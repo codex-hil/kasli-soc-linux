@@ -219,3 +219,19 @@ Obraz nie jest identyczny bajtowo między checkoutami: generowany klucz SSH,
 znaczniki czasu i identyfikatory filesystemów mogą się różnić. Każdy build
 zapisuje własny manifest SHA-256. Prywatne klucze i gotowe obrazy nie są
 commitowane. Repozytorium: https://github.com/codex-hil/kasli-soc-linux (prywatne; wymaga dostępu do konta).
+
+## ZC706 jako etap pośredni
+
+Sprawdzono lokalne przypięte upstreamy: LiteX-Boards ma platformę
+`xilinx_zc706` dla `xc7z045ffg900-2`, a dostarczony openXC7 zawiera
+zarówno dokładny part FFG900-2, jak i chipdb XC7Z045. SZL z istniejącym
+patchem FCLK0 zbudował się z `--no-default-features --features target_zc706`.
+Golden zynq-rs ustawia PS_CLK 33.333333 MHz, DDR 32-bit/666.666666 MHz.
+Upstream Linux ma `zynq-zc706.dts`, 1 GiB pamięci i PHY pod adresem MDIO 7.
+
+Obecny gotowy target LiteX-Boards używa softcore i DDR PL; nie jest targetem
+Linux PS7. Dla próby potrzebny jest osobny target naszego minimalnego PS7/CSR,
+LED Y21, DTS i konfiguracja obrazu ZC706. Nie należy bootować obrazu Kasli na
+ZC706: konfiguracja DDR i PHY jest inna. Nie wykonano bootowania na ZC706
+ani jej pełnego buildu PL; wynik sprawdzenia zapisano w
+`evidence/zc706-feasibility.json`. To etap pośredni, nie zastępuje milestone Kasli.

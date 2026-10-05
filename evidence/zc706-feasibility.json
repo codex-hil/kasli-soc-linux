@@ -1,0 +1,19 @@
+{
+  "board": "ZC706",
+  "device": "xc7z045ffg900-2",
+  "exact_package_database": true,
+  "nextpnr_chipdb": "chipdb-xc7z045.bin",
+  "szl_feature": "target_zc706",
+  "szl_build": "PASS",
+  "szl_fclk_patch": "existing project patch; golden DDR/MIO unchanged",
+  "ps_clk_hz": 33333333,
+  "ddr_bus_bits": 32,
+  "ddr_clock_hz": 666666666,
+  "linux_upstream_dts": "zynq-zc706.dts",
+  "linux_ddr_bytes": 1073741824,
+  "phy_mdio_address": 7,
+  "litex_boards_platform": true,
+  "litex_boards_existing_target": "softcore/PL DDR, not Linux PS7 target",
+  "hardware_validated": false,
+  "nextpnr_integrity_test": "device loaded; exhaustive check stopped during pip-name check after several minutes; no PASS claimed"
+}
