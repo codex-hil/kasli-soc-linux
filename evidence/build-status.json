@@ -13,7 +13,8 @@
     "golden_ddr_mio_unchanged": true,
     "patch": "FCLK0 100 MHz"
   },
-  "linux": "building",
-  "uboot": "building",
-  "sd_image": "not built"
+  "linux": "build PASS: upstream 6.18.40",
+  "uboot": "build PASS: entry 0x00100000",
+  "sd_image": "built; hardware untested",
+  "make_image": "PASS: exit 0"
 }

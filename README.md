@@ -49,7 +49,7 @@ zynq-rs SZL PS/DDR/MIO | ten sam loader, dodana konfiguracja FCLK0 | make szl PA
 Migen-AXI PS7 | upstream LiteX Zynq7000 / natywny prymityw PS7 | synteza działa
 ARTIQ AXI/CSR | GP0 → upstream AXI3/Wishbone bridge → LiteX CSR | PL zbudowany, hardware oczekuje
 Vivado place-and-route | Yosys → nextpnr openXC7 → FASM → X-Ray bitstream | build eksperymentalny działa
-ARTIQ runtime | upstream U-Boot → upstream Linux → Buildroot | implementacja w toku
+ARTIQ runtime | upstream U-Boot → upstream Linux → Buildroot | obraz SD zbudowany
 ARTIQ RTIO/DRTIO | późniejszy PoC | nie rozpoczęto
 
 ## Architektura i boot
@@ -103,7 +103,8 @@ lokalne zależności Python i Rust, buduje PL, SZL, U-Boot, kernel i rootfs,
 a następnie składa `build/buildroot/images/sdcard.img` i manifest SHA-256.
 Etapy można uruchamiać osobno: `make bootstrap`, `make pl`, `make test-pl`,
 `make szl`, `make linux`. Bootstrap, PL, test PL i SZL przeszły przez tę ścieżkę.
-Cała droga jest w trakcie walidacji; gotowy obraz jeszcze nie istnieje.
+U-Boot, Linux 6.18.40, rootfs i składanie obrazu również przeszły; pełny przebieg
+`make image` zakończył się kodem 0. Obraz ma 335 544 832 bajty.
 Kontener ma zapisywalne `/usr` i `/var` na woluminie projektu w `build/environment/`,
 więc instalacja zależności nie zapełnia partycji systemowej hosta.
 Do diagnostyki elaboracji można też użyć lokalnego środowiska Python:
@@ -146,14 +147,39 @@ Element | Status
 PS7 | golden reference i SZL zbudowane; natywny PS7 zsyntezowany
 DDR | konfiguracja zynq-rs znaleziona; hardware niebadany
 UART | UART1/MIO48–49 ustalone; hardware niebadany
-SD | SD0/MIO40–46 ustalone; obraz jeszcze niegotowy
-U-Boot | integracja w toku
-Linux | integracja w toku
+SD | obraz MBR/FAT/ext4 zbudowany; boot fizyczny niebadany
+U-Boot | build PASS; entry 0x00100000; boot fizyczny niebadany
+Linux | upstream 6.18.40 zbudowany; boot fizyczny niebadany
 Ethernet | GEM0/88E1512/adres 0/reset ustalone; hardware niebadany
-SSH | oczekuje na rootfs
+SSH | Dropbear i klucz w rootfs; połączenie fizyczne niebadane
 AXI PS→PL | build PL przeszedł; hardware niebadany
 LiteX CSR | mapa wygenerowana; 1000 transakcji w symulacji PASS; hardware niebadany
 Yosys | synteza PASS
 nextpnr-xilinx | routing i timing PASS, adapter nowego CLI działa
-openXC7 bitstream | artefakt zbudowany; alias obudowy weryfikowany; hardware niebadany
+openXC7 bitstream | artefakt zbudowany; pinout aliasu zweryfikowany; hardware niebadany
 ARTIQ RTIO PoC | oczekuje na milestone 1
+
+## Obraz SD i pierwsze połączenie
+
+Artefakt: `build/buildroot/images/sdcard.img`; sumy wszystkich payloadów:
+`build/buildroot/images/manifest.json`. Bieżący manifest zapisano też w
+`evidence/image-manifest.json`. To obraz bring-up, jeszcze niezweryfikowany na płycie.
+Partycja 1: FAT 64 MiB, BOOT.BIN, zImage, DTB i extlinux.conf.
+Partycja 2: ext4 256 MiB. Po identyfikacji właściwej, odmontowanej karty SD:
+
+```sh
+# Zastąp ścieżkę faktycznym identyfikatorem karty, bez sufiksu -partN.
+sudo dd if=build/buildroot/images/sdcard.img of=/dev/disk/by-id/WLASCIWA_KARTA_SD bs=4M conv=fsync status=progress
+```
+
+UART: 115200 8N1, login `root`, puste hasło konsoli w tym PoC.
+Ethernet pobiera adres przez DHCP. SSH dopuszcza klucz, hasła są wyłączone:
+
+```sh
+ssh -i build/ssh/id_ed25519 root@ADRES_Z_DHCP
+python3 tools/hardware_test.py --help
+```
+
+Klucz prywatny pozostaje w ignorowanym `build/ssh`; bootstrap generuje nowy
+dla nowego checkoutu. Nie publikuj go razem z obrazem. Test fizyczny musi
+jeszcze potwierdzić boot, DDR, UART, sieć i PS→PL.

@@ -1,0 +1,20 @@
+{
+  "hardware_validated": false,
+  "checks": [
+    {
+      "partition": 1,
+      "type": 12,
+      "start_sector": 1,
+      "sectors": 131072,
+      "payload_identical": true
+    },
+    {
+      "partition": 2,
+      "type": 131,
+      "start_sector": 131073,
+      "sectors": 524288,
+      "payload_identical": true
+    }
+  ],
+  "image_sha256": "078fd6ab4c5692009351d17f15514a52cd6e798deadaa5f74149f033e2df6677"
+}

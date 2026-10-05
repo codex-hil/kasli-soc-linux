@@ -108,7 +108,7 @@ def linux():
     run(command + ["-j4"])
 
 
-def image():
+def boot():
     packer = BUILD / "mkbootimage"
     if not packer.exists():
         shutil.copytree(ROOT / "upstream/mkbootimage", packer, ignore=shutil.ignore_patterns("*.o", "mkbootimage", "exbootimage"))
@@ -121,6 +121,13 @@ def image():
                    + "\n    " + str(BUILD / "gateware/gateware/top.bit")
                    + "\n    [load=0x00100000] " + str(images / "u-boot.bin") + "\n}\n")
     run([packer / "mkbootimage", bif, images / "BOOT.BIN"])
+    run(["python3", ROOT / "tools/check_boot_image.py", images / "BOOT.BIN",
+         "--uboot", images / "u-boot.bin"])
+
+
+def image():
+    boot()
+    images = BUILD / "buildroot/images"
     board = ROOT / "buildroot/board/kasli-soc"
     shutil.copyfile(board / "extlinux.conf", images / "extlinux.conf")
     # genimage must not copy the rootfs again: rootfs.ext4 is already built.
@@ -129,7 +136,9 @@ def image():
         shutil.rmtree(temp)
     run([BUILD / "buildroot/host/bin/genimage", "--rootpath", BUILD / "buildroot/target",
          "--tmppath", temp, "--inputpath", images, "--outputpath", images,
-         "--config", board / "genimage.cfg"])
+         "--config", board / "genimage.cfg"],
+        env=dict(os.environ, PATH=str(BUILD / "buildroot/host/bin") + ":"
+                 + str(BUILD / "buildroot/host/sbin") + ":" + os.environ["PATH"]))
     manifest = {"hardware_validated": False, "milestone_1_complete": False,
                 "files": {}}
     for name in ["BOOT.BIN", "zImage", "kasli-soc.dtb", "rootfs.ext4", "sdcard.img"]:
@@ -142,6 +151,6 @@ def image():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("stage", choices=["bootstrap", "pl", "test", "szl", "linux", "image"])
+    parser.add_argument("stage", choices=["bootstrap", "pl", "test", "szl", "linux", "boot", "image"])
     args = parser.parse_args()
     globals()[args.stage]()

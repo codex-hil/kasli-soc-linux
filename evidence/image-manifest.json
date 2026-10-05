@@ -1,0 +1,26 @@
+{
+  "hardware_validated": false,
+  "milestone_1_complete": false,
+  "files": {
+    "BOOT.BIN": {
+      "bytes": 7045512,
+      "sha256": "f6f03e8653ec0fe5a85fff6323409d9b73957ff1cd9b0007c2497bb81c07bff6"
+    },
+    "zImage": {
+      "bytes": 3768760,
+      "sha256": "97ae4e99b32edc67f2936e6cfaccca82d2ae56836894b10564f4544514eb69c8"
+    },
+    "kasli-soc.dtb": {
+      "bytes": 12328,
+      "sha256": "cbf44c77c6dc0c6fd5d6c6155114c4e837d383f61502a4a4463dd08bb3a4948a"
+    },
+    "rootfs.ext4": {
+      "bytes": 268435456,
+      "sha256": "fc25426caec4846e4ae6e521ed2968987e597cc6d7eb6fdb7c2f23841742e775"
+    },
+    "sdcard.img": {
+      "bytes": 335544832,
+      "sha256": "7ca07108b30f7eff41299b82654f5f16ffe0d6b25f870e55f1d83ef9ce990541"
+    }
+  }
+}

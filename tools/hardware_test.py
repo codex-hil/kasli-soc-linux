@@ -25,7 +25,7 @@ def main():
            f"UserKnownHostsFile={args.key.parent / 'known_hosts'}", "root@" + str(args.address)]
     commands = [
         ("ping", ["ping", "-c", "5", str(args.address)], 20),
-        ("ssh_diagnostics", ssh + ["uname -a; cat /proc/meminfo; ip addr show eth0; ethtool eth0; dmesg"], 30),
+        ("ssh_diagnostics", ssh + ["set -e; uname -a; cat /proc/meminfo; ip addr show eth0; ethtool eth0; dmesg"], 30),
         ("ddr", ssh + ["memtester 128M 3"], 600),
         ("pl", ssh + ["python3 /usr/bin/pl_test.py --csr-json /etc/litex/csr.json --iterations 10000"], 60),
         ("ps7_dump", ssh + ["python3 /usr/bin/dump_ps7_state.py"], 30),
