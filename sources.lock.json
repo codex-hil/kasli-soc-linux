@@ -1,0 +1,74 @@
+{
+  "artiq": {
+    "url": "https://github.com/m-labs/artiq.git",
+    "rev": "7d7b85f377e0c172ae3496f0c03cfb6cb85ba022"
+  },
+  "openXC7": {
+    "url": "https://github.com/openXC7/toolchain-nix.git",
+    "rev": "092acc1e4599a0892fe02937a15928e137ad592d"
+  },
+  "litex-boards": {
+    "url": "https://github.com/litex-hub/litex-boards.git",
+    "rev": "10debf146d433ce8ac8aedcac84e97d252ff4d5b"
+  },
+  "GenZ": {
+    "url": "https://github.com/regymm/GenZ.git",
+    "rev": "842a8f6471bd0b0765f24bc2eaaa1d8f82347dde"
+  },
+  "toolchain-installer": {
+    "url": "https://github.com/openXC7/toolchain-installer.git",
+    "rev": "0cb31563418a2cfec44d68d7d0836e000d73fba6"
+  },
+  "kasli-hardware": {
+    "url": "https://github.com/sinara-hw/Kasli-SOC.git",
+    "rev": "6a9c5adf05ce6058f390d7213dca6664278fecb2"
+  },
+  "u-boot": {
+    "url": "https://github.com/u-boot/u-boot.git",
+    "rev": "a6ab6a66146ed0bf1420db0ee858b49005783222"
+  },
+  "nextpnr": {
+    "url": "https://github.com/openXC7/nextpnr.git",
+    "rev": "c68c13582e972292c86a5025140d52e713384cbc"
+  },
+  "artiq-zynq": {
+    "url": "https://git.m-labs.hk/M-Labs/artiq-zynq.git",
+    "rev": "15c856f315969b5c1d01d2917ed52f1b0f199677"
+  },
+  "migen": {
+    "url": "https://github.com/m-labs/migen.git",
+    "rev": "e19524c963a8342952840983047557707fbe0b6a"
+  },
+  "yosys": {
+    "url": "https://github.com/YosysHQ/yosys.git",
+    "rev": "0e8336b4e2659efb40c2b8751c7619f69c358137"
+  },
+  "litex": {
+    "url": "https://github.com/enjoy-digital/litex.git",
+    "rev": "8c01073afb71aa0a0709f02f8e24247589e8f5e4"
+  },
+  "migen-axi": {
+    "url": "https://github.com/peteut/migen-axi.git",
+    "rev": "3ec01e9cbdcb25ff3dac6eaedb8a0c6e98b0769a"
+  },
+  "mkbootimage": {
+    "url": "https://github.com/antmicro/zynq-mkbootimage.git",
+    "rev": "521a7b059b88a75bbce3a3481ae83385d8e71bc9"
+  },
+  "prjxray": {
+    "url": "https://github.com/openXC7/prjxray.git",
+    "rev": "9553f1ad53c18ba5d5246a7dd10a718da9a9b20c"
+  },
+  "zynq-rs": {
+    "url": "https://git.m-labs.hk/m-labs/zynq-rs.git",
+    "rev": "e825ca79c6b01e068df0e8078b77ee017c54a485"
+  },
+  "buildroot": {
+    "url": "https://github.com/buildroot/buildroot.git",
+    "rev": "cdddb871d385ef0549819d1dbcffd24a58277181"
+  },
+  "linux": {
+    "url": "https://github.com/torvalds/linux.git",
+    "rev": "a90ee4305c4a5df72c11b31dacfdc76e00fcf78a"
+  }
+}

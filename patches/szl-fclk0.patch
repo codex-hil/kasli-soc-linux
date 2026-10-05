@@ -1,0 +1,27 @@
+diff --git a/szl/src/main.rs b/szl/src/main.rs
+index 1d8d45b..cdf28d3 100644
+--- a/szl/src/main.rs
++++ b/szl/src/main.rs
+@@ -16,7 +16,7 @@ use libconfig::{self, bootgen,
+                 sd_reader::{self, SdFile}};
+ use libcortex_a9::{asm::{dsb, isb},
+                    cache::{bpiall, dcciall, iciallu}};
+-use libregister::RegisterR;
++use libregister::{RegisterR, RegisterW};
+ use libsupport_zynq::ram;
+ use log::info;
+ 
+@@ -121,6 +121,13 @@ pub fn main_core0() {
+         }
+     };
+ 
++    // Linux/LiteX uses IO PLL 1 GHz / 10 / 1 = 100 MHz FCLK0.
++    // DDR/MIO initialization is unchanged from the Kasli-SoC golden loader.
++    slcr::RegisterBlock::unlocked(|slcr| {
++        slcr.fpga0_clk_ctrl.write(slcr::Fpga0ClkCtrl::zeroed()
++            .src_sel(slcr::PllSource::IoPll).divisor0(10).divisor1(1));
++        slcr.fpga0_thr_ctrl.write(0);
++    });
+     info!("Preparing for runtime execution");
+     // Flush data cache entries for all of L1 cache, including
+     // Memory/Instruction Synchronization Barriers

@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "url": "https://www.xilinx.com/content/dam/xilinx/support/packagefiles/z7packages/xc7z030ffg676pkg.txt",
+      "sha256": "09ddd24e04aa0e04aa1fccaf370c4e1cbc0e02b4419d38dbf58750ff6e6eff96"
+    },
+    {
+      "url": "https://www.xilinx.com/content/dam/xilinx/support/packagefiles/z7packages/xc7z030fbg676pkg.txt",
+      "sha256": "dbe80e7ab6fdd2e73f86aaf0a7d94cd1691f38df53850b1df9bad1ab3d265615"
+    }
+  ],
+  "pins": 677,
+  "identical": false
+}
