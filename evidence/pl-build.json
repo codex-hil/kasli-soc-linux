@@ -1,0 +1,50 @@
+{
+  "physical_part": "xc7z030ffg676-3",
+  "database_part": "xc7z030fbg676-1",
+  "hardware_validated": false,
+  "bitstream_sha256": "61cd066aab284855b5f07be8cf0c0ec376b8cee87b78970a7b6ecc500b0f4d25",
+  "commands": [
+    [
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/oss-cad-suite/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/openxc7/bin/nextpnr-xilinx",
+      "--device",
+      "xc7z030fbg676-1",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json"
+    ],
+    [
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z030fbg676-1",
+      "--db-root",
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/openxc7/share/nextpnr/external/prjxray-db/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/srv/codex-hil-data/workspaces/rng-rpi/build/openxc7/share/nextpnr/external/prjxray-db/zynq7/xc7z030fbg676-1/part.yaml",
+      "--part_name",
+      "xc7z030ffg676-3",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ]
+}

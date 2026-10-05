@@ -1,0 +1,70 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/dts-v1/;
+#include "zynq-7000.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+    model = "Sinara Kasli-SoC Linux LiteX PoC";
+    compatible = "sinara,kasli-soc", "xlnx,zynq-7000";
+    aliases { serial0 = &uart1; ethernet0 = &gem0; mmc0 = &sdhci0; };
+    chosen { stdout-path = "serial0:115200n8"; };
+    memory@0 { device_type = "memory"; reg = <0 0x20000000>; };
+    litex@40000000 {
+        compatible = "generic-uio";
+        reg = <0x40000000 0x10000>;
+        clocks = <&clkc 15>;
+        clock-names = "fclk0";
+        assigned-clocks = <&clkc 15>;
+        assigned-clock-rates = <100000000>;
+    };
+};
+
+&clkc { ps-clk-frequency = <33333333>; };
+&uart1 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&uart1_pins>;
+};
+&sdhci0 {
+    status = "okay";
+    bus-width = <4>;
+    disable-wp;
+    cd-gpios = <&gpio0 46 GPIO_ACTIVE_LOW>;
+    pinctrl-names = "default";
+    pinctrl-0 = <&sd0_pins>;
+};
+&gem0 {
+    status = "okay";
+    phy-mode = "rgmii-id";
+    pinctrl-names = "default";
+    pinctrl-0 = <&gem0_pins>;
+    phy-handle = <&phy0>;
+    // PHY address 0 is provisional until strap/hardware confirmation.
+    phy0: ethernet-phy@0 {
+        reg = <0>;
+        reset-gpios = <&gpio0 47 GPIO_ACTIVE_LOW>;
+        reset-assert-us = <10000>;
+        reset-deassert-us = <10000>;
+    };
+};
+&pinctrl0 {
+    uart1_pins: uart1-default {
+        mux { groups = "uart1_10_grp"; function = "uart1"; };
+        conf { groups = "uart1_10_grp"; power-source = <1>; bias-pull-up; };
+        rx { pins = "MIO49"; bias-high-impedance; };
+    };
+    sd0_pins: sd0-default {
+        mux { groups = "sdio0_2_grp"; function = "sdio0"; };
+        conf { groups = "sdio0_2_grp"; power-source = <1>; slew-rate = <0>; bias-disable; };
+    };
+    gem0_pins: gem0-default {
+        mux { groups = "ethernet0_0_grp"; function = "ethernet0"; };
+        conf { groups = "ethernet0_0_grp"; power-source = <4>; slew-rate = <0>; bias-pull-up; };
+        rx { pins = "MIO22", "MIO23", "MIO24", "MIO25", "MIO26", "MIO27";
+             bias-high-impedance; low-power-disable; };
+        tx { pins = "MIO16", "MIO17", "MIO18", "MIO19", "MIO20", "MIO21";
+             low-power-enable; };
+        mdio { groups = "mdio0_0_grp"; function = "mdio0"; };
+        mdio_conf { groups = "mdio0_0_grp"; power-source = <1>; bias-pull-up; };
+    };
+};

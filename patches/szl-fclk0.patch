@@ -20,7 +20,7 @@ index 1d8d45b..cdf28d3 100644
 +    slcr::RegisterBlock::unlocked(|slcr| {
 +        slcr.fpga0_clk_ctrl.write(slcr::Fpga0ClkCtrl::zeroed()
 +            .src_sel(slcr::PllSource::IoPll).divisor0(10).divisor1(1));
-+        slcr.fpga0_thr_ctrl.write(0);
++        unsafe { slcr.fpga0_thr_ctrl.write(0); }
 +    });
      info!("Preparing for runtime execution");
      // Flush data cache entries for all of L1 cache, including

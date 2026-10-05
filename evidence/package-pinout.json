@@ -9,6 +9,20 @@
       "sha256": "dbe80e7ab6fdd2e73f86aaf0a7d94cd1691f38df53850b1df9bad1ab3d265615"
     }
   ],
-  "pins": 677,
-  "identical": false
+  "pins": 676,
+  "identical": false,
+  "pin_functions_identical": true,
+  "metadata_differences": 150,
+  "metadata_difference_fields": [
+    "VCCAUX Group"
+  ],
+  "led_af19": [
+    "IO_L15P_T2_DQS_13",
+    "2",
+    "13",
+    "NA",
+    "NA",
+    "HR",
+    "NA"
+  ]
 }

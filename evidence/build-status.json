@@ -1,0 +1,19 @@
+{
+  "hardware_validated": false,
+  "milestone_1_complete": false,
+  "pl": {
+    "yosys": "PASS",
+    "nextpnr": "PASS",
+    "timing_mhz": 143.84,
+    "required_mhz": 100,
+    "bitstream": "built"
+  },
+  "szl": {
+    "build": "PASS",
+    "golden_ddr_mio_unchanged": true,
+    "patch": "FCLK0 100 MHz"
+  },
+  "linux": "building",
+  "uboot": "building",
+  "sd_image": "not built"
+}

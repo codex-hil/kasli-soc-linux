@@ -2,3 +2,8 @@ upstream
 build
 .venv
 __pycache__/
+cargo/
+rustup/
+container-root/
+project/
+venv/
