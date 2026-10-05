@@ -13,12 +13,8 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build"
 TOOLS = BUILD / "tools"
-ASSETS = [
-    ("openxc7", "https://github.com/cavearr/toolchain-openxc7-releases/releases/download/2026-10-03/openxc7-toolchain-linux-x86-64-20261003.tgz",
-     "5ad99cfbc3f4309f10e650e39d17a5e551cd6838ab0bf473de86c00630d9e775"),
-    ("oss-cad-suite", "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-05/oss-cad-suite-linux-x64-20261005.tgz",
-     "0c432bb689ba2aaea76d4c38fa6e7b3a81b1123e00d437bfae8c96b292bc6824"),
-]
+ASSETS = [(name, entry["url"], entry["sha256"])
+          for name, entry in json.loads((ROOT / "toolchains.lock.json").read_text()).items()]
 
 
 def run(args, **kwargs):

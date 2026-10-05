@@ -187,3 +187,35 @@ jeszcze potwierdzić boot, DDR, UART, sieć i PS→PL.
 Każdy `make image` automatycznie sprawdza MBR, granice i brak nakładania
 partycji oraz ich zgodność bajt po bajcie z boot.vfat/rootfs.ext4.
 Powtórzenie audytu: `python3 tools/check_sd_image.py build/buildroot/images/sdcard.img`.
+
+## Pliki potrzebne do odtworzenia z Git
+
+Wszystkie wejścia projektu są śledzone przez Git:
+
+* `Makefile`, `tools/environment.py`, `tools/image.py`: środowisko i cały build.
+* `sources.lock.json`: adresy upstreamów i dokładne commity.
+* `toolchains.lock.json`: archiwa narzędzi FPGA i sprawdzane SHA-256.
+* `requirements.lock`: wersje zależności Python.
+* `gateware/`, `tests/`: LiteX PL i test netlisty AXI.
+* `patches/`: patch golden SZL dla FCLK0.
+* `buildroot/`: konfiguracje Linux/U-Boot/rootfs, DTS, overlay, boot i SD.
+
+Host wymaga Linux x86_64, Docker z dostępem użytkownika, Git, Make, Python 3
+i tar. Zarezerwuj przynajmniej 30 GiB na checkout i build oraz dostęp do sieci.
+Nie trzeba kopiować `.venv`, `upstream/`, `build/` ani zależności z tej maszyny:
+`make image` pobiera je z przypiętych źródeł i generuje wszystkie artefakty.
+Referencyjny wykaz pakietów kontenera jest w `evidence/debian-packages.txt`;
+instalację odtwarza datowany snapshot APT zapisany w `tools/environment.py`.
+
+Powtarzalna ścieżka od czystego checkoutu:
+
+```sh
+git clone ADRES_REPO kasli-soc-linux
+cd kasli-soc-linux
+make image
+```
+
+Obraz nie jest identyczny bajtowo między checkoutami: generowany klucz SSH,
+znaczniki czasu i identyfikatory filesystemów mogą się różnić. Każdy build
+zapisuje własny manifest SHA-256. Prywatne klucze i gotowe obrazy nie są
+commitowane. Repo lokalne nie ma obecnie skonfigurowanego zdalnego `origin`.
