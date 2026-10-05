@@ -210,7 +210,7 @@ instalację odtwarza datowany snapshot APT zapisany w `tools/environment.py`.
 Powtarzalna ścieżka od czystego checkoutu:
 
 ```sh
-git clone ADRES_REPO kasli-soc-linux
+git clone https://github.com/codex-hil/kasli-soc-linux.git kasli-soc-linux
 cd kasli-soc-linux
 make image
 ```
@@ -218,4 +218,4 @@ make image
 Obraz nie jest identyczny bajtowo między checkoutami: generowany klucz SSH,
 znaczniki czasu i identyfikatory filesystemów mogą się różnić. Każdy build
 zapisuje własny manifest SHA-256. Prywatne klucze i gotowe obrazy nie są
-commitowane. Repo lokalne nie ma obecnie skonfigurowanego zdalnego `origin`.
+commitowane. Repozytorium: https://github.com/codex-hil/kasli-soc-linux (prywatne; wymaga dostępu do konta).
