@@ -226,12 +226,12 @@ Sprawdzono lokalne przypięte upstreamy: LiteX-Boards ma platformę
 `xilinx_zc706` dla `xc7z045ffg900-2`, a dostarczony openXC7 zawiera
 zarówno dokładny part FFG900-2, jak i chipdb XC7Z045. SZL z istniejącym
 patchem FCLK0 zbudował się z `--no-default-features --features target_zc706`.
-Golden zynq-rs ustawia PS_CLK 33.333333 MHz, DDR 32-bit/666.666666 MHz.
+Golden zynq-rs ustawia CPU 800 MHz, PS_CLK 33.333333 MHz, DDR 32-bit/666.666666 MHz.
 Upstream Linux ma `zynq-zc706.dts`, 1 GiB pamięci i PHY pod adresem MDIO 7.
 
 Obecny gotowy target LiteX-Boards używa softcore i DDR PL; nie jest targetem
-Linux PS7. Dla próby potrzebny jest osobny target naszego minimalnego PS7/CSR,
-LED G2/LVCMOS15, DTS i konfiguracja obrazu ZC706. Nie należy bootować obrazu Kasli na
+Linux PS7. Dodany target używa naszego minimalnego PS7/CSR,
+LED G2/LVCMOS15, DTS i konfiguracji obrazu ZC706. Nie należy bootować obrazu Kasli na
 ZC706: konfiguracja DDR i PHY jest inna. PL ZC706 zbudowano przez Yosys/nextpnr/openXC7 (133.30 MHz dla 100 MHz),
 SZL i test 1000 transakcji AXI/CSR również przeszły. Nie wykonano bootowania na ZC706; wynik sprawdzenia zapisano w
 `evidence/zc706-feasibility.json`. To etap pośredni, nie zastępuje milestone Kasli.
@@ -250,3 +250,19 @@ LED G2/LVCMOS15 pochodzi z platformy LiteX ZC706; Y21 jest nieobecna w
 używanej bazie openXC7. DTS ZC706 skopiowano z przypiętego upstream Linux
 i dodano wyłącznie węzeł LiteX UIO/FCLK0. Bez fizycznej płyty status boot,
 DDR, UART, Ethernet, SSH i PS→PL pozostaje niezweryfikowany.
+
+Bring-up ZC706: SD w J30; boot SD w tabeli 1-2 UG954 to SW11.1–5 =
+`0 0 1 1 0` (przy ustawianiu sprawdź oznaczenia na własnej płycie).
+UART przez USB Mini-B J21/CP2103, UART1 MIO48/49, 115200 8N1.
+Ethernet przez RJ45 P3/Marvell 88E1116R. Źródło:
+[AMD UG954 v1.8, str. 17, 49–52](https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content).
+Boot z SD nie wymaga zapisu QSPI.
+
+Etap `linux` odtwarza defconfig wybranej płyty. Po zmianie konfiguracji
+kernela w istniejącym katalogu Buildroot użyj także `linux-reconfigure`
+(lub nowego katalogu buildu), zgodnie z normalnym workflow Buildroot.
+
+`make BOARD=zc706 image` zakończył się kodem 0. Obraz SD ZC706 ma
+335 544 832 bajty; BOOT.BIN i partycje przeszły audyt. Manifest i wyniki:
+`evidence/zc706/`. Boot, DDR, UART, sieć i PS→PL na fizycznej ZC706
+pozostają nieprzetestowane.

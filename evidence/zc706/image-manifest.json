@@ -1,0 +1,27 @@
+{
+  "board": "zc706",
+  "hardware_validated": false,
+  "milestone_1_complete": false,
+  "files": {
+    "BOOT.BIN": {
+      "bytes": 14387320,
+      "sha256": "38a56d67632fe8b3a6320f2582fcf3e060239e65c04b616d8d5d546158e9bf85"
+    },
+    "zImage": {
+      "bytes": 3768760,
+      "sha256": "beae38281c012976ca0e9bb0449e83cd659643c61f8ae2ff4c7bbf6c54dafc92"
+    },
+    "zc706.dtb": {
+      "bytes": 15693,
+      "sha256": "95f711c0b88dbc314af9eae9a02f5ad12bc1a8fc5b1510bb7b9b4733140b0f9b"
+    },
+    "rootfs.ext4": {
+      "bytes": 268435456,
+      "sha256": "021501fc27e4375b4daa923b068ffc9b51061ffc2c498c3cf248eaf49491470a"
+    },
+    "sdcard.img": {
+      "bytes": 335544832,
+      "sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015"
+    }
+  }
+}

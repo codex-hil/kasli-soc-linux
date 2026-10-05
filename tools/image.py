@@ -102,8 +102,7 @@ def linux():
     command = ["make", "-C", ROOT / "upstream/buildroot", f"O={output}",
                f"BR2_EXTERNAL={ROOT / 'buildroot'}", "BR2_WGET=wget --timeout=30",
                "BR2_PRIMARY_SITE=https://sources.buildroot.net"]
-    if not (output / ".config").exists():
-        run(command + ["zc706_defconfig" if BOARD == "zc706" else "kasli_soc_defconfig"])
+    run(command + ["zc706_defconfig" if BOARD == "zc706" else "kasli_soc_defconfig"])
     run(command + ["-j4"])
 
 

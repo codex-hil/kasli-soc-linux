@@ -5,6 +5,9 @@
   "required_mhz": 100,
   "szl": "PASS",
   "axi_simulation": "PASS: 1000 transactions",
-  "linux": "building",
-  "sd_image": "not yet built"
+  "linux": "PASS: upstream 6.18.40-zc706",
+  "sd_image": "built; audit PASS; hardware untested",
+  "uboot": "PASS: entry 0x00100000, no SPL, environment in RAM",
+  "make_image": "PASS: exit 0",
+  "rootfs": "DHCP, SSH key, CSR map verified"
 }

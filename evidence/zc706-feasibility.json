@@ -20,5 +20,7 @@
   "pl_frequency_mhz": 133.3,
   "led_pin": "G2",
   "led_iostandard": "LVCMOS15",
-  "axi_simulation": "PASS: 1000 transactions"
+  "axi_simulation": "PASS: 1000 transactions",
+  "cpu_clock_hz": 800000000,
+  "sd_image": "built; make BOARD=zc706 image PASS; hardware untested"
 }

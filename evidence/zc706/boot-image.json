@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "hardware": false,
+  "boot_bin_sha256": "38a56d67632fe8b3a6320f2582fcf3e060239e65c04b616d8d5d546158e9bf85",
+  "partitions": [
+    {
+      "length": 109920,
+      "load": 0,
+      "entry": 332,
+      "offset": 5888,
+      "flags": 16,
+      "bootloader": true
+    },
+    {
+      "length": 13321408,
+      "load": 0,
+      "entry": 0,
+      "offset": 115840,
+      "flags": 32,
+      "bootloader": false
+    },
+    {
+      "length": 950072,
+      "load": 1048576,
+      "entry": 0,
+      "offset": 13437248,
+      "flags": 17,
+      "bootloader": false
+    }
+  ]
+}

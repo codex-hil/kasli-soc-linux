@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: BSD-2-Clause
-"""Minimal Kasli-SoC PS7/GP0/CSR design; PS initialization belongs to SZL."""
+"""Minimal Kasli-SoC/ZC706 PS7/GP0/CSR design; PS initialization belongs to SZL."""
 import argparse
 from pathlib import Path
 from migen import ClockDomain, ClockSignal, ResetSignal, Signal
@@ -15,7 +15,7 @@ from litex.soc.interconnect.csr import CSRStorage, CSRStatus
 
 class Platform(XilinxPlatform):
     def __init__(self, board="kasli-soc"):
-        # Exact part and LED constraints from Migen sinara/kasli_soc.py.
+        # Kasli: Migen sinara/kasli_soc; ZC706: LiteX-Boards xilinx_zc706.
         part, led, standard = {"kasli-soc": ("xc7z030ffg676-3", "AF19", "LVCMOS25"),
                      "zc706": ("xc7z045ffg900-2", "G2", "LVCMOS15")}[board]
         super().__init__(part, [
@@ -57,11 +57,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     parser.add_argument("--build", action="store_true")
-    parser.add_argument("--output-dir", default="build/gateware")
+    parser.add_argument("--output-dir")
     args = parser.parse_args()
     soc = BaseSoC(args.board)
     soc.finalize()
-    output = Path(args.output_dir)
+    output = Path(args.output_dir or ("build/zc706/gateware" if args.board == "zc706" else "build/gateware"))
     output.mkdir(parents=True, exist_ok=True)
     (output / "csr.json").write_text(get_csr_json(
         csr_regions=soc.csr_regions, constants=soc.constants,
