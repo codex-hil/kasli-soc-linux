@@ -13,6 +13,8 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build"
 TOOLS = BUILD / "tools"
+SHARED = BUILD
+BOARD = "kasli-soc"
 ASSETS = [(name, entry["url"], entry["sha256"])
           for name, entry in json.loads((ROOT / "toolchains.lock.json").read_text()).items()]
 
@@ -25,7 +27,7 @@ def run(args, **kwargs):
 def bootstrap():
     run(["python3", ROOT / "tools/fetch_sources.py"])
     TOOLS.mkdir(parents=True, exist_ok=True)
-    downloads = BUILD / "downloads"
+    downloads = SHARED / "downloads"
     downloads.mkdir(exist_ok=True)
     for name, url, expected in ASSETS:
         marker = TOOLS / name / ".sha256"
@@ -45,22 +47,23 @@ def bootstrap():
         with tarfile.open(archive) as tf:
             tf.extractall(dest, filter="data")
         marker.write_text(expected + "\n")
-    python = BUILD / "python/bin/python"
+    python = SHARED / "python/bin/python"
     if not python.exists():
-        run(["python3", "-m", "venv", BUILD / "python"])
+        run(["python3", "-m", "venv", SHARED / "python"])
     run([python, "-m", "pip", "install", "-r", ROOT / "requirements.lock"])
     run([python, "-m", "pip", "install", "--no-deps",
          ROOT / "upstream/migen", ROOT / "upstream/litex"])
     run(["rustup", "toolchain", "install", "nightly-2026-03-25",
          "--profile", "minimal", "--component", "rust-src"])
-    keys = BUILD / "ssh"
+    keys = SHARED / "ssh"
     keys.mkdir(exist_ok=True)
     if not (keys / "id_ed25519").exists():
         run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-f", keys / "id_ed25519"])
 
 
 def pl():
-    run([BUILD / "python/bin/python", ROOT / "tools/build_pl.py",
+    run([SHARED / "python/bin/python", ROOT / "tools/build_pl.py",
+         "--board", BOARD, "--output-dir", BUILD / "gateware",
          "--openxc7", TOOLS / "openxc7", "--yosys", TOOLS / "oss-cad-suite/bin/yosys"])
 
 
@@ -75,7 +78,7 @@ def szl():
         (source / ".kasli-patched").write_text("FCLK0 100MHz\n")
     env = dict(os.environ, CARGO_TARGET_DIR=str(BUILD / "szl"))
     subprocess.run(["rustup", "run", "nightly-2026-03-25", "cargo", "build", "--locked",
-                    "--release", "-p", "szl", "--no-default-features", "--features", "target_kasli_soc"],
+                    "--release", "-p", "szl", "--no-default-features", "--features", "target_zc706" if BOARD == "zc706" else "target_kasli_soc"],
                    cwd=source, env=env, check=True)
 
 
@@ -100,7 +103,7 @@ def linux():
                f"BR2_EXTERNAL={ROOT / 'buildroot'}", "BR2_WGET=wget --timeout=30",
                "BR2_PRIMARY_SITE=https://sources.buildroot.net"]
     if not (output / ".config").exists():
-        run(command + ["kasli_soc_defconfig"])
+        run(command + ["zc706_defconfig" if BOARD == "zc706" else "kasli_soc_defconfig"])
     run(command + ["-j4"])
 
 
@@ -124,7 +127,7 @@ def boot():
 def image():
     boot()
     images = BUILD / "buildroot/images"
-    board = ROOT / "buildroot/board/kasli-soc"
+    board = ROOT / "buildroot/board" / BOARD
     shutil.copyfile(board / "extlinux.conf", images / "extlinux.conf")
     # genimage must not copy the rootfs again: rootfs.ext4 is already built.
     temp = BUILD / "genimage"
@@ -136,9 +139,9 @@ def image():
         env=dict(os.environ, PATH=str(BUILD / "buildroot/host/bin") + ":"
                  + str(BUILD / "buildroot/host/sbin") + ":" + os.environ["PATH"]))
     run(["python3", ROOT / "tools/check_sd_image.py", images / "sdcard.img"])
-    manifest = {"hardware_validated": False, "milestone_1_complete": False,
+    manifest = {"board": BOARD, "hardware_validated": False, "milestone_1_complete": False,
                 "files": {}}
-    for name in ["BOOT.BIN", "zImage", "kasli-soc.dtb", "rootfs.ext4", "sdcard.img"]:
+    for name in ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img"]:
         path = images / name
         with path.open("rb") as f:
             digest = hashlib.file_digest(f, "sha256").hexdigest()
@@ -149,5 +152,10 @@ def image():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("stage", choices=["bootstrap", "pl", "test", "szl", "linux", "boot", "image"])
+    parser.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     args = parser.parse_args()
+    BOARD = args.board
+    if BOARD == "zc706":
+        BUILD = SHARED / "zc706"
+    BUILD.mkdir(parents=True, exist_ok=True)
     globals()[args.stage]()

@@ -1,0 +1,50 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "hardware_validated": false,
+  "bitstream_sha256": "b089bf4607396daf438b375957b4e695a1dd16ce9c2a464684bbe2ed86a86d11",
+  "commands": [
+    [
+      "/work/build/tools/oss-cad-suite/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/nextpnr-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/tools/openxc7/share/nextpnr/external/prjxray-db/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/tools/openxc7/share/nextpnr/external/prjxray-db/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ]
+}

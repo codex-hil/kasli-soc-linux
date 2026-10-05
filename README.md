@@ -231,7 +231,22 @@ Upstream Linux ma `zynq-zc706.dts`, 1 GiB pamięci i PHY pod adresem MDIO 7.
 
 Obecny gotowy target LiteX-Boards używa softcore i DDR PL; nie jest targetem
 Linux PS7. Dla próby potrzebny jest osobny target naszego minimalnego PS7/CSR,
-LED Y21, DTS i konfiguracja obrazu ZC706. Nie należy bootować obrazu Kasli na
-ZC706: konfiguracja DDR i PHY jest inna. Nie wykonano bootowania na ZC706
-ani jej pełnego buildu PL; wynik sprawdzenia zapisano w
+LED G2/LVCMOS15, DTS i konfiguracja obrazu ZC706. Nie należy bootować obrazu Kasli na
+ZC706: konfiguracja DDR i PHY jest inna. PL ZC706 zbudowano przez Yosys/nextpnr/openXC7 (133.30 MHz dla 100 MHz),
+SZL i test 1000 transakcji AXI/CSR również przeszły. Nie wykonano bootowania na ZC706; wynik sprawdzenia zapisano w
 `evidence/zc706-feasibility.json`. To etap pośredni, nie zastępuje milestone Kasli.
+
+### Build targetu ZC706
+
+```sh
+make BOARD=zc706 image
+```
+
+Wynik: `build/zc706/buildroot/images/sdcard.img`. Etapy: `make BOARD=zc706 pl`,
+`szl`, `test-pl`, `linux`. Domyślny `make image` nadal buduje Kasli.
+Narzędzia, pobrane źródła i klucz SSH są współdzielone; PL, SZL, Buildroot
+i obrazy mają oddzielne katalogi. Mapa CSR i hardware test są takie same.
+LED G2/LVCMOS15 pochodzi z platformy LiteX ZC706; Y21 jest nieobecna w
+używanej bazie openXC7. DTS ZC706 skopiowano z przypiętego upstream Linux
+i dodano wyłącznie węzeł LiteX UIO/FCLK0. Bez fizycznej płyty status boot,
+DDR, UART, Ethernet, SSH i PS→PL pozostaje niezweryfikowany.

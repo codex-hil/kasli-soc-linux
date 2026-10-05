@@ -1,0 +1,10 @@
+{
+  "hardware_validated": false,
+  "pl": "PASS",
+  "frequency_mhz": 133.3,
+  "required_mhz": 100,
+  "szl": "PASS",
+  "axi_simulation": "PASS: 1000 transactions",
+  "linux": "building",
+  "sd_image": "not yet built"
+}

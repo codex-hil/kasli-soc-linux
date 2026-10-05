@@ -14,10 +14,12 @@ from litex.soc.interconnect.csr import CSRStorage, CSRStatus
 
 
 class Platform(XilinxPlatform):
-    def __init__(self):
+    def __init__(self, board="kasli-soc"):
         # Exact part and LED constraints from Migen sinara/kasli_soc.py.
-        super().__init__("xc7z030ffg676-3", [
-            ("user_led", 0, Pins("AF19"), IOStandard("LVCMOS25")),
+        part, led, standard = {"kasli-soc": ("xc7z030ffg676-3", "AF19", "LVCMOS25"),
+                     "zc706": ("xc7z045ffg900-2", "G2", "LVCMOS15")}[board]
+        super().__init__(part, [
+            ("user_led", 0, Pins(led), IOStandard(standard)),
         ], toolchain="openxc7")
 
 
@@ -39,13 +41,13 @@ class CRG(LiteXModule):
 
 
 class BaseSoC(SoCCore):
-    def __init__(self):
-        platform = Platform()
+    def __init__(self, board="kasli-soc"):
+        platform = Platform(board)
         self.crg = CRG()
         super().__init__(platform, 100e6, cpu_type="zynq7000",
                          integrated_rom_size=0, integrated_sram_size=0,
                          with_uart=False, with_timer=False, with_ctrl=False,
-                         csr_data_width=32, ident="Kasli-SoC Linux openXC7 probe")
+                         csr_data_width=32, ident=f"{board} Linux openXC7 probe")
         self.probe = Probe(platform.request("user_led"))
         self.bus.add_region("rom", SoCRegion(origin=self.cpu.reset_address,
                             size=0x10000, mode="r", linker=True))
@@ -53,10 +55,11 @@ class BaseSoC(SoCCore):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     parser.add_argument("--build", action="store_true")
     parser.add_argument("--output-dir", default="build/gateware")
     args = parser.parse_args()
-    soc = BaseSoC()
+    soc = BaseSoC(args.board)
     soc.finalize()
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
