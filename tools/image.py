@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+"""Stages for make image; run inside the project-local Debian environment."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tarfile
+import urllib.request
+
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / "build"
+TOOLS = BUILD / "tools"
+ASSETS = [
+    ("openxc7", "https://github.com/cavearr/toolchain-openxc7-releases/releases/download/2026-10-03/openxc7-toolchain-linux-x86-64-20261003.tgz",
+     "5ad99cfbc3f4309f10e650e39d17a5e551cd6838ab0bf473de86c00630d9e775"),
+    ("oss-cad-suite", "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-05/oss-cad-suite-linux-x64-20261005.tgz",
+     "0c432bb689ba2aaea76d4c38fa6e7b3a81b1123e00d437bfae8c96b292bc6824"),
+]
+
+
+def run(args, **kwargs):
+    print("+ " + " ".join(map(str, args)), flush=True)
+    subprocess.run(list(map(str, args)), cwd=ROOT, check=True, **kwargs)
+
+
+def bootstrap():
+    run(["python3", ROOT / "tools/fetch_sources.py"])
+    TOOLS.mkdir(parents=True, exist_ok=True)
+    downloads = BUILD / "downloads"
+    downloads.mkdir(exist_ok=True)
+    for name, url, expected in ASSETS:
+        marker = TOOLS / name / ".sha256"
+        if marker.exists() and marker.read_text().strip() == expected:
+            continue
+        archive = downloads / url.rsplit("/", 1)[1]
+        if not archive.exists():
+            temporary = archive.with_suffix(".part")
+            urllib.request.urlretrieve(url, temporary)
+            temporary.rename(archive)
+        with archive.open("rb") as f:
+            actual = hashlib.file_digest(f, "sha256").hexdigest()
+        if actual != expected:
+            raise RuntimeError("SHA-256 mismatch: " + str(archive))
+        dest = TOOLS / name if name == "openxc7" else TOOLS
+        dest.mkdir(exist_ok=True)
+        with tarfile.open(archive) as tf:
+            tf.extractall(dest, filter="data")
+        marker.write_text(expected + "\n")
+    python = BUILD / "python/bin/python"
+    if not python.exists():
+        run(["python3", "-m", "venv", BUILD / "python"])
+    run([python, "-m", "pip", "install", "-r", ROOT / "requirements.lock"])
+    run([python, "-m", "pip", "install", "--no-deps",
+         ROOT / "upstream/migen", ROOT / "upstream/litex"])
+    run(["rustup", "toolchain", "install", "nightly-2026-03-25",
+         "--profile", "minimal", "--component", "rust-src"])
+    keys = BUILD / "ssh"
+    keys.mkdir(exist_ok=True)
+    if not (keys / "id_ed25519").exists():
+        run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-f", keys / "id_ed25519"])
+
+
+def pl():
+    run([BUILD / "python/bin/python", ROOT / "tools/build_pl.py",
+         "--openxc7", TOOLS / "openxc7", "--yosys", TOOLS / "oss-cad-suite/bin/yosys"])
+
+
+def szl():
+    source = BUILD / "szl-source"
+    if not (source / ".kasli-patched").exists():
+        if source.exists():
+            raise RuntimeError("unmarked SZL build tree exists; inspect before rebuilding")
+        shutil.copytree(ROOT / "upstream/zynq-rs", source, ignore=shutil.ignore_patterns(".git", "target"))
+        subprocess.run(["patch", "-p1"], cwd=source, check=True,
+                       input=(ROOT / "patches/szl-fclk0.patch").read_bytes())
+        (source / ".kasli-patched").write_text("FCLK0 100MHz\n")
+    env = dict(os.environ, CARGO_TARGET_DIR=str(BUILD / "szl"))
+    subprocess.run(["rustup", "run", "nightly-2026-03-25", "cargo", "build", "--locked",
+                    "--release", "-p", "szl", "--no-default-features", "--features", "target_kasli_soc"],
+                   cwd=source, env=env, check=True)
+
+
+def test():
+    work = BUILD / "gateware/gateware"
+    suite = TOOLS / "oss-cad-suite"
+    subprocess.run([suite / "bin/yosys", "-Q", "-T", "-p",
+                    "read_json top.json; write_verilog -noattr top_sim.v"], cwd=work, check=True)
+    subprocess.run([suite / "bin/iverilog", "-g2012", "-s", "tb", "-o", BUILD / "axi-test.vvp",
+                    ROOT / "tests/axi_csr_tb.v", work / "top_sim.v",
+                    suite / "share/yosys/xilinx/cells_sim.v",
+                    suite / "share/yosys/xilinx/cells_xtra.v"], cwd=work, check=True)
+    with (BUILD / "axi-test.log").open("w") as log:
+        subprocess.run([suite / "bin/vvp", BUILD / "axi-test.vvp"], cwd=work,
+                       stdout=log, stderr=subprocess.STDOUT, timeout=30, check=True)
+    print((BUILD / "axi-test.log").read_text(), flush=True)
+
+
+def linux():
+    output = BUILD / "buildroot"
+    command = ["make", "-C", ROOT / "upstream/buildroot", f"O={output}",
+               f"BR2_EXTERNAL={ROOT / 'buildroot'}", "BR2_WGET=wget --timeout=30",
+               "BR2_PRIMARY_SITE=https://sources.buildroot.net"]
+    if not (output / ".config").exists():
+        run(command + ["kasli_soc_defconfig"])
+    run(command + ["-j4"])
+
+
+def image():
+    packer = BUILD / "mkbootimage"
+    if not packer.exists():
+        shutil.copytree(ROOT / "upstream/mkbootimage", packer, ignore=shutil.ignore_patterns("*.o", "mkbootimage", "exbootimage"))
+    run(["make", "-C", packer, "-j4"])
+    images = BUILD / "buildroot/images"
+    bif = BUILD / "boot.bif"
+    # SZL discovers PL and PS payload headers, skips its own bootloader header.
+    # U-Boot's configured text base matches SZL's fixed DDR payload address.
+    bif.write_text("image: {\n    [bootloader] " + str(BUILD / "szl/armv7-none-eabihf/release/szl")
+                   + "\n    " + str(BUILD / "gateware/gateware/top.bit")
+                   + "\n    [load=0x00100000] " + str(images / "u-boot.bin") + "\n}\n")
+    run([packer / "mkbootimage", bif, images / "BOOT.BIN"])
+    board = ROOT / "buildroot/board/kasli-soc"
+    shutil.copyfile(board / "extlinux.conf", images / "extlinux.conf")
+    # genimage must not copy the rootfs again: rootfs.ext4 is already built.
+    temp = BUILD / "genimage"
+    if temp.exists():
+        shutil.rmtree(temp)
+    run([BUILD / "buildroot/host/bin/genimage", "--rootpath", BUILD / "buildroot/target",
+         "--tmppath", temp, "--inputpath", images, "--outputpath", images,
+         "--config", board / "genimage.cfg"])
+    manifest = {"hardware_validated": False, "milestone_1_complete": False,
+                "files": {}}
+    for name in ["BOOT.BIN", "zImage", "kasli-soc.dtb", "rootfs.ext4", "sdcard.img"]:
+        path = images / name
+        with path.open("rb") as f:
+            digest = hashlib.file_digest(f, "sha256").hexdigest()
+        manifest["files"][name] = {"bytes": path.stat().st_size, "sha256": digest}
+    (images / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("stage", choices=["bootstrap", "pl", "test", "szl", "linux", "image"])
+    args = parser.parse_args()
+    globals()[args.stage]()

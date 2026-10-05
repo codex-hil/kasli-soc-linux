@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /dts-v1/;
 #include "zynq-7000.dtsi"
-#include <dt-bindings/gpio/gpio.h>
 
 / {
     model = "Sinara Kasli-SoC Linux LiteX PoC";
@@ -29,7 +28,7 @@
     status = "okay";
     bus-width = <4>;
     disable-wp;
-    cd-gpios = <&gpio0 46 GPIO_ACTIVE_LOW>;
+    cd-gpios = <&gpio0 46 1>; // GPIO_ACTIVE_LOW
     pinctrl-names = "default";
     pinctrl-0 = <&sd0_pins>;
 };
@@ -39,10 +38,10 @@
     pinctrl-names = "default";
     pinctrl-0 = <&gem0_pins>;
     phy-handle = <&phy0>;
-    // PHY address 0 is provisional until strap/hardware confirmation.
+    // Kasli-SOC_ETH_PHY.SchDoc: "PHY MDIO address is 0".
     phy0: ethernet-phy@0 {
         reg = <0>;
-        reset-gpios = <&gpio0 47 GPIO_ACTIVE_LOW>;
+        reset-gpios = <&gpio0 47 1>; // GPIO_ACTIVE_LOW
         reset-assert-us = <10000>;
         reset-deassert-us = <10000>;
     };

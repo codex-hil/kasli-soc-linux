@@ -1,0 +1,2 @@
+# Access through the project-generated SSH key.
+DROPBEAR_ARGS="-s"

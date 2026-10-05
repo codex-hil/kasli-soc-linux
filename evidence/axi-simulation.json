@@ -1,0 +1,16 @@
+{
+  "hardware": false,
+  "simulator": "Icarus Verilog from OSS CAD Suite 2026-10-05",
+  "design": "Yosys-generated netlist top_sim.v from top.json",
+  "result": "PASS",
+  "transactions": 1000,
+  "checks": [
+    "signature",
+    "AXI response IDs",
+    "response status",
+    "scratch randomized write/read",
+    "delayed AW/W",
+    "B/R response backpressure",
+    "counter advancement"
+  ]
+}
