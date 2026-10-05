@@ -15,5 +15,10 @@
   "litex_boards_platform": true,
   "litex_boards_existing_target": "softcore/PL DDR, not Linux PS7 target",
   "hardware_validated": false,
-  "nextpnr_integrity_test": "device loaded; exhaustive check stopped during pip-name check after several minutes; no PASS claimed"
+  "nextpnr_integrity_test": "device loaded; exhaustive check stopped during pip-name check after several minutes; no PASS claimed",
+  "pl_build": "PASS: Yosys/nextpnr/openXC7",
+  "pl_frequency_mhz": 133.3,
+  "led_pin": "G2",
+  "led_iostandard": "LVCMOS15",
+  "axi_simulation": "PASS: 1000 transactions"
 }
