@@ -139,6 +139,7 @@ def image():
          "--config", board / "genimage.cfg"],
         env=dict(os.environ, PATH=str(BUILD / "buildroot/host/bin") + ":"
                  + str(BUILD / "buildroot/host/sbin") + ":" + os.environ["PATH"]))
+    run(["python3", ROOT / "tools/check_sd_image.py", images / "sdcard.img"])
     manifest = {"hardware_validated": False, "milestone_1_complete": False,
                 "files": {}}
     for name in ["BOOT.BIN", "zImage", "kasli-soc.dtb", "rootfs.ext4", "sdcard.img"]:

@@ -183,3 +183,7 @@ python3 tools/hardware_test.py --help
 Klucz prywatny pozostaje w ignorowanym `build/ssh`; bootstrap generuje nowy
 dla nowego checkoutu. Nie publikuj go razem z obrazem. Test fizyczny musi
 jeszcze potwierdzić boot, DDR, UART, sieć i PS→PL.
+
+Każdy `make image` automatycznie sprawdza MBR, granice i brak nakładania
+partycji oraz ich zgodność bajt po bajcie z boot.vfat/rootfs.ext4.
+Powtórzenie audytu: `python3 tools/check_sd_image.py build/buildroot/images/sdcard.img`.
