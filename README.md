@@ -387,3 +387,22 @@ Odczyt 335544832 bajtów ma SHA-256 identyczny z manifestem:
 `c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015`.
 Restart do naszego obrazu nastąpi po zakończeniu testu DDR. Karta nie
 zawiera już obrazu HERO; jego kopia i skrypt odtworzenia pozostają na hoście.
+
+Aktualny status fizycznej ZC706 rev. 1.2 (bring-up na reference Linux):
+
+Element | Status
+---|---
+PS7 | reference FSBL + Linux działa; SZL z naszego SD oczekuje na restart
+DDR | 2 pełne pętle memtester 128M PASS; 3. trwa
+UART | PASS, 115200 8N1
+SD | reference boot PASS; nasz obraz zapisany i odczyt zweryfikowany
+U-Boot | pełny log naszego startu oczekuje
+Linux | reference 4.9 PASS; nasz upstream 6.18 oczekuje
+Ethernet | PASS, 1000/Full, DHCP 192.168.2.7, ping
+SSH | PASS, klucz projektu
+AXI PS→PL | PASS na fizycznej płycie
+LiteX CSR | PASS, 10000 zapisów/odczytów, licznik ~100 MHz
+Yosys | PASS, użyty do zbudowanego i załadowanego PL
+nextpnr-xilinx/openXC7 | PASS, place-and-route i timing
+openXC7 bitstream | PASS, PCAP DONE i fizyczny test CSR
+ARTIQ RTIO PoC | nie rozpoczęto
