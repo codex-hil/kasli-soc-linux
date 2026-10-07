@@ -29,6 +29,8 @@ Testy RTL nie potwierdzają elektryki ani marginesu czasowego LVDS.
 PoC zapisuje krótkie czterokanałowe rekordy; nie jest jeszcze portem pełnego
 sterownika CERN, DMA ani aplikacji oscyloskopowej używanej na SPEC.
 
+Gotowa paczka: [GitHub prerelease](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-fmc-adc-j5-20261007), commit `ca4c1fc`.
+
 ## Build
 
 Z czystego checkoutu, na Linux z Dockerem i Pythonem 3:

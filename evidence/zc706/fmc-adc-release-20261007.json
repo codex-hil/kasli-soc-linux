@@ -1,0 +1,8 @@
+{
+  "release_url": "https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-fmc-adc-j5-20261007",
+  "source_commit": "ca4c1fc875c408a1124f2b974e4af11ed906ab09",
+  "archive": "zc706-fmc-adc-j5.tar.xz",
+  "archive_sha256": "3e715de41254e8e81098380f46d5b703de211e97c86096d498a9299f34099def",
+  "uploaded_download_verified": true,
+  "hardware_validated": false
+}
