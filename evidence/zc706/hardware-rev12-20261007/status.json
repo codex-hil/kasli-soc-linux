@@ -25,7 +25,7 @@
   "full_project_sd_boot": true,
   "project_sd_written": true,
   "project_sd_readback_verified": true,
-  "project_sd_sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015",
+  "project_sd_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de",
   "project_sd_boot": "PASS upstream SPL/U-Boot/openXC7 PL/Linux, no JTAG",
   "ddr_raw_log_sha256": "ac803c79eec269fa0e3b1bcc377cb72ca2aa755184a6fb9235ae5ed226142217",
   "project_linux_recovery": {
@@ -65,6 +65,23 @@
     "linux": "6.18.40-zc706",
     "dhcp": "192.168.2.15",
     "uart_verified_ssh_host_key": true,
-    "validation": "ping and SSH PASS; final DDR/UIO checks running"
-  }
+    "validation": "PASS ping/SSH/memtester 128M 1/UIO CSR/PS7 dump",
+    "csr_writes": 10036,
+    "counter_hz": [
+      100047574.07918541,
+      100003299.76818888,
+      99992611.60982744,
+      99993311.90960681,
+      99990649.97601125,
+      99994370.1787972,
+      99989118.2381417,
+      99990050.6273996,
+      99991043.42459585,
+      99990868.78182669
+    ],
+    "ddr_loops": 1,
+    "build_source_commit": "e214293ce805cdf7a0c45c0aadadcedd15f13958"
+  },
+  "zc706_bringup_complete": true,
+  "cold_power_cycle_validated": false
 }

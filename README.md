@@ -7,9 +7,9 @@ Repo jest oddzielone od upstream ARTIQ; checkouty `upstream/` pozostają bez zmi
 openXC7 PL → Linux 6.18.40 / Buildroot działa z SD bez JTAG i Vivado.
 UART, Ethernet 1 Gb/s, DHCP i SSH działają. Testy AXI/CSR przez `/dev/mem`
 i `/dev/uio0` przeszły po 10036 zapisów/odczytów; licznik ma ~100 MHz.
-DDR naszego Linuksa przeszedł `memtester 128M 3`. Finalny obraz został
-zapisany w całości i zweryfikowany pełnym odczytem; trwa końcowy test
-tego bootu. Fizyczna Kasli-SoC nadal oczekuje na walidację.
+DDR naszego Linuksa przeszedł `memtester 128M 3` i dodatkową pętlę na
+finalnym obrazie. Pełny zapis/odczyt SD i końcowy zestaw testów są PASS.
+Fizyczna Kasli-SoC nadal oczekuje na walidację.
 
 ## Hardware i źródła prawdy
 
@@ -241,8 +241,10 @@ Obecny gotowy target LiteX-Boards używa softcore i DDR PL; nie jest targetem
 Linux PS7. Dodany target używa naszego minimalnego PS7/CSR,
 LED G2/LVCMOS15, DTS i konfiguracji obrazu ZC706. Nie należy bootować obrazu Kasli na
 ZC706: konfiguracja DDR i PHY jest inna. PL ZC706 zbudowano przez Yosys/nextpnr/openXC7 (133.30 MHz dla 100 MHz),
-SZL i test 1000 transakcji AXI/CSR również przeszły. Nie wykonano bootowania na ZC706; wynik sprawdzenia zapisano w
-`evidence/zc706-feasibility.json`. To etap pośredni, nie zastępuje milestone Kasli.
+SZL i test 1000 transakcji AXI/CSR również przeszły w pierwszym sprawdzeniu
+programowym, zapisanym w `evidence/zc706-feasibility.json`.
+Aktualny target używa SPL; fizyczne wyniki są poniżej. ZC706 jest etapem
+pośrednim i nie zastępuje milestone Kasli.
 
 ### Build targetu ZC706
 
@@ -271,10 +273,9 @@ Etap `linux` odtwarza defconfig wybranej płyty. Po zmianie konfiguracji
 kernela w istniejącym katalogu Buildroot użyj także `linux-reconfigure`
 (lub nowego katalogu buildu), zgodnie z normalnym workflow Buildroot.
 
-`make BOARD=zc706 image` zakończył się kodem 0. Obraz SD ZC706 ma
-335 544 832 bajty; BOOT.BIN i partycje przeszły audyt. Manifest i wyniki:
-`evidence/zc706/`. Boot, DDR, UART, sieć i PS→PL na fizycznej ZC706
-pozostają nieprzetestowane.
+Obraz SD ZC706 ma 335 544 832 bajty; BOOT.BIN i partycje przeszły audyt.
+Manifest i wyniki są w `evidence/zc706/`, a bieżące dowody fizycznego
+bootu, DDR, sieci i PS→PL w `evidence/zc706/hardware-rev12-20261007/`.
 
 Dostęp USB na tym hoście: nowy CP2103 UART i Digilent serial 210251841109
 pojawiły się po podłączeniu ZC706. Konto codex-hil nie ma dostępu do
@@ -397,12 +398,12 @@ Odczyt 335544832 bajtów ma SHA-256 identyczny z manifestem:
 Restart do naszego obrazu nastąpi po zakończeniu testu DDR. Karta nie
 zawiera już obrazu HERO; jego kopia i skrypt odtworzenia pozostają na hoście.
 
-Aktualny status fizycznej ZC706 rev. 1.2 (bring-up na reference Linux):
+Aktualny status fizycznej ZC706 rev. 1.2 (własny Linux i upstream SPL):
 
 Element | Status
 ---|---
 PS7 | PASS, upstream U-Boot SPL ZC706 z istniejącym ps7_init
-DDR | PASS memtester 128M 3, wszystkie testy i 3 pętle bez błędów
+DDR | PASS, 1 GiB / 533 MHz; memtester 128M 3 na naszym Linuxie, bez błędów
 UART | PASS, 115200 8N1
 SD | PASS, pełny własny obraz zapisany, odczyt SHA-256 zgodny, boot bez JTAG
 U-Boot | PASS, SPL i main 2026.10-rc5, pełny log UART
@@ -477,3 +478,50 @@ lub SD jest zamontowana, sprawdza CID i pojemność, a następnie porównuje
 SHA-256 pełnego odczytu z obrazem. Odmowę przy rootfs z SD sprawdzono
 na fizycznej płycie. QSPI nie jest używana. Test PL obsługuje
 `--device /dev/uio0` oprócz `/dev/mem`.
+
+Końcowy obraz ma SHA-256
+`729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de`.
+Zapisano go w całości z recovery RAM, odczytano wszystkie 335544832 bajty
+i potwierdzono zgodność hasha. Następnie uruchomiono ten obraz z SD:
+SPL, U-Boot, PL, Linux, konsola, rootfs ext4, DHCP, ping (0% strat) i SSH PASS.
+Klucz publiczny SSH hosta jest pobierany przez fizyczny UART i wpisywany do
+projektowego `build/ssh/known_hosts`; świeży rootfs/recovery może generować
+nowy klucz hosta. Nie wyłączamy sprawdzania kluczy SSH.
+
+U-Boot korzysta z losowego MAC przy środowisku w RAM. Po uzyskaniu lub
+odnowieniu DHCP hook BusyBox wysyła gratuitous ARP, aby odświeżyć wpisy
+hosta/routera po restarcie. Nie zapisujemy środowiska w QSPI.
+
+Pełny test automatyczny:
+
+```sh
+python3 tools/hardware_test.py ADRES_IP --output build/hardware/validation
+```
+
+Domyślnie testuje `memtester 128M 3`; `--ddr-loops 1` pozwala skrócić
+kontrolę kolejnego bootu. Po wcześniejszym PASS trzech pętli wykonujemy
+jedną dodatkową pętlę na finalnym obrazie, następnie test UIO i dump PS7.
+Wyniki finalnego testu są zapisywane osobno i nie zastępują logów wcześniejszych.
+
+### Finalny wynik ZC706 rev. 1.2 — PASS
+
+W `evidence/zc706/hardware-rev12-20261007/final-validation/` wszystkie
+kontrole zakończyły się kodem 0: ping (5/5, bez strat), SSH, `memtester 128M 1`,
+UIO (10036 zapisów/odczytów, licznik ~100 MHz) i odczyt rejestrów PS7.
+`validation.json` łączy te wyniki z logiem bootu i hashem pełnego odczytu SD.
+BootROM/SPL/U-Boot/PL/Linux działają bez ładowania przez JTAG.
+Potwierdzono restarty programowe; pełnego odłączenia zasilania nie testowano.
+Rev. 1.0 pozostaje osobnym, nierozwiązanym przypadkiem diagnostycznym.
+
+[Gotowy obraz SD i sumy kontrolne](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-poc-20261007).
+`make BOARD=zc706 image` odtwarza również `sdcard.img.gz` i `SHA256SUMS`.
+Archiwum rozpakowuje się do dokładnie zweryfikowanego obrazu SD.
+
+SSH z tego stanowiska:
+
+```sh
+ssh -i build/ssh/id_ed25519 -o UserKnownHostsFile=build/ssh/known_hosts root@192.168.2.15
+```
+
+To zakończony bring-up ZC706. Milestone 1 Kasli-SoC wymaga nadal testów
+na fizycznej Kasli-SoC; RTIO PoC nie został rozpoczęty.

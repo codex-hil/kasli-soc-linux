@@ -1,0 +1,31 @@
+{
+  "hardware": true,
+  "address": "192.168.2.15",
+  "time": "2026-10-07T16:21:39.362866+00:00",
+  "checks": {
+    "ping": {
+      "returncode": 0,
+      "pass": true
+    },
+    "ssh_diagnostics": {
+      "returncode": 0,
+      "pass": true
+    },
+    "ddr": {
+      "returncode": 0,
+      "pass": true
+    },
+    "pl": {
+      "returncode": 0,
+      "pass": true
+    },
+    "ps7_dump": {
+      "returncode": 0,
+      "pass": true
+    }
+  },
+  "ddr_mib": 128,
+  "ddr_loops": 1,
+  "milestone_1_complete": false,
+  "network_ddr_pl_pass": true
+}

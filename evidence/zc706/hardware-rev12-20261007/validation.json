@@ -1,0 +1,86 @@
+{
+  "board": "zc706",
+  "board_revision": "1.2 (user report)",
+  "hardware_validated": true,
+  "zc706_bringup_complete": true,
+  "kasli_milestone_1_complete": false,
+  "qspi_written": false,
+  "boot_without_jtag": true,
+  "boot": {
+    "hardware": true,
+    "ram_root_requested": false,
+    "qspi_written": false,
+    "dhcp_address": "192.168.2.15",
+    "ssh_host_key_verified_via_uart": true,
+    "spl_banner": true,
+    "uboot_banner": true,
+    "kernel_banner": true,
+    "rootfs_login": true
+  },
+  "sd_write": {
+    "hardware": true,
+    "address": "192.168.2.15",
+    "device": "/dev/mmcblk0",
+    "cid": "035344534333324780d55bcc91012a00",
+    "bytes": 335544832,
+    "image_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de",
+    "qspi_written": false,
+    "preflight_pass": true,
+    "write_completed": true,
+    "readback_verified": true,
+    "readback_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de"
+  },
+  "checks": {
+    "hardware": true,
+    "address": "192.168.2.15",
+    "time": "2026-10-07T16:21:39.362866+00:00",
+    "checks": {
+      "ping": {
+        "returncode": 0,
+        "pass": true
+      },
+      "ssh_diagnostics": {
+        "returncode": 0,
+        "pass": true
+      },
+      "ddr": {
+        "returncode": 0,
+        "pass": true
+      },
+      "pl": {
+        "returncode": 0,
+        "pass": true
+      },
+      "ps7_dump": {
+        "returncode": 0,
+        "pass": true
+      }
+    },
+    "ddr_mib": 128,
+    "ddr_loops": 1,
+    "milestone_1_complete": false,
+    "network_ddr_pl_pass": true
+  },
+  "pl": {
+    "hardware": true,
+    "result": "PASS",
+    "writes": 10036,
+    "counter_hz": [
+      100047574.07918541,
+      100003299.76818888,
+      99992611.60982744,
+      99993311.90960681,
+      99990649.97601125,
+      99994370.1787972,
+      99989118.2381417,
+      99990050.6273996,
+      99991043.42459585,
+      99990868.78182669
+    ]
+  },
+  "previous_ddr_test": "PASS memtester 128M 3, exit 0",
+  "previous_ddr_evidence": "evidence/zc706/hardware-rev12-20261007/project-linux-ddr.log",
+  "build_source_commit": "e214293ce805cdf7a0c45c0aadadcedd15f13958",
+  "image_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de",
+  "cold_power_cycle_validated": false
+}

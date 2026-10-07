@@ -1,14 +1,17 @@
 {
-  "hardware_validated": false,
+  "hardware_validated": true,
   "pl": "PASS",
   "frequency_mhz": 133.3,
   "required_mhz": 100,
   "szl": "Kasli only; ZC706 uses upstream U-Boot SPL",
   "axi_simulation": "PASS: 1000 transactions",
   "linux": "PASS: upstream 6.18.40-zc706",
-  "sd_image": "built; SPL/partition audit PASS; standalone SD hardware boot pending",
+  "sd_image": "PASS full write/readback SHA-256 and standalone SPL/PL/Linux SD boot",
   "uboot": "PASS: upstream ZC706 SPL, main U-Boot 0x04000000, RAM environment, no QSPI writes",
   "make_image": "PASS: make BOARD=zc706 image, all stages exit 0",
   "rootfs": "DHCP, SSH key, CSR map verified",
-  "pl_bitstream_sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c"
+  "pl_bitstream_sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c",
+  "zc706_bringup_complete": true,
+  "kasli_milestone_1_complete": false,
+  "physical_checks": "PASS UART/DDR 128M 3 plus final 128M 1/Ethernet DHCP ping SSH/UIO CSR 10036"
 }
