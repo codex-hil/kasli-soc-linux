@@ -1,0 +1,10 @@
+{
+  "device": "/dev/sdb",
+  "serial": "000000001536",
+  "capacity_bytes": 31914983424,
+  "image_bytes": 67109376,
+  "image_sha256": "0f214b66b1a44bb40657bb072bdc80ca700f239d71628ad3afeac121af4ab96c",
+  "readback_sha256": "0f214b66b1a44bb40657bb072bdc80ca700f239d71628ad3afeac121af4ab96c",
+  "verified": true,
+  "qspi_written": false
+}

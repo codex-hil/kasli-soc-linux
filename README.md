@@ -292,8 +292,11 @@ Do niezależnego testu przygotowano gotowe obrazy opublikowane przez
 [PULP/HERO dla ZC706](https://pulp-platform.org/hero/doc/downloads/images/zc706/).
 To osobny comparator z historycznie wygenerowanym PL, **nie** nasz build
 openXC7. FSBL/U-Boot próbowano uruchomić z RAM przez JTAG; nie uzyskano
-konsoli. Przygotowany obraz SD nie był jeszcze zapisany na fizycznej karcie.
-QSPI pozostało bez zmian. Brak czytnika/karty SD widocznej na hoście.
+konsoli. Obraz referencyjny zapisano na fizycznej karcie 32 GB (31 914 983 424 bajty),
+a SHA-256 odczytu zwrotnego jest identyczny z obrazem. Wynik:
+`evidence/zc706/hardware-20261007/sd-write.json`. Boot z tej karty oczekuje
+na przełożenie jej do ZC706 i włączenie zasilania.
+QSPI pozostało bez zmian. Czytnik USB i karta testowa zostały udostępnione.
 
 Odtworzenie obrazu referencyjnego (po przygotowaniu toolchainu ZC706):
 

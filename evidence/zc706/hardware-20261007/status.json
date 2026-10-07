@@ -13,8 +13,10 @@
   "stock_uboot_console": false,
   "linux_boot": false,
   "ddr_stability": "unverified; debug reads inconsistent; no diagnosis of defective RAM",
-  "sd_written": false,
+  "sd_written": true,
   "qspi_written": false,
   "openxc7_pl_hardware_validated": false,
-  "milestone_1_complete": false
+  "milestone_1_complete": false,
+  "sd_write_verified": true,
+  "sd_boot": "awaiting card transfer and power-on"
 }
