@@ -38,5 +38,23 @@
     "ddr_test": "PASS memtester 128M 3, exit 0",
     "pl_loaded": false
   },
-  "project_ddr_raw_log_sha256": "f6beb3f9b37b2ca3714a927a71af9e15f9fedd3635e2ac0cbd8138e2f200870d"
+  "project_ddr_raw_log_sha256": "f6beb3f9b37b2ca3714a927a71af9e15f9fedd3635e2ac0cbd8138e2f200870d",
+  "project_standalone_sd_boot": {
+    "bootrom_sd": true,
+    "spl": true,
+    "uboot": true,
+    "linux": "6.18.40-zc706",
+    "rootfs": "Buildroot ext4",
+    "ethernet_link": "1000/Full",
+    "dhcp": "192.168.2.15",
+    "ssh": true,
+    "openxc7_pl": true,
+    "bitstream_sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c",
+    "csr_devmem_test": "PASS 10036 writes",
+    "csr_uio_test": "PASS 10036 writes",
+    "counter_hz": 100000000,
+    "boot_partition_verified": true,
+    "full_image_written": false
+  },
+  "ram_root_recovery_boot": true
 }

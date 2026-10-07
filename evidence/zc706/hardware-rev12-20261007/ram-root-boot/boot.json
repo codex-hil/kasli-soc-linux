@@ -1,0 +1,11 @@
+{
+  "hardware": true,
+  "ram_root_requested": true,
+  "qspi_written": false,
+  "dhcp_address": "192.168.2.15",
+  "ssh_host_key_verified_via_uart": true,
+  "spl_banner": true,
+  "uboot_banner": true,
+  "kernel_banner": true,
+  "rootfs_login": true
+}

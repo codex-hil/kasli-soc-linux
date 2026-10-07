@@ -38,6 +38,12 @@ def main():
            "root@" + str(args.reboot_ssh_address), "sync; reboot"]
     interrupted = ram_sent = logged_in = False
     next_probe = None
+    probe_command = (
+        "ip -4 addr show eth0; cat /proc/mounts; cat /proc/cmdline; "
+        "test -f /etc/dropbear/dropbear_ed25519_host_key || "
+        "dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key; "
+        "dropbearkey -y -f /etc/dropbear/dropbear_ed25519_host_key\n"
+    )
     # U-Boot addresses come from its standard Zynq environment. Fail closed.
     ram_command = " && ".join([
         "load mmc 0:1 ${kernel_addr_r} top.bit",
@@ -72,15 +78,24 @@ def main():
                         logged_in = True
                         next_probe = time.monotonic() + 1
                     if next_probe is not None and time.monotonic() >= next_probe:
-                        uart.write(b"ip -4 addr show eth0; cat /proc/mounts; cat /proc/cmdline\n")
+                        uart.write(probe_command.encode())
                         next_probe = time.monotonic() + 5
                     match = re.search(rb"inet (\d+\.\d+\.\d+\.\d+)/\d+.*?scope global", recent)
                     if match:
                         result["dhcp_address"] = match.group(1).decode()
-                        # Capture remaining shell output, including root mount.
-                        block = uart.read(4096)
-                        transcript.extend(block)
-                        log.write(block)
+                    host_key = re.search(rb"ssh-ed25519 ([A-Za-z0-9+/=]+)", recent)
+                    if result["dhcp_address"] and host_key:
+                        # Pin the board's public host key through its physical UART.
+                        # RAM recovery and freshly written rootfs generate new keys.
+                        known = args.key.parent / "known_hosts"
+                        known.parent.mkdir(parents=True, exist_ok=True)
+                        if known.exists():
+                            subprocess.run(["ssh-keygen", "-R", result["dhcp_address"],
+                                            "-f", str(known)], check=True, capture_output=True)
+                        with known.open("a") as keys:
+                            keys.write(result["dhcp_address"] + " ssh-ed25519 "
+                                       + host_key.group(1).decode() + "\n")
+                        result["ssh_host_key_verified_via_uart"] = True
                         break
             reboot.wait(timeout=15)
         for key, pattern in [("spl_banner", b"U-Boot SPL"), ("uboot_banner", b"U-Boot 2026"),
