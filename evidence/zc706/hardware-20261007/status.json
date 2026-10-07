@@ -18,5 +18,5 @@
   "openxc7_pl_hardware_validated": false,
   "milestone_1_complete": false,
   "sd_write_verified": true,
-  "sd_boot": "awaiting card transfer and power-on"
+  "sd_boot": "Power-on reported by user; UART capture empty; waiting for restored JTAG ACL to inspect BootROM"
 }
