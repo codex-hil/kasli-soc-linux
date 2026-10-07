@@ -3,10 +3,11 @@
 Prace trwają. **Milestone 1 nie został osiągnięty ani potwierdzony na hardware.**
 Repo jest oddzielone od upstream ARTIQ; checkouty `upstream/` pozostają bez zmian.
 
-**Fizyczna ZC706 rev. 1.2:** reference Linux bootuje, UART/Ethernet/DHCP/SSH
-działają, a nasz PL z openXC7 przeszedł 10000 transakcji AXI/CSR.
-Nasz pełny obraz SD jest już zapisany i zweryfikowany; jego boot jest następnym
-krokiem po zakończeniu testu DDR. Fizyczna Kasli-SoC nadal oczekuje na walidację.
+**Fizyczna ZC706 rev. 1.2:** nasz Linux 6.18.40 i Buildroot bootują z SD
+po inicjalizacji upstreamowym U-Boot SPL przez JTAG. UART/Ethernet/DHCP/SSH
+działają. Nasz PL z openXC7 przeszedł 10000 transakcji AXI/CSR na systemie
+referencyjnym. Trwa test DDR naszego Linuksa i przygotowanie pełnego bootu
+SPL/PL/Linux z SD bez JTAG. Fizyczna Kasli-SoC nadal oczekuje na walidację.
 
 ## Hardware i źródła prawdy
 
@@ -248,8 +249,9 @@ make BOARD=zc706 image
 ```
 
 Wynik: `build/zc706/buildroot/images/sdcard.img`. Etapy: `make BOARD=zc706 pl`,
-`szl`, `test-pl`, `linux`. Domyślny `make image` nadal buduje Kasli.
-Narzędzia, pobrane źródła i klucz SSH są współdzielone; PL, SZL, Buildroot
+`test-pl`, `linux`. ZC706 używa U-Boot SPL z upstreamowego `ps7_init`;
+SZL jest używany przez Kasli. Domyślny `make image` nadal buduje Kasli.
+Narzędzia, pobrane źródła i klucz SSH są współdzielone; PL, loader, Buildroot
 i obrazy mają oddzielne katalogi. Mapa CSR i hardware test są takie same.
 LED G2/LVCMOS15 pochodzi z platformy LiteX ZC706; Y21 jest nieobecna w
 używanej bazie openXC7. DTS ZC706 skopiowano z przypiętego upstream Linux

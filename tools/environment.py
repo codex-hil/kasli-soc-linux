@@ -64,8 +64,11 @@ def main():
     args = p.parse_args()
     prepare()
     if args.command:
+        # Keep compiler/download temporary files on the project's data disk.
+        (ROOT / "build/tmp").mkdir(exist_ok=True)
         call(["docker", "exec", "-w", "/work", "-e", "CARGO_HOME=/work/build/cargo",
-              "-e", "RUSTUP_HOME=/work/build/rustup", NAME, *args.command])
+              "-e", "RUSTUP_HOME=/work/build/rustup", "-e", "TMPDIR=/work/build/tmp",
+              NAME, *args.command])
 
 
 if __name__ == "__main__":

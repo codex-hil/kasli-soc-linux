@@ -17,9 +17,19 @@ def main():
     args = p.parse_args()
     regs = json.load(open(args.csr_json))["csr_registers"]
     base = regs["probe_scratch"]["addr"] & ~(mmap.PAGESIZE - 1)
+    offset = base
+    if os.path.basename(args.device).startswith("uio"):
+        map_dir = "/sys/class/uio/" + os.path.basename(args.device) + "/maps/map0"
+        with open(map_dir + "/addr") as f:
+            mapped_base = int(f.read().strip(), 0)
+        with open(map_dir + "/size") as f:
+            mapped_size = int(f.read().strip(), 0)
+        if mapped_base != base or mapped_size < mmap.PAGESIZE:
+            raise RuntimeError("UIO map does not cover the expected LiteX CSR page")
+        offset = 0  # UIO mmap offset selects map index, not physical address.
     fd = os.open(args.device, os.O_RDWR | os.O_SYNC)
     with mmap.mmap(fd, mmap.PAGESIZE, flags=mmap.MAP_SHARED,
-                   prot=mmap.PROT_READ | mmap.PROT_WRITE, offset=base) as mem:
+                   prot=mmap.PROT_READ | mmap.PROT_WRITE, offset=offset) as mem:
         def read(name):
             return struct.unpack_from("<I", mem, regs["probe_" + name]["addr"] - base)[0]
         def write(value):

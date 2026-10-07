@@ -53,8 +53,9 @@ def bootstrap():
     run([python, "-m", "pip", "install", "-r", ROOT / "requirements.lock"])
     run([python, "-m", "pip", "install", "--no-deps",
          ROOT / "upstream/migen", ROOT / "upstream/litex"])
-    run(["rustup", "toolchain", "install", "nightly-2026-03-25",
-         "--profile", "minimal", "--component", "rust-src"])
+    if BOARD == "kasli-soc":
+        run(["rustup", "toolchain", "install", "nightly-2026-03-25",
+             "--profile", "minimal", "--component", "rust-src"])
     keys = SHARED / "ssh"
     keys.mkdir(exist_ok=True)
     if not (keys / "id_ed25519").exists():

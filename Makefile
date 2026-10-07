@@ -12,5 +12,9 @@ szl:
 	$(ENV) python3 tools/image.py szl --board $(BOARD)
 linux:
 	$(ENV) python3 tools/image.py linux --board $(BOARD)
+ifeq ($(BOARD),zc706)
+image: bootstrap pl test-pl linux
+else
 image: bootstrap pl test-pl szl linux
+endif
 	$(ENV) python3 tools/image.py image --board $(BOARD)
