@@ -398,7 +398,7 @@ Aktualny status fizycznej ZC706 rev. 1.2 (bring-up na reference Linux):
 Element | Status
 ---|---
 PS7 | reference FSBL + Linux działa; SZL z naszego SD oczekuje na restart
-DDR | 2 pełne pętle memtester 128M PASS; 3. trwa
+DDR | PASS memtester 128M 3, wszystkie testy i 3 pętle bez błędów
 UART | PASS, 115200 8N1
 SD | reference boot PASS; nasz obraz zapisany i odczyt zweryfikowany
 U-Boot | pełny log naszego startu oczekuje
@@ -411,3 +411,8 @@ Yosys | PASS, użyty do zbudowanego i załadowanego PL
 nextpnr-xilinx/openXC7 | PASS, place-and-route i timing
 openXC7 bitstream | PASS, PCAP DONE i fizyczny test CSR
 ARTIQ RTIO PoC | nie rozpoczęto
+
+Pełny test DDR systemu referencyjnego zakończył się kodem 0:
+`memtester 128M 3`, wszystkie wzorce i trzy pętle PASS. Log zapisano
+bez animacji terminalowych w `ddr-memtester.log`; SHA-256 surowego logu
+jest w `status.json`.

@@ -12,7 +12,7 @@
   "dhcp_address": "192.168.2.7",
   "ping": true,
   "ssh_key_login": true,
-  "ddr_test": "memtester 128M 3 running; result pending",
+  "ddr_test": "PASS memtester 128M 3, exit 0",
   "uboot_boot_log_captured": false,
   "openxc7_pl": true,
   "milestone_1_complete": false,
@@ -26,5 +26,6 @@
   "project_sd_written": true,
   "project_sd_readback_verified": true,
   "project_sd_sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015",
-  "project_sd_boot": "pending completion of DDR test"
+  "project_sd_boot": "restart in progress",
+  "ddr_raw_log_sha256": "ac803c79eec269fa0e3b1bcc377cb72ca2aa755184a6fb9235ae5ed226142217"
 }
