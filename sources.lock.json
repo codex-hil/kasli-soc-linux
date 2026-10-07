@@ -70,5 +70,13 @@
   "linux": {
     "url": "https://github.com/torvalds/linux.git",
     "rev": "a90ee4305c4a5df72c11b31dacfdc76e00fcf78a"
+  },
+  "fmc-adc-100m14b4cha-gw": {
+    "url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-gw.git",
+    "rev": "f08eb4cde093d4753d6b01928298317994047557"
+  },
+  "fmc-adc-100m14b4cha-sw": {
+    "url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-sw.git",
+    "rev": "949cbe3f687f0828a16dea18d83b331eceb5f8f4"
   }
 }

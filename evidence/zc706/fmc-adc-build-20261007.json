@@ -1,0 +1,67 @@
+{
+  "target": "ZC706 rev. 1.2 / XC7Z045-2FFG900C / J5 LPC / CERN FMC ADC 100M 14b 4cha",
+  "hardware_validated": false,
+  "physical_acquisition": "PENDING card installation and measured VADJ 2.5 V",
+  "build": "PASS Yosys + nextpnr-xilinx + FASM + openXC7; no Vivado",
+  "bitstream_sha256": "971f22e23423e177a1933dc8789aaa2346ab7b684cb0434b3bd23855ddedd912",
+  "clocking": "DCO 400 MHz -> MMCM -> BUFG 400 MHz / BUFG 100 MHz; independent IDELAYCTRL 200 MHz",
+  "post_route_logic_timing": [
+    "Info: Max frequency for clock   'adcsoc_clkout_buf': 374.25 MHz (PASS at 200.00 MHz)",
+    "Info: Max frequency for clock             'adc_clk': 267.31 MHz (PASS at 100.00 MHz)",
+    "Info: Max frequency for clock 'adcsoc_clkin_signal': 113.88 MHz (PASS at 100.00 MHz)"
+  ],
+  "adc_io_timing": "Requires physical pattern/eye validation; primitive protocol model does not model analog delays",
+  "csr_bases": {
+    "identifier_mem": 1073741824,
+    "probe": 1073743872,
+    "adc": 1073745920,
+    "adc_spi": 1073747968,
+    "adc_i2c": 1073750016
+  },
+  "chipdb": {
+    "patch_sha256": "3a1e85c308785f7b64e77be72771c586209e60a3b35af0a2a47c96ddf8c0674e",
+    "chipdb_sha256": "ef9eb851f6bb76a69f1aed50937465194e12810ff2a14a995c77e48cdbbf7f62",
+    "added_hr_pins": 150,
+    "source_chipdb_sha256": "759e2963cd26448876c06ac9bd9af8b848e8158529db71a19d01ce338079d543",
+    "overlay_version": 1,
+    "unchanged_fabric_bytes_verified": true,
+    "method": "schema-6 package-only append; existing FFG900 IOB pads verified",
+    "provenance": {
+      "original_csv_sha256": "fa44f666d88822b1c6d4d3be22236d94fea8f0807758165b0ac8f2889bc1da70",
+      "donor_csv_sha256": "298be6228c312821d95766f1305f5540345cb47c48711f02157dcb3bb3112792",
+      "donor_part": "xc7z035ffg900-2",
+      "prjxray_db_rev": "517d66a383676cb971177ea92b0ff3b6ea6e8690",
+      "official_package_sha256": "41fc3a942109a8714f66fb918a4b8bc499b5217899b59777fc170d4a3137f553"
+    }
+  },
+  "test_results": {
+    "capture": "PASS: async clocks, alignment gating, 3 snapshots, external trigger, frame errors, frozen RAM, abort/re-arm\n/work/tests/adc_capture_tb.v:73: $finish called at 123454900 (1ps)\n",
+    "receiver": "PASS: frame BITSLIP acquisition/recovery, 4-channel lane ordering, walking bits (protocol model)\n/work/tests/adc_rx_tb.v:53: $finish called at 17958100 (1ps)\n",
+    "axi": "PASS: 1000 AXI/CSR transactions with delayed channels and response backpressure (simulation)\nPASS: ADC control/SSR/nine delay CSR readback and reset counters over AXI\n/work/tests/axi_csr_tb.v:93: $finish called at 190960000 (1ps)\n"
+  },
+  "toolchain_lock": {
+    "openxc7": {
+      "url": "https://github.com/cavearr/toolchain-openxc7-releases/releases/download/2026-10-03/openxc7-toolchain-linux-x86-64-20261003.tgz",
+      "sha256": "5ad99cfbc3f4309f10e650e39d17a5e551cd6838ab0bf473de86c00630d9e775"
+    },
+    "oss-cad-suite": {
+      "url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-05/oss-cad-suite-linux-x64-20261005.tgz",
+      "sha256": "0c432bb689ba2aaea76d4c38fa6e7b3a81b1123e00d437bfae8c96b292bc6824"
+    }
+  },
+  "cern_source_locks": {
+    "fmc-adc-100m14b4cha-gw": {
+      "url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-gw.git",
+      "rev": "f08eb4cde093d4753d6b01928298317994047557"
+    },
+    "fmc-adc-100m14b4cha-sw": {
+      "url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-sw.git",
+      "rev": "949cbe3f687f0828a16dea18d83b331eceb5f8f4"
+    }
+  },
+  "limitations": [
+    "snapshot only: 1024 samples per channel, no DMA/pretrigger",
+    "no EEPROM analog calibration or SI570 frequency programming",
+    "one J5 card; J37 target not implemented"
+  ]
+}

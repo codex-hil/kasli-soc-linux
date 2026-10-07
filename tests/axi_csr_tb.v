@@ -87,6 +87,9 @@ module tb;
         read_word(32'h40000804,result);
         if(result <= original) $fatal(1,"counter did not advance");
         $display("PASS: 1000 AXI/CSR transactions with delayed channels and response backpressure (simulation)");
+        `ifdef ADC_CSR_CHECKS
+        `include "adc_csr_checks.vh"
+        `endif
         $finish;
     end
     initial begin #1000000; $fatal(1,"AXI test timeout"); end

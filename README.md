@@ -11,6 +11,14 @@ DDR naszego Linuksa przeszedł `memtester 128M 3` i dodatkową pętlę na
 finalnym obrazie. Pełny zapis/odczyt SD i końcowy zestaw testów są PASS.
 Fizyczna Kasli-SoC nadal oczekuje na walidację.
 
+## CERN FMC ADC na ZC706
+
+Dodany target dla **jednej karty w J5 LPC**: cztery kanały,
+odbiornik ISERDES, snapshot 1024 próbek, SPI/I²C i automatyczny test wzorców.
+Build: `make bootstrap BOARD=zc706`, `make adc-test`, `make adc-pl`.
+Fizyczna akwizycja oczekuje na kartę i weryfikację VADJ 2.5 V.
+Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
+
 ## Hardware i źródła prawdy
 
 Platforma Migen `migen/build/platforms/sinara/kasli_soc.py`: **XC7Z030-FFG676-3**,

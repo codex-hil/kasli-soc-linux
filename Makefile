@@ -1,4 +1,4 @@
-.PHONY: bootstrap pl test-pl szl linux image
+.PHONY: bootstrap pl test-pl szl linux image adc-pl adc-test adc-package
 .NOTPARALLEL:
 BOARD ?= kasli-soc
 ENV = python3 tools/environment.py
@@ -12,6 +12,13 @@ szl:
 	$(ENV) python3 tools/image.py szl --board $(BOARD)
 linux:
 	$(ENV) python3 tools/image.py linux --board $(BOARD)
+adc-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design fmc-adc --output-dir build/zc706-adc/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+adc-test:
+	$(ENV) python3 tools/test_adc.py
+adc-package: adc-pl
+	$(ENV) python3 tools/test_adc.py --soc
+	$(ENV) python3 tools/package_adc.py
 ifeq ($(BOARD),zc706)
 image: bootstrap pl test-pl linux
 else
