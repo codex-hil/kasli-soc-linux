@@ -379,3 +379,11 @@ Pythona na starym rootfs:
 ```sh
 python3 tools/dump_ps7_state.py --ssh-address 192.168.2.7 > ps7.json
 ```
+
+Nasz obraz `build/zc706/buildroot/images/sdcard.img` zapisano następnie
+z działającego systemu RAM na tę samą kartę SC32G, CID
+`035344534333324780d55bcc91012a00`, po sprawdzeniu braku mountów SD.
+Odczyt 335544832 bajtów ma SHA-256 identyczny z manifestem:
+`c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015`.
+Restart do naszego obrazu nastąpi po zakończeniu testu DDR. Karta nie
+zawiera już obrazu HERO; jego kopia i skrypt odtworzenia pozostają na hoście.

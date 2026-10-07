@@ -22,5 +22,9 @@
   "axi_csr": true,
   "csr_transactions": 10000,
   "counter_hz": 99990601,
-  "full_project_sd_boot": false
+  "full_project_sd_boot": false,
+  "project_sd_written": true,
+  "project_sd_readback_verified": true,
+  "project_sd_sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015",
+  "project_sd_boot": "pending completion of DDR test"
 }
