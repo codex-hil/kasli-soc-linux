@@ -328,3 +328,17 @@ wobec konfiguracji specyficznej dla rewizji. Następny eksperyment to ten sam
 obraz na dostępnej rev. 1.2. BootROM SD jest osobnym nierozwiązanym problemem.
 Logi: `ddr-bit12-patterns.log`, `ocm-ddr-control.log`, `branch-readback.log`
 w katalogu dowodów hardware. QSPI bez zmian.
+
+### Sukces obrazu referencyjnego na ZC706 rev. 1.2
+
+Ta sama karta bootuje Linux `4.9.0-xilinx-v2017.2`, BusyBox i konsolę
+UART. JTAG `0x23731093`, MCTRL `0x30800100`; adapter `210251842914`.
+Ethernet 1000/Full, DHCP `192.168.2.7`, ping i SSH kluczem projektu PASS.
+Kernel widzi 901732 KiB RAM; test `memtester 128M 3` trwa. Pełny log
+U-Boot wymaga jeszcze przechwycenia restartu. Dowody:
+`evidence/zc706/hardware-rev12-20261007/`.
+To **referencyjny system HERO z vendorowym PL**, nie nasz Linux/openXC7;
+milestone 1 nadal nie jest osiągnięty. Rev. 1.0 i jej wyniki pozostają
+osobno zapisane. Klucz SSH dodano w RAM systemu referencyjnego; znika
+po restarcie. Domyślne logowanie tego obrazu opisuje
+[README HERO SDK](https://github.com/pulp-platform/hero-sdk/blob/master/README.md).

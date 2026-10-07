@@ -1,0 +1,20 @@
+{
+  "board_revision": "1.2 (reported by user)",
+  "jtag_serial": "210251842914",
+  "idcode": "0x23731093",
+  "devcfg_mctrl": "0x30800100",
+  "boot_mode": 5,
+  "boot_source": "same published PULP/HERO SD reference image",
+  "linux": "4.9.0-xilinx-v2017.2",
+  "uart_console": true,
+  "rootfs_shell": true,
+  "ethernet_link": "1000/Full",
+  "dhcp_address": "192.168.2.7",
+  "ping": true,
+  "ssh_key_login": true,
+  "ddr_test": "memtester 128M 3 running; result pending",
+  "uboot_boot_log_captured": false,
+  "openxc7_pl": false,
+  "milestone_1_complete": false,
+  "qspi_written": false
+}

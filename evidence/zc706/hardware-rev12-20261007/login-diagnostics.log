@@ -1,0 +1,53 @@
+root
+Password: 
+# uname -a; head /proc/meminfo; ip addr; dmesg | tail -30
+Linux zynq 4.9.0-xilinx-v2017.2 #1 SMP PREEMPT Fri Aug 24 19:15:13 CEST 2018 armv7l GNU/Linux
+MemTotal:         901732 kB
+MemFree:          851712 kB
+MemAvailable:     869692 kB
+Buffers:               0 kB
+Cached:            36604 kB
+SwapCached:            0 kB
+Active:             4412 kB
+Inactive:          33016 kB
+Active(anon):        848 kB
+Inactive(anon):       28 kB
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast qlen 1000
+    link/ether 00:0a:35:00:01:22 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.2.7/24 brd 192.168.2.255 scope global eth0
+       valid_lft forever preferred_lft forever
+[    2.927014] cpufreq: cpufreq_online: CPU0: Unlisted initial frequency changed to: 800000 KHz
+[    2.935589] Xilinx Zynq CpuIdle Driver started
+[    2.940428] sdhci: Secure Digital Host Controller Interface driver
+[    2.946519] sdhci: Copyright(c) Pierre Ossman
+[    2.950884] sdhci-pltfm: SDHCI platform and OF driver helper
+[    3.018837] mmc0: SDHCI controller on e0100000.sdhci [e0100000.sdhci] using DMA
+[    3.026425] usbcore: registered new interface driver usbhid
+[    3.031966] usbhid: USB HID core driver
+[    3.041182] oprofile: using arm/armv7-ca9
+[    3.047394] NET: Registered protocol family 17
+[    3.052066] Registering SWP/SWPB emulation handler
+[    3.071483] hctosys: unable to open rtc device (rtc0)
+[    3.113356] mmc0: new high speed SDHC card at address aaaa
+[    3.119325] mmcblk0: mmc0:aaaa SC32G 29.7 GiB 
+[    3.128914]  mmcblk0: p1
+[    6.199101] macb e000b000.ethernet eth0: link up (1000/Full)
+[    6.258828] Sending DHCP and RARP requests ., OK
+[    7.388824] IP-Config: Got DHCP answer from 192.168.2.1, my address is 192.168.2.7
+[    7.396306] IP-Config: Complete:
+[    7.399545]      device=eth0, hwaddr=00:0a:35:00:01:22, ipaddr=192.168.2.7, mask=255.255.255.0, gw=192.168.2.1
+[    7.409515]      host=192.168.2.7, domain=, nis-domain=(none)
+[    7.415228]      bootserver=0.0.0.0, rootserver=0.0.0.0, rootpath=     nameserver0=192.168.2.1
+[    7.426887] Freeing unused kernel memory: 1024K (c0800000 - c0900000)
+[    7.909308] random: dd: uninitialized urandom read (512 bytes read)
+[    9.028467] random: avahi-daemon: uninitialized urandom read (4 bytes read)
+[    9.041687] random: avahi-daemon: uninitialized urandom read (4 bytes read)
+[    9.055332] random: avahi-daemon: uninitialized urandom read (4 bytes read)
+[    9.062648] random: avahi-daemon: uninitialized urandom read (4 bytes read)
+[    9.093528] random: ssh-keygen: uninitialized urandom read (32 bytes read)
+[    9.111490] random: sshd: uninitialized urandom read (32 bytes read)
+# 
