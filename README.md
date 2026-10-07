@@ -370,3 +370,12 @@ nie zapisuje SD ani QSPI. Ponowny boot karty referencyjnej przywróci HERO PL.
 Nadal pozostają: pełny log startu U-Boot, wynik długiego testu DDR oraz boot
 **naszego** obrazu SZL/upstream U-Boot/upstream Linux/Buildroot/openXC7.
 Nie utożsamiamy hybrydowego bring-upu z zakończeniem milestone 1 Kasli-SoC.
+
+PS7 działającego systemu referencyjnego z naszym PL zapisano jako
+`ps7-reference-openxc7.json` (108 rejestrów, UART_CLK_CTRL `00001402`,
+FPGA0_CLK_CTRL `00200500`, 100 MHz). Hostowy transport SSH dumpu nie wymaga
+Pythona na starym rootfs:
+
+```sh
+python3 tools/dump_ps7_state.py --ssh-address 192.168.2.7 > ps7.json
+```
