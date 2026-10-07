@@ -1,0 +1,33 @@
+{
+  "url": "https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-poc-20261007",
+  "tag": "zc706-poc-20261007",
+  "target_commit": "a95bf8219b8de0984f5229c8f162201eb56218ae",
+  "published": true,
+  "assets": [
+    {
+      "name": "manifest.json",
+      "bytes": 1577,
+      "sha256": "9b8e1f2cc0efc56095542ad61a65d41072e240ceece04386dc46a0f30110b689",
+      "github_digest_verified": true
+    },
+    {
+      "name": "sdcard.img.gz",
+      "bytes": 30490510,
+      "sha256": "11c36458877f62726c8cb05e5abdd215fabbbc94bab1f0a6c4690a1afb93835f",
+      "github_digest_verified": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 157,
+      "sha256": "e20ee110dc98c15044babb304ca974bd6e087763942754b5b15a287cc855068f",
+      "github_digest_verified": true
+    },
+    {
+      "name": "validation.json",
+      "bytes": 2281,
+      "sha256": "387ac0d8983af1b5d5049ebc2c4350f0d56d7a2a2bc8884d522f4ba44eb37c89",
+      "github_digest_verified": true
+    }
+  ],
+  "all_uploaded_digests_verified": true
+}
