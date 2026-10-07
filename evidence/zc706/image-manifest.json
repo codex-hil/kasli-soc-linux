@@ -17,11 +17,15 @@
     },
     "rootfs.ext4": {
       "bytes": 268435456,
-      "sha256": "3a8193301e01842613ea15d7940d5cc3dc466020b4cacff9c09f8ccbf2ef9a55"
+      "sha256": "46d6676be1056e660e3df69ca0fe06ad3b8e2ae45de9856aebbc75e0a91407e6"
     },
     "sdcard.img": {
       "bytes": 335544832,
-      "sha256": "3b41dc60e5607cd72fe3dc0770f7b5b69b930c26c9b6b22523bc812a5e0edd7f"
+      "sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de"
+    },
+    "sdcard.img.gz": {
+      "bytes": 30490510,
+      "sha256": "11c36458877f62726c8cb05e5abdd215fabbbc94bab1f0a6c4690a1afb93835f"
     },
     "u-boot-spl.bin": {
       "bytes": 126556,
@@ -33,19 +37,15 @@
     },
     "boot.scr": {
       "bytes": 652,
-      "sha256": "f4fc4397a5f0f87a109f798fa54befce072cf2f516ee88c4a5c368402b28cee6"
+      "sha256": "7f4777a2b02111c4b8cbdf6405919679ec27ee26660e26dd836fc8dc77e57492"
     },
     "top.bit": {
       "bytes": 13321505,
       "sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c"
     },
     "rootfs.cpio.gz": {
-      "bytes": 12892479,
-      "sha256": "31d7337d75b68b6afcfad71304c0cc7d84d814f0f84787a0ab53395cd34b1637"
-    },
-    "sdcard.img.gz": {
-      "bytes": 30489411,
-      "sha256": "d13d623a6385235cf85ef69ee690c43d9ddd35a2903c25fecea46bb4027709bc"
+      "bytes": 12892505,
+      "sha256": "ead906c9410c194eb5ae55b3b036c6a1ce2476f32ac10eb6d4c811ece1849906"
     }
   }
 }

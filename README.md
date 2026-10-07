@@ -1,13 +1,15 @@
 # Kasli-SoC Linux / LiteX / openXC7
 
-Prace trwają. **Milestone 1 nie został osiągnięty ani potwierdzony na hardware.**
+Prace trwają. **Milestone 1 Kasli-SoC nie został potwierdzony na hardware.**
 Repo jest oddzielone od upstream ARTIQ; checkouty `upstream/` pozostają bez zmian.
 
-**Fizyczna ZC706 rev. 1.2:** nasz Linux 6.18.40 i Buildroot bootują z SD
-po inicjalizacji upstreamowym U-Boot SPL przez JTAG. UART/Ethernet/DHCP/SSH
-działają. Nasz PL z openXC7 przeszedł 10000 transakcji AXI/CSR na systemie
-referencyjnym. Trwa test DDR naszego Linuksa i przygotowanie pełnego bootu
-SPL/PL/Linux z SD bez JTAG. Fizyczna Kasli-SoC nadal oczekuje na walidację.
+**Fizyczna ZC706 rev. 1.2:** BootROM → upstream U-Boot SPL → U-Boot →
+openXC7 PL → Linux 6.18.40 / Buildroot działa z SD bez JTAG i Vivado.
+UART, Ethernet 1 Gb/s, DHCP i SSH działają. Testy AXI/CSR przez `/dev/mem`
+i `/dev/uio0` przeszły po 10036 zapisów/odczytów; licznik ma ~100 MHz.
+DDR naszego Linuksa przeszedł `memtester 128M 3`. Finalny obraz został
+zapisany w całości i zweryfikowany pełnym odczytem; trwa końcowy test
+tego bootu. Fizyczna Kasli-SoC nadal oczekuje na walidację.
 
 ## Hardware i źródła prawdy
 
@@ -399,16 +401,16 @@ Aktualny status fizycznej ZC706 rev. 1.2 (bring-up na reference Linux):
 
 Element | Status
 ---|---
-PS7 | reference FSBL + Linux działa; SZL z naszego SD oczekuje na restart
+PS7 | PASS, upstream U-Boot SPL ZC706 z istniejącym ps7_init
 DDR | PASS memtester 128M 3, wszystkie testy i 3 pętle bez błędów
 UART | PASS, 115200 8N1
-SD | reference boot PASS; nasz obraz zapisany i odczyt zweryfikowany
-U-Boot | pełny log naszego startu oczekuje
-Linux | reference 4.9 PASS; nasz upstream 6.18 oczekuje
-Ethernet | PASS, 1000/Full, DHCP 192.168.2.7, ping
+SD | PASS, pełny własny obraz zapisany, odczyt SHA-256 zgodny, boot bez JTAG
+U-Boot | PASS, SPL i main 2026.10-rc5, pełny log UART
+Linux | PASS, własny upstream 6.18.40 i rootfs Buildroot z SD
+Ethernet | PASS, 1000/Full, DHCP 192.168.2.15, ping
 SSH | PASS, klucz projektu
 AXI PS→PL | PASS na fizycznej płycie
-LiteX CSR | PASS, 10000 zapisów/odczytów, licznik ~100 MHz
+LiteX CSR | PASS, po 10036 zapisów/odczytów przez devmem i UIO, licznik ~100 MHz
 Yosys | PASS, użyty do zbudowanego i załadowanego PL
 nextpnr-xilinx/openXC7 | PASS, place-and-route i timing
 openXC7 bitstream | PASS, PCAP DONE i fizyczny test CSR

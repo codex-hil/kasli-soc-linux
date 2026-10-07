@@ -10,15 +10,24 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def positive(value):
+    value = int(value)
+    if value < 1:
+        raise argparse.ArgumentTypeError("loop count must be positive")
+    return value
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("address", type=ipaddress.ip_address)
     p.add_argument("--key", type=Path, default=ROOT / "build/ssh/id_ed25519")
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--ddr-loops", type=positive, default=3)
     args = p.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     result = {"hardware": True, "address": str(args.address),
               "time": datetime.now(timezone.utc).isoformat(), "checks": {},
+              "ddr_mib": 128, "ddr_loops": args.ddr_loops,
               "milestone_1_complete": False}
     ssh = ["ssh", "-i", str(args.key), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
            "-o", "StrictHostKeyChecking=accept-new", "-o",
@@ -26,7 +35,7 @@ def main():
     commands = [
         ("ping", ["ping", "-c", "5", str(args.address)], 20),
         ("ssh_diagnostics", ssh + ["set -e; uname -a; cat /proc/meminfo; ip addr show eth0; ethtool eth0; dmesg"], 30),
-        ("ddr", ssh + ["memtester 128M 3"], 3600),
+        ("ddr", ssh + [f"memtester 128M {args.ddr_loops}"], max(3600, args.ddr_loops * 1200)),
         ("pl", ssh + ["python3 /usr/bin/pl_test.py --device /dev/uio0 --csr-json /etc/litex/csr.json --iterations 10000"], 60),
         ("ps7_dump", ssh + ["python3 /usr/bin/dump_ps7_state.py"], 30),
     ]

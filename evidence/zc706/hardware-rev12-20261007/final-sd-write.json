@@ -1,0 +1,13 @@
+{
+  "hardware": true,
+  "address": "192.168.2.15",
+  "device": "/dev/mmcblk0",
+  "cid": "035344534333324780d55bcc91012a00",
+  "bytes": 335544832,
+  "image_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de",
+  "qspi_written": false,
+  "preflight_pass": true,
+  "write_completed": true,
+  "readback_verified": true,
+  "readback_sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de"
+}

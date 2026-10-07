@@ -1,0 +1,10 @@
+#!/bin/sh
+# Refresh peer ARP caches after DHCP, including boards with a RAM U-Boot MAC.
+case "$1" in
+    bound|renew)
+        if [ -n "${interface:-}" ] && [ -n "${ip:-}" ]; then
+            arping -q -U -c 2 -I "$interface" "$ip" || true
+        fi
+        ;;
+esac
+exit 0

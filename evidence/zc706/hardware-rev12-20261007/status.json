@@ -22,11 +22,11 @@
   "axi_csr": true,
   "csr_transactions": 10000,
   "counter_hz": 99990601,
-  "full_project_sd_boot": false,
+  "full_project_sd_boot": true,
   "project_sd_written": true,
   "project_sd_readback_verified": true,
   "project_sd_sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015",
-  "project_sd_boot": "SZL starts, PL DoneTimeout; DDR corruption observed with SZL 667 MHz configuration",
+  "project_sd_boot": "PASS upstream SPL/U-Boot/openXC7 PL/Linux, no JTAG",
   "ddr_raw_log_sha256": "ac803c79eec269fa0e3b1bcc377cb72ca2aa755184a6fb9235ae5ed226142217",
   "project_linux_recovery": {
     "loader": "upstream U-Boot SPL ZC706 ps7_init via OpenOCD JTAG",
@@ -56,5 +56,15 @@
     "boot_partition_verified": true,
     "full_image_written": false
   },
-  "ram_root_recovery_boot": true
+  "ram_root_recovery_boot": true,
+  "final_image": {
+    "sha256": "729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de",
+    "bytes": 335544832,
+    "full_readback_verified": true,
+    "sd_boot_without_jtag": true,
+    "linux": "6.18.40-zc706",
+    "dhcp": "192.168.2.15",
+    "uart_verified_ssh_host_key": true,
+    "validation": "ping and SSH PASS; final DDR/UIO checks running"
+  }
 }
