@@ -156,7 +156,7 @@ def image():
                 "files": {}}
     names = ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img"]
     if BOARD == "zc706":
-        names += ["u-boot-spl.bin", "u-boot.img", "boot.scr", "top.bit"]
+        names += ["u-boot-spl.bin", "u-boot.img", "boot.scr", "top.bit", "rootfs.cpio.gz"]
     for name in names:
         path = images / name
         with path.open("rb") as f:

@@ -1,0 +1,9 @@
+{
+  "hardware": true,
+  "partition": "/dev/mmcblk0p1",
+  "bytes": 67108864,
+  "sha256": "9c1ef7d32b72a6391322cea9231d8fbc5f165e5decb1ddbcb47887dfdef5a9a0",
+  "readback_verified": true,
+  "root_partition_written": false,
+  "qspi_written": false
+}

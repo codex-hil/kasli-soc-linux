@@ -441,3 +441,37 @@ Target ZC706 przechodzi na standardowy flow BootROM → U-Boot SPL →
 upstreamowego opisu ZC706 i PS7, bez generowania konfiguracji w Vivado.
 Kasli-SoC nadal używa golden SZL/ARTIQ. Pełny start nowego wariantu ZC706
 z SD bez JTAG pozostaje do sprawdzenia; milestone 1 Kasli nie jest zakończony.
+
+Pełne `make BOARD=zc706 image` w wariancie SPL zakończyło się kodem 0.
+Obraz ma 335544832 bajty; bieżące hashe znajdują się w
+`evidence/zc706/image-manifest.json`. `BOOT.BIN` zawiera wyłącznie
+upstreamowy SPL; PL ładuje U-Boot z pliku `top.bit`, przed uruchomieniem
+kernela. Niepowodzenie ładowania PL zatrzymuje skrypt startowy.
+
+Obraz zawiera również `rootfs.cpio.gz`, pozwalający uruchomić ten sam
+userspace w RAM. `tools/boot_zc706_uart.py --ram-root` przechwytuje
+autoboot i wybiera ten tryb bez zapisywania środowiska U-Boot.
+Narzędzie wymaga hostowego Pythona z `pyserial==3.5` oraz jawnej ścieżki
+UART i adresu SSH działającej płyty. Przykład dla tego egzemplarza:
+
+```sh
+.venv/bin/python tools/boot_zc706_uart.py \
+  --port /dev/serial/by-id/usb-Silicon_Labs_CP2103_USB_to_UART_Bridge_Controller_0001-if00-port0 \
+  --reboot-ssh-address ADRES_IP --ram-root --output build/hardware/ram-boot
+```
+
+Po potwierdzeniu rootfs w RAM można zapisać obraz przez LAN:
+
+```sh
+python3 tools/write_sd_over_ssh.py ADRES_IP \
+  --cid 035344534333324780d55bcc91012a00 \
+  --image build/zc706/buildroot/images/sdcard.img \
+  --output build/hardware/sd-write.json
+```
+
+CID powyżej identyfikuje udostępnioną kartę SC32G; dla innej karty trzeba
+podać jej własny CID. Skrypt odmawia zapisu, jeśli rootfs nie działa w RAM
+lub SD jest zamontowana, sprawdza CID i pojemność, a następnie porównuje
+SHA-256 pełnego odczytu z obrazem. Odmowę przy rootfs z SD sprawdzono
+na fizycznej płycie. QSPI nie jest używana. Test PL obsługuje
+`--device /dev/uio0` oprócz `/dev/mem`.

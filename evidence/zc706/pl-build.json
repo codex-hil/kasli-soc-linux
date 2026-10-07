@@ -2,7 +2,7 @@
   "physical_part": "xc7z045ffg900-2",
   "database_part": "xc7z045ffg900-2",
   "hardware_validated": false,
-  "bitstream_sha256": "e5a836508795b7bca585caee43ab4fe65b00ede398fbdc2d7d90468f861357d2",
+  "bitstream_sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c",
   "commands": [
     [
       "/work/build/tools/oss-cad-suite/bin/yosys",

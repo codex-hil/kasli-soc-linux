@@ -4,8 +4,8 @@
   "milestone_1_complete": false,
   "files": {
     "BOOT.BIN": {
-      "bytes": 14387320,
-      "sha256": "38a56d67632fe8b3a6320f2582fcf3e060239e65c04b616d8d5d546158e9bf85"
+      "bytes": 132444,
+      "sha256": "ee8b8866b8a74674094fa69d1daa5b3a29fb6e93d4254c68f896002bc7768493"
     },
     "zImage": {
       "bytes": 3768760,
@@ -17,11 +17,31 @@
     },
     "rootfs.ext4": {
       "bytes": 268435456,
-      "sha256": "021501fc27e4375b4daa923b068ffc9b51061ffc2c498c3cf248eaf49491470a"
+      "sha256": "3a8193301e01842613ea15d7940d5cc3dc466020b4cacff9c09f8ccbf2ef9a55"
     },
     "sdcard.img": {
       "bytes": 335544832,
-      "sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015"
+      "sha256": "3b41dc60e5607cd72fe3dc0770f7b5b69b930c26c9b6b22523bc812a5e0edd7f"
+    },
+    "u-boot-spl.bin": {
+      "bytes": 126556,
+      "sha256": "86ee30fae246c6ea266fa9e02dd353857d3f9df56232aa324b1f019d077f986d"
+    },
+    "u-boot.img": {
+      "bytes": 1200168,
+      "sha256": "30d7347d737a37ca6454ddef896eb13e49fdf780d4856e235c0fddd79cbc913b"
+    },
+    "boot.scr": {
+      "bytes": 652,
+      "sha256": "f4fc4397a5f0f87a109f798fa54befce072cf2f516ee88c4a5c368402b28cee6"
+    },
+    "top.bit": {
+      "bytes": 13321505,
+      "sha256": "90da4059acfa6215cd96cbe5e5bb48b7a287c5372089d90d34a4106ce696c72c"
+    },
+    "rootfs.cpio.gz": {
+      "bytes": 12892479,
+      "sha256": "31d7337d75b68b6afcfad71304c0cc7d84d814f0f84787a0ab53395cd34b1637"
     }
   }
 }
