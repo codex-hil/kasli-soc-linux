@@ -416,3 +416,26 @@ Pełny test DDR systemu referencyjnego zakończył się kodem 0:
 `memtester 128M 3`, wszystkie wzorce i trzy pętle PASS. Log zapisano
 bez animacji terminalowych w `ddr-memtester.log`; SHA-256 surowego logu
 jest w `status.json`.
+
+### ZC706: upstream Linux uruchomiony, korekta loadera (2026-10-07)
+
+Pierwszy pełny restart naszego SD uruchomił SZL, lecz programowanie PL
+zakończyło się `DoneTimeout`. Partycja PL zawiera poprawne dane PCAP;
+odczyty wzorców DDR przez JTAG wykazały przekłamania przy konfiguracji
+SZL (667 MHz). Nie traktujemy tego jako awarii bitstreamu ani dowodu
+uszkodzenia rev. 1.2.
+
+Upstreamowy U-Boot SPL korzystający z istniejącego
+`board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c` inicjalizuje DDR na 533 MHz,
+tak jak działający obraz HERO. Załadowano SPL i nasz U-Boot przez
+open-source OpenOCD, następnie U-Boot uruchomił z SD nasz Linux
+6.18.40 i rootfs Buildroot. UART, 1 GiB DDR, DHCP (192.168.2.15), ping
+i SSH działają. Logi są w `evidence/zc706/hardware-rev12-20261007/`.
+Pełny test DDR tego systemu trwa; PL w tym starcie nie został załadowany.
+
+Target ZC706 przechodzi na standardowy flow BootROM → U-Boot SPL →
+`u-boot.img` → `boot.scr` → openXC7 `top.bit` → Linux/ext4.
+`boot.cmd` jest źródłem reprodukowalnego skryptu startowego. Używamy
+upstreamowego opisu ZC706 i PS7, bez generowania konfiguracji w Vivado.
+Kasli-SoC nadal używa golden SZL/ARTIQ. Pełny start nowego wariantu ZC706
+z SD bez JTAG pozostaje do sprawdzenia; milestone 1 Kasli nie jest zakończony.

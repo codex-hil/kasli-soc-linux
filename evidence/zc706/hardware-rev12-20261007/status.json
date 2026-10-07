@@ -26,6 +26,16 @@
   "project_sd_written": true,
   "project_sd_readback_verified": true,
   "project_sd_sha256": "c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015",
-  "project_sd_boot": "restart in progress",
-  "ddr_raw_log_sha256": "ac803c79eec269fa0e3b1bcc377cb72ca2aa755184a6fb9235ae5ed226142217"
+  "project_sd_boot": "SZL starts, PL DoneTimeout; DDR corruption observed with SZL 667 MHz configuration",
+  "ddr_raw_log_sha256": "ac803c79eec269fa0e3b1bcc377cb72ca2aa755184a6fb9235ae5ed226142217",
+  "project_linux_recovery": {
+    "loader": "upstream U-Boot SPL ZC706 ps7_init via OpenOCD JTAG",
+    "uboot": "project binary via JTAG",
+    "kernel": "6.18.40-zc706 from SD",
+    "rootfs": "project Buildroot ext4 from SD",
+    "dhcp_address": "192.168.2.15",
+    "ssh": true,
+    "ddr_test": "running memtester 128M 3",
+    "pl_loaded": false
+  }
 }

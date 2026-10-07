@@ -113,6 +113,19 @@ def boot():
     run(["make", "-C", packer, "-j4"])
     images = BUILD / "buildroot/images"
     bif = BUILD / "boot.bif"
+    if BOARD == "zc706":
+        # Use upstream ZC706 ps7_init (533 MHz DDR), not SZL's 667 MHz preset.
+        # BootROM loads SPL from BOOT.BIN; SPL reads u-boot.img from FAT.
+        bif.write_text("image: {\n    [bootloader, load=0x00000000] "
+                       + str(images / "u-boot-spl.bin") + "\n}\n")
+        run([packer / "mkbootimage", bif, images / "BOOT.BIN"])
+        run(["python3", ROOT / "tools/check_boot_image.py", images / "BOOT.BIN",
+             "--spl", images / "u-boot-spl.bin"])
+        shutil.copyfile(BUILD / "gateware/gateware/top.bit", images / "top.bit")
+        run([BUILD / "buildroot/host/bin/mkimage", "-A", "arm", "-T", "script",
+             "-C", "none", "-n", "ZC706 Linux openXC7", "-d",
+             ROOT / "buildroot/board/zc706/boot.cmd", images / "boot.scr"])
+        return
     # SZL discovers PL and PS payload headers, skips its own bootloader header.
     # U-Boot's configured text base matches SZL's fixed DDR payload address.
     bif.write_text("image: {\n    [bootloader] " + str(BUILD / "szl/armv7-none-eabihf/release/szl")
@@ -140,7 +153,10 @@ def image():
     run(["python3", ROOT / "tools/check_sd_image.py", images / "sdcard.img"])
     manifest = {"board": BOARD, "hardware_validated": False, "milestone_1_complete": False,
                 "files": {}}
-    for name in ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img"]:
+    names = ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img"]
+    if BOARD == "zc706":
+        names += ["u-boot-spl.bin", "u-boot.img", "boot.scr", "top.bit"]
+    for name in names:
         path = images / name
         with path.open("rb") as f:
             digest = hashlib.file_digest(f, "sha256").hexdigest()

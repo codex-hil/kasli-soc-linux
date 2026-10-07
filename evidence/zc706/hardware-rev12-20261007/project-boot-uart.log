@@ -1,0 +1,64 @@
+Stopping telnetd: OK
+Stopping sshd: OK
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+Stopping network: ifdown: interface lo not configured
+OK
+Saving random seed... done.
+Stopping logging: OK
+umount: /etc/mtab: No such file or directory
+umount: devtmpfs busy - remounted read-only
+umount: can't unmount /: Invalid argument
+
+The system is going down NOW!
+
+Sent SIGTERM to all processes
+
+Sent SIGKILL to all processes
+
+Requesting system reboot
+[ 1769.962728] reboot: Restarting system
+�
+
+                     __________   __
+                    / ___/__  /  / /
+                    \__ \  / /  / /
+                   ___/ / / /__/ /___
+                  /____/ /____/_____/
+
+                 (C) 2020-2025 M-Labs
+
+[     0.014342s]  INFO(szl): Simple Zynq Loader starting...
+[     0.019548s] DEBUG(libboard_zynq::clocks::source): Set ARM_PLL to 1600000000 Hz
+[     0.008795s] DEBUG(libboard_zynq::clocks::source): Set IO_PLL to 1000000000 Hz
+[     0.018514s] DEBUG(libboard_zynq::clocks::source): Set DDR_PLL to 1333333332 Hz
+[     0.025867s] DEBUG(libboard_zynq::ddr): DDR 3x/2x clocks: 666666660/444444440
+[     0.027399s] DEBUG(libboard_zynq::ddr): DDR DCI clock: 9876543 Hz (divisors=3*45)
+[     0.039000s] DEBUG(libboard_zynq::sdio): Reset SDIO!
+[     0.039764s] DEBUG(libboard_zynq::sdio): Changing clock frequency to 400000
+[     0.046710s]  INFO(szl): Card inserted. Mounting file system.
+[     0.077302s] DEBUG(libboard_zynq::sdio): Changing clock frequency to 25000000
+[     0.078798s] DEBUG(libboard_zynq::sdio::sd_card): Getting bus width
+[     0.088361s] DEBUG(libboard_zynq::sdio::sd_card): 4 bit support
+[     0.090932s] DEBUG(libboard_zynq::sdio::sd_card): Changing bus width
+[     0.099001s] DEBUG(libboard_zynq::sdio): Set block size to 512
+[     0.107807s] DEBUG(libconfig::sd_reader): Partition ID: C
+[     0.109051s]  INFO(szl): Loading gateware
+[     0.112774s] DEBUG(libconfig::bootgen): Partition header pointer = C80
+[     0.122556s] DEBUG(libconfig::bootgen): Unencrypted length = 32D130
+[     0.125218s] DEBUG(libconfig::bootgen): Partition start address: 7120
+[     7.133160s] DEBUG(libboard_zynq::devc): Invalidate DCache for bitstream buffer
+[     7.161872s] DEBUG(libboard_zynq::devc): Init preload FPGA
+[     7.161886s] DEBUG(libboard_zynq::devc): Toggling PROG_B
+[     7.268208s] DEBUG(libboard_zynq::devc): Waiting for done
+[     7.767982s] ERROR(szl): Cannot load gateware: DevcError(DoneTimeout)
+[     7.768765s] ERROR(szl): Error booting from SD card
+[     7.773626s]  INFO(szl): Fall back on netboot
+[     7.777966s]  INFO(szl::netboot): Preparing network for netboot
+[     7.787340s]  INFO(szl::netboot): Network addresses: MAC=02-00-00-00-00-52 IPv4=192.168.1.52/0 IPv4-default-route=no configured address 
+[     7.796159s] DEBUG(libboard_zynq::eth): Eth TX clock for 125000000: 999999990 / 1 / 8 = 124999998
+[     7.806460s]  INFO(szl::netboot): Waiting for connections...
+[    11.310021s]  INFO(libboard_zynq::eth): eth: got Link { speed: S1000, duplex: Full }
+[    11.312165s] DEBUG(libboard_zynq::eth): Eth TX clock for 125000000: 999999990 / 1 / 8 = 124999998
