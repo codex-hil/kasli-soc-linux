@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-07",
+  "reference_source": "https://pulp-platform.org/hero/doc/downloads/images/zc706/",
+  "reference_image": {
+    "path": "build/zc706-vendor-baseline/sdcard.img",
+    "size": 67109376,
+    "sha256": "0f214b66b1a44bb40657bb072bdc80ca700f239d71628ad3afeac121af4ab96c",
+    "mbr_fat_partition_verified": true
+  },
+  "jtag_idcode": "0x03731093",
+  "jtag_cpu_debug": true,
+  "direct_uart_tx_test": true,
+  "stock_uboot_console": false,
+  "linux_boot": false,
+  "ddr_stability": "unverified; debug reads inconsistent; no diagnosis of defective RAM",
+  "sd_written": false,
+  "qspi_written": false,
+  "openxc7_pl_hardware_validated": false,
+  "milestone_1_complete": false
+}

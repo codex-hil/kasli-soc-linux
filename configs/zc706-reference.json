@@ -1,0 +1,12 @@
+{
+  "source": "https://pulp-platform.org/hero/doc/downloads/images/zc706/",
+  "base_url": "https://pulp-platform.org/hero/files/images/latest/zc706/",
+  "files": {
+    "BOOT.bin": "2dd2740daf9ee531c5131e498885a451a4f47a80060436a1d197c47de6fa30b7",
+    "FSBL.elf": "3caa01f1bb2d4ac08892ec74eb3313eb121a823ed41047e8f4896b0c7d9f7365",
+    "devicetree.dtb": "7fd3de947f960a7982433864c4c489ff774483f6a49b173c852b6d97595a74ea",
+    "u-boot.elf": "5fc08da7eb3c66658627518c4be16ee5f2365a2fbd47740a946215ffcb9839d2",
+    "uImage": "c51826f2c8daf444e7426654d662c7bbef1a1aae39a17e759e5ba1cb6d624d36",
+    "uramdisk.image.gz": "74da4e5300cf9242794ead18c4d2581ab19f819a32b859c77175abcc2fd0060a"
+  }
+}

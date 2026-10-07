@@ -277,4 +277,32 @@ sudo python3 /home/codex-hil/kasli-soc-linux/tools/grant_zc706_usb_access.py
 
 Skrypt rozwiązuje bieżące numery USB z sysfs i nie zmienia pozostałych
 adapterów. Po odłączeniu USB ACL może wymagać ponownego nadania. JTAG
-IDCODE musi jeszcze potwierdzić XC7Z045 przed programowaniem.
+IDCODE potwierdził XC7Z045 (`0x03731093`); oba rdzenie odpowiadają przez JTAG.
+
+### Fizyczna diagnostyka ZC706, 2026-10-07
+
+Bezpośredni test nadajnika PS UART wysłał `ZC706 UART TEST` do CP2103.
+Kod standardowego upstream U-Boot SPL wykonuje się w OCM; odczyt pierwszych
+64 KiB odpowiada przesłanemu obrazowi. Konsola U-Boot i boot Linuxa nie
+zostały jeszcze uzyskane. Pierwsze odczyty rejestrów debuggera bywają
+niespójne; pojedynczy wynik DDR nie potwierdza uszkodzenia pamięci.
+Dowody i jawny status: `evidence/zc706/hardware-20261007/`.
+
+Do niezależnego testu przygotowano gotowe obrazy opublikowane przez
+[PULP/HERO dla ZC706](https://pulp-platform.org/hero/doc/downloads/images/zc706/).
+To osobny comparator z historycznie wygenerowanym PL, **nie** nasz build
+openXC7. FSBL/U-Boot próbowano uruchomić z RAM przez JTAG; nie uzyskano
+konsoli. Przygotowany obraz SD nie był jeszcze zapisany na fizycznej karcie.
+QSPI pozostało bez zmian. Brak czytnika/karty SD widocznej na hoście.
+
+Odtworzenie obrazu referencyjnego (po przygotowaniu toolchainu ZC706):
+
+```sh
+python3 tools/environment.py python3 tools/zc706_reference.py --image
+```
+
+Wynik: `build/zc706-vendor-baseline/sdcard.img`, partycja FAT 64 MiB
+z `BOOT.bin`, `uImage`, `devicetree.dtb`, `uramdisk.image.gz`.
+`configs/zc706-reference.json` przypina SHA-256 każdego pobranego pliku;
+zmiana pod upstreamowym adresem `latest` zatrzyma odtwarzanie.
+Skrypt tworzy wyłącznie plik obrazu i nie zapisuje żadnego urządzenia.
