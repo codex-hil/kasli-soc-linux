@@ -316,3 +316,15 @@ opcjonalnie przez AMD XSDB / istniejący hw_server. FSBL nie został załadowany
 z SD; przyczyna wymaga dalszej diagnostyki. Próby ładowania gotowego FSBL
 i U-Boot przez JTAG również nie dały konsoli. Nie jest to dowód uszkodzenia
 płyty ani zakończony test DDR. Build nie korzysta z narzędzi AMD.
+
+Nowszy wynik diagnostyki: użytkownik potwierdził **ZC706 rev. 1.0**,
+POWER GOOD świeci, J7 jest OPEN. Po inicjalizacji PS7 opublikowanym
+HERO FSBL DDR gubi bit 12: `ffffffff → ffffefff`, `00001000 → 00000000`,
+`55555555 → 55554555`, powtarzalnie pod `01000000`, `01000040`, `11000000`.
+Identyczne zapisy/odczyty w OCM (`00020000`) są poprawne. Instrukcja skoku
+U-Boot `eaffffeb` odczytuje się jako `eaffefeb`; krokowanie potwierdza skok
+pod niewłaściwy adres i wyjątek. Wynik nie rozstrzyga jeszcze usterki płyty
+wobec konfiguracji specyficznej dla rewizji. Następny eksperyment to ten sam
+obraz na dostępnej rev. 1.2. BootROM SD jest osobnym nierozwiązanym problemem.
+Logi: `ddr-bit12-patterns.log`, `ocm-ddr-control.log`, `branch-readback.log`
+w katalogu dowodów hardware. QSPI bez zmian.

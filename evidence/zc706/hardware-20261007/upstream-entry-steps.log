@@ -1,0 +1,61 @@
+pc: 04000000
+
+pc: 040002e8
+
+pc: 04000338
+
+pc: 03ffc2ec
+
+pc: 03ffc2f0
+
+pc: 00000004
+
+pc: 000000a0
+
+pc: 000000a4
+
+pc: 000000a8
+
+pc: 000000ac
+
+pc: 000000b0
+
+pc: 00006970
+
+pc: 00006974
+
+pc: 00006978
+
+pc: 0000697c
+
+pc: 00006980
+
+pc: 00001f24
+
+pc: 00001f28
+
+pc: 00001f2c
+
+pc: 00001f30
+
+pc: 00001ce4
+
+pc: 00001ce8
+
+pc: 00001cec
+
+pc: 00001cf0
+
+             r0: 0000a301               r1: 03ffc2f0               r2: 00001f24
+             r3: 00011e84               r4: 00000000               r5: 0001ae60
+             r6: 00019540               r7: dc003cfc               r8: 00019524
+             r9: ffffffff              r10: 00000000              r11: ffffd3dc
+            r12: 00000000               sp: ffffd3d0               lr: 00001f34
+             pc: 00001cf4             cpsr: 800000db              usr          
+            fiq                        irq                        abt          
+            und                        svc                        mon          
+            vfp                       cp15                        dbg          
+        Jazelle             gpv_qos301_cpu            gpv_qos301_dmac          
+ gpv_qos301_iou              gpv_trustzone                    l2cache          
+         mpcore          
+

@@ -12,12 +12,16 @@
   "direct_uart_tx_test": true,
   "stock_uboot_console": false,
   "linux_boot": false,
-  "ddr_stability": "unverified; debug reads inconsistent; no diagnosis of defective RAM",
+  "ddr_stability": "FAIL under published HERO FSBL PS7 initialization: bit 12 reads zero across three DDR addresses; identical OCM patterns PASS",
   "sd_written": true,
   "qspi_written": false,
   "openxc7_pl_hardware_validated": false,
   "milestone_1_complete": false,
   "sd_write_verified": true,
   "sd_boot": "BootROM PC 0xffffff28, BOOT_MODE=5, REBOOT_STATUS=0x00401000; no FSBL loaded by SD boot",
-  "debug_comparator": "AMD XSDB via existing hw_server; optional diagnostic only"
+  "debug_comparator": "AMD XSDB via existing hw_server; optional diagnostic only",
+  "board_revision": "1.0 (reported by user)",
+  "power_good": true,
+  "j7": "OPEN (reported by user)",
+  "ddr_root_cause": "Unresolved: board fault versus revision-specific PS7 configuration; compare rev 1.2 next"
 }

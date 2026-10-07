@@ -1,0 +1,16 @@
+ 4000000:   EA0000BE
+ 4000004:   E59FF014
+ 4000008:   E59FE014
+ 400000C:   E59FF014
+
+pc: 04000300
+
+cpsr: 000000d3
+       n (Bits [31]):  0      z (Bits [30]):  0      c (Bits [29]):  0
+       v (Bits [28]):  0      q (Bits [27]):  0  it (Bits [15:25]):  0
+       j (Bits [24]):  0  ge (Bits [19:16]):  0       e (Bits [9]):  0
+        a (Bits [8]):  0       i (Bits [7]):  1       f (Bits [6]):  1
+        t (Bits [5]):  0     m (Bits [4:0]): 13
+
+lr: 000001d4
+

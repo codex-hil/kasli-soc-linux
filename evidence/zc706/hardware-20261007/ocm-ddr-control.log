@@ -1,0 +1,45 @@
+address 0x20000 written 0xffffffff
+   20000:   FFFFFFFF
+
+   20000:   FFFFFFFF
+
+address 0x20000 written 0x1000
+   20000:   00001000
+
+   20000:   00001000
+
+address 0x20000 written 0x55555555
+   20000:   55555555
+
+   20000:   55555555
+
+address 0x01000040 written 0xffffffff
+ 1000040:   FFFFEFFF
+
+ 1000040:   FFFFEFFF
+
+address 0x01000040 written 0x1000
+ 1000040:   00000000
+
+ 1000040:   00000000
+
+address 0x01000040 written 0x55555555
+ 1000040:   55554555
+
+ 1000040:   55554555
+
+address 0x11000000 written 0xffffffff
+11000000:   FFFFEFFF
+
+11000000:   FFFFEFFF
+
+address 0x11000000 written 0x1000
+11000000:   00000000
+
+11000000:   00000000
+
+address 0x11000000 written 0x55555555
+11000000:   55554555
+
+11000000:   55554555
+

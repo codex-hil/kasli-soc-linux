@@ -1,0 +1,30 @@
+written 0x0
+ 1000000:   00000000
+
+ 1000000:   00000000
+
+written 0xffffffff
+ 1000000:   FFFFEFFF
+
+ 1000000:   FFFFEFFF
+
+written 0x1000
+ 1000000:   00000000
+
+ 1000000:   00000000
+
+written 0xffffefff
+ 1000000:   FFFFEFFF
+
+ 1000000:   FFFFEFFF
+
+written 0xaaaaaaaa
+ 1000000:   AAAAAAAA
+
+ 1000000:   AAAAAAAA
+
+written 0x55555555
+ 1000000:   55554555
+
+ 1000000:   55554555
+
