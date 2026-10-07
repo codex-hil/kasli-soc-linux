@@ -525,3 +525,5 @@ ssh -i build/ssh/id_ed25519 -o UserKnownHostsFile=build/ssh/known_hosts root@192
 
 To zakończony bring-up ZC706. Milestone 1 Kasli-SoC wymaga nadal testów
 na fizycznej Kasli-SoC; RTIO PoC nie został rozpoczęty.
+
+Investigation of the older ZC706 engineering-sample silicon, relevant errata, and the next controlled DDR experiment: [silicon revision comparison](evidence/zc706/silicon-revisions-20261007.md). The rev. 1.0 DDR fault remains unresolved.
