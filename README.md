@@ -266,3 +266,15 @@ kernela w istniejącym katalogu Buildroot użyj także `linux-reconfigure`
 335 544 832 bajty; BOOT.BIN i partycje przeszły audyt. Manifest i wyniki:
 `evidence/zc706/`. Boot, DDR, UART, sieć i PS→PL na fizycznej ZC706
 pozostają nieprzetestowane.
+
+Dostęp USB na tym hoście: nowy CP2103 UART i Digilent serial 210251841109
+pojawiły się po podłączeniu ZC706. Konto codex-hil nie ma dostępu do
+urządzeń. Administrator może nadać chwilowy ACL tylko tej parze:
+
+```sh
+sudo python3 /home/codex-hil/kasli-soc-linux/tools/grant_zc706_usb_access.py
+```
+
+Skrypt rozwiązuje bieżące numery USB z sysfs i nie zmienia pozostałych
+adapterów. Po odłączeniu USB ACL może wymagać ponownego nadania. JTAG
+IDCODE musi jeszcze potwierdzić XC7Z045 przed programowaniem.
