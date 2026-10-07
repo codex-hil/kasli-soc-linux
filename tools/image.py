@@ -152,9 +152,11 @@ def image():
         env=dict(os.environ, PATH=str(BUILD / "buildroot/host/bin") + ":"
                  + str(BUILD / "buildroot/host/sbin") + ":" + os.environ["PATH"]))
     run(["python3", ROOT / "tools/check_sd_image.py", images / "sdcard.img"])
+    with (images / "sdcard.img.gz").open("wb") as archive:
+        run(["gzip", "-n", "-c", images / "sdcard.img"], stdout=archive)
     manifest = {"board": BOARD, "hardware_validated": False, "milestone_1_complete": False,
                 "files": {}}
-    names = ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img"]
+    names = ["BOOT.BIN", "zImage", f"{BOARD}.dtb", "rootfs.ext4", "sdcard.img", "sdcard.img.gz"]
     if BOARD == "zc706":
         names += ["u-boot-spl.bin", "u-boot.img", "boot.scr", "top.bit", "rootfs.cpio.gz"]
     for name in names:
@@ -163,6 +165,9 @@ def image():
             digest = hashlib.file_digest(f, "sha256").hexdigest()
         manifest["files"][name] = {"bytes": path.stat().st_size, "sha256": digest}
     (images / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (images / "SHA256SUMS").write_text("".join(
+        manifest["files"][name]["sha256"] + "  " + name + "\n"
+        for name in ["sdcard.img", "sdcard.img.gz"]))
 
 
 if __name__ == "__main__":

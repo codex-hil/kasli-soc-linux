@@ -42,6 +42,10 @@
     "rootfs.cpio.gz": {
       "bytes": 12892479,
       "sha256": "31d7337d75b68b6afcfad71304c0cc7d84d814f0f84787a0ab53395cd34b1637"
+    },
+    "sdcard.img.gz": {
+      "bytes": 30489411,
+      "sha256": "d13d623a6385235cf85ef69ee690c43d9ddd35a2903c25fecea46bb4027709bc"
     }
   }
 }

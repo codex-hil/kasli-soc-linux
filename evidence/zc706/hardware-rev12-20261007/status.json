@@ -35,7 +35,8 @@
     "rootfs": "project Buildroot ext4 from SD",
     "dhcp_address": "192.168.2.15",
     "ssh": true,
-    "ddr_test": "running memtester 128M 3",
+    "ddr_test": "PASS memtester 128M 3, exit 0",
     "pl_loaded": false
-  }
+  },
+  "project_ddr_raw_log_sha256": "f6beb3f9b37b2ca3714a927a71af9e15f9fedd3635e2ac0cbd8138e2f200870d"
 }
