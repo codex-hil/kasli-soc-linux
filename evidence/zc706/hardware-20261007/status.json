@@ -18,5 +18,6 @@
   "openxc7_pl_hardware_validated": false,
   "milestone_1_complete": false,
   "sd_write_verified": true,
-  "sd_boot": "Power-on reported by user; UART capture empty; waiting for restored JTAG ACL to inspect BootROM"
+  "sd_boot": "BootROM PC 0xffffff28, BOOT_MODE=5, REBOOT_STATUS=0x00401000; no FSBL loaded by SD boot",
+  "debug_comparator": "AMD XSDB via existing hw_server; optional diagnostic only"
 }

@@ -309,3 +309,10 @@ z `BOOT.bin`, `uImage`, `devicetree.dtb`, `uramdisk.image.gz`.
 `configs/zc706-reference.json` przypina SHA-256 każdego pobranego pliku;
 zmiana pod upstreamowym adresem `latest` zatrzyma odtwarzanie.
 Skrypt tworzy wyłącznie plik obrazu i nie zapisuje żadnego urządzenia.
+
+Po włączeniu z kartą referencyjną: UART pusty, PC BootROM `0xffffff28`,
+`BOOT_MODE=5` (SD), `REBOOT_STATUS=0x00401000`. Odczyty potwierdzono
+opcjonalnie przez AMD XSDB / istniejący hw_server. FSBL nie został załadowany
+z SD; przyczyna wymaga dalszej diagnostyki. Próby ładowania gotowego FSBL
+i U-Boot przez JTAG również nie dały konsoli. Nie jest to dowód uszkodzenia
+płyty ani zakończony test DDR. Build nie korzysta z narzędzi AMD.
