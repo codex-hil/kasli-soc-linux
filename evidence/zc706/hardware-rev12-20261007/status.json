@@ -14,7 +14,13 @@
   "ssh_key_login": true,
   "ddr_test": "memtester 128M 3 running; result pending",
   "uboot_boot_log_captured": false,
-  "openxc7_pl": false,
+  "openxc7_pl": true,
   "milestone_1_complete": false,
-  "qspi_written": false
+  "qspi_written": false,
+  "pl_bitstream_sha256": "e5a836508795b7bca585caee43ab4fe65b00ede398fbdc2d7d90468f861357d2",
+  "pl_load_transport": "Linux xdevcfg, volatile PL configuration",
+  "axi_csr": true,
+  "csr_transactions": 10000,
+  "counter_hz": 99990601,
+  "full_project_sd_boot": false
 }

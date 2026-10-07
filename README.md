@@ -342,3 +342,31 @@ milestone 1 nadal nie jest osiągnięty. Rev. 1.0 i jej wyniki pozostają
 osobno zapisane. Klucz SSH dodano w RAM systemu referencyjnego; znika
 po restarcie. Domyślne logowanie tego obrazu opisuje
 [README HERO SDK](https://github.com/pulp-platform/hero-sdk/blob/master/README.md).
+
+### Fizyczny sukces PL openXC7 na rev. 1.2
+
+Na działającym systemie referencyjnym załadowano nasz `top.bit` przez
+`/dev/xdevcfg` (bez narzędzi AMD). Przesłanie SHA-256 zweryfikowane,
+PCAP DONE=1. FCLK0 ustawiono przez sterownik zegara Linux na ~100 MHz.
+PS → AXI → LiteX CSR działa: sygnatura `4b534f43`, scratch RW,
+**10000 transakcji PASS**, licznik 99990601 Hz, scratch przywrócony.
+PL jest zbudowany przez Yosys/nextpnr/openXC7; jego SHA-256:
+`e5a836508795b7bca585caee43ab4fe65b00ede398fbdc2d7d90468f861357d2`.
+Dowody: `openxc7-program.log`, `csr-smoke.log`, `pl-test.log`.
+
+Odtworzenie na systemie referencyjnym z dostępem SSH kluczem projektu:
+
+```sh
+python3 tools/load_pl_xdevcfg.py 192.168.2.7
+python3 tools/environment.py /work/build/zc706/buildroot/host/bin/arm-linux-gcc \
+  -static -O2 -Wall -Wextra /work/tools/pl_test.c -o /work/build/pl-test
+ssh -i build/ssh/id_ed25519 -o UserKnownHostsFile=build/ssh/known_hosts \
+  root@192.168.2.7 'cat > /tmp/pl-test; chmod 755 /tmp/pl-test; /tmp/pl-test 10000' \
+  < build/pl-test
+```
+
+`load_pl_xdevcfg.py` jest helperem dla legacy kernela referencyjnego;
+nie zapisuje SD ani QSPI. Ponowny boot karty referencyjnej przywróci HERO PL.
+Nadal pozostają: pełny log startu U-Boot, wynik długiego testu DDR oraz boot
+**naszego** obrazu SZL/upstream U-Boot/upstream Linux/Buildroot/openXC7.
+Nie utożsamiamy hybrydowego bring-upu z zakończeniem milestone 1 Kasli-SoC.

@@ -1,0 +1,10 @@
+99999999
+1
+[    9.062648] random: avahi-daemon: uninitialized urandom read (4 bytes read)
+[    9.093528] random: ssh-keygen: uninitialized urandom read (32 bytes read)
+[    9.111490] random: sshd: uninitialized urandom read (32 bytes read)
+[  230.546301] random: sshd: uninitialized urandom read (32 bytes read)
+[  230.577239] random: sshd: uninitialized urandom read (32 bytes read)
+[  243.649215] random: sshd: uninitialized urandom read (32 bytes read)
+[  256.422345] random: fast init done
+[  259.946908] random: crng init done

@@ -1,0 +1,23 @@
+crw-rw----    1 root     root      247,   0 Jan  1  1970 /dev/xdevcfg
+rootfs on / type rootfs (rw)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=442904k,nr_inodes=110726,mode=755)
+proc on /proc type proc (rw,relatime)
+devpts on /dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=666)
+tmpfs on /dev/shm type tmpfs (rw,relatime,mode=777)
+tmpfs on /tmp type tmpfs (rw,relatime)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,relatime,mode=755)
+sysfs on /sys type sysfs (rw,relatime)
+amba
+amba_pl
+f8891000.pmu
+family
+fixedregulator
+fpga-full
+power
+revision
+soc_id
+subsystem
+uevent
+0x00200500
+0x00000000
+0x0000000F
