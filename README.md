@@ -3,6 +3,11 @@
 Prace trwają. **Milestone 1 nie został osiągnięty ani potwierdzony na hardware.**
 Repo jest oddzielone od upstream ARTIQ; checkouty `upstream/` pozostają bez zmian.
 
+**Fizyczna ZC706 rev. 1.2:** reference Linux bootuje, UART/Ethernet/DHCP/SSH
+działają, a nasz PL z openXC7 przeszedł 10000 transakcji AXI/CSR.
+Nasz pełny obraz SD jest już zapisany i zweryfikowany; jego boot jest następnym
+krokiem po zakończeniu testu DDR. Fizyczna Kasli-SoC nadal oczekuje na walidację.
+
 ## Hardware i źródła prawdy
 
 Platforma Migen `migen/build/platforms/sinara/kasli_soc.py`: **XC7Z030-FFG676-3**,
@@ -248,8 +253,8 @@ Narzędzia, pobrane źródła i klucz SSH są współdzielone; PL, SZL, Buildroo
 i obrazy mają oddzielne katalogi. Mapa CSR i hardware test są takie same.
 LED G2/LVCMOS15 pochodzi z platformy LiteX ZC706; Y21 jest nieobecna w
 używanej bazie openXC7. DTS ZC706 skopiowano z przypiętego upstream Linux
-i dodano wyłącznie węzeł LiteX UIO/FCLK0. Bez fizycznej płyty status boot,
-DDR, UART, Ethernet, SSH i PS→PL pozostaje niezweryfikowany.
+i dodano wyłącznie węzeł LiteX UIO/FCLK0. Status przygotowanego wówczas obrazu pozostawał niezweryfikowany;
+aktualne wyniki fizycznej rev. 1.2 znajdują się poniżej.
 
 Bring-up ZC706: SD w J30; boot SD w tabeli 1-2 UG954 to SW11.1–5 =
 `0 0 1 1 0` (przy ustawianiu sprawdź oznaczenia na własnej płycie).
