@@ -1,0 +1,1116 @@
+{
+  "gateware_commit": "f08eb4cde093d4753d6b01928298317994047557",
+  "board_source": "https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content",
+  "pins": [
+    {
+      "signal": "adc%_ext_trigger_n_i",
+      "fmc_signal": "LA17_N",
+      "standard": "LVDS_25",
+      "HPC": "W24",
+      "LPC": "AC27",
+      "HPC_package": {
+        "function": "IO_L24N_T3_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L11N_T1_SRCC_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_ext_trigger_p_i",
+      "fmc_signal": "LA17_P",
+      "standard": "LVDS_25",
+      "HPC": "V23",
+      "LPC": "AB27",
+      "HPC_package": {
+        "function": "IO_L24P_T3_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L11P_T1_SRCC_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_dco_n_i",
+      "fmc_signal": "LA00_N",
+      "standard": "LVDS_25",
+      "HPC": "AG20",
+      "LPC": "AF13",
+      "HPC_package": {
+        "function": "IO_L14N_T2_SRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L11N_T1_SRCC_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_dco_p_i",
+      "fmc_signal": "LA00_P",
+      "standard": "LVDS_25",
+      "HPC": "AF20",
+      "LPC": "AE13",
+      "HPC_package": {
+        "function": "IO_L14P_T2_SRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L11P_T1_SRCC_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_fr_n_i",
+      "fmc_signal": "LA01_N",
+      "standard": "LVDS_25",
+      "HPC": "AH21",
+      "LPC": "AG15",
+      "HPC_package": {
+        "function": "IO_L13N_T2_MRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L14N_T2_SRCC_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_fr_p_i",
+      "fmc_signal": "LA01_P",
+      "standard": "LVDS_25",
+      "HPC": "AG21",
+      "LPC": "AF15",
+      "HPC_package": {
+        "function": "IO_L13P_T2_MRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L14P_T2_SRCC_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_n_i[0]",
+      "fmc_signal": "LA14_N",
+      "standard": "LVDS_25",
+      "HPC": "AD24",
+      "LPC": "AF17",
+      "HPC_package": {
+        "function": "IO_L7N_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L15N_T2_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_p_i[0]",
+      "fmc_signal": "LA14_P",
+      "standard": "LVDS_25",
+      "HPC": "AC24",
+      "LPC": "AF18",
+      "HPC_package": {
+        "function": "IO_L7P_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L15P_T2_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_n_i[0]",
+      "fmc_signal": "LA15_N",
+      "standard": "LVDS_25",
+      "HPC": "Y23",
+      "LPC": "AB14",
+      "HPC_package": {
+        "function": "IO_L21N_T3_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L22N_T3_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_p_i[0]",
+      "fmc_signal": "LA15_P",
+      "standard": "LVDS_25",
+      "HPC": "Y22",
+      "LPC": "AB15",
+      "HPC_package": {
+        "function": "IO_L21P_T3_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L22P_T3_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_n_i[1]",
+      "fmc_signal": "LA16_N",
+      "standard": "LVDS_25",
+      "HPC": "AB24",
+      "LPC": "AE17",
+      "HPC_package": {
+        "function": "IO_L22N_T3_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L17N_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_p_i[1]",
+      "fmc_signal": "LA16_P",
+      "standard": "LVDS_25",
+      "HPC": "AA24",
+      "LPC": "AE18",
+      "HPC_package": {
+        "function": "IO_L22P_T3_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L17P_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_n_i[1]",
+      "fmc_signal": "LA13_N",
+      "standard": "LVDS_25",
+      "HPC": "AA23",
+      "LPC": "AH16",
+      "HPC_package": {
+        "function": "IO_L23N_T3_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L6N_T0_VREF_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_p_i[1]",
+      "fmc_signal": "LA13_P",
+      "standard": "LVDS_25",
+      "HPC": "AA22",
+      "LPC": "AH17",
+      "HPC_package": {
+        "function": "IO_L23P_T3_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L6P_T0_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_n_i[2]",
+      "fmc_signal": "LA10_N",
+      "standard": "LVDS_25",
+      "HPC": "AG25",
+      "LPC": "AC13",
+      "HPC_package": {
+        "function": "IO_L8N_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L19N_T3_VREF_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_p_i[2]",
+      "fmc_signal": "LA10_P",
+      "standard": "LVDS_25",
+      "HPC": "AG24",
+      "LPC": "AC14",
+      "HPC_package": {
+        "function": "IO_L8P_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L19P_T3_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_n_i[2]",
+      "fmc_signal": "LA09_N",
+      "standard": "LVDS_25",
+      "HPC": "AE21",
+      "LPC": "AH13",
+      "HPC_package": {
+        "function": "IO_L10N_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L8N_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_p_i[2]",
+      "fmc_signal": "LA09_P",
+      "standard": "LVDS_25",
+      "HPC": "AD21",
+      "LPC": "AH14",
+      "HPC_package": {
+        "function": "IO_L10P_T1_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L8P_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_n_i[3]",
+      "fmc_signal": "LA07_N",
+      "standard": "LVDS_25",
+      "HPC": "AJ24",
+      "LPC": "AA14",
+      "HPC_package": {
+        "function": "IO_L4N_T0_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L20N_T3_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outa_p_i[3]",
+      "fmc_signal": "LA07_P",
+      "standard": "LVDS_25",
+      "HPC": "AJ23",
+      "LPC": "AA15",
+      "HPC_package": {
+        "function": "IO_L4P_T0_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L20P_T3_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_n_i[3]",
+      "fmc_signal": "LA05_N",
+      "standard": "LVDS_25",
+      "HPC": "AH24",
+      "LPC": "AE15",
+      "HPC_package": {
+        "function": "IO_L5N_T0_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L16N_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_outb_p_i[3]",
+      "fmc_signal": "LA05_P",
+      "standard": "LVDS_25",
+      "HPC": "AH23",
+      "LPC": "AE16",
+      "HPC_package": {
+        "function": "IO_L5P_T0_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L16P_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_din_i",
+      "fmc_signal": "LA25_P",
+      "standard": "LVCMOS25",
+      "HPC": "T29",
+      "LPC": "AF29",
+      "HPC_package": {
+        "function": "IO_L5P_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L15P_T2_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_dout_o",
+      "fmc_signal": "LA31_N",
+      "standard": "LVCMOS25",
+      "HPC": "P29",
+      "LPC": "AD29",
+      "HPC_package": {
+        "function": "IO_L4N_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L9N_T1_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_sck_o",
+      "fmc_signal": "LA31_P",
+      "standard": "LVCMOS25",
+      "HPC": "N29",
+      "LPC": "AC29",
+      "HPC_package": {
+        "function": "IO_L4P_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L9P_T1_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_cs_adc_n_o",
+      "fmc_signal": "LA30_P",
+      "standard": "LVCMOS25",
+      "HPC": "P23",
+      "LPC": "AB29",
+      "HPC_package": {
+        "function": "IO_L18P_T2_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L2P_T0_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_cs_dac1_n_o",
+      "fmc_signal": "LA32_P",
+      "standard": "LVCMOS25",
+      "HPC": "P21",
+      "LPC": "Y26",
+      "HPC_package": {
+        "function": "IO_L19P_T3_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L3P_T0_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_cs_dac2_n_o",
+      "fmc_signal": "LA32_N",
+      "standard": "LVCMOS25",
+      "HPC": "R21",
+      "LPC": "Y27",
+      "HPC_package": {
+        "function": "IO_L19N_T3_VREF_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L3N_T0_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_cs_dac3_n_o",
+      "fmc_signal": "LA33_P",
+      "standard": "LVCMOS25",
+      "HPC": "N26",
+      "LPC": "Y30",
+      "HPC_package": {
+        "function": "IO_L15P_T2_DQS_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L1P_T0_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_spi_cs_dac4_n_o",
+      "fmc_signal": "LA33_N",
+      "standard": "LVCMOS25",
+      "HPC": "N27",
+      "LPC": "AA30",
+      "HPC_package": {
+        "function": "IO_L15N_T2_DQS_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L1N_T0_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_dac_clr_n_o",
+      "fmc_signal": "LA30_N",
+      "standard": "LVCMOS25",
+      "HPC": "P24",
+      "LPC": "AB30",
+      "HPC_package": {
+        "function": "IO_L18N_T2_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L2N_T0_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_led_acq_o",
+      "fmc_signal": "LA28_N",
+      "standard": "LVCMOS25",
+      "HPC": "R30",
+      "LPC": "AE26",
+      "HPC_package": {
+        "function": "IO_L1N_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L10N_T1_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_led_trig_o",
+      "fmc_signal": "LA28_P",
+      "standard": "LVCMOS25",
+      "HPC": "P30",
+      "LPC": "AD25",
+      "HPC_package": {
+        "function": "IO_L1P_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L10P_T1_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[0]",
+      "fmc_signal": "LA26_P",
+      "standard": "LVCMOS25",
+      "HPC": "R28",
+      "LPC": "AJ30",
+      "HPC_package": {
+        "function": "IO_L6P_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L20P_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[1]",
+      "fmc_signal": "LA26_N",
+      "standard": "LVCMOS25",
+      "HPC": "T28",
+      "LPC": "AK30",
+      "HPC_package": {
+        "function": "IO_L6N_T0_VREF_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L20N_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[2]",
+      "fmc_signal": "LA27_N",
+      "standard": "LVCMOS25",
+      "HPC": "V29",
+      "LPC": "AJ29",
+      "HPC_package": {
+        "function": "IO_L7N_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L21N_T3_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[3]",
+      "fmc_signal": "LA25_N",
+      "standard": "LVCMOS25",
+      "HPC": "U29",
+      "LPC": "AG29",
+      "HPC_package": {
+        "function": "IO_L5N_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L15N_T2_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[4]",
+      "fmc_signal": "LA24_P",
+      "standard": "LVCMOS25",
+      "HPC": "T30",
+      "LPC": "AF30",
+      "HPC_package": {
+        "function": "IO_L2P_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L16P_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[5]",
+      "fmc_signal": "LA24_N",
+      "standard": "LVCMOS25",
+      "HPC": "U30",
+      "LPC": "AG30",
+      "HPC_package": {
+        "function": "IO_L2N_T0_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L16N_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch1_o[6]",
+      "fmc_signal": "LA29_P",
+      "standard": "LVCMOS25",
+      "HPC": "R25",
+      "LPC": "AE25",
+      "HPC_package": {
+        "function": "IO_L13P_T2_MRCC_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L18P_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[0]",
+      "fmc_signal": "LA20_P",
+      "standard": "LVCMOS25",
+      "HPC": "U25",
+      "LPC": "AG26",
+      "HPC_package": {
+        "function": "IO_L11P_T1_SRCC_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L17P_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[1]",
+      "fmc_signal": "LA19_N",
+      "standard": "LVCMOS25",
+      "HPC": "T25",
+      "LPC": "AH27",
+      "HPC_package": {
+        "function": "IO_L17N_T2_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L23N_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[2]",
+      "fmc_signal": "LA22_P",
+      "standard": "LVCMOS25",
+      "HPC": "V27",
+      "LPC": "AK27",
+      "HPC_package": {
+        "function": "IO_L9P_T1_DQS_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L22P_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[3]",
+      "fmc_signal": "LA22_N",
+      "standard": "LVCMOS25",
+      "HPC": "W28",
+      "LPC": "AK28",
+      "HPC_package": {
+        "function": "IO_L9N_T1_DQS_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L22N_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[4]",
+      "fmc_signal": "LA21_P",
+      "standard": "LVCMOS25",
+      "HPC": "W29",
+      "LPC": "AH28",
+      "HPC_package": {
+        "function": "IO_L8P_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L19P_T3_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[5]",
+      "fmc_signal": "LA27_P",
+      "standard": "LVCMOS25",
+      "HPC": "V28",
+      "LPC": "AJ28",
+      "HPC_package": {
+        "function": "IO_L7P_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L21P_T3_DQS_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch2_o[6]",
+      "fmc_signal": "LA21_N",
+      "standard": "LVCMOS25",
+      "HPC": "W30",
+      "LPC": "AH29",
+      "HPC_package": {
+        "function": "IO_L8N_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L19N_T3_VREF_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[0]",
+      "fmc_signal": "LA08_P",
+      "standard": "LVCMOS25",
+      "HPC": "AF19",
+      "LPC": "AD14",
+      "HPC_package": {
+        "function": "IO_L18P_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L9P_T1_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[1]",
+      "fmc_signal": "LA08_N",
+      "standard": "LVCMOS25",
+      "HPC": "AG19",
+      "LPC": "AD13",
+      "HPC_package": {
+        "function": "IO_L18N_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L9N_T1_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[2]",
+      "fmc_signal": "LA12_P",
+      "standard": "LVCMOS25",
+      "HPC": "AF23",
+      "LPC": "AD16",
+      "HPC_package": {
+        "function": "IO_L9P_T1_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L18P_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[3]",
+      "fmc_signal": "LA12_N",
+      "standard": "LVCMOS25",
+      "HPC": "AF24",
+      "LPC": "AD15",
+      "HPC_package": {
+        "function": "IO_L9N_T1_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L18N_T2_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[4]",
+      "fmc_signal": "LA11_P",
+      "standard": "LVCMOS25",
+      "HPC": "AD23",
+      "LPC": "AJ16",
+      "HPC_package": {
+        "function": "IO_L11P_T1_SRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L4P_T0_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[5]",
+      "fmc_signal": "LA11_N",
+      "standard": "LVCMOS25",
+      "HPC": "AE23",
+      "LPC": "AK16",
+      "HPC_package": {
+        "function": "IO_L11N_T1_SRCC_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L4N_T0_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch3_o[6]",
+      "fmc_signal": "LA20_N",
+      "standard": "LVCMOS25",
+      "HPC": "V26",
+      "LPC": "AG27",
+      "HPC_package": {
+        "function": "IO_L11N_T1_SRCC_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L17N_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[0]",
+      "fmc_signal": "LA02_P",
+      "standard": "LVCMOS25",
+      "HPC": "AK17",
+      "LPC": "AE12",
+      "HPC_package": {
+        "function": "IO_L16P_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L7P_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[1]",
+      "fmc_signal": "LA02_N",
+      "standard": "LVCMOS25",
+      "HPC": "AK18",
+      "LPC": "AF12",
+      "HPC_package": {
+        "function": "IO_L16N_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L7N_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[2]",
+      "fmc_signal": "LA03_P",
+      "standard": "LVCMOS25",
+      "HPC": "AH19",
+      "LPC": "AG12",
+      "HPC_package": {
+        "function": "IO_L17P_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L10P_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[3]",
+      "fmc_signal": "LA03_N",
+      "standard": "LVCMOS25",
+      "HPC": "AJ19",
+      "LPC": "AH12",
+      "HPC_package": {
+        "function": "IO_L17N_T2_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L10N_T1_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[4]",
+      "fmc_signal": "LA04_P",
+      "standard": "LVCMOS25",
+      "HPC": "AJ20",
+      "LPC": "AJ15",
+      "HPC_package": {
+        "function": "IO_L15P_T2_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L5P_T0_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[5]",
+      "fmc_signal": "LA06_P",
+      "standard": "LVCMOS25",
+      "HPC": "AG22",
+      "LPC": "AB12",
+      "HPC_package": {
+        "function": "IO_L6P_T0_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L21P_T3_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_ssr_ch4_o[6]",
+      "fmc_signal": "LA04_N",
+      "standard": "LVCMOS25",
+      "HPC": "AK20",
+      "LPC": "AK15",
+      "HPC_package": {
+        "function": "IO_L15N_T2_DQS_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L5N_T0_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_gpio_si570_oe_o",
+      "fmc_signal": "LA06_N",
+      "standard": "LVCMOS25",
+      "HPC": "AH22",
+      "LPC": "AC12",
+      "HPC_package": {
+        "function": "IO_L6N_T0_VREF_11",
+        "bank": "11",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L21N_T3_DQS_10",
+        "bank": "10",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_si570_scl_b",
+      "fmc_signal": "LA18_N",
+      "standard": "LVCMOS25",
+      "HPC": "W26",
+      "LPC": "AF27",
+      "HPC_package": {
+        "function": "IO_L10N_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L14N_T2_SRCC_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_si570_sda_b",
+      "fmc_signal": "LA18_P",
+      "standard": "LVCMOS25",
+      "HPC": "W25",
+      "LPC": "AE27",
+      "HPC_package": {
+        "function": "IO_L10P_T1_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L14P_T2_SRCC_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    },
+    {
+      "signal": "adc%_one_wire_b",
+      "fmc_signal": "LA29_N",
+      "standard": "LVCMOS25",
+      "HPC": "R26",
+      "LPC": "AF25",
+      "HPC_package": {
+        "function": "IO_L13N_T2_MRCC_13",
+        "bank": "13",
+        "type": "HR"
+      },
+      "LPC_package": {
+        "function": "IO_L18N_T2_12",
+        "bank": "12",
+        "type": "HR"
+      }
+    }
+  ],
+  "package_source": {
+    "url": "https://www.xilinx.com/content/dam/xilinx/support/packagefiles/z7packages/xc7z045ffg900pkg.txt",
+    "sha256": "41fc3a942109a8714f66fb918a4b8bc499b5217899b59777fc170d4a3137f553"
+  },
+  "hardware_validated": false
+}

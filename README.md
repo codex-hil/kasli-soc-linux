@@ -527,3 +527,5 @@ To zakończony bring-up ZC706. Milestone 1 Kasli-SoC wymaga nadal testów
 na fizycznej Kasli-SoC; RTIO PoC nie został rozpoczęty.
 
 Investigation of the older ZC706 engineering-sample silicon, relevant errata, and the next controlled DDR experiment: [silicon revision comparison](evidence/zc706/silicon-revisions-20261007.md). The rev. 1.0 DDR fault remains unresolved.
+
+FMC ADC connectivity audit: [both ZC706 slots](evidence/zc706/fmc-adc-pin-audit-20261007.md). DCO and all ADC data lanes share an HR bank in each slot; J5 LPC is recommended for first acquisition. ADC gateware and physical acquisition remain unvalidated.
