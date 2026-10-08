@@ -39,7 +39,7 @@ files = {
     label+'.cmd': ROOT/('boot/zc706-adc-dual.cmd' if args.dual else 'boot/zc706-adc-j5.cmd'),
     'csr.json': BUILD/'gateware/csr.json',
     'fmc_adc.py': ROOT/'tools/fmc_adc.py',
-    'README.md': ROOT/'docs/zc706-fmc-adc.md',
+    'README.md': ROOT/('docs/zc706-adc-dual.md' if args.dual else 'docs/zc706-fmc-adc.md'),
     'hr-diff-term.md': ROOT/'docs/hr-diff-term.md',
     'nextpnr-termination-manifest.json': SUPPORT/'nextpnr-term/manifest.json',
     'termination-db-manifest.json': SUPPORT/'termination-db/manifest.json',
