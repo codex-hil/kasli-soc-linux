@@ -539,6 +539,11 @@ Investigation of the older ZC706 engineering-sample silicon, relevant errata, an
 FMC ADC connectivity audit: [both ZC706 slots](evidence/zc706/fmc-adc-pin-audit-20261007.md). DCO and all ADC data lanes share an HR bank in each slot; J5 LPC is recommended for first acquisition. ADC gateware and physical acquisition remain unvalidated.
 
 Independent PL SODIMM bring-up: [architecture, build and current status](docs/zc706-pl-ddr.md).
-Yosys and the ARM diagnostic build pass; the wrapped-address BIST simulation
-passes including injected error detection. nextpnr HP input-delay support
-is under investigation. Physical DDR validation remains pending.
+Yosys, patched nextpnr routing/timing and openXC7 bitstream generation PASS
+at 333⅓ MHz DDR / 83⅓ MHz system / 50 MHz GP1 and BIST. The static ARM
+diagnostic and simulations (including clock crossings, injected errors,
+byte lanes and synthesized GP0 CSRs) pass. `make ddr-package` reproduces
+the bring-up bundle. Physical programming is currently blocked by USB/JTAG
+permissions after the host reboot; SODIMM training and full-capacity BIST
+remain pending. ADC is separate. DCI termination is not supported by the
+current backend and remains a hardware validation limitation.
