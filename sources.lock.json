@@ -78,5 +78,9 @@
   "fmc-adc-100m14b4cha-sw": {
     "url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-sw.git",
     "rev": "949cbe3f687f0828a16dea18d83b331eceb5f8f4"
+  },
+  "litedram": {
+    "url": "https://github.com/enjoy-digital/litedram.git",
+    "rev": "74522f715d7b10163ef6f6caa09887a90874be83"
   }
 }

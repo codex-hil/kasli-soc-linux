@@ -16,15 +16,15 @@ def main():
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     args = p.parse_args()
-    if args.design == "fmc-adc" and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = "fmc_adc.py" if args.design == "fmc-adc" else "kasli_soc.py"
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py"}[args.design]
     subprocess.run([sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)], cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
-    if args.design == "fmc-adc":
+    if args.design in ("fmc-adc", "pl-ddr"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
         script = work / "top.ys"
@@ -39,12 +39,18 @@ def main():
     part = "xc7z045ffg900-2" if args.board == "zc706" else "xc7z030fbg676-1"
     physical_part = "xc7z045ffg900-2" if args.board == "zc706" else "xc7z030ffg676-3"
     chipdb_args = []
+    nextpnr = args.openxc7.resolve() / "bin/nextpnr-xilinx"
     if args.design == "fmc-adc":
         from adc_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
+    if args.design == "pl-ddr":
+        from ddr_chipdb import prepare
+        chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
+        from ddr_nextpnr import prepare as prepare_nextpnr
+        nextpnr = prepare_nextpnr()
     cmds = [
         [str(args.yosys.resolve()), "-l", "top.rpt", "top.ys"],
-        [str(args.openxc7.resolve() / "bin/nextpnr-xilinx"),
+        [str(nextpnr),
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
          "--freq", "100", "--report", "timing.json", *chipdb_args],

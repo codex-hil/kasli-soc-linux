@@ -1,0 +1,70 @@
+--- a/himbaechel/uarch/xilinx/pack_io.cc
++++ b/himbaechel/uarch/xilinx/pack_io.cc
+@@ -631,12 +631,15 @@
+         ibc_bel = uarch->get_site_bel(uarch->get_bel_site(io_bel), ctx->id("IOB33.OUTBUF"));
+     NPNR_ASSERT(ibc_bel != BelId());
+ 
++    pool<WireId> visited;
+     std::queue<WireId> visit;
+     visit.push(ctx->getBelPinWire(ibc_bel, id_IN));
+ 
+     while (!visit.empty()) {
+         WireId cursor = visit.front();
+         visit.pop();
++        if (!visited.insert(cursor).second)
++            continue;
+         for (auto bp : ctx->getWireBelPins(cursor)) {
+             auto site = uarch->get_bel_site(bp.bel);
+             if (boost::starts_with(uarch->get_site_name(site).str(ctx), "OLOGIC"))
+@@ -658,12 +661,15 @@
+ 
+     NPNR_ASSERT(ibc_bel != BelId());
+ 
++    pool<WireId> visited;
+     std::queue<WireId> visit;
+     visit.push(ctx->getBelPinWire(ibc_bel, id_OUT));
+ 
+     while (!visit.empty()) {
+         WireId cursor = visit.front();
+         visit.pop();
++        if (!visited.insert(cursor).second)
++            continue;
+         for (auto bp : ctx->getWireBelPins(cursor)) {
+             auto site = uarch->get_bel_site(bp.bel);
+             if (boost::starts_with(uarch->get_site_name(site).str(ctx), "ILOGIC"))
+@@ -685,15 +691,18 @@
+ 
+     NPNR_ASSERT(ibc_bel != BelId());
+ 
++    pool<WireId> visited;
+     std::queue<WireId> visit;
+     visit.push(ctx->getBelPinWire(ibc_bel, id_OUT));
+ 
+     while (!visit.empty()) {
+         WireId cursor = visit.front();
+         visit.pop();
++        if (!visited.insert(cursor).second)
++            continue;
+         for (auto bp : ctx->getWireBelPins(cursor)) {
+             auto site = uarch->get_bel_site(bp.bel);
+-            if (boost::starts_with(uarch->get_site_name(site).str(ctx), "IDELAY"))
++            if (boost::starts_with(uarch->get_site_name(site).str(ctx), "IDELAY_"))
+                 return site;
+         }
+         for (auto pip : ctx->getPipsDownhill(cursor))
+@@ -711,12 +720,15 @@
+         log_error("BEL %s is located on a high range bank. High range banks do not have ODELAY\n",
+                   ctx->nameOfBel(io_bel));
+ 
++    pool<WireId> visited;
+     std::queue<WireId> visit;
+     visit.push(ctx->getBelPinWire(obc_bel, id_IN));
+ 
+     while (!visit.empty()) {
+         WireId cursor = visit.front();
+         visit.pop();
++        if (!visited.insert(cursor).second)
++            continue;
+         for (auto bp : ctx->getWireBelPins(cursor)) {
+             auto site = uarch->get_bel_site(bp.bel);
+             if (boost::starts_with(uarch->get_site_name(site).str(ctx), "ODELAY"))

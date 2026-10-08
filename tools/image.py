@@ -52,7 +52,8 @@ def bootstrap():
         run(["python3", "-m", "venv", SHARED / "python"])
     run([python, "-m", "pip", "install", "-r", ROOT / "requirements.lock"])
     run([python, "-m", "pip", "install", "--no-deps",
-         ROOT / "upstream/migen", ROOT / "upstream/litex"])
+         ROOT / "upstream/migen", ROOT / "upstream/litex",
+         ROOT / "upstream/litex-boards", ROOT / "upstream/litedram"])
     if BOARD == "kasli-soc":
         run(["rustup", "toolchain", "install", "nightly-2026-03-25",
              "--profile", "minimal", "--component", "rust-src"])

@@ -6,12 +6,16 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+# Keep FPGA routing from exhausting the interactive host. No swap spill.
+BUILD_MEMORY = "6g"
+BUILD_CPUS = "2"
 IMAGE = "debian@sha256:a99cfc517144bc59b1978475ec53b46ecabec7e43635402ee5b77cc54cd1b20a"
 NAME = "kasli-" + hashlib.sha256(str(ROOT).encode()).hexdigest()[:12]
 PACKAGES = ("build-essential patch perl python3 python3-venv python3-pip bison flex "
             "bc cpio unzip rsync file wget xz-utils libssl-dev libncurses-dev git "
             "ca-certificates libelf-dev clang llvm device-tree-compiler rustup "
-            "openssh-client curl").split()
+            "openssh-client curl cmake libboost-dev libboost-program-options-dev "
+            "libboost-iostreams-dev libboost-thread-dev libeigen3-dev").split()
 
 
 def call(args, **kwargs):
@@ -36,7 +40,8 @@ def prepare():
             call(["docker", "rm", cid])
     active = subprocess.run(["docker", "inspect", NAME], capture_output=True).returncode == 0
     if not active:
-        cmd = ["docker", "run", "-d", "--name", NAME, "--workdir", "/work"]
+        cmd = ["docker", "run", "-d", "--name", NAME, "--workdir", "/work",
+               "--memory", BUILD_MEMORY, "--memory-swap", BUILD_MEMORY, "--cpus", BUILD_CPUS]
         for name in ("usr", "etc", "var"):
             cmd += ["--mount", f"type=bind,src={filesystem/name},dst=/{name}"]
         cmd += ["--mount", f"type=bind,src={ROOT},dst=/work", IMAGE,
@@ -44,6 +49,8 @@ def prepare():
         call(cmd)
     else:
         call(["docker", "start", NAME], stdout=subprocess.DEVNULL)
+    call(["docker", "update", "--memory", BUILD_MEMORY, "--memory-swap", BUILD_MEMORY,
+          "--cpus", BUILD_CPUS, NAME], stdout=subprocess.DEVNULL)
     if not (state / "ready").exists():
         # A dated immutable Debian snapshot avoids unrecorded moving package versions.
         sources = filesystem / "etc/apt/sources.list.d/debian.sources"
