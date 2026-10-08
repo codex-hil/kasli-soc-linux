@@ -18,6 +18,8 @@ def prepare(openxc7):
     binary = out/'chipdb-xc7z045.bin'
     marker = out/'manifest.json'
     version = 2
+    subprocess.run(['git', '-C', ROOT/'upstream/nextpnr', 'submodule', 'update',
+        '--init', '--depth', '1', 'himbaechel/uarch/xilinx/meta'], check=True)
     revision = subprocess.check_output(['git', '-C', source.parent,
         'rev-parse', 'HEAD'], text=True).strip()
     metadata_revision = subprocess.check_output(['git', '-C', source/'uarch/xilinx/meta',
@@ -30,8 +32,6 @@ def prepare(openxc7):
                 and all(cached.get(k) == v for k, v in identity.items())
                 and hashlib.sha256(binary.read_bytes()).hexdigest() == cached.get('chipdb_sha256')):
             return binary
-    subprocess.run(['git', '-C', ROOT/'upstream/nextpnr', 'submodule', 'update',
-        '--init', '--depth', '1', 'himbaechel/uarch/xilinx/meta'], check=True)
     metadata = out/'metadata'
     metadata.mkdir(exist_ok=True)
     for item in (source/'uarch/xilinx/meta/zynq7').iterdir():

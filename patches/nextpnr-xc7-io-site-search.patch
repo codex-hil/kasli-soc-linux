@@ -1,6 +1,19 @@
 --- a/himbaechel/uarch/xilinx/pack_io.cc
 +++ b/himbaechel/uarch/xilinx/pack_io.cc
-@@ -631,12 +631,15 @@
+@@ -228,7 +228,11 @@
+             xil_iob->type.in(id_IOBUFDS_DIFF_OUT, id_IOBUFDS_DIFF_OUT_DCIEN, id_IOBUFDS_DIFF_OUT_INTERMDISABLE);
+     bool is_diff_obuf = xil_iob->type.in(id_OBUFDS, id_OBUFTDS);
+ 
+-    if (is_diff_ibuf || is_diff_iobuf) {
++    // A bidirectional buffer with an unused O port needs no input receiver.
++    // In particular LiteDRAM drives DQS but does not sample this buffer.
++    NetInfo *diff_input = xil_iob->getPort(id_O);
++    bool needs_diff_input = !is_diff_iobuf || (diff_input && !diff_input->users.empty());
++    if ((is_diff_ibuf || is_diff_iobuf) && needs_diff_input) {
+         NetInfo *pad_p_net = xil_iob->getPort((is_diff_iobuf || is_diff_out_iobuf) ? id_IO : id_I);
+         NPNR_ASSERT(pad_p_net != nullptr);
+         auto site_p = pad_site(pad_p_net);
+@@ -631,12 +635,15 @@
          ibc_bel = uarch->get_site_bel(uarch->get_bel_site(io_bel), ctx->id("IOB33.OUTBUF"));
      NPNR_ASSERT(ibc_bel != BelId());
  
@@ -16,7 +29,7 @@
          for (auto bp : ctx->getWireBelPins(cursor)) {
              auto site = uarch->get_bel_site(bp.bel);
              if (boost::starts_with(uarch->get_site_name(site).str(ctx), "OLOGIC"))
-@@ -658,12 +661,15 @@
+@@ -658,12 +665,15 @@
  
      NPNR_ASSERT(ibc_bel != BelId());
  
@@ -32,7 +45,7 @@
          for (auto bp : ctx->getWireBelPins(cursor)) {
              auto site = uarch->get_bel_site(bp.bel);
              if (boost::starts_with(uarch->get_site_name(site).str(ctx), "ILOGIC"))
-@@ -685,15 +691,18 @@
+@@ -685,15 +695,18 @@
  
      NPNR_ASSERT(ibc_bel != BelId());
  
@@ -52,7 +65,7 @@
                  return site;
          }
          for (auto pip : ctx->getPipsDownhill(cursor))
-@@ -711,12 +720,15 @@
+@@ -711,12 +724,15 @@
          log_error("BEL %s is located on a high range bank. High range banks do not have ODELAY\n",
                    ctx->nameOfBel(io_bel));
  

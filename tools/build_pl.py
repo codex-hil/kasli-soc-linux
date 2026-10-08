@@ -11,6 +11,21 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def validate_ddr_io(work):
+    """Reject disconnected bidirectional pads before placement/programming."""
+    top = json.loads((work/'top.json').read_text())['modules']['top']
+    cells = top['cells'].values()
+    if any(cell['type'] in ('$buf', '$_BUF_') for cell in cells):
+        raise RuntimeError('Unmapped alias buffer in DDR netlist')
+    for name, kind, port in [('ddram_dq', 'IOBUF', 'IO'),
+            ('ddram_dqs_p', 'IOBUFDS', 'IO'), ('ddram_dqs_n', 'IOBUFDS', 'IOB')]:
+        actual = [bit for cell in cells if cell['type'] == kind
+            for bit in cell['connections'][port]]
+        expected = top['ports'][name]['bits']
+        if sorted(actual) != sorted(expected):
+            raise RuntimeError(f'Disconnected or duplicated DDR pad: {name}')
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
@@ -33,6 +48,9 @@ def main():
         script.write_text(prelude + script.read_text().replace("verilog_defaults -add -defer", "")
             .replace("synth_xilinx", "hierarchy -check -top top\nproc\n"
                 "write_rtlil elaborated.il\ndesign -reset\nread_rtlil elaborated.il\nsynth_xilinx"))
+        if args.design == "pl-ddr":
+            # Use stable ABC mapping for the standalone DDR controller.
+            script.write_text(script.read_text().replace(" -abc9", ""))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
     # FBG/FFG676: 676 identical pin functions, AMD pinout evidence in repo.
     # -1 timing is conservative for the physical -3 device; no GTX in this design.
@@ -67,6 +85,8 @@ def main():
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
+        if n == 0 and args.design == 'pl-ddr':
+            validate_ddr_io(work)
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,

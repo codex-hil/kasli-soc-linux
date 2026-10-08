@@ -65,6 +65,10 @@ static int bist(uint32_t base, unsigned random) {
 }
 static int address_test(int fd) {
     volatile uint32_t *locations[30]; void *pages[30]; uint32_t expected[30]; int n=0;
+    /* Include zero: a stuck address line maps its walking-one address here. */
+    pages[n]=map(fd,4096,0x80000000ULL);
+    locations[n]=(volatile uint32_t *)pages[n];
+    expected[n]=0x136ac59fU; *locations[n]=expected[n]; n++;
     for(int bit=2;bit<30;bit++) {
         uint32_t offset=1U<<bit;
         pages[n]=map(fd,4096,0x80000000ULL+(offset&~4095U));

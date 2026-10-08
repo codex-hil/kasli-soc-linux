@@ -15,7 +15,7 @@ PACKAGES = ("build-essential patch perl python3 python3-venv python3-pip bison f
             "bc cpio unzip rsync file wget xz-utils libssl-dev libncurses-dev git "
             "ca-certificates libelf-dev clang llvm device-tree-compiler rustup "
             "openssh-client curl cmake libboost-dev libboost-program-options-dev "
-            "libboost-iostreams-dev libboost-thread-dev libeigen3-dev").split()
+            "libboost-iostreams-dev libboost-thread-dev libeigen3-dev yosys").split()
 
 
 def call(args, **kwargs):
@@ -51,7 +51,8 @@ def prepare():
         call(["docker", "start", NAME], stdout=subprocess.DEVNULL)
     call(["docker", "update", "--memory", BUILD_MEMORY, "--memory-swap", BUILD_MEMORY,
           "--cpus", BUILD_CPUS, NAME], stdout=subprocess.DEVNULL)
-    if not (state / "ready").exists():
+    ready_identity = IMAGE + "\n" + hashlib.sha256(" ".join(PACKAGES).encode()).hexdigest() + "\n"
+    if not (state / "ready").exists() or (state / "ready").read_text() != ready_identity:
         # A dated immutable Debian snapshot avoids unrecorded moving package versions.
         sources = filesystem / "etc/apt/sources.list.d/debian.sources"
         sources.write_text("Types: deb\nURIs: http://snapshot.debian.org/archive/debian/20261005T000000Z/\n"
@@ -62,7 +63,7 @@ def prepare():
               "apt-get", "install", "-y", "--no-install-recommends", *PACKAGES])
         with (state / "packages.txt").open("w") as f:
             call(["docker", "exec", NAME, "dpkg-query", "-W"], stdout=f)
-        (state / "ready").write_text(IMAGE + "\n")
+        (state / "ready").write_text(ready_identity)
 
 
 def main():

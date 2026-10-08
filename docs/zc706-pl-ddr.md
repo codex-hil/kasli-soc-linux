@@ -12,6 +12,8 @@ DDR uses fixed 1.5 V HP banks 33–35, independently of FMC VADJ.
 PS FCLK0 feeds the PL MMCM. Both PS AXI GP ports and the LiteX bus use the
 resulting 100 MHz system clock. GP0 exposes CSRs at `0x40000000`; GP1 exposes
 the entire SODIMM at `0x80000000..0xbfffffff`. Linux PS DDR is separate.
+GP1 uses upstream `AXI2Wishbone` directly into the LiteDRAM frontend;
+GP0 remains the LiteX CSR bus. The PS already separates these windows.
 
 ## Build
 
@@ -19,6 +21,7 @@ the entire SODIMM at `0x80000000..0xbfffffff`. Linux PS DDR is separate.
 make ddr-pl
 make ddr-software
 make ddr-test
+make ddr-axi-test
 ```
 
 The userspace program `build/zc706-ddr/pl-ddr-test` uses upstream LiteX
@@ -40,8 +43,7 @@ the pinned Kintex metadata. Upstream checkouts are kept unchanged.
 
 Database generation also needs an idempotent node-union guard and reduced
 Python graph retention. These changes apply to an isolated generator copy.
-The first rebuilt database succeeds under a 6 GiB memory limit; the final
-overlay including the HP input-delay variant is being rebuilt. Do not run
+The complete rebuilt database succeeds under a 6 GiB memory limit. Do not run
 large RTL simulations concurrently with database generation. The original
 nextpnr search without visited-node tracking exhausted host memory; builds
 now have a 6 GiB RAM/no-swap limit and two CPUs to protect the host.
@@ -53,9 +55,58 @@ as an IDELAY site. The isolated patch
 prevents repeated graph visits. `tools/ddr_nextpnr.py` builds pinned
 nextpnr with this patch without changing the upstream checkout.
 
+The October OSS CAD Suite Yosys 0.69 experimental abc9 mapping retained
+internal `$buf` cells. Converting those to connections disconnected
+bidirectional DQ/DQS pads. This target therefore uses Debian snapshot
+Yosys **0.52-2** with conventional ABC; ADC/probe retain their existing
+suite. `tools/build_pl.py` rejects unmapped buffers and checks all 64 DQ
+and eight differential DQS connections before placement. Stable synthesis
+passes that check and nextpnr reaches logic placement.
+
+The first shared-bus implementation routed but failed 100 MHz timing
+(77.07 MHz maximum). It was rejected. The direct GP1 topology is being
+validated; timing violations are not ignored.
+The direct topology initially still failed at 75.99 MHz: the critical path
+was the generic 32-to-512-bit native converter's read FIFO feedback.
+The target now uses the native-width crossbar port and upstream Wishbone
+frontend, matching normal LiteX SDRAM integration. A dedicated simulation
+passes with sparse RAM across all 1 GiB address boundaries, native 64-byte
+word selection, partial byte writes and backpressure.
+
+The backend currently strips `_T_DCI` from the upstream pin standards.
+Digital impedance calibration/termination is therefore **not validated**.
+The openXC7 HPCStore LiteX DDR demo uses SSTL15 without DCI, but that does
+not establish signal integrity on this ZC706 SODIMM. This is a material
+limitation for hardware tests and must be resolved or explicitly measured.
+Reference: [openXC7 DDR demo constraints](https://github.com/openXC7/demo-projects/blob/main/litex-ddr-hpcstore-k420t/hpcstore_xc7k420t.xdc).
+
+An additional packer fix avoids creating an input receiver for a differential
+IOBUF whose O port is unused (the LiteDRAM DQS buffer). Otherwise FASM asks
+for input features absent from the Zynq bit database. No FASM features are
+silently removed from the resulting design.
+
+## Hardware diagnostic
+
+After a successful matching bitstream build, on the host:
+
+```sh
+make ddr-software
+python3 tools/test_ddr_hardware.py --program
+```
+
+This selects only ZC706 JTAG serial `210251842914`, programs volatile PL
+SRAM, uploads the diagnostic to the existing Linux and saves logs in
+`build/zc706-ddr/hardware/`. No SD or QSPI writes occur. After a reconnect
+or host reboot the existing USB grant script may need to be run through
+sudo. Do not run the diagnostic while another user of PL RAM is active.
+
 The wrapped-address BIST simulation passes with backpressure and both
 sequential and PRBS data; a deliberately flipped bit produces exactly
 one checker error. This is logic validation, not physical DDR evidence.
+The synthesized target also passes 100 GP0 AXI CSR transactions with delayed
+channels and response backpressure, plus DDR signature and PHY register
+read/write checks. MMCM clocks are injected in this RTL simulation; it does
+not validate the physical clock tree, PS7, GP1 RAM accesses or the DDR PHY.
 
 | Element | Status |
 |---|---|

@@ -8,7 +8,7 @@ from migen import ClockDomain, ClockSignal, ResetSignal, Signal, Instance
 from litex.gen import LiteXModule
 from litex.soc.cores.clock import S7MMCM, S7IDELAYCTRL
 from litex.soc.interconnect.csr import CSRStatus
-from litex.soc.interconnect import wishbone
+from litex.soc.interconnect import wishbone, axi
 from litex.soc.integration.soc import SoCRegion
 from litedram.frontend.wishbone import LiteDRAMWishbone2Native
 from litex.soc.integration.export import get_csr_json, get_csr_header, get_mem_header, get_soc_header
@@ -63,7 +63,6 @@ class DDRSoC(BaseSoC):
         self.csr.add("ddr_status", 6)
         # The complete 1 GiB PL RAM occupies GP1, leaving GP0 for CSRs.
         gp1 = self.cpu.add_axi_gp_master()
-        self.bus.add_master(name="ps7_gp1", master=gp1)
         for port in (0, 1):
             self.cpu.cpu_params[f"i_M_AXI_GP{port}_ACLK"] = ClockSignal("sys")
         # Reuse the upstream board resource verbatim, including SSTL/DCI standards.
@@ -76,10 +75,17 @@ class DDRSoC(BaseSoC):
         # Zynq treats all PL addresses as IO; expose this diagnostic memory
         # uncached, using the same upstream bridge without a CPU/L2 cache.
         ram_bus = wishbone.Interface(data_width=32, address_width=32)
-        port = self.sdram.crossbar.get_port(data_width=32)
+        # Match LiteX's normal SDRAM frontend: let the Wishbone adapter select
+        # a 32-bit lane in the native 512-bit word. A separate generic native
+        # converter creates an unnecessary ordered-command FIFO and long
+        # ready/valid feedback path (75.99 MHz in the rejected build).
+        port = self.sdram.crossbar.get_port()
         self.ram_bridge = LiteDRAMWishbone2Native(ram_bus, port, base_address=0x80000000)
-        self.bus.add_slave(name="main_ram", slave=ram_bus,
-            region=SoCRegion(origin=0x80000000, size=0x40000000, cached=False))
+        # PS decodes GP0 and GP1 into disjoint windows already. A shared
+        # AXI-Lite crossbar adds a long round-trip through unrelated slaves.
+        self.ps_ram_bridge = axi.AXI2Wishbone(gp1, ram_bus)
+        self.bus.add_region("main_ram",
+            SoCRegion(origin=0x80000000, size=0x40000000, cached=False))
         self.ddr_status = DDRStatus(self.crg)
         self.add_constant("PL_DDR_ABI", 1)
         self.add_constant("PL_DDR_SIZE", 0x40000000)

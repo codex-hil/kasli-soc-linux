@@ -27,10 +27,13 @@ endif
 	$(ENV) python3 tools/image.py image --board $(BOARD)
 
 ddr-pl:
-	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design pl-ddr --output-dir build/zc706-ddr/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design pl-ddr --output-dir build/zc706-ddr/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
 
-.PHONY: ddr-software ddr-test
+.PHONY: ddr-software ddr-test ddr-axi-test
 ddr-software:
 	$(ENV) build/python/bin/python tools/build_ddr_software.py
 ddr-test:
 	$(ENV) build/python/bin/python tests/pl_ddr_bist.py
+	$(ENV) build/python/bin/python tests/pl_ddr_frontend.py
+ddr-axi-test:
+	$(ENV) build/python/bin/python tools/test_ddr_axi.py
