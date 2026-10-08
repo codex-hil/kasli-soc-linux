@@ -121,7 +121,9 @@ Głównym miejscem zgłoszenia jest `f4pga/prjxray`. `prjxray-db` zgodnie ze
 swoim CONTRIBUTING nie przyjmuje bezpośrednich zmian wygenerowanej bazy.
 Gotowe patche są w `patches/prjxray-hr-diff-term-fuzzer.patch` oraz
 `patches/prjxray-hr-diff-term-db.patch`. Zgłoszenie wymaga podpisu DCO z
-prawdziwym imieniem i nazwiskiem; danych nie zastępujemy fikcyjną tożsamością.
+prawdziwym imieniem i nazwiskiem. Na wyraźne polecenie użytkownika dodano
+`Signed-off-by: Greg Kasprowicz <gkasprow@gmail.com>`.
 
-Wysłano [draft PR #2575](https://github.com/f4pga/prjxray/pull/2575).
-Kod i wyniki są opublikowane; wymagany podpis DCO pozostaje do uzupełnienia.
+[PR #2575](https://github.com/f4pga/prjxray/pull/2575) jest gotowy do przeglądu.
+Check DCO zakończył się SUCCESS dla commitu
+`ecc21ef834edf6631ed7e51c4d1b43da9a3d8446`.
