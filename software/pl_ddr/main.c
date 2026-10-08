@@ -24,14 +24,14 @@ static uint64_t now_ns(void) {
 }
 void cdelay(int cycles) {
     /* BIOS delays are PL clock cycles, not Cortex-A9 instruction cycles. */
-    uint64_t end = now_ns() + (uint64_t)cycles * 10;
+    uint64_t end = now_ns() + ((uint64_t)cycles * 1000000000ULL + CONFIG_CLOCK_FREQUENCY - 1) / CONFIG_CLOCK_FREQUENCY;
     while (now_ns() < end) __asm__ volatile("nop");
 }
 static uint32_t timer_sample;
 void timer0_en_write(unsigned int v) { (void)v; }
 void timer0_reload_write(unsigned int v) { (void)v; }
 void timer0_load_write(unsigned int v) { (void)v; }
-void timer0_update_value_write(unsigned int v) { timer_sample = 0xffffffffU-(uint32_t)(now_ns()/10); }
+void timer0_update_value_write(unsigned int v) { timer_sample = 0xffffffffU-(uint32_t)((now_ns()/1000) * CONFIG_CLOCK_FREQUENCY / 1000000); }
 uint32_t timer0_value_read(void) { return timer_sample; }
 static void *map(int fd, size_t bytes, off_t offset) {
     void *p=mmap(NULL, bytes, PROT_READ|PROT_WRITE, MAP_SHARED, fd, offset);

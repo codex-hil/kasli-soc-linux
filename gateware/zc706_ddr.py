@@ -20,6 +20,8 @@ from litedram.init import get_sdram_phy_c_header
 from kasli_soc import BaseSoC
 
 ROOT = Path(__file__).resolve().parents[1]
+SYS_CLK_FREQ = 100e6 * 10 / 12
+DDR_CLK_FREQ = 4 * SYS_CLK_FREQ
 
 
 class DDRClock(LiteXModule):
@@ -32,8 +34,8 @@ class DDRClock(LiteXModule):
         self.comb += self.mmcm.reset.eq(ResetSignal("ps7"))
         self.mmcm.register_clkin(ClockSignal("ps7"), 100e6)
         # CLK and CLKDIV must come from the same MMCM with matching BUFGs.
-        self.mmcm.create_clkout(self.cd_sys, 100e6)
-        self.mmcm.create_clkout(self.cd_sys4x, 400e6)
+        self.mmcm.create_clkout(self.cd_sys, SYS_CLK_FREQ)
+        self.mmcm.create_clkout(self.cd_sys4x, DDR_CLK_FREQ)
         self.mmcm.create_clkout(self.cd_idelay, 200e6)
         self.mmcm.create_clkout(self.cd_gp1, 50e6)
         self.idelayctrl = S7IDELAYCTRL(self.cd_idelay)
@@ -57,7 +59,7 @@ class DDRStatus(LiteXModule):
 
 class DDRSoC(BaseSoC):
     def __init__(self):
-        super().__init__("zc706", crg=DDRClock())
+        super().__init__("zc706", crg=DDRClock(), sys_clk_freq=SYS_CLK_FREQ)
         self.csr.add("probe", 1)
         self.csr.add("ddrphy", 2)
         self.csr.add("sdram", 3)
@@ -71,13 +73,13 @@ class DDRSoC(BaseSoC):
         # Reuse the upstream board resource verbatim, including SSTL/DCI standards.
         self.platform.add_extension([resource for resource in _io if resource[0] == "ddram"])
         self.ddrphy = K7DDRPHY(self.platform.request("ddram"), memtype="DDR3",
-            nphases=4, sys_clk_freq=100e6, iodelay_clk_freq=200e6)
-        self.dram_module = MT8JTF12864(100e6, "1:4")
+            nphases=4, sys_clk_freq=SYS_CLK_FREQ, iodelay_clk_freq=200e6)
+        self.dram_module = MT8JTF12864(SYS_CLK_FREQ, "1:4")
         self.add_sdram("sdram", phy=self.ddrphy, module=self.dram_module,
             with_soc_interconnect=False, with_bist=False)
         # BIST address generation has a long CSR-derived mask/add path. Use
         # the upstream wrappers' control/status CDC and native-port CDC to
-        # run diagnostics at 50 MHz, while the DDR controller stays at 100 MHz.
+        # run diagnostics at 50 MHz, while the DDR controller stays in its own faster domain.
         self.sdram_generator = LiteDRAMBISTGenerator(
             self.sdram.crossbar.get_port(mode="write", clock_domain="gp1"))
         self.sdram_checker = LiteDRAMBISTChecker(
@@ -112,7 +114,7 @@ class DDRSoC(BaseSoC):
         self.ddr_status = DDRStatus(self.crg)
         self.add_constant("PL_DDR_ABI", 1)
         self.add_constant("PL_DDR_SIZE", 0x40000000)
-        for clk, period in ((self.crg.cd_sys.clk, 10), (self.crg.cd_sys4x.clk, 2.5),
+        for clk, period in ((self.crg.cd_sys.clk, 1e9/SYS_CLK_FREQ), (self.crg.cd_sys4x.clk, 1e9/DDR_CLK_FREQ),
                             (self.crg.cd_idelay.clk, 5), (self.crg.cd_gp1.clk, 20)):
             self.platform.add_period_constraint(clk, period)
 

@@ -62,6 +62,6 @@ for memory in fragment.specials:
             if port.dat_r is None:
                 port.dat_r = Signal(memory.width)  # simulator-only write-port adapter
 run_simulation(fragment, {'gp1': [control()], 'sys': [ram.write_handler(dut.port, 30),
-    ram.read_handler(dut.port, 30)]}, clocks={'sys': 10, 'gp1': 20})
+    ram.read_handler(dut.port, 30)]}, clocks={'sys': 12, 'gp1': 20})
 assert set(ram.words) == {offset//64 for offset in offsets}
-print('PASS: 50/100 MHz CDC, 32-to-512-bit frontend, 1 GiB boundaries, lane/byte enables, backpressure')
+print('PASS: 50/83.33 MHz CDC, 32-to-512-bit frontend, 1 GiB boundaries, lane/byte enables, backpressure')

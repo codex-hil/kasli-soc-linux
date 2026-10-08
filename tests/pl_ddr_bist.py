@@ -114,8 +114,8 @@ def check_cdc(corrupt):
                     port.dat_r = Signal(memory.width)
     run_simulation(fragment, {"sys": [control()], "gp1": [
         dut.mem.write_handler(dut.wp, 30), dut.mem.read_handler(dut.rp, 30)]},
-        clocks={"sys": 10, "gp1": 20})
+        clocks={"sys": 12, "gp1": 20})
 
 for corrupt in (False, True):
     check_cdc(corrupt)
-print("PASS: BIST CSR reset/start/configuration/status CDC at 100/50 MHz and injected error")
+print("PASS: BIST CSR reset/start/configuration/status CDC at 83.33/50 MHz and injected error")

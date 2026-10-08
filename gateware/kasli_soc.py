@@ -41,10 +41,10 @@ class CRG(LiteXModule):
 
 
 class BaseSoC(SoCCore):
-    def __init__(self, board="kasli-soc", crg=None):
+    def __init__(self, board="kasli-soc", crg=None, sys_clk_freq=100e6):
         platform = Platform(board)
         self.crg = CRG() if crg is None else crg
-        super().__init__(platform, 100e6, cpu_type="zynq7000",
+        super().__init__(platform, sys_clk_freq, cpu_type="zynq7000",
                          integrated_rom_size=0, integrated_sram_size=0,
                          with_uart=False, with_timer=False, with_ctrl=False,
                          csr_data_width=32, ident=f"{board} Linux openXC7 probe")

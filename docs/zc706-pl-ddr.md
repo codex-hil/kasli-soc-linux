@@ -5,13 +5,14 @@ to the memory controller. Physical PL DDR validation is **pending**.
 
 The ZC706 PL SODIMM is a 64-bit, 1 GiB MT8JTF12864 DDR3 module. The target
 reuses LiteX-Boards' ZC706 DDR pin resource and LiteDRAM's `K7DDRPHY` and
-`MT8JTF12864`, as in the upstream ZC706 target. It starts at 400 MHz DDR
-(800 MT/s), with a 100 MHz controller and 200 MHz delay reference clock.
+`MT8JTF12864`, as in the upstream ZC706 target. It starts at 333⅓ MHz DDR
+(667 MT/s), with an 83⅓ MHz controller and 200 MHz delay reference clock.
 DDR uses fixed 1.5 V HP banks 33–35, independently of FMC VADJ.
 
-PS FCLK0 feeds the PL MMCM. GP0, the LiteX CSR bus and DDR controller/BIST
-use the resulting 100 MHz system clock. The GP1 access frontend runs at
-50 MHz and uses upstream LiteDRAM native CDC into the 100 MHz controller.
+PS FCLK0 feeds the PL MMCM. GP0, the LiteX CSR bus and DDR controller
+use the resulting 83⅓ MHz system clock. The GP1 access frontend and BIST
+run at 50 MHz, using upstream LiteDRAM native CDC into the 83⅓ MHz
+controller and control/status CDC between BIST and the CSR bus.
 GP0 exposes CSRs at `0x40000000`; GP1 exposes
 the entire SODIMM at `0x80000000..0xbfffffff`. Linux PS DDR is separate.
 GP1 uses upstream AXI-to-AXI-Lite/Wishbone bridges with registered channels;
@@ -86,9 +87,15 @@ failed the 100 MHz domain (84.41 MHz maximum). The remaining critical
 path was BIST CSR base/end arithmetic. BIST now uses the upstream
 control/status and native-port CDC wrappers at 50 MHz; the DDR controller
 still runs at 100 MHz, with the physical DDR clock at 400 MHz. BIST ticks
-therefore count 50 MHz cycles. This version is being routed.
+therefore count 50 MHz cycles. This version routed at 93.81 MHz for the 100 MHz domain and was
+rejected. The critical path had moved to CSR decoding. The bring-up target
+now uses 83⅓ MHz system / 333⅓ MHz DDR clocks, with a 1000 MHz MMCM
+VCO and integer output divisors 12/3/5/20. These preserve the 200 MHz
+IDELAY reference and 50 MHz GP1/BIST clocks. The ARM initialization delay
+and timer shim derive their cycles from generated CONFIG_CLOCK_FREQUENCY.
+This reduced-clock target is being built.
 The CSR wrapper simulation passes reset/start/configuration/status transfers
-at 100/50 MHz, including a deliberately injected memory error.
+at 83⅓/50 MHz, including a deliberately injected memory error.
 
 The backend currently strips `_T_DCI` from the upstream pin standards.
 Digital impedance calibration/termination is therefore **not validated**.
