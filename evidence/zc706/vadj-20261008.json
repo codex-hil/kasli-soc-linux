@@ -1,0 +1,11 @@
+{
+  "board_revision": "1.2",
+  "measurement_source": "user-reported multimeter measurement",
+  "component": "C605",
+  "voltage_v": 2.5,
+  "schematic_net": "VADJ_FPGA",
+  "schematic_sheet": 14,
+  "schematic_revision": "1.2",
+  "source": "https://docs.amd.com/v/u/en-US/ZC706-Schematics-XTP215",
+  "status": "VADJ measurement reported; ADC acquisition remains pending"
+}

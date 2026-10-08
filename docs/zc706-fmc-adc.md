@@ -8,7 +8,7 @@ Ten target zachowuje działający PS7/UART/Ethernet z naszego ZC706.
 Most LiteX Wishbone→CSR ma włączony upstreamowy tryb registered,
 żeby rozdzielić długą ścieżkę AXI address/decode od większej liczby CSR.
 
-**Build bitstreamu: PASS, bez Vivado. Fizyczna akwizycja: oczekuje na kartę i pomiar VADJ.**
+**Build bitstreamu: PASS, bez Vivado. VADJ: użytkownik zmierzył 2.5 V na C605. Fizyczna akwizycja: oczekuje na kartę.**
 
 Element | Status
 ---|---
@@ -20,7 +20,7 @@ Frame/BITSLIP i lane ordering | PASS, model protokolarny
 Snapshot / CDC / trigger / error injection | PASS, symulacja
 AXI / CSR / reset | PASS, symulacja nowego SoC
 SPI | PASS, model slave; fizyczny readback oczekuje
-VADJ / karta / oko LVDS / akwizycja | oczekuje na sprzęt
+VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V zmierzone przez użytkownika; pozostałe oczekują
 EEPROM calibration / DMA / druga karta | nie zaimplementowano
 
 Dowody: `evidence/zc706/fmc-adc-build-20261007.json`;
@@ -127,6 +127,9 @@ Przed montażem wyłącz płytę. Sprawdź rewizję karty i wymagane napięcie
 I/O; referencja CERN używa **LVDS_25/LVCMOS25 i VADJ 2.5 V**.
 VADJ jest wspólne dla obu FMC. Nie ustawiaj 1.8 V na podstawie samego
 określenia LVDS. Ten bitstream zakłada 2.5 V, które trzeba zmierzyć.
+Pomiar użytkownika z 2026-10-08: **2.5 V na C605**. Schemat ZC706
+rev. 1.2, arkusz 14, potwierdza C605 między VADJ_FPGA i GND.
+[Zapis pomiaru](../evidence/zc706/vadj-20261008.json).
 Karta powinna być w J5 LPC. Najpierw bez zewnętrznego źródła analogowego.
 
 Po bezpiecznym załadowaniu bitstreamu do działającego Linuksa skopiuj
