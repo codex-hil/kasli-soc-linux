@@ -543,7 +543,8 @@ Yosys, patched nextpnr routing/timing and openXC7 bitstream generation PASS
 at 333⅓ MHz DDR / 83⅓ MHz system / 50 MHz GP1 and BIST. The static ARM
 diagnostic and simulations (including clock crossings, injected errors,
 byte lanes and synthesized GP0 CSRs) pass. `make ddr-package` reproduces
-the bring-up bundle. Physical programming is currently blocked by USB/JTAG
-permissions after the host reboot; SODIMM training and full-capacity BIST
-remain pending. ADC is separate. DCI termination is not supported by the
-current backend and remains a hardware validation limitation.
+the bring-up bundle. Physical JTAG programming, eight-lane DDR leveling,
+GP1 address checks and three full-1-GiB BIST passes PASS on rev. 1.2 with
+zero errors: [hardware evidence](evidence/zc706/pl-ddr-20261008/validation.json).
+ADC remains separate; SD/QSPI unchanged. DCI termination is not supported
+by the current backend; long-term signal-integrity qualification remains pending.

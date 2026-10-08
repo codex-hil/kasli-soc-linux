@@ -1,0 +1,10 @@
+{
+  "started_utc": "2026-10-08T12:49:24.694251+00:00",
+  "host": "192.168.2.15",
+  "jtag_serial": "210251842914",
+  "program_requested": true,
+  "hardware_validated": true,
+  "diagnostic_sha256": "516633c8c6e5a5cf520a5cae947e292f38b1918ec70684cfa3f54f552b288daa",
+  "bitstream_sha256": "c232613eb5882bc3df673d1ecdcdb882979f804a11c8e3142899783ce6971611",
+  "finished_utc": "2026-10-08T12:49:48.309357+00:00"
+}

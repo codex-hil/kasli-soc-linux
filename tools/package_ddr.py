@@ -32,7 +32,7 @@ files = {
 }
 for stage in range(4):
     files[f'evidence/stage{stage}.log'] = WORK/f'stage{stage}.log'
-for name in ('validation.json', 'program.log'):
+for name in ('validation.json', 'program.log', 'ddr-test.log'):
     path = BUILD/'hardware'/name
     if path.exists():
         files['evidence/hardware/'+name] = path

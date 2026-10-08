@@ -1,7 +1,7 @@
 # Independent ZC706 PL DDR bring-up
 
 This target is independent of the FMC ADC target. No ADC data is connected
-to the memory controller. Physical PL DDR validation is **pending**.
+to the memory controller. Physical PL DDR validation **PASS on ZC706 rev. 1.2, 2026-10-08**.
 
 The ZC706 PL SODIMM is a 64-bit, 1 GiB MT8JTF12864 DDR3 module. The target
 reuses LiteX-Boards' ZC706 DDR pin resource and LiteDRAM's `K7DDRPHY` and
@@ -38,7 +38,8 @@ bitstream and generated headers; this does not update the SD image or QSPI.
 ## Toolchain investigation, 2026-10-08
 
 Yosys synthesis, nextpnr routing/timing, FASM assembly and bitstream
-generation PASS. All physical memory tests remain pending.
+generation PASS. Physical initialization/leveling, GP1 memory access,
+address alias checks and three whole-capacity BIST passes also PASS.
 The bitstream SHA-256 is
 `c232613eb5882bc3df673d1ecdcdb882979f804a11c8e3142899783ce6971611`.
 
@@ -71,8 +72,7 @@ and eight differential DQS connections before placement. Stable synthesis
 passes that check and nextpnr reaches logic placement.
 
 The first shared-bus implementation routed but failed 100 MHz timing
-(77.07 MHz maximum). It was rejected. The direct GP1 topology is being
-validated; timing violations are not ignored.
+(77.07 MHz maximum). It was rejected. The direct GP1 topology replaces it; timing violations are not ignored.
 The direct topology initially still failed at 75.99 MHz: the critical path
 was the generic 32-to-512-bit native converter's read FIFO feedback.
 The target now uses the native-width crossbar port and upstream Wishbone
@@ -80,18 +80,18 @@ frontend, matching normal LiteX SDRAM integration. A dedicated simulation
 passes with sparse RAM across all 1 GiB address boundaries, native 64-byte
 word selection, partial byte writes and backpressure.
 Buffering the AXI channels alone still failed 100 MHz (55.27 MHz maximum).
-The final topology separates the 50 MHz CPU memory-access frontend using
-native CDC, preserving the 400 MHz DDR clock. The frontend simulation also
-passes with actual 50/100 MHz clocks and asynchronous FIFO crossings.
+The next iteration separated the 50 MHz CPU memory-access frontend using
+native CDC, initially preserving the 400 MHz DDR clock. The frontend
+simulation passed with actual 50/100 MHz clocks and asynchronous FIFO crossings.
 
 The unused DQS input fix passed FASM-to-frames assembly on the rejected
 100 MHz build. That artifact is not approved for programming: it failed
 timing. The GP1 CDC build passed its 50 MHz domain (74.79 MHz maximum), but
 failed the 100 MHz domain (84.41 MHz maximum). The remaining critical
-path was BIST CSR base/end arithmetic. BIST now uses the upstream
-control/status and native-port CDC wrappers at 50 MHz; the DDR controller
-still runs at 100 MHz, with the physical DDR clock at 400 MHz. BIST ticks
-therefore count 50 MHz cycles. This version routed at 93.81 MHz for the 100 MHz domain and was
+path was BIST CSR base/end arithmetic. BIST then used the upstream
+control/status and native-port CDC wrappers at 50 MHz, initially retaining
+the 100 MHz controller / 400 MHz DDR clocks. BIST ticks count 50 MHz cycles.
+This version routed at 93.81 MHz for the 100 MHz domain and was
 rejected. The critical path had moved to CSR decoding. The bring-up target
 now uses 83⅓ MHz system / 333⅓ MHz DDR clocks, with a 1000 MHz MMCM
 VCO and integer output divisors 12/3/5/20. These preserve the 200 MHz
@@ -106,8 +106,9 @@ at 83⅓/50 MHz, including a deliberately injected memory error.
 The backend currently strips `_T_DCI` from the upstream pin standards.
 Digital impedance calibration/termination is therefore **not validated**.
 The openXC7 HPCStore LiteX DDR demo uses SSTL15 without DCI, but that does
-not establish signal integrity on this ZC706 SODIMM. This is a material
-limitation for hardware tests and must be resolved or explicitly measured.
+not establish signal integrity on this ZC706 SODIMM. The physical functional tests below pass without DCI, but do not establish
+full signal-integrity margins across voltage and temperature. This remains
+a limitation for production qualification.
 Reference: [openXC7 DDR demo constraints](https://github.com/openXC7/demo-projects/blob/main/litex-ddr-hpcstore-k420t/hpcstore_xc7k420t.xdc).
 
 An additional packer fix avoids creating an input receiver for a differential
@@ -145,16 +146,36 @@ not validate the physical clock tree, PS7, GP1 RAM accesses or the DDR PHY.
 | HP chipdb regeneration | PASS |
 | ARM initialization/test program | Build PASS |
 | nextpnr | Routing/timing PASS with isolated HP fixes |
-| Bitstream | openXC7 generation PASS; hardware pending |
-| DDR leveling and 1 GiB BIST on hardware | Pending |
+| Bitstream | openXC7 generation and physical JTAG programming PASS |
+| DDR leveling and 1 GiB BIST on hardware | PASS, 3 full-capacity passes, zero errors |
 | ADC-to-DDR connection | Deferred |
 
-Physical programming attempt on 2026-10-08 was blocked by USB permissions
-after the host reboot (`usb_open() failed`, FTDI error -4). Linux SSH remains
-reachable. No bitstream was loaded and no DDR diagnostic ran. Restore access
-with the project USB grant script and repeat the hardware command above.
+## Physical result, 2026-10-08
+
+After USB access was restored, volatile JTAG programming succeeded and Linux
+remained reachable over SSH. MMCM and IDELAYCTRL readiness checks passed.
+Upstream LiteDRAM write leveling, write-latency calibration, DQ/DQS training
+and read leveling completed on all eight byte lanes. The 256 KiB CPU
+memtest passed; the 30-location GP1 address test covered the entire 1 GiB
+aperture, including the last word.
+
+All three whole-1-GiB BIST passes (sequential and PRBS data) completed with
+zero errors. Each pass tested both 512 MiB halves; hardware exercised the
+wrapped upper-end address exactly as in simulation. Native BIST ticks
+correspond to about 3.1 GB/s sequential traffic; this is not PS bandwidth.
+The 256 KiB GP1 CPU benchmark measured 14.5 MiB/s writes and 7.7 MiB/s reads.
+This initial result does not qualify extended thermal/voltage stability.
+
+Evidence: [validation and hashes](../evidence/zc706/pl-ddr-20261008/validation.json),
+[raw training/test log](../evidence/zc706/pl-ddr-20261008/ddr-test.log),
+[result summary](../evidence/zc706/pl-ddr-20261008/summary.json).
+The bitstream and diagnostic hashes bind the test to the built artifacts.
+No ADC acquisition, SD writes or QSPI writes were performed. PL currently
+contains the DDR target; rebooting restores the SD's baseline PL design.
 
 `make ddr-package` produces `build/zc706-ddr/zc706-pl-ddr-bringup.tar.xz`
 with bitstream, ARM diagnostic, CSR map, timing, source/toolchain locks and
 build/simulation evidence plus SHA-256 checksums. This is a PL-only
-bring-up bundle, not a replacement SD image; hardware validation is pending.
+bring-up bundle, not a replacement SD image. The hardware evidence is
+included when available; build provenance and physical validation remain
+separate records.

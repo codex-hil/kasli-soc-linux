@@ -1,0 +1,21 @@
+{
+  "source_commit": "32f3d09",
+  "board": "ZC706 rev. 1.2",
+  "part": "xc7z045ffg900-2",
+  "capacity_bytes": 1073741824,
+  "ddr_clock_hz": 333333333,
+  "controller_clock_hz": 83333333,
+  "bist_clock_hz": 50000000,
+  "gp1_address_locations": 30,
+  "full_capacity_bist_passes": 3,
+  "bist_errors": 0,
+  "gp1_write_mib_s": 14.5,
+  "gp1_read_mib_s": 7.7,
+  "performance_scope": "GP1 CPU sequential 256 KiB; BIST ticks are native 512-bit traffic, not PS bandwidth",
+  "limitations": [
+    "DCI termination not implemented by backend; functional test passed without it",
+    "No temperature/voltage sweep or long-duration stress",
+    "ADC remains separate; no acquisition test",
+    "Volatile JTAG programming; SD/QSPI unchanged"
+  ]
+}
