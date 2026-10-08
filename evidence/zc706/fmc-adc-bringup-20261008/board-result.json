@@ -1,0 +1,5 @@
+{
+  "diagnostic": "FMC presence/FRU",
+  "writes": "temporary mux selection only; restored",
+  "error": "SI570 I2C NACK for byte 0xe9"
+}

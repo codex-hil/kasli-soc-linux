@@ -12,6 +12,7 @@ from litex.soc.cores.clock import S7MMCM, S7IDELAYCTRL
 from litex.soc.cores.bitbang import I2CMaster, SPIMaster
 from litex.soc.interconnect.csr import CSR, CSRStorage, CSRStatus
 from litex.soc.integration.export import get_csr_json
+from litex_boards.platforms.xilinx_zc706 import _io
 from kasli_soc import BaseSoC
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -136,6 +137,15 @@ class ADC(LiteXModule):
         platform.add_source(str(ROOT / "gateware/fmc_adc_capture.v"))
 
 
+class ADCCRG(LiteXModule):
+    def __init__(self):
+        self.cd_sys = ClockDomain("sys")
+        # Keep PS GP0 ACLK and fabric FF clocks on the same explicit BUFG.
+        # Automatic FF clock insertion can leave hard PS7 ACLK unbuffered.
+        self.specials += Instance("BUFG", i_I=ClockSignal("ps7"), o_O=self.cd_sys.clk)
+        self.comb += self.cd_sys.rst.eq(ResetSignal("ps7"))
+
+
 class ADCSoC(BaseSoC):
     def add_csr_bridge(self, name="csr", origin=None, with_register=False):
         # Register the upstream bridge: the larger FMC CSR fanout otherwise
@@ -143,13 +153,19 @@ class ADCSoC(BaseSoC):
         return super().add_csr_bridge(name, origin, with_register=True)
 
     def __init__(self):
-        super().__init__("zc706")
+        super().__init__("zc706", crg=ADCCRG())
+        # LiteX defaults GP0 ACLK to the raw PS FCLK, independently of CRG.
+        self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
         # Keep the physically validated probe ABI and identifier unchanged.
         self.csr.add("probe", 1)
         self.csr.add("adc", 2)
         self.csr.add("adc_spi", 3)
         self.csr.add("adc_i2c", 4)
+        self.csr.add("board_i2c", 5)
         add_fmc_pads(self.platform)
+        # UG954: board mux/expander bus for FMC presence/power diagnostics.
+        self.platform.add_extension([r for r in _io if r[0] == "i2c"])
+        self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.cd_idelay = ClockDomain("idelay")
         self.mmcm = S7MMCM(speedgrade=-2, fractional=False)
         self.comb += self.mmcm.reset.eq(ResetSignal())

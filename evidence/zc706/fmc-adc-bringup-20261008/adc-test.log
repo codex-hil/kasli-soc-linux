@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/tmp/zc706-adc-bringup/fmc_adc.py", line 297, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/zc706-adc-bringup/fmc_adc.py", line 252, in main
+    adc.initialize()
+    ~~~~~~~~~~~~~~^^
+  File "/tmp/zc706-adc-bringup/fmc_adc.py", line 82, in initialize
+    self.reg(1, 0x20)  # two's complement; randomizer off; all channels awake
+    ~~~~~~~~^^^^^^^^^
+  File "/tmp/zc706-adc-bringup/fmc_adc.py", line 76, in reg
+    raise RuntimeError(f'ADC SPI register {address}: {actual:#x} != {value:#x}')
+RuntimeError: ADC SPI register 1: 0xff != 0x20

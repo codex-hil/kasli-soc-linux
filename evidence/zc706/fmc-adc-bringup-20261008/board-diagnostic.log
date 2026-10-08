@@ -1,0 +1,15 @@
+Reading board I2C mux
+{
+  "diagnostic": "FMC presence/FRU",
+  "writes": "temporary mux selection only; restored",
+  "error": "SI570 I2C NACK for byte 0xe9"
+}
+Traceback (most recent call last):
+  File "/tmp/zc706-adc-bringup/diagnose_fmc_board.py", line 48, in <module>
+    saved = i.raw_read(0x74)
+  File "/tmp/zc706-adc-bringup/diagnose_fmc_board.py", line 19, in raw_read
+    self.start(); self.send((address << 1) | 1)
+                  ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/zc706-adc-bringup/fmc_adc.py", line 217, in send
+    raise RuntimeError(f'SI570 I2C NACK for byte {value:#x}')
+RuntimeError: SI570 I2C NACK for byte 0xe9

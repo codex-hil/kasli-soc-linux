@@ -1,0 +1,14 @@
+PASS: 16-edge MSB-first SPI, slave readback, ADC/DAC chip-select exclusivity (model)
+/work/tests/axi_csr_tb.v:7: vvp.tgt sorry: procedural continuous assignments are not yet fully supported. The RHS of this assignment will only be evaluated once, at the time the assignment statement is executed.
+PASS: async clocks, alignment gating, 3 snapshots, external trigger, frame errors, frozen RAM, abort/re-arm
+/work/tests/adc_capture_tb.v:73: $finish called at 123454900 (1ps)
+
+PASS: frame BITSLIP acquisition/recovery, 4-channel lane ordering, walking bits (protocol model)
+/work/tests/adc_rx_tb.v:53: $finish called at 17958100 (1ps)
+
+PASS: hard PS GP0 ACLK shares the fabric BUFG (netlist)
+PASS: 1000 AXI/CSR transactions with delayed channels and response backpressure (simulation)
+PASS: board I2C CSR AXI accesses
+PASS: ADC control/SSR/nine delay CSR readback and reset counters over AXI
+/work/tests/axi_csr_tb.v:93: $finish called at 191930000 (1ps)
+

@@ -1,0 +1,3 @@
+mw.l 0xf8000008 0xdf0d; mw.l 0xf8000900 0xf; mw.l 0xf8000240 0xf; mw.l 0xf8000240 0; md.l 0x40000808 1
+40000808: 4b534f43                             COSK
+Zynq> 

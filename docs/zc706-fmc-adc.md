@@ -8,7 +8,29 @@ Ten target zachowuje działający PS7/UART/Ethernet z naszego ZC706.
 Most LiteX Wishbone→CSR ma włączony upstreamowy tryb registered,
 żeby rozdzielić długą ścieżkę AXI address/decode od większej liczby CSR.
 
-**Build bitstreamu: PASS, bez Vivado. VADJ: użytkownik zmierzył 2.5 V na C605. Fizyczna akwizycja: oczekuje na kartę.**
+**Build bitstreamu: PASS, bez Vivado. VADJ: użytkownik zmierzył 2.5 V na C605. Karta jest w J5 LPC; bring-up trwa, akwizycja niepotwierdzona.**
+
+2026-10-08: fizycznie potwierdzono zegar próbek około 100 MHz i frame
+`0x0f` we wcześniejszym wariancie. ADC SPI zwraca jednak `0xff` zamiast
+oczekiwanego `0x20`; SI570 nie odpowiada. Nowy wariant dodaje I²C płyty
+oraz wspólny jawny BUFG dla GP0 ACLK i logiki CSR. Netlist i symulacja
+przechodzą. Sygnatura PL `0x4b534f43` jest odczytywana w U-Boot przy
+50/100 MHz i w Linux po załadowaniu PL przed kernelem.
+
+Przeprogramowanie PL przez JTAG podczas pracy Linux powodowało blokadę
+CPU na pierwszym odczycie GP0; przyczyna sekwencji resetu pozostaje otwarta.
+Na tym etapie ładuj ADC PL przed startem kernela. Test hosta
+`python3 tools/test_adc_hardware.py --host ADRES_IP` zbiera wyniki już
+uruchomionego targetu; opcja `--program` jest zablokowana.
+Diagnostyka `tools/diagnose_fmc_board.py` tylko odczytuje presence/FRU
+i chwilowo wybiera kanał multipleksera, po czym przywraca jego stan.
+Nie zmienia VADJ, GPIO zasilania ani zawartości EEPROM.
+
+Niezależny kontroler PS I²C w U-Boot potwierdził ACK multipleksera
+`0x74`, wejścia U16 `00 8c` (LPC obecna, HPC pusta), oraz ACK EEPROM
+LPC `0x50`. Pierwsze 128 bajtów EEPROM to `0xff`; nie ma informacji FRU
+o rewizji karty. PL I²C nadal nie uzyskuje ACK tego samego multipleksera.
+Dowody: `evidence/zc706/fmc-adc-bringup-20261008/`.
 
 Element | Status
 ---|---

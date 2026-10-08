@@ -16,7 +16,8 @@ Fizyczna Kasli-SoC nadal oczekuje na walidację.
 Dodany target dla **jednej karty w J5 LPC**: cztery kanały,
 odbiornik ISERDES, snapshot 1024 próbek, SPI/I²C i automatyczny test wzorców.
 Build: `make bootstrap BOARD=zc706`, `make adc-test`, `make adc-pl`.
-Fizyczna akwizycja oczekuje na kartę i weryfikację VADJ 2.5 V.
+Karta jest w J5 LPC, VADJ 2.5 V zmierzone. Bring-up trwa: zegar/frame
+potwierdzone, SPI/I²C i fizyczna akwizycja pozostają niewalidowane.
 Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
 
 ## Hardware i źródła prawdy

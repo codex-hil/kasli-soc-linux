@@ -23,6 +23,14 @@ for name, sources in [('capture', ['tests/adc_capture_tb.v', 'gateware/fmc_adc_c
 
 if args.soc:
     work = ROOT/'build/zc706-adc/gateware/gateware'
+    cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
+    ps = next(c for c in cells.values() if c['type'] == 'PS7')
+    gp0_clock = ps['connections']['MAXIGP0ACLK']
+    assert any(c['type'] == 'BUFG' and c['connections']['O'] == gp0_clock
+               for c in cells.values()), 'GP0 ACLK must use the buffered fabric clock'
+    assert any(c['type'].startswith('FD') and c['connections'].get('C') == gp0_clock
+               for c in cells.values()), 'GP0 and CSR fabric clocks must be shared'
+    print('PASS: hard PS GP0 ACLK shares the fabric BUFG (netlist)')
     subprocess.run([SUITE/'yosys', '-Q', '-T', '-p',
         'read_json top.json; write_verilog -noattr top_sim.v'], cwd=work, check=True,
         stdout=subprocess.DEVNULL)
@@ -33,6 +41,14 @@ if args.soc:
         checks += [f"write_word(32'h{address:08x},32'h{value:08x});",
                    f"read_word(32'h{address:08x},result);",
                    f'if(result !== {value}) $fatal(1,"{name} readback failed");']
+    if 'board_i2c_w' in csr:
+        for value in (5, 0, 3, 5):
+            address = csr['board_i2c_w']['addr']
+            checks += [f"write_word(32'h{address:08x},{value});",
+                       f"read_word(32'h{address:08x},result);",
+                       f'if(result !== {value}) $fatal(1,"board I2C CSR readback failed");']
+        checks += [f"read_word(32'h{csr['board_i2c_r']['addr']:08x},result);",
+                   '$display("PASS: board I2C CSR AXI accesses");']
     checks += [f"write_word(32'h{csr['adc_ssr']['addr']:08x},0);",
                f"write_word(32'h{csr['adc_control']['addr']:08x},1);"]
     for name in ('adc_captured', 'adc_errors'):

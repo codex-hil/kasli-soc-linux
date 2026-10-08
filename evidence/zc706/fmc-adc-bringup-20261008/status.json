@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "2026-10-08T16:02:53.255698+00:00",
+  "board": "ZC706 rev. 1.2",
+  "slot": "J5 LPC",
+  "physical_acquisition_passed": false,
+  "pre_kernel_jtag_load_gp0_probe": "PASS in U-Boot at 50/100 MHz and Linux at 100 MHz",
+  "live_jtag_load_gp0_probe": "STALL; reset sequencing unresolved",
+  "adc_spi_readback": "FAIL: register 1 returns 0xff, expected 0x20",
+  "pl_i2c_mux": "NACK",
+  "ps_i2c_mux": "ACK at 0x74",
+  "lpc_present": true,
+  "hpc_present": false,
+  "expander_inputs": [
+    0,
+    140
+  ],
+  "lpc_eeprom": "ACK at 0x50; first 128 bytes all 0xff",
+  "earlier_adc_bitstream_clock_frame": "about 100 MHz, frame 0x0f; see build/zc706-adc/hardware/diagnostic-clock.log",
+  "vadj_volts_user_measurement": 2.5,
+  "sd_qspi_modified": false,
+  "adc_ddr_connected": false
+}

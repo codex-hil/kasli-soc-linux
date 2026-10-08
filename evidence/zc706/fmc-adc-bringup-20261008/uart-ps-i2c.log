@@ -1,0 +1,30 @@
+
+U-Boot SPL 2026.10-rc5 (Oct 07 2026 - 15:41:28 +0000)
+Silicon version:	3
+Trying to boot from MMC1
+
+
+U-Boot 2026.10-rc5 (Oct 07 2026 - 15:41:28 +0000)
+
+CPU:   Zynq 7z045
+Silicon: v3.1
+Model: Xilinx ZC706 board
+DRAM:  ECC disabled 1 GiB
+Core:  30 devices, 20 uclasses, devicetree: board
+Flash: 0 Bytes
+NAND:  0 MiB
+MMC:   mmc@e0100000: 0
+Loading Environment from nowhere...Loading Environment from nowhere... OK
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Net:   
+ZYNQ GEM: e000b000, mdio bus e000b000, phyaddr 7, interface rgmii-id
+
+Warning: ethernet@e000b000 (eth0) using random MAC address - 76:7e:69:64:ea:f7
+eth0: ethernet@e000b000
+[2KHit any key to stop autoboot: 2[2KHit any key to stop autoboot: 0
+Zynq> i2c dev 0; i2c probe
+Setting bus to 0
+Valid chip addresses: 74
+Zynq> 
