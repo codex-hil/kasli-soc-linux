@@ -25,6 +25,8 @@ make ddr-pl
 make ddr-software
 make ddr-test
 make ddr-axi-test
+# Or build, verify and package all artifacts:
+make ddr-package
 ```
 
 The userspace program `build/zc706-ddr/pl-ddr-test` uses upstream LiteX
@@ -35,8 +37,10 @@ bitstream and generated headers; this does not update the SD image or QSPI.
 
 ## Toolchain investigation, 2026-10-08
 
-Yosys synthesis and the ARM static diagnostic build pass. Bitstream
-generation and all physical memory tests remain pending.
+Yosys synthesis, nextpnr routing/timing, FASM assembly and bitstream
+generation PASS. All physical memory tests remain pending.
+The bitstream SHA-256 is
+`c232613eb5882bc3df673d1ecdcdb882979f804a11c8e3142899783ce6971611`.
 
 The distributed Zynq chipdb lacks HP ILOGICE2, OLOGICE2, ODELAYE2 and
 IDELAYE2_FINEDELAY
@@ -93,7 +97,9 @@ now uses 83⅓ MHz system / 333⅓ MHz DDR clocks, with a 1000 MHz MMCM
 VCO and integer output divisors 12/3/5/20. These preserve the 200 MHz
 IDELAY reference and 50 MHz GP1/BIST clocks. The ARM initialization delay
 and timer shim derive their cycles from generated CONFIG_CLOCK_FREQUENCY.
-This reduced-clock target is being built.
+The reduced-clock target PASS after routing: 90.50 MHz maximum for the
+83⅓ MHz system domain, 60.54 MHz for the 50 MHz domain and 542.59 MHz
+for the 200 MHz reference domain. All four build stages completed.
 The CSR wrapper simulation passes reset/start/configuration/status transfers
 at 83⅓/50 MHz, including a deliberately injected memory error.
 
@@ -138,7 +144,17 @@ not validate the physical clock tree, PS7, GP1 RAM accesses or the DDR PHY.
 | Yosys | PASS |
 | HP chipdb regeneration | PASS |
 | ARM initialization/test program | Build PASS |
-| nextpnr | HP metadata and site-search fixes being validated |
-| Bitstream | Pending |
+| nextpnr | Routing/timing PASS with isolated HP fixes |
+| Bitstream | openXC7 generation PASS; hardware pending |
 | DDR leveling and 1 GiB BIST on hardware | Pending |
 | ADC-to-DDR connection | Deferred |
+
+Physical programming attempt on 2026-10-08 was blocked by USB permissions
+after the host reboot (`usb_open() failed`, FTDI error -4). Linux SSH remains
+reachable. No bitstream was loaded and no DDR diagnostic ran. Restore access
+with the project USB grant script and repeat the hardware command above.
+
+`make ddr-package` produces `build/zc706-ddr/zc706-pl-ddr-bringup.tar.xz`
+with bitstream, ARM diagnostic, CSR map, timing, source/toolchain locks and
+build/simulation evidence plus SHA-256 checksums. This is a PL-only
+bring-up bundle, not a replacement SD image; hardware validation is pending.

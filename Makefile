@@ -29,11 +29,13 @@ endif
 ddr-pl:
 	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design pl-ddr --output-dir build/zc706-ddr/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
 
-.PHONY: ddr-software ddr-test ddr-axi-test
+.PHONY: ddr-software ddr-test ddr-axi-test ddr-package
 ddr-software:
 	$(ENV) build/python/bin/python tools/build_ddr_software.py
 ddr-test:
-	$(ENV) build/python/bin/python tests/pl_ddr_bist.py
-	$(ENV) build/python/bin/python tests/pl_ddr_frontend.py
+	$(ENV) build/python/bin/python tools/test_ddr_logic.py
 ddr-axi-test:
 	$(ENV) build/python/bin/python tools/test_ddr_axi.py
+
+ddr-package: ddr-pl ddr-software ddr-test ddr-axi-test
+	$(ENV) python3 tools/package_ddr.py
