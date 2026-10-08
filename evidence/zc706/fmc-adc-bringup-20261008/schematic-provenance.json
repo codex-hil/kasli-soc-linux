@@ -1,0 +1,11 @@
+{
+  "revision": "6.0",
+  "url": "https://edms.cern.ch/ui/file/2258647/1/EDA-02063-V6-0_sch.pdf",
+  "sha256": "e92084c54abfc07250cb6f8c1312bba7a018e117d0ba08728f3b5137e0a2b82a",
+  "v61_changes_url": "https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-hw/-/wikis/v6_0_to_v6_1",
+  "wiki_commit": "c9207a643062bc826e192d37ff0e612281db8298",
+  "v61_full_schematic_obtained": false,
+  "spi_adc_page": 5,
+  "si570_page": 4,
+  "matches_current_map": true
+}

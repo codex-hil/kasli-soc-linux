@@ -1,0 +1,5 @@
+SAVED {"mio50": 4672, "mio51": 4672, "direction": 16384, "enable": 16384, "data": 49152}
+{"ps_mio": 50, "ps_inputs": 49152, "pl_i2c_inputs": 1}
+RESTORED 3
+{"ps_mio": 51, "ps_inputs": 49152, "pl_i2c_inputs": 2}
+RESTORED 3

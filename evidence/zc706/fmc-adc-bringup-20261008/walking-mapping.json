@@ -1,0 +1,452 @@
+[
+  {
+    "pattern": 0,
+    "register3": 128,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 16383,
+    "register3": 191,
+    "register4": 255,
+    "first": [
+      "0xffff",
+      "0xffff",
+      "0xffff",
+      "0xffff"
+    ],
+    "unique_per_channel": [
+      [
+        "0xffff"
+      ],
+      [
+        "0xffff"
+      ],
+      [
+        "0xffff"
+      ],
+      [
+        "0xffff"
+      ]
+    ]
+  },
+  {
+    "pattern": 5461,
+    "register3": 149,
+    "register4": 85,
+    "first": [
+      "0x5555",
+      "0x5555",
+      "0x5555",
+      "0x5555"
+    ],
+    "unique_per_channel": [
+      [
+        "0x5555"
+      ],
+      [
+        "0x5555"
+      ],
+      [
+        "0x5555"
+      ],
+      [
+        "0x5555"
+      ]
+    ]
+  },
+  {
+    "pattern": 10922,
+    "register3": 170,
+    "register4": 170,
+    "first": [
+      "0xaaaa",
+      "0xaaaa",
+      "0xaaaa",
+      "0xaaaa"
+    ],
+    "unique_per_channel": [
+      [
+        "0xaaaa"
+      ],
+      [
+        "0xaaaa"
+      ],
+      [
+        "0xaaaa"
+      ],
+      [
+        "0xaaaa"
+      ]
+    ]
+  },
+  {
+    "pattern": 1,
+    "register3": 128,
+    "register4": 1,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 2,
+    "register3": 128,
+    "register4": 2,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 4,
+    "register3": 128,
+    "register4": 4,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 8,
+    "register3": 128,
+    "register4": 8,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 16,
+    "register3": 128,
+    "register4": 16,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 32,
+    "register3": 128,
+    "register4": 32,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 64,
+    "register3": 128,
+    "register4": 64,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 128,
+    "register3": 128,
+    "register4": 128,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 256,
+    "register3": 129,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 512,
+    "register3": 130,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 1024,
+    "register3": 132,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 2048,
+    "register3": 136,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 4096,
+    "register3": 144,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  },
+  {
+    "pattern": 8192,
+    "register3": 160,
+    "register4": 0,
+    "first": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+    ],
+    "unique_per_channel": [
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ],
+      [
+        "0x0"
+      ]
+    ]
+  }
+]

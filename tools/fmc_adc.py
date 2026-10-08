@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 """Bring-up/capture for the ZC706 J5 LiteX FMC ADC snapshot target (Linux root)."""
 import argparse
+import ctypes
 import csv
 import json
 import mmap
@@ -35,10 +36,21 @@ class Registers:
             raise RuntimeError('PL probe signature mismatch')
 
     def read(self, name):
-        return struct.unpack_from('<I', self.mem, self.map['csr_registers'][name]['addr']-self.base)[0]
+        # MMIO needs one aligned word load/store. struct's little-endian
+        # pack/unpack can use byte accesses on ARM, generating extra AXI
+        # transactions and glitches on software-bitbanged SPI/I2C outputs.
+        return ctypes.c_uint32.from_buffer(self.mem, self._offset(name)).value
 
     def write(self, name, value):
-        struct.pack_into('<I', self.mem, self.map['csr_registers'][name]['addr']-self.base, value)
+        if not 0 <= value <= 0xffffffff:
+            raise ValueError('CSR value must fit an unsigned 32-bit word')
+        ctypes.c_uint32.from_buffer(self.mem, self._offset(name)).value = value
+
+    def _offset(self, name):
+        offset = self.map['csr_registers'][name]['addr'] - self.base
+        if offset < 0 or offset & 3 or offset + 4 > len(self.mem):
+            raise ValueError('CSR must be an aligned 32-bit word inside the mapped region')
+        return offset
 
 
 class ADC:

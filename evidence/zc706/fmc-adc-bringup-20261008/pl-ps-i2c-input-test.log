@@ -1,0 +1,7 @@
+SAVED [4672, 4672, 16384, 16384]
+{"pl_drive": 5, "ps_gpio_lines": 3, "pl_lines": 3}
+{"pl_drive": 4, "ps_gpio_lines": 2, "pl_lines": 1}
+{"pl_drive": 5, "ps_gpio_lines": 3, "pl_lines": 3}
+{"pl_drive": 3, "ps_gpio_lines": 1, "pl_lines": 2}
+{"pl_drive": 5, "ps_gpio_lines": 3, "pl_lines": 3}
+MUX_ERROR SI570 I2C NACK for byte 0xe9

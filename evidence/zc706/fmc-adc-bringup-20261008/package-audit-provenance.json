@@ -1,0 +1,11 @@
+{
+  "rapidwright_version": "2026.1.1-beta",
+  "jar_url": "https://github.com/Xilinx/RapidWright/releases/download/v2026.1.1-beta/rapidwright-2026.1.1-standalone-lin64.jar",
+  "jar_sha256": "b3bd8e98a026fec792347b9d007af1fc054e9376789186a3721c400ed52e9955",
+  "device_database_sha256": "cf756d032b7910667df1b41455b472c486ce9813ed911b06ee64ed25e6580eb8",
+  "java_version": "OpenJDK 25.0.4.1+1 (existing shared Nix store)",
+  "pin_site_tile_checks": 350,
+  "errors": 0,
+  "build_dependency": false,
+  "vivado_invoked": false
+}

@@ -1,0 +1,11 @@
+STEP map/probe
+STEP probe/scratch 1000
+STEP control OE/reset release
+STEP control read 2
+STEP counter awake-before
+{"step": "awake-before", "frequency_hz": 99952779.45955215, "frame": 15, "status": 3, "register1": 255}
+STEP SPI sleep
+STEP counter sleep-write
+{"step": "sleep-write", "frequency_hz": 99954136.70608152, "frame": 15, "status": 3, "register1": 255}
+STEP counter awake-restore
+{"step": "awake-restore", "frequency_hz": 99967654.14866222, "frame": 15, "status": 3, "register1": 255}

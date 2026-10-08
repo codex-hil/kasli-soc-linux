@@ -1,0 +1,99 @@
+
+build/zc706/buildroot/build/python3-3.14.8/Modules/_struct.cpython-314-arm-linux-gnueabihf.so:     file format elf32-littlearm
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .text:
+
+000065f4 <bp_uint>:
+    65f4:	e59fc134 	ldr	ip, [pc, #308]	@ 6730 <bp_uint+0x13c>
+    65f8:	e92d40f0 	push	{r4, r5, r6, r7, lr}
+    65fc:	e1a04001 	mov	r4, r1
+    6600:	e1a01002 	mov	r1, r2
+    6604:	e59f2128 	ldr	r2, [pc, #296]	@ 6734 <bp_uint+0x140>
+    6608:	e08fc00c 	add	ip, pc, ip
+    660c:	e1a05003 	mov	r5, r3
+    6610:	e59f3120 	ldr	r3, [pc, #288]	@ 6738 <bp_uint+0x144>
+    6614:	e24dd014 	sub	sp, sp, #20
+    6618:	e79c2002 	ldr	r2, [ip, r2]
+    661c:	e1a06000 	mov	r6, r0
+    6620:	e08f3003 	add	r3, pc, r3
+    6624:	e5922000 	ldr	r2, [r2]
+    6628:	e58d200c 	str	r2, [sp, #12]
+    662c:	e3a02000 	mov	r2, #0
+    6630:	e28d2008 	add	r2, sp, #8
+    6634:	e1a07003 	mov	r7, r3
+    6638:	ebfff4e3 	bl	39cc <get_ulong>
+    663c:	e3700001 	cmn	r0, #1
+    6640:	0a00001b 	beq	66b4 <bp_uint+0xc0>
+    6644:	e5951004 	ldr	r1, [r5, #4]
+    6648:	e59d2008 	ldr	r2, [sp, #8]
+    664c:	e3510004 	cmp	r1, #4
+    6650:	0a000003 	beq	6664 <bp_uint+0x70>
+    6654:	e1a00181 	lsl	r0, r1, #3
+    6658:	e3a0c001 	mov	ip, #1
+    665c:	e152001c 	cmp	r2, ip, lsl r0
+    6660:	2a00001d 	bcs	66dc <bp_uint+0xe8>
+    6664:	e2411001 	sub	r1, r1, #1
+    6668:	e2640001 	rsb	r0, r4, #1
+    666c:	e0841001 	add	r1, r4, r1
+    6670:	e4412001 	strb	r2, [r1], #-1
+    6674:	e0803001 	add	r3, r0, r1
+    6678:	e3530000 	cmp	r3, #0
+    667c:	e1a02422 	lsr	r2, r2, #8
+    6680:	cafffffa 	bgt	6670 <bp_uint+0x7c>
+    6684:	e3a00000 	mov	r0, #0
+    6688:	e59f20ac 	ldr	r2, [pc, #172]	@ 673c <bp_uint+0x148>
+    668c:	e59f30a0 	ldr	r3, [pc, #160]	@ 6734 <bp_uint+0x140>
+    6690:	e08f2002 	add	r2, pc, r2
+    6694:	e7923003 	ldr	r3, [r2, r3]
+    6698:	e5932000 	ldr	r2, [r3]
+    669c:	e59d300c 	ldr	r3, [sp, #12]
+    66a0:	e0332002 	eors	r2, r3, r2
+    66a4:	e3a03000 	mov	r3, #0
+    66a8:	1a00001f 	bne	672c <bp_uint+0x138>
+    66ac:	e28dd014 	add	sp, sp, #20
+    66b0:	e8bd80f0 	pop	{r4, r5, r6, r7, pc}
+    66b4:	e59f2084 	ldr	r2, [pc, #132]	@ 6740 <bp_uint+0x14c>
+    66b8:	e58d0004 	str	r0, [sp, #4]
+    66bc:	e7972002 	ldr	r2, [r7, r2]
+    66c0:	e5920000 	ldr	r0, [r2]
+    66c4:	ebffed67 	bl	1c68 <PyErr_ExceptionMatches@plt>
+    66c8:	e3500000 	cmp	r0, #0
+    66cc:	e59d3004 	ldr	r3, [sp, #4]
+    66d0:	1a00000b 	bne	6704 <bp_uint+0x110>
+    66d4:	e3e00000 	mvn	r0, #0
+    66d8:	eaffffea 	b	6688 <bp_uint+0x94>
+    66dc:	e2611004 	rsb	r1, r1, #4
+    66e0:	e3e0e000 	mvn	lr, #0
+    66e4:	e1a0c181 	lsl	ip, r1, #3
+    66e8:	e59f1054 	ldr	r1, [pc, #84]	@ 6744 <bp_uint+0x150>
+    66ec:	e5d52000 	ldrb	r2, [r5]
+    66f0:	e596000c 	ldr	r0, [r6, #12]
+    66f4:	e1a03c3e 	lsr	r3, lr, ip
+    66f8:	e08f1001 	add	r1, pc, r1
+    66fc:	ebffede0 	bl	1e84 <PyErr_Format@plt>
+    6700:	eafffff3 	b	66d4 <bp_uint+0xe0>
+    6704:	e595c004 	ldr	ip, [r5, #4]
+    6708:	e59f1038 	ldr	r1, [pc, #56]	@ 6748 <bp_uint+0x154>
+    670c:	e5d52000 	ldrb	r2, [r5]
+    6710:	e26cc004 	rsb	ip, ip, #4
+    6714:	e596000c 	ldr	r0, [r6, #12]
+    6718:	e1a0c18c 	lsl	ip, ip, #3
+    671c:	e08f1001 	add	r1, pc, r1
+    6720:	e1a03c33 	lsr	r3, r3, ip
+    6724:	ebffedd6 	bl	1e84 <PyErr_Format@plt>
+    6728:	eaffffe9 	b	66d4 <bp_uint+0xe0>
+    672c:	ebffed3b 	bl	1c20 <__stack_chk_fail@plt>
+    6730:	0000386c 	.word	0x0000386c
+    6734:	00000160 	.word	0x00000160
+    6738:	00003854 	.word	0x00003854
+    673c:	000037e4 	.word	0x000037e4
+    6740:	00000174 	.word	0x00000174
+    6744:	00000f38 	.word	0x00000f38
+    6748:	00000f14 	.word	0x00000f14
+
+Disassembly of section .fini:

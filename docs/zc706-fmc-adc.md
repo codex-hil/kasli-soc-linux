@@ -1,8 +1,9 @@
 # Jedna CERN FMC ADC na ZC706 — gateware PoC
 
 Target: ZC706 rev. 1.2, XC7Z045-2FFG900C, **J5 LPC**, jedna
-OHWR/CERN FMC ADC 100M 14b 4cha (LTC2174-14). Wszystkie używane pary
-ADC i zegar DCO leżą w banku HR 10. Pełna mapa pochodzi z przypiętego
+OHWR/CERN FMC ADC 100M 14b 4cha (LTC2174-14).
+Użytkownik potwierdził świeżą produkcję, rewizję karty **v6.1**.
+Wszystkie używane pary ADC i zegar DCO leżą w banku HR 10. Pełna mapa pochodzi z przypiętego
 upstream CERN i audytu `evidence/zc706/fmc-adc-pin-audit-20261007.json`.
 Ten target zachowuje działający PS7/UART/Ethernet z naszego ZC706.
 Most LiteX Wishbone→CSR ma włączony upstreamowy tryb registered,
@@ -32,6 +33,30 @@ LPC `0x50`. Pierwsze 128 bajtów EEPROM to `0xff`; nie ma informacji FRU
 o rewizji karty. PL I²C nadal nie uzyskuje ACK tego samego multipleksera.
 Dowody: `evidence/zc706/fmc-adc-bringup-20261008/`.
 
+**Aktualizacja: wcześniejsze NACK/`0xff` rozwiązane.** Driver używa teraz
+natywnych, wyrównanych dostępów `ctypes.c_uint32` do MMIO. ARM-owy
+`struct.pack_into('<I')` wykonuje zapisy bajtowe (`strb`, potwierdzone
+disassembly naszego CPython 3.14.8), które zakłócały bitbang przez CSR.
+Po zmianie: multiplekser ACK, ADC register 1 = `0x20`, SI570 odczytany.
+PS→PL i PL→PS przekazywanie poziomów I²C potwierdzono niezależnie przez
+chwilowe przełączenie MIO50/51 na GPIO; rejestry przywrócono.
+Pełny test pozostaje FAIL na kalibracji/wzorcach danych, więc akwizycja
+nie jest jeszcze walidowana. PLL/frame i komunikacja SPI są potwierdzone.
+
+Niezależny audyt RapidWright 2026.1.1-beta potwierdził wszystkie 350 mapowań
+pin → site → tile: 200 istniejących IOB i 150 dodanych w naszej nakładce.
+Wynik i hashe bazy/JAR są w `package-audit*.json` w katalogu dowodów.
+`tools/audit_xc7z045_package.py` odtwarza porównanie przez Jython RapidWright.
+RapidWright służy wyłącznie do audytu, bez wywoływania Vivado; build
+Yosys/nextpnr/openXC7 nie wymaga go.
+
+Dokumentacja CERN wskazuje v6.1 jako EDA-02063-V6-1. Lista zmian v6.0→v6.1
+opisuje wymianę 16 kondensatorów i zastąpienie L8 zworą 0 Ω dla stabilności
+zasilania; nie opisuje zmiany interfejsu cyfrowego. Pełny schemat v6.1
+pozostaje do pozyskania z EDMS:
+https://edms.cern.ch/nav/EDA-02063-V6-1 . Źródło listy zmian:
+https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-hw/-/wikis/v6_0_to_v6_1 .
+
 Element | Status
 ---|---
 Yosys | PASS, 9 ISERDESE2 / 9 IDELAYE2 / 2 RAMB36E1
@@ -41,8 +66,8 @@ FASM / openXC7 bitstream | PASS
 Frame/BITSLIP i lane ordering | PASS, model protokolarny
 Snapshot / CDC / trigger / error injection | PASS, symulacja
 AXI / CSR / reset | Symulacja PASS; fizyczna sygnatura PASS po konfiguracji przed kernelem; reset/reconfiguration nadal niestabilne
-SPI | Model PASS; fizyczny readback FAIL (`0xff`)
-VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V, karta LPC wykryta przez PS; oko i akwizycja niepotwierdzone
+SPI | PASS na hardware po użyciu natywnych dostępów MMIO 32-bit
+VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V, LPC wykryta, clock/frame PASS; kalibracja/wzorce nie przechodzą
 EEPROM calibration / DMA / druga karta | nie zaimplementowano
 
 Dowody: `evidence/zc706/fmc-adc-build-20261007.json`;
@@ -63,6 +88,19 @@ make adc-test
 make adc-pl
 python3 tools/environment.py python3 tools/test_adc.py --soc
 ```
+
+Zdalny start PL przed kernelem (host Python wymaga pyserial):
+
+```sh
+python3 tools/boot_adc_jtag.py --host AKTUALNY_ADRES_IP
+python3 tools/test_adc_hardware.py --host NOWY_ADRES_IP
+```
+
+Pierwszy skrypt synchronizuje działający Linux, resetuje PS, zatrzymuje
+U-Boot, ładuje PL przez wskazany adapter JTAG i sprawdza sygnaturę przy
+100 MHz, następnie bootuje istniejący kernel/DTS/rootfs z SD i wypisuje
+nowy adres DHCP. Bez `saveenv`, zapisu obrazu SD i QSPI. Test fizyczny
+tej sekwencji przeszedł (`automated-boot.json`).
 
 Środowisko i wersje narzędzi są przypięte w `tools/environment.py`,
 `sources.lock.json`, `requirements.lock` i `toolchains.lock.json`.
