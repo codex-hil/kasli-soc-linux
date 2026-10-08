@@ -1,0 +1,18 @@
+{
+  "physical_adc2_validated": false,
+  "result": "PASS",
+  "hpc_csr_write_read_passed": true,
+  "lpc_taps_unchanged": true,
+  "card_ids": [
+    "0xadc00001",
+    "0xadc00002"
+  ],
+  "controls": [
+    1,
+    1
+  ],
+  "ssr": [
+    0,
+    0
+  ]
+}

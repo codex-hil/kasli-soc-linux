@@ -1,0 +1,21 @@
+{
+  "bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "dual_adc_hardware_validated": false,
+  "lpc_card1_hardware_validated": true,
+  "hpc_card2_hardware_validated": false,
+  "hpc_csr_hardware_validated": true,
+  "boot_passed": true,
+  "sd_qspi_written": false,
+  "lpc_pattern_channel_values": 139264,
+  "lpc_snapshot_samples": 1024,
+  "hpc_reason": "Second FMC card not connected yet; user plans installation tomorrow.",
+  "controls_after_test": [
+    1,
+    1
+  ],
+  "ssr_after_test": [
+    0,
+    0
+  ],
+  "inter_card_synchronization": false
+}

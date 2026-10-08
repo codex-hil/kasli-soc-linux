@@ -1,9 +1,27 @@
 # Dwie karty CERN FMC ADC na ZC706
 
-Status 2026-10-08: implementacja dwóch niezależnych odbiorników. Druga karta
+Status 2026-10-08: **build, timing i symulacje PASS**. Bitstream dwóch kart
+został załadowany do fizycznej ZC706; Linux/SSH oraz regresja LPC przeszły. Druga karta
 zostanie podłączona później; **akwizycja z fizycznego HPC nie jest jeszcze
 potwierdzona**. Wyniki buildu, symulacji i regresji LPC zapisujemy w
 `evidence/zc706/adc-dual-20261008/`.
+
+Element | Status
+---|---
+Yosys → nextpnr/openXC7 → bitstream | PASS, 22 pary z DIFF_TERM
+Timing 100/200/400 MHz | PASS
+Symulacja dwóch zegarów i izolacji resetów/buforów | PASS
+AXI/CSR obu kart w syntetyzowanym SoC | PASS
+Boot fizycznej ZC706, Linux i Ethernet/SSH | PASS na bitstreamie dwóch kart
+Karta LPC: 34 wzorce i snapshot 1024 próbek | PASS, 139264 wartości kanałów
+Fizyczny zapis/odczyt CSR HPC, izolacja tapów LPC | PASS
+Fizyczny odbiór ADC z HPC | OCZEKUJE NA KARTĘ
+Synchronizacja kart / ADC → DDR | późniejszy etap
+
+Finalny bitstream SHA-256:
+`ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560`.
+Po testach obie karty mają `control=1`, `ssr=0`; wszystkie tappy HPC
+przywrócono po próbie zapisu/odczytu. Nie uruchamialiśmy odbiornika nieobecnej karty.
 
 ## Hardware i architektura
 
@@ -70,19 +88,19 @@ loader synchronizuje filesystem, resetuje PS, zatrzymuje U-Boot, wgrywa
 bitstream do SRAM i uruchamia istniejącego Linuksa z SD:
 
 ```sh
-python3 tools/boot_adc_jtag.py --host 192.168.2.25 \
+python3 tools/boot_adc_jtag.py --host 192.168.2.2 \
   --bit build/zc706-adc-dual/gateware/gateware/top.bit \
   --output build/zc706-adc-dual/hardware/boot
 ```
 
-Adres po restarcie odczytaj z UART; `.25` jest przykładem ostatniego adresu.
+Adres po restarcie odczytaj z UART; `.2` jest przykładem ostatniego adresu.
 Loader nie zapisuje SD, QSPI ani środowiska U-Boot. Powrót do poprzedniego
 bitstreamu przez ten sam loader lub zwykły restart do dotychczasowego obrazu SD.
 
 Test samego HPC:
 
 ```sh
-python3 tools/test_adc_hardware.py --host 192.168.2.25 --card 2 \
+python3 tools/test_adc_hardware.py --host 192.168.2.2 --card 2 \
   --bit build/zc706-adc-dual/gateware/gateware/top.bit \
   --csr-json build/zc706-adc-dual/gateware/csr.json \
   --output build/zc706-adc-dual/hardware/card2
@@ -91,7 +109,7 @@ python3 tools/test_adc_hardware.py --host 192.168.2.25 --card 2 \
 Test obu kart równolegle:
 
 ```sh
-python3 tools/test_adc_dual_hardware.py --host 192.168.2.25
+python3 tools/test_adc_dual_hardware.py --host 192.168.2.2
 ```
 
 Każdy proces ma osobny katalog na Linuksie i własny bank CSR. Test sprawdza

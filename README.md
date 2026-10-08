@@ -27,8 +27,9 @@ Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
 Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-term.md).
 
 Dodany także target **dwóch kart: J5 LPC + J4 HPC**, z osobnymi zegarami,
-CSR i snapshotami. Build: `make adc-dual-package`. Druga karta oczekuje na
-podłączenie i test fizyczny; synchronizacja pozostaje na później.
+CSR i snapshotami. Build: `make adc-dual-package`. Build/timing/symulacje
+przeszły; fizyczna LPC na tym bitstreamie przeszła wszystkie 34 wzorce i snapshot.
+Druga karta oczekuje na podłączenie i test fizyczny; synchronizacja później.
 [Opis i test obu kart](docs/zc706-adc-dual.md).
 
 ## Hardware i źródła prawdy

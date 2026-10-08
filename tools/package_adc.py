@@ -57,6 +57,21 @@ if args.dual:
     files['dual-acquisition.md'] = ROOT/'docs/zc706-adc-dual.md'
     files['test_adc_hardware.py'] = ROOT/'tools/test_adc_hardware.py'
     files['test_adc_dual_hardware.py'] = ROOT/'tools/test_adc_dual_hardware.py'
+    recorded = ROOT/'evidence/zc706/adc-dual-20261008'
+    status = json.loads((recorded/'hardware-status.json').read_text())
+    if status['bitstream_sha256'] == bit_hash:
+        files['evidence/hardware-status.json'] = recorded/'hardware-status.json'
+        files['evidence/build-summary.json'] = recorded/'build-summary.json'
+    for card in (1, 2):
+        directory = BUILD/f'hardware/card{card}'
+        if not (directory/'validation.json').exists():
+            continue
+        card_validation = json.loads((directory/'validation.json').read_text())
+        if (card_validation.get('hardware_validated') is True and
+                card_validation.get('bitstream_sha256') == bit_hash and
+                card_validation.get('diagnostic_sha256') == hashlib.sha256((ROOT/'tools/fmc_adc.py').read_bytes()).hexdigest()):
+            for name in ('validation.json', 'result.json', 'samples.bin', 'samples.csv'):
+                files[f'evidence/hardware/card{card}/'+name] = directory/name
 validation = BUILD/'hardware/validation.json'
 if validation.exists():
     physical = json.loads(validation.read_text())
