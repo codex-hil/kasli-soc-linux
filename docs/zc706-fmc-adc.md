@@ -40,9 +40,9 @@ Timing logiki sys/ADC/IDELAY | PASS przy 100/100/200 MHz
 FASM / openXC7 bitstream | PASS
 Frame/BITSLIP i lane ordering | PASS, model protokolarny
 Snapshot / CDC / trigger / error injection | PASS, symulacja
-AXI / CSR / reset | PASS, symulacja nowego SoC
-SPI | PASS, model slave; fizyczny readback oczekuje
-VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V zmierzone przez użytkownika; pozostałe oczekują
+AXI / CSR / reset | Symulacja PASS; fizyczna sygnatura PASS po konfiguracji przed kernelem; reset/reconfiguration nadal niestabilne
+SPI | Model PASS; fizyczny readback FAIL (`0xff`)
+VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V, karta LPC wykryta przez PS; oko i akwizycja niepotwierdzone
 EEPROM calibration / DMA / druga karta | nie zaimplementowano
 
 Dowody: `evidence/zc706/fmc-adc-build-20261007.json`;
