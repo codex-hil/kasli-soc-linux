@@ -9,6 +9,7 @@ SUITE = ROOT/'build/tools/oss-cad-suite'
 WORK = ROOT/'build/zc706-ddr/gateware/gateware'
 OUT = ROOT/'build/zc706-ddr/tests'
 OUT.mkdir(exist_ok=True)
+(OUT/'axi.log').unlink(missing_ok=True)
 subprocess.run([SUITE/'bin/yosys', '-Q', '-T', '-p',
     'read_json top.json; write_verilog -noattr top_sim.v'], cwd=WORK,
     stdout=subprocess.DEVNULL, check=True)
@@ -17,7 +18,7 @@ text = text.replace('i<1000', 'i<100').replace('1000 AXI/CSR', '100 AXI/CSR')
 text = text.replace('    task write_word',
     '    always @(clk or resetn) begin\n'
     '        force dut.sys_clk = clk;\n'
-    '        force dut.main_locked = resetn[0];\n'
+    '        force dut.MMCME2_ADV.LOCKED = resetn[0];\n'
     '    end\n'
     '    task write_word')
 text = text.replace('        force dut.PS7.FCLKRESETN = resetn;',

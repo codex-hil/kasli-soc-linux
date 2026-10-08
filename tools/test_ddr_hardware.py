@@ -18,6 +18,10 @@ out = work/'hardware'
 out.mkdir(exist_ok=True)
 bit = work/'gateware/gateware/top.bit'
 test = work/'pl-ddr-test'
+manifest = json.loads((bit.parent/'manifest.json').read_text())
+if (manifest.get('design') != 'pl-ddr' or not manifest.get('timing_passed')
+        or manifest['bitstream_sha256'] != hashlib.sha256(bit.read_bytes()).hexdigest()):
+    raise RuntimeError('DDR bitstream lacks a matching successful timing/build manifest')
 ssh = ['ssh', '-i', str(ROOT/'build/ssh/id_ed25519'),
     '-o', 'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),
     '-o', 'ConnectTimeout=10', 'root@'+args.host]

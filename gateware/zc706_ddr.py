@@ -4,13 +4,14 @@
 import argparse
 import json
 from pathlib import Path
-from migen import ClockDomain, ClockSignal, ResetSignal, Signal, Instance
+from migen import ClockDomain, ClockSignal, ResetSignal, Signal, Instance, ClockDomainsRenamer
 from litex.gen import LiteXModule
 from litex.soc.cores.clock import S7MMCM, S7IDELAYCTRL
 from litex.soc.interconnect.csr import CSRStatus
-from litex.soc.interconnect import wishbone, axi
+from litex.soc.interconnect import wishbone, axi, stream
 from litex.soc.integration.soc import SoCRegion
 from litedram.frontend.wishbone import LiteDRAMWishbone2Native
+from litedram.frontend.bist import LiteDRAMBISTGenerator, LiteDRAMBISTChecker
 from litex.soc.integration.export import get_csr_json, get_csr_header, get_mem_header, get_soc_header
 from litex_boards.platforms.xilinx_zc706 import _io
 from litedram.modules import MT8JTF12864
@@ -26,6 +27,7 @@ class DDRClock(LiteXModule):
         self.cd_sys = ClockDomain("sys")
         self.cd_sys4x = ClockDomain("sys4x")
         self.cd_idelay = ClockDomain("idelay")
+        self.cd_gp1 = ClockDomain("gp1")
         self.mmcm = S7MMCM(speedgrade=-2, fractional=False)
         self.comb += self.mmcm.reset.eq(ResetSignal("ps7"))
         self.mmcm.register_clkin(ClockSignal("ps7"), 100e6)
@@ -33,6 +35,7 @@ class DDRClock(LiteXModule):
         self.mmcm.create_clkout(self.cd_sys, 100e6)
         self.mmcm.create_clkout(self.cd_sys4x, 400e6)
         self.mmcm.create_clkout(self.cd_idelay, 200e6)
+        self.mmcm.create_clkout(self.cd_gp1, 50e6)
         self.idelayctrl = S7IDELAYCTRL(self.cd_idelay)
         self.ready = Signal()
         for special in self.idelayctrl._fragment.specials:
@@ -64,14 +67,21 @@ class DDRSoC(BaseSoC):
         # The complete 1 GiB PL RAM occupies GP1, leaving GP0 for CSRs.
         gp1 = self.cpu.add_axi_gp_master()
         for port in (0, 1):
-            self.cpu.cpu_params[f"i_M_AXI_GP{port}_ACLK"] = ClockSignal("sys")
+            self.cpu.cpu_params[f"i_M_AXI_GP{port}_ACLK"] = ClockSignal("sys" if port == 0 else "gp1")
         # Reuse the upstream board resource verbatim, including SSTL/DCI standards.
         self.platform.add_extension([resource for resource in _io if resource[0] == "ddram"])
         self.ddrphy = K7DDRPHY(self.platform.request("ddram"), memtype="DDR3",
             nphases=4, sys_clk_freq=100e6, iodelay_clk_freq=200e6)
         self.dram_module = MT8JTF12864(100e6, "1:4")
         self.add_sdram("sdram", phy=self.ddrphy, module=self.dram_module,
-            with_soc_interconnect=False, with_bist=True)
+            with_soc_interconnect=False, with_bist=False)
+        # BIST address generation has a long CSR-derived mask/add path. Use
+        # the upstream wrappers' control/status CDC and native-port CDC to
+        # run diagnostics at 50 MHz, while the DDR controller stays at 100 MHz.
+        self.sdram_generator = LiteDRAMBISTGenerator(
+            self.sdram.crossbar.get_port(mode="write", clock_domain="gp1"))
+        self.sdram_checker = LiteDRAMBISTChecker(
+            self.sdram.crossbar.get_port(mode="read", clock_domain="gp1"))
         # Zynq treats all PL addresses as IO; expose this diagnostic memory
         # uncached, using the same upstream bridge without a CPU/L2 cache.
         ram_bus = wishbone.Interface(data_width=32, address_width=32)
@@ -79,18 +89,31 @@ class DDRSoC(BaseSoC):
         # a 32-bit lane in the native 512-bit word. A separate generic native
         # converter creates an unnecessary ordered-command FIFO and long
         # ready/valid feedback path (75.99 MHz in the rejected build).
-        port = self.sdram.crossbar.get_port()
-        self.ram_bridge = LiteDRAMWishbone2Native(ram_bus, port, base_address=0x80000000)
+        port = self.sdram.crossbar.get_port(clock_domain="gp1")
+        self.ram_bridge = ClockDomainsRenamer("gp1")(
+            LiteDRAMWishbone2Native(ram_bus, port, base_address=0x80000000))
         # PS decodes GP0 and GP1 into disjoint windows already. A shared
         # AXI-Lite crossbar adds a long round-trip through unrelated slaves.
-        self.ps_ram_bridge = axi.AXI2Wishbone(gp1, ram_bus)
+        ram_axi = axi.AXILiteInterface(data_width=32, address_width=32)
+        buffered_axi = axi.AXILiteInterface(data_width=32, address_width=32)
+        self.gp1_converter = ClockDomainsRenamer("gp1")(axi.AXI2AXILite(gp1, ram_axi))
+        # Break the full-AXI conversion / DRAM acknowledgement round-trip.
+        # Upstream buffers register both valid/payload and ready directions.
+        for name in ("aw", "w", "ar", "b", "r"):
+            source, sink = (ram_axi, buffered_axi) if name in ("aw", "w", "ar") else (buffered_axi, ram_axi)
+            source, sink = getattr(source, name), getattr(sink, name)
+            buffer = ClockDomainsRenamer("gp1")(
+                stream.Buffer(source.description, pipe_valid=True, pipe_ready=True))
+            self.submodules += buffer
+            self.comb += [source.connect(buffer.sink), buffer.source.connect(sink)]
+        self.ps_ram_bridge = ClockDomainsRenamer("gp1")(axi.AXILite2Wishbone(buffered_axi, ram_bus))
         self.bus.add_region("main_ram",
             SoCRegion(origin=0x80000000, size=0x40000000, cached=False))
         self.ddr_status = DDRStatus(self.crg)
         self.add_constant("PL_DDR_ABI", 1)
         self.add_constant("PL_DDR_SIZE", 0x40000000)
         for clk, period in ((self.crg.cd_sys.clk, 10), (self.crg.cd_sys4x.clk, 2.5),
-                            (self.crg.cd_idelay.clk, 5)):
+                            (self.crg.cd_idelay.clk, 5), (self.crg.cd_gp1.clk, 20)):
             self.platform.add_period_constraint(clk, period)
 
 

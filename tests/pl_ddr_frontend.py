@@ -3,10 +3,12 @@
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'upstream/litedram'))
-from migen import Module, run_simulation
+from migen import Module, Signal, ClockDomainsRenamer, run_simulation
+from migen.fhdl.specials import Memory
 from litex.soc.interconnect import wishbone
 from litedram.common import LiteDRAMNativePort
 from litedram.frontend.wishbone import LiteDRAMWishbone2Native
+from litedram.frontend.adapter import LiteDRAMNativePortCDC
 from test.common import DRAMMemory
 
 
@@ -27,8 +29,11 @@ class DUT(Module):
     def __init__(self):
         self.wb = wishbone.Interface(data_width=32, address_width=32)
         self.port = LiteDRAMNativePort('both', address_width=24, data_width=512)
-        self.submodules.bridge = LiteDRAMWishbone2Native(self.wb, self.port,
-            base_address=0x80000000)
+        self.app = LiteDRAMNativePort('both', address_width=24, data_width=512,
+            clock_domain='gp1')
+        self.submodules.cdc = LiteDRAMNativePortCDC(self.app, self.port)
+        self.submodules.bridge = ClockDomainsRenamer('gp1')(
+            LiteDRAMWishbone2Native(self.wb, self.app, base_address=0x80000000))
 
 
 dut = DUT()
@@ -50,7 +55,13 @@ def control():
     assert value == 0x53100000
 
 
-run_simulation(dut, [control(), ram.write_handler(dut.port, 30),
-    ram.read_handler(dut.port, 30)])
+fragment = dut.get_fragment()
+for memory in fragment.specials:
+    if isinstance(memory, Memory):
+        for port in memory.ports:
+            if port.dat_r is None:
+                port.dat_r = Signal(memory.width)  # simulator-only write-port adapter
+run_simulation(fragment, {'gp1': [control()], 'sys': [ram.write_handler(dut.port, 30),
+    ram.read_handler(dut.port, 30)]}, clocks={'sys': 10, 'gp1': 20})
 assert set(ram.words) == {offset//64 for offset in offsets}
-print('PASS: 32-to-512-bit frontend, 1 GiB address boundaries, lane/byte enables, backpressure')
+print('PASS: 50/100 MHz CDC, 32-to-512-bit frontend, 1 GiB boundaries, lane/byte enables, backpressure')

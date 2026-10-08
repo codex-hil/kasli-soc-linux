@@ -39,6 +39,8 @@ def main():
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py"}[args.design]
     subprocess.run([sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)], cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
+    # A failed rebuild must never leave an earlier bitstream approved.
+    (work / "manifest.json").unlink(missing_ok=True)
     if args.design in ("fmc-adc", "pl-ddr"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
@@ -91,6 +93,7 @@ def main():
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
         "hardware_validated": False,
+        "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),
         "commands": cmds,
     }, indent=2) + "\n")

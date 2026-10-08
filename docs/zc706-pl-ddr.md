@@ -9,10 +9,12 @@ reuses LiteX-Boards' ZC706 DDR pin resource and LiteDRAM's `K7DDRPHY` and
 (800 MT/s), with a 100 MHz controller and 200 MHz delay reference clock.
 DDR uses fixed 1.5 V HP banks 33–35, independently of FMC VADJ.
 
-PS FCLK0 feeds the PL MMCM. Both PS AXI GP ports and the LiteX bus use the
-resulting 100 MHz system clock. GP0 exposes CSRs at `0x40000000`; GP1 exposes
+PS FCLK0 feeds the PL MMCM. GP0, the LiteX CSR bus and DDR controller/BIST
+use the resulting 100 MHz system clock. The GP1 access frontend runs at
+50 MHz and uses upstream LiteDRAM native CDC into the 100 MHz controller.
+GP0 exposes CSRs at `0x40000000`; GP1 exposes
 the entire SODIMM at `0x80000000..0xbfffffff`. Linux PS DDR is separate.
-GP1 uses upstream `AXI2Wishbone` directly into the LiteDRAM frontend;
+GP1 uses upstream AXI-to-AXI-Lite/Wishbone bridges with registered channels;
 GP0 remains the LiteX CSR bus. The PS already separates these windows.
 
 ## Build
@@ -72,6 +74,21 @@ The target now uses the native-width crossbar port and upstream Wishbone
 frontend, matching normal LiteX SDRAM integration. A dedicated simulation
 passes with sparse RAM across all 1 GiB address boundaries, native 64-byte
 word selection, partial byte writes and backpressure.
+Buffering the AXI channels alone still failed 100 MHz (55.27 MHz maximum).
+The final topology separates the 50 MHz CPU memory-access frontend using
+native CDC, preserving the 400 MHz DDR clock. The frontend simulation also
+passes with actual 50/100 MHz clocks and asynchronous FIFO crossings.
+
+The unused DQS input fix passed FASM-to-frames assembly on the rejected
+100 MHz build. That artifact is not approved for programming: it failed
+timing. The GP1 CDC build passed its 50 MHz domain (74.79 MHz maximum), but
+failed the 100 MHz domain (84.41 MHz maximum). The remaining critical
+path was BIST CSR base/end arithmetic. BIST now uses the upstream
+control/status and native-port CDC wrappers at 50 MHz; the DDR controller
+still runs at 100 MHz, with the physical DDR clock at 400 MHz. BIST ticks
+therefore count 50 MHz cycles. This version is being routed.
+The CSR wrapper simulation passes reset/start/configuration/status transfers
+at 100/50 MHz, including a deliberately injected memory error.
 
 The backend currently strips `_T_DCI` from the upstream pin standards.
 Digital impedance calibration/termination is therefore **not validated**.
