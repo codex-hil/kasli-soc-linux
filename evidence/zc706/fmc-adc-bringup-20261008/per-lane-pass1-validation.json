@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-10-08T17:15:20.660892+00:00",
+  "host": "192.168.2.15",
+  "slot": "J5 LPC",
+  "jtag_serial": "210251842914",
+  "program_requested": false,
+  "hardware_validated": true,
+  "bitstream_sha256": "84f665dd2b9256dae8799270a3d140838d09e1eb914bca39366c0af5a6338b23",
+  "diagnostic_sha256": "ad31293550d1c16221fb0dad81d9294ea2e72118e1170c775bb83171b13ab2bb",
+  "finished_utc": "2026-10-08T17:15:45.662094+00:00"
+}

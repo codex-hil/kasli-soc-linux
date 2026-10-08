@@ -5,11 +5,20 @@ module tb;
     reg [7:0] data=0;
     reg serial_frame=0;
     reg [63:0] pattern=64'h4560123489accde0;
+    reg [7:0] slip_toggle=0;
     wire adc_clk, adc_reset, aligned;
     wire [63:0] samples;
     wire [7:0] frame;
-    fmc_adc_rx dut(dco,~dco,serial_frame,~serial_frame,data,~data,sys_clk,
-                  reset,ready,45'b0,adc_clk,adc_reset,samples,frame,aligned);
+    wire [71:0] raw;
+    wire serial_div32;
+    fmc_adc_rx dut(.dco_p(dco), .dco_n(~dco),
+                  .frame_p(serial_frame), .frame_n(~serial_frame),
+                  .data_p(data), .data_n(~data), .sys_clk(sys_clk),
+                  .reset(reset), .idelay_ready(ready), .delay_taps(45'b0),
+                  .slip_toggle(slip_toggle),
+                  .adc_clk(adc_clk), .adc_reset(adc_reset), .samples(samples),
+                  .raw_lanes(raw), .serial_div32(serial_div32),
+                  .frame(frame), .aligned(aligned));
     integer b=7,ch,i;
     initial forever begin
         // ADC changes serial data between DCO sampling edges.
@@ -30,6 +39,12 @@ module tb;
                 @(negedge adc_clk);
                 if(frame !== 8'h0f || samples !== pattern)
                     $fatal(1,"lane decode mismatch %h != %h frame %h",samples,pattern,frame);
+                if(raw[71:64] !== frame) $fatal(1,"raw frame mismatch");
+                for(integer raw_ch=0;raw_ch<4;raw_ch=raw_ch+1)
+                    for(integer k=0;k<8;k=k+1)
+                        if(raw[16*raw_ch+k] !== samples[16*raw_ch+2*k] ||
+                           raw[16*raw_ch+8+k] !== samples[16*raw_ch+2*k+1])
+                            $fatal(1,"raw lane/decode mismatch");
             end
         end
     endtask
@@ -48,6 +63,16 @@ module tb;
         if(aligned) $fatal(1,"bad frame still aligned");
         corrupt_frame=0;
         wait(aligned);
+        check_pattern;
+        @(negedge adc_clk); slip_toggle=1;
+        repeat(20) @(negedge adc_clk);
+        if(!aligned || samples === pattern ||
+           ((samples ^ pattern) & ~64'h5555) !== 0)
+            $fatal(1,"manual BITSLIP must affect only lane zero, preserving frame");
+        repeat(7) begin
+            slip_toggle=slip_toggle ^ 1;
+            repeat(20) @(negedge adc_clk);
+        end
         check_pattern;
         $display("PASS: frame BITSLIP acquisition/recovery, 4-channel lane ordering, walking bits (protocol model)");
         $finish;

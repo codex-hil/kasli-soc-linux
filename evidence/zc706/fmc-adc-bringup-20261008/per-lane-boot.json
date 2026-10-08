@@ -1,0 +1,7 @@
+{
+  "bitstream_sha256": "84f665dd2b9256dae8799270a3d140838d09e1eb914bca39366c0af5a6338b23",
+  "sd_qspi_written": false,
+  "jtag_serial": "210251842914",
+  "boot_passed": true,
+  "host": "192.168.2.15"
+}

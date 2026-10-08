@@ -1,8 +1,8 @@
 {
-  "timestamp_utc": "2026-10-08T16:02:53.255698+00:00",
+  "timestamp_utc": "2026-10-08T17:19:30.424873+00:00",
   "board": "ZC706 rev. 1.2",
   "slot": "J5 LPC",
-  "physical_acquisition_passed": false,
+  "physical_acquisition_passed": true,
   "pre_kernel_jtag_load_gp0_probe": "PASS in U-Boot at 50/100 MHz and Linux at 100 MHz",
   "live_jtag_load_gp0_probe": "STALL; reset sequencing unresolved",
   "ps_i2c_mux": "ACK at 0x74",
@@ -30,6 +30,13 @@
   "pl_i2c_mux": "PASS: native32 driver ACK at 0x74",
   "si570_i2c": "PASS: registers [34,66,187,255,240,31]",
   "mmio_access_fix": "Aligned native32 ctypes accesses; ARM struct bp_uint uses strb",
-  "acquisition_current_failure": "No common stable eye >=3 taps; walking-bit data mismatch",
-  "ps_pl_board_i2c_bidirectional_static_levels": "PASS"
+  "acquisition_current_failure": null,
+  "ps_pl_board_i2c_bidirectional_static_levels": "PASS",
+  "physical_acquisition_scope": "4-channel BRAM snapshot with analog inputs disconnected; ADC test patterns then normal ADC output, no analog calibration",
+  "adc_internal_termination": true,
+  "adc_register_A2": 240,
+  "adc_deserializer_clock_hz": 399999250.1681739,
+  "per_lane_training": "PASS: 8 IDELAY eyes >=14 taps plus independent BITSLIP",
+  "pattern_channel_values_per_run": 139264,
+  "validated_per_lane_cold_boot_runs": 2
 }

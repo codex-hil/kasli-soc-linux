@@ -11,8 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT/'build/zc706-adc'
 WORK = BUILD/'gateware/gateware'
 manifest = json.loads((WORK/'manifest.json').read_text())
-if manifest['design'] != 'fmc-adc' or manifest['hardware_validated']:
-    raise RuntimeError('Expected the unvalidated one-card build')
+bit_hash = hashlib.sha256((WORK/'top.bit').read_bytes()).hexdigest()
+if manifest['design'] != 'fmc-adc' or not manifest['timing_passed'] or manifest['bitstream_sha256'] != bit_hash:
+    raise RuntimeError('Expected a matching successful one-card build')
 for test in ('capture', 'receiver', 'axi'):
     if 'PASS:' not in (BUILD/f'tests/{test}.log').read_text():
         raise RuntimeError('Required simulation missing: '+test)
@@ -36,6 +37,15 @@ for test in ('capture', 'receiver', 'axi'):
     files[f'evidence/{test}.log'] = BUILD/f'tests/{test}.log'
 for stage in range(4):
     files[f'evidence/stage{stage}.log'] = WORK/f'stage{stage}.log'
+validation = BUILD/'hardware/validation.json'
+if validation.exists():
+    physical = json.loads(validation.read_text())
+    driver_hash = hashlib.sha256((ROOT/'tools/fmc_adc.py').read_bytes()).hexdigest()
+    if (physical.get('hardware_validated') is True and
+            physical.get('bitstream_sha256') == bit_hash and
+            physical.get('diagnostic_sha256') == driver_hash):
+        for name in ('validation.json', 'result.json', 'samples.bin', 'samples.csv'):
+            files['evidence/hardware/'+name] = BUILD/'hardware'/name
 checksums = BUILD/'SHA256SUMS'
 checksums.write_text(''.join(f'{hashlib.sha256(path.read_bytes()).hexdigest()}  {name}\n'
                            for name, path in sorted(files.items())))

@@ -92,7 +92,10 @@ class ADC:
         self.spi(0x0080)  # Datasheet A0 RESET; self-clearing, write-only.
         time.sleep(0.005)
         self.reg(1, 0x20)  # two's complement; randomizer off; all channels awake
-        self.reg(2, 0)     # two lanes, 16-bit serialization, 3.5 mA LVDS
+        # 2 lanes/16 bits; internal source termination enabled, 1.75 mA
+        # setting doubled to 3.5 mA by TERMON (LTC2174 datasheet A2).
+        # Pinned openXC7 does not implement FPGA IBUFDS DIFF_TERM.
+        self.reg(2, 0xf0)
         self.reg(3, 0)
         self.reg(4, 0)
         self.r.write('adc_control', 11)  # release DAC clear, keep RX reset
@@ -118,11 +121,11 @@ class ADC:
         raise TimeoutError(f'ADC frame not aligned: status={self.r.read("adc_status"):#x}, '
                            f'frame={self.r.read("adc_frame"):#x}')
 
-    def sample_rate(self):
-        a = self.r.read('adc_count'); start = time.monotonic()
+    def sample_rate(self, counter='adc_count', multiplier=1):
+        a = self.r.read(counter); start = time.monotonic()
         time.sleep(0.05)
-        b = self.r.read('adc_count'); end = time.monotonic()
-        return ((b-a) & 0xffffffff)/(end-start)
+        b = self.r.read(counter); end = time.monotonic()
+        return ((b-a) & 0xffffffff)*multiplier/(end-start)
 
     def pattern(self, value=None):
         if value is None:
@@ -173,6 +176,8 @@ class ADC:
                                        f'{raw:#06x} != {expected:#06x}')
 
     def calibrate(self):
+        if 'adc_slip_toggle' in self.r.map['csr_registers']:
+            return self.calibrate_lanes()
         good = []
         evidence = []
         for tap in range(32):
@@ -196,6 +201,82 @@ class ADC:
         tap = window[len(window)//2]
         self.set_taps([tap]*9)
         return {'tap': tap, 'window': window, 'scan': evidence}
+
+    def raw_lanes(self):
+        word = self.r.read('adc_raw_low') | self.r.read('adc_raw_high') << 32
+        return [(word >> (8*lane)) & 255 for lane in range(8)]
+
+    def align_lanes(self):
+        """Train each data lane against two asymmetric steady test words."""
+        self.wait_aligned()
+        slips = [0]*8
+        good = [False]*8
+        for phase in range(8):
+            good = [True]*8
+            for value in (0x1235, 0x2dca):
+                self.pattern(value)
+                expected = [sum((((value << 2) >> (2*bit+lane)) & 1) << bit
+                                for bit in range(8)) for lane in range(2)]*4
+                for _ in range(8):
+                    actual = self.raw_lanes()
+                    good = [ok and actual[i] == expected[i] for i, ok in enumerate(good)]
+            if all(good) or phase == 7:
+                break
+            mask = sum((not ok) << i for i, ok in enumerate(good))
+            self.r.write('adc_slip_toggle', self.r.read('adc_slip_toggle') ^ mask)
+            slips = [n + (not good[i]) for i, n in enumerate(slips)]
+            time.sleep(.001)  # CDC plus ISERDES BITSLIP pipeline/settling
+        return good, slips
+
+    def calibrate_lanes(self):
+        # Keep frame delay fixed: moving it with data can change the shared
+        # automatic BITSLIP reference and obscure each data lane's eye.
+        frame_runs = []
+        for tap in range(32):
+            self.set_taps([0]*8 + [tap])
+            try:
+                self.wait_aligned()
+                stable = True
+                for _ in range(16):
+                    stable &= self.r.read('adc_raw_frame') == 0x0f
+                    time.sleep(.0001)
+                if stable:
+                    if not frame_runs or tap != frame_runs[-1][-1]+1:
+                        frame_runs.append([])
+                    frame_runs[-1].append(tap)
+            except TimeoutError:
+                pass
+        if not frame_runs or max(map(len, frame_runs)) < 3:
+            raise RuntimeError('No stable frame eye >=3 taps')
+        frame_window = max(frame_runs, key=len)
+        frame_tap = frame_window[len(frame_window)//2]
+        scan = []
+        for tap in range(32):
+            self.set_taps([tap]*8 + [frame_tap])
+            try:
+                good, slips = self.align_lanes()
+                scan.append(dict(tap=tap, good=good, slips=slips))
+            except TimeoutError as exc:
+                scan.append(dict(tap=tap, good=[False]*8, error=str(exc)))
+        taps, windows = [], []
+        for lane in range(8):
+            runs = []
+            for row in scan:
+                if row['good'][lane]:
+                    if not runs or row['tap'] != runs[-1][-1]+1:
+                        runs.append([])
+                    runs[-1].append(row['tap'])
+            if not runs or max(map(len, runs)) < 3:
+                raise RuntimeError(f'Lane {lane}: no stable eye >=3 taps: ' + json.dumps(scan))
+            window = max(runs, key=len)
+            windows.append(window)
+            taps.append(window[len(window)//2])
+        self.set_taps(taps + [frame_tap])
+        good, slips = self.align_lanes()
+        if not all(good):
+            raise RuntimeError('Selected lane centres failed retraining')
+        return dict(taps=taps + [frame_tap], frame_window=frame_window,
+                    windows=windows, slips=slips, scan=scan)
 
 
 class I2C:
@@ -262,16 +343,26 @@ def main():
     result = {'hardware_validated': False, 'result': 'FAIL', 'slot': 'J5 LPC'}
     try:
         adc.initialize()
+        result['adc_registers'] = {str(address): adc.reg(address) for address in (1, 2)}
         result['si570_registers'] = I2C(r).read(args.si570_address, 7, 6)
         hz = adc.sample_rate()
         result['sample_rate_hz'] = hz
         if not 98e6 < hz < 102e6:
             raise RuntimeError(f'Expected factory SI570 100 MHz; measured {hz:g} Hz. '
                                'Do not change oscillator without verifying its configuration.')
+        if 'adc_serial_count' in r.map['csr_registers']:
+            result['serial_clock_hz'] = adc.sample_rate('adc_serial_count', 32)
+            if not 392e6 < result['serial_clock_hz'] < 408e6:
+                raise RuntimeError('Expected 400 MHz deserializer clock')
         if args.tap is None:
             result['calibration'] = adc.calibrate()
         else:
             adc.set_taps([args.tap]*9)
+            if 'adc_slip_toggle' in r.map['csr_registers']:
+                good, slips = adc.align_lanes()
+                if not all(good):
+                    raise RuntimeError('Manual tap cannot align all data lanes')
+                result['calibration'] = dict(taps=[args.tap]*9, slips=slips, manual=True)
         # Zero/ones, asymmetric words, all walking ones and walking zeros.
         patterns = [0, 0x3fff, 0x1555, 0x2aaa, 0x1235, 0x2dca]
         patterns += [1 << bit for bit in range(14)]

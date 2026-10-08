@@ -1,0 +1,11 @@
+{
+  "source_url": "https://github.com/openXC7/nextpnr/blob/c68c13582e972292c86a5025140d52e713384cbc/himbaechel/uarch/xilinx/fasm.cc",
+  "source_sha256": "a04ca3bcba3e0fe117156d6e56b8bacbf2adef3f4740ceddc405a52d9914cf00",
+  "diff_term_occurrences": 0,
+  "requested_ibufds_diff_term_count": 11,
+  "adc_register_A2_termination_off": 0,
+  "adc_register_A2_high_current_no_termination": 64,
+  "adc_register_A2_termination_on": 240,
+  "physical_A_B_test": "source-termination.json",
+  "conclusion": "ADC internal termination resolves missing walking bits; receiver termination omission inferred from pinned source, no scope measurement"
+}

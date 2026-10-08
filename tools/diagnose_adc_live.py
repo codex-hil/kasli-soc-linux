@@ -16,13 +16,20 @@ try:
     adc.initialize()
     adc.set_taps([0]*9)
     adc.wait_aligned()
+    start = time.monotonic()
+    initial = r.read('adc_serial_count')
+    time.sleep(.1)
+    final = r.read('adc_serial_count')
+    serial_hz = ((final-initial) & 0xffffffff)*32/(time.monotonic()-start)
     for value in [0, 0x3fff, 0x1555, 0x2aaa, 0x1235] + [1 << i for i in range(14)]:
         adc.pattern(value)
         time.sleep(.01)
         live = [[r.read('adc_live_low'), r.read('adc_live_high')] for _ in range(8)]
+        raw = [[r.read('adc_raw_low'), r.read('adc_raw_high'), r.read('adc_raw_frame')]
+               for _ in range(8)]
         words = adc.capture()
         results.append(dict(pattern=value, expected=value << 2,
-                            live=live, snapshot_first=words[0],
+                            serial_hz=serial_hz, raw=raw, live=live, snapshot_first=words[0],
                             snapshot_unique=[sorted(set(row[c] for row in words)) for c in range(4)]))
 finally:
     r.write('adc_control', 1)

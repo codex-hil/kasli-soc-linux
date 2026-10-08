@@ -6,8 +6,11 @@ module fmc_adc_rx(
     input [7:0] data_p, data_n,
     input sys_clk, reset, idelay_ready,
     input [44:0] delay_taps,
+    input [7:0] slip_toggle,
     output adc_clk, output adc_reset,
     output [63:0] samples,
+    output [71:0] raw_lanes,
+    output serial_div32,
     output [7:0] frame,
     output reg aligned = 0
 );
@@ -37,11 +40,23 @@ module fmc_adc_rx(
         if (clock_reset) reset_pipe <= 4'hf;
         else reset_pipe <= {reset_pipe[2:0], !idelay_ready};
     wire rx_reset = reset_pipe[3];
+    reg [4:0] serial_prescaler = 0;
+    always @(posedge io_clk or posedge rx_reset)
+        if (rx_reset) serial_prescaler <= 0;
+        else serial_prescaler <= serial_prescaler + 1'b1;
+    assign serial_div32 = serial_prescaler[4];
     assign adc_reset = rx_reset;
     wire [8:0] pins_p = {frame_p, data_p};
     wire [8:0] pins_n = {frame_n, data_n};
     wire [7:0] parallel [0:8];
     reg bitslip = 0;
+    reg [7:0] slip_meta = 0, slip_sync = 0, slip_previous = 0;
+    always @(posedge adc_clk) begin
+        slip_meta <= slip_toggle;
+        slip_sync <= slip_meta;
+        slip_previous <= slip_sync;
+    end
+    wire [7:0] manual_slip = rx_reset ? 8'b0 : slip_sync ^ slip_previous;
     reg [4:0] settle = 0;
     reg [3:0] good = 0;
     always @(posedge adc_clk or posedge rx_reset) begin
@@ -65,6 +80,7 @@ module fmc_adc_rx(
     end
     genvar lane, bitnum, channel;
     generate for (lane=0; lane<9; lane=lane+1) begin: lanes
+        assign raw_lanes[8*lane+:8] = parallel[lane];
         wire raw, delayed;
         IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("TRUE")) ibuf
             (.I(pins_p[lane]), .IB(pins_n[lane]), .O(raw));
@@ -80,7 +96,8 @@ module fmc_adc_rx(
             .NUM_CE(2), .SERDES_MODE("MASTER")) serdes
             (.DDLY(delayed), .CLK(io_clk), .CLKB(~io_clk),
              .CLKDIV(adc_clk),
-             .CE1(1'b1), .CE2(1'b1), .RST(rx_reset), .BITSLIP(bitslip),
+             .CE1(1'b1), .CE2(1'b1), .RST(rx_reset),
+             .BITSLIP(bitslip | (lane < 8 ? manual_slip[lane] : 1'b0)),
              .DYNCLKDIVSEL(1'b0), .DYNCLKSEL(1'b0),
              // Cascade inputs are unused for width-8 MASTER; leave them open.
              .SHIFTOUT1(), .SHIFTOUT2(), .O(),

@@ -1,0 +1,230 @@
+{
+    "csr_bases": {
+        "identifier_mem": 1073741824,
+        "probe": 1073743872,
+        "adc": 1073745920,
+        "adc_spi": 1073747968,
+        "adc_i2c": 1073750016,
+        "board_i2c": 1073752064
+    },
+    "csr_registers": {
+        "probe_scratch": {
+            "addr": 1073743872,
+            "size": 1,
+            "type": "rw"
+        },
+        "probe_counter": {
+            "addr": 1073743876,
+            "size": 1,
+            "type": "ro"
+        },
+        "probe_signature": {
+            "addr": 1073743880,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_control": {
+            "addr": 1073745920,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_arm": {
+            "addr": 1073745924,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_status": {
+            "addr": 1073745928,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_frame": {
+            "addr": 1073745932,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_count": {
+            "addr": 1073745936,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_captured": {
+            "addr": 1073745940,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_errors": {
+            "addr": 1073745944,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_read_address": {
+            "addr": 1073745948,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_data_low": {
+            "addr": 1073745952,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_data_high": {
+            "addr": 1073745956,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_ssr": {
+            "addr": 1073745960,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap0": {
+            "addr": 1073745964,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap1": {
+            "addr": 1073745968,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap2": {
+            "addr": 1073745972,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap3": {
+            "addr": 1073745976,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap4": {
+            "addr": 1073745980,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap5": {
+            "addr": 1073745984,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap6": {
+            "addr": 1073745988,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap7": {
+            "addr": 1073745992,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_tap8": {
+            "addr": 1073745996,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_live_low": {
+            "addr": 1073746000,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_live_high": {
+            "addr": 1073746004,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_raw_low": {
+            "addr": 1073746008,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_raw_high": {
+            "addr": 1073746012,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_raw_frame": {
+            "addr": 1073746016,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_serial_count": {
+            "addr": 1073746020,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_slip_toggle": {
+            "addr": 1073746024,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_spi_w": {
+            "addr": 1073747968,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_spi_r": {
+            "addr": 1073747972,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_i2c_w": {
+            "addr": 1073750016,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_i2c_r": {
+            "addr": 1073750020,
+            "size": 1,
+            "type": "ro"
+        },
+        "board_i2c_w": {
+            "addr": 1073752064,
+            "size": 1,
+            "type": "rw"
+        },
+        "board_i2c_r": {
+            "addr": 1073752068,
+            "size": 1,
+            "type": "ro"
+        }
+    },
+    "constants": {
+        "config_platform_name": "kasli_soc",
+        "config_clock_frequency": 100000000,
+        "config_cpu_has_interrupt": null,
+        "config_cpu_reset_addr": 4227858432,
+        "config_cpu_type_zynq7000": null,
+        "config_cpu_variant_standard": null,
+        "config_cpu_family": "arm",
+        "config_cpu_name": "zynq7000",
+        "config_cpu_human_name": "Zynq7000",
+        "config_cpu_nop": "nop",
+        "config_bios_no_build_time": null,
+        "config_identifier": "zc706 Linux openXC7 probe",
+        "adc_capture_samples": 1024,
+        "adc_sample_rate": 100000000,
+        "adc_abi": 1,
+        "config_csr_data_width": 32,
+        "config_csr_alignment": 32,
+        "config_csr_ordering_big": null,
+        "config_bus_standard": "wishbone",
+        "config_bus_data_width": 32,
+        "config_bus_address_width": 32,
+        "config_bus_bursting": 0,
+        "config_cpu_interrupts": 0
+    },
+    "memories": {
+        "rom": {
+            "base": 4227858432,
+            "size": 65536,
+            "type": "cached+linker"
+        },
+        "csr": {
+            "base": 1073741824,
+            "size": 65536,
+            "type": "io"
+        }
+    },
+    "cores": {}
+}

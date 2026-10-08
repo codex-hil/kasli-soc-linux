@@ -9,14 +9,20 @@ Ten target zachowuje działający PS7/UART/Ethernet z naszego ZC706.
 Most LiteX Wishbone→CSR ma włączony upstreamowy tryb registered,
 żeby rozdzielić długą ścieżkę AXI address/decode od większej liczby CSR.
 
-**Build bitstreamu: PASS, bez Vivado. VADJ: użytkownik zmierzył 2.5 V na C605. Karta jest w J5 LPC; bring-up trwa, akwizycja niepotwierdzona.**
+**Build i fizyczny test czterokanałowego snapshotu: PASS, bez Vivado.**
+VADJ 2.5 V zmierzone na C605; karta v6.1 w J5 LPC. Potwierdzone SPI,
+I²C SI570, 100 MS/s, odbiór 34 wzorców (139264 wartości kanałów) oraz
+snapshot 1024 próbek z wyłączonym wzorcem. Wejścia pozostają odłączone;
+nie jest to walidacja parametrów analogowych. ADC i PL DDR nadal niezależne.
 
-2026-10-08: fizycznie potwierdzono zegar próbek około 100 MHz i frame
-`0x0f` we wcześniejszym wariancie. ADC SPI zwraca jednak `0xff` zamiast
-oczekiwanego `0x20`; SI570 nie odpowiada. Nowy wariant dodaje I²C płyty
-oraz wspólny jawny BUFG dla GP0 ACLK i logiki CSR. Netlist i symulacja
-przechodzą. Sygnatura PL `0x4b534f43` jest odczytywana w U-Boot przy
-50/100 MHz i w Linux po załadowaniu PL przed kernelem.
+Rozwiązano dwa problemy: dostęp MMIO musi być wyrównanym słowem 32-bit,
+a łącze LVDS wymaga terminacji. Pinned nextpnr/openXC7 nie emituje
+konfiguracji IBUFDS `DIFF_TERM`; ustawiamy zgodną z datasheetem terminację
+wewnętrzną ADC (`A2=0xf0`: 1.75 mA, TERMON, prąd efektywny 3.5 mA).
+Dodatkowo każda linia danych ma własny trening IDELAY i BITSLIP.
+Nowy licznik potwierdza zegar deserializacji około 400 MHz, objęty także
+jawnym constraintem 2.5 ns. Sygnatura GP0 jest sprawdzana w U-Boot,
+przed startem Linux, a test Linux używa `/dev/uio0`.
 
 Przeprogramowanie PL przez JTAG podczas pracy Linux powodowało blokadę
 CPU na pierwszym odczycie GP0; przyczyna sekwencji resetu pozostaje otwarta.
@@ -30,7 +36,7 @@ Nie zmienia VADJ, GPIO zasilania ani zawartości EEPROM.
 Niezależny kontroler PS I²C w U-Boot potwierdził ACK multipleksera
 `0x74`, wejścia U16 `00 8c` (LPC obecna, HPC pusta), oraz ACK EEPROM
 LPC `0x50`. Pierwsze 128 bajtów EEPROM to `0xff`; nie ma informacji FRU
-o rewizji karty. PL I²C nadal nie uzyskuje ACK tego samego multipleksera.
+o rewizji karty. PL I²C po poprawce MMIO również uzyskuje ACK tego multipleksera.
 Dowody: `evidence/zc706/fmc-adc-bringup-20261008/`.
 
 **Aktualizacja: wcześniejsze NACK/`0xff` rozwiązane.** Driver używa teraz
@@ -40,8 +46,8 @@ disassembly naszego CPython 3.14.8), które zakłócały bitbang przez CSR.
 Po zmianie: multiplekser ACK, ADC register 1 = `0x20`, SI570 odczytany.
 PS→PL i PL→PS przekazywanie poziomów I²C potwierdzono niezależnie przez
 chwilowe przełączenie MIO50/51 na GPIO; rejestry przywrócono.
-Pełny test pozostaje FAIL na kalibracji/wzorcach danych, więc akwizycja
-nie jest jeszcze walidowana. PLL/frame i komunikacja SPI są potwierdzone.
+Wcześniejsze błędy wzorców rozwiązano terminacją ADC i treningiem linii;
+poniżej zapisano eksperymenty oraz dowody fizycznego PASS.
 
 Niezależny audyt RapidWright 2026.1.1-beta potwierdził wszystkie 350 mapowań
 pin → site → tile: 200 istniejących IOB i 150 dodanych w naszej nakładce.
@@ -61,13 +67,13 @@ Element | Status
 ---|---
 Yosys | PASS, 9 ISERDESE2 / 9 IDELAYE2 / 2 RAMB36E1
 nextpnr / routing | PASS
-Timing logiki sys/ADC/IDELAY | PASS przy 100/100/200 MHz
+Timing logiki sys/ADC/IDELAY | PASS przy 100/100/200 MHz; serial 400 MHz
 FASM / openXC7 bitstream | PASS
 Frame/BITSLIP i lane ordering | PASS, model protokolarny
 Snapshot / CDC / trigger / error injection | PASS, symulacja
 AXI / CSR / reset | Symulacja PASS; fizyczna sygnatura PASS po konfiguracji przed kernelem; reset/reconfiguration nadal niestabilne
 SPI | PASS na hardware po użyciu natywnych dostępów MMIO 32-bit
-VADJ / karta / oko LVDS / akwizycja | VADJ 2.5 V, LPC wykryta, clock/frame PASS; kalibracja/wzorce nie przechodzą
+VADJ / karta / oko LVDS / akwizycja | PASS: 2.5 V, LPC, kalibracja 8 linii, 34 wzorce, snapshot 1024 próbek; analog bez walidacji
 EEPROM calibration / DMA / druga karta | nie zaimplementowano
 
 Dowody: `evidence/zc706/fmc-adc-build-20261007.json`;
@@ -76,7 +82,7 @@ Testy RTL nie potwierdzają elektryki ani marginesu czasowego LVDS.
 PoC zapisuje krótkie czterokanałowe rekordy; nie jest jeszcze portem pełnego
 sterownika CERN, DMA ani aplikacji oscyloskopowej używanej na SPEC.
 
-Gotowa paczka: [GitHub prerelease](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-fmc-adc-j5-20261007), commit `ca4c1fc`.
+Archiwalna paczka sprzed bring-upu: [GitHub prerelease](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-fmc-adc-j5-20261007), commit `ca4c1fc`.
 
 ## Build
 
@@ -170,7 +176,7 @@ Dokładne adresy każdego rejestru są w generowanym `csr.json`.
 Blok | Baza | Zawartość
 ---|---|---
 probe | 0x40000800 | dotychczasowy scratch, counter, signature
-adc | 0x40001000 | control, arm, status, frame, count, captured, errors, read_address, data_low/high, ssr, tap0..8
+adc | 0x40001000 | control, arm, status, frame, count, captured, errors, read_address, data_low/high, ssr, tap0..8, live/raw, serial_count, slip_toggle
 adc_spi | 0x40001800 | upstream LiteX bitbang SPI
 adc_i2c | 0x40002000 | upstream LiteX bitbang I²C
 
@@ -203,8 +209,10 @@ Alternatywnie `--device /dev/mem`. Skrypt:
 
 1. Sprawdza sygnaturę PL, inicjalizuje ADC i weryfikuje SPI readback.
 2. Odczytuje SI570 (adres domyślny 0x55) i mierzy częstotliwość próbek.
-3. Skanuje wspólne opóźnienie 0..31 dwoma asymetrycznymi wzorcami,
-   wymaga okna co najmniej trzech tapów i wybiera jego środek.
+3. Skanuje opóźnienie ramki, potem opóźnienia 8 linii danych 0..31.
+   Trenuje BITSLIP każdej linii dwoma asymetrycznymi wzorcami; wymaga
+   okna co najmniej trzech tapów i wybiera jego środek. Starszy PL bez
+   CSR `slip_toggle` zachowuje wcześniejszy wspólny skan.
 4. Sprawdza 34 wzorce, w tym walking-one/zero: 139264 wartości kanałów.
 5. Zapisuje cztery kanały do `samples.bin`, `samples.csv` i `result.json`.
 6. Odłącza wejścia, resetuje odbiornik i wyłącza OE także po błędzie.
@@ -261,3 +269,54 @@ Błąd występuje przed pamięcią snapshot. Nie zaliczamy akwizycji ADC.
 Dowód: `evidence/zc706/fmc-adc-bringup-20261008/live-vs-bram.json`.
 Build Yosys/nextpnr/openXC7 przeszedł timing; boot z JTAG przed kernelem
 i Linux/SSH przeszły. Nie zapisano SD/QSPI.
+
+### Terminacja i trening osobnych linii — 2026-10-08
+
+Eksperyment A/B na identycznym PL: `A2=0x00` (3.5 mA bez terminacji)
+i `0x40` (4.5 mA bez terminacji) gubiły walking-one. `0xf0` włączyło
+terminację wewnętrzną ADC i poprawiło wszystkie badane wzorce.
+Następnie pełny test na tym PL przeszedł 139264 porównania oraz snapshot.
+Źródło konfiguracji: [datasheet LTC2174, rejestr A2, str. 27](https://www.analog.com/media/en/technical-documentation/data-sheets/21754314fa.pdf).
+Nie włączamy TERMON przy ustawieniu prądu 3.5/4/4.5 mA.
+
+Analiza przypiętego nextpnr `c68c13582e972292c86a5025140d52e713384cbc`
+potwierdza brak obsługi parametru `DIFF_TERM` w writerze FASM. Wszystkie
+11 IBUFDS mają ten parametr TRUE w netliście, lecz nie powoduje on
+konfiguracji terminacji. Przyczynę elektryczną wnioskujemy z kodu i testu
+A/B; nie wykonano pomiaru oscyloskopem. Terminacja ADC jest obecnie
+sprawdzonym obejściem; dodanie prawidłowej terminacji odbiornika do
+openXC7 pozostaje osobnym zadaniem.
+
+Nowy build z diagnostyką ujawnił różne przesunięcia słów na liniach.
+Skan z nieruchomą ramką i surowym odczytem wykazał potrzebę niezależnego
+IDELAY/BITSLIP. Po dodaniu CSR toggle-mask i treningu każdy z 8 torów
+ma stabilne okno 14–15 tapów, a pełny test przechodzi. Nie zapamiętujemy
+na sztywno tapów ani liczby BITSLIP: inicjalizacja trenuje je ponownie.
+`--tap` omija skan opóźnień, ale nadal trenuje BITSLIP i sprawdza wzorce.
+
+Dodatkowe CSR (ABI 1, dopisane bez przesunięcia istniejących adresów):
+
+CSR | Adres | Znaczenie
+---|---|---
+adc_live_low/high | 0x40001050 / 0x40001054 | steady word przed BRAM
+adc_raw_low/high | 0x40001058 / 0x4000105c | 8 surowych bajtów B,A dla kanałów 1..4
+adc_raw_frame | 0x40001060 | surowy bajt FR
+adc_serial_count | 0x40001064 | licznik SYS zboczy narastających IOCLK/32; różnica ×32 daje IOCLK
+adc_slip_toggle | 0x40001068 | zmiana każdego bitu generuje BITSLIP na odpowiedniej linii danych
+
+Odczyty live/raw są wyłącznie do stałych wzorców; nie gwarantują spójności
+zmiennych danych. Maskę slip zmieniaj dopiero po wyrównaniu ramki,
+z przerwą co najmniej 1 ms między poleceniami w naszym sterowniku.
+Dowody i hashe: `evidence/zc706/fmc-adc-bringup-20261008/`.
+
+Powtórka po drugim pełnym resecie PS i konfiguracji JTAG: PASS.
+Ponownie 139264 wartości kanałów, 1024 próbki, te same centra tapów;
+serial clock 399999250 Hz, ADC A1=0x20 / A2=0xf0.
+Nowa paczka: [fizycznie sprawdzony target](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-fmc-adc-validated-20261008).
+Paczka dołącza wynik hardware tylko gdy hashe bitstreamu i sterownika
+pasują do ostatniego fizycznego PASS. Pole `hardware_validated=false`
+w build-manifest jest stanem przy budowaniu; dowód fizyczny znajduje się
+w `evidence/hardware/validation.json`.
+Opcjonalny skrypt SD zawiera teraz sprawdzoną sekwencję FCLK0/reset/level
+shifters; sam wariant bootowania ADC z SD nie był wykonywany na płycie.
+Walidowana ścieżka to `tools/boot_adc_jtag.py` i Linux z istniejącej SD.

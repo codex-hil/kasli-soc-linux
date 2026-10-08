@@ -77,10 +77,24 @@ class ADC(LiteXModule):
         # Independent words are not a coherent live acquisition interface.
         self.live_low = CSRStatus(32, name="live_low")
         self.live_high = CSRStatus(32, name="live_high")
+        self.raw_low = CSRStatus(32, name="raw_low")
+        self.raw_high = CSRStatus(32, name="raw_high")
+        self.raw_frame = CSRStatus(8, name="raw_frame")
+        self.serial_count = CSRStatus(32, name="serial_count")
+        self.slip_toggle = CSRStorage(8, name="slip_toggle")
         self.cd_adc = ClockDomain("adc")
         rx_reset, adc_reset = Signal(), Signal()
         aligned, frame, samples = Signal(), Signal(8), Signal(64)
         live = Signal(64)
+        raw, raw_sys = Signal(72), Signal(72)
+        serial_div32, serial_sys, serial_previous = Signal(), Signal(), Signal()
+        self.specials += [MultiReg(raw, raw_sys), MultiReg(serial_div32, serial_sys)]
+        self.comb += [self.raw_low.status.eq(raw_sys[:32]),
+                      self.raw_high.status.eq(raw_sys[32:64]),
+                      self.raw_frame.status.eq(raw_sys[64:])]
+        self.sync += [serial_previous.eq(serial_sys),
+                      If(serial_sys & ~serial_previous,
+                         self.serial_count.status.eq(self.serial_count.status + 1))]
         self.specials += MultiReg(samples, live)
         self.comb += [self.live_low.status.eq(live[:32]),
                       self.live_high.status.eq(live[32:])]
@@ -129,7 +143,9 @@ class ADC(LiteXModule):
             i_frame_p=fr.p, i_frame_n=fr.n, i_data_p=data.p, i_data_n=data.n,
             i_sys_clk=ClockSignal(), i_reset=rx_reset, i_idelay_ready=ready,
             i_delay_taps=Cat(*taps), o_adc_clk=ClockSignal("adc"),
-            o_adc_reset=adc_reset, o_samples=samples, o_frame=frame, o_aligned=aligned)
+            i_slip_toggle=self.slip_toggle.storage,
+            o_adc_reset=adc_reset, o_samples=samples, o_frame=frame, o_aligned=aligned,
+            o_raw_lanes=raw, o_serial_div32=serial_div32)
         read_data = Signal(64)
         self.specials += Instance("fmc_adc_capture", i_sys_clk=ClockSignal(),
             i_adc_clk=ClockSignal("adc"), i_reset=adc_reset,
@@ -141,6 +157,8 @@ class ADC(LiteXModule):
                       self.data_high.status.eq(read_data[32:])]
         platform.add_period_constraint(dco.p, 2.5)
         platform.add_period_constraint(self.cd_adc.clk, 10.0)
+        platform.add_platform_command('create_clock -name adc_serial -period 2.5 '
+                                      '[get_nets fmc_adc_rx.io_clk]')
         platform.add_source(str(ROOT / "gateware/fmc_adc_rx.v"))
         platform.add_source(str(ROOT / "gateware/fmc_adc_capture.v"))
 
