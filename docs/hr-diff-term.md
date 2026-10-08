@@ -122,3 +122,6 @@ swoim CONTRIBUTING nie przyjmuje bezpośrednich zmian wygenerowanej bazy.
 Gotowe patche są w `patches/prjxray-hr-diff-term-fuzzer.patch` oraz
 `patches/prjxray-hr-diff-term-db.patch`. Zgłoszenie wymaga podpisu DCO z
 prawdziwym imieniem i nazwiskiem; danych nie zastępujemy fikcyjną tożsamością.
+
+Wysłano [draft PR #2575](https://github.com/f4pga/prjxray/pull/2575).
+Kod i wyniki są opublikowane; wymagany podpis DCO pozostaje do uzupełnienia.
