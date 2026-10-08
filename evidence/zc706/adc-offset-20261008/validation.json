@@ -1,0 +1,254 @@
+{
+  "board": "ZC706 rev.1.2",
+  "fmc": "CERN FMC ADC100M14b4cha v6.1",
+  "slot": "J5 LPC",
+  "vadj_v": 2.5,
+  "host": "192.168.2.25",
+  "fpga_termination": true,
+  "adc_source_termination": false,
+  "expected_bitstream_sha256": "850752ddb769991c646046fbc67acc5e8edd823a15b9c18c92c5de9ece805bfe",
+  "script_sha256": "9e9e7b107239a210765707f4c771907f4d94dd8422e39e8d289a694e748555f0",
+  "driver_sha256": "5f14ca10e0aa863ded62b774ec2932a0d1b65f061de3dbac957a7e02dc98ac7c",
+  "cern_software_revision": "949cbe3f687f0828a16dea18d83b331eceb5f8f4",
+  "total_sample_values": 933888,
+  "ranges": {
+    "5V": {
+      "result": "PASS",
+      "sample_values_checked": 311296,
+      "channels": [
+        {
+          "slope_adc_codes_per_dac_code": -0.27621707916259763,
+          "intercept": 9062.16501736111,
+          "r_squared": 0.9999999591126556,
+          "span_adc_codes": 2263.0224609375,
+          "maximum_fit_error_codes": 0.2704861111105856,
+          "channel": 1,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.5810546875,
+          "other_channel_spans_codes": {
+            "2": 0.7880859375,
+            "3": 0.5009765625,
+            "4": 0.7080078125
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -0.2762763023376465,
+          "intercept": 9053.413368055555,
+          "r_squared": 0.9999998752561686,
+          "span_adc_codes": 2263.1396484375,
+          "maximum_fit_error_codes": 0.5430772569452529,
+          "channel": 2,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.521484375,
+          "other_channel_spans_codes": {
+            "1": 0.3974609375,
+            "3": 0.509765625,
+            "4": 0.505859375
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -0.27651087443033856,
+          "intercept": 9062.233940972223,
+          "r_squared": 0.9999999760065889,
+          "span_adc_codes": 2265.08984375,
+          "maximum_fit_error_codes": 0.22536892361131322,
+          "channel": 3,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.150390625,
+          "other_channel_spans_codes": {
+            "1": 0.3330078125,
+            "2": 0.318359375,
+            "4": 0.484375
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -0.2760156790415446,
+          "intercept": 9066.8974609375,
+          "r_squared": 0.9999998007687266,
+          "span_adc_codes": 2261.0478515625,
+          "maximum_fit_error_codes": 0.709716796875,
+          "channel": 4,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.3798828125,
+          "other_channel_spans_codes": {
+            "1": 0.3623046875,
+            "2": 0.5615234375,
+            "3": 0.451171875
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        }
+      ],
+      "raw_sha256": "aa1a43a83025119d29e4a4be01734c1cd0cb589e73ae49b389a2632333abd45a"
+    },
+    "0.5V": {
+      "result": "PASS",
+      "sample_values_checked": 311296,
+      "channels": [
+        {
+          "slope_adc_codes_per_dac_code": -2.6433188120524087,
+          "intercept": 86621.85232204861,
+          "r_squared": 0.9999985351436479,
+          "span_adc_codes": 2708.783203125,
+          "maximum_fit_error_codes": 1.8569878472189885,
+          "channel": 1,
+          "monotonic": true,
+          "hysteresis_max_codes": 1.7041015625,
+          "other_channel_spans_codes": {
+            "2": 0.9580078125,
+            "3": 1.3330078125,
+            "4": 1.8662109375
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -2.6477553049723306,
+          "intercept": 86760.26801215277,
+          "r_squared": 0.999999864584091,
+          "span_adc_codes": 2710.7529296875,
+          "maximum_fit_error_codes": 0.5636121961870231,
+          "channel": 2,
+          "monotonic": true,
+          "hysteresis_max_codes": 1.11328125,
+          "other_channel_spans_codes": {
+            "1": 1.0439453125,
+            "3": 1.037109375,
+            "4": 1.25
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -2.6486871083577475,
+          "intercept": 86795.08856336806,
+          "r_squared": 0.9999998651782389,
+          "span_adc_codes": 2712.2841796875,
+          "maximum_fit_error_codes": 0.6197808159777196,
+          "channel": 3,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.8720703125,
+          "other_channel_spans_codes": {
+            "1": 1.0634765625,
+            "2": 1.2568359375,
+            "4": 1.1298828125
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -2.6466580708821614,
+          "intercept": 86745.44752604167,
+          "r_squared": 0.999999670069017,
+          "span_adc_codes": 2711.078125,
+          "maximum_fit_error_codes": 0.8442708333313931,
+          "channel": 4,
+          "monotonic": true,
+          "hysteresis_max_codes": 0.9990234375,
+          "other_channel_spans_codes": {
+            "1": 1.07421875,
+            "2": 1.291015625,
+            "3": 1.1865234375
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        }
+      ],
+      "raw_sha256": "f06d1f7eb4a558add45d99f66be04455fcb410907c25073f1475549472d04633"
+    },
+    "0.05V": {
+      "result": "PASS",
+      "sample_values_checked": 311296,
+      "channels": [
+        {
+          "slope_adc_codes_per_dac_code": -25.55717264811198,
+          "intercept": 837394.8759331597,
+          "r_squared": 0.9999689961816428,
+          "span_adc_codes": 3280.509765625,
+          "maximum_fit_error_codes": 11.160915798624046,
+          "channel": 1,
+          "monotonic": true,
+          "hysteresis_max_codes": 6.94921875,
+          "other_channel_spans_codes": {
+            "2": 5.69921875,
+            "3": 7.8203125,
+            "4": 8.3515625
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -25.770735677083334,
+          "intercept": 844427.774609375,
+          "r_squared": 0.9999954495498006,
+          "span_adc_codes": 3301.5908203125,
+          "maximum_fit_error_codes": 4.547916666720994,
+          "channel": 2,
+          "monotonic": true,
+          "hysteresis_max_codes": 6.876953125,
+          "other_channel_spans_codes": {
+            "1": 6.6357421875,
+            "3": 7.2998046875,
+            "4": 7.7294921875
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -25.722281901041665,
+          "intercept": 842872.2390842013,
+          "r_squared": 0.999996899799964,
+          "span_adc_codes": 3291.3935546875,
+          "maximum_fit_error_codes": 4.298090277821757,
+          "channel": 3,
+          "monotonic": true,
+          "hysteresis_max_codes": 7.45703125,
+          "other_channel_spans_codes": {
+            "1": 8.1630859375,
+            "2": 6.369140625,
+            "4": 9.728515625
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        },
+        {
+          "slope_adc_codes_per_dac_code": -25.710894775390624,
+          "intercept": 842464.24453125,
+          "r_squared": 0.9999914145865777,
+          "span_adc_codes": 3293.7685546875,
+          "maximum_fit_error_codes": 6.148242187453434,
+          "channel": 4,
+          "monotonic": true,
+          "hysteresis_max_codes": 8.0166015625,
+          "other_channel_spans_codes": {
+            "1": 7.4521484375,
+            "2": 5.75390625,
+            "3": 6.244140625
+          },
+          "clipped_samples_seen": false,
+          "passed": true
+        }
+      ],
+      "raw_sha256": "7e8ec17653c4ce8d2ba0bba12c68bf461ca1c002391becfaa87c653505774390"
+    }
+  },
+  "analog_calibrated": false,
+  "external_signal_tested": false,
+  "final_state": {
+    "adc_control": 1,
+    "adc_ssr": 0,
+    "offset_dac_codes_commanded": [
+      32768,
+      32768,
+      32768,
+      32768
+    ]
+  },
+  "raw_archive_sha256": "62423486f7d731021e33ad01886cb292aba3b8ac99b94c2cdb583448d51def65"
+}

@@ -87,6 +87,17 @@ class ADC:
         if actual != value:
             raise RuntimeError(f'ADC SPI register {address}: {actual:#x} != {value:#x}')
 
+    def set_offset_code(self, channel, code):
+        """Write one offset DAC, matching CERN's 16-bit fa_dac_offset_set.
+
+        Channels are zero-based. Midscale 0x8000 is nominal zero offset;
+        converting to voltage requires the board's analog calibration.
+        This DAC interface has no readback.
+        """
+        if not 0 <= channel < 4 or not 0 <= code <= 0xffff:
+            raise ValueError('Offset DAC requires channel 0..3 and code 0..65535')
+        self.spi(code, dac=channel)
+
     def initialize(self):
         self.r.write('adc_control', 3)  # receiver reset, oscillator enabled
         self.spi(0x0080)  # Datasheet A0 RESET; self-clearing, write-only.
@@ -102,7 +113,7 @@ class ADC:
         self.reg(4, 0)
         self.r.write('adc_control', 11)  # release DAC clear, keep RX reset
         for channel in range(4):
-            self.spi(0x8000, dac=channel)  # nominal zero offset; EEPROM calibration later
+            self.set_offset_code(channel, 0x8000)  # EEPROM calibration later
         self.r.write('adc_control', 10)
 
     def set_taps(self, taps):

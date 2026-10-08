@@ -20,7 +20,9 @@ Karta jest w J5 LPC, VADJ 2.5 V zmierzone. Bring-up trwa: zegar/frame
 potwierdzone; SPI ADC i I²C SI570/multipleksera przeszły testy fizyczne.
 Po dodaniu terminacji FPGA HR i treningu osobnych linii odbiór 34 wzorców
 (139264 wartości kanałów) oraz snapshot 1024 próbek przeszły na hardware.
-Parametry analogowe i połączenie ADC z DDR PL pozostają niewalidowane.
+Wewnętrzny offset DAC → ADC przeszedł test czterech kanałów na wszystkich
+trzech zakresach (933888 wartości). [Wyniki i wykresy](docs/zc706-adc-offset.md).
+Pełna charakterystyka analogowa i połączenie ADC z DDR PL pozostają niewalidowane.
 Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
 Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-term.md).
 

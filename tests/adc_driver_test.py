@@ -51,8 +51,10 @@ with patch.object(module.time, 'sleep', lambda seconds: None):
     assert adc.spi(0x83c7) == 0xa5
     for channel in range(4):
         assert adc.spi(0x8000, dac=channel) == 0xa5
+    for channel in range(4):
+        adc.set_offset_code(channel, 0x1234 + channel*0x1111)
     # Final DAC CS release is a control write; observe it with one idle cycle.
     slave.write('adc_spi_w', 4)
-assert slave.words == [('adc', 0x83c7)] + [(i, 0x8000) for i in range(4)]
+assert slave.words == [('adc', 0x83c7)] + [(i, 0x8000) for i in range(4)] + [(i, 0x1234+i*0x1111) for i in range(4)]
 assert slave.control == 10 and slave.spi == 4
 print('PASS: 16-edge MSB-first SPI, slave readback, ADC/DAC chip-select exclusivity (model)')

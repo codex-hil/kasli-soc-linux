@@ -13,7 +13,10 @@ Most LiteX Wishbone→CSR ma włączony upstreamowy tryb registered,
 VADJ 2.5 V zmierzone na C605; karta v6.1 w J5 LPC. Potwierdzone SPI,
 I²C SI570, 100 MS/s, odbiór 34 wzorców (139264 wartości kanałów) oraz
 snapshot 1024 próbek z wyłączonym wzorcem. Wejścia pozostają odłączone;
-nie jest to walidacja parametrów analogowych. ADC i PL DDR nadal niezależne.
+nie jest to pełna walidacja parametrów analogowych. ADC i PL DDR nadal niezależne.
+
+**Wewnętrzny offset DAC → ADC: PASS.** Cztery kanały, wszystkie trzy zakresy,
+933888 wartości; cyfrowy wzorzec wyłączony. [Opis i wykresy](zc706-adc-offset.md).
 
 Rozwiązano dwa problemy: dostęp MMIO musi być wyrównanym słowem 32-bit,
 a łącze LVDS wymaga terminacji. Dodaliśmy izolowaną łatkę nextpnr i overlay
