@@ -73,9 +73,17 @@ class ADC(LiteXModule):
             reg = CSRStorage(5, name=f"tap{lane}")
             setattr(self, f"tap{lane}", reg)
             taps.append(reg.storage)
+        # Diagnostic view of a steady ADC test pattern, before snapshot BRAM.
+        # Independent words are not a coherent live acquisition interface.
+        self.live_low = CSRStatus(32, name="live_low")
+        self.live_high = CSRStatus(32, name="live_high")
         self.cd_adc = ClockDomain("adc")
         rx_reset, adc_reset = Signal(), Signal()
         aligned, frame, samples = Signal(), Signal(8), Signal(64)
+        live = Signal(64)
+        self.specials += MultiReg(samples, live)
+        self.comb += [self.live_low.status.eq(live[:32]),
+                      self.live_high.status.eq(live[32:])]
         done, captured, errors, gray = Signal(), Signal(11), Signal(11), Signal(32)
         request, busy, complete = Signal(), Signal(), Signal()
         done_sys, aligned_sys, gray_sys = Signal(), Signal(), Signal(32)

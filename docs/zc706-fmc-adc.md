@@ -247,3 +247,17 @@ opóźnień analogowych, MMCM jittera ani IDELAY.
 [CERN software](https://gitlab.com/ohwr/project/fmc-adc-100m14b4cha-sw),
 [LTC2174 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/21754314fa.pdf),
 [ZC706 UG954](https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content).
+
+### Bezpośredni odczyt odbiornika — 2026-10-08
+
+Karta fizyczna: v6.1 (informacja użytkownika). Dodano `adc_live_low` i
+`adc_live_high`: dwie synchronizowane części słowa odbiornika przed BRAM.
+Służą wyłącznie diagnostyce stałych wzorców; nie zapewniają spójnej akwizycji
+zmiennych danych. `tools/diagnose_adc_live.py` porównuje 19 wzorców przed
+pamięcią i w snapshotach 1024 próbek. Fizyczny test nowego bitstreamu
+wykazał te same błędy w obu miejscach: walking-one daje zero; wzorce
+0x1555/0x2aaa dają 0x5555/0xaaaa zamiast 0x5554/0xaaa8.
+Błąd występuje przed pamięcią snapshot. Nie zaliczamy akwizycji ADC.
+Dowód: `evidence/zc706/fmc-adc-bringup-20261008/live-vs-bram.json`.
+Build Yosys/nextpnr/openXC7 przeszedł timing; boot z JTAG przed kernelem
+i Linux/SSH przeszły. Nie zapisano SD/QSPI.
