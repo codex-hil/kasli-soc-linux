@@ -1,0 +1,2 @@
+PASS: two asynchronous cards, overlapping captures, HPC abort/re-arm isolation, 2048 exact samples, frozen buffers
+/work/tests/adc_dual_capture_tb.v:53: $finish called at 42805000 (1ps)

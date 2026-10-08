@@ -33,11 +33,17 @@ def main():
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
+    p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     args = p.parse_args()
+    if args.cards != 1 and args.design != "fmc-adc":
+        p.error("--cards only applies to the FMC ADC target")
     if args.design in ("fmc-adc", "pl-ddr") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py"}[args.design]
-    subprocess.run([sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)], cwd=ROOT, check=True)
+    target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
+    if args.design == "fmc-adc":
+        target_command += ["--cards", str(args.cards)]
+    subprocess.run(target_command, cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
     # A failed rebuild must never leave an earlier bitstream approved.
     (work / "manifest.json").unlink(missing_ok=True)
@@ -99,11 +105,12 @@ def main():
                             for c in cells.values())
             emitted = sum(line.endswith('.DIFF.DIFF_TERM')
                           for line in (work/'top.fasm').read_text().splitlines())
-            if requested != 11 or emitted != requested:
+            if requested != 11 * args.cards or emitted != requested:
                 raise RuntimeError(f'FPGA termination was not emitted: {emitted}/{requested}')
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
+        "adc_cards": args.cards if args.design == "fmc-adc" else None,
         "hardware_validated": False,
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),

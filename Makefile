@@ -39,3 +39,11 @@ ddr-axi-test:
 
 ddr-package: ddr-pl ddr-software ddr-test ddr-axi-test
 	$(ENV) python3 tools/package_ddr.py
+
+.PHONY: adc-dual-pl adc-dual-test adc-dual-package
+adc-dual-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design fmc-adc --cards 2 --output-dir build/zc706-adc-dual/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+adc-dual-test:
+	$(ENV) python3 tools/test_adc.py --soc --output-dir build/zc706-adc-dual
+adc-dual-package: adc-dual-pl adc-dual-test
+	$(ENV) python3 tools/package_adc.py --dual

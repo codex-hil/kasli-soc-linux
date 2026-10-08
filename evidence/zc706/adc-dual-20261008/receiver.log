@@ -1,0 +1,2 @@
+PASS: frame BITSLIP acquisition/recovery, 4-channel lane ordering, walking bits (protocol model)
+/work/tests/adc_rx_tb.v:78: $finish called at 20078100 (1ps)

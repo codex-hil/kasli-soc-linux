@@ -13,6 +13,7 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--host', required=True, type=ipaddress.ip_address)
 p.add_argument('--host-key-alias', default='192.168.2.15')
 p.add_argument('--program', action='store_true')
+p.add_argument('--card', type=int, choices=[1, 2], default=1)
 p.add_argument('--jtag-serial', default='210251842914')
 p.add_argument('--bit', type=Path, default=ROOT/'build/zc706-adc/gateware/gateware/top.bit')
 p.add_argument('--csr-json', type=Path, default=ROOT/'build/zc706-adc/gateware/csr.json')
@@ -28,14 +29,16 @@ manifest = json.loads((bit.parent/'manifest.json').read_text())
 bit_hash = hashlib.sha256(bit.read_bytes()).hexdigest()
 if manifest['design'] != 'fmc-adc' or manifest['bitstream_sha256'] != bit_hash:
     raise RuntimeError('Expected a matching successful ADC build manifest')
+if args.card > manifest.get('adc_cards', 1):
+    raise RuntimeError('Selected card is not present in this build')
 ssh = ['ssh', '-i', str(ROOT/'build/ssh/id_ed25519'),
     '-o', 'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),
     '-o', 'HostKeyAlias='+args.host_key_alias, '-o', 'StrictHostKeyChecking=yes',
     '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=5',
     '-o', 'ServerAliveCountMax=3', 'root@'+str(args.host)]
-remote = '/tmp/zc706-adc-bringup'
+remote = '/tmp/zc706-adc-bringup-card'+str(args.card)
 result = {'started_utc': datetime.now(timezone.utc).isoformat(),
-    'host': str(args.host), 'slot': 'J5 LPC', 'jtag_serial': args.jtag_serial,
+    'host': str(args.host), 'slot': 'J5 LPC' if args.card == 1 else 'J4 HPC', 'card': args.card, 'jtag_serial': args.jtag_serial,
     'program_requested': args.program, 'hardware_validated': False,
     'bitstream_sha256': bit_hash,
     'diagnostic_only': manifest.get('diagnostic_only', False),
@@ -57,7 +60,7 @@ try:
     ran = True
     with (out/'adc-test.log').open('w') as log:
         subprocess.run(ssh+['cd '+remote+' && python3 -u fmc_adc.py --csr-json csr.json '
-            '--device /dev/uio0 --output capture'], stdout=log,
+            '--device /dev/uio0 --card '+str(args.card)+' --output capture'], stdout=log,
             stderr=subprocess.STDOUT, check=True, timeout=240)
     for name in ('result.json', 'samples.bin', 'samples.csv'):
         with (out/name).open('wb') as output:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: BSD-2-Clause
-"""ZC706 J5/CERN FMC ADC: 4-channel source-synchronous receiver and BRAM snapshot."""
+"""ZC706 CERN FMC ADC: independent J5 LPC / optional J4 HPC snapshots."""
 import argparse
 import json
 from pathlib import Path
@@ -18,32 +18,34 @@ from kasli_soc import BaseSoC
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def add_fmc_pads(platform):
+def add_fmc_pads(platform, index=0, slot="LPC"):
     # Pinned CERN mezzanine mapping / official AMD package audit in evidence/zc706.
     audit = json.loads((ROOT / "evidence/zc706/fmc-adc-pin-audit-20261007.json").read_text())
-    pins = {r["signal"].replace("%", ""): r["LPC"] for r in audit["pins"]}
+    if slot not in ("LPC", "HPC") or any(r[slot + "_package"]["type"] != "HR" for r in audit["pins"]):
+        raise ValueError("ADC requires the audited 2.5 V HR FMC pins")
+    pins = {r["signal"].replace("%", ""): r[slot] for r in audit["pins"]}
     def pin(name):
         return pins["adc_" + name]
     def pair(name):
         return [Subsignal("p", Pins(pin(name + "_p_i"))),
                 Subsignal("n", Pins(pin(name + "_n_i")))]
     platform.add_extension([
-        ("adc_dco", 0, *pair("dco"), IOStandard("LVDS_25")),
-        ("adc_frame", 0, *pair("fr"), IOStandard("LVDS_25")),
-        ("adc_trigger", 0, *pair("ext_trigger"), IOStandard("LVDS_25")),
-        ("adc_data", 0,
+        ("adc_dco", index, *pair("dco"), IOStandard("LVDS_25")),
+        ("adc_frame", index, *pair("fr"), IOStandard("LVDS_25")),
+        ("adc_trigger", index, *pair("ext_trigger"), IOStandard("LVDS_25")),
+        ("adc_data", index,
             Subsignal("p", Pins(" ".join(pin(f"out{lane}_p_i[{ch}]")
                 for ch in range(4) for lane in ["b", "a"]))),
             Subsignal("n", Pins(" ".join(pin(f"out{lane}_n_i[{ch}]")
                 for ch in range(4) for lane in ["b", "a"]))), IOStandard("LVDS_25")),
-        ("adc_spi", 0,
+        ("adc_spi", index,
             Subsignal("clk", Pins(pin("spi_sck_o"))),
             Subsignal("mosi", Pins(pin("spi_dout_o"))),
             Subsignal("miso", Pins(pin("spi_din_i"))),
             Subsignal("cs_n", Pins(pin("spi_cs_adc_n_o"))), IOStandard("LVCMOS25")),
-        ("adc_i2c", 0, Subsignal("scl", Pins(pin("si570_scl_b"))),
+        ("adc_i2c", index, Subsignal("scl", Pins(pin("si570_scl_b"))),
             Subsignal("sda", Pins(pin("si570_sda_b"))), IOStandard("LVCMOS25")),
-        ("adc_control", 0,
+        ("adc_control", index,
             Subsignal("osc_oe", Pins(pin("gpio_si570_oe_o"))),
             Subsignal("dac_clr_n", Pins(pin("gpio_dac_clr_n_o"))),
             Subsignal("dac_cs_n", Pins(" ".join(pin(f"spi_cs_dac{ch}_n_o") for ch in range(1, 5)))),
@@ -55,7 +57,8 @@ def add_fmc_pads(platform):
 
 
 class ADC(LiteXModule):
-    def __init__(self, platform, ready):
+    def __init__(self, platform, ready, index=0):
+        domain = "adc" if index == 0 else "adc2"
         # reset, oscillator OE, external trigger, DAC clear release, DAC selects.
         self.control = CSRStorage(8, reset=1, name="control")
         self.arm = CSR(name="arm")
@@ -82,7 +85,8 @@ class ADC(LiteXModule):
         self.raw_frame = CSRStatus(8, name="raw_frame")
         self.serial_count = CSRStatus(32, name="serial_count")
         self.slip_toggle = CSRStorage(8, name="slip_toggle")
-        self.cd_adc = ClockDomain("adc")
+        self.card_id = CSRStatus(32, reset=0xadc00001 + index, name="card_id")
+        self.cd_adc = ClockDomain(domain)
         rx_reset, adc_reset = Signal(), Signal()
         aligned, frame, samples = Signal(), Signal(8), Signal(64)
         live = Signal(64)
@@ -125,30 +129,30 @@ class ADC(LiteXModule):
                 ).Else(settling.eq(settling + 1))
             ).Else(settling.eq(0))
         )
-        control = platform.request("adc_control")
-        trigger_pads = platform.request("adc_trigger")
+        control = platform.request("adc_control", index)
+        trigger_pads = platform.request("adc_trigger", index)
         trigger, trigger_adc = Signal(), Signal()
         self.specials += [Instance("IBUFDS", p_IOSTANDARD="LVDS_25", p_DIFF_TERM="TRUE",
                                   i_I=trigger_pads.p, i_IB=trigger_pads.n, o_O=trigger),
-                          MultiReg(trigger, trigger_adc, "adc")]
+                          MultiReg(trigger, trigger_adc, domain)]
         self.comb += [rx_reset.eq(ResetSignal() | self.control.storage[0] | ~ready),
-            ResetSignal("adc").eq(adc_reset),
+            ResetSignal(domain).eq(adc_reset),
             control.osc_oe.eq(self.control.storage[1]), control.dac_clr_n.eq(self.control.storage[3]),
             control.dac_cs_n.eq(~self.control.storage[4:8]), control.ssr.eq(self.ssr.storage),
             control.led.eq(Cat(busy, complete)),
             self.status.status.eq(Cat(ready, aligned_sys, busy, complete, self.errors.status != 0)),
             self.frame.status.eq(raw_frame), self.count.status.eq(count_binary)]
-        dco, fr, data = [platform.request(name) for name in ["adc_dco", "adc_frame", "adc_data"]]
-        self.specials += Instance("fmc_adc_rx", i_dco_p=dco.p, i_dco_n=dco.n,
+        dco, fr, data = [platform.request(name, index) for name in ["adc_dco", "adc_frame", "adc_data"]]
+        self.specials += Instance("fmc_adc_rx", name=domain + "_rx", i_dco_p=dco.p, i_dco_n=dco.n,
             i_frame_p=fr.p, i_frame_n=fr.n, i_data_p=data.p, i_data_n=data.n,
             i_sys_clk=ClockSignal(), i_reset=rx_reset, i_idelay_ready=ready,
-            i_delay_taps=Cat(*taps), o_adc_clk=ClockSignal("adc"),
+            i_delay_taps=Cat(*taps), o_adc_clk=ClockSignal(domain),
             i_slip_toggle=self.slip_toggle.storage,
             o_adc_reset=adc_reset, o_samples=samples, o_frame=frame, o_aligned=aligned,
             o_raw_lanes=raw, o_serial_div32=serial_div32)
         read_data = Signal(64)
         self.specials += Instance("fmc_adc_capture", i_sys_clk=ClockSignal(),
-            i_adc_clk=ClockSignal("adc"), i_reset=adc_reset,
+            i_adc_clk=ClockSignal(domain), i_reset=adc_reset,
             i_arm_toggle=request, i_ext_mode=self.control.storage[2], i_trigger=trigger_adc,
             i_aligned=aligned, i_frame=frame, i_samples=samples,
             i_read_address=self.read_address.storage, o_read_data=read_data,
@@ -157,8 +161,9 @@ class ADC(LiteXModule):
                       self.data_high.status.eq(read_data[32:])]
         platform.add_period_constraint(dco.p, 2.5)
         platform.add_period_constraint(self.cd_adc.clk, 10.0)
-        platform.add_platform_command('create_clock -name adc_serial -period 2.5 '
-                                      '[get_nets fmc_adc_rx.io_clk]')
+        # Per-instance clocks are inferred from the MMCM by nextpnr.
+        platform.add_platform_command(f'create_clock -name {domain}_serial -period 2.5 '
+                                      f'[get_nets {domain}_rx.io_clk]')
         platform.add_source(str(ROOT / "gateware/fmc_adc_rx.v"))
         platform.add_source(str(ROOT / "gateware/fmc_adc_capture.v"))
 
@@ -178,7 +183,9 @@ class ADCSoC(BaseSoC):
         # puts AXI burst-address arithmetic and bank decode on one long path.
         return super().add_csr_bridge(name, origin, with_register=True)
 
-    def __init__(self):
+    def __init__(self, cards=1):
+        if cards not in (1, 2):
+            raise ValueError("Expected one or two FMC cards")
         super().__init__("zc706", crg=ADCCRG())
         # LiteX defaults GP0 ACLK to the raw PS FCLK, independently of CRG.
         self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
@@ -189,6 +196,11 @@ class ADCSoC(BaseSoC):
         self.csr.add("adc_i2c", 4)
         self.csr.add("board_i2c", 5)
         add_fmc_pads(self.platform)
+        if cards == 2:
+            self.csr.add("adc2", 6)
+            self.csr.add("adc2_spi", 7)
+            self.csr.add("adc2_i2c", 8)
+            add_fmc_pads(self.platform, index=1, slot="HPC")
         # UG954: board mux/expander bus for FMC presence/power diagnostics.
         self.platform.add_extension([r for r in _io if r[0] == "i2c"])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
@@ -207,6 +219,11 @@ class ADCSoC(BaseSoC):
         self.adc = ADC(self.platform, ready)
         self.adc_spi = SPIMaster(self.platform.request("adc_spi"))
         self.adc_i2c = I2CMaster(self.platform.request("adc_i2c"))
+        if cards == 2:
+            self.adc2 = ADC(self.platform, ready, index=1)
+            self.adc2_spi = SPIMaster(self.platform.request("adc_spi", 1))
+            self.adc2_i2c = I2CMaster(self.platform.request("adc_i2c", 1))
+        self.add_constant("ADC_CARDS", cards)
         self.add_constant("ADC_CAPTURE_SAMPLES", 1024)
         self.add_constant("ADC_SAMPLE_RATE", 100000000)
         self.add_constant("ADC_ABI", 1)
@@ -218,8 +235,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="build/zc706-adc/gateware")
     parser.add_argument("--board", choices=["zc706"], default="zc706")
+    parser.add_argument("--cards", type=int, choices=[1, 2], default=1)
     args = parser.parse_args()
-    soc = ADCSoC()
+    soc = ADCSoC(cards=args.cards)
     soc.finalize()
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)

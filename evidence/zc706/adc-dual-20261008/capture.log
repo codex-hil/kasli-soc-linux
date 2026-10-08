@@ -1,0 +1,2 @@
+PASS: async clocks, alignment gating, 3 snapshots, external trigger, frame errors, frozen RAM, abort/re-arm
+/work/tests/adc_capture_tb.v:73: $finish called at 123454900 (1ps)

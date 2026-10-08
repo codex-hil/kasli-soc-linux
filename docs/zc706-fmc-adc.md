@@ -326,3 +326,8 @@ w `evidence/hardware/validation.json`.
 Opcjonalny skrypt SD zawiera teraz sprawdzoną sekwencję FCLK0/reset/level
 shifters; sam wariant bootowania ADC z SD nie był wykonywany na płycie.
 Walidowana ścieżka to `tools/boot_adc_jtag.py` i Linux z istniejącej SD.
+
+## Druga karta HPC
+
+Opcjonalny target dwóch kart i niezależna akwizycja w J4 HPC:
+[zc706-adc-dual.md](zc706-adc-dual.md). Target jednej karty pozostaje dostępny.

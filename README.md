@@ -26,6 +26,11 @@ Pełna charakterystyka analogowa i połączenie ADC z DDR PL pozostają niewalid
 Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
 Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-term.md).
 
+Dodany także target **dwóch kart: J5 LPC + J4 HPC**, z osobnymi zegarami,
+CSR i snapshotami. Build: `make adc-dual-package`. Druga karta oczekuje na
+podłączenie i test fizyczny; synchronizacja pozostaje na później.
+[Opis i test obu kart](docs/zc706-adc-dual.md).
+
 ## Hardware i źródła prawdy
 
 Platforma Migen `migen/build/platforms/sinara/kasli_soc.py`: **XC7Z030-FFG676-3**,

@@ -13,10 +13,22 @@ import time
 
 
 class Registers:
-    def __init__(self, csr_json, device):
+    def __init__(self, csr_json, device, card=1):
         self.map = json.loads(Path(csr_json).read_text())
         if self.map['constants'].get('adc_abi') != 1:
             raise RuntimeError('Requires FMC ADC ABI 1 CSR map')
+        if card not in (1, 2) or card > self.map['constants'].get('adc_cards', 1):
+            raise ValueError('Selected FMC card is absent from this gateware')
+        self.card = card
+        if card == 2:
+            # Expose the same logical ADC API against only the second CSR bank.
+            original = self.map['csr_registers']
+            aliases = {name.replace('adc2_', 'adc_', 1): entry
+                       for name, entry in original.items() if name.startswith('adc2_')}
+            if 'adc_control' not in aliases:
+                raise ValueError('Second FMC card CSR bank is missing')
+            self.map['csr_registers'] = {name: entry for name, entry in original.items()
+                                        if not name.startswith('adc_')} | aliases
         self.base = self.map['memories']['csr']['base']
         size = self.map['memories']['csr']['size']
         offset = self.base
@@ -34,6 +46,9 @@ class Registers:
         if self.read('probe_signature') != 0x4b534f43:
             self.mem.close()
             raise RuntimeError('PL probe signature mismatch')
+        if 'adc_card_id' in self.map['csr_registers'] and self.read('adc_card_id') != 0xadc00000 + card:
+            self.mem.close()
+            raise RuntimeError('FMC card identity mismatch: load matching gateware and CSR map')
 
     def read(self, name):
         # MMIO needs one aligned word load/store. struct's little-endian
@@ -344,16 +359,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--csr-json', required=True)
     parser.add_argument('--device', default='/dev/uio0')
+    parser.add_argument('--card', type=int, choices=[1, 2], default=1,
+                        help='1: J5 LPC; 2: J4 HPC (independent clock/snapshot)')
     parser.add_argument('--si570-address', type=lambda x: int(x, 0), default=0x55)
     parser.add_argument('--tap', type=int)
     parser.add_argument('--external-trigger', action='store_true')
     parser.add_argument('--range', choices=['open', '5V', '0.5V', '0.05V'], default='open')
     parser.add_argument('--output', type=Path, default=Path('adc-capture'))
     args = parser.parse_args()
-    r = Registers(args.csr_json, args.device)
+    r = Registers(args.csr_json, args.device, card=args.card)
     adc = ADC(r)
     args.output.mkdir(parents=True, exist_ok=True)
-    result = {'hardware_validated': False, 'result': 'FAIL', 'slot': 'J5 LPC'}
+    result = {'hardware_validated': False, 'result': 'FAIL', 'slot': 'J5 LPC' if args.card == 1 else 'J4 HPC',
+              'card': args.card, 'synchronized': False}
     try:
         adc.initialize()
         result['adc_registers'] = {str(address): adc.reg(address) for address in (1, 2)}

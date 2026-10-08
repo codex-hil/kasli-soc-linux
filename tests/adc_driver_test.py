@@ -58,3 +58,46 @@ with patch.object(module.time, 'sleep', lambda seconds: None):
 assert slave.words == [('adc', 0x83c7)] + [(i, 0x8000) for i in range(4)] + [(i, 0x1234+i*0x1111) for i in range(4)]
 assert slave.control == 10 and slave.spi == 4
 print('PASS: 16-edge MSB-first SPI, slave readback, ADC/DAC chip-select exclusivity (model)')
+
+
+# Exercise the real mapped-register adapter: second-card operations must never
+# write the first-card bank, even though the ADC driver uses logical adc_* names.
+import json
+import tempfile
+import ctypes
+with tempfile.TemporaryDirectory() as directory:
+    root = Path(directory)
+    registers = {'probe_signature': {'addr': 0}}
+    for card, base in [('adc', 16), ('adc2', 48)]:
+        for offset, suffix in enumerate(['control', 'spi_w', 'spi_r', 'tap0']):
+            registers[card+'_'+suffix] = {'addr': base+4*offset}
+    description = {'constants': {'adc_abi': 1, 'adc_cards': 2},
+                   'memories': {'csr': {'base': 0, 'size': 4096}},
+                   'csr_registers': registers}
+    (root/'csr.json').write_text(json.dumps(description))
+    (root/'memory').write_bytes(bytes(4096))
+    with (root/'memory').open('r+b') as file:
+        file.write((0x4b534f43).to_bytes(4, 'little'))
+    first = module.Registers(root/'csr.json', str(root/'memory'), card=1)
+    second = module.Registers(root/'csr.json', str(root/'memory'), card=2)
+    first.write('adc_control', 0x91)
+    first.write('adc_spi_w', 0x17)
+    first.write('adc_tap0', 23)
+    second.write('adc_control', 10)
+    with patch.object(module.time, 'sleep', lambda seconds: None):
+        module.ADC(second).set_offset_code(2, 0x93a7)
+    second.write('adc_tap0', 9)
+    assert second.read('adc_control') == 10 and second.read('adc_spi_w') == 4
+    assert first.read('adc_control') == 0x91 and first.read('adc_spi_w') == 0x17
+    assert first.read('adc_tap0') == 23 and second.read('adc_tap0') == 9
+    assert first.read('probe_signature') == 0x4b534f43
+    first.mem.close(); second.mem.close()
+    description['constants']['adc_cards'] = 1
+    (root/'csr.json').write_text(json.dumps(description))
+    try:
+        module.Registers(root/'csr.json', '/does/not/exist', card=2)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Missing card must be rejected before device access')
+print('PASS: real MMIO card selection isolates SPI/DAC/control/taps and rejects absent card before device access')

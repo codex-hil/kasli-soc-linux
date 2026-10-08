@@ -1,0 +1,37 @@
+{
+  "result": "BUILD_AND_SIMULATION_PASS",
+  "hardware_validated": false,
+  "physical_hpc_adc_validated": false,
+  "board": "ZC706 rev.1.2 XC7Z045-FFG900-2",
+  "cards": 2,
+  "bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "clocks": {
+    "system_hz": 100000000,
+    "idelay_hz": 200000000,
+    "adc_hz_per_card": 100000000,
+    "serial_hz_per_card": 400000000
+  },
+  "independent_clock_domains": true,
+  "inter_card_synchronization": false,
+  "adc_to_ddr": false,
+  "pin_count": 130,
+  "terminated_lvds_pairs": 22,
+  "bram_ramb36": 4,
+  "iserdes": 18,
+  "idelay": 18,
+  "mmcm": 3,
+  "csr_bases": {
+    "identifier_mem": "0x40000000",
+    "probe": "0x40000800",
+    "adc": "0x40001000",
+    "adc_spi": "0x40001800",
+    "adc_i2c": "0x40002000",
+    "board_i2c": "0x40002800",
+    "adc2": "0x40003000",
+    "adc2_spi": "0x40003800",
+    "adc2_i2c": "0x40004000"
+  },
+  "top_json_sha256": "faf7be9538f08c24b617a14096c3b9c109a240d12482f74b9e9c88d6401f97bd",
+  "source_reference": "evidence/zc706/fmc-adc-pin-audit-20261007.json",
+  "baseline_commit": "039e087"
+}

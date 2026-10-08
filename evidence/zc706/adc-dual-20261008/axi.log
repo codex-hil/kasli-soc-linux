@@ -1,0 +1,5 @@
+PASS: 1000 AXI/CSR transactions with delayed channels and response backpressure (simulation)
+PASS: board I2C CSR AXI accesses
+PASS: ADC control/SSR/nine delay CSR readback and reset counters over AXI
+PASS: independent LPC/HPC CSR banks, nine taps each, HPC reset isolation over AXI
+/work/tests/axi_csr_tb.v:93: $finish called at 197170000 (1ps)
