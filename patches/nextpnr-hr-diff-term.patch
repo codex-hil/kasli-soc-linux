@@ -1,0 +1,66 @@
+--- a/himbaechel/uarch/xilinx/pack_io.cc
++++ b/himbaechel/uarch/xilinx/pack_io.cc
+@@ -240,6 +240,34 @@
+         NPNR_ASSERT(pad_n_net != nullptr);
+         std::string tile_p = ctx->get_tile_type(site_p.tile).str(ctx);
+         bool is_iob18 = boost::contains(tile_p, "IOB18");
++
++        // Preserve differential termination before primitive decomposition.
++        // An explicit port/XDC property overrides the primitive parameter.
++        IdString diff_term = ctx->id("DIFF_TERM");
++        bool term = boolstr_or_default(xil_iob->params, diff_term, false);
++        bool has_override = false, override_value = false;
++        CellInfo *master_pad = nullptr;
++        for (auto net : {pad_p_net, pad_n_net}) {
++            for (auto user : net->users) {
++                if (user.cell->type != id_PAD)
++                    continue;
++                if (net == pad_p_net)
++                    master_pad = user.cell;
++                if (!user.cell->attrs.count(diff_term))
++                    continue;
++                bool value = boolstr_or_default(user.cell->attrs, diff_term);
++                if (has_override && value != override_value)
++                    log_error("Conflicting DIFF_TERM properties on differential pair.\n");
++                override_value = value;
++                has_override = true;
++            }
++        }
++        if (has_override)
++            term = override_value;
++        NPNR_ASSERT(master_pad != nullptr);
++        master_pad->attrs[diff_term] = Property(term);
++        if (term && is_iob18)
++            log_error("DIFF_TERM support currently covers HR banks only.\n");
+ 
+         if (!is_diff_iobuf && !is_diff_out_iobuf) {
+             xil_iob->disconnectPort(id_I);
+--- a/himbaechel/uarch/xilinx/fasm.cc
++++ b/himbaechel/uarch/xilinx/fasm.cc
+@@ -1203,6 +1203,15 @@
+         if (is_lvds25)
+             ioconfig_by_hclk[hclk].lvds_25 = true;
+ 
++        if (is_input && is_master_half && boolstr_or_default(pad->attrs, ctx->id("DIFF_TERM"), false)) {
++            if (is_hp_bank || is_sing || !is_lvds25)
++                log_error("DIFF_TERM is validated only for HR LVDS_25 differential pairs.\n");
++            std::string saved = fasm_ctx.back();
++            fasm_ctx.back() = "DIFF";
++            write_bit("DIFF_TERM");
++            fasm_ctx.back() = saved;
++        }
++
+         if (is_output) {
+             // DRIVE
+             int default_drive = (is_hp_bank && iostandard == "LVCMOS12") ? 8 : 12;
+@@ -1509,6 +1518,10 @@
+                         write_bit("LVCMOS12_LVCMOS15_SSTL12_SSTL135_SSTL15.IN_ONLY");
+                     } else
+                         write_bit("LVCMOS12_LVCMOS15_LVCMOS18_SSTL12_SSTL135_SSTL15.IN_ONLY");
++                } else if (is_master_half && is_lvds25 &&
++                           boolstr_or_default(pad->attrs, ctx->id("DIFF_TERM"), false)) {
++                    // The generic input-only feature constrains the termination bits low.
++                    write_bit("LVDS_25.IN_ONLY");
+                 } else
+                     write_bit("LVCMOS12_LVCMOS15_LVCMOS18_LVCMOS25_LVCMOS33_LVDS_25_LVTTL_SSTL135_SSTL15_TMDS_33.IN_"
+                               "ONLY");

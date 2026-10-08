@@ -63,6 +63,10 @@ def main():
     if args.design == "fmc-adc":
         from adc_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
+        from adc_nextpnr import prepare as prepare_nextpnr
+        from adc_termination_db import prepare as prepare_termination_db
+        nextpnr = prepare_nextpnr()
+        db = prepare_termination_db(db)
     if args.design == "pl-ddr":
         from ddr_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
@@ -89,6 +93,14 @@ def main():
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
         if n == 0 and args.design == 'pl-ddr':
             validate_ddr_io(work)
+        if n == 1 and args.design == 'fmc-adc':
+            cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
+            requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
+                            for c in cells.values())
+            emitted = sum(line.endswith('.DIFF.DIFF_TERM')
+                          for line in (work/'top.fasm').read_text().splitlines())
+            if requested != 11 or emitted != requested:
+                raise RuntimeError(f'FPGA termination was not emitted: {emitted}/{requested}')
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,

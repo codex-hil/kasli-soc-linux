@@ -1,0 +1,89 @@
+{
+  "features": {
+    "RIOB33.DIFF.DIFF_TERM": [
+      "38_100",
+      "39_97"
+    ],
+    "LIOB33.DIFF.DIFF_TERM": [
+      "38_100",
+      "39_97"
+    ]
+  },
+  "pairs": [
+    {
+      "pair": 0,
+      "tile": "RIOB33_X73Y145",
+      "feature": "RIOB33.DIFF.DIFF_TERM",
+      "bits": [
+        "38_100",
+        "39_97"
+      ],
+      "added": 2,
+      "removed": 0
+    },
+    {
+      "pair": 1,
+      "tile": "RIOB33_X73Y53",
+      "feature": "RIOB33.DIFF.DIFF_TERM",
+      "bits": [
+        "38_100",
+        "39_97"
+      ],
+      "added": 2,
+      "removed": 0
+    },
+    {
+      "pair": 2,
+      "tile": "LIOB33_X0Y11",
+      "feature": "LIOB33.DIFF.DIFF_TERM",
+      "bits": [
+        "38_100",
+        "39_97"
+      ],
+      "added": 2,
+      "removed": 0
+    }
+  ],
+  "source_sha256": {
+    "all.bit": "10d1c3e9504a6551f750901919d9e06bf964a875e76209842a4c267aecb81980",
+    "off-repeat.bit": "7e7097ee6f304bc3ddfaf0432aec186e20927452b27b38afd01b5f7330448d30",
+    "off.bit": "2a7a0e692df50bb8e8c2db7d07687790414354d50bdf1f9667f59dffdb7c4aab",
+    "pair0.bit": "ef1ad5a5c10ee33d3fdbc87a9ad5f1b3cfecd22553a6afd8f6085ba13b3cc25a",
+    "pair1.bit": "b7e65a2d578c4c0523bd9f6e20a4514e7ce9774d69ce4fc3ddea7efe946f671b",
+    "pair2.bit": "8b6d48d89a2bf1192ae0579ce6d75e2dd0dbe707706bce57877fd9b48c666707"
+  },
+  "repeated_baseline_identical": true,
+  "all_on_union_verified": true,
+  "comparator_part": "xc7z020clg400-1",
+  "ecc_word_excluded": 50,
+  "source_db_sha256": {
+    "segbits_liob33.db": "432e956da48016ba647631ff91975eb501f98e3961330bdaa35c686d780300d9",
+    "segbits_riob33.db": "327992e6b38faaeb0ddf948e8b42b8ce082a662f83f0dac14ebac901b3aeb909"
+  },
+  "vivado_version": "2019.1",
+  "optional_comparator_image": "kkrizka/vivado@sha256:f08ed71496b6ec4d1709c49eee92286d256ecb11ea7dbf23f75d89fc6fe2162c",
+  "reference_inputs_sha256": {
+    "top.v": "4ee389c1ccd004d7e77aa0267029208c8f3942bf81645e48cd43cc210f926cbe",
+    "reference.tcl": "af02d1627e97418190e40b8c51a3bfe3514899b6524f987ad1bd70607651e0ab",
+    "pins.json": "39bcfe9f4a79a9e8362d168ccfc65294339629923a172f19ff79ec40ce5d75db"
+  },
+  "scope": "HR LVDS_25 at VCCO 2.5 V: all 60 bonded XC7Z020 CLG400 pairs measured; physical XC7Z045 ZC706 eleven-receiver A/B validated; HP excluded",
+  "input_only_aliases": {
+    "LIOB33.IOB_Y0.LVDS_25.IN_ONLY": {
+      "source_feature": "LIOB33.IOB_Y0.LVCMOS12_LVCMOS15_LVCMOS18_LVCMOS25_LVCMOS33_LVDS_25_LVTTL_SSTL135_SSTL15_TMDS_33.IN_ONLY",
+      "omit_bits": [
+        "!38_100",
+        "!39_97"
+      ]
+    },
+    "RIOB33.IOB_Y0.LVDS_25.IN_ONLY": {
+      "source_feature": "RIOB33.IOB_Y0.LVCMOS12_LVCMOS15_LVCMOS18_LVCMOS25_LVCMOS33_LVDS_25_LVTTL_SSTL135_SSTL15_TMDS_33.IN_ONLY",
+      "omit_bits": [
+        "!38_100",
+        "!39_97"
+      ]
+    }
+  },
+  "all_bonded_pairs_reference": "evidence/zc706/hr-diff-term-20261008/all-hr-mapping.json",
+  "physical_validation": "evidence/zc706/hr-diff-term-20261008/"
+}

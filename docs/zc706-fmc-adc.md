@@ -16,9 +16,12 @@ snapshot 1024 próbek z wyłączonym wzorcem. Wejścia pozostają odłączone;
 nie jest to walidacja parametrów analogowych. ADC i PL DDR nadal niezależne.
 
 Rozwiązano dwa problemy: dostęp MMIO musi być wyrównanym słowem 32-bit,
-a łącze LVDS wymaga terminacji. Pinned nextpnr/openXC7 nie emituje
-konfiguracji IBUFDS `DIFF_TERM`; ustawiamy zgodną z datasheetem terminację
-wewnętrzną ADC (`A2=0xf0`: 1.75 mA, TERMON, prąd efektywny 3.5 mA).
+a łącze LVDS wymaga terminacji. Dodaliśmy izolowaną łatkę nextpnr i overlay
+bazy Project X-Ray, które emitują rzeczywiste `DIFF_TERM` w bankach HR.
+Aktualny test fizyczny przechodzi z terminacją FPGA i `A2=0` w ADC.
+Wcześniejszy zwalidowany release pozostaje dostępny: używał terminacji
+wewnętrznej ADC (`A2=0xf0`) i nie miał terminacji FPGA.
+Szczegóły pomiaru bitów i testu A/B: [hr-diff-term.md](hr-diff-term.md).
 Dodatkowo każda linia danych ma własny trening IDELAY i BITSLIP.
 Nowy licznik potwierdza zegar deserializacji około 400 MHz, objęty także
 jawnym constraintem 2.5 ns. Sygnatura GP0 jest sprawdzana w U-Boot,

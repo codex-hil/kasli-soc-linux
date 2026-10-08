@@ -1,0 +1,6 @@
+{
+  "base_binary_sha256": "291684c459fcfb55ec89b46400885821d19e9291d6bed6440608055dc28fbe14",
+  "patch_sha256": "b59e98b1287a4fd3f5b10567081536101e8161c32a8fc4428abeaaf14984b988",
+  "binary_sha256": "12d213a277e84bc6f5a1563703f539cfc57137a10055bfa39800eae9a93ece57",
+  "method": "isolated replacement of fasm/pack_io objects; pinned baseline unchanged"
+}

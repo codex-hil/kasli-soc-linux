@@ -210,6 +210,7 @@ class ADCSoC(BaseSoC):
         self.add_constant("ADC_CAPTURE_SAMPLES", 1024)
         self.add_constant("ADC_SAMPLE_RATE", 100000000)
         self.add_constant("ADC_ABI", 1)
+        self.add_constant("ADC_FPGA_DIFF_TERM", 1)
         self.platform.add_period_constraint(self.cd_idelay.clk, 5.0)
 
 

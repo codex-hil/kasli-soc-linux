@@ -1,0 +1,17 @@
+{
+  "mapping_sha256": "e79eb36d00527ea73ca61daefdb23128507c2027caa3e6bccbe1607568d23e62",
+  "source_db_sha256": {
+    "segbits_liob33.db": "432e956da48016ba647631ff91975eb501f98e3961330bdaa35c686d780300d9",
+    "segbits_riob33.db": "327992e6b38faaeb0ddf948e8b42b8ce082a662f83f0dac14ebac901b3aeb909"
+  },
+  "features": {
+    "RIOB33.DIFF.DIFF_TERM": [
+      "38_100",
+      "39_97"
+    ],
+    "LIOB33.DIFF.DIFF_TERM": [
+      "38_100",
+      "39_97"
+    ]
+  }
+}

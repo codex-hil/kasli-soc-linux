@@ -1,0 +1,20 @@
+{
+  "hardware_validated": false,
+  "result": "FAIL",
+  "slot": "J5 LPC",
+  "adc_registers": {
+    "1": 32,
+    "2": 0
+  },
+  "si570_registers": [
+    34,
+    66,
+    187,
+    255,
+    240,
+    31
+  ],
+  "sample_rate_hz": 99997690.56379572,
+  "serial_clock_hz": 399999561.2696403,
+  "error": "Lane 0: no stable eye >=3 taps: [{\"tap\": 0, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 1, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 2, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 3, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 4, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 5, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 6, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 7, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 8, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 9, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 10, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 11, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 12, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 13, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 14, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 15, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 16, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 17, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 18, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 19, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 20, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 21, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 22, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 23, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 24, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 25, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 26, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 27, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 28, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 29, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 30, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}, {\"tap\": 31, \"good\": [false, false, false, false, false, false, false, false], \"slips\": [7, 7, 7, 7, 7, 7, 7, 7]}]"
+}

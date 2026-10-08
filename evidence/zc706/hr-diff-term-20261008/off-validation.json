@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-10-08T18:25:08.513688+00:00",
+  "host": "192.168.2.24",
+  "slot": "J5 LPC",
+  "jtag_serial": "210251842914",
+  "program_requested": false,
+  "hardware_validated": false,
+  "bitstream_sha256": "8b8fa945e0d5a6b9736981a7c24f64ec6d50e1f50def12f0d427590c3c2f3802",
+  "diagnostic_only": true,
+  "diagnostic_sha256": "c86c3654cc07359add10e5833b7e8501f85c518a636a61bb4a242173f6cc9bb3",
+  "error": "Command '['ssh', '-i', '/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/id_ed25519', '-o', 'UserKnownHostsFile=/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/known_hosts', '-o', 'HostKeyAlias=192.168.2.15', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=5', '-o', 'ServerAliveCountMax=3', 'root@192.168.2.24', 'cd /tmp/zc706-adc-bringup && python3 -u fmc_adc.py --csr-json csr.json --device /dev/uio0 --output capture']' returned non-zero exit status 1.",
+  "finished_utc": "2026-10-08T18:25:29.127638+00:00"
+}

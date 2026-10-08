@@ -1,0 +1,17 @@
+test_both_states_are_tile_tags (test_iob_diff_term.TestDiffTerm.test_both_states_are_tile_tags) ... ok
+test_other_standard_is_not_inferred (test_iob_diff_term.TestDiffTerm.test_other_standard_is_not_inferred) ... ok
+test_pudc_tile_remains_excluded (test_iob_diff_term.TestDiffTerm.test_pudc_tile_remains_excluded) ... ok
+test_single_ended_input_is_not_tagged (test_iob_diff_term.TestDiffTerm.test_single_ended_input_is_not_tagged) ... ok
+test_alias_relaxes_only_measured_termination_bits (test_iob_process_diff_term.TestInputOnly.test_alias_relaxes_only_measured_termination_bits) ... ok
+test_legacy_output_unchanged_without_measured_term (test_iob_process_diff_term.TestInputOnly.test_legacy_output_unchanged_without_measured_term) ... ok
+test_get_roi_gen_sites (test_util.TestUtil.test_get_roi_gen_sites) ... ok
+test_in_roi_overlay (test_util.TestUtil.test_in_roi_overlay) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.028s
+
+OK
+Loading tags
+Loading tags
+Loading tags
+Loading tags

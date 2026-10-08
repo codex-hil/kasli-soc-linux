@@ -94,8 +94,10 @@ class ADC:
         self.reg(1, 0x20)  # two's complement; randomizer off; all channels awake
         # 2 lanes/16 bits; internal source termination enabled, 1.75 mA
         # setting doubled to 3.5 mA by TERMON (LTC2174 datasheet A2).
-        # Pinned openXC7 does not implement FPGA IBUFDS DIFF_TERM.
-        self.reg(2, 0xf0)
+        # The patched HR flow uses receiver termination instead. Keep the
+        # source-terminated fallback for previously validated bitstreams.
+        fpga_term = self.r.map['constants'].get('adc_fpga_diff_term', 0)
+        self.reg(2, 0 if fpga_term else 0xf0)
         self.reg(3, 0)
         self.reg(4, 0)
         self.r.write('adc_control', 11)  # release DAC clear, keep RX reset

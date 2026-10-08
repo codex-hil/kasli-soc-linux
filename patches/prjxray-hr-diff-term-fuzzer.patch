@@ -1,0 +1,2369 @@
+diff --git a/fuzzers/030-iob/generate.py b/fuzzers/030-iob/generate.py
+index bc642d6..0aaa742 100644
+--- a/fuzzers/030-iob/generate.py
++++ b/fuzzers/030-iob/generate.py
+@@ -144,6 +144,9 @@ def main():
+                     segmk.add_site_tag(
+                         site, 'ZIBUF_LOW_PWR', 1 ^ d['IBUF_LOW_PWR'])
+             elif d['type'] == 'IBUFDS':
++                # Do not infer other differential standards from LVDS_25.
++                if iostandard == 'LVDS_25':
++                    segmk.add_tile_tag(tile, 'DIFF.DIFF_TERM', d['DIFF_TERM'])
+                 segmk.add_site_tag(site, 'INOUT', 0)
+                 segmk.add_site_tag(site, '{}.IN_USE'.format(iostandard), 1)
+                 segmk.add_site_tag(site, '{}.IN'.format(iostandard), 1)
+diff --git a/fuzzers/030-iob/process_rdb.py b/fuzzers/030-iob/process_rdb.py
+index c1c2887..2ea5db6 100644
+--- a/fuzzers/030-iob/process_rdb.py
++++ b/fuzzers/030-iob/process_rdb.py
+@@ -64,7 +64,7 @@ def filter_bits(site, bits):
+     return frozenset(inner())
+ 
+ 
+-def process_features_sets(iostandard_lines):
++def process_features_sets(iostandard_lines, diff_term_bits=frozenset()):
+     sites = {}
+ 
+     for iostd_type, iostd_list in iostandard_lines.items():
+@@ -241,7 +241,18 @@ def process_features_sets(iostandard_lines):
+ 
+             neg_bits = frozenset(
+                 '!{}'.format(b) for b in (common_bits[(site, group)] - bits))
+-            print('{} {}'.format(feature, ' '.join(sorted(bits | neg_bits))))
++            # LVDS termination shares bits with differential output drive.
++            # Keep the legacy grouped feature for compatibility, but provide
++            # an LVDS input-only feature that does not force DIFF_TERM off.
++            alias = 'IOB33.IOB_Y0.LVDS_25.IN_ONLY'
++            term_aware = (site == 'IOB_Y0' and group == 'IN_ONLY' and
++                          'LVDS_25' in iostandards and diff_term_bits)
++            if feature != alias or not term_aware:
++                print('{} {}'.format(feature, ' '.join(sorted(bits | neg_bits))))
++            if term_aware:
++                assert not (bits & diff_term_bits), 'IN_ONLY unexpectedly sets DIFF_TERM'
++                relaxed = neg_bits - frozenset('!' + b for b in diff_term_bits)
++                print('{} {}'.format(alias, ' '.join(sorted(bits | relaxed))))
+ 
+ 
+ def main():
+@@ -258,7 +269,13 @@ def main():
+     }
+ 
+     with open(args.input_rdb) as f:
+-        for l in f:
++        lines = list(f)
++        diff_term_bits = frozenset()
++        for l in lines:
++            if get_name(l) == 'IOB33.DIFF.DIFF_TERM':
++                diff_term_bits = parse_bits(l)
++                assert all(not b.startswith('!') for b in diff_term_bits)
++        for l in lines:
+             if ('.SSTL' in l or '.LVCMOS' in l
+                     or '.LVTTL' in l) and 'IOB_' in l:
+                 iostandard_lines["NORMAL"].append(l)
+@@ -267,7 +284,7 @@ def main():
+             else:
+                 print(l.strip())
+ 
+-    process_features_sets(iostandard_lines)
++    process_features_sets(iostandard_lines, diff_term_bits)
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/minitests/iob-diff-term/.gitignore b/minitests/iob-diff-term/.gitignore
+new file mode 100644
+index 0000000..954e88a
+--- /dev/null
++++ b/minitests/iob-diff-term/.gitignore
+@@ -0,0 +1,9 @@
++.Xil/
++*.bit
++*.bits
++*.dcp
++*.jou
++*.log
++*-io.txt
++webtalk*
++usage_statistics*
+diff --git a/minitests/iob-diff-term/README.md b/minitests/iob-diff-term/README.md
+new file mode 100644
+index 0000000..65ce46c
+--- /dev/null
++++ b/minitests/iob-diff-term/README.md
+@@ -0,0 +1,52 @@
++# HR LVDS_25 differential termination
++
++SPDX-License-Identifier: ISC
++
++Controlled comparator for all 60 bonded HR differential pairs on
++XC7Z020CLG400-1 (banks 13, 34 and 35, both LIOB33 and RIOB33).
++This design is **not** a board image: its arbitrary output and bank voltages
++are not intended for hardware programming.
++
++`reference.tcl` routes once and changes only each P port's DIFF_TERM property.
++It writes OFF, each single pair ON, ALL ON and repeated OFF bitstreams.
++The measured local tile bits are `38_100 39_97`, independent of pin/bank and
++left/right orientation. No other non-ECC configuration bits change.
++`mapping.json` records all 60 results and bitstream SHA-256 values.
++
++Reproduction (the comparator was run with Vivado 2019.1):
++
++```sh
++vivado -mode batch -source reference.tcl
++for name in off off-repeat all pair{0..59}; do
++    bitread --part_file "$XRAY_DATABASE_ROOT/xc7z020clg400-1/part.yaml" \
++        -y -z -o "$name.bits" "$name.bit"
++done
++python3 verify_bits.py --db "$XRAY_DATABASE_ROOT"
++```
++
++The verifier rejects changes outside the selected tile, inconsistent same-type
++mappings, a changed repeated baseline, or an ALL ON result differing from the
++union of individual changes. Only derived frame ECC word 50 is excluded.
++This comparator does not replace a full rerun of the randomized 030-iob fuzzer
++with its supported Vivado version.
++
++The generated database also needs a separate `IOB_Y0.LVDS_25.IN_ONLY` feature:
++legacy grouped IN_ONLY features constrain these shared differential-drive bits
++to zero. The postprocessor retains the legacy feature and emits an alias that
++relaxes only the independently measured DIFF_TERM bits.
++
++Physical A/B was tested with a Yosys/nextpnr/X-Ray build on a ZC706 rev. 1.2,
++XC7Z045FFG900, CERN FMC ADC100M14b4cha v6.1 in LPC, VADJ 2.5 V. All 11 design
++receivers use HR banks. ADC source termination was disabled (LTC2174 A2=0).
++Removing exactly 22 non-ECC bits from the same routed design prevents stable
++lane calibration; restoring them passes 139264 channel test-pattern values
++and a 1024-sample/channel snapshot on two cold boots. Analog inputs were
++unconnected, so this is not analog qualification. No SD or QSPI writes.
++
++Complete physical evidence and the separate nextpnr patch are maintained at:
++https://github.com/codex-hil/kasli-soc-linux/tree/main/evidence/zc706/hr-diff-term-20261008
++and https://github.com/codex-hil/kasli-soc-linux/blob/main/docs/hr-diff-term.md .
++
++Scope is HR LVDS_25 input termination only. No HP or other-standard mapping
++is inferred from these results. Vivado was only the optional mapping comparator;
++the tested board bitstreams were built without it.
+diff --git a/minitests/iob-diff-term/mapping.json b/minitests/iob-diff-term/mapping.json
+new file mode 100644
+index 0000000..ce87aec
+--- /dev/null
++++ b/minitests/iob-diff-term/mapping.json
+@@ -0,0 +1,743 @@
++{
++  "features": {
++    "RIOB33.DIFF.DIFF_TERM": [
++      "38_100",
++      "39_97"
++    ],
++    "LIOB33.DIFF.DIFF_TERM": [
++      "38_100",
++      "39_97"
++    ]
++  },
++  "pairs": [
++    {
++      "pair": 0,
++      "tile": "RIOB33_X73Y145",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 1,
++      "tile": "RIOB33_X73Y147",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 2,
++      "tile": "RIOB33_X73Y141",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 3,
++      "tile": "RIOB33_X73Y143",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 4,
++      "tile": "RIOB33_X73Y139",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 5,
++      "tile": "RIOB33_X73Y137",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 6,
++      "tile": "RIOB33_X73Y119",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 7,
++      "tile": "RIOB33_X73Y117",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 8,
++      "tile": "RIOB33_X73Y113",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 9,
++      "tile": "RIOB33_X73Y111",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 10,
++      "tile": "RIOB33_X73Y123",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 11,
++      "tile": "RIOB33_X73Y121",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 12,
++      "tile": "RIOB33_X73Y115",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 13,
++      "tile": "RIOB33_X73Y109",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 14,
++      "tile": "RIOB33_X73Y101",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 15,
++      "tile": "RIOB33_X73Y125",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 16,
++      "tile": "RIOB33_X73Y129",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 17,
++      "tile": "RIOB33_X73Y105",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 18,
++      "tile": "RIOB33_X73Y127",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 19,
++      "tile": "RIOB33_X73Y131",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 20,
++      "tile": "RIOB33_X73Y103",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 21,
++      "tile": "RIOB33_X73Y133",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 22,
++      "tile": "RIOB33_X73Y135",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 23,
++      "tile": "RIOB33_X73Y107",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 24,
++      "tile": "RIOB33_X73Y53",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 25,
++      "tile": "RIOB33_X73Y73",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 26,
++      "tile": "RIOB33_X73Y71",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 27,
++      "tile": "RIOB33_X73Y87",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 28,
++      "tile": "RIOB33_X73Y51",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 29,
++      "tile": "RIOB33_X73Y61",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 30,
++      "tile": "LIOB33_X0Y11",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 31,
++      "tile": "LIOB33_X0Y25",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 32,
++      "tile": "RIOB33_X73Y97",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 33,
++      "tile": "RIOB33_X73Y95",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 34,
++      "tile": "RIOB33_X73Y89",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 35,
++      "tile": "RIOB33_X73Y81",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 36,
++      "tile": "RIOB33_X73Y59",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 37,
++      "tile": "RIOB33_X73Y69",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 38,
++      "tile": "LIOB33_X0Y27",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 39,
++      "tile": "LIOB33_X0Y15",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 40,
++      "tile": "RIOB33_X73Y93",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 41,
++      "tile": "RIOB33_X73Y77",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 42,
++      "tile": "RIOB33_X73Y75",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 43,
++      "tile": "LIOB33_X0Y5",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 44,
++      "tile": "LIOB33_X0Y19",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 45,
++      "tile": "LIOB33_X0Y7",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 46,
++      "tile": "RIOB33_X73Y91",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 47,
++      "tile": "RIOB33_X73Y79",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 48,
++      "tile": "RIOB33_X73Y63",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 49,
++      "tile": "RIOB33_X73Y57",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 50,
++      "tile": "RIOB33_X73Y67",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 51,
++      "tile": "LIOB33_X0Y17",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 52,
++      "tile": "LIOB33_X0Y13",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 53,
++      "tile": "RIOB33_X73Y83",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 54,
++      "tile": "RIOB33_X73Y55",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 55,
++      "tile": "LIOB33_X0Y23",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 56,
++      "tile": "LIOB33_X0Y21",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 57,
++      "tile": "LIOB33_X0Y9",
++      "feature": "LIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 58,
++      "tile": "RIOB33_X73Y85",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    },
++    {
++      "pair": 59,
++      "tile": "RIOB33_X73Y65",
++      "feature": "RIOB33.DIFF.DIFF_TERM",
++      "bits": [
++        "38_100",
++        "39_97"
++      ],
++      "added": 2,
++      "removed": 0
++    }
++  ],
++  "source_sha256": {
++    "all.bit": "cc303ed965a5e78de2b54466a9b9f500edf92e1287279fb861fd35f797d000ba",
++    "off-repeat.bit": "d559e2d6621fc3759c602f2f47d398aac11f34569e6143232b35ced651133389",
++    "off.bit": "0aa8c41f331ab2d6db3c19ecdd7f72a169e62b06a9c079f9553d037803fa49c9",
++    "pair0.bit": "2db3f8d8338b818e31ba68cef9486500d83d531f7c0087843e6a5a35b1328467",
++    "pair1.bit": "cd5d7415f7908aa07e5934eba915d1e63fc6378f11412d1be6de0de3ce259374",
++    "pair10.bit": "5d59d0cd093f5dccc9d229a9d3bd69241c3775e7a78999c31ae30fb55c5e16a7",
++    "pair11.bit": "b6d05b0e051d9c8aa796a08491b5968a0132e98bcf464e51e97d57db29b4a915",
++    "pair12.bit": "51dd29f1abbed7b339a0eeeb583ad9b00c2fada5d864d51f448242836673cc05",
++    "pair13.bit": "a0801ddc135af09d34fafbe0d1ea4ce4182f0c6e1441e08e9d2b69f1c196fadd",
++    "pair14.bit": "71b8f5bf5cd5e86a9a9a8475aafaeeac9c2a6482a070be862ddd53150903b962",
++    "pair15.bit": "601c7d743ebdd63595c3e2b4577ac24b403be283303bdbe5df0a6598171fc50a",
++    "pair16.bit": "d804e93a194c76a6ccab14801de46a67383ccedc1049d04e916634676d0bb9d3",
++    "pair17.bit": "ae30ecec1c5b292d80f1e8519bd236f6132b72e3253d51e8e1e505756fc4708c",
++    "pair18.bit": "67d37ecb46bd591127e30996710d619c6661bf1726ac481db025e75370030bd5",
++    "pair19.bit": "0bf5d3fd11c3fa4312005a7da40e437958a872a2fb4c85469ce726103946d50e",
++    "pair2.bit": "649260ba801e6ebcf6b04ab292ad7635cd053444a103165b07efc9fdec3bc54f",
++    "pair20.bit": "d5c5cef54ce3674ad435841ace89c20cf810285fbb29aeae96acaa67561cb54c",
++    "pair21.bit": "6ef5c1996f54092eb6e6bb567edf1ccabf1d943022f0bdcd7aafb3099961e661",
++    "pair22.bit": "92d909235a993caa5bc8b616d8aaee0447851c46a3945a6a5328de55c794d1a7",
++    "pair23.bit": "3ef0ea37bbdb9a834881d5b4504d86253e148344b92e7cc319c7ffe7b27f619d",
++    "pair24.bit": "66ab9b0e5f2f788eb7e414e07deeb08504ea9a67ba138ddb01a3a28adce0fa61",
++    "pair25.bit": "a1557ed47641c2b1a366ab2b893067eb2f9dde1a21dd228b01e0e4049b380e44",
++    "pair26.bit": "1ffe94012c963ac31cf1f1c522ab54261d55b543070f4de542cf7fecce9732be",
++    "pair27.bit": "712ce7b423f531c9ab42c7fc871c44781e0824d6d086eeef30c80f6edc447230",
++    "pair28.bit": "a5389a2f3e42be3f551ef3bc2f0f74f8c638ec542aabca12c53d97f72551baed",
++    "pair29.bit": "17d96b4b1425d771e0270ca07039bfb2f7c765a6dcb281d2eab0ba2101254598",
++    "pair3.bit": "29a3837ada42917e487de39afd971d02c7ae8d071d804db2178ff1578480d9cc",
++    "pair30.bit": "4d373a54955027f72646f34e19fbdaeaa80d0032f1412e1757e96f266b165355",
++    "pair31.bit": "48cdb0ec8acb876be1a6d4782efa45ede4fa26b1d21a9a6c2fe6fdbdcf129c2b",
++    "pair32.bit": "8fe0de33e32b34ad21593c53a03a81f33bcfba7fc9466954d9ec08a1e83bd4d6",
++    "pair33.bit": "fe9132595eb680ad2280b6a83bcaf7df3e994281bda9e005071aa566b4afcef6",
++    "pair34.bit": "aac7b8aeb1700304f9aaf8536e8cd98db6a08c97cdad5007a1e455c0c55e07d2",
++    "pair35.bit": "64b5c433851c31f65335675810475a1594721847a230d601d4306ebb66026a86",
++    "pair36.bit": "c1535dcf663c61faca3c499cdabc011072b741c39a7cd8d05f3c989543555cc6",
++    "pair37.bit": "fa623af3b3c5e2fc97334ca6dc6ea54719db3df14e2f38584eb54de076ce698c",
++    "pair38.bit": "dd3a92b68869e048c3e528327427ffc4425a7d3983809344d7dba8ce1cf17a1f",
++    "pair39.bit": "de24e6e6d7f7fabe530ab05fd353ca6a3739ed609f236c7e99ba1842e8087fc5",
++    "pair4.bit": "4033a5ac5c39a15c83787cb60165b8367a3596db49ed28bb77a164862d26ffed",
++    "pair40.bit": "8471397b4b51b96433b973e7055cb9bf73b96dccab9862a3156bbf5ba76d8b7d",
++    "pair41.bit": "06771a01d7ca92e7a35dc238ebdc4a2dd24c884b4336fa644e144267f693d2cc",
++    "pair42.bit": "1591e4e048f3e47d5f2b5a4c24e17478fcfd69b5525fcf04867c564bdc777da4",
++    "pair43.bit": "bc6473a29737715b5045dc29fd6170856ff742f325b91d123d976eca9cc7beba",
++    "pair44.bit": "b3376549d0eb6c6ff852f14053ed43b508e2420a452f031b40e2b37b6a36dfda",
++    "pair45.bit": "d2d6cbfbe2b689bdaecbe3b0f0e590c06c7273c68e2b93e0a9bf88ca4542f6e3",
++    "pair46.bit": "b274cd97df09300ccf783e1888ddde7297948d63985dd9096027e65af3a7e43a",
++    "pair47.bit": "21c84090b9aced49dd5fad78116fff59ad9d69de11a8241106e336e900626fe5",
++    "pair48.bit": "499594109e7226fc56f9668a1c8f626efdf8fcb983346612c10a45ffe3da6ae7",
++    "pair49.bit": "13c84d48538f3d16c7d8b3b54d728abae671ecca7cea95aef097ce4bc9c5b3c1",
++    "pair5.bit": "2dc1fbf2b31968a4d71516b866505f6744d77d04064c54d05f978f405abf197c",
++    "pair50.bit": "e025bd6ff9b31b8488a10df01a2ca2373a1db871e1e00a3105ec274723a1e59b",
++    "pair51.bit": "1d5d5ad96c87854902a7b87eb8b623acce47b51c03052f062e0befa22dc5cf3f",
++    "pair52.bit": "4982de3ef5e2cd02d06fb2bd8768307513b035886d2855991cacd2fafaad531b",
++    "pair53.bit": "a684a0a9e6a6ef9366e4b8e60c82c41b67cd4ad5c2baeea112003b8b965412d1",
++    "pair54.bit": "803ad8127695273a2f2978c845447541dcdfac5200a9e3cacb3deed385b8e6a4",
++    "pair55.bit": "efbb00ea903de86d2802e06e30e144f940e8dff7e3a933ea9f522e2615792484",
++    "pair56.bit": "598f1313aeda16ae2a6419778c757d14cbecbe2ef008be7970ef92ffd7e8c87b",
++    "pair57.bit": "2a10e9392617462c749a236215291ef050a783241ff8d6af02292ce2d203d0c3",
++    "pair58.bit": "eb5f7c031e4759d46bc86a9b1708d8e36ac102febeef1a944f239d0dab742805",
++    "pair59.bit": "6d2f754626664b8d9230f5a1fe1d1add5b3d9aa3fc1a72bddcce5a8fb46c1a27",
++    "pair6.bit": "4e2c89455883923da42b3349a4c7d68f2de8953bd866cc9b25dfc0adfd4c582b",
++    "pair7.bit": "84bccfe488bf863cff8f990760b9dfef691be27d831a837a7ccaf1f3f556ce78",
++    "pair8.bit": "8da156babd68a075a6655e8cd7a3211572ea3345fbe117245cd8b65f7548a633",
++    "pair9.bit": "f3c395003cb68408af49f171609a2d0a98be91d85474c5a8e9d0c4bbf11eb91f"
++  },
++  "repeated_baseline_identical": true,
++  "all_on_union_verified": true,
++  "comparator_part": "xc7z020clg400-1",
++  "ecc_word_excluded": 50
++}
+diff --git a/minitests/iob-diff-term/pins.json b/minitests/iob-diff-term/pins.json
+new file mode 100644
+index 0000000..9130098
+--- /dev/null
++++ b/minitests/iob-diff-term/pins.json
+@@ -0,0 +1,976 @@
++{
++  "part": "xc7z020clg400-1",
++  "pairs": [
++    {
++      "p": {
++        "pin": "B19",
++        "bank": "35",
++        "site": "IOB_X1Y146",
++        "tile": "RIOB33_X73Y145",
++        "pin_function": "IO_L2P_T0_AD8P_35"
++      },
++      "n": {
++        "pin": "A20",
++        "bank": "35",
++        "site": "IOB_X1Y145",
++        "tile": "RIOB33_X73Y145",
++        "pin_function": "IO_L2N_T0_AD8N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "C20",
++        "bank": "35",
++        "site": "IOB_X1Y148",
++        "tile": "RIOB33_X73Y147",
++        "pin_function": "IO_L1P_T0_AD0P_35"
++      },
++      "n": {
++        "pin": "B20",
++        "bank": "35",
++        "site": "IOB_X1Y147",
++        "tile": "RIOB33_X73Y147",
++        "pin_function": "IO_L1N_T0_AD0N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "D19",
++        "bank": "35",
++        "site": "IOB_X1Y142",
++        "tile": "RIOB33_X73Y141",
++        "pin_function": "IO_L4P_T0_35"
++      },
++      "n": {
++        "pin": "D20",
++        "bank": "35",
++        "site": "IOB_X1Y141",
++        "tile": "RIOB33_X73Y141",
++        "pin_function": "IO_L4N_T0_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "E17",
++        "bank": "35",
++        "site": "IOB_X1Y144",
++        "tile": "RIOB33_X73Y143",
++        "pin_function": "IO_L3P_T0_DQS_AD1P_35"
++      },
++      "n": {
++        "pin": "D18",
++        "bank": "35",
++        "site": "IOB_X1Y143",
++        "tile": "RIOB33_X73Y143",
++        "pin_function": "IO_L3N_T0_DQS_AD1N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "E18",
++        "bank": "35",
++        "site": "IOB_X1Y140",
++        "tile": "RIOB33_X73Y139",
++        "pin_function": "IO_L5P_T0_AD9P_35"
++      },
++      "n": {
++        "pin": "E19",
++        "bank": "35",
++        "site": "IOB_X1Y139",
++        "tile": "RIOB33_X73Y139",
++        "pin_function": "IO_L5N_T0_AD9N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "F16",
++        "bank": "35",
++        "site": "IOB_X1Y138",
++        "tile": "RIOB33_X73Y137",
++        "pin_function": "IO_L6P_T0_35"
++      },
++      "n": {
++        "pin": "F17",
++        "bank": "35",
++        "site": "IOB_X1Y137",
++        "tile": "RIOB33_X73Y137",
++        "pin_function": "IO_L6N_T0_VREF_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "F19",
++        "bank": "35",
++        "site": "IOB_X1Y120",
++        "tile": "RIOB33_X73Y119",
++        "pin_function": "IO_L15P_T2_DQS_AD12P_35"
++      },
++      "n": {
++        "pin": "F20",
++        "bank": "35",
++        "site": "IOB_X1Y119",
++        "tile": "RIOB33_X73Y119",
++        "pin_function": "IO_L15N_T2_DQS_AD12N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "G17",
++        "bank": "35",
++        "site": "IOB_X1Y118",
++        "tile": "RIOB33_X73Y117",
++        "pin_function": "IO_L16P_T2_35"
++      },
++      "n": {
++        "pin": "G18",
++        "bank": "35",
++        "site": "IOB_X1Y117",
++        "tile": "RIOB33_X73Y117",
++        "pin_function": "IO_L16N_T2_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "G19",
++        "bank": "35",
++        "site": "IOB_X1Y114",
++        "tile": "RIOB33_X73Y113",
++        "pin_function": "IO_L18P_T2_AD13P_35"
++      },
++      "n": {
++        "pin": "G20",
++        "bank": "35",
++        "site": "IOB_X1Y113",
++        "tile": "RIOB33_X73Y113",
++        "pin_function": "IO_L18N_T2_AD13N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "H15",
++        "bank": "35",
++        "site": "IOB_X1Y112",
++        "tile": "RIOB33_X73Y111",
++        "pin_function": "IO_L19P_T3_35"
++      },
++      "n": {
++        "pin": "G15",
++        "bank": "35",
++        "site": "IOB_X1Y111",
++        "tile": "RIOB33_X73Y111",
++        "pin_function": "IO_L19N_T3_VREF_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "H16",
++        "bank": "35",
++        "site": "IOB_X1Y124",
++        "tile": "RIOB33_X73Y123",
++        "pin_function": "IO_L13P_T2_MRCC_35"
++      },
++      "n": {
++        "pin": "H17",
++        "bank": "35",
++        "site": "IOB_X1Y123",
++        "tile": "RIOB33_X73Y123",
++        "pin_function": "IO_L13N_T2_MRCC_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "J18",
++        "bank": "35",
++        "site": "IOB_X1Y122",
++        "tile": "RIOB33_X73Y121",
++        "pin_function": "IO_L14P_T2_AD4P_SRCC_35"
++      },
++      "n": {
++        "pin": "H18",
++        "bank": "35",
++        "site": "IOB_X1Y121",
++        "tile": "RIOB33_X73Y121",
++        "pin_function": "IO_L14N_T2_AD4N_SRCC_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "J20",
++        "bank": "35",
++        "site": "IOB_X1Y116",
++        "tile": "RIOB33_X73Y115",
++        "pin_function": "IO_L17P_T2_AD5P_35"
++      },
++      "n": {
++        "pin": "H20",
++        "bank": "35",
++        "site": "IOB_X1Y115",
++        "tile": "RIOB33_X73Y115",
++        "pin_function": "IO_L17N_T2_AD5N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "K14",
++        "bank": "35",
++        "site": "IOB_X1Y110",
++        "tile": "RIOB33_X73Y109",
++        "pin_function": "IO_L20P_T3_AD6P_35"
++      },
++      "n": {
++        "pin": "J14",
++        "bank": "35",
++        "site": "IOB_X1Y109",
++        "tile": "RIOB33_X73Y109",
++        "pin_function": "IO_L20N_T3_AD6N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "K16",
++        "bank": "35",
++        "site": "IOB_X1Y102",
++        "tile": "RIOB33_X73Y101",
++        "pin_function": "IO_L24P_T3_AD15P_35"
++      },
++      "n": {
++        "pin": "J16",
++        "bank": "35",
++        "site": "IOB_X1Y101",
++        "tile": "RIOB33_X73Y101",
++        "pin_function": "IO_L24N_T3_AD15N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "K17",
++        "bank": "35",
++        "site": "IOB_X1Y126",
++        "tile": "RIOB33_X73Y125",
++        "pin_function": "IO_L12P_T1_MRCC_35"
++      },
++      "n": {
++        "pin": "K18",
++        "bank": "35",
++        "site": "IOB_X1Y125",
++        "tile": "RIOB33_X73Y125",
++        "pin_function": "IO_L12N_T1_MRCC_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "K19",
++        "bank": "35",
++        "site": "IOB_X1Y130",
++        "tile": "RIOB33_X73Y129",
++        "pin_function": "IO_L10P_T1_AD11P_35"
++      },
++      "n": {
++        "pin": "J19",
++        "bank": "35",
++        "site": "IOB_X1Y129",
++        "tile": "RIOB33_X73Y129",
++        "pin_function": "IO_L10N_T1_AD11N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "L14",
++        "bank": "35",
++        "site": "IOB_X1Y106",
++        "tile": "RIOB33_X73Y105",
++        "pin_function": "IO_L22P_T3_AD7P_35"
++      },
++      "n": {
++        "pin": "L15",
++        "bank": "35",
++        "site": "IOB_X1Y105",
++        "tile": "RIOB33_X73Y105",
++        "pin_function": "IO_L22N_T3_AD7N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "L16",
++        "bank": "35",
++        "site": "IOB_X1Y128",
++        "tile": "RIOB33_X73Y127",
++        "pin_function": "IO_L11P_T1_SRCC_35"
++      },
++      "n": {
++        "pin": "L17",
++        "bank": "35",
++        "site": "IOB_X1Y127",
++        "tile": "RIOB33_X73Y127",
++        "pin_function": "IO_L11N_T1_SRCC_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "L19",
++        "bank": "35",
++        "site": "IOB_X1Y132",
++        "tile": "RIOB33_X73Y131",
++        "pin_function": "IO_L9P_T1_DQS_AD3P_35"
++      },
++      "n": {
++        "pin": "L20",
++        "bank": "35",
++        "site": "IOB_X1Y131",
++        "tile": "RIOB33_X73Y131",
++        "pin_function": "IO_L9N_T1_DQS_AD3N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "M14",
++        "bank": "35",
++        "site": "IOB_X1Y104",
++        "tile": "RIOB33_X73Y103",
++        "pin_function": "IO_L23P_T3_35"
++      },
++      "n": {
++        "pin": "M15",
++        "bank": "35",
++        "site": "IOB_X1Y103",
++        "tile": "RIOB33_X73Y103",
++        "pin_function": "IO_L23N_T3_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "M17",
++        "bank": "35",
++        "site": "IOB_X1Y134",
++        "tile": "RIOB33_X73Y133",
++        "pin_function": "IO_L8P_T1_AD10P_35"
++      },
++      "n": {
++        "pin": "M18",
++        "bank": "35",
++        "site": "IOB_X1Y133",
++        "tile": "RIOB33_X73Y133",
++        "pin_function": "IO_L8N_T1_AD10N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "M19",
++        "bank": "35",
++        "site": "IOB_X1Y136",
++        "tile": "RIOB33_X73Y135",
++        "pin_function": "IO_L7P_T1_AD2P_35"
++      },
++      "n": {
++        "pin": "M20",
++        "bank": "35",
++        "site": "IOB_X1Y135",
++        "tile": "RIOB33_X73Y135",
++        "pin_function": "IO_L7N_T1_AD2N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "N15",
++        "bank": "35",
++        "site": "IOB_X1Y108",
++        "tile": "RIOB33_X73Y107",
++        "pin_function": "IO_L21P_T3_DQS_AD14P_35"
++      },
++      "n": {
++        "pin": "N16",
++        "bank": "35",
++        "site": "IOB_X1Y107",
++        "tile": "RIOB33_X73Y107",
++        "pin_function": "IO_L21N_T3_DQS_AD14N_35"
++      }
++    },
++    {
++      "p": {
++        "pin": "N17",
++        "bank": "34",
++        "site": "IOB_X1Y54",
++        "tile": "RIOB33_X73Y53",
++        "pin_function": "IO_L23P_T3_34"
++      },
++      "n": {
++        "pin": "P18",
++        "bank": "34",
++        "site": "IOB_X1Y53",
++        "tile": "RIOB33_X73Y53",
++        "pin_function": "IO_L23N_T3_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "N18",
++        "bank": "34",
++        "site": "IOB_X1Y74",
++        "tile": "RIOB33_X73Y73",
++        "pin_function": "IO_L13P_T2_MRCC_34"
++      },
++      "n": {
++        "pin": "P19",
++        "bank": "34",
++        "site": "IOB_X1Y73",
++        "tile": "RIOB33_X73Y73",
++        "pin_function": "IO_L13N_T2_MRCC_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "N20",
++        "bank": "34",
++        "site": "IOB_X1Y72",
++        "tile": "RIOB33_X73Y71",
++        "pin_function": "IO_L14P_T2_SRCC_34"
++      },
++      "n": {
++        "pin": "P20",
++        "bank": "34",
++        "site": "IOB_X1Y71",
++        "tile": "RIOB33_X73Y71",
++        "pin_function": "IO_L14N_T2_SRCC_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "P14",
++        "bank": "34",
++        "site": "IOB_X1Y88",
++        "tile": "RIOB33_X73Y87",
++        "pin_function": "IO_L6P_T0_34"
++      },
++      "n": {
++        "pin": "R14",
++        "bank": "34",
++        "site": "IOB_X1Y87",
++        "tile": "RIOB33_X73Y87",
++        "pin_function": "IO_L6N_T0_VREF_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "P15",
++        "bank": "34",
++        "site": "IOB_X1Y52",
++        "tile": "RIOB33_X73Y51",
++        "pin_function": "IO_L24P_T3_34"
++      },
++      "n": {
++        "pin": "P16",
++        "bank": "34",
++        "site": "IOB_X1Y51",
++        "tile": "RIOB33_X73Y51",
++        "pin_function": "IO_L24N_T3_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "R16",
++        "bank": "34",
++        "site": "IOB_X1Y62",
++        "tile": "RIOB33_X73Y61",
++        "pin_function": "IO_L19P_T3_34"
++      },
++      "n": {
++        "pin": "R17",
++        "bank": "34",
++        "site": "IOB_X1Y61",
++        "tile": "RIOB33_X73Y61",
++        "pin_function": "IO_L19N_T3_VREF_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T5",
++        "bank": "13",
++        "site": "IOB_X0Y12",
++        "tile": "LIOB33_X0Y11",
++        "pin_function": "IO_L19P_T3_13"
++      },
++      "n": {
++        "pin": "U5",
++        "bank": "13",
++        "site": "IOB_X0Y11",
++        "tile": "LIOB33_X0Y11",
++        "pin_function": "IO_L19N_T3_VREF_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "T9",
++        "bank": "13",
++        "site": "IOB_X0Y26",
++        "tile": "LIOB33_X0Y25",
++        "pin_function": "IO_L12P_T1_MRCC_13"
++      },
++      "n": {
++        "pin": "U10",
++        "bank": "13",
++        "site": "IOB_X0Y25",
++        "tile": "LIOB33_X0Y25",
++        "pin_function": "IO_L12N_T1_MRCC_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "T11",
++        "bank": "34",
++        "site": "IOB_X1Y98",
++        "tile": "RIOB33_X73Y97",
++        "pin_function": "IO_L1P_T0_34"
++      },
++      "n": {
++        "pin": "T10",
++        "bank": "34",
++        "site": "IOB_X1Y97",
++        "tile": "RIOB33_X73Y97",
++        "pin_function": "IO_L1N_T0_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T12",
++        "bank": "34",
++        "site": "IOB_X1Y96",
++        "tile": "RIOB33_X73Y95",
++        "pin_function": "IO_L2P_T0_34"
++      },
++      "n": {
++        "pin": "U12",
++        "bank": "34",
++        "site": "IOB_X1Y95",
++        "tile": "RIOB33_X73Y95",
++        "pin_function": "IO_L2N_T0_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T14",
++        "bank": "34",
++        "site": "IOB_X1Y90",
++        "tile": "RIOB33_X73Y89",
++        "pin_function": "IO_L5P_T0_34"
++      },
++      "n": {
++        "pin": "T15",
++        "bank": "34",
++        "site": "IOB_X1Y89",
++        "tile": "RIOB33_X73Y89",
++        "pin_function": "IO_L5N_T0_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T16",
++        "bank": "34",
++        "site": "IOB_X1Y82",
++        "tile": "RIOB33_X73Y81",
++        "pin_function": "IO_L9P_T1_DQS_34"
++      },
++      "n": {
++        "pin": "U17",
++        "bank": "34",
++        "site": "IOB_X1Y81",
++        "tile": "RIOB33_X73Y81",
++        "pin_function": "IO_L9N_T1_DQS_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T17",
++        "bank": "34",
++        "site": "IOB_X1Y60",
++        "tile": "RIOB33_X73Y59",
++        "pin_function": "IO_L20P_T3_34"
++      },
++      "n": {
++        "pin": "R18",
++        "bank": "34",
++        "site": "IOB_X1Y59",
++        "tile": "RIOB33_X73Y59",
++        "pin_function": "IO_L20N_T3_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "T20",
++        "bank": "34",
++        "site": "IOB_X1Y70",
++        "tile": "RIOB33_X73Y69",
++        "pin_function": "IO_L15P_T2_DQS_34"
++      },
++      "n": {
++        "pin": "U20",
++        "bank": "34",
++        "site": "IOB_X1Y69",
++        "tile": "RIOB33_X73Y69",
++        "pin_function": "IO_L15N_T2_DQS_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "U7",
++        "bank": "13",
++        "site": "IOB_X0Y28",
++        "tile": "LIOB33_X0Y27",
++        "pin_function": "IO_L11P_T1_SRCC_13"
++      },
++      "n": {
++        "pin": "V7",
++        "bank": "13",
++        "site": "IOB_X0Y27",
++        "tile": "LIOB33_X0Y27",
++        "pin_function": "IO_L11N_T1_SRCC_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "U9",
++        "bank": "13",
++        "site": "IOB_X0Y16",
++        "tile": "LIOB33_X0Y15",
++        "pin_function": "IO_L17P_T2_13"
++      },
++      "n": {
++        "pin": "U8",
++        "bank": "13",
++        "site": "IOB_X0Y15",
++        "tile": "LIOB33_X0Y15",
++        "pin_function": "IO_L17N_T2_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "U13",
++        "bank": "34",
++        "site": "IOB_X1Y94",
++        "tile": "RIOB33_X73Y93",
++        "pin_function": "IO_L3P_T0_DQS_PUDC_B_34"
++      },
++      "n": {
++        "pin": "V13",
++        "bank": "34",
++        "site": "IOB_X1Y93",
++        "tile": "RIOB33_X73Y93",
++        "pin_function": "IO_L3N_T0_DQS_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "U14",
++        "bank": "34",
++        "site": "IOB_X1Y78",
++        "tile": "RIOB33_X73Y77",
++        "pin_function": "IO_L11P_T1_SRCC_34"
++      },
++      "n": {
++        "pin": "U15",
++        "bank": "34",
++        "site": "IOB_X1Y77",
++        "tile": "RIOB33_X73Y77",
++        "pin_function": "IO_L11N_T1_SRCC_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "U18",
++        "bank": "34",
++        "site": "IOB_X1Y76",
++        "tile": "RIOB33_X73Y75",
++        "pin_function": "IO_L12P_T1_MRCC_34"
++      },
++      "n": {
++        "pin": "U19",
++        "bank": "34",
++        "site": "IOB_X1Y75",
++        "tile": "RIOB33_X73Y75",
++        "pin_function": "IO_L12N_T1_MRCC_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "V6",
++        "bank": "13",
++        "site": "IOB_X0Y6",
++        "tile": "LIOB33_X0Y5",
++        "pin_function": "IO_L22P_T3_13"
++      },
++      "n": {
++        "pin": "W6",
++        "bank": "13",
++        "site": "IOB_X0Y5",
++        "tile": "LIOB33_X0Y5",
++        "pin_function": "IO_L22N_T3_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "V8",
++        "bank": "13",
++        "site": "IOB_X0Y20",
++        "tile": "LIOB33_X0Y19",
++        "pin_function": "IO_L15P_T2_DQS_13"
++      },
++      "n": {
++        "pin": "W8",
++        "bank": "13",
++        "site": "IOB_X0Y19",
++        "tile": "LIOB33_X0Y19",
++        "pin_function": "IO_L15N_T2_DQS_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "V11",
++        "bank": "13",
++        "site": "IOB_X0Y8",
++        "tile": "LIOB33_X0Y7",
++        "pin_function": "IO_L21P_T3_DQS_13"
++      },
++      "n": {
++        "pin": "V10",
++        "bank": "13",
++        "site": "IOB_X0Y7",
++        "tile": "LIOB33_X0Y7",
++        "pin_function": "IO_L21N_T3_DQS_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "V12",
++        "bank": "34",
++        "site": "IOB_X1Y92",
++        "tile": "RIOB33_X73Y91",
++        "pin_function": "IO_L4P_T0_34"
++      },
++      "n": {
++        "pin": "W13",
++        "bank": "34",
++        "site": "IOB_X1Y91",
++        "tile": "RIOB33_X73Y91",
++        "pin_function": "IO_L4N_T0_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "V15",
++        "bank": "34",
++        "site": "IOB_X1Y80",
++        "tile": "RIOB33_X73Y79",
++        "pin_function": "IO_L10P_T1_34"
++      },
++      "n": {
++        "pin": "W15",
++        "bank": "34",
++        "site": "IOB_X1Y79",
++        "tile": "RIOB33_X73Y79",
++        "pin_function": "IO_L10N_T1_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "V16",
++        "bank": "34",
++        "site": "IOB_X1Y64",
++        "tile": "RIOB33_X73Y63",
++        "pin_function": "IO_L18P_T2_34"
++      },
++      "n": {
++        "pin": "W16",
++        "bank": "34",
++        "site": "IOB_X1Y63",
++        "tile": "RIOB33_X73Y63",
++        "pin_function": "IO_L18N_T2_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "V17",
++        "bank": "34",
++        "site": "IOB_X1Y58",
++        "tile": "RIOB33_X73Y57",
++        "pin_function": "IO_L21P_T3_DQS_34"
++      },
++      "n": {
++        "pin": "V18",
++        "bank": "34",
++        "site": "IOB_X1Y57",
++        "tile": "RIOB33_X73Y57",
++        "pin_function": "IO_L21N_T3_DQS_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "V20",
++        "bank": "34",
++        "site": "IOB_X1Y68",
++        "tile": "RIOB33_X73Y67",
++        "pin_function": "IO_L16P_T2_34"
++      },
++      "n": {
++        "pin": "W20",
++        "bank": "34",
++        "site": "IOB_X1Y67",
++        "tile": "RIOB33_X73Y67",
++        "pin_function": "IO_L16N_T2_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "W10",
++        "bank": "13",
++        "site": "IOB_X0Y18",
++        "tile": "LIOB33_X0Y17",
++        "pin_function": "IO_L16P_T2_13"
++      },
++      "n": {
++        "pin": "W9",
++        "bank": "13",
++        "site": "IOB_X0Y17",
++        "tile": "LIOB33_X0Y17",
++        "pin_function": "IO_L16N_T2_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "W11",
++        "bank": "13",
++        "site": "IOB_X0Y14",
++        "tile": "LIOB33_X0Y13",
++        "pin_function": "IO_L18P_T2_13"
++      },
++      "n": {
++        "pin": "Y11",
++        "bank": "13",
++        "site": "IOB_X0Y13",
++        "tile": "LIOB33_X0Y13",
++        "pin_function": "IO_L18N_T2_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "W14",
++        "bank": "34",
++        "site": "IOB_X1Y84",
++        "tile": "RIOB33_X73Y83",
++        "pin_function": "IO_L8P_T1_34"
++      },
++      "n": {
++        "pin": "Y14",
++        "bank": "34",
++        "site": "IOB_X1Y83",
++        "tile": "RIOB33_X73Y83",
++        "pin_function": "IO_L8N_T1_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "W18",
++        "bank": "34",
++        "site": "IOB_X1Y56",
++        "tile": "RIOB33_X73Y55",
++        "pin_function": "IO_L22P_T3_34"
++      },
++      "n": {
++        "pin": "W19",
++        "bank": "34",
++        "site": "IOB_X1Y55",
++        "tile": "RIOB33_X73Y55",
++        "pin_function": "IO_L22N_T3_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "Y7",
++        "bank": "13",
++        "site": "IOB_X0Y24",
++        "tile": "LIOB33_X0Y23",
++        "pin_function": "IO_L13P_T2_MRCC_13"
++      },
++      "n": {
++        "pin": "Y6",
++        "bank": "13",
++        "site": "IOB_X0Y23",
++        "tile": "LIOB33_X0Y23",
++        "pin_function": "IO_L13N_T2_MRCC_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "Y9",
++        "bank": "13",
++        "site": "IOB_X0Y22",
++        "tile": "LIOB33_X0Y21",
++        "pin_function": "IO_L14P_T2_SRCC_13"
++      },
++      "n": {
++        "pin": "Y8",
++        "bank": "13",
++        "site": "IOB_X0Y21",
++        "tile": "LIOB33_X0Y21",
++        "pin_function": "IO_L14N_T2_SRCC_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "Y12",
++        "bank": "13",
++        "site": "IOB_X0Y10",
++        "tile": "LIOB33_X0Y9",
++        "pin_function": "IO_L20P_T3_13"
++      },
++      "n": {
++        "pin": "Y13",
++        "bank": "13",
++        "site": "IOB_X0Y9",
++        "tile": "LIOB33_X0Y9",
++        "pin_function": "IO_L20N_T3_13"
++      }
++    },
++    {
++      "p": {
++        "pin": "Y16",
++        "bank": "34",
++        "site": "IOB_X1Y86",
++        "tile": "RIOB33_X73Y85",
++        "pin_function": "IO_L7P_T1_34"
++      },
++      "n": {
++        "pin": "Y17",
++        "bank": "34",
++        "site": "IOB_X1Y85",
++        "tile": "RIOB33_X73Y85",
++        "pin_function": "IO_L7N_T1_34"
++      }
++    },
++    {
++      "p": {
++        "pin": "Y18",
++        "bank": "34",
++        "site": "IOB_X1Y66",
++        "tile": "RIOB33_X73Y65",
++        "pin_function": "IO_L17P_T2_34"
++      },
++      "n": {
++        "pin": "Y19",
++        "bank": "34",
++        "site": "IOB_X1Y65",
++        "tile": "RIOB33_X73Y65",
++        "pin_function": "IO_L17N_T2_34"
++      }
++    }
++  ],
++  "outputs": [
++    {
++      "pin": "G14",
++      "bank": "35",
++      "site": "IOB_X1Y149",
++      "tile": "RIOB33_SING_X73Y149",
++      "pin_function": "IO_0_35"
++    }
++  ],
++  "reserved_pair": null,
++  "all_bonded_pairs": true
++}
+diff --git a/minitests/iob-diff-term/reference.tcl b/minitests/iob-diff-term/reference.tcl
+new file mode 100644
+index 0000000..076b0e4
+--- /dev/null
++++ b/minitests/iob-diff-term/reference.tcl
+@@ -0,0 +1,203 @@
++create_project -in_memory -part xc7z020clg400-1
++read_verilog top.v
++synth_design -top top
++set_property -dict {PACKAGE_PIN B19 IOSTANDARD LVDS_25} [get_ports {in_p[0]}]
++set_property -dict {PACKAGE_PIN A20 IOSTANDARD LVDS_25} [get_ports {in_n[0]}]
++set_property -dict {PACKAGE_PIN C20 IOSTANDARD LVDS_25} [get_ports {in_p[1]}]
++set_property -dict {PACKAGE_PIN B20 IOSTANDARD LVDS_25} [get_ports {in_n[1]}]
++set_property -dict {PACKAGE_PIN D19 IOSTANDARD LVDS_25} [get_ports {in_p[2]}]
++set_property -dict {PACKAGE_PIN D20 IOSTANDARD LVDS_25} [get_ports {in_n[2]}]
++set_property -dict {PACKAGE_PIN E17 IOSTANDARD LVDS_25} [get_ports {in_p[3]}]
++set_property -dict {PACKAGE_PIN D18 IOSTANDARD LVDS_25} [get_ports {in_n[3]}]
++set_property -dict {PACKAGE_PIN E18 IOSTANDARD LVDS_25} [get_ports {in_p[4]}]
++set_property -dict {PACKAGE_PIN E19 IOSTANDARD LVDS_25} [get_ports {in_n[4]}]
++set_property -dict {PACKAGE_PIN F16 IOSTANDARD LVDS_25} [get_ports {in_p[5]}]
++set_property -dict {PACKAGE_PIN F17 IOSTANDARD LVDS_25} [get_ports {in_n[5]}]
++set_property -dict {PACKAGE_PIN F19 IOSTANDARD LVDS_25} [get_ports {in_p[6]}]
++set_property -dict {PACKAGE_PIN F20 IOSTANDARD LVDS_25} [get_ports {in_n[6]}]
++set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVDS_25} [get_ports {in_p[7]}]
++set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVDS_25} [get_ports {in_n[7]}]
++set_property -dict {PACKAGE_PIN G19 IOSTANDARD LVDS_25} [get_ports {in_p[8]}]
++set_property -dict {PACKAGE_PIN G20 IOSTANDARD LVDS_25} [get_ports {in_n[8]}]
++set_property -dict {PACKAGE_PIN H15 IOSTANDARD LVDS_25} [get_ports {in_p[9]}]
++set_property -dict {PACKAGE_PIN G15 IOSTANDARD LVDS_25} [get_ports {in_n[9]}]
++set_property -dict {PACKAGE_PIN H16 IOSTANDARD LVDS_25} [get_ports {in_p[10]}]
++set_property -dict {PACKAGE_PIN H17 IOSTANDARD LVDS_25} [get_ports {in_n[10]}]
++set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVDS_25} [get_ports {in_p[11]}]
++set_property -dict {PACKAGE_PIN H18 IOSTANDARD LVDS_25} [get_ports {in_n[11]}]
++set_property -dict {PACKAGE_PIN J20 IOSTANDARD LVDS_25} [get_ports {in_p[12]}]
++set_property -dict {PACKAGE_PIN H20 IOSTANDARD LVDS_25} [get_ports {in_n[12]}]
++set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVDS_25} [get_ports {in_p[13]}]
++set_property -dict {PACKAGE_PIN J14 IOSTANDARD LVDS_25} [get_ports {in_n[13]}]
++set_property -dict {PACKAGE_PIN K16 IOSTANDARD LVDS_25} [get_ports {in_p[14]}]
++set_property -dict {PACKAGE_PIN J16 IOSTANDARD LVDS_25} [get_ports {in_n[14]}]
++set_property -dict {PACKAGE_PIN K17 IOSTANDARD LVDS_25} [get_ports {in_p[15]}]
++set_property -dict {PACKAGE_PIN K18 IOSTANDARD LVDS_25} [get_ports {in_n[15]}]
++set_property -dict {PACKAGE_PIN K19 IOSTANDARD LVDS_25} [get_ports {in_p[16]}]
++set_property -dict {PACKAGE_PIN J19 IOSTANDARD LVDS_25} [get_ports {in_n[16]}]
++set_property -dict {PACKAGE_PIN L14 IOSTANDARD LVDS_25} [get_ports {in_p[17]}]
++set_property -dict {PACKAGE_PIN L15 IOSTANDARD LVDS_25} [get_ports {in_n[17]}]
++set_property -dict {PACKAGE_PIN L16 IOSTANDARD LVDS_25} [get_ports {in_p[18]}]
++set_property -dict {PACKAGE_PIN L17 IOSTANDARD LVDS_25} [get_ports {in_n[18]}]
++set_property -dict {PACKAGE_PIN L19 IOSTANDARD LVDS_25} [get_ports {in_p[19]}]
++set_property -dict {PACKAGE_PIN L20 IOSTANDARD LVDS_25} [get_ports {in_n[19]}]
++set_property -dict {PACKAGE_PIN M14 IOSTANDARD LVDS_25} [get_ports {in_p[20]}]
++set_property -dict {PACKAGE_PIN M15 IOSTANDARD LVDS_25} [get_ports {in_n[20]}]
++set_property -dict {PACKAGE_PIN M17 IOSTANDARD LVDS_25} [get_ports {in_p[21]}]
++set_property -dict {PACKAGE_PIN M18 IOSTANDARD LVDS_25} [get_ports {in_n[21]}]
++set_property -dict {PACKAGE_PIN M19 IOSTANDARD LVDS_25} [get_ports {in_p[22]}]
++set_property -dict {PACKAGE_PIN M20 IOSTANDARD LVDS_25} [get_ports {in_n[22]}]
++set_property -dict {PACKAGE_PIN N15 IOSTANDARD LVDS_25} [get_ports {in_p[23]}]
++set_property -dict {PACKAGE_PIN N16 IOSTANDARD LVDS_25} [get_ports {in_n[23]}]
++set_property -dict {PACKAGE_PIN N17 IOSTANDARD LVDS_25} [get_ports {in_p[24]}]
++set_property -dict {PACKAGE_PIN P18 IOSTANDARD LVDS_25} [get_ports {in_n[24]}]
++set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVDS_25} [get_ports {in_p[25]}]
++set_property -dict {PACKAGE_PIN P19 IOSTANDARD LVDS_25} [get_ports {in_n[25]}]
++set_property -dict {PACKAGE_PIN N20 IOSTANDARD LVDS_25} [get_ports {in_p[26]}]
++set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVDS_25} [get_ports {in_n[26]}]
++set_property -dict {PACKAGE_PIN P14 IOSTANDARD LVDS_25} [get_ports {in_p[27]}]
++set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVDS_25} [get_ports {in_n[27]}]
++set_property -dict {PACKAGE_PIN P15 IOSTANDARD LVDS_25} [get_ports {in_p[28]}]
++set_property -dict {PACKAGE_PIN P16 IOSTANDARD LVDS_25} [get_ports {in_n[28]}]
++set_property -dict {PACKAGE_PIN R16 IOSTANDARD LVDS_25} [get_ports {in_p[29]}]
++set_property -dict {PACKAGE_PIN R17 IOSTANDARD LVDS_25} [get_ports {in_n[29]}]
++set_property -dict {PACKAGE_PIN T5 IOSTANDARD LVDS_25} [get_ports {in_p[30]}]
++set_property -dict {PACKAGE_PIN U5 IOSTANDARD LVDS_25} [get_ports {in_n[30]}]
++set_property -dict {PACKAGE_PIN T9 IOSTANDARD LVDS_25} [get_ports {in_p[31]}]
++set_property -dict {PACKAGE_PIN U10 IOSTANDARD LVDS_25} [get_ports {in_n[31]}]
++set_property -dict {PACKAGE_PIN T11 IOSTANDARD LVDS_25} [get_ports {in_p[32]}]
++set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVDS_25} [get_ports {in_n[32]}]
++set_property -dict {PACKAGE_PIN T12 IOSTANDARD LVDS_25} [get_ports {in_p[33]}]
++set_property -dict {PACKAGE_PIN U12 IOSTANDARD LVDS_25} [get_ports {in_n[33]}]
++set_property -dict {PACKAGE_PIN T14 IOSTANDARD LVDS_25} [get_ports {in_p[34]}]
++set_property -dict {PACKAGE_PIN T15 IOSTANDARD LVDS_25} [get_ports {in_n[34]}]
++set_property -dict {PACKAGE_PIN T16 IOSTANDARD LVDS_25} [get_ports {in_p[35]}]
++set_property -dict {PACKAGE_PIN U17 IOSTANDARD LVDS_25} [get_ports {in_n[35]}]
++set_property -dict {PACKAGE_PIN T17 IOSTANDARD LVDS_25} [get_ports {in_p[36]}]
++set_property -dict {PACKAGE_PIN R18 IOSTANDARD LVDS_25} [get_ports {in_n[36]}]
++set_property -dict {PACKAGE_PIN T20 IOSTANDARD LVDS_25} [get_ports {in_p[37]}]
++set_property -dict {PACKAGE_PIN U20 IOSTANDARD LVDS_25} [get_ports {in_n[37]}]
++set_property -dict {PACKAGE_PIN U7 IOSTANDARD LVDS_25} [get_ports {in_p[38]}]
++set_property -dict {PACKAGE_PIN V7 IOSTANDARD LVDS_25} [get_ports {in_n[38]}]
++set_property -dict {PACKAGE_PIN U9 IOSTANDARD LVDS_25} [get_ports {in_p[39]}]
++set_property -dict {PACKAGE_PIN U8 IOSTANDARD LVDS_25} [get_ports {in_n[39]}]
++set_property -dict {PACKAGE_PIN U13 IOSTANDARD LVDS_25} [get_ports {in_p[40]}]
++set_property -dict {PACKAGE_PIN V13 IOSTANDARD LVDS_25} [get_ports {in_n[40]}]
++set_property -dict {PACKAGE_PIN U14 IOSTANDARD LVDS_25} [get_ports {in_p[41]}]
++set_property -dict {PACKAGE_PIN U15 IOSTANDARD LVDS_25} [get_ports {in_n[41]}]
++set_property -dict {PACKAGE_PIN U18 IOSTANDARD LVDS_25} [get_ports {in_p[42]}]
++set_property -dict {PACKAGE_PIN U19 IOSTANDARD LVDS_25} [get_ports {in_n[42]}]
++set_property -dict {PACKAGE_PIN V6 IOSTANDARD LVDS_25} [get_ports {in_p[43]}]
++set_property -dict {PACKAGE_PIN W6 IOSTANDARD LVDS_25} [get_ports {in_n[43]}]
++set_property -dict {PACKAGE_PIN V8 IOSTANDARD LVDS_25} [get_ports {in_p[44]}]
++set_property -dict {PACKAGE_PIN W8 IOSTANDARD LVDS_25} [get_ports {in_n[44]}]
++set_property -dict {PACKAGE_PIN V11 IOSTANDARD LVDS_25} [get_ports {in_p[45]}]
++set_property -dict {PACKAGE_PIN V10 IOSTANDARD LVDS_25} [get_ports {in_n[45]}]
++set_property -dict {PACKAGE_PIN V12 IOSTANDARD LVDS_25} [get_ports {in_p[46]}]
++set_property -dict {PACKAGE_PIN W13 IOSTANDARD LVDS_25} [get_ports {in_n[46]}]
++set_property -dict {PACKAGE_PIN V15 IOSTANDARD LVDS_25} [get_ports {in_p[47]}]
++set_property -dict {PACKAGE_PIN W15 IOSTANDARD LVDS_25} [get_ports {in_n[47]}]
++set_property -dict {PACKAGE_PIN V16 IOSTANDARD LVDS_25} [get_ports {in_p[48]}]
++set_property -dict {PACKAGE_PIN W16 IOSTANDARD LVDS_25} [get_ports {in_n[48]}]
++set_property -dict {PACKAGE_PIN V17 IOSTANDARD LVDS_25} [get_ports {in_p[49]}]
++set_property -dict {PACKAGE_PIN V18 IOSTANDARD LVDS_25} [get_ports {in_n[49]}]
++set_property -dict {PACKAGE_PIN V20 IOSTANDARD LVDS_25} [get_ports {in_p[50]}]
++set_property -dict {PACKAGE_PIN W20 IOSTANDARD LVDS_25} [get_ports {in_n[50]}]
++set_property -dict {PACKAGE_PIN W10 IOSTANDARD LVDS_25} [get_ports {in_p[51]}]
++set_property -dict {PACKAGE_PIN W9 IOSTANDARD LVDS_25} [get_ports {in_n[51]}]
++set_property -dict {PACKAGE_PIN W11 IOSTANDARD LVDS_25} [get_ports {in_p[52]}]
++set_property -dict {PACKAGE_PIN Y11 IOSTANDARD LVDS_25} [get_ports {in_n[52]}]
++set_property -dict {PACKAGE_PIN W14 IOSTANDARD LVDS_25} [get_ports {in_p[53]}]
++set_property -dict {PACKAGE_PIN Y14 IOSTANDARD LVDS_25} [get_ports {in_n[53]}]
++set_property -dict {PACKAGE_PIN W18 IOSTANDARD LVDS_25} [get_ports {in_p[54]}]
++set_property -dict {PACKAGE_PIN W19 IOSTANDARD LVDS_25} [get_ports {in_n[54]}]
++set_property -dict {PACKAGE_PIN Y7 IOSTANDARD LVDS_25} [get_ports {in_p[55]}]
++set_property -dict {PACKAGE_PIN Y6 IOSTANDARD LVDS_25} [get_ports {in_n[55]}]
++set_property -dict {PACKAGE_PIN Y9 IOSTANDARD LVDS_25} [get_ports {in_p[56]}]
++set_property -dict {PACKAGE_PIN Y8 IOSTANDARD LVDS_25} [get_ports {in_n[56]}]
++set_property -dict {PACKAGE_PIN Y12 IOSTANDARD LVDS_25} [get_ports {in_p[57]}]
++set_property -dict {PACKAGE_PIN Y13 IOSTANDARD LVDS_25} [get_ports {in_n[57]}]
++set_property -dict {PACKAGE_PIN Y16 IOSTANDARD LVDS_25} [get_ports {in_p[58]}]
++set_property -dict {PACKAGE_PIN Y17 IOSTANDARD LVDS_25} [get_ports {in_n[58]}]
++set_property -dict {PACKAGE_PIN Y18 IOSTANDARD LVDS_25} [get_ports {in_p[59]}]
++set_property -dict {PACKAGE_PIN Y19 IOSTANDARD LVDS_25} [get_ports {in_n[59]}]
++set_property -dict {PACKAGE_PIN G14 IOSTANDARD LVCMOS25} [get_ports out]
++set_property CFGBVS VCCO [current_design]
++set_property CONFIG_VOLTAGE 2.5 [current_design]
++set_property BITSTREAM.GENERAL.COMPRESS FALSE [current_design]
++opt_design
++place_design
++route_design
++report_io -file baseline-io.txt
++write_checkpoint -force routed.dcp
++proc emit {name enabled} {
++    for {set i 0} {$i < 60} {incr i} {
++        set val [expr {[lsearch -exact $enabled $i] >= 0 ? "TRUE" : "FALSE"}]
++        set_property DIFF_TERM $val [get_ports [format {in_p[%d]} $i]]
++    }
++    report_io -file $name-io.txt
++    write_bitstream -force $name.bit
++}
++emit off {}
++emit pair0 {0}
++emit pair1 {1}
++emit pair2 {2}
++emit pair3 {3}
++emit pair4 {4}
++emit pair5 {5}
++emit pair6 {6}
++emit pair7 {7}
++emit pair8 {8}
++emit pair9 {9}
++emit pair10 {10}
++emit pair11 {11}
++emit pair12 {12}
++emit pair13 {13}
++emit pair14 {14}
++emit pair15 {15}
++emit pair16 {16}
++emit pair17 {17}
++emit pair18 {18}
++emit pair19 {19}
++emit pair20 {20}
++emit pair21 {21}
++emit pair22 {22}
++emit pair23 {23}
++emit pair24 {24}
++emit pair25 {25}
++emit pair26 {26}
++emit pair27 {27}
++emit pair28 {28}
++emit pair29 {29}
++emit pair30 {30}
++emit pair31 {31}
++emit pair32 {32}
++emit pair33 {33}
++emit pair34 {34}
++emit pair35 {35}
++emit pair36 {36}
++emit pair37 {37}
++emit pair38 {38}
++emit pair39 {39}
++emit pair40 {40}
++emit pair41 {41}
++emit pair42 {42}
++emit pair43 {43}
++emit pair44 {44}
++emit pair45 {45}
++emit pair46 {46}
++emit pair47 {47}
++emit pair48 {48}
++emit pair49 {49}
++emit pair50 {50}
++emit pair51 {51}
++emit pair52 {52}
++emit pair53 {53}
++emit pair54 {54}
++emit pair55 {55}
++emit pair56 {56}
++emit pair57 {57}
++emit pair58 {58}
++emit pair59 {59}
++emit all {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59}
++emit off-repeat {}
+diff --git a/minitests/iob-diff-term/top.v b/minitests/iob-diff-term/top.v
+new file mode 100644
+index 0000000..f1f5611
+--- /dev/null
++++ b/minitests/iob-diff-term/top.v
+@@ -0,0 +1,64 @@
++module top(input [59:0] in_p, in_n, output out);
++wire [59:0] received;
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver0 (.I(in_p[0]), .IB(in_n[0]), .O(received[0]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver1 (.I(in_p[1]), .IB(in_n[1]), .O(received[1]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver2 (.I(in_p[2]), .IB(in_n[2]), .O(received[2]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver3 (.I(in_p[3]), .IB(in_n[3]), .O(received[3]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver4 (.I(in_p[4]), .IB(in_n[4]), .O(received[4]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver5 (.I(in_p[5]), .IB(in_n[5]), .O(received[5]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver6 (.I(in_p[6]), .IB(in_n[6]), .O(received[6]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver7 (.I(in_p[7]), .IB(in_n[7]), .O(received[7]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver8 (.I(in_p[8]), .IB(in_n[8]), .O(received[8]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver9 (.I(in_p[9]), .IB(in_n[9]), .O(received[9]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver10 (.I(in_p[10]), .IB(in_n[10]), .O(received[10]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver11 (.I(in_p[11]), .IB(in_n[11]), .O(received[11]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver12 (.I(in_p[12]), .IB(in_n[12]), .O(received[12]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver13 (.I(in_p[13]), .IB(in_n[13]), .O(received[13]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver14 (.I(in_p[14]), .IB(in_n[14]), .O(received[14]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver15 (.I(in_p[15]), .IB(in_n[15]), .O(received[15]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver16 (.I(in_p[16]), .IB(in_n[16]), .O(received[16]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver17 (.I(in_p[17]), .IB(in_n[17]), .O(received[17]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver18 (.I(in_p[18]), .IB(in_n[18]), .O(received[18]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver19 (.I(in_p[19]), .IB(in_n[19]), .O(received[19]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver20 (.I(in_p[20]), .IB(in_n[20]), .O(received[20]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver21 (.I(in_p[21]), .IB(in_n[21]), .O(received[21]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver22 (.I(in_p[22]), .IB(in_n[22]), .O(received[22]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver23 (.I(in_p[23]), .IB(in_n[23]), .O(received[23]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver24 (.I(in_p[24]), .IB(in_n[24]), .O(received[24]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver25 (.I(in_p[25]), .IB(in_n[25]), .O(received[25]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver26 (.I(in_p[26]), .IB(in_n[26]), .O(received[26]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver27 (.I(in_p[27]), .IB(in_n[27]), .O(received[27]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver28 (.I(in_p[28]), .IB(in_n[28]), .O(received[28]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver29 (.I(in_p[29]), .IB(in_n[29]), .O(received[29]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver30 (.I(in_p[30]), .IB(in_n[30]), .O(received[30]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver31 (.I(in_p[31]), .IB(in_n[31]), .O(received[31]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver32 (.I(in_p[32]), .IB(in_n[32]), .O(received[32]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver33 (.I(in_p[33]), .IB(in_n[33]), .O(received[33]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver34 (.I(in_p[34]), .IB(in_n[34]), .O(received[34]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver35 (.I(in_p[35]), .IB(in_n[35]), .O(received[35]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver36 (.I(in_p[36]), .IB(in_n[36]), .O(received[36]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver37 (.I(in_p[37]), .IB(in_n[37]), .O(received[37]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver38 (.I(in_p[38]), .IB(in_n[38]), .O(received[38]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver39 (.I(in_p[39]), .IB(in_n[39]), .O(received[39]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver40 (.I(in_p[40]), .IB(in_n[40]), .O(received[40]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver41 (.I(in_p[41]), .IB(in_n[41]), .O(received[41]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver42 (.I(in_p[42]), .IB(in_n[42]), .O(received[42]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver43 (.I(in_p[43]), .IB(in_n[43]), .O(received[43]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver44 (.I(in_p[44]), .IB(in_n[44]), .O(received[44]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver45 (.I(in_p[45]), .IB(in_n[45]), .O(received[45]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver46 (.I(in_p[46]), .IB(in_n[46]), .O(received[46]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver47 (.I(in_p[47]), .IB(in_n[47]), .O(received[47]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver48 (.I(in_p[48]), .IB(in_n[48]), .O(received[48]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver49 (.I(in_p[49]), .IB(in_n[49]), .O(received[49]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver50 (.I(in_p[50]), .IB(in_n[50]), .O(received[50]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver51 (.I(in_p[51]), .IB(in_n[51]), .O(received[51]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver52 (.I(in_p[52]), .IB(in_n[52]), .O(received[52]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver53 (.I(in_p[53]), .IB(in_n[53]), .O(received[53]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver54 (.I(in_p[54]), .IB(in_n[54]), .O(received[54]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver55 (.I(in_p[55]), .IB(in_n[55]), .O(received[55]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver56 (.I(in_p[56]), .IB(in_n[56]), .O(received[56]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver57 (.I(in_p[57]), .IB(in_n[57]), .O(received[57]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver58 (.I(in_p[58]), .IB(in_n[58]), .O(received[58]));
++IBUFDS #(.IOSTANDARD("LVDS_25"), .DIFF_TERM("FALSE")) receiver59 (.I(in_p[59]), .IB(in_n[59]), .O(received[59]));
++assign out = ^received;
++endmodule
+diff --git a/minitests/iob-diff-term/verify_bits.py b/minitests/iob-diff-term/verify_bits.py
+new file mode 100644
+index 0000000..cb6a3f2
+--- /dev/null
++++ b/minitests/iob-diff-term/verify_bits.py
+@@ -0,0 +1,79 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: ISC
++"""Extract HR DIFF_TERM feature bits from a controlled, route-once comparator.
++
++Reject unrelated changes, inconsistent same-type tiles and a changed baseline.
++ECC word 50 is derived frame data, not a configurable feature.
++"""
++import argparse
++import hashlib
++import json
++from pathlib import Path
++import re
++
++def read_bits(path):
++    result = set()
++    for line in path.read_text().splitlines():
++        match = re.fullmatch(r'bit_([0-9a-fA-F]{8})_(\d+)_(\d+)', line)
++        if not match:
++            raise ValueError('Unexpected bitread output: '+line)
++        frame, word, bit = int(match[1], 16), int(match[2]), int(match[3])
++        if word != 50:
++            result.add((frame, word, bit))
++    return result
++
++
++def main():
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument('reference', type=Path, nargs='?', default=Path('.'))
++    p.add_argument('--db', type=Path, required=True)
++    a = p.parse_args()
++    pins = json.loads((a.reference/'pins.json').read_text())
++    part = pins['part'].rsplit('-', 1)[0]
++    # Package name is not the tilegrid directory name.
++    die = re.match(r'(xc7z\d+)', part)[1]
++    grid = json.loads((a.db/die/'tilegrid.json').read_text())
++    off = read_bits(a.reference/'off.bits')
++    if off != read_bits(a.reference/'off-repeat.bits'):
++        raise RuntimeError('Repeated baseline changed configuration bits')
++    features, evidence, additions, removals = {}, [], set(), set()
++    for i, pair in enumerate(pins['pairs']):
++        on = read_bits(a.reference/f'pair{i}.bits')
++        added, removed = on-off, off-on
++        if not added and not removed:
++            raise RuntimeError('DIFF_TERM changed no bits')
++        name = pair['p']['tile']
++        tile = grid[name]
++        region = tile['bits']['CLB_IO_CLK']
++        base = int(region['baseaddr'], 16)
++        tags = []
++        for state, changed in ((True, added), (False, removed)):
++            for frame, word, bit in sorted(changed):
++                if not (base <= frame < base+region['frames'] and
++                        region['offset'] <= word < region['offset']+region['words']):
++                    raise RuntimeError(f'DIFF_TERM also changes bits outside {name}: {frame:08x}/{word}/{bit}')
++                tags.append(('' if state else '!')+f'{frame-base:02d}_{32*(word-region["offset"])+bit:02d}')
++        tags.sort()
++        feature = tile['type']+'.DIFF.DIFF_TERM'
++        if feature in features and features[feature] != tags:
++            raise RuntimeError('Same tile type has inconsistent DIFF_TERM mapping')
++        features[feature] = tags
++        evidence.append(dict(pair=i, tile=name, feature=feature, bits=tags,
++                             added=len(added), removed=len(removed)))
++        additions |= added
++        removals |= removed
++    if additions & removals:
++        raise RuntimeError('Per-pair changes conflict')
++    if read_bits(a.reference/'all.bits') != (off-removals)|additions:
++        raise RuntimeError('All-on configuration is not the union of individual changes')
++    inputs = sorted(a.reference.glob('*.bit'))
++    result = dict(features=features, pairs=evidence,
++                  source_sha256={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
++                  repeated_baseline_identical=True, all_on_union_verified=True,
++                  comparator_part=pins['part'], ecc_word_excluded=50)
++    (a.reference/'mapping.json').write_text(json.dumps(result, indent=2)+'\n')
++    print(json.dumps(result, indent=2))
++
++
++if __name__ == '__main__':
++    main()
+diff --git a/tests/test_iob_diff_term.py b/tests/test_iob_diff_term.py
+new file mode 100644
+index 0000000..79a8c6f
+--- /dev/null
++++ b/tests/test_iob_diff_term.py
+@@ -0,0 +1,70 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: ISC
++"""Exercise 030-iob's real tag generator without Vivado or a device database."""
++import importlib.util
++import json
++import os
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch, MagicMock
++
++ROOT = Path(__file__).resolve().parents[1]
++spec = importlib.util.spec_from_file_location(
++    'iob_generate', ROOT / 'fuzzers/030-iob/generate.py')
++generate = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(generate)
++
++
++class TestDiffTerm(unittest.TestCase):
++    def tags(self, kind='IBUFDS', excluded=False, standard='LVDS_25'):
++        with tempfile.TemporaryDirectory() as tmp:
++            root = Path(tmp)
++            (root / 'build').mkdir()
++            (root / 'build/iobanks.txt').write_text('IOB_X0Y2,13\nIOB_X0Y4,13\n')
++            (root / 'build/pudc_sites.csv').write_text(
++                'tile\n' + ('LIOB33_X0Y1\n' if excluded else ''))
++            (root / 'build/cmt_regions.csv').write_text(
++                'IOB_X0Y2,LIOB33_X0Y1,CMT0\n'
++                'IOB_X0Y4,LIOB33_X0Y3,CMT0\n'
++                'IDELAYCTRL_X0Y0,HCLK_IOI3_X1Y0,CMT0\n')
++            (root / 'iobank_vref.csv').write_text('')
++            design = []
++            for y, enabled in ((2, 0), (4, 1)):
++                design.append(dict(site='IOB_X0Y%d' % y,
++                                   pair_site='IOB_X0Y%d' % (y-1),
++                                   tile='LIOB33_X0Y%d' % (y-1),
++                                   type=kind, IOSTANDARD='"%s"' % standard,
++                                   DIFF_TERM=enabled, IBUF_LOW_PWR=0,
++                                   PULLTYPE='"NONE"'))
++            (root / 'params.json').write_text(json.dumps(dict(tiles=design)))
++            segmk = MagicMock()
++            old = Path.cwd()
++            try:
++                os.chdir(root)
++                with patch.dict(os.environ, FUZDIR=str(root)), \
++                        patch.object(generate, 'Segmaker', return_value=segmk):
++                    generate.main()
++            finally:
++                os.chdir(old)
++            return [call.args for call in segmk.add_tile_tag.call_args_list
++                    if call.args[1] == 'DIFF.DIFF_TERM']
++
++    def test_both_states_are_tile_tags(self):
++        self.assertEqual(self.tags(), [
++            ('LIOB33_X0Y1', 'DIFF.DIFF_TERM', 0),
++            ('LIOB33_X0Y3', 'DIFF.DIFF_TERM', 1)])
++
++    def test_single_ended_input_is_not_tagged(self):
++        self.assertEqual(self.tags(kind='IBUF'), [])
++
++    def test_other_standard_is_not_inferred(self):
++        self.assertEqual(self.tags(standard='TMDS_33'), [])
++
++    def test_pudc_tile_remains_excluded(self):
++        self.assertEqual(self.tags(excluded=True), [
++            ('LIOB33_X0Y3', 'DIFF.DIFF_TERM', 1)])
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/tests/test_iob_process_diff_term.py b/tests/test_iob_process_diff_term.py
+new file mode 100644
+index 0000000..850536d
+--- /dev/null
++++ b/tests/test_iob_process_diff_term.py
+@@ -0,0 +1,48 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: ISC
++"""Termination must not be forced off by the LVDS input-only feature."""
++import contextlib
++import importlib.util
++import io
++from pathlib import Path
++import unittest
++
++ROOT = Path(__file__).resolve().parents[1]
++spec = importlib.util.spec_from_file_location(
++    'iob_process', ROOT/'fuzzers/030-iob/process_rdb.py')
++process = importlib.util.module_from_spec(spec); spec.loader.exec_module(process)
++
++
++class TestInputOnly(unittest.TestCase):
++    def features(self, termination=True):
++        lines = {'NORMAL': [], 'ONLY_DIFF': []}
++        for standard, category in [('LVCMOS25', 'NORMAL'), ('LVDS_25', 'ONLY_DIFF')]:
++            groups = {'IN_USE': '38_112', 'IN': '38_96', 'IN_DIFF': '38_96',
++                      'IN_ONLY': '38_96 38_118', 'OUT': '38_100 39_97',
++                      'DRIVE.I_FIXED': '38_100 39_97 38_112',
++                      'SLEW.SLOW': '<const0>', 'STEPDOWN': '<const0>'}
++            for group, bits in groups.items():
++                lines[category].append('IOB33.IOB_Y0.%s.%s %s\n' % (standard, group, bits))
++        output = io.StringIO()
++        with contextlib.redirect_stdout(output):
++            process.process_features_sets(lines,
++                frozenset(['38_100', '39_97']) if termination else frozenset())
++        return dict(line.split(' ', 1) for line in output.getvalue().splitlines())
++
++    def test_alias_relaxes_only_measured_termination_bits(self):
++        result = self.features()
++        alias = set(result['IOB33.IOB_Y0.LVDS_25.IN_ONLY'].split())
++        legacy = set(result['IOB33.IOB_Y0.LVCMOS25_LVDS_25.IN_ONLY'].split())
++        self.assertEqual(legacy - alias, {'!38_100', '!39_97'})
++        self.assertFalse(alias - legacy)
++        self.assertIn('38_118', alias)
++        self.assertIn('!38_112', alias)
++
++    def test_legacy_output_unchanged_without_measured_term(self):
++        result = self.features(termination=False)
++        self.assertNotIn('IOB33.IOB_Y0.LVDS_25.IN_ONLY', result)
++        self.assertIn('!38_100', result['IOB33.IOB_Y0.LVCMOS25_LVDS_25.IN_ONLY'].split())
++
++
++if __name__ == '__main__':
++    unittest.main()

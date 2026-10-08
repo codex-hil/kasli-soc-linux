@@ -14,13 +14,16 @@ p.add_argument('--host', required=True, type=ipaddress.ip_address)
 p.add_argument('--host-key-alias', default='192.168.2.15')
 p.add_argument('--program', action='store_true')
 p.add_argument('--jtag-serial', default='210251842914')
+p.add_argument('--bit', type=Path, default=ROOT/'build/zc706-adc/gateware/gateware/top.bit')
+p.add_argument('--csr-json', type=Path, default=ROOT/'build/zc706-adc/gateware/csr.json')
+p.add_argument('--output', type=Path, default=ROOT/'build/zc706-adc/hardware')
 args = p.parse_args()
 if args.program:
     p.error('Live JTAG reconfiguration can stall GP0. Load ADC PL before Linux boot; omit --program.')
 work = ROOT/'build/zc706-adc'
-out = work/'hardware'
-out.mkdir(exist_ok=True)
-bit = work/'gateware/gateware/top.bit'
+out = args.output
+out.mkdir(parents=True, exist_ok=True)
+bit = args.bit
 manifest = json.loads((bit.parent/'manifest.json').read_text())
 bit_hash = hashlib.sha256(bit.read_bytes()).hexdigest()
 if manifest['design'] != 'fmc-adc' or manifest['bitstream_sha256'] != bit_hash:
@@ -35,6 +38,7 @@ result = {'started_utc': datetime.now(timezone.utc).isoformat(),
     'host': str(args.host), 'slot': 'J5 LPC', 'jtag_serial': args.jtag_serial,
     'program_requested': args.program, 'hardware_validated': False,
     'bitstream_sha256': bit_hash,
+    'diagnostic_only': manifest.get('diagnostic_only', False),
     'diagnostic_sha256': hashlib.sha256((ROOT/'tools/fmc_adc.py').read_bytes()).hexdigest()}
 ran = False
 try:
@@ -47,7 +51,7 @@ try:
                 stderr=subprocess.STDOUT, check=True, timeout=60)
     subprocess.run(ssh+['mkdir -p '+remote], check=True, timeout=20)
     for name, source in [('fmc_adc.py', ROOT/'tools/fmc_adc.py'),
-            ('csr.json', work/'gateware/csr.json')]:
+            ('csr.json', args.csr_json)]:
         subprocess.run(ssh+['cat > '+remote+'/'+name], input=source.read_bytes(),
             check=True, timeout=20)
     ran = True

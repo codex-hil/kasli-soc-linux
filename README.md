@@ -18,10 +18,11 @@ odbiornik ISERDES, snapshot 1024 próbek, SPI/I²C i automatyczny test wzorców.
 Build: `make bootstrap BOARD=zc706`, `make adc-test`, `make adc-pl`.
 Karta jest w J5 LPC, VADJ 2.5 V zmierzone. Bring-up trwa: zegar/frame
 potwierdzone; SPI ADC i I²C SI570/multipleksera przeszły testy fizyczne.
-Po włączeniu terminacji ADC i treningu osobnych linii odbiór 34 wzorców
+Po dodaniu terminacji FPGA HR i treningu osobnych linii odbiór 34 wzorców
 (139264 wartości kanałów) oraz snapshot 1024 próbek przeszły na hardware.
 Parametry analogowe i połączenie ADC z DDR PL pozostają niewalidowane.
 Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
+Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-term.md).
 
 ## Hardware i źródła prawdy
 
