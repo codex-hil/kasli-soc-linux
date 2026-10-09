@@ -142,9 +142,13 @@ def main():
                     subprocess.run([suite/'openFPGALoader', '-b', 'zc706',
                         '--usb-serial-num', a.jtag_serial, '--write-sram', a.bit],
                         stdout=f, stderr=subprocess.STDOUT, check=True, timeout=60)
-            probe = command('mw.l 0xf8000008 0xdf0d; mw.l 0xf8000900 0xf; '
+            command('mw.l 0xf8000008 0xdf0d; mw.l 0xf8000900 0xf; '
                 'mw.l 0xf8000240 0xf; mw.l 0xf8000240 0; '
-                'mw.l 0xf8000170 0x00100a00; md.l 0x40000808 1')
+                'mw.l 0xf8000170 0x00100a00')
+            # MMCM-based targets need lock/reset settling before PS accepts
+            # a GP0 transaction; an access during reset can lose its response.
+            time.sleep(.05)
+            probe = command('md.l 0x40000808 1')
             if not re.search(rb'40000808:\s+4b534f43', probe):
                 raise RuntimeError('U-Boot PL signature check failed')
             print('PL signature PASS; starting Linux from existing SD', flush=True)
