@@ -249,6 +249,9 @@ that decision. Raw captures are separate from this small bring-up bundle.
 The installed target remains volatile: an ordinary default boot restores
 the existing probe. QSPI and persistent U-Boot settings were unchanged.
 
+[Published bitstream/tools and complete raw captures](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-adc-ddr-validated-20261009)
+include archive SHA-256 checksums and internal file checksums.
+
 ## Status
 
 Element | Status

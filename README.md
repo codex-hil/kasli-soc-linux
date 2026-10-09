@@ -635,3 +635,4 @@ acquisition with independent clocks and epochs; Linux reads completed buffers
 through GP1. Output: `build/zc706-adc-ddr/`.
 [Hardware evidence](evidence/zc706/adc-ddr-20261009/hardware-validation.json).
 `make adc-ddr-package` reproduces the artifact bundle.
+[Download the qualified bitstream/tools and complete sample buffers](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-adc-ddr-validated-20261009).
