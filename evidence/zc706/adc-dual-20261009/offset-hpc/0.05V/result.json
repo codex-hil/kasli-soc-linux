@@ -1,0 +1,3837 @@
+{
+  "result": "PASS",
+  "hardware_validated": true,
+  "initial": {
+    "control": 1,
+    "ssr": 0,
+    "taps": [
+      21,
+      21,
+      21,
+      21,
+      20,
+      21,
+      19,
+      21,
+      19
+    ]
+  },
+  "range": "0.05V",
+  "card": 2,
+  "slot": "J4 HPC",
+  "analog_calibrated": false,
+  "offset_dac_readback": false,
+  "records": [
+    {
+      "channel": 1,
+      "dac_code": 32704,
+      "direction": "up",
+      "sample_offset": 0,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1612.921875,
+          "stddev": 15.332886620247832,
+          "minimum": 1567,
+          "maximum": 1643,
+          "median": 1616.0
+        },
+        {
+          "mean": -5.7216796875,
+          "stddev": 4.57998348699533,
+          "minimum": -22,
+          "maximum": 12,
+          "median": -6.0
+        },
+        {
+          "mean": -27.205078125,
+          "stddev": 4.319393674191609,
+          "minimum": -41,
+          "maximum": -11,
+          "median": -27.0
+        },
+        {
+          "mean": -49.84765625,
+          "stddev": 4.784438721713963,
+          "minimum": -65,
+          "maximum": -35,
+          "median": -50.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32720,
+      "direction": "up",
+      "sample_offset": 1024,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1189.9228515625,
+          "stddev": 10.98787085522447,
+          "minimum": 1152,
+          "maximum": 1218,
+          "median": 1192.0
+        },
+        {
+          "mean": -7.0244140625,
+          "stddev": 4.82348478965698,
+          "minimum": -25,
+          "maximum": 17,
+          "median": -7.0
+        },
+        {
+          "mean": -29.0341796875,
+          "stddev": 4.722763577764867,
+          "minimum": -42,
+          "maximum": -3,
+          "median": -29.0
+        },
+        {
+          "mean": -46.7451171875,
+          "stddev": 4.433369070401436,
+          "minimum": -59,
+          "maximum": -19,
+          "median": -47.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32736,
+      "direction": "up",
+      "sample_offset": 2048,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 773.609375,
+          "stddev": 9.697864918855851,
+          "minimum": 742,
+          "maximum": 800,
+          "median": 775.0
+        },
+        {
+          "mean": -6.3037109375,
+          "stddev": 4.646754779299513,
+          "minimum": -20,
+          "maximum": 9,
+          "median": -6.0
+        },
+        {
+          "mean": -29.958984375,
+          "stddev": 5.207067513822522,
+          "minimum": -46,
+          "maximum": -10,
+          "median": -31.0
+        },
+        {
+          "mean": -47.966796875,
+          "stddev": 4.714595759711561,
+          "minimum": -62,
+          "maximum": -35,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32752,
+      "direction": "up",
+      "sample_offset": 3072,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 362.8076171875,
+          "stddev": 14.886127028745744,
+          "minimum": 317,
+          "maximum": 393,
+          "median": 367.0
+        },
+        {
+          "mean": -3.2451171875,
+          "stddev": 5.372953424504264,
+          "minimum": -20,
+          "maximum": 13,
+          "median": -3.0
+        },
+        {
+          "mean": -26.896484375,
+          "stddev": 6.5161328746719756,
+          "minimum": -47,
+          "maximum": -10,
+          "median": -27.0
+        },
+        {
+          "mean": -46.6650390625,
+          "stddev": 6.796577464639767,
+          "minimum": -63,
+          "maximum": -29,
+          "median": -47.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 4096,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -30.3984375,
+          "stddev": 12.676158627857012,
+          "minimum": -76,
+          "maximum": -4,
+          "median": -28.0
+        },
+        {
+          "mean": -1.3115234375,
+          "stddev": 4.854687653226331,
+          "minimum": -18,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": -27.333984375,
+          "stddev": 4.265341948455699,
+          "minimum": -43,
+          "maximum": -15,
+          "median": -27.0
+        },
+        {
+          "mean": -41.603515625,
+          "stddev": 5.062020361513855,
+          "minimum": -60,
+          "maximum": -22,
+          "median": -41.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32784,
+      "direction": "up",
+      "sample_offset": 5120,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -447.7021484375,
+          "stddev": 12.341580318549822,
+          "minimum": -477,
+          "maximum": -415,
+          "median": -446.0
+        },
+        {
+          "mean": -5.8154296875,
+          "stddev": 7.399859862676026,
+          "minimum": -28,
+          "maximum": 11,
+          "median": -5.0
+        },
+        {
+          "mean": -26.4404296875,
+          "stddev": 7.529393327345082,
+          "minimum": -50,
+          "maximum": -8,
+          "median": -25.0
+        },
+        {
+          "mean": -46.830078125,
+          "stddev": 7.871553908307844,
+          "minimum": -67,
+          "maximum": -22,
+          "median": -46.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32800,
+      "direction": "up",
+      "sample_offset": 6144,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -865.7705078125,
+          "stddev": 11.02965946996445,
+          "minimum": -904,
+          "maximum": -839,
+          "median": -864.0
+        },
+        {
+          "mean": -5.8623046875,
+          "stddev": 4.901528875097599,
+          "minimum": -23,
+          "maximum": 11,
+          "median": -6.0
+        },
+        {
+          "mean": -28.2607421875,
+          "stddev": 4.644740582008613,
+          "minimum": -43,
+          "maximum": -12,
+          "median": -29.0
+        },
+        {
+          "mean": -48.1455078125,
+          "stddev": 4.813039675091144,
+          "minimum": -61,
+          "maximum": -29,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32816,
+      "direction": "up",
+      "sample_offset": 7168,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1276.7275390625,
+          "stddev": 12.948251246791461,
+          "minimum": -1318,
+          "maximum": -1246,
+          "median": -1275.0
+        },
+        {
+          "mean": -5.4765625,
+          "stddev": 4.366223059876093,
+          "minimum": -20,
+          "maximum": 11,
+          "median": -6.0
+        },
+        {
+          "mean": -27.1591796875,
+          "stddev": 4.294920431694562,
+          "minimum": -40,
+          "maximum": -12,
+          "median": -27.0
+        },
+        {
+          "mean": -44.4296875,
+          "stddev": 4.920951054150382,
+          "minimum": -59,
+          "maximum": -30,
+          "median": -44.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32832,
+      "direction": "up",
+      "sample_offset": 8192,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1694.7412109375,
+          "stddev": 11.292472815270814,
+          "minimum": -1731,
+          "maximum": -1670,
+          "median": -1693.0
+        },
+        {
+          "mean": -5.02734375,
+          "stddev": 4.1109175307145165,
+          "minimum": -20,
+          "maximum": 9,
+          "median": -5.0
+        },
+        {
+          "mean": -27.0986328125,
+          "stddev": 4.211572376298232,
+          "minimum": -41,
+          "maximum": -15,
+          "median": -27.0
+        },
+        {
+          "mean": -48.8037109375,
+          "stddev": 4.228062164448729,
+          "minimum": -63,
+          "maximum": -37,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32832,
+      "direction": "down",
+      "sample_offset": 9216,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1697.6748046875,
+          "stddev": 12.15085476195926,
+          "minimum": -1740,
+          "maximum": -1674,
+          "median": -1694.0
+        },
+        {
+          "mean": -11.115234375,
+          "stddev": 4.66791767427601,
+          "minimum": -23,
+          "maximum": 7,
+          "median": -11.0
+        },
+        {
+          "mean": -31.919921875,
+          "stddev": 4.970954070286355,
+          "minimum": -46,
+          "maximum": -17,
+          "median": -32.0
+        },
+        {
+          "mean": -52.80859375,
+          "stddev": 5.124093324429302,
+          "minimum": -66,
+          "maximum": -36,
+          "median": -53.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32816,
+      "direction": "down",
+      "sample_offset": 10240,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1283.6904296875,
+          "stddev": 11.252033939875878,
+          "minimum": -1327,
+          "maximum": -1256,
+          "median": -1282.0
+        },
+        {
+          "mean": -10.0205078125,
+          "stddev": 5.186988805378942,
+          "minimum": -24,
+          "maximum": 5,
+          "median": -10.0
+        },
+        {
+          "mean": -35.4423828125,
+          "stddev": 5.106158255940036,
+          "minimum": -52,
+          "maximum": -18,
+          "median": -35.0
+        },
+        {
+          "mean": -51.986328125,
+          "stddev": 5.027445047420606,
+          "minimum": -70,
+          "maximum": -37,
+          "median": -52.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32800,
+      "direction": "down",
+      "sample_offset": 11264,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -864.185546875,
+          "stddev": 12.292764405624055,
+          "minimum": -902,
+          "maximum": -827,
+          "median": -863.0
+        },
+        {
+          "mean": -7.5283203125,
+          "stddev": 5.286995645912705,
+          "minimum": -22,
+          "maximum": 19,
+          "median": -8.0
+        },
+        {
+          "mean": -29.076171875,
+          "stddev": 5.570750429292178,
+          "minimum": -45,
+          "maximum": -6,
+          "median": -29.0
+        },
+        {
+          "mean": -47.580078125,
+          "stddev": 6.210141151286055,
+          "minimum": -71,
+          "maximum": -20,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32784,
+      "direction": "down",
+      "sample_offset": 12288,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -450.88671875,
+          "stddev": 13.09165628304526,
+          "minimum": -497,
+          "maximum": -420,
+          "median": -448.0
+        },
+        {
+          "mean": -7.1953125,
+          "stddev": 4.802031786373738,
+          "minimum": -23,
+          "maximum": 7,
+          "median": -7.0
+        },
+        {
+          "mean": -30.2255859375,
+          "stddev": 4.609019016808484,
+          "minimum": -41,
+          "maximum": -14,
+          "median": -30.0
+        },
+        {
+          "mean": -48.6767578125,
+          "stddev": 4.918079571918312,
+          "minimum": -61,
+          "maximum": -30,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 13312,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.5244140625,
+          "stddev": 13.209304753792011,
+          "minimum": -82,
+          "maximum": 2,
+          "median": -33.0
+        },
+        {
+          "mean": -3.505859375,
+          "stddev": 4.466450986826634,
+          "minimum": -26,
+          "maximum": 17,
+          "median": -4.0
+        },
+        {
+          "mean": -27.001953125,
+          "stddev": 4.459890266060673,
+          "minimum": -44,
+          "maximum": -11,
+          "median": -27.0
+        },
+        {
+          "mean": -45.77734375,
+          "stddev": 4.442694404225429,
+          "minimum": -62,
+          "maximum": -26,
+          "median": -46.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32752,
+      "direction": "down",
+      "sample_offset": 14336,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 358.0634765625,
+          "stddev": 12.781321592993159,
+          "minimum": 311,
+          "maximum": 396,
+          "median": 360.0
+        },
+        {
+          "mean": -10.904296875,
+          "stddev": 4.423240855059245,
+          "minimum": -27,
+          "maximum": 14,
+          "median": -11.0
+        },
+        {
+          "mean": -32.7197265625,
+          "stddev": 4.386431663406137,
+          "minimum": -44,
+          "maximum": -13,
+          "median": -33.0
+        },
+        {
+          "mean": -51.80078125,
+          "stddev": 4.5515020888327005,
+          "minimum": -66,
+          "maximum": -29,
+          "median": -52.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32736,
+      "direction": "down",
+      "sample_offset": 15360,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 783.62890625,
+          "stddev": 12.831273759986221,
+          "minimum": 738,
+          "maximum": 819,
+          "median": 786.0
+        },
+        {
+          "mean": -0.0556640625,
+          "stddev": 4.381003375329217,
+          "minimum": -20,
+          "maximum": 23,
+          "median": 0.0
+        },
+        {
+          "mean": -22.904296875,
+          "stddev": 4.658307126721598,
+          "minimum": -46,
+          "maximum": -2,
+          "median": -23.0
+        },
+        {
+          "mean": -43.3310546875,
+          "stddev": 5.022096920747774,
+          "minimum": -62,
+          "maximum": -22,
+          "median": -43.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32720,
+      "direction": "down",
+      "sample_offset": 16384,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1193.33203125,
+          "stddev": 15.082426827239157,
+          "minimum": 1145,
+          "maximum": 1223,
+          "median": 1197.0
+        },
+        {
+          "mean": -0.91796875,
+          "stddev": 5.766036517749731,
+          "minimum": -21,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": -23.7685546875,
+          "stddev": 6.338756305839638,
+          "minimum": -41,
+          "maximum": -6,
+          "median": -23.0
+        },
+        {
+          "mean": -44.2548828125,
+          "stddev": 5.91809952090974,
+          "minimum": -63,
+          "maximum": -26,
+          "median": -44.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32704,
+      "direction": "down",
+      "sample_offset": 17408,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1606.1474609375,
+          "stddev": 16.264498742181132,
+          "minimum": 1553,
+          "maximum": 1640,
+          "median": 1611.0
+        },
+        {
+          "mean": -6.109375,
+          "stddev": 8.701525885405099,
+          "minimum": -27,
+          "maximum": 21,
+          "median": -6.0
+        },
+        {
+          "mean": -27.107421875,
+          "stddev": 9.315655065038179,
+          "minimum": -49,
+          "maximum": -6,
+          "median": -27.0
+        },
+        {
+          "mean": -47.9814453125,
+          "stddev": 9.686423703362959,
+          "minimum": -70,
+          "maximum": -26,
+          "median": -47.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 18432,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.7919921875,
+          "stddev": 10.90650493684567,
+          "minimum": -76,
+          "maximum": -14,
+          "median": -37.0
+        },
+        {
+          "mean": -9.81640625,
+          "stddev": 4.5564476524987025,
+          "minimum": -22,
+          "maximum": 5,
+          "median": -10.0
+        },
+        {
+          "mean": -32.310546875,
+          "stddev": 4.569904746100047,
+          "minimum": -46,
+          "maximum": -16,
+          "median": -32.0
+        },
+        {
+          "mean": -49.48828125,
+          "stddev": 4.201452894047301,
+          "minimum": -61,
+          "maximum": -37,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32704,
+      "direction": "up",
+      "sample_offset": 19456,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -34.837890625,
+          "stddev": 14.984011330432752,
+          "minimum": -81,
+          "maximum": -7,
+          "median": -30.0
+        },
+        {
+          "mean": 1639.037109375,
+          "stddev": 6.8204218450391405,
+          "minimum": 1619,
+          "maximum": 1657,
+          "median": 1639.0
+        },
+        {
+          "mean": -26.8681640625,
+          "stddev": 6.983462758408861,
+          "minimum": -45,
+          "maximum": -10,
+          "median": -27.0
+        },
+        {
+          "mean": -47.0615234375,
+          "stddev": 6.822321190704685,
+          "minimum": -66,
+          "maximum": -29,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32720,
+      "direction": "up",
+      "sample_offset": 20480,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -37.2431640625,
+          "stddev": 14.342029177428433,
+          "minimum": -84,
+          "maximum": -6,
+          "median": -34.0
+        },
+        {
+          "mean": 1223.982421875,
+          "stddev": 5.500859626869375,
+          "minimum": 1207,
+          "maximum": 1243,
+          "median": 1224.0
+        },
+        {
+          "mean": -29.2744140625,
+          "stddev": 6.253271772424596,
+          "minimum": -47,
+          "maximum": -10,
+          "median": -29.0
+        },
+        {
+          "mean": -49.515625,
+          "stddev": 5.0570717425576435,
+          "minimum": -63,
+          "maximum": -36,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32736,
+      "direction": "up",
+      "sample_offset": 21504,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.3759765625,
+          "stddev": 13.577405728339663,
+          "minimum": -79,
+          "maximum": -6,
+          "median": -33.0
+        },
+        {
+          "mean": 815.5810546875,
+          "stddev": 4.621754822319579,
+          "minimum": 802,
+          "maximum": 829,
+          "median": 815.0
+        },
+        {
+          "mean": -27.84765625,
+          "stddev": 5.602928431350515,
+          "minimum": -44,
+          "maximum": -14,
+          "median": -28.0
+        },
+        {
+          "mean": -47.5,
+          "stddev": 5.44180863776006,
+          "minimum": -65,
+          "maximum": -35,
+          "median": -47.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32752,
+      "direction": "up",
+      "sample_offset": 22528,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -37.25390625,
+          "stddev": 12.872875445727383,
+          "minimum": -85,
+          "maximum": -13,
+          "median": -35.0
+        },
+        {
+          "mean": 399.875,
+          "stddev": 4.419859302059286,
+          "minimum": 383,
+          "maximum": 418,
+          "median": 400.0
+        },
+        {
+          "mean": -30.0712890625,
+          "stddev": 4.138684202988659,
+          "minimum": -46,
+          "maximum": -15,
+          "median": -30.0
+        },
+        {
+          "mean": -50.1337890625,
+          "stddev": 4.030241019375314,
+          "minimum": -67,
+          "maximum": -36,
+          "median": -50.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 23552,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.5986328125,
+          "stddev": 10.63731079471209,
+          "minimum": -76,
+          "maximum": -11,
+          "median": -38.0
+        },
+        {
+          "mean": -9.2734375,
+          "stddev": 5.551379113210856,
+          "minimum": -31,
+          "maximum": 9,
+          "median": -10.0
+        },
+        {
+          "mean": -34.2216796875,
+          "stddev": 5.820112514260347,
+          "minimum": -49,
+          "maximum": -9,
+          "median": -34.0
+        },
+        {
+          "mean": -55.515625,
+          "stddev": 6.686605518450674,
+          "minimum": -72,
+          "maximum": -37,
+          "median": -56.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32784,
+      "direction": "up",
+      "sample_offset": 24576,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.38671875,
+          "stddev": 12.037736050993908,
+          "minimum": -78,
+          "maximum": -12,
+          "median": -37.0
+        },
+        {
+          "mean": -425.7958984375,
+          "stddev": 4.187539968726873,
+          "minimum": -441,
+          "maximum": -413,
+          "median": -426.0
+        },
+        {
+          "mean": -34.03515625,
+          "stddev": 4.118452945352895,
+          "minimum": -45,
+          "maximum": -19,
+          "median": -34.0
+        },
+        {
+          "mean": -54.0263671875,
+          "stddev": 3.8558356855451374,
+          "minimum": -65,
+          "maximum": -43,
+          "median": -54.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32800,
+      "direction": "up",
+      "sample_offset": 25600,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -32.853515625,
+          "stddev": 11.619707605094066,
+          "minimum": -69,
+          "maximum": -9,
+          "median": -31.0
+        },
+        {
+          "mean": -829.3994140625,
+          "stddev": 5.286668785178172,
+          "minimum": -844,
+          "maximum": -812,
+          "median": -829.0
+        },
+        {
+          "mean": -24.7578125,
+          "stddev": 5.933216999642247,
+          "minimum": -44,
+          "maximum": -6,
+          "median": -24.0
+        },
+        {
+          "mean": -43.52734375,
+          "stddev": 5.451601181702118,
+          "minimum": -59,
+          "maximum": -29,
+          "median": -43.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32816,
+      "direction": "up",
+      "sample_offset": 26624,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.5732421875,
+          "stddev": 12.12485932730645,
+          "minimum": -75,
+          "maximum": -4,
+          "median": -37.0
+        },
+        {
+          "mean": -1249.3994140625,
+          "stddev": 4.373620278919655,
+          "minimum": -1263,
+          "maximum": -1224,
+          "median": -1250.0
+        },
+        {
+          "mean": -34.15234375,
+          "stddev": 4.446100202068767,
+          "minimum": -51,
+          "maximum": -19,
+          "median": -34.0
+        },
+        {
+          "mean": -53.27734375,
+          "stddev": 4.550201143283221,
+          "minimum": -70,
+          "maximum": -29,
+          "median": -53.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32832,
+      "direction": "up",
+      "sample_offset": 27648,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.298828125,
+          "stddev": 13.262249592422434,
+          "minimum": -81,
+          "maximum": -1,
+          "median": -33.0
+        },
+        {
+          "mean": -1657.884765625,
+          "stddev": 5.18753787107317,
+          "minimum": -1675,
+          "maximum": -1644,
+          "median": -1658.0
+        },
+        {
+          "mean": -30.865234375,
+          "stddev": 4.793937653570222,
+          "minimum": -49,
+          "maximum": -14,
+          "median": -31.0
+        },
+        {
+          "mean": -48.634765625,
+          "stddev": 4.934473196433268,
+          "minimum": -62,
+          "maximum": -30,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32832,
+      "direction": "down",
+      "sample_offset": 28672,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -33.1474609375,
+          "stddev": 13.400921631903218,
+          "minimum": -78,
+          "maximum": -5,
+          "median": -31.0
+        },
+        {
+          "mean": -1653.5966796875,
+          "stddev": 4.966728038963368,
+          "minimum": -1670,
+          "maximum": -1638,
+          "median": -1654.0
+        },
+        {
+          "mean": -23.40625,
+          "stddev": 4.491854607230737,
+          "minimum": -42,
+          "maximum": -11,
+          "median": -23.0
+        },
+        {
+          "mean": -45.2470703125,
+          "stddev": 5.008439285164706,
+          "minimum": -59,
+          "maximum": -27,
+          "median": -45.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32816,
+      "direction": "down",
+      "sample_offset": 29696,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -42.150390625,
+          "stddev": 11.816584935374184,
+          "minimum": -80,
+          "maximum": -9,
+          "median": -42.0
+        },
+        {
+          "mean": -1248.9443359375,
+          "stddev": 5.087882658792948,
+          "minimum": -1265,
+          "maximum": -1222,
+          "median": -1249.0
+        },
+        {
+          "mean": -34.6259765625,
+          "stddev": 5.594862757986176,
+          "minimum": -53,
+          "maximum": -20,
+          "median": -34.0
+        },
+        {
+          "mean": -57.7607421875,
+          "stddev": 5.193556501729592,
+          "minimum": -77,
+          "maximum": -37,
+          "median": -58.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32800,
+      "direction": "down",
+      "sample_offset": 30720,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -31.740234375,
+          "stddev": 14.995862135771599,
+          "minimum": -82,
+          "maximum": -1,
+          "median": -28.0
+        },
+        {
+          "mean": -828.2841796875,
+          "stddev": 5.260991443417524,
+          "minimum": -846,
+          "maximum": -805,
+          "median": -828.0
+        },
+        {
+          "mean": -23.68359375,
+          "stddev": 6.0602028810891255,
+          "minimum": -40,
+          "maximum": -7,
+          "median": -23.0
+        },
+        {
+          "mean": -43.515625,
+          "stddev": 5.889588768273639,
+          "minimum": -63,
+          "maximum": -19,
+          "median": -43.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32784,
+      "direction": "down",
+      "sample_offset": 31744,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.33984375,
+          "stddev": 13.514522511934558,
+          "minimum": -83,
+          "maximum": -4,
+          "median": -33.0
+        },
+        {
+          "mean": -419.94140625,
+          "stddev": 4.976162353908978,
+          "minimum": -441,
+          "maximum": -406,
+          "median": -420.0
+        },
+        {
+          "mean": -29.998046875,
+          "stddev": 5.098444548124725,
+          "minimum": -46,
+          "maximum": -15,
+          "median": -30.0
+        },
+        {
+          "mean": -49.1162109375,
+          "stddev": 4.554484708010926,
+          "minimum": -62,
+          "maximum": -35,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 32768,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.72265625,
+          "stddev": 11.235460846994036,
+          "minimum": -77,
+          "maximum": -14,
+          "median": -38.0
+        },
+        {
+          "mean": -6.912109375,
+          "stddev": 6.013826017024196,
+          "minimum": -22,
+          "maximum": 19,
+          "median": -7.0
+        },
+        {
+          "mean": -31.3310546875,
+          "stddev": 6.071093495523214,
+          "minimum": -52,
+          "maximum": -8,
+          "median": -31.0
+        },
+        {
+          "mean": -51.7685546875,
+          "stddev": 5.534704735107535,
+          "minimum": -68,
+          "maximum": -21,
+          "median": -52.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32752,
+      "direction": "down",
+      "sample_offset": 33792,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -31.2470703125,
+          "stddev": 13.60579535338457,
+          "minimum": -73,
+          "maximum": -5,
+          "median": -29.0
+        },
+        {
+          "mean": 404.77734375,
+          "stddev": 4.642411732530403,
+          "minimum": 388,
+          "maximum": 419,
+          "median": 405.0
+        },
+        {
+          "mean": -24.4189453125,
+          "stddev": 4.453237110533671,
+          "minimum": -40,
+          "maximum": -12,
+          "median": -24.0
+        },
+        {
+          "mean": -45.3818359375,
+          "stddev": 4.666798260513678,
+          "minimum": -63,
+          "maximum": -28,
+          "median": -45.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32736,
+      "direction": "down",
+      "sample_offset": 34816,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.30078125,
+          "stddev": 11.95978610864962,
+          "minimum": -77,
+          "maximum": -9,
+          "median": -33.0
+        },
+        {
+          "mean": 814.2001953125,
+          "stddev": 4.436174973933403,
+          "minimum": 792,
+          "maximum": 831,
+          "median": 814.0
+        },
+        {
+          "mean": -26.73046875,
+          "stddev": 5.025677171314672,
+          "minimum": -49,
+          "maximum": -7,
+          "median": -27.0
+        },
+        {
+          "mean": -45.7734375,
+          "stddev": 4.517266948453871,
+          "minimum": -60,
+          "maximum": -25,
+          "median": -46.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32720,
+      "direction": "down",
+      "sample_offset": 35840,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.50390625,
+          "stddev": 12.953868886020537,
+          "minimum": -77,
+          "maximum": -9,
+          "median": -33.0
+        },
+        {
+          "mean": 1227.1318359375,
+          "stddev": 5.064158886042528,
+          "minimum": 1209,
+          "maximum": 1246,
+          "median": 1227.0
+        },
+        {
+          "mean": -27.6123046875,
+          "stddev": 4.669244133922056,
+          "minimum": -42,
+          "maximum": -5,
+          "median": -28.0
+        },
+        {
+          "mean": -46.4609375,
+          "stddev": 4.122446830596333,
+          "minimum": -59,
+          "maximum": -28,
+          "median": -47.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32704,
+      "direction": "down",
+      "sample_offset": 36864,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.3974609375,
+          "stddev": 14.151014256605835,
+          "minimum": -85,
+          "maximum": -12,
+          "median": -35.0
+        },
+        {
+          "mean": 1634.8564453125,
+          "stddev": 6.407080545318341,
+          "minimum": 1614,
+          "maximum": 1652,
+          "median": 1635.0
+        },
+        {
+          "mean": -30.3701171875,
+          "stddev": 5.979842897603338,
+          "minimum": -48,
+          "maximum": -10,
+          "median": -31.0
+        },
+        {
+          "mean": -53.0908203125,
+          "stddev": 5.875046019678263,
+          "minimum": -67,
+          "maximum": -39,
+          "median": -53.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 37888,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.49609375,
+          "stddev": 11.867184285508124,
+          "minimum": -73,
+          "maximum": -11,
+          "median": -34.0
+        },
+        {
+          "mean": -8.5966796875,
+          "stddev": 4.779353045970229,
+          "minimum": -24,
+          "maximum": 5,
+          "median": -9.0
+        },
+        {
+          "mean": -29.5703125,
+          "stddev": 4.6075406837426565,
+          "minimum": -46,
+          "maximum": -13,
+          "median": -29.0
+        },
+        {
+          "mean": -49.3994140625,
+          "stddev": 4.6764076724743795,
+          "minimum": -65,
+          "maximum": -36,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32704,
+      "direction": "up",
+      "sample_offset": 38912,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -28.9697265625,
+          "stddev": 14.745433003356732,
+          "minimum": -83,
+          "maximum": 5,
+          "median": -26.0
+        },
+        {
+          "mean": -0.8095703125,
+          "stddev": 4.990603104497357,
+          "minimum": -16,
+          "maximum": 21,
+          "median": -1.0
+        },
+        {
+          "mean": 1618.0380859375,
+          "stddev": 5.030329365346244,
+          "minimum": 1604,
+          "maximum": 1633,
+          "median": 1618.0
+        },
+        {
+          "mean": -42.2724609375,
+          "stddev": 4.966979185081876,
+          "minimum": -59,
+          "maximum": -26,
+          "median": -42.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32720,
+      "direction": "up",
+      "sample_offset": 39936,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -37.330078125,
+          "stddev": 11.504093768367698,
+          "minimum": -78,
+          "maximum": -13,
+          "median": -35.0
+        },
+        {
+          "mean": -6.34765625,
+          "stddev": 4.276369752118722,
+          "minimum": -18,
+          "maximum": 6,
+          "median": -6.0
+        },
+        {
+          "mean": 1194.6875,
+          "stddev": 4.1704409988633095,
+          "minimum": 1181,
+          "maximum": 1207,
+          "median": 1195.0
+        },
+        {
+          "mean": -51.951171875,
+          "stddev": 4.584446211289754,
+          "minimum": -65,
+          "maximum": -39,
+          "median": -52.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32736,
+      "direction": "up",
+      "sample_offset": 40960,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -33.1923828125,
+          "stddev": 13.227468334528515,
+          "minimum": -82,
+          "maximum": -6,
+          "median": -30.5
+        },
+        {
+          "mean": -3.6953125,
+          "stddev": 4.308754884226271,
+          "minimum": -18,
+          "maximum": 11,
+          "median": -4.0
+        },
+        {
+          "mean": 786.208984375,
+          "stddev": 4.030072180619828,
+          "minimum": 774,
+          "maximum": 801,
+          "median": 786.0
+        },
+        {
+          "mean": -48.7841796875,
+          "stddev": 4.026196409790809,
+          "minimum": -61,
+          "maximum": -32,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32752,
+      "direction": "up",
+      "sample_offset": 41984,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -40.0791015625,
+          "stddev": 10.80312964516811,
+          "minimum": -82,
+          "maximum": -13,
+          "median": -39.0
+        },
+        {
+          "mean": -9.1220703125,
+          "stddev": 4.535638091967453,
+          "minimum": -23,
+          "maximum": 4,
+          "median": -9.0
+        },
+        {
+          "mean": 369.95703125,
+          "stddev": 4.583652739521553,
+          "minimum": 357,
+          "maximum": 387,
+          "median": 370.0
+        },
+        {
+          "mean": -52.453125,
+          "stddev": 4.667012519736261,
+          "minimum": -70,
+          "maximum": -37,
+          "median": -53.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 43008,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -36.02734375,
+          "stddev": 13.159227482809769,
+          "minimum": -81,
+          "maximum": -6,
+          "median": -34.0
+        },
+        {
+          "mean": -3.255859375,
+          "stddev": 4.343521221914843,
+          "minimum": -16,
+          "maximum": 10,
+          "median": -3.0
+        },
+        {
+          "mean": -27.306640625,
+          "stddev": 4.424686037121686,
+          "minimum": -43,
+          "maximum": -13,
+          "median": -28.0
+        },
+        {
+          "mean": -49.888671875,
+          "stddev": 4.829849873296683,
+          "minimum": -68,
+          "maximum": -35,
+          "median": -50.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32784,
+      "direction": "up",
+      "sample_offset": 44032,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -41.1650390625,
+          "stddev": 12.849455408512421,
+          "minimum": -88,
+          "maximum": -8,
+          "median": -38.0
+        },
+        {
+          "mean": -9.681640625,
+          "stddev": 5.850698980322745,
+          "minimum": -27,
+          "maximum": 11,
+          "median": -10.0
+        },
+        {
+          "mean": -446.7626953125,
+          "stddev": 6.37770584127165,
+          "minimum": -463,
+          "maximum": -426,
+          "median": -447.0
+        },
+        {
+          "mean": -52.474609375,
+          "stddev": 6.077891210457959,
+          "minimum": -69,
+          "maximum": -35,
+          "median": -53.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32800,
+      "direction": "up",
+      "sample_offset": 45056,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -34.5,
+          "stddev": 14.11407210021261,
+          "minimum": -84,
+          "maximum": -9,
+          "median": -31.0
+        },
+        {
+          "mean": -2.8935546875,
+          "stddev": 4.9731110442002775,
+          "minimum": -19,
+          "maximum": 14,
+          "median": -3.0
+        },
+        {
+          "mean": -853.7392578125,
+          "stddev": 6.432900498543228,
+          "minimum": -869,
+          "maximum": -836,
+          "median": -854.0
+        },
+        {
+          "mean": -47.689453125,
+          "stddev": 6.058249645188595,
+          "minimum": -64,
+          "maximum": -31,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32816,
+      "direction": "up",
+      "sample_offset": 46080,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -26.7421875,
+          "stddev": 11.835870461856354,
+          "minimum": -67,
+          "maximum": 2,
+          "median": -25.0
+        },
+        {
+          "mean": 1.82421875,
+          "stddev": 4.136862603731049,
+          "minimum": -11,
+          "maximum": 19,
+          "median": 2.0
+        },
+        {
+          "mean": -1262.3232421875,
+          "stddev": 4.498047193029461,
+          "minimum": -1277,
+          "maximum": -1242,
+          "median": -1262.0
+        },
+        {
+          "mean": -40.8759765625,
+          "stddev": 5.056444007348513,
+          "minimum": -58,
+          "maximum": -13,
+          "median": -41.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32832,
+      "direction": "up",
+      "sample_offset": 47104,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -36.0361328125,
+          "stddev": 12.540935435897948,
+          "minimum": -77,
+          "maximum": -5,
+          "median": -34.0
+        },
+        {
+          "mean": -7.4384765625,
+          "stddev": 4.870001847190428,
+          "minimum": -25,
+          "maximum": 14,
+          "median": -7.0
+        },
+        {
+          "mean": -1684.572265625,
+          "stddev": 4.979121677509333,
+          "minimum": -1704,
+          "maximum": -1661,
+          "median": -1685.0
+        },
+        {
+          "mean": -49.3388671875,
+          "stddev": 5.103940447510711,
+          "minimum": -70,
+          "maximum": -29,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32832,
+      "direction": "down",
+      "sample_offset": 48128,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.662109375,
+          "stddev": 13.25313531020253,
+          "minimum": -84,
+          "maximum": -8,
+          "median": -36.0
+        },
+        {
+          "mean": -8.74609375,
+          "stddev": 4.254820838321038,
+          "minimum": -26,
+          "maximum": 5,
+          "median": -9.0
+        },
+        {
+          "mean": -1683.2978515625,
+          "stddev": 4.173268174850055,
+          "minimum": -1698,
+          "maximum": -1672,
+          "median": -1683.0
+        },
+        {
+          "mean": -48.724609375,
+          "stddev": 4.035286235654431,
+          "minimum": -61,
+          "maximum": -38,
+          "median": -49.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32816,
+      "direction": "down",
+      "sample_offset": 49152,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -36.51953125,
+          "stddev": 11.564510356269885,
+          "minimum": -70,
+          "maximum": -6,
+          "median": -36.0
+        },
+        {
+          "mean": -6.58203125,
+          "stddev": 7.730261492926577,
+          "minimum": -28,
+          "maximum": 15,
+          "median": -6.0
+        },
+        {
+          "mean": -1268.35546875,
+          "stddev": 7.718472247975854,
+          "minimum": -1288,
+          "maximum": -1248,
+          "median": -1268.0
+        },
+        {
+          "mean": -48.083984375,
+          "stddev": 7.691740277710621,
+          "minimum": -73,
+          "maximum": -28,
+          "median": -48.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32800,
+      "direction": "down",
+      "sample_offset": 50176,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -32.2421875,
+          "stddev": 14.046586047500785,
+          "minimum": -74,
+          "maximum": -2,
+          "median": -29.0
+        },
+        {
+          "mean": -5.2763671875,
+          "stddev": 4.886883361629715,
+          "minimum": -20,
+          "maximum": 16,
+          "median": -5.0
+        },
+        {
+          "mean": -850.4990234375,
+          "stddev": 4.722990543217897,
+          "minimum": -865,
+          "maximum": -830,
+          "median": -851.0
+        },
+        {
+          "mean": -42.3896484375,
+          "stddev": 4.903117060366172,
+          "minimum": -57,
+          "maximum": -19,
+          "median": -42.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32784,
+      "direction": "down",
+      "sample_offset": 51200,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -28.0830078125,
+          "stddev": 14.605286671803603,
+          "minimum": -76,
+          "maximum": 2,
+          "median": -24.0
+        },
+        {
+          "mean": -0.55078125,
+          "stddev": 4.584211970409793,
+          "minimum": -16,
+          "maximum": 14,
+          "median": -0.5
+        },
+        {
+          "mean": -436.8828125,
+          "stddev": 4.577024985167085,
+          "minimum": -453,
+          "maximum": -423,
+          "median": -437.0
+        },
+        {
+          "mean": -43.8203125,
+          "stddev": 4.7232943246577115,
+          "minimum": -60,
+          "maximum": -29,
+          "median": -44.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 52224,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -33.0478515625,
+          "stddev": 11.29818912107008,
+          "minimum": -71,
+          "maximum": -4,
+          "median": -32.0
+        },
+        {
+          "mean": -3.6826171875,
+          "stddev": 4.475175732619848,
+          "minimum": -20,
+          "maximum": 10,
+          "median": -3.0
+        },
+        {
+          "mean": -25.9326171875,
+          "stddev": 4.482643457724425,
+          "minimum": -41,
+          "maximum": -13,
+          "median": -26.0
+        },
+        {
+          "mean": -45.078125,
+          "stddev": 4.418726794493522,
+          "minimum": -63,
+          "maximum": -33,
+          "median": -45.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32752,
+      "direction": "down",
+      "sample_offset": 53248,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.796875,
+          "stddev": 11.757135051081747,
+          "minimum": -74,
+          "maximum": -13,
+          "median": -37.0
+        },
+        {
+          "mean": -7.9296875,
+          "stddev": 4.1672712777480365,
+          "minimum": -24,
+          "maximum": 15,
+          "median": -8.0
+        },
+        {
+          "mean": 370.2890625,
+          "stddev": 4.2916658765674836,
+          "minimum": 355,
+          "maximum": 388,
+          "median": 370.0
+        },
+        {
+          "mean": -51.5380859375,
+          "stddev": 4.5488359869712545,
+          "minimum": -69,
+          "maximum": -29,
+          "median": -52.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32736,
+      "direction": "down",
+      "sample_offset": 54272,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -32.6337890625,
+          "stddev": 13.718560323946365,
+          "minimum": -76,
+          "maximum": -5,
+          "median": -29.0
+        },
+        {
+          "mean": -4.3486328125,
+          "stddev": 5.413789728512582,
+          "minimum": -21,
+          "maximum": 14,
+          "median": -4.0
+        },
+        {
+          "mean": 788.814453125,
+          "stddev": 5.25880456778703,
+          "minimum": 771,
+          "maximum": 803,
+          "median": 789.0
+        },
+        {
+          "mean": -46.6640625,
+          "stddev": 6.13538958592637,
+          "minimum": -69,
+          "maximum": -30,
+          "median": -46.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32720,
+      "direction": "down",
+      "sample_offset": 55296,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -29.0595703125,
+          "stddev": 16.636901467532006,
+          "minimum": -85,
+          "maximum": 2,
+          "median": -25.0
+        },
+        {
+          "mean": 0.72265625,
+          "stddev": 6.500393195364103,
+          "minimum": -29,
+          "maximum": 20,
+          "median": 1.5
+        },
+        {
+          "mean": 1208.439453125,
+          "stddev": 6.3771630899583975,
+          "minimum": 1187,
+          "maximum": 1223,
+          "median": 1209.0
+        },
+        {
+          "mean": -39.83203125,
+          "stddev": 6.759477531512583,
+          "minimum": -70,
+          "maximum": -20,
+          "median": -39.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32704,
+      "direction": "down",
+      "sample_offset": 56320,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -31.6865234375,
+          "stddev": 13.804875370942803,
+          "minimum": -73,
+          "maximum": 2,
+          "median": -30.0
+        },
+        {
+          "mean": -3.8720703125,
+          "stddev": 8.399349003497601,
+          "minimum": -27,
+          "maximum": 17,
+          "median": -2.0
+        },
+        {
+          "mean": 1616.6806640625,
+          "stddev": 7.657625970006697,
+          "minimum": 1595,
+          "maximum": 1635,
+          "median": 1618.0
+        },
+        {
+          "mean": -44.8515625,
+          "stddev": 7.502306774159115,
+          "minimum": -67,
+          "maximum": -29,
+          "median": -43.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 57344,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -33.896484375,
+          "stddev": 12.741381406283264,
+          "minimum": -82,
+          "maximum": -10,
+          "median": -31.0
+        },
+        {
+          "mean": -3.6484375,
+          "stddev": 4.520076471542683,
+          "minimum": -17,
+          "maximum": 10,
+          "median": -4.0
+        },
+        {
+          "mean": -27.6318359375,
+          "stddev": 4.0070984559383485,
+          "minimum": -42,
+          "maximum": -15,
+          "median": -28.0
+        },
+        {
+          "mean": -45.060546875,
+          "stddev": 4.324061279737804,
+          "minimum": -60,
+          "maximum": -30,
+          "median": -45.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32704,
+      "direction": "up",
+      "sample_offset": 58368,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.91796875,
+          "stddev": 12.17375464365959,
+          "minimum": -76,
+          "maximum": -11,
+          "median": -34.0
+        },
+        {
+          "mean": -6.1123046875,
+          "stddev": 4.750008733640974,
+          "minimum": -20,
+          "maximum": 7,
+          "median": -6.0
+        },
+        {
+          "mean": -29.6396484375,
+          "stddev": 4.534807899889896,
+          "minimum": -45,
+          "maximum": -14,
+          "median": -30.0
+        },
+        {
+          "mean": 1596.947265625,
+          "stddev": 4.428594975914298,
+          "minimum": 1583,
+          "maximum": 1611,
+          "median": 1597.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32720,
+      "direction": "up",
+      "sample_offset": 59392,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -37.1640625,
+          "stddev": 13.362086256310942,
+          "minimum": -81,
+          "maximum": -12,
+          "median": -34.0
+        },
+        {
+          "mean": -6.8076171875,
+          "stddev": 4.8271996064959435,
+          "minimum": -25,
+          "maximum": 9,
+          "median": -7.0
+        },
+        {
+          "mean": -32.1630859375,
+          "stddev": 4.865953610495043,
+          "minimum": -48,
+          "maximum": -19,
+          "median": -32.0
+        },
+        {
+          "mean": 1182.369140625,
+          "stddev": 4.567897582474306,
+          "minimum": 1167,
+          "maximum": 1196,
+          "median": 1182.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32736,
+      "direction": "up",
+      "sample_offset": 60416,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.052734375,
+          "stddev": 13.68047594971364,
+          "minimum": -81,
+          "maximum": -13,
+          "median": -35.0
+        },
+        {
+          "mean": -7.416015625,
+          "stddev": 6.112932735173508,
+          "minimum": -26,
+          "maximum": 13,
+          "median": -8.0
+        },
+        {
+          "mean": -29.0439453125,
+          "stddev": 5.006735937415641,
+          "minimum": -46,
+          "maximum": -15,
+          "median": -29.0
+        },
+        {
+          "mean": 768.9052734375,
+          "stddev": 5.751851903157533,
+          "minimum": 751,
+          "maximum": 786,
+          "median": 769.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32752,
+      "direction": "up",
+      "sample_offset": 61440,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.90234375,
+          "stddev": 11.234982788453035,
+          "minimum": -76,
+          "maximum": -15,
+          "median": -37.0
+        },
+        {
+          "mean": -9.3798828125,
+          "stddev": 4.278081124904843,
+          "minimum": -22,
+          "maximum": 4,
+          "median": -10.0
+        },
+        {
+          "mean": -35.05078125,
+          "stddev": 4.1698976323944015,
+          "minimum": -47,
+          "maximum": -21,
+          "median": -35.0
+        },
+        {
+          "mean": 353.1806640625,
+          "stddev": 4.493656243419271,
+          "minimum": 342,
+          "maximum": 368,
+          "median": 353.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 62464,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -32.0791015625,
+          "stddev": 11.847030909907767,
+          "minimum": -75,
+          "maximum": -3,
+          "median": -30.0
+        },
+        {
+          "mean": -2.9150390625,
+          "stddev": 4.453712504933286,
+          "minimum": -19,
+          "maximum": 13,
+          "median": -3.0
+        },
+        {
+          "mean": -23.880859375,
+          "stddev": 4.4206838991806015,
+          "minimum": -39,
+          "maximum": -10,
+          "median": -24.0
+        },
+        {
+          "mean": -45.0419921875,
+          "stddev": 4.226173368863251,
+          "minimum": -57,
+          "maximum": -31,
+          "median": -45.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32784,
+      "direction": "up",
+      "sample_offset": 63488,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.47265625,
+          "stddev": 12.449085149894989,
+          "minimum": -75,
+          "maximum": -8,
+          "median": -36.0
+        },
+        {
+          "mean": -8.1650390625,
+          "stddev": 4.578643144573414,
+          "minimum": -26,
+          "maximum": 12,
+          "median": -8.0
+        },
+        {
+          "mean": -28.85546875,
+          "stddev": 4.445921737139942,
+          "minimum": -46,
+          "maximum": -8,
+          "median": -29.0
+        },
+        {
+          "mean": -465.0517578125,
+          "stddev": 4.202196323512886,
+          "minimum": -482,
+          "maximum": -448,
+          "median": -465.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32800,
+      "direction": "up",
+      "sample_offset": 64512,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.1572265625,
+          "stddev": 13.519144647334182,
+          "minimum": -75,
+          "maximum": -5,
+          "median": -32.0
+        },
+        {
+          "mean": -4.1142578125,
+          "stddev": 4.301574910981176,
+          "minimum": -17,
+          "maximum": 8,
+          "median": -4.0
+        },
+        {
+          "mean": -27.025390625,
+          "stddev": 4.522873706634103,
+          "minimum": -42,
+          "maximum": -13,
+          "median": -27.0
+        },
+        {
+          "mean": -876.2431640625,
+          "stddev": 4.637699219570896,
+          "minimum": -896,
+          "maximum": -864,
+          "median": -876.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32816,
+      "direction": "up",
+      "sample_offset": 65536,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.2255859375,
+          "stddev": 11.781742763585624,
+          "minimum": -81,
+          "maximum": -13,
+          "median": -38.0
+        },
+        {
+          "mean": -12.3173828125,
+          "stddev": 5.441077360029867,
+          "minimum": -27,
+          "maximum": 3,
+          "median": -12.0
+        },
+        {
+          "mean": -33.599609375,
+          "stddev": 4.101952641415075,
+          "minimum": -47,
+          "maximum": -21,
+          "median": -34.0
+        },
+        {
+          "mean": -1297.400390625,
+          "stddev": 4.944401806327243,
+          "minimum": -1311,
+          "maximum": -1281,
+          "median": -1297.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32832,
+      "direction": "up",
+      "sample_offset": 66560,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.7138671875,
+          "stddev": 10.269567977822184,
+          "minimum": -68,
+          "maximum": -9,
+          "median": -34.0
+        },
+        {
+          "mean": -5.4013671875,
+          "stddev": 6.817231591217826,
+          "minimum": -26,
+          "maximum": 14,
+          "median": -6.0
+        },
+        {
+          "mean": -29.3046875,
+          "stddev": 7.197610924976686,
+          "minimum": -53,
+          "maximum": -8,
+          "median": -30.0
+        },
+        {
+          "mean": -1704.2109375,
+          "stddev": 7.084757343839925,
+          "minimum": -1731,
+          "maximum": -1687,
+          "median": -1704.5
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32832,
+      "direction": "down",
+      "sample_offset": 67584,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -34.9853515625,
+          "stddev": 10.672539797807213,
+          "minimum": -72,
+          "maximum": -5,
+          "median": -33.0
+        },
+        {
+          "mean": -5.2783203125,
+          "stddev": 4.652544531345176,
+          "minimum": -20,
+          "maximum": 12,
+          "median": -5.0
+        },
+        {
+          "mean": -25.6259765625,
+          "stddev": 4.186071237532955,
+          "minimum": -40,
+          "maximum": -8,
+          "median": -26.0
+        },
+        {
+          "mean": -1702.759765625,
+          "stddev": 4.141645197873468,
+          "minimum": -1718,
+          "maximum": -1689,
+          "median": -1703.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32816,
+      "direction": "down",
+      "sample_offset": 68608,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -34.927734375,
+          "stddev": 13.02434065718658,
+          "minimum": -71,
+          "maximum": -7,
+          "median": -32.0
+        },
+        {
+          "mean": -5.6875,
+          "stddev": 6.598413635109578,
+          "minimum": -23,
+          "maximum": 16,
+          "median": -5.0
+        },
+        {
+          "mean": -27.333984375,
+          "stddev": 6.270573742669474,
+          "minimum": -46,
+          "maximum": -10,
+          "median": -27.0
+        },
+        {
+          "mean": -1289.0185546875,
+          "stddev": 6.754819421055738,
+          "minimum": -1309,
+          "maximum": -1271,
+          "median": -1288.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32800,
+      "direction": "down",
+      "sample_offset": 69632,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.4091796875,
+          "stddev": 14.024238006780882,
+          "minimum": -86,
+          "maximum": -12,
+          "median": -37.0
+        },
+        {
+          "mean": -11.126953125,
+          "stddev": 4.768825369423034,
+          "minimum": -25,
+          "maximum": 2,
+          "median": -11.0
+        },
+        {
+          "mean": -33.01171875,
+          "stddev": 4.966475439977373,
+          "minimum": -47,
+          "maximum": -19,
+          "median": -33.0
+        },
+        {
+          "mean": -883.1845703125,
+          "stddev": 4.774619198139644,
+          "minimum": -896,
+          "maximum": -869,
+          "median": -883.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32784,
+      "direction": "down",
+      "sample_offset": 70656,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -37.9638671875,
+          "stddev": 11.866101233444827,
+          "minimum": -79,
+          "maximum": -9,
+          "median": -37.0
+        },
+        {
+          "mean": -6.482421875,
+          "stddev": 4.427109710016399,
+          "minimum": -20,
+          "maximum": 11,
+          "median": -6.0
+        },
+        {
+          "mean": -28.4091796875,
+          "stddev": 4.338638371751833,
+          "minimum": -42,
+          "maximum": -15,
+          "median": -29.0
+        },
+        {
+          "mean": -464.9658203125,
+          "stddev": 4.438138566613531,
+          "minimum": -480,
+          "maximum": -453,
+          "median": -465.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 71680,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.734375,
+          "stddev": 12.858064939343517,
+          "minimum": -83,
+          "maximum": -13,
+          "median": -36.0
+        },
+        {
+          "mean": -12.1064453125,
+          "stddev": 4.525470178108213,
+          "minimum": -30,
+          "maximum": 2,
+          "median": -12.0
+        },
+        {
+          "mean": -32.79296875,
+          "stddev": 4.602575427032504,
+          "minimum": -47,
+          "maximum": -18,
+          "median": -33.0
+        },
+        {
+          "mean": -55.6806640625,
+          "stddev": 4.493547581980299,
+          "minimum": -72,
+          "maximum": -43,
+          "median": -56.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32752,
+      "direction": "down",
+      "sample_offset": 72704,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -28.98828125,
+          "stddev": 14.58601439036375,
+          "minimum": -84,
+          "maximum": 0,
+          "median": -26.0
+        },
+        {
+          "mean": -0.6279296875,
+          "stddev": 4.633569047727265,
+          "minimum": -17,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": -21.572265625,
+          "stddev": 4.451195014200497,
+          "minimum": -35,
+          "maximum": -9,
+          "median": -22.0
+        },
+        {
+          "mean": 365.83203125,
+          "stddev": 4.46985447179474,
+          "minimum": 351,
+          "maximum": 378,
+          "median": 366.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32736,
+      "direction": "down",
+      "sample_offset": 73728,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -35.0595703125,
+          "stddev": 13.072714539848587,
+          "minimum": -80,
+          "maximum": -6,
+          "median": -33.0
+        },
+        {
+          "mean": -5.5078125,
+          "stddev": 4.841021156723419,
+          "minimum": -21,
+          "maximum": 9,
+          "median": -5.0
+        },
+        {
+          "mean": -29.0009765625,
+          "stddev": 4.267541811022557,
+          "minimum": -42,
+          "maximum": -17,
+          "median": -29.0
+        },
+        {
+          "mean": 772.484375,
+          "stddev": 4.161503963037282,
+          "minimum": 761,
+          "maximum": 787,
+          "median": 772.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32720,
+      "direction": "down",
+      "sample_offset": 74752,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -38.20703125,
+          "stddev": 10.780303825102678,
+          "minimum": -75,
+          "maximum": -9,
+          "median": -37.0
+        },
+        {
+          "mean": -9.529296875,
+          "stddev": 5.002843048519035,
+          "minimum": -27,
+          "maximum": 8,
+          "median": -10.0
+        },
+        {
+          "mean": -30.5185546875,
+          "stddev": 4.532828115379159,
+          "minimum": -48,
+          "maximum": -11,
+          "median": -31.0
+        },
+        {
+          "mean": 1181.115234375,
+          "stddev": 5.232336575452535,
+          "minimum": 1160,
+          "maximum": 1196,
+          "median": 1181.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32704,
+      "direction": "down",
+      "sample_offset": 75776,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -44.1943359375,
+          "stddev": 13.686227364796187,
+          "minimum": -90,
+          "maximum": -16,
+          "median": -41.0
+        },
+        {
+          "mean": -15.7705078125,
+          "stddev": 5.600386194127728,
+          "minimum": -31,
+          "maximum": 2,
+          "median": -16.0
+        },
+        {
+          "mean": -40.1884765625,
+          "stddev": 5.168699367141427,
+          "minimum": -55,
+          "maximum": -23,
+          "median": -40.0
+        },
+        {
+          "mean": 1589.8173828125,
+          "stddev": 5.842066149944691,
+          "minimum": 1575,
+          "maximum": 1610,
+          "median": 1589.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 76800,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -39.29296875,
+          "stddev": 11.383329255385853,
+          "minimum": -76,
+          "maximum": -3,
+          "median": -37.0
+        },
+        {
+          "mean": -10.458984375,
+          "stddev": 5.009198310958138,
+          "minimum": -26,
+          "maximum": 8,
+          "median": -10.0
+        },
+        {
+          "mean": -31.20703125,
+          "stddev": 4.269499084965757,
+          "minimum": -43,
+          "maximum": -17,
+          "median": -31.0
+        },
+        {
+          "mean": -50.939453125,
+          "stddev": 4.671247459290477,
+          "minimum": -65,
+          "maximum": -30,
+          "median": -51.0
+        }
+      ]
+    }
+  ],
+  "input_source": "on-card offset DAC",
+  "source_termination": false,
+  "restored": true,
+  "adc_registers": {
+    "1": 32,
+    "2": 0
+  },
+  "calibration": {
+    "taps": [
+      21,
+      21,
+      21,
+      21,
+      20,
+      21,
+      19,
+      21,
+      19
+    ],
+    "frame_window": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "windows": [
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    ],
+    "slips": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ],
+    "scan": [
+      {
+        "tap": 0,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 1,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 2,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 3,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 4,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 5,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 6,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 7,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 8,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 9,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 10,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 11,
+        "good": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          3,
+          7,
+          1,
+          1,
+          1,
+          1,
+          7,
+          1
+        ]
+      },
+      {
+        "tap": 12,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 13,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          0,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 14,
+        "good": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          7,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 15,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 16,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 17,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 18,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 19,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 20,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 21,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 22,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 23,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 24,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 25,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 26,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 27,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          7,
+          0
+        ]
+      },
+      {
+        "tap": 28,
+        "good": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          2,
+          7,
+          0,
+          7,
+          7,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 29,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 30,
+        "good": [
+          false,
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          3,
+          3,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 31,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          5,
+          3,
+          3,
+          3,
+          3,
+          5,
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  "channels": [
+    {
+      "slope_adc_codes_per_dac_code": -25.749867757161457,
+      "intercept": 843729.8802083333,
+      "r_squared": 0.9999622316256308,
+      "span_adc_codes": 3307.6630859375,
+      "maximum_fit_error_codes": 11.388020833372138,
+      "channel": 1,
+      "monotonic": true,
+      "hysteresis_max_codes": 10.01953125,
+      "other_channel_spans_codes": {
+        "2": 5.712890625,
+        "3": 3.5185546875,
+        "4": 8.244140625
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -25.753609212239585,
+      "intercept": 843883.9025173612,
+      "r_squared": 0.9999942636403285,
+      "span_adc_codes": 3296.921875,
+      "maximum_fit_error_codes": 5.08023003465496,
+      "channel": 2,
+      "monotonic": true,
+      "hysteresis_max_codes": 5.8544921875,
+      "other_channel_spans_codes": {
+        "1": 6.7451171875,
+        "3": 9.4638671875,
+        "4": 11.98828125
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -25.706343587239584,
+      "intercept": 842311.4875,
+      "r_squared": 0.9999755036331139,
+      "span_adc_codes": 3302.6103515625,
+      "maximum_fit_error_codes": 7.365299479220994,
+      "channel": 3,
+      "monotonic": true,
+      "hysteresis_max_codes": 13.751953125,
+      "other_channel_spans_codes": {
+        "1": 14.4228515625,
+        "2": 11.505859375,
+        "4": 11.5986328125
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -25.783823649088543,
+      "intercept": 844830.2726779514,
+      "r_squared": 0.9999843778155802,
+      "span_adc_codes": 3301.158203125,
+      "maximum_fit_error_codes": 9.018663194496185,
+      "channel": 4,
+      "monotonic": true,
+      "hysteresis_max_codes": 12.6513671875,
+      "other_channel_spans_codes": {
+        "1": 7.146484375,
+        "2": 9.40234375,
+        "3": 11.169921875
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    }
+  ],
+  "sample_values_checked": 311296,
+  "final": {
+    "control": 1,
+    "ssr": 0,
+    "dac_codes_commanded": [
+      32768,
+      32768,
+      32768,
+      32768
+    ]
+  }
+}

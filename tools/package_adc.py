@@ -58,6 +58,8 @@ if args.dual:
     files['test_adc_hardware.py'] = ROOT/'tools/test_adc_hardware.py'
     files['test_adc_dual_hardware.py'] = ROOT/'tools/test_adc_dual_hardware.py'
     files['boot_adc_jtag.py'] = ROOT/'tools/boot_adc_jtag.py'
+    files['test_adc_offset.py'] = ROOT/'tools/test_adc_offset.py'
+    files['test_adc_offset_hardware.py'] = ROOT/'tools/test_adc_offset_hardware.py'
     recorded = ROOT/'evidence/zc706/adc-dual-20261008'
     for candidate in sorted((ROOT/'evidence/zc706').glob('adc-dual-*'), reverse=True):
         candidate_status = candidate/'hardware-status.json'

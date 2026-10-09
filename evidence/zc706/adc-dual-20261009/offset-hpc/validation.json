@@ -1,0 +1,31 @@
+{
+  "started_utc": "2026-10-09T10:05:13.687469+00:00",
+  "host": "192.168.2.9",
+  "expected_bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "slot": "J4 HPC",
+  "card": 2,
+  "ranges": {
+    "5V": {
+      "result": "PASS",
+      "restored": true,
+      "sample_values_checked": 311296,
+      "raw_sha256": "be77d0b7331e44da968650741cc1ce40eef2f6ab80f61c8991b48dd536fea872"
+    },
+    "0.5V": {
+      "result": "PASS",
+      "restored": true,
+      "sample_values_checked": 311296,
+      "raw_sha256": "c9311e83c07f9e38b3c4dc99e8fd319bcb1bfeee861b9e82ff0b05ce673b03d4"
+    },
+    "0.05V": {
+      "result": "PASS",
+      "restored": true,
+      "sample_values_checked": 311296,
+      "raw_sha256": "5d5c2222d531a3dfe9d9fc53a06c76018362fd124d1a8abe761ce86cf628df74"
+    }
+  },
+  "diagnostic_sha256": "be2de35b6b3a3f1ba56e33a72f317267dc9fdcdcc80e1458918c9b8cc7bcf162",
+  "driver_sha256": "14ca46404f92faebcec21a2597c99847dbe5958c2724f80a275e3f6472d2c5f6",
+  "result": "PASS",
+  "finished_utc": "2026-10-09T10:06:50.329853+00:00"
+}

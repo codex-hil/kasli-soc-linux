@@ -46,6 +46,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--csr-json', required=True)
     p.add_argument('--device', default='/dev/uio0')
+    p.add_argument('--card', type=int, choices=[1, 2], default=1)
     p.add_argument('--output', type=Path, default=Path('adc-offset'))
     p.add_argument('--range', choices=['5V','0.5V','0.05V'], default='5V')
     p.add_argument('--half-span', type=int, default=4096, help='DAC codes around midscale')
@@ -53,7 +54,7 @@ def main():
     if not 8 <= a.half_span <= 4096:
         p.error('Half-span must be 8..4096 codes')
     a.output.mkdir(parents=True, exist_ok=True)
-    r = Registers(a.csr_json,a.device); adc = ADC(r)
+    r = Registers(a.csr_json,a.device,card=a.card); adc = ADC(r)
     initial = dict(control=r.read('adc_control'),ssr=r.read('adc_ssr'),
                    taps=[r.read(f'adc_tap{i}') for i in range(9)])
     # Avoid silently changing an already running acquisition or unknown DAC state.
@@ -61,7 +62,7 @@ def main():
         r.mem.close()
         raise RuntimeError('Expected stopped golden state: control=1, SSR=0, DAC CLR asserted')
     result = dict(result='FAIL', hardware_validated=False, initial=initial,
-                  range=a.range, analog_calibrated=False,
+                  range=a.range, card=a.card, slot='J5 LPC' if a.card == 1 else 'J4 HPC', analog_calibrated=False,
                   offset_dac_readback=False, records=[], input_source='on-card offset DAC',
                   source_termination=False, restored=False)
     try:

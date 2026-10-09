@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('results',nargs='+',type=Path)
 p.add_argument('--output',type=Path,required=True)
+p.add_argument('--title',default='ZC706 / CERN FMC ADC v6.1')
 a=p.parse_args()
 measurements=[json.loads(path.read_text()) for path in a.results]
 fig,axes=plt.subplots(len(measurements),4,figsize=(15,3.3*len(measurements)),squeeze=False,layout='constrained')
@@ -32,7 +33,7 @@ for row,result in enumerate(measurements):
         if channel==0:ax.set_ylabel('ADC mean (signed 14-bit codes)')
         ax.grid(alpha=.25)
         if row==0 and channel==0:ax.legend(fontsize=8)
-fig.suptitle('ZC706 / CERN FMC ADC v6.1 — internal offset sweep, 1024 samples per point\nReal analog ADC data; source termination OFF, FPGA termination ON; uncalibrated',fontsize=12)
+fig.suptitle(a.title+' — internal offset sweep, 1024 samples per point\nReal analog ADC data; source termination OFF, FPGA termination ON; uncalibrated',fontsize=12)
 a.output.parent.mkdir(parents=True,exist_ok=True)
 fig.savefig(a.output.with_suffix('.svg'))
 fig.savefig(a.output.with_suffix('.png'),dpi=150)

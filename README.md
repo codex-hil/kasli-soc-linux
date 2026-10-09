@@ -30,7 +30,8 @@ Dodany także target **dwóch kart: J5 LPC + J4 HPC**, z osobnymi zegarami,
 CSR i snapshotami. Build: `make adc-dual-package`. Build/timing/symulacje
 przeszły. **Obie fizyczne karty przeszły test równoległy 2026-10-09:**
 278528 wartości wzorców oraz osobne snapshoty 1024 próbek na kanał.
-Boot przez U-Boot z SD również działa bez JTAG. Synchronizacja później.
+Boot przez U-Boot z SD również działa bez JTAG. HPC przeszła dodatkowo
+wewnętrzny sweep offsetu na trzech zakresach (933888 wartości). Synchronizacja później.
 [Opis i test obu kart](docs/zc706-adc-dual.md).
 
 ## Hardware i źródła prawdy

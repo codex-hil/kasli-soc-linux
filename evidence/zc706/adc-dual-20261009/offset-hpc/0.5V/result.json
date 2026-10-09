@@ -1,0 +1,3837 @@
+{
+  "result": "PASS",
+  "hardware_validated": true,
+  "initial": {
+    "control": 1,
+    "ssr": 0,
+    "taps": [
+      21,
+      21,
+      21,
+      21,
+      20,
+      21,
+      19,
+      21,
+      19
+    ]
+  },
+  "range": "0.5V",
+  "card": 2,
+  "slot": "J4 HPC",
+  "analog_calibrated": false,
+  "offset_dac_readback": false,
+  "records": [
+    {
+      "channel": 1,
+      "dac_code": 32256,
+      "direction": "up",
+      "sample_offset": 0,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1354.4560546875,
+          "stddev": 3.1203124938873152,
+          "minimum": 1344,
+          "maximum": 1370,
+          "median": 1355.0
+        },
+        {
+          "mean": 22.8154296875,
+          "stddev": 1.860390009445238,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 23.0
+        },
+        {
+          "mean": 5.6533203125,
+          "stddev": 1.979368366872347,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": -0.4697265625,
+          "stddev": 2.0225924933070263,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32384,
+      "direction": "up",
+      "sample_offset": 1024,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1014.0537109375,
+          "stddev": 3.0714228905660113,
+          "minimum": 1003,
+          "maximum": 1029,
+          "median": 1014.0
+        },
+        {
+          "mean": 22.392578125,
+          "stddev": 1.9243971239771391,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": 5.1162109375,
+          "stddev": 1.8975649739878135,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -0.814453125,
+          "stddev": 1.8746734334752104,
+          "minimum": -8,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32512,
+      "direction": "up",
+      "sample_offset": 2048,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 675.6328125,
+          "stddev": 3.2688661397866614,
+          "minimum": 660,
+          "maximum": 693,
+          "median": 676.0
+        },
+        {
+          "mean": 22.6943359375,
+          "stddev": 1.9368262811610122,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 23.0
+        },
+        {
+          "mean": 5.845703125,
+          "stddev": 1.8613096798666349,
+          "minimum": 0,
+          "maximum": 13,
+          "median": 6.0
+        },
+        {
+          "mean": -0.27734375,
+          "stddev": 1.986584492121072,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32640,
+      "direction": "up",
+      "sample_offset": 3072,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 336.5234375,
+          "stddev": 3.1464013266895483,
+          "minimum": 322,
+          "maximum": 352,
+          "median": 337.0
+        },
+        {
+          "mean": 23.306640625,
+          "stddev": 2.0371824052105914,
+          "minimum": 18,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.880859375,
+          "stddev": 1.9237071662481817,
+          "minimum": -1,
+          "maximum": 13,
+          "median": 6.0
+        },
+        {
+          "mean": -0.1943359375,
+          "stddev": 1.9249409356902347,
+          "minimum": -5,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 4096,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.025390625,
+          "stddev": 3.1407944363109963,
+          "minimum": -11,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 22.8955078125,
+          "stddev": 1.9975129399459381,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.4580078125,
+          "stddev": 1.9274422251234833,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -0.5634765625,
+          "stddev": 1.9540307958200618,
+          "minimum": -6,
+          "maximum": 7,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32896,
+      "direction": "up",
+      "sample_offset": 5120,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -341.083984375,
+          "stddev": 3.236265652686111,
+          "minimum": -352,
+          "maximum": -324,
+          "median": -341.0
+        },
+        {
+          "mean": 22.7548828125,
+          "stddev": 1.9594212479434048,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.443359375,
+          "stddev": 2.0522269829625595,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -0.9736328125,
+          "stddev": 1.9132270079432132,
+          "minimum": -6,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33024,
+      "direction": "up",
+      "sample_offset": 6144,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -679.90234375,
+          "stddev": 3.093944813152933,
+          "minimum": -691,
+          "maximum": -666,
+          "median": -680.0
+        },
+        {
+          "mean": 22.515625,
+          "stddev": 1.9007990712789713,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": 4.7529296875,
+          "stddev": 1.9859101372371188,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -1.1064453125,
+          "stddev": 1.8909213251605095,
+          "minimum": -7,
+          "maximum": 4,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33152,
+      "direction": "up",
+      "sample_offset": 7168,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1018.3603515625,
+          "stddev": 3.1083981306942983,
+          "minimum": -1029,
+          "maximum": -1006,
+          "median": -1018.0
+        },
+        {
+          "mean": 23.2548828125,
+          "stddev": 1.916844428844472,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.6865234375,
+          "stddev": 1.9636277669821192,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": -0.138671875,
+          "stddev": 1.952639588117578,
+          "minimum": -6,
+          "maximum": 8,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33280,
+      "direction": "up",
+      "sample_offset": 8192,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1357.203125,
+          "stddev": 3.2358088609148408,
+          "minimum": -1370,
+          "maximum": -1342,
+          "median": -1357.0
+        },
+        {
+          "mean": 23.037109375,
+          "stddev": 1.9686482721113767,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.953125,
+          "stddev": 1.9484945109943215,
+          "minimum": 1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.3984375,
+          "stddev": 1.927757131641263,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33280,
+      "direction": "down",
+      "sample_offset": 9216,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1357.8720703125,
+          "stddev": 3.2912409221380545,
+          "minimum": -1369,
+          "maximum": -1343,
+          "median": -1358.0
+        },
+        {
+          "mean": 22.6162109375,
+          "stddev": 1.8525138374666386,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 4.908203125,
+          "stddev": 1.9856347118088549,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.9111328125,
+          "stddev": 1.896469037576369,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33152,
+      "direction": "down",
+      "sample_offset": 10240,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1018.96875,
+          "stddev": 3.0437885007831933,
+          "minimum": -1030,
+          "maximum": -1003,
+          "median": -1019.0
+        },
+        {
+          "mean": 22.7607421875,
+          "stddev": 1.9839152607048807,
+          "minimum": 15,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.2578125,
+          "stddev": 1.9064901231959608,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.2109375,
+          "stddev": 1.9986415063972203,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 33024,
+      "direction": "down",
+      "sample_offset": 11264,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -678.85546875,
+          "stddev": 3.1790035927588125,
+          "minimum": -691,
+          "maximum": -664,
+          "median": -679.0
+        },
+        {
+          "mean": 23.2431640625,
+          "stddev": 1.9536754595399144,
+          "minimum": 15,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.7900390625,
+          "stddev": 1.9404862063988295,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": 0.0751953125,
+          "stddev": 1.848566262668998,
+          "minimum": -6,
+          "maximum": 7,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32896,
+      "direction": "down",
+      "sample_offset": 12288,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -341.3525390625,
+          "stddev": 3.0758213776017,
+          "minimum": -350,
+          "maximum": -326,
+          "median": -341.0
+        },
+        {
+          "mean": 22.4267578125,
+          "stddev": 1.9320757831850734,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 22.0
+        },
+        {
+          "mean": 4.7548828125,
+          "stddev": 1.9237098928612104,
+          "minimum": -2,
+          "maximum": 10,
+          "median": 5.0
+        },
+        {
+          "mean": -1.0908203125,
+          "stddev": 1.9081838835231268,
+          "minimum": -7,
+          "maximum": 4,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 13312,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.419921875,
+          "stddev": 2.969150235150873,
+          "minimum": -10,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": 22.0126953125,
+          "stddev": 1.9577657269296873,
+          "minimum": 15,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": 4.642578125,
+          "stddev": 1.954857629923848,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.9697265625,
+          "stddev": 1.976932777431224,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32640,
+      "direction": "down",
+      "sample_offset": 14336,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 336.2841796875,
+          "stddev": 3.0330702831804612,
+          "minimum": 328,
+          "maximum": 352,
+          "median": 336.0
+        },
+        {
+          "mean": 23.03515625,
+          "stddev": 1.9290983095959464,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.2861328125,
+          "stddev": 1.9119185916536405,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.27734375,
+          "stddev": 1.9388186981602837,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32512,
+      "direction": "down",
+      "sample_offset": 15360,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 674.7236328125,
+          "stddev": 3.1160478157713403,
+          "minimum": 665,
+          "maximum": 690,
+          "median": 675.0
+        },
+        {
+          "mean": 21.7412109375,
+          "stddev": 1.967117601626901,
+          "minimum": 15,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": 4.28515625,
+          "stddev": 2.005055713212463,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 4.0
+        },
+        {
+          "mean": -1.537109375,
+          "stddev": 1.9431846655135763,
+          "minimum": -8,
+          "maximum": 5,
+          "median": -2.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32384,
+      "direction": "down",
+      "sample_offset": 16384,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1013.990234375,
+          "stddev": 3.0493823567352716,
+          "minimum": 1003,
+          "maximum": 1027,
+          "median": 1014.0
+        },
+        {
+          "mean": 22.3173828125,
+          "stddev": 1.9778684139319254,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 22.0
+        },
+        {
+          "mean": 4.37109375,
+          "stddev": 2.0017044433959117,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 4.0
+        },
+        {
+          "mean": -1.1650390625,
+          "stddev": 1.9159865070895257,
+          "minimum": -8,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32256,
+      "direction": "down",
+      "sample_offset": 17408,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 1353.822265625,
+          "stddev": 2.968857291441163,
+          "minimum": 1344,
+          "maximum": 1369,
+          "median": 1354.0
+        },
+        {
+          "mean": 23.1943359375,
+          "stddev": 1.8844364491529015,
+          "minimum": 18,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.3994140625,
+          "stddev": 1.9519720718230695,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.4609375,
+          "stddev": 1.8766756835142693,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 18432,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.107421875,
+          "stddev": 3.1644669639248066,
+          "minimum": -9,
+          "maximum": 16,
+          "median": 0.0
+        },
+        {
+          "mean": 23.294921875,
+          "stddev": 2.008510601825762,
+          "minimum": 16,
+          "maximum": 31,
+          "median": 23.0
+        },
+        {
+          "mean": 5.9873046875,
+          "stddev": 1.916426463901114,
+          "minimum": 0,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": 0.0791015625,
+          "stddev": 1.991336895231457,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32256,
+      "direction": "up",
+      "sample_offset": 19456,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.2841796875,
+          "stddev": 3.081938264747106,
+          "minimum": -14,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 1378.0556640625,
+          "stddev": 1.959010419739006,
+          "minimum": 1372,
+          "maximum": 1386,
+          "median": 1378.0
+        },
+        {
+          "mean": 5.060546875,
+          "stddev": 1.9541237680678607,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.7802734375,
+          "stddev": 1.952952873274707,
+          "minimum": -7,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32384,
+      "direction": "up",
+      "sample_offset": 20480,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.7041015625,
+          "stddev": 3.1045176843086364,
+          "minimum": -12,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 1039.6435546875,
+          "stddev": 1.8907922087571594,
+          "minimum": 1035,
+          "maximum": 1045,
+          "median": 1040.0
+        },
+        {
+          "mean": 5.5146484375,
+          "stddev": 1.9994580011290082,
+          "minimum": -1,
+          "maximum": 14,
+          "median": 6.0
+        },
+        {
+          "mean": -0.2138671875,
+          "stddev": 1.9922121532635122,
+          "minimum": -7,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32512,
+      "direction": "up",
+      "sample_offset": 21504,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.2802734375,
+          "stddev": 3.0826127696699004,
+          "minimum": -12,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 700.470703125,
+          "stddev": 1.932736355045673,
+          "minimum": 693,
+          "maximum": 707,
+          "median": 700.0
+        },
+        {
+          "mean": 4.662109375,
+          "stddev": 1.9865489675658914,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.5380859375,
+          "stddev": 1.9631653550744894,
+          "minimum": -6,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32640,
+      "direction": "up",
+      "sample_offset": 22528,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.212890625,
+          "stddev": 3.147045651366867,
+          "minimum": -11,
+          "maximum": 14,
+          "median": 0.0
+        },
+        {
+          "mean": 362.107421875,
+          "stddev": 1.9299711567200906,
+          "minimum": 356,
+          "maximum": 368,
+          "median": 362.0
+        },
+        {
+          "mean": 5.7822265625,
+          "stddev": 1.8515292780346289,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": 0.134765625,
+          "stddev": 1.8701505892088903,
+          "minimum": -6,
+          "maximum": 7,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 23552,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.0537109375,
+          "stddev": 3.1124820999795118,
+          "minimum": -10,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.6650390625,
+          "stddev": 1.969024881216365,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.763671875,
+          "stddev": 1.8819684554566753,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": -0.4326171875,
+          "stddev": 1.972305961705635,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32896,
+      "direction": "up",
+      "sample_offset": 24576,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.1650390625,
+          "stddev": 3.111079683220782,
+          "minimum": -12,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": -316.2626953125,
+          "stddev": 1.9531462401188824,
+          "minimum": -322,
+          "maximum": -309,
+          "median": -316.0
+        },
+        {
+          "mean": 5.4833984375,
+          "stddev": 1.9832594732214337,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.94140625,
+          "stddev": 1.8922344324794793,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33024,
+      "direction": "up",
+      "sample_offset": 25600,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.21484375,
+          "stddev": 3.1022192118040173,
+          "minimum": -12,
+          "maximum": 17,
+          "median": -1.0
+        },
+        {
+          "mean": -655.0478515625,
+          "stddev": 1.9346388333397808,
+          "minimum": -661,
+          "maximum": -650,
+          "median": -655.0
+        },
+        {
+          "mean": 5.2138671875,
+          "stddev": 1.9951511255067471,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -0.2705078125,
+          "stddev": 1.9213208896164287,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33152,
+      "direction": "up",
+      "sample_offset": 26624,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.5283203125,
+          "stddev": 3.10512094529342,
+          "minimum": -10,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": -993.93359375,
+          "stddev": 1.9529335843701745,
+          "minimum": -1000,
+          "maximum": -987,
+          "median": -994.0
+        },
+        {
+          "mean": 5.7109375,
+          "stddev": 1.9681143567114565,
+          "minimum": 0,
+          "maximum": 14,
+          "median": 6.0
+        },
+        {
+          "mean": 0.2138671875,
+          "stddev": 1.9769578621232269,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33280,
+      "direction": "up",
+      "sample_offset": 27648,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.701171875,
+          "stddev": 3.140362021600214,
+          "minimum": -10,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": -1333.2587890625,
+          "stddev": 1.9305371101406912,
+          "minimum": -1339,
+          "maximum": -1327,
+          "median": -1333.0
+        },
+        {
+          "mean": 5.7783203125,
+          "stddev": 1.9270582317745104,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.2177734375,
+          "stddev": 1.871464511397273,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33280,
+      "direction": "down",
+      "sample_offset": 28672,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.505859375,
+          "stddev": 3.2914966265704435,
+          "minimum": -10,
+          "maximum": 12,
+          "median": 0.0
+        },
+        {
+          "mean": -1332.9541015625,
+          "stddev": 1.9766317362966372,
+          "minimum": -1339,
+          "maximum": -1327,
+          "median": -1333.0
+        },
+        {
+          "mean": 5.9296875,
+          "stddev": 2.043218943809926,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.19140625,
+          "stddev": 1.9893477002427045,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33152,
+      "direction": "down",
+      "sample_offset": 29696,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.33984375,
+          "stddev": 3.0780432056074094,
+          "minimum": -12,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": -994.2451171875,
+          "stddev": 1.9733269184025464,
+          "minimum": -1000,
+          "maximum": -988,
+          "median": -994.0
+        },
+        {
+          "mean": 5.130859375,
+          "stddev": 1.9163321603977244,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.3046875,
+          "stddev": 1.8788859471356292,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 33024,
+      "direction": "down",
+      "sample_offset": 30720,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.84765625,
+          "stddev": 3.1909041832740663,
+          "minimum": -12,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": -655.0185546875,
+          "stddev": 1.9790522759825666,
+          "minimum": -661,
+          "maximum": -650,
+          "median": -655.0
+        },
+        {
+          "mean": 5.6650390625,
+          "stddev": 1.958083305901238,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.1015625,
+          "stddev": 1.9782601405259497,
+          "minimum": -5,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32896,
+      "direction": "down",
+      "sample_offset": 31744,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.455078125,
+          "stddev": 3.1718262917673288,
+          "minimum": -13,
+          "maximum": 13,
+          "median": 0.0
+        },
+        {
+          "mean": -315.6337890625,
+          "stddev": 1.9105154374553928,
+          "minimum": -322,
+          "maximum": -309,
+          "median": -316.0
+        },
+        {
+          "mean": 6.1748046875,
+          "stddev": 1.9439685269386506,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.41015625,
+          "stddev": 1.9773459107060498,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 32768,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.458984375,
+          "stddev": 3.205871892871869,
+          "minimum": -15,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 23.021484375,
+          "stddev": 1.9905851015796485,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.548828125,
+          "stddev": 1.9559501052452704,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": 0.0146484375,
+          "stddev": 1.9597463447545471,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32640,
+      "direction": "down",
+      "sample_offset": 33792,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.060546875,
+          "stddev": 3.18477918401382,
+          "minimum": -11,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 361.2880859375,
+          "stddev": 1.9887414186149859,
+          "minimum": 355,
+          "maximum": 367,
+          "median": 361.0
+        },
+        {
+          "mean": 5.234375,
+          "stddev": 1.9258089817982986,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -0.76953125,
+          "stddev": 1.9619449292152513,
+          "minimum": -6,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32512,
+      "direction": "down",
+      "sample_offset": 34816,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.9072265625,
+          "stddev": 3.0414112105722295,
+          "minimum": -10,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 700.64453125,
+          "stddev": 2.0678456706856627,
+          "minimum": 694,
+          "maximum": 707,
+          "median": 701.0
+        },
+        {
+          "mean": 5.5791015625,
+          "stddev": 2.09761601414798,
+          "minimum": -1,
+          "maximum": 15,
+          "median": 6.0
+        },
+        {
+          "mean": -0.30859375,
+          "stddev": 2.0035331036598665,
+          "minimum": -6,
+          "maximum": 7,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32384,
+      "direction": "down",
+      "sample_offset": 35840,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.2841796875,
+          "stddev": 2.9928795235880115,
+          "minimum": -11,
+          "maximum": 11,
+          "median": -1.0
+        },
+        {
+          "mean": 1039.16796875,
+          "stddev": 1.954839091593842,
+          "minimum": 1033,
+          "maximum": 1046,
+          "median": 1039.0
+        },
+        {
+          "mean": 5.171875,
+          "stddev": 1.9544995163404364,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -0.6015625,
+          "stddev": 1.9089216677469376,
+          "minimum": -6,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32256,
+      "direction": "down",
+      "sample_offset": 36864,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.1005859375,
+          "stddev": 3.1863722956800333,
+          "minimum": -12,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": 1378.6533203125,
+          "stddev": 1.975417457595964,
+          "minimum": 1372,
+          "maximum": 1385,
+          "median": 1379.0
+        },
+        {
+          "mean": 5.56640625,
+          "stddev": 2.0609568978901374,
+          "minimum": -2,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.2255859375,
+          "stddev": 1.918477598853384,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 37888,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.5380859375,
+          "stddev": 3.137243927616204,
+          "minimum": -12,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 22.0146484375,
+          "stddev": 1.9432325158814137,
+          "minimum": 16,
+          "maximum": 27,
+          "median": 22.0
+        },
+        {
+          "mean": 5.0888671875,
+          "stddev": 2.006559819812467,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -1.0498046875,
+          "stddev": 1.9158212483431296,
+          "minimum": -7,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32256,
+      "direction": "up",
+      "sample_offset": 38912,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.2666015625,
+          "stddev": 3.1521039869224743,
+          "minimum": -13,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": 22.8134765625,
+          "stddev": 1.96387641407579,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 1361.0595703125,
+          "stddev": 1.9929970685800449,
+          "minimum": 1355,
+          "maximum": 1367,
+          "median": 1361.0
+        },
+        {
+          "mean": -0.6806640625,
+          "stddev": 1.8709793215107953,
+          "minimum": -7,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32384,
+      "direction": "up",
+      "sample_offset": 39936,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.669921875,
+          "stddev": 3.0526681454747884,
+          "minimum": -11,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 23.1884765625,
+          "stddev": 1.9947744290741707,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 1021.9697265625,
+          "stddev": 1.9034460739621528,
+          "minimum": 1016,
+          "maximum": 1030,
+          "median": 1022.0
+        },
+        {
+          "mean": -0.18359375,
+          "stddev": 1.8981601842207463,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32512,
+      "direction": "up",
+      "sample_offset": 40960,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.05859375,
+          "stddev": 3.14780497290746,
+          "minimum": -12,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.6328125,
+          "stddev": 1.8843354836238027,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 682.5830078125,
+          "stddev": 1.9642668041953886,
+          "minimum": 676,
+          "maximum": 688,
+          "median": 683.0
+        },
+        {
+          "mean": -0.8388671875,
+          "stddev": 1.9117270409856737,
+          "minimum": -8,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32640,
+      "direction": "up",
+      "sample_offset": 41984,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.392578125,
+          "stddev": 3.0622103807170866,
+          "minimum": -11,
+          "maximum": 15,
+          "median": 0.0
+        },
+        {
+          "mean": 23.3466796875,
+          "stddev": 1.9520443787923731,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 344.474609375,
+          "stddev": 1.90787324425972,
+          "minimum": 339,
+          "maximum": 351,
+          "median": 344.0
+        },
+        {
+          "mean": -0.431640625,
+          "stddev": 1.839564859103807,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 43008,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.509765625,
+          "stddev": 3.20611938448467,
+          "minimum": -11,
+          "maximum": 14,
+          "median": 0.0
+        },
+        {
+          "mean": 22.8603515625,
+          "stddev": 1.9412841758495352,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.8642578125,
+          "stddev": 1.9749732583082524,
+          "minimum": 0,
+          "maximum": 13,
+          "median": 6.0
+        },
+        {
+          "mean": -0.1162109375,
+          "stddev": 2.006135826783763,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32896,
+      "direction": "up",
+      "sample_offset": 44032,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.6953125,
+          "stddev": 3.0683836180216693,
+          "minimum": -10,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.771484375,
+          "stddev": 1.99426113739672,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": -333.515625,
+          "stddev": 1.8956544672948707,
+          "minimum": -340,
+          "maximum": -327,
+          "median": -334.0
+        },
+        {
+          "mean": -0.2431640625,
+          "stddev": 1.979990764172524,
+          "minimum": -6,
+          "maximum": 7,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33024,
+      "direction": "up",
+      "sample_offset": 45056,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.830078125,
+          "stddev": 3.1567811424608587,
+          "minimum": -12,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.455078125,
+          "stddev": 1.8905432817437648,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": -672.87890625,
+          "stddev": 1.973205369116691,
+          "minimum": -680,
+          "maximum": -665,
+          "median": -673.0
+        },
+        {
+          "mean": -0.876953125,
+          "stddev": 1.9076572914317536,
+          "minimum": -7,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33152,
+      "direction": "up",
+      "sample_offset": 46080,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.5859375,
+          "stddev": 3.1002831114422036,
+          "minimum": -11,
+          "maximum": 14,
+          "median": 0.0
+        },
+        {
+          "mean": 23.4453125,
+          "stddev": 2.0051051786237424,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": -1011.9609375,
+          "stddev": 1.954171594587781,
+          "minimum": -1017,
+          "maximum": -1006,
+          "median": -1012.0
+        },
+        {
+          "mean": -0.04296875,
+          "stddev": 1.8895553211069098,
+          "minimum": -6,
+          "maximum": 5,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33280,
+      "direction": "up",
+      "sample_offset": 47104,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.34375,
+          "stddev": 3.15810589000749,
+          "minimum": -13,
+          "maximum": 13,
+          "median": 0.0
+        },
+        {
+          "mean": 23.5517578125,
+          "stddev": 2.0148997813403065,
+          "minimum": 16,
+          "maximum": 30,
+          "median": 24.0
+        },
+        {
+          "mean": -1350.8369140625,
+          "stddev": 1.9268266111640004,
+          "minimum": -1356,
+          "maximum": -1345,
+          "median": -1351.0
+        },
+        {
+          "mean": 0.2431640625,
+          "stddev": 1.9666288544635198,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33280,
+      "direction": "down",
+      "sample_offset": 48128,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.8310546875,
+          "stddev": 3.1121254262777196,
+          "minimum": -11,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": 22.9189453125,
+          "stddev": 1.9471213881353873,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": -1351.6396484375,
+          "stddev": 1.9309441185347154,
+          "minimum": -1358,
+          "maximum": -1344,
+          "median": -1352.0
+        },
+        {
+          "mean": 0.224609375,
+          "stddev": 1.9385934020990863,
+          "minimum": -7,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33152,
+      "direction": "down",
+      "sample_offset": 49152,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.6640625,
+          "stddev": 3.2515677558823453,
+          "minimum": -13,
+          "maximum": 18,
+          "median": -2.0
+        },
+        {
+          "mean": 22.2744140625,
+          "stddev": 1.8848412691264604,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": -1012.908203125,
+          "stddev": 1.9762681583581299,
+          "minimum": -1019,
+          "maximum": -1007,
+          "median": -1013.0
+        },
+        {
+          "mean": -0.8896484375,
+          "stddev": 2.000129457098667,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 33024,
+      "direction": "down",
+      "sample_offset": 50176,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.87109375,
+          "stddev": 3.0826797479970147,
+          "minimum": -11,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.263671875,
+          "stddev": 2.018665002503879,
+          "minimum": 16,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": -672.9248046875,
+          "stddev": 1.8622509168954724,
+          "minimum": -680,
+          "maximum": -667,
+          "median": -673.0
+        },
+        {
+          "mean": -0.6845703125,
+          "stddev": 1.965800422154714,
+          "minimum": -6,
+          "maximum": 4,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32896,
+      "direction": "down",
+      "sample_offset": 51200,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.32421875,
+          "stddev": 3.0259875994703673,
+          "minimum": -13,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 22.0810546875,
+          "stddev": 1.91882951304546,
+          "minimum": 15,
+          "maximum": 30,
+          "median": 22.0
+        },
+        {
+          "mean": -333.921875,
+          "stddev": 1.9141103310350216,
+          "minimum": -340,
+          "maximum": -328,
+          "median": -334.0
+        },
+        {
+          "mean": -0.9150390625,
+          "stddev": 1.9007626960247093,
+          "minimum": -7,
+          "maximum": 4,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 52224,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.0908203125,
+          "stddev": 2.825068049328618,
+          "minimum": -10,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.6787109375,
+          "stddev": 1.9658450538681504,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.2421875,
+          "stddev": 2.1074499317525315,
+          "minimum": 0,
+          "maximum": 13,
+          "median": 5.0
+        },
+        {
+          "mean": -0.6513671875,
+          "stddev": 1.9244870679088337,
+          "minimum": -6,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32640,
+      "direction": "down",
+      "sample_offset": 53248,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.07421875,
+          "stddev": 3.067973325690502,
+          "minimum": -13,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 22.8076171875,
+          "stddev": 1.9458240005084195,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 344.0771484375,
+          "stddev": 2.0075310535808177,
+          "minimum": 337,
+          "maximum": 351,
+          "median": 344.0
+        },
+        {
+          "mean": -0.4462890625,
+          "stddev": 1.9392748671069997,
+          "minimum": -6,
+          "maximum": 7,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32512,
+      "direction": "down",
+      "sample_offset": 54272,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.115234375,
+          "stddev": 3.102166950507074,
+          "minimum": -10,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 22.6396484375,
+          "stddev": 1.8833227455494208,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 682.80078125,
+          "stddev": 1.949899680662684,
+          "minimum": 677,
+          "maximum": 689,
+          "median": 683.0
+        },
+        {
+          "mean": -0.62109375,
+          "stddev": 1.9291615869882277,
+          "minimum": -6,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32384,
+      "direction": "down",
+      "sample_offset": 55296,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.1923828125,
+          "stddev": 3.138891092560331,
+          "minimum": -13,
+          "maximum": 16,
+          "median": 0.0
+        },
+        {
+          "mean": 23.3193359375,
+          "stddev": 1.894837030332951,
+          "minimum": 18,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 1022.0576171875,
+          "stddev": 1.871768200714124,
+          "minimum": 1016,
+          "maximum": 1029,
+          "median": 1022.0
+        },
+        {
+          "mean": -0.05078125,
+          "stddev": 1.8601913583415115,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32256,
+      "direction": "down",
+      "sample_offset": 56320,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.259765625,
+          "stddev": 3.17997001873734,
+          "minimum": -12,
+          "maximum": 13,
+          "median": 0.0
+        },
+        {
+          "mean": 23.2265625,
+          "stddev": 1.9772725997175378,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 1361.76171875,
+          "stddev": 1.9555258681230574,
+          "minimum": 1356,
+          "maximum": 1368,
+          "median": 1362.0
+        },
+        {
+          "mean": 0.0029296875,
+          "stddev": 1.901631498064531,
+          "minimum": -5,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    },
+    {
+      "channel": 3,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 57344,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.63671875,
+          "stddev": 3.0810755806046752,
+          "minimum": -11,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.74609375,
+          "stddev": 1.9374960622439823,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 23.0
+        },
+        {
+          "mean": 5.724609375,
+          "stddev": 1.8646432309324241,
+          "minimum": 0,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": -0.603515625,
+          "stddev": 1.8558994154804993,
+          "minimum": -6,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32256,
+      "direction": "up",
+      "sample_offset": 58368,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.130859375,
+          "stddev": 2.878134304367086,
+          "minimum": -11,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 22.5380859375,
+          "stddev": 1.9214340572511839,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.26953125,
+          "stddev": 1.9404235440422375,
+          "minimum": -2,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": 1355.3154296875,
+          "stddev": 1.9139486473632599,
+          "minimum": 1349,
+          "maximum": 1362,
+          "median": 1355.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32384,
+      "direction": "up",
+      "sample_offset": 59392,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.619140625,
+          "stddev": 3.116153861168381,
+          "minimum": -12,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 22.822265625,
+          "stddev": 2.0557779529762836,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.4853515625,
+          "stddev": 1.9614896566841256,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": 1016.6611328125,
+          "stddev": 1.8981418457891497,
+          "minimum": 1010,
+          "maximum": 1023,
+          "median": 1017.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32512,
+      "direction": "up",
+      "sample_offset": 60416,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.908203125,
+          "stddev": 3.0620808217191517,
+          "minimum": -13,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.7197265625,
+          "stddev": 1.9056252878601116,
+          "minimum": 16,
+          "maximum": 28,
+          "median": 23.0
+        },
+        {
+          "mean": 5.474609375,
+          "stddev": 1.9752718967681664,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": 677.486328125,
+          "stddev": 1.9570107830142338,
+          "minimum": 672,
+          "maximum": 683,
+          "median": 677.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32640,
+      "direction": "up",
+      "sample_offset": 61440,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.990234375,
+          "stddev": 3.0586554860867152,
+          "minimum": -14,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 22.595703125,
+          "stddev": 1.9592082997642783,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.083984375,
+          "stddev": 1.8912776104411164,
+          "minimum": 0,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": 337.8095703125,
+          "stddev": 1.9540288435994624,
+          "minimum": 332,
+          "maximum": 346,
+          "median": 338.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "up",
+      "sample_offset": 62464,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.537109375,
+          "stddev": 3.084200831542445,
+          "minimum": -9,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 22.583984375,
+          "stddev": 1.8907611892451832,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 22.0
+        },
+        {
+          "mean": 5.7919921875,
+          "stddev": 1.9602231856191694,
+          "minimum": -1,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -0.5478515625,
+          "stddev": 1.9444570843724756,
+          "minimum": -7,
+          "maximum": 6,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32896,
+      "direction": "up",
+      "sample_offset": 63488,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": 0.255859375,
+          "stddev": 3.1670552734716533,
+          "minimum": -9,
+          "maximum": 15,
+          "median": 0.0
+        },
+        {
+          "mean": 23.380859375,
+          "stddev": 1.9181149304654843,
+          "minimum": 18,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 6.212890625,
+          "stddev": 2.0400266742832334,
+          "minimum": 0,
+          "maximum": 14,
+          "median": 6.0
+        },
+        {
+          "mean": -338.8935546875,
+          "stddev": 1.9723175664549504,
+          "minimum": -345,
+          "maximum": -333,
+          "median": -339.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33024,
+      "direction": "up",
+      "sample_offset": 64512,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.041015625,
+          "stddev": 3.1893801660363192,
+          "minimum": -12,
+          "maximum": 16,
+          "median": -1.0
+        },
+        {
+          "mean": 22.9443359375,
+          "stddev": 1.9724239401421786,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.6171875,
+          "stddev": 1.9258565210948997,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -679.291015625,
+          "stddev": 1.985119777496023,
+          "minimum": -686,
+          "maximum": -674,
+          "median": -679.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33152,
+      "direction": "up",
+      "sample_offset": 65536,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.6279296875,
+          "stddev": 2.96220350753559,
+          "minimum": -9,
+          "maximum": 13,
+          "median": 0.0
+        },
+        {
+          "mean": 23.287109375,
+          "stddev": 1.9038380857591617,
+          "minimum": 18,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.5869140625,
+          "stddev": 1.8854564290218288,
+          "minimum": -2,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -1018.6025390625,
+          "stddev": 1.969799670185174,
+          "minimum": -1025,
+          "maximum": -1012,
+          "median": -1019.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33280,
+      "direction": "up",
+      "sample_offset": 66560,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.3271484375,
+          "stddev": 3.036787029467379,
+          "minimum": -11,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 22.556640625,
+          "stddev": 1.8917777590403184,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.5
+        },
+        {
+          "mean": 4.8486328125,
+          "stddev": 1.9954876063379445,
+          "minimum": -2,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": -1358.6943359375,
+          "stddev": 1.8784674054654225,
+          "minimum": -1364,
+          "maximum": -1354,
+          "median": -1359.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33280,
+      "direction": "down",
+      "sample_offset": 67584,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.052734375,
+          "stddev": 2.9343654059597553,
+          "minimum": -13,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 22.9609375,
+          "stddev": 1.998152833517434,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.5634765625,
+          "stddev": 1.9679745554791057,
+          "minimum": 0,
+          "maximum": 12,
+          "median": 6.0
+        },
+        {
+          "mean": -1358.392578125,
+          "stddev": 2.0189975645778984,
+          "minimum": -1365,
+          "maximum": -1351,
+          "median": -1358.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33152,
+      "direction": "down",
+      "sample_offset": 68608,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.916015625,
+          "stddev": 3.1589990107241026,
+          "minimum": -12,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 23.3974609375,
+          "stddev": 1.9910035448641525,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.8359375,
+          "stddev": 1.9325636460654407,
+          "minimum": 0,
+          "maximum": 13,
+          "median": 6.0
+        },
+        {
+          "mean": -1018.1201171875,
+          "stddev": 2.009310745944263,
+          "minimum": -1024,
+          "maximum": -1012,
+          "median": -1018.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 33024,
+      "direction": "down",
+      "sample_offset": 69632,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.9990234375,
+          "stddev": 3.248647408357159,
+          "minimum": -13,
+          "maximum": 14,
+          "median": -1.0
+        },
+        {
+          "mean": 22.9658203125,
+          "stddev": 1.9867244238853063,
+          "minimum": 17,
+          "maximum": 30,
+          "median": 23.0
+        },
+        {
+          "mean": 5.44140625,
+          "stddev": 2.0497914277947737,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -679.0078125,
+          "stddev": 1.9515462369218286,
+          "minimum": -685,
+          "maximum": -673,
+          "median": -679.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32896,
+      "direction": "down",
+      "sample_offset": 70656,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.1728515625,
+          "stddev": 3.044013924876381,
+          "minimum": -11,
+          "maximum": 15,
+          "median": -1.0
+        },
+        {
+          "mean": 22.4150390625,
+          "stddev": 2.013772985989017,
+          "minimum": 16,
+          "maximum": 29,
+          "median": 22.0
+        },
+        {
+          "mean": 5.01953125,
+          "stddev": 1.9171332192295447,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -340.6552734375,
+          "stddev": 1.9114456661404042,
+          "minimum": -347,
+          "maximum": -335,
+          "median": -341.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "down",
+      "sample_offset": 71680,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.0859375,
+          "stddev": 3.064482378166621,
+          "minimum": -13,
+          "maximum": 12,
+          "median": -1.0
+        },
+        {
+          "mean": 22.4111328125,
+          "stddev": 1.9273709744068057,
+          "minimum": 17,
+          "maximum": 28,
+          "median": 22.0
+        },
+        {
+          "mean": 5.1142578125,
+          "stddev": 1.9609547648486731,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": -1.205078125,
+          "stddev": 1.9855271246312614,
+          "minimum": -7,
+          "maximum": 5,
+          "median": -1.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32640,
+      "direction": "down",
+      "sample_offset": 72704,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.654296875,
+          "stddev": 3.1017291507101703,
+          "minimum": -12,
+          "maximum": 16,
+          "median": -2.0
+        },
+        {
+          "mean": 22.5703125,
+          "stddev": 1.9261100441936723,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 4.8486328125,
+          "stddev": 1.9787785467424948,
+          "minimum": -2,
+          "maximum": 12,
+          "median": 5.0
+        },
+        {
+          "mean": 337.224609375,
+          "stddev": 1.9961730582948236,
+          "minimum": 331,
+          "maximum": 343,
+          "median": 337.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32512,
+      "direction": "down",
+      "sample_offset": 73728,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -1.6171875,
+          "stddev": 3.08915971015481,
+          "minimum": -13,
+          "maximum": 13,
+          "median": -2.0
+        },
+        {
+          "mean": 22.2578125,
+          "stddev": 1.92433468108948,
+          "minimum": 14,
+          "maximum": 29,
+          "median": 22.0
+        },
+        {
+          "mean": 4.5498046875,
+          "stddev": 1.9949790395147082,
+          "minimum": -2,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": 676.9345703125,
+          "stddev": 1.9416830375974479,
+          "minimum": 671,
+          "maximum": 684,
+          "median": 677.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32384,
+      "direction": "down",
+      "sample_offset": 74752,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.0078125,
+          "stddev": 3.0986289653399535,
+          "minimum": -13,
+          "maximum": 15,
+          "median": 0.0
+        },
+        {
+          "mean": 23.6826171875,
+          "stddev": 1.9505234138121976,
+          "minimum": 18,
+          "maximum": 33,
+          "median": 24.0
+        },
+        {
+          "mean": 5.7734375,
+          "stddev": 1.9469119930273555,
+          "minimum": -1,
+          "maximum": 13,
+          "median": 6.0
+        },
+        {
+          "mean": 1017.640625,
+          "stddev": 1.9499974959919821,
+          "minimum": 1010,
+          "maximum": 1024,
+          "median": 1018.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32256,
+      "direction": "down",
+      "sample_offset": 75776,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.6962890625,
+          "stddev": 3.0514062297476667,
+          "minimum": -12,
+          "maximum": 13,
+          "median": -1.0
+        },
+        {
+          "mean": 23.076171875,
+          "stddev": 1.932467909296034,
+          "minimum": 17,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.4453125,
+          "stddev": 1.9992521795270726,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 5.0
+        },
+        {
+          "mean": 1356.123046875,
+          "stddev": 1.8499620175973166,
+          "minimum": 1350,
+          "maximum": 1362,
+          "median": 1356.0
+        }
+      ]
+    },
+    {
+      "channel": 4,
+      "dac_code": 32768,
+      "direction": "restored_zero",
+      "sample_offset": 76800,
+      "samples": 1024,
+      "statistics": [
+        {
+          "mean": -0.470703125,
+          "stddev": 2.9952959692015804,
+          "minimum": -13,
+          "maximum": 13,
+          "median": 0.0
+        },
+        {
+          "mean": 22.9931640625,
+          "stddev": 1.9159466870084083,
+          "minimum": 15,
+          "maximum": 29,
+          "median": 23.0
+        },
+        {
+          "mean": 5.498046875,
+          "stddev": 1.898806186871829,
+          "minimum": -1,
+          "maximum": 11,
+          "median": 6.0
+        },
+        {
+          "mean": -0.0693359375,
+          "stddev": 1.8435055845510737,
+          "minimum": -6,
+          "maximum": 6,
+          "median": 0.0
+        }
+      ]
+    }
+  ],
+  "input_source": "on-card offset DAC",
+  "source_termination": false,
+  "restored": true,
+  "adc_registers": {
+    "1": 32,
+    "2": 0
+  },
+  "calibration": {
+    "taps": [
+      21,
+      21,
+      21,
+      21,
+      20,
+      21,
+      19,
+      21,
+      19
+    ],
+    "frame_window": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "windows": [
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    ],
+    "slips": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ],
+    "scan": [
+      {
+        "tap": 0,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 1,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 2,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 3,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 4,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 5,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 6,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 7,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 8,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 9,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 10,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 11,
+        "good": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          3,
+          7,
+          1,
+          1,
+          1,
+          3,
+          7,
+          1
+        ]
+      },
+      {
+        "tap": 12,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 13,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          0,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 14,
+        "good": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          7,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 15,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 16,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 17,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 18,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 19,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 20,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 21,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 22,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 23,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 24,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 25,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 26,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 27,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          7,
+          0
+        ]
+      },
+      {
+        "tap": 28,
+        "good": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          2,
+          7,
+          0,
+          7,
+          7,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 29,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 30,
+        "good": [
+          false,
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          3,
+          3,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 31,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          5,
+          3,
+          3,
+          3,
+          3,
+          5,
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  "channels": [
+    {
+      "slope_adc_codes_per_dac_code": -2.6474683125813803,
+      "intercept": 86750.3628689236,
+      "r_squared": 0.9999996487196734,
+      "span_adc_codes": 2711.6591796875,
+      "maximum_fit_error_codes": 0.8534071180620231,
+      "channel": 1,
+      "monotonic": true,
+      "hysteresis_max_codes": 1.046875,
+      "other_channel_spans_codes": {
+        "2": 0.9140625,
+        "3": 1.2001953125,
+        "4": 0.9677734375
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -2.647838083902995,
+      "intercept": 86787.07382812501,
+      "r_squared": 0.9999999298182525,
+      "span_adc_codes": 2711.314453125,
+      "maximum_fit_error_codes": 0.46865234374126885,
+      "channel": 2,
+      "monotonic": true,
+      "hysteresis_max_codes": 0.8193359375,
+      "other_channel_spans_codes": {
+        "1": 1.0712890625,
+        "3": 1.1201171875,
+        "4": 1.1552734375
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -2.648215103149414,
+      "intercept": 86781.90792100693,
+      "r_squared": 0.9999998497813127,
+      "span_adc_codes": 2711.896484375,
+      "maximum_fit_error_codes": 0.6688368055620231,
+      "channel": 3,
+      "monotonic": true,
+      "hysteresis_max_codes": 0.947265625,
+      "other_channel_spans_codes": {
+        "1": 0.9228515625,
+        "2": 1.0966796875,
+        "4": 1.1201171875
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    },
+    {
+      "slope_adc_codes_per_dac_code": -2.650011444091797,
+      "intercept": 86834.60201822917,
+      "r_squared": 0.9999995488214973,
+      "span_adc_codes": 2714.009765625,
+      "maximum_fit_error_codes": 1.2808919270755723,
+      "channel": 4,
+      "monotonic": true,
+      "hysteresis_max_codes": 1.76171875,
+      "other_channel_spans_codes": {
+        "1": 1.5830078125,
+        "2": 0.8427734375,
+        "3": 1.3642578125
+      },
+      "clipped_samples_seen": false,
+      "passed": true
+    }
+  ],
+  "sample_values_checked": 311296,
+  "final": {
+    "control": 1,
+    "ssr": 0,
+    "dac_codes_commanded": [
+      32768,
+      32768,
+      32768,
+      32768
+    ]
+  }
+}

@@ -165,3 +165,36 @@ To nie zastępuje pomiaru oka i testów fizycznego HPC.
 Brak transferu ADC → DDR, synchronizacji kart, ciągłego streamingu oraz
 fizycznego potwierdzenia zewnętrznego triggera. Build nadal obejmuje tylko
 snapshoty BRAM. W pełni synchroniczne osiem kanałów wymaga późniejszej pracy.
+
+## Fizyczny tor analogowy HPC — offset DAC
+
+2026-10-09: karta HPC przeszła również sweep czterech offsetów na wszystkich
+trzech zakresach. Każdy zakres: 76 snapshotów × 1024 próbki × 4 kanały,
+łącznie **933888 wartości kanałów**. Zmiany były monotoniczne, bez clippingu
+oraz błędów frame; ADC pracował z wyłączonym generatorem wzorców.
+
+Zakres | CH1 | CH2 | CH3 | CH4
+---|---|---|---|---
+±5 V | -0.27495 | -0.27624 | -0.27585 | -0.27675
+±0.5 V | -2.64747 | -2.64784 | -2.64822 | -2.65001
+±50 mV | -25.74987 | -25.75361 | -25.70634 | -25.78382
+
+Wartości w tabeli: nachylenie w kodach ADC na kod DAC, **bez kalibracji napięcia**.
+To potwierdzenie wewnętrznego toru offset → ADC, nie pełna charakterystyka BNC,
+szumów, ENOB ani pasma. Zewnętrzny generator i synchronizacja kart nadal później.
+
+![Sweep offsetu karty HPC](../evidence/zc706/adc-dual-20261009/offset-hpc/offset-response.png)
+
+JSON/CSV i surowe snapshoty:
+`evidence/zc706/adc-dual-20261009/offset-hpc/`.
+Odtworzenie testu na załadowanym bitstreamie dwóch kart:
+
+```sh
+python3 tools/test_adc_offset_hardware.py --host 192.168.2.9 --card 2 \
+  --build-dir build/zc706-adc-dual/gateware \
+  --output build/zc706-adc-dual/hardware/offset-hpc
+```
+
+Test przywraca zapisaną konfigurację tapów, zeruje offsety poleceniem 0x8000,
+odłącza SSR i zatrzymuje odbiornik. Niezależny odczyt po testach obu kart:
+`final-state.json` — `control=1`, `ssr=0`, ADC A2=0 i A3=0 na obu kartach.
