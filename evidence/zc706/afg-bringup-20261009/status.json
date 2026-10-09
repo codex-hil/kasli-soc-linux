@@ -1,0 +1,14 @@
+{
+  "result": "BLOCKED_GENERATOR_ACCESS",
+  "generator_configured": false,
+  "requested_sine_hz": 1000000,
+  "requested_vpp": 1,
+  "raspberry_ip": "192.168.2.36",
+  "raspberry_mdns": "RPI-USBTMC.local",
+  "raspberry_mac": "b8:27:eb:01:74:4d",
+  "raspberry_gateway_listening": false,
+  "raspberry_ssh_access_available": false,
+  "zc706_ip": "192.168.2.10",
+  "adc_capture_available": true,
+  "requested_waveform_validated": false
+}

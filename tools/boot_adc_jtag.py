@@ -29,7 +29,12 @@ def main():
     p.add_argument('--host', type=ipaddress.ip_address)
     p.add_argument('--output', type=Path)
     p.add_argument('--sd', action='store_true', help='Upload a new content-addressed SD file and load via U-Boot; no JTAG needed')
+    p.add_argument('--sd-existing', action='store_true', help='Use an already stored, hash-verified SD bitstream; UART reboot if SSH is unavailable')
+    p.add_argument('--allow-no-network', action='store_true', help='Accept a Linux UART shell without a DHCP lease')
     a = p.parse_args()
+    if a.sd and a.sd_existing:
+        p.error('Choose --sd or --sd-existing')
+    sd_mode = a.sd or a.sd_existing
     if a.sd and not a.host:
         p.error("--sd requires --host for safe upload and reboot")
     if not re.fullmatch(r'[0-9]+', a.jtag_serial):
@@ -55,6 +60,9 @@ def main():
         'zynq.dap apreg 0 0 0x23000052; zynq.dap apreg 0 4 0xf8000008; '
         'zynq.dap apreg 0 0xc 0xdf0d; zynq.dap apreg 0 4 0xf8000200; '
         'zynq.dap apreg 0 0xc 1; shutdown')
+    if sd_mode:
+        sd_name = 'adc-'+digest+'.bit'
+        sd_path = '/root/'+sd_name
     if a.sd:
         ssh = ['ssh', '-i', str(ROOT/'build/ssh/id_ed25519'),
             '-o', 'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),
@@ -74,9 +82,9 @@ def main():
     result = {'bitstream_sha256': digest, 'sd_qspi_written': False,
               'jtag_serial': a.jtag_serial, 'boot_passed': False,
               'sd_written': a.sd, 'qspi_written': False, 'boot_environment_written': False,
-              'method': 'sd-ext4-uboot' if a.sd else 'jtag', 'jtag_used': not a.sd}
-    if a.sd:
-        result['sd_qspi_written'] = True
+              'method': 'sd-ext4-uboot' if sd_mode else 'jtag', 'jtag_used': not sd_mode}
+    if sd_mode:
+        result['sd_qspi_written'] = a.sd
         result['sd_file'] = sd_name
     try:
         with (out/'uart.log').open('wb') as log:
@@ -95,7 +103,18 @@ def main():
                 raise TimeoutError('U-Boot command did not complete: '+text)
             print('Resetting PS and stopping U-Boot', flush=True)
             with (out/'reset.log').open('w') as f:
-                if a.sd:
+                if a.sd_existing:
+                    uart.write(('sha256sum '+sd_path+'\r').encode())
+                    verified = b''
+                    deadline = time.monotonic()+15
+                    while time.monotonic() < deadline:
+                        verified += read()
+                        if b'# ' in verified:
+                            break
+                    if not re.search((digest+r'\s+/root/'+sd_name).encode(), verified):
+                        raise RuntimeError('Existing SD image checksum was not confirmed over Linux UART')
+                    uart.write(b'sync; reboot\r')
+                elif a.sd:
                     reboot = subprocess.run(ssh+['reboot'], stdout=f, stderr=subprocess.STDOUT, timeout=15)
                     if reboot.returncode not in (0, 255):
                         raise RuntimeError('Linux reboot failed')
@@ -114,7 +133,7 @@ def main():
                 raise TimeoutError('Did not stop U-Boot')
             print('Loading ADC bitstream into volatile PL', flush=True)
             with (out/'program.log').open('w') as f:
-                if a.sd:
+                if sd_mode:
                     programmed = command('ext4load mmc 0:2 ${kernel_addr_r} '+sd_path+' && fpga loadb 0 ${kernel_addr_r} ${filesize}')
                     f.write(programmed.decode(errors='replace'))
                     if b'Error' in programmed or b'Failed' in programmed:
@@ -143,6 +162,10 @@ def main():
                 if next_probe is not None and time.monotonic() >= next_probe:
                     uart.write(b'ip -4 addr show eth0; uptime\r'); next_probe = time.monotonic()+5
                 match = re.search(rb'inet (\d+\.\d+\.\d+\.\d+)/\d+.*scope global', transcript)
+                if a.allow_no_network and logged_in and b' up ' in transcript and b'# ' in transcript:
+                    result['boot_passed'] = True
+                    result['network_validated'] = False
+                    break
                 if match:
                     result['host'] = str(ipaddress.ip_address(match.group(1).decode()))
                     result['boot_passed'] = True
