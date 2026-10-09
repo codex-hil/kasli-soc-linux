@@ -1,246 +1,287 @@
 # Kasli-SoC Linux / LiteX / openXC7
 
-Prace trwają. **Milestone 1 Kasli-SoC nie został potwierdzony na hardware.**
-Repo jest oddzielone od upstream ARTIQ; checkouty `upstream/` pozostają bez zmian.
+Work in progress. **Kasli-SoC milestone 1 has not been validated on hardware.**
+This repository is separate from upstream ARTIQ; the `upstream/` checkouts
+remain unchanged.
 
-**Fizyczna ZC706 rev. 1.2:** BootROM → upstream U-Boot SPL → U-Boot →
-openXC7 PL → Linux 6.18.40 / Buildroot działa z SD bez JTAG i Vivado.
-UART, Ethernet 1 Gb/s, DHCP i SSH działają. Testy AXI/CSR przez `/dev/mem`
-i `/dev/uio0` przeszły po 10036 zapisów/odczytów; licznik ma ~100 MHz.
-DDR naszego Linuksa przeszedł `memtester 128M 3` i dodatkową pętlę na
-finalnym obrazie. Pełny zapis/odczyt SD i końcowy zestaw testów są PASS.
-Fizyczna Kasli-SoC nadal oczekuje na walidację.
+**Physical ZC706 rev. 1.2:** BootROM → upstream U-Boot SPL → U-Boot →
+openXC7 PL → Linux 6.18.40 / Buildroot boots from SD without JTAG or Vivado.
+Linux runs on **both ARM Cortex-A9 cores** in SMP mode. UART, 1 Gb/s
+Ethernet, DHCP and SSH work. AXI/CSR tests passed 10,036 reads/writes each
+through `/dev/mem` and `/dev/uio0`; the counter runs at approximately
+100 MHz. PS DDR passed `memtester 128M 3`, followed by another pass on the
+final image. Full SD write/readback verification and the final test suite
+passed. Physical Kasli-SoC validation remains pending.
 
-## CERN FMC ADC na ZC706
+## CERN FMC ADC on ZC706
 
-Dodany target dla **jednej karty w J5 LPC**: cztery kanały,
-odbiornik ISERDES, snapshot 1024 próbek, SPI/I²C i automatyczny test wzorców.
-Build: `make bootstrap BOARD=zc706`, `make adc-test`, `make adc-pl`.
-Karta jest w J5 LPC, VADJ 2.5 V zmierzone. Bring-up trwa: zegar/frame
-potwierdzone; SPI ADC i I²C SI570/multipleksera przeszły testy fizyczne.
-Po dodaniu terminacji FPGA HR i treningu osobnych linii odbiór 34 wzorców
-(139264 wartości kanałów) oraz snapshot 1024 próbek przeszły na hardware.
-Wewnętrzny offset DAC → ADC przeszedł test czterech kanałów na wszystkich
-trzech zakresach (933888 wartości). [Wyniki i wykresy](docs/zc706-adc-offset.md).
-Pełna charakterystyka analogowa i połączenie ADC z DDR PL pozostają niewalidowane.
-Opis, mapa CSR i ograniczenia: [docs/zc706-fmc-adc.md](docs/zc706-fmc-adc.md).
-Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-term.md).
+The **single-card J5 LPC target** provides four channels, an ISERDES
+receiver, 1,024-sample snapshots, SPI/I²C and automated test-pattern checks.
+Build it with:
 
-Dodany także target **dwóch kart: J5 LPC + J4 HPC**, z osobnymi zegarami,
-CSR i snapshotami. Build: `make adc-dual-package`. Build/timing/symulacje
-przeszły. **Obie fizyczne karty przeszły test równoległy 2026-10-09:**
-278528 wartości wzorców oraz osobne snapshoty 1024 próbek na kanał.
-Boot przez U-Boot z SD również działa bez JTAG. HPC przeszła dodatkowo
-wewnętrzny sweep offsetu na trzech zakresach (933888 wartości). Synchronizacja później.
-[Opis i test obu kart](docs/zc706-adc-dual.md).
-Zewnętrzny sinus AFG1062 1 MHz / 1 Vpp przechwycony na CH1 obu FMC:
-[przebiegi i wyniki](docs/zc706-afg.md).
+```sh
+make bootstrap BOARD=zc706
+make adc-test
+make adc-pl
+```
 
-## Hardware i źródła prawdy
+The card is installed in J5 LPC; VADJ was measured at 2.5 V. Physical tests
+confirmed clock/frame reception, ADC SPI, and SI570/multiplexer I²C.
+With FPGA HR termination and individual-lane training, all 34 patterns
+(139,264 channel values) and a 1,024-sample snapshot passed on hardware.
+The internal offset DAC → ADC test passed on all four channels across
+all three ranges (933,888 values).
+[Offset results and plots](docs/zc706-adc-offset.md).
+Full analog characterization and ADC integration with PL DDR remain pending.
+See [the target, CSR map and limitations](docs/zc706-fmc-adc.md) and
+[DIFF_TERM mapping and physical A/B tests](docs/hr-diff-term.md).
 
-Platforma Migen `migen/build/platforms/sinara/kasli_soc.py`: **XC7Z030-FFG676-3**,
-LED AF19/AF23 LVCMOS25. Dodatkowe piny PS/DDR:
-`migen-axi/src/migen_axi/platforms/kasli_soc.py`.
-Target ARTIQ: `artiq-zynq/src/gateware/kasli_soc.py`.
-Rewizja fizycznego egzemplarza nie jest jeszcze ustalona. Platforma Migen deklaruje
-stopień -3; aktualny schemat ma symbol XC7Z030-2FFG676I. Routing -1 jest
-konserwatywny dla obu, lecz oznaczenie zamontowanego układu wymaga potwierdzenia.
+The **dual-card target, J5 LPC + J4 HPC**, has independent clocks, CSR banks
+and snapshots. Build it with `make adc-dual-package`. Build, timing and
+simulations passed. **Both physical cards passed concurrent tests on
+2026-10-09:** 278,528 pattern values and separate 1,024-sample snapshots
+per channel. U-Boot loads the target from SD without JTAG. HPC also passed
+an internal offset sweep across all three ranges (933,888 values).
+Inter-card synchronization is deferred.
+[Dual-card design and validation](docs/zc706-adc-dual.md).
 
-Inicjalizacja PS pochodzi z **M-Labs zynq-rs SZL**, nie z nowego presetu Vivado:
+An external AFG1062 1 MHz / 1 Vpp sine wave was captured on CH1 of both
+FMC cards: [waveforms and results](docs/zc706-afg.md).
+All range and termination control settings were checked; physical CH1
+measurements are documented in [ADC controls and results](docs/zc706-adc-controls.md).
+Ranges and offset adjustment work. Independent BNC impedance qualification
+of all eight inputs remains pending. Both CH1 inputs are connected in
+parallel to AFG CH1; the LPC load response is asymmetric and remains
+under investigation. The linked detailed ADC documents are currently in Polish.
 
-* PS_CLK 33 333 333 Hz: `libboard_zynq/src/clocks/source.rs`.
-* ARM 1 GHz i IO PLL 1 GHz: `szl/src/main.rs`.
-* DDR3L: golden kod opisuje MT41K256M16HA-125:E, pracuje w **16-bit**,
-  wyłącza slice 2/3 i udostępnia **512 MiB**, zegar 533 333 333 Hz:
-  `libboard_zynq/src/ddr/{mod,regs}.rs`. SZL wykonuje konfigurację kontrolera,
-  IOB i kalibrację; tych wartości nie zmieniamy. Schemat prowadzi 32 linie
-  do dwóch MT41K256M16TW-107:P (łącznie 1 GiB fizycznie), lecz Linux korzysta
-  z konserwatywnego obszaru udostępnianego przez golden loader.
-* UART1 115200 8N1, TX MIO48 / RX MIO49, bank 1.8 V:
-  `libboard_zynq/src/uart/mod.rs` i `stdio.rs`. PL serial Y18/AA18 to inne piny.
-* SD0 MIO40–45, card detect MIO46: `libboard_zynq/src/sdio/mod.rs`.
-* GEM0 RGMII MIO16–27, MDIO MIO52/53, reset PHY GPIO MIO47:
-  `libboard_zynq/src/eth/mod.rs`. Schemat `Kasli-SOC_ETH_PHY.SchDoc`
-  potwierdza Marvell 88E1512 i zawiera uwagę **"PHY MDIO address is 0"**.
-* Reset i level shifters: `slcr.rs::init_preload_fpga/init_postload_fpga`.
-* QSPI: w przejrzanym upstream schemacie brak kości QSPI NOR; SZL obsługuje
-  boot SD/JTAG. Nie zakładamy istnienia bootloadera QSPI.
-* USB: złącze służy FT4232H (JTAG/UART/I²C/POR), nie znaleziono PHY ULPI
-  dla kontrolera USB PS. PS USB pozostaje wyłączone.
-* GTX/SFP, zegary RTIO i EEM nie są potrzebne do minimalnego PL.
+## Kasli-SoC hardware and golden references
 
-Commity źródeł znajdują się w `sources.lock.json`. Projekt korzysta z
+The Migen platform, `migen/build/platforms/sinara/kasli_soc.py`, declares
+**XC7Z030-FFG676-3**, with LEDs AF19/AF23 using LVCMOS25. Additional PS/DDR
+pins are defined in `migen-axi/src/migen_axi/platforms/kasli_soc.py`.
+The ARTIQ target is `artiq-zynq/src/gateware/kasli_soc.py`.
+
+The physical board revision has not yet been established. Migen declares
+speed grade -3, while the current schematic uses XC7Z030-2FFG676I.
+Routing for -1 is conservative for either grade, but the fitted device
+marking still needs confirmation.
+
+PS initialization comes from **M-Labs zynq-rs SZL**, using the existing
+hardware configuration:
+
+* PS_CLK: 33,333,333 Hz, `libboard_zynq/src/clocks/source.rs`.
+* ARM and IO PLL: 1 GHz, `szl/src/main.rs`.
+* DDR3L: the golden code describes MT41K256M16HA-125:E, operates in
+  **16-bit mode**, disables slices 2/3 and exposes **512 MiB** at
+  533,333,333 Hz. See `libboard_zynq/src/ddr/{mod,regs}.rs`.
+  SZL configures the controller, IOBs and calibration; those settings are
+  retained. The schematic routes 32 data lines to two MT41K256M16TW-107:P
+  devices (1 GiB physically), but Linux uses the conservative region
+  exposed by the golden loader.
+* UART1: 115200 8N1, TX MIO48 / RX MIO49, 1.8 V bank.
+  See `libboard_zynq/src/uart/mod.rs` and `stdio.rs`.
+  PL serial pins Y18/AA18 are a separate interface.
+* SD0: MIO40–45, card detect MIO46, `libboard_zynq/src/sdio/mod.rs`.
+* GEM0: RGMII MIO16–27, MDIO MIO52/53, PHY reset GPIO MIO47,
+  `libboard_zynq/src/eth/mod.rs`. `Kasli-SOC_ETH_PHY.SchDoc` confirms
+  Marvell 88E1512 and explicitly states **“PHY MDIO address is 0.”**
+* Reset and level shifters: `slcr.rs::init_preload_fpga/init_postload_fpga`.
+* QSPI: no QSPI NOR device was found in the inspected upstream schematic.
+  SZL supports SD/JTAG boot; this project does not assume a QSPI bootloader.
+* USB: the connector serves the FT4232H (JTAG/UART/I²C/POR). No ULPI PHY
+  for the PS USB controller was found; PS USB remains disabled.
+* GTX/SFP, RTIO clocks and EEM are unnecessary for the minimal PL design.
+
+Source revisions are pinned in `sources.lock.json`. The project uses
 [LiteX Zynq7000](https://github.com/enjoy-digital/litex/blob/master/litex/soc/cores/cpu/zynq7000/core.py)
-i [openXC7](https://github.com/openXC7/toolchain-nix).
+and [openXC7](https://github.com/openXC7/toolchain-nix).
 
-## Mapa przeniesienia
+## Porting map
 
-ARTIQ/Migen element | LiteX/openXC7 odpowiednik | Status
+ARTIQ/Migen element | LiteX/openXC7 equivalent | Kasli-SoC status
 ---|---|---
-Sinara Kasli-SoC platform/LED | mała lokalna platforma `gateware/kasli_soc.py` | elaboracja działa
-zynq-rs SZL PS/DDR/MIO | ten sam loader, dodana konfiguracja FCLK0 | make szl PASS
-Migen-AXI PS7 | upstream LiteX Zynq7000 / natywny prymityw PS7 | synteza działa
-ARTIQ AXI/CSR | GP0 → upstream AXI3/Wishbone bridge → LiteX CSR | PL zbudowany, hardware oczekuje
-Vivado place-and-route | Yosys → nextpnr openXC7 → FASM → X-Ray bitstream | build eksperymentalny działa
-ARTIQ runtime | upstream U-Boot → upstream Linux → Buildroot | obraz SD zbudowany
-ARTIQ RTIO/DRTIO | późniejszy PoC | nie rozpoczęto
+Sinara platform/LED | Small local platform in `gateware/kasli_soc.py` | Elaboration works
+zynq-rs SZL PS/DDR/MIO | Existing loader with added FCLK0 configuration | `make szl` PASS
+Migen-AXI PS7 | Upstream LiteX Zynq7000 / native PS7 primitive | Synthesis works
+ARTIQ AXI/CSR | GP0 → upstream AXI3/Wishbone bridge → LiteX CSR | PL built; hardware validation pending
+Vivado place-and-route | Yosys → nextpnr openXC7 → FASM → X-Ray bitstream | Experimental build works
+ARTIQ runtime | Upstream U-Boot → upstream Linux → Buildroot | SD image built
+ARTIQ RTIO/DRTIO | Later proof of concept | Not started
 
-## Architektura i boot
+## Kasli-SoC architecture and boot
 
-PS7 GP0 → AXI3 → LiteX Wishbone → CSR, FCLK0 100 MHz → `sys`.
-Scratch i licznik 32-bit, sygnatura `0x4b534f43`, LED AF19 z bitu 25 licznika.
-Pełna mapa jest generowana jako `build/gateware/csr.json`:
+PS7 GP0 → AXI3 → LiteX Wishbone → CSR; FCLK0 at 100 MHz drives `sys`.
+The minimal design has a 32-bit scratch register and counter, signature
+`0x4b534f43`, and LED AF19 driven by counter bit 25.
+The full map is generated as `build/gateware/csr.json`:
 
-Rejestr | Adres | Dostęp
+Register | Address | Access
 ---|---|---
 scratch | 0x40000800 | RW
 counter | 0x40000804 | RO
 signature | 0x40000808 | RO
 
-Wybrany boot flow: BootROM SD → SZL → PL → U-Boot → Linux/rootfs.
-U-Boot remapuje OCM na górę przestrzeni adresowej i udostępnia DDR od 0
-(`arch/arm/mach-zynq/cpu.c::arch_cpu_init`). UART/SD zachowują MIO z SZL.
-U-Boot nie ma sterownika pinctrl Zynq7000; Ethernet MIO inicjalizuje Linux.
-Wspólny DTS używa bazowego `zynq-7000.dtsi` z przypiętych źródeł upstream;
-w buildzie U-Boot bazowy plik pochodzi z jego `dts/upstream`, ponieważ
-stary plik `arch/arm/dts` nie zawiera węzła pinctrl.
-SZL ładuje payload pod 0x00100000; U-Boot trzeba zlinkować zgodnie z tym adresem.
-SZL pozostaje źródłem konfiguracji DDR/MIO. Mały patch dodaje FCLK0:
-IO PLL / 10 / 1. Linux musi utrzymać ten zegar aktywny.
-Nie wykonano żadnego programowania QSPI ani operacji na karcie SD.
-Przełączniki boot mode należy ustawić według dokumentacji fizycznej rewizji.
-Powrót do ARTIQ: dotychczasowa karta/tryb boot; istniejące artefakty pozostają zachowane.
+Kasli-SoC boot flow: BootROM SD → SZL → PL → U-Boot → Linux/rootfs.
+U-Boot remaps OCM to the top of the address space and exposes DDR from
+address 0 (`arch/arm/mach-zynq/cpu.c::arch_cpu_init`). UART/SD retain SZL's
+MIO configuration. U-Boot has no Zynq7000 pinctrl driver; Linux initializes
+Ethernet MIO.
 
-## Build i struktura
+The shared DTS uses `zynq-7000.dtsi` from the pinned upstream sources.
+For U-Boot, it comes from `dts/upstream`, because the older `arch/arm/dts`
+file lacks a pinctrl node. SZL loads the payload at 0x00100000; U-Boot must
+be linked for that address. SZL remains the DDR/MIO configuration reference.
+A small patch enables FCLK0 using IO PLL / 10 / 1; Linux must keep it running.
 
-* `gateware/`: minimalna platforma i SoC zgodne z API LiteX.
-* `tools/pl_test.py`: hardware test wzorców, walking-one, losowych zapisów,
-  sygnatury i częstotliwości licznika; przywraca początkowy scratch.
-* `tools/hardware_test.py`: ping, SSH, memtester 128 MiB × 3, PL, dump PS7;
-  zapisuje osobne logi i nie oznacza milestone jako zakończony bez audytu UART/boot.
-* `tools/capture_uart.py`: przechwycenie wskazanego UART 115200 bez wysyłania znaków.
-* `tools/dump_ps7_state.py`: odczyt SLCR/DDRC z `/dev/mem`, JSON i porównanie.
-  Nie czyta FIFO. Dla ARTIQ potrzebny jest jeszcze transport JTAG lub integracja dumpu.
-* `upstream/`, `.venv/`, `build/`: ignorowane katalogi robocze.
-* `evidence/`: dowody z buildów; nie są dowodami działania fizycznej płyty.
+Kasli-SoC SD programming and physical boot have not yet been performed.
+No QSPI programming has been performed. Set boot-mode switches according
+to the documentation for the physical board revision. Return to ARTIQ using
+the original SD card/boot mode; existing artifacts are preserved.
 
-Droga od czystego checkoutu (Docker + Python3 + Git na hoście, x86_64 Linux):
+## Build and repository layout
+
+* `gateware/`: minimal platform and SoC using the LiteX API.
+* `tools/pl_test.py`: hardware tests of patterns, walking ones, random
+  writes, signature and counter frequency; restores the original scratch value.
+* `tools/hardware_test.py`: ping, SSH, `memtester 128M 3`, PL checks and
+  PS7 dump; records separate logs and requires UART/boot evidence before
+  accepting a milestone.
+* `tools/capture_uart.py`: captures a specified 115200-baud UART without
+  transmitting characters.
+* `tools/dump_ps7_state.py`: reads SLCR/DDRC through `/dev/mem`, emits JSON
+  and compares dumps. It does not read FIFOs. An ARTIQ dump still needs
+  JTAG transport or integration into ARTIQ.
+* `upstream/`, `.venv/`, `build/`: ignored working directories.
+* `evidence/`: build and hardware evidence, labeled by board and test.
+  Build-only evidence does not establish physical-board operation.
+
+From a clean checkout on an x86_64 Linux host with Docker, Python 3 and Git:
 
 ```sh
 make image
 ```
 
-`make image` kolejno przygotowuje przypięty Debian z datowanym snapshotem APT,
-pobiera źródła z `sources.lock.json`, sprawdza SHA-256 paczek FPGA, instaluje
-lokalne zależności Python i Rust, buduje PL, SZL, U-Boot, kernel i rootfs,
-a następnie składa `build/buildroot/images/sdcard.img` i manifest SHA-256.
-Etapy można uruchamiać osobno: `make bootstrap`, `make pl`, `make test-pl`,
-`make szl`, `make linux`. Bootstrap, PL, test PL i SZL przeszły przez tę ścieżkę.
-U-Boot, Linux 6.18.40, rootfs i składanie obrazu również przeszły; pełny przebieg
-`make image` zakończył się kodem 0. Obraz ma 335 544 832 bajty.
-Kontener ma zapisywalne `/usr` i `/var` na woluminie projektu w `build/environment/`,
-więc instalacja zależności nie zapełnia partycji systemowej hosta.
-Do diagnostyki elaboracji można też użyć lokalnego środowiska Python:
-`.venv/bin/python gateware/kasli_soc.py`.
+This prepares pinned Debian with a dated APT snapshot, fetches sources
+from `sources.lock.json`, verifies FPGA tool archive SHA-256 checksums,
+installs local Python/Rust dependencies, builds PL, SZL, U-Boot, Linux and
+rootfs, then assembles `build/buildroot/images/sdcard.img` and its manifest.
+Individual stages are `make bootstrap`, `make pl`, `make test-pl`,
+`make szl` and `make linux`.
 
-Pakiety FPGA użyte w pierwszym eksperymencie:
-openXC7 release 2026-10-03, nextpnr c68c1358, prjxray-db a90f27c1;
-OSS CAD Suite 2026-10-05, Yosys 0.69+190 / 0e8336b4e.
-SZL wymaga Rust nightly-2026-03-25, rust-src i clang.
-Buildy i większe zależności przechowujemy na dodatkowym woluminie, ponieważ
-partycja systemowa ma mniej niż 1 GB wolnego miejsca.
+All stages, including U-Boot, Linux 6.18.40, rootfs and image assembly,
+passed; a complete `make image` exited with code 0. The image is
+335,544,832 bytes. The container's writable `/usr` and `/var` reside in
+`build/environment/` on the project volume, keeping dependency installation
+off the host system partition. Local elaboration diagnostics are also
+available with `.venv/bin/python gateware/kasli_soc.py`.
 
-## Walidacja
+FPGA tools used in the initial experiment:
 
-Yosys: CHECK 0 problemów. nextpnr: 143.84 MHz, PASS dla 100 MHz.
-`make test-pl`: PASS dla 1000 transakcji AXI/CSR z opóźnionymi AW/W
-i backpressure na B/R, sprawdzeniem ID, sygnatury, scratch i licznika.
-Test symuluje netlistę po Yosys; PS7 jest blackboxem z pobudzanymi portami.
-Nie sprawdza CPU, DDR, MIO ani fizycznego FPGA.
-Powstał bitstream 5.8 MiB przez fasm2frames + xc7frames2bit, bez Vivado.
-Obecna baza zawiera FBG676-1 zamiast FFG676-3; routing używa konserwatywnego
-stopnia -1. Mapowanie obudowy jest sprawdzane z oficjalnymi pinoutami AMD;
-nie wolno uznać samego powodzenia routingu za hardware validation.
-Nowy nextpnr używa `--device` i `-o xdc=... -o fasm=...`; aktualny backend
-LiteX generuje starsze argumenty. Adapter `tools/build_pl.py` używa nowego CLI i przeszedł pełny build.
+* openXC7 release 2026-10-03; nextpnr c68c1358; prjxray-db a90f27c1.
+* OSS CAD Suite 2026-10-05; Yosys 0.69+190 / 0e8336b4e.
+* SZL: Rust nightly-2026-03-25, rust-src and clang.
 
-Po uruchomieniu Linuxa:
+Builds and larger dependencies are stored on an additional volume because
+the original host system partition had less than 1 GB free.
+
+## Kasli-SoC validation status
+
+Yosys CHECK reported zero problems. nextpnr achieved 143.84 MHz, passing
+the 100 MHz target. `make test-pl` passed 1,000 AXI/CSR transactions with
+delayed AW/W, B/R backpressure, ID checks, signature, scratch and counter
+verification. This simulates the post-Yosys netlist with PS7 as a black box
+whose ports are driven by the testbench; it does not test CPU, DDR, MIO or
+the physical FPGA.
+
+A 5.8 MiB bitstream was generated through fasm2frames + xc7frames2bit
+without Vivado. The available database contains FBG676-1 rather than
+FFG676-3, so routing uses conservative speed grade -1. Package mapping is
+checked against official AMD pinouts; successful routing alone is not
+hardware validation. New nextpnr uses `--device` and `-o xdc=... -o fasm=...`;
+the pinned LiteX backend emits older arguments. `tools/build_pl.py` adapts
+the CLI and has passed the complete build.
+
+Once Linux is running on Kasli-SoC:
 
 ```sh
 python3 /usr/bin/pl_test.py --csr-json /etc/litex/csr.json --iterations 10000
 python3 /usr/bin/dump_ps7_state.py > /tmp/ps7-linux.json
 ```
 
-SSH, DHCP, ping, stabilność DDR i pełny test PS→PL jeszcze nie były wykonane.
-Podłączone USB adaptery nie identyfikują Kasli-SoC; nie wysyłamy komend do
-niezidentyfikowanych urządzeń.
+SSH, DHCP, ping, DDR stability and the complete PS→PL test have not yet been
+performed on Kasli-SoC. Attached USB adapters have not been identified as
+Kasli-SoC; commands are not sent to unidentified devices.
 
-Element | Status
+Element | Kasli-SoC status
 ---|---
-PS7 | golden reference i SZL zbudowane; natywny PS7 zsyntezowany
-DDR | konfiguracja zynq-rs znaleziona; hardware niebadany
-UART | UART1/MIO48–49 ustalone; hardware niebadany
-SD | obraz MBR/FAT/ext4 zbudowany; boot fizyczny niebadany
-U-Boot | build PASS; entry 0x00100000; boot fizyczny niebadany
-Linux | upstream 6.18.40 zbudowany; boot fizyczny niebadany
-Ethernet | GEM0/88E1512/adres 0/reset ustalone; hardware niebadany
-SSH | Dropbear i klucz w rootfs; połączenie fizyczne niebadane
-AXI PS→PL | build PL przeszedł; hardware niebadany
-LiteX CSR | mapa wygenerowana; 1000 transakcji w symulacji PASS; hardware niebadany
-Yosys | synteza PASS
-nextpnr-xilinx | routing i timing PASS, adapter nowego CLI działa
-openXC7 bitstream | artefakt zbudowany; pinout aliasu zweryfikowany; hardware niebadany
-ARTIQ RTIO PoC | oczekuje na milestone 1
+PS7 | Golden reference and SZL built; native PS7 synthesized
+DDR | zynq-rs configuration identified; hardware untested
+UART | UART1/MIO48–49 identified; hardware untested
+SD | MBR/FAT/ext4 image built; physical boot untested
+U-Boot | Build PASS; entry 0x00100000; physical boot untested
+Linux | Upstream 6.18.40 built; physical boot untested
+Ethernet | GEM0/88E1512/address 0/reset identified; hardware untested
+SSH | Dropbear and public key in rootfs; physical connection untested
+AXI PS→PL | PL build passed; hardware untested
+LiteX CSR | Map generated; 1,000 simulated transactions PASS; hardware untested
+Yosys | Synthesis PASS
+nextpnr-xilinx | Routing/timing PASS; new CLI adapter works
+openXC7 bitstream | Artifact built; package alias pinout verified; hardware untested
+ARTIQ RTIO PoC | Waiting for milestone 1
 
-## Obraz SD i pierwsze połączenie
+## Kasli-SoC SD image and first connection
 
-Artefakt: `build/buildroot/images/sdcard.img`; sumy wszystkich payloadów:
-`build/buildroot/images/manifest.json`. Bieżący manifest zapisano też w
-`evidence/image-manifest.json`. To obraz bring-up, jeszcze niezweryfikowany na płycie.
-Partycja 1: FAT 64 MiB, BOOT.BIN, zImage, DTB i extlinux.conf.
-Partycja 2: ext4 256 MiB. Po identyfikacji właściwej, odmontowanej karty SD:
+Image: `build/buildroot/images/sdcard.img`.
+Payload checksums: `build/buildroot/images/manifest.json`; a recorded
+manifest is also in `evidence/image-manifest.json`.
+This bring-up image has not yet been validated on Kasli-SoC.
+
+Partition 1 is 64 MiB FAT with BOOT.BIN, zImage, DTB and extlinux.conf.
+Partition 2 is 256 MiB ext4. After identifying and unmounting the correct SD card:
 
 ```sh
-# Zastąp ścieżkę faktycznym identyfikatorem karty, bez sufiksu -partN.
-sudo dd if=build/buildroot/images/sdcard.img of=/dev/disk/by-id/WLASCIWA_KARTA_SD bs=4M conv=fsync status=progress
+# Replace the path with the actual card identifier, without a -partN suffix.
+sudo dd if=build/buildroot/images/sdcard.img of=/dev/disk/by-id/YOUR_SD_CARD bs=4M conv=fsync status=progress
 ```
 
-UART: 115200 8N1, login `root`, puste hasło konsoli w tym PoC.
-Ethernet pobiera adres przez DHCP. SSH dopuszcza klucz, hasła są wyłączone:
+UART: 115200 8N1; console login `root` with an empty password in this PoC.
+Ethernet uses DHCP. SSH uses keys; password authentication is disabled:
 
 ```sh
-ssh -i build/ssh/id_ed25519 root@ADRES_Z_DHCP
+ssh -i build/ssh/id_ed25519 root@DHCP_ADDRESS
 python3 tools/hardware_test.py --help
 ```
 
-Klucz prywatny pozostaje w ignorowanym `build/ssh`; bootstrap generuje nowy
-dla nowego checkoutu. Nie publikuj go razem z obrazem. Test fizyczny musi
-jeszcze potwierdzić boot, DDR, UART, sieć i PS→PL.
+The private key stays in ignored `build/ssh`; bootstrap generates a new key
+for a fresh checkout. Do not publish it with the image. Physical Kasli-SoC
+tests still need to confirm boot, DDR, UART, networking and PS→PL.
 
-Każdy `make image` automatycznie sprawdza MBR, granice i brak nakładania
-partycji oraz ich zgodność bajt po bajcie z boot.vfat/rootfs.ext4.
-Powtórzenie audytu: `python3 tools/check_sd_image.py build/buildroot/images/sdcard.img`.
+Every `make image` checks the MBR, partition boundaries/non-overlap and
+byte-for-byte agreement with boot.vfat/rootfs.ext4. Repeat the audit with:
 
-## Pliki potrzebne do odtworzenia z Git
+```sh
+python3 tools/check_sd_image.py build/buildroot/images/sdcard.img
+```
 
-Wszystkie wejścia projektu są śledzone przez Git:
+## Reproducing the build from Git
 
-* `Makefile`, `tools/environment.py`, `tools/image.py`: środowisko i cały build.
-* `sources.lock.json`: adresy upstreamów i dokładne commity.
-* `toolchains.lock.json`: archiwa narzędzi FPGA i sprawdzane SHA-256.
-* `requirements.lock`: wersje zależności Python.
-* `gateware/`, `tests/`: LiteX PL i test netlisty AXI.
-* `patches/`: patch golden SZL dla FCLK0.
-* `buildroot/`: konfiguracje Linux/U-Boot/rootfs, DTS, overlay, boot i SD.
+All project inputs are tracked:
 
-Host wymaga Linux x86_64, Docker z dostępem użytkownika, Git, Make, Python 3
-i tar. Zarezerwuj przynajmniej 30 GiB na checkout i build oraz dostęp do sieci.
-Nie trzeba kopiować `.venv`, `upstream/`, `build/` ani zależności z tej maszyny:
-`make image` pobiera je z przypiętych źródeł i generuje wszystkie artefakty.
-Referencyjny wykaz pakietów kontenera jest w `evidence/debian-packages.txt`;
-instalację odtwarza datowany snapshot APT zapisany w `tools/environment.py`.
+* `Makefile`, `tools/environment.py`, `tools/image.py`: environment and build.
+* `sources.lock.json`: upstream URLs and exact commits.
+* `toolchains.lock.json`: FPGA tool archives and verified SHA-256 checksums.
+* `requirements.lock`: Python dependency versions.
+* `gateware/`, `tests/`: LiteX PL and AXI netlist tests.
+* `patches/`: golden SZL FCLK0 patch.
+* `buildroot/`: Linux/U-Boot/rootfs configurations, DTS, overlay, boot and SD setup.
 
-Powtarzalna ścieżka od czystego checkoutu:
+The host needs x86_64 Linux, user access to Docker, Git, Make, Python 3 and
+tar. Reserve at least 30 GiB for checkout/build and provide network access.
+There is no need to copy `.venv`, `upstream/`, `build/` or dependencies
+from the development machine. `make image` fetches pinned sources and
+generates the artifacts. A reference container package list is recorded in
+`evidence/debian-packages.txt`; the dated APT snapshot is specified in
+`tools/environment.py`.
 
 ```sh
 git clone https://github.com/codex-hil/kasli-soc-linux.git kasli-soc-linux
@@ -248,148 +289,153 @@ cd kasli-soc-linux
 make image
 ```
 
-Obraz nie jest identyczny bajtowo między checkoutami: generowany klucz SSH,
-znaczniki czasu i identyfikatory filesystemów mogą się różnić. Każdy build
-zapisuje własny manifest SHA-256. Prywatne klucze i gotowe obrazy nie są
-commitowane. Repozytorium: https://github.com/codex-hil/kasli-soc-linux (prywatne; wymaga dostępu do konta).
+Images are not byte-identical between checkouts: generated SSH keys,
+timestamps and filesystem identifiers may differ. Every build records its
+own SHA-256 manifest. Private keys and built images are not committed.
+The [repository](https://github.com/codex-hil/kasli-soc-linux) is public.
 
-## ZC706 jako etap pośredni
+## ZC706 as the intermediate platform
 
-Sprawdzono lokalne przypięte upstreamy: LiteX-Boards ma platformę
-`xilinx_zc706` dla `xc7z045ffg900-2`, a dostarczony openXC7 zawiera
-zarówno dokładny part FFG900-2, jak i chipdb XC7Z045. SZL z istniejącym
-patchem FCLK0 zbudował się z `--no-default-features --features target_zc706`.
-Golden zynq-rs ustawia CPU 800 MHz, PS_CLK 33.333333 MHz, DDR 32-bit/666.666666 MHz.
-Upstream Linux ma `zynq-zc706.dts`, 1 GiB pamięci i PHY pod adresem MDIO 7.
+The pinned LiteX-Boards sources provide `xilinx_zc706` for
+**XC7Z045-FFG900-2**. The supplied openXC7 has both the exact FFG900-2 part
+and XC7Z045 chipdb. Upstream Linux provides `zynq-zc706.dts`, 1 GiB of
+memory and PHY address MDIO 7.
 
-Obecny gotowy target LiteX-Boards używa softcore i DDR PL; nie jest targetem
-Linux PS7. Dodany target używa naszego minimalnego PS7/CSR,
-LED G2/LVCMOS15, DTS i konfiguracji obrazu ZC706. Nie należy bootować obrazu Kasli na
-ZC706: konfiguracja DDR i PHY jest inna. PL ZC706 zbudowano przez Yosys/nextpnr/openXC7 (133.30 MHz dla 100 MHz),
-SZL i test 1000 transakcji AXI/CSR również przeszły w pierwszym sprawdzeniu
-programowym, zapisanym w `evidence/zc706-feasibility.json`.
-Aktualny target używa SPL; fizyczne wyniki są poniżej. ZC706 jest etapem
-pośrednim i nie zastępuje milestone Kasli.
+Initial SZL feasibility checks built successfully with
+`--no-default-features --features target_zc706` and the existing FCLK0 patch.
+Golden zynq-rs sets CPU to 800 MHz, PS_CLK to 33.333333 MHz and 32-bit DDR
+to 666.666666 MHz. That DDR configuration later failed physical checks;
+the working ZC706 target uses **upstream U-Boot SPL PS7 initialization at
+533 MHz**. Kasli-SoC retains golden SZL/ARTIQ initialization.
 
-### Build targetu ZC706
+The existing LiteX-Boards SoC target uses a soft CPU and PL DDR, so this
+project supplies a minimal PS7/CSR target with LED G2/LVCMOS15, DTS and
+ZC706 image configuration. Do not boot the Kasli image on ZC706: DDR and
+PHY configurations differ. Initial Yosys/nextpnr/openXC7 PL achieved
+133.30 MHz against the 100 MHz target; SZL and 1,000 simulated AXI/CSR
+transactions also passed. See `evidence/zc706-feasibility.json`.
+ZC706 is an intermediate platform; it does not satisfy the Kasli milestone.
+
+### Building ZC706
 
 ```sh
 make BOARD=zc706 image
 ```
 
-Wynik: `build/zc706/buildroot/images/sdcard.img`. Etapy: `make BOARD=zc706 pl`,
-`test-pl`, `linux`. ZC706 używa U-Boot SPL z upstreamowego `ps7_init`;
-SZL jest używany przez Kasli. Domyślny `make image` nadal buduje Kasli.
-Narzędzia, pobrane źródła i klucz SSH są współdzielone; PL, loader, Buildroot
-i obrazy mają oddzielne katalogi. Mapa CSR i hardware test są takie same.
-LED G2/LVCMOS15 pochodzi z platformy LiteX ZC706; Y21 jest nieobecna w
-używanej bazie openXC7. DTS ZC706 skopiowano z przypiętego upstream Linux
-i dodano wyłącznie węzeł LiteX UIO/FCLK0. Status przygotowanego wówczas obrazu pozostawał niezweryfikowany;
-aktualne wyniki fizycznej rev. 1.2 znajdują się poniżej.
+Output: `build/zc706/buildroot/images/sdcard.img`.
+Individual stages include `make BOARD=zc706 pl`, `make BOARD=zc706 test-pl`
+and `make BOARD=zc706 linux`. ZC706 uses upstream U-Boot SPL `ps7_init`;
+Kasli uses SZL. The default `make image` still builds Kasli.
+Tools, fetched sources and the SSH key are shared; PL, loader, Buildroot
+and image outputs have separate directories. The minimal CSR map and
+hardware test are common to both targets.
 
-Bring-up ZC706: SD w J30; boot SD w tabeli 1-2 UG954 to SW11.1–5 =
-`0 0 1 1 0` (przy ustawianiu sprawdź oznaczenia na własnej płycie).
-UART przez USB Mini-B J21/CP2103, UART1 MIO48/49, 115200 8N1.
-Ethernet przez RJ45 P3/Marvell 88E1116R. Źródło:
-[AMD UG954 v1.8, str. 17, 49–52](https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content).
-Boot z SD nie wymaga zapisu QSPI.
+LED G2/LVCMOS15 comes from the LiteX ZC706 platform; Y21 is absent from the
+available openXC7 database. The ZC706 DTS is copied from pinned upstream
+Linux, with the LiteX UIO/FCLK0 node added.
 
-Etap `linux` odtwarza defconfig wybranej płyty. Po zmianie konfiguracji
-kernela w istniejącym katalogu Buildroot użyj także `linux-reconfigure`
-(lub nowego katalogu buildu), zgodnie z normalnym workflow Buildroot.
+ZC706 bring-up:
 
-Obraz SD ZC706 ma 335 544 832 bajty; BOOT.BIN i partycje przeszły audyt.
-Manifest i wyniki są w `evidence/zc706/`, a bieżące dowody fizycznego
-bootu, DDR, sieci i PS→PL w `evidence/zc706/hardware-rev12-20261007/`.
+* SD slot J30. UG954 table 1-2 specifies SD boot as SW11.1–5 =
+  `0 0 1 1 0`; check switch markings on your physical board.
+* UART: USB Mini-B J21/CP2103, UART1 MIO48/49, 115200 8N1.
+* Ethernet: RJ45 P3 / Marvell 88E1116R.
 
-Dostęp USB na tym hoście: nowy CP2103 UART i Digilent serial 210251841109
-pojawiły się po podłączeniu ZC706. Konto codex-hil nie ma dostępu do
-urządzeń. Administrator może nadać chwilowy ACL tylko tej parze:
+Reference: [AMD UG954 v1.8, pp. 17 and 49–52](https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content).
+SD boot does not require QSPI writes.
+
+The `linux` stage reproduces the selected board defconfig. After changing
+kernel configuration in an existing Buildroot directory, also use
+`linux-reconfigure` or a fresh build directory, following the normal
+Buildroot workflow.
+
+The ZC706 SD image is 335,544,832 bytes; BOOT.BIN and partitions passed
+validation. Manifests are in `evidence/zc706/`; physical boot, DDR, network
+and PS→PL evidence is in `evidence/zc706/hardware-rev12-20261007/`.
+
+### USB access on the development host
+
+The original ZC706 introduced a CP2103 UART and Digilent adapter
+`210251841109`; rev. 1.2 uses JTAG serial `210251842914`.
+An administrator can grant temporary ACL access to the selected board:
 
 ```sh
-sudo python3 /home/codex-hil/kasli-soc-linux/tools/grant_zc706_usb_access.py
+sudo python3 /home/codex-hil/kasli-soc-linux/tools/grant_zc706_usb_access.py --jtag-serial 210251842914
 ```
 
-Skrypt rozwiązuje bieżące numery USB z sysfs i nie zmienia pozostałych
-adapterów. Po odłączeniu USB ACL może wymagać ponownego nadania. JTAG
-IDCODE potwierdził XC7Z045 (`0x03731093`); oba rdzenie odpowiadają przez JTAG.
+The script resolves current USB numbers through sysfs and leaves other
+adapters unchanged. Reconnection may require granting access again.
+JTAG IDCODE identified XC7Z045; both CPU cores respond through JTAG.
 
-### Fizyczna diagnostyka ZC706, 2026-10-07
+### Historical bring-up and revision comparison
 
-Bezpośredni test nadajnika PS UART wysłał `ZC706 UART TEST` do CP2103.
-Kod standardowego upstream U-Boot SPL wykonuje się w OCM; odczyt pierwszych
-64 KiB odpowiada przesłanemu obrazowi. Konsola U-Boot i boot Linuxa nie
-zostały jeszcze uzyskane. Pierwsze odczyty rejestrów debuggera bywają
-niespójne; pojedynczy wynik DDR nie potwierdza uszkodzenia pamięci.
-Dowody i jawny status: `evidence/zc706/hardware-20261007/`.
+The initial rev. 1.0 investigation on 2026-10-07 confirmed PS UART
+transmission (`ZC706 UART TEST`) and upstream U-Boot SPL execution in OCM.
+A 64 KiB OCM readback matched the uploaded image, but full U-Boot/Linux
+console output was not obtained. Early debugger register reads were
+inconsistent; a single DDR result did not establish a memory fault.
+Evidence: `evidence/zc706/hardware-20261007/`.
 
-Do niezależnego testu przygotowano gotowe obrazy opublikowane przez
-[PULP/HERO dla ZC706](https://pulp-platform.org/hero/doc/downloads/images/zc706/).
-To osobny comparator z historycznie wygenerowanym PL, **nie** nasz build
-openXC7. FSBL/U-Boot próbowano uruchomić z RAM przez JTAG; nie uzyskano
-konsoli. Obraz referencyjny zapisano na fizycznej karcie 32 GB (31 914 983 424 bajty),
-a SHA-256 odczytu zwrotnego jest identyczny z obrazem. Wynik:
-`evidence/zc706/hardware-20261007/sd-write.json`. Boot z tej karty oczekuje
-na przełożenie jej do ZC706 i włączenie zasilania.
-QSPI pozostało bez zmian. Czytnik USB i karta testowa zostały udostępnione.
+An independent comparator used published
+[PULP/HERO ZC706 images](https://pulp-platform.org/hero/doc/downloads/images/zc706/).
+Its historical vendor-generated PL is separate from this project's openXC7
+build. The reference image was written to a physical 32 GB card
+(31,914,983,424 bytes), and full readback SHA-256 matched.
+See `evidence/zc706/hardware-20261007/sd-write.json`.
+QSPI was left unchanged.
 
-Odtworzenie obrazu referencyjnego (po przygotowaniu toolchainu ZC706):
+To reproduce the reference image after preparing the ZC706 toolchain:
 
 ```sh
 python3 tools/environment.py python3 tools/zc706_reference.py --image
 ```
 
-Wynik: `build/zc706-vendor-baseline/sdcard.img`, partycja FAT 64 MiB
-z `BOOT.bin`, `uImage`, `devicetree.dtb`, `uramdisk.image.gz`.
-`configs/zc706-reference.json` przypina SHA-256 każdego pobranego pliku;
-zmiana pod upstreamowym adresem `latest` zatrzyma odtwarzanie.
-Skrypt tworzy wyłącznie plik obrazu i nie zapisuje żadnego urządzenia.
+Output: `build/zc706-vendor-baseline/sdcard.img`, with a 64 MiB FAT
+partition containing `BOOT.bin`, `uImage`, `devicetree.dtb` and
+`uramdisk.image.gz`. `configs/zc706-reference.json` pins every download's
+SHA-256; changed files at the upstream `latest` URL stop reproduction.
+The script creates an image file without writing a device.
 
-Po włączeniu z kartą referencyjną: UART pusty, PC BootROM `0xffffff28`,
-`BOOT_MODE=5` (SD), `REBOOT_STATUS=0x00401000`. Odczyty potwierdzono
-opcjonalnie przez AMD XSDB / istniejący hw_server. FSBL nie został załadowany
-z SD; przyczyna wymaga dalszej diagnostyki. Próby ładowania gotowego FSBL
-i U-Boot przez JTAG również nie dały konsoli. Nie jest to dowód uszkodzenia
-płyty ani zakończony test DDR. Build nie korzysta z narzędzi AMD.
+On rev. 1.0, SD boot left UART silent, BootROM PC at `0xffffff28`,
+`BOOT_MODE=5` and `REBOOT_STATUS=0x00401000`. Optional AMD XSDB/existing
+hw_server confirmed these observations; AMD tools are not build dependencies.
+FSBL/U-Boot JTAG loading also failed to produce a console.
 
-Nowszy wynik diagnostyki: użytkownik potwierdził **ZC706 rev. 1.0**,
-POWER GOOD świeci, J7 jest OPEN. Po inicjalizacji PS7 opublikowanym
-HERO FSBL DDR gubi bit 12: `ffffffff → ffffefff`, `00001000 → 00000000`,
-`55555555 → 55554555`, powtarzalnie pod `01000000`, `01000040`, `11000000`.
-Identyczne zapisy/odczyty w OCM (`00020000`) są poprawne. Instrukcja skoku
-U-Boot `eaffffeb` odczytuje się jako `eaffefeb`; krokowanie potwierdza skok
-pod niewłaściwy adres i wyjątek. Wynik nie rozstrzyga jeszcze usterki płyty
-wobec konfiguracji specyficznej dla rewizji. Następny eksperyment to ten sam
-obraz na dostępnej rev. 1.2. BootROM SD jest osobnym nierozwiązanym problemem.
-Logi: `ddr-bit12-patterns.log`, `ocm-ddr-control.log`, `branch-readback.log`
-w katalogu dowodów hardware. QSPI bez zmian.
+With POWER GOOD lit, J7 open, and PS7 initialized by the published HERO
+FSBL, rev. 1.0 DDR repeatedly lost bit 12:
+`ffffffff → ffffefff`, `00001000 → 00000000`, `55555555 → 55554555`
+at `01000000`, `01000040` and `11000000`. Identical OCM accesses at
+`00020000` passed. U-Boot branch `eaffffeb` read back as `eaffefeb`;
+stepping confirmed a wrong branch target and exception. This did not
+settle whether the cause was a board fault or revision-specific initialization.
+Logs: `ddr-bit12-patterns.log`, `ocm-ddr-control.log`, `branch-readback.log`.
+Rev. 1.0 SD BootROM behavior and DDR remain unresolved.
 
-### Sukces obrazu referencyjnego na ZC706 rev. 1.2
+The same reference card booted on **rev. 1.2**, running Linux
+`4.9.0-xilinx-v2017.2`, BusyBox and UART console. JTAG IDCODE was
+`0x23731093`, MCTRL `0x30800100`; adapter `210251842914`.
+Ethernet negotiated 1000/Full; DHCP assigned `192.168.2.7`; ping and SSH
+passed. The kernel reported 901,732 KiB RAM. `memtester 128M 3` subsequently
+passed every pattern in all three loops. Logs are in `ddr-memtester.log`,
+with raw-log SHA-256 in `status.json`. The reference system's SSH key was
+added in RAM and disappears on reboot; its default login is documented in
+the [HERO SDK README](https://github.com/pulp-platform/hero-sdk/blob/master/README.md).
 
-Ta sama karta bootuje Linux `4.9.0-xilinx-v2017.2`, BusyBox i konsolę
-UART. JTAG `0x23731093`, MCTRL `0x30800100`; adapter `210251842914`.
-Ethernet 1000/Full, DHCP `192.168.2.7`, ping i SSH kluczem projektu PASS.
-Kernel widzi 901732 KiB RAM; test `memtester 128M 3` trwa. Pełny log
-U-Boot wymaga jeszcze przechwycenia restartu. Dowody:
-`evidence/zc706/hardware-rev12-20261007/`.
-To **referencyjny system HERO z vendorowym PL**, nie nasz Linux/openXC7;
-milestone 1 nadal nie jest osiągnięty. Rev. 1.0 i jej wyniki pozostają
-osobno zapisane. Klucz SSH dodano w RAM systemu referencyjnego; znika
-po restarcie. Domyślne logowanie tego obrazu opisuje
-[README HERO SDK](https://github.com/pulp-platform/hero-sdk/blob/master/README.md).
+See [silicon revisions, errata and the next controlled DDR experiment](evidence/zc706/silicon-revisions-20261007.md).
+Rev. 1.0 results remain separate from the working rev. 1.2 platform.
 
-### Fizyczny sukces PL openXC7 na rev. 1.2
+### First physical openXC7 PL success
 
-Na działającym systemie referencyjnym załadowano nasz `top.bit` przez
-`/dev/xdevcfg` (bez narzędzi AMD). Przesłanie SHA-256 zweryfikowane,
-PCAP DONE=1. FCLK0 ustawiono przez sterownik zegara Linux na ~100 MHz.
-PS → AXI → LiteX CSR działa: sygnatura `4b534f43`, scratch RW,
-**10000 transakcji PASS**, licznik 99990601 Hz, scratch przywrócony.
-PL jest zbudowany przez Yosys/nextpnr/openXC7; jego SHA-256:
+On the running HERO reference system, this project's `top.bit` was loaded
+through `/dev/xdevcfg`, with verified transfer SHA-256 and PCAP DONE=1.
+Linux clock control set FCLK0 to approximately 100 MHz.
+PS → AXI → LiteX CSR passed: signature `4b534f43`, scratch read/write,
+10,000 transactions, counter 99,990,601 Hz and scratch restoration.
+The Yosys/nextpnr/openXC7 bitstream SHA-256 was
 `e5a836508795b7bca585caee43ab4fe65b00ede398fbdc2d7d90468f861357d2`.
-Dowody: `openxc7-program.log`, `csr-smoke.log`, `pl-test.log`.
+Logs: `openxc7-program.log`, `csr-smoke.log`, `pl-test.log`.
 
-Odtworzenie na systemie referencyjnym z dostępem SSH kluczem projektu:
+Reproduce on the legacy reference system with the project SSH key:
 
 ```sh
 python3 tools/load_pl_xdevcfg.py 192.168.2.7
@@ -400,174 +446,157 @@ ssh -i build/ssh/id_ed25519 -o UserKnownHostsFile=build/ssh/known_hosts \
   < build/pl-test
 ```
 
-`load_pl_xdevcfg.py` jest helperem dla legacy kernela referencyjnego;
-nie zapisuje SD ani QSPI. Ponowny boot karty referencyjnej przywróci HERO PL.
-Nadal pozostają: pełny log startu U-Boot, wynik długiego testu DDR oraz boot
-**naszego** obrazu SZL/upstream U-Boot/upstream Linux/Buildroot/openXC7.
-Nie utożsamiamy hybrydowego bring-upu z zakończeniem milestone 1 Kasli-SoC.
+`load_pl_xdevcfg.py` supports the legacy reference kernel and does not
+write SD or QSPI. Rebooting the reference card restores HERO PL.
+This hybrid bring-up was not completion of the Kasli-SoC milestone.
 
-PS7 działającego systemu referencyjnego z naszym PL zapisano jako
-`ps7-reference-openxc7.json` (108 rejestrów, UART_CLK_CTRL `00001402`,
-FPGA0_CLK_CTRL `00200500`, 100 MHz). Hostowy transport SSH dumpu nie wymaga
-Pythona na starym rootfs:
+A PS7 dump of the reference system with this PL is saved as
+`ps7-reference-openxc7.json`: 108 registers, UART_CLK_CTRL `00001402`,
+FPGA0_CLK_CTRL `00200500`, FCLK0 100 MHz. Host-side SSH transport does not
+require Python in the old rootfs:
 
 ```sh
 python3 tools/dump_ps7_state.py --ssh-address 192.168.2.7 > ps7.json
 ```
 
-Nasz obraz `build/zc706/buildroot/images/sdcard.img` zapisano następnie
-z działającego systemu RAM na tę samą kartę SC32G, CID
-`035344534333324780d55bcc91012a00`, po sprawdzeniu braku mountów SD.
-Odczyt 335544832 bajtów ma SHA-256 identyczny z manifestem:
+The initial project SD image was then written from RAM to the unmounted
+SC32G card, CID `035344534333324780d55bcc91012a00`. All 335,544,832 bytes
+were read back and matched SHA-256
 `c771c39018c5f32d16f8afb3e5bae3610fb36c1bc713c61dc5044fd4d44f8015`.
-Restart do naszego obrazu nastąpi po zakończeniu testu DDR. Karta nie
-zawiera już obrazu HERO; jego kopia i skrypt odtworzenia pozostają na hoście.
+The HERO image and its reproduction script remain available on the host.
 
-Aktualny status fizycznej ZC706 rev. 1.2 (własny Linux i upstream SPL):
+### Working upstream loader and Linux
 
-Element | Status
----|---
-PS7 | PASS, upstream U-Boot SPL ZC706 z istniejącym ps7_init
-DDR | PASS, 1 GiB / 533 MHz; memtester 128M 3 na naszym Linuxie, bez błędów
-UART | PASS, 115200 8N1
-SD | PASS, pełny własny obraz zapisany, odczyt SHA-256 zgodny, boot bez JTAG
-U-Boot | PASS, SPL i main 2026.10-rc5, pełny log UART
-Linux | PASS, własny upstream 6.18.40 i rootfs Buildroot z SD
-Ethernet | PASS, 1000/Full, DHCP 192.168.2.15, ping
-SSH | PASS, klucz projektu
-AXI PS→PL | PASS na fizycznej płycie
-LiteX CSR | PASS, po 10036 zapisów/odczytów przez devmem i UIO, licznik ~100 MHz
-Yosys | PASS, użyty do zbudowanego i załadowanego PL
-nextpnr-xilinx/openXC7 | PASS, place-and-route i timing
-openXC7 bitstream | PASS, PCAP DONE i fizyczny test CSR
-ARTIQ RTIO PoC | nie rozpoczęto
+The first project SD restart ran SZL, but PL programming ended in
+`DoneTimeout`. The PL partition held correct PCAP data; JTAG DDR pattern
+checks showed corruption with SZL's 667 MHz configuration. This was not
+accepted as a bitstream failure or proof of rev. 1.2 hardware damage.
 
-Pełny test DDR systemu referencyjnego zakończył się kodem 0:
-`memtester 128M 3`, wszystkie wzorce i trzy pętle PASS. Log zapisano
-bez animacji terminalowych w `ddr-memtester.log`; SHA-256 surowego logu
-jest w `status.json`.
+Upstream U-Boot SPL uses the existing
+`board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c`, configuring DDR at 533 MHz,
+matching the working HERO reference. SPL and the project U-Boot were first
+loaded with open-source OpenOCD; U-Boot then booted Linux 6.18.40 and
+Buildroot from SD. UART, 1 GiB DDR, DHCP, ping and SSH worked.
 
-### ZC706: upstream Linux uruchomiony, korekta loadera (2026-10-07)
+The current ZC706 flow is:
 
-Pierwszy pełny restart naszego SD uruchomił SZL, lecz programowanie PL
-zakończyło się `DoneTimeout`. Partycja PL zawiera poprawne dane PCAP;
-odczyty wzorców DDR przez JTAG wykazały przekłamania przy konfiguracji
-SZL (667 MHz). Nie traktujemy tego jako awarii bitstreamu ani dowodu
-uszkodzenia rev. 1.2.
+BootROM → U-Boot SPL → `u-boot.img` → `boot.scr` → openXC7 `top.bit` → Linux/ext4.
 
-Upstreamowy U-Boot SPL korzystający z istniejącego
-`board/xilinx/zynq/zynq-zc706/ps7_init_gpl.c` inicjalizuje DDR na 533 MHz,
-tak jak działający obraz HERO. Załadowano SPL i nasz U-Boot przez
-open-source OpenOCD, następnie U-Boot uruchomił z SD nasz Linux
-6.18.40 i rootfs Buildroot. UART, 1 GiB DDR, DHCP (192.168.2.15), ping
-i SSH działają. Logi są w `evidence/zc706/hardware-rev12-20261007/`.
-Pełny test DDR tego systemu trwa; PL w tym starcie nie został załadowany.
+`boot.cmd` is the reproducible boot-script source. BOOT.BIN contains only
+upstream SPL; U-Boot loads `top.bit` before starting Linux. A PL load
+failure stops the boot script. The complete SPL-based
+`make BOARD=zc706 image` exited with code 0. Current payload checksums are
+in `evidence/zc706/image-manifest.json`.
 
-Target ZC706 przechodzi na standardowy flow BootROM → U-Boot SPL →
-`u-boot.img` → `boot.scr` → openXC7 `top.bit` → Linux/ext4.
-`boot.cmd` jest źródłem reprodukowalnego skryptu startowego. Używamy
-upstreamowego opisu ZC706 i PS7, bez generowania konfiguracji w Vivado.
-Kasli-SoC nadal używa golden SZL/ARTIQ. Pełny start nowego wariantu ZC706
-z SD bez JTAG pozostaje do sprawdzenia; milestone 1 Kasli nie jest zakończony.
-
-Pełne `make BOARD=zc706 image` w wariancie SPL zakończyło się kodem 0.
-Obraz ma 335544832 bajty; bieżące hashe znajdują się w
-`evidence/zc706/image-manifest.json`. `BOOT.BIN` zawiera wyłącznie
-upstreamowy SPL; PL ładuje U-Boot z pliku `top.bit`, przed uruchomieniem
-kernela. Niepowodzenie ładowania PL zatrzymuje skrypt startowy.
-
-Obraz zawiera również `rootfs.cpio.gz`, pozwalający uruchomić ten sam
-userspace w RAM. `tools/boot_zc706_uart.py --ram-root` przechwytuje
-autoboot i wybiera ten tryb bez zapisywania środowiska U-Boot.
-Narzędzie wymaga hostowego Pythona z `pyserial==3.5` oraz jawnej ścieżki
-UART i adresu SSH działającej płyty. Przykład dla tego egzemplarza:
+The image also includes `rootfs.cpio.gz` for RAM-root recovery.
+`tools/boot_zc706_uart.py --ram-root` intercepts autoboot and selects this
+mode without saving U-Boot environment. It requires host Python with
+`pyserial==3.5`, an explicit UART path and the working board's SSH address:
 
 ```sh
 .venv/bin/python tools/boot_zc706_uart.py \
   --port /dev/serial/by-id/usb-Silicon_Labs_CP2103_USB_to_UART_Bridge_Controller_0001-if00-port0 \
-  --reboot-ssh-address ADRES_IP --ram-root --output build/hardware/ram-boot
+  --reboot-ssh-address IP_ADDRESS --ram-root --output build/hardware/ram-boot
 ```
 
-Po potwierdzeniu rootfs w RAM można zapisać obraz przez LAN:
+After confirming RAM rootfs, write the image over LAN:
 
 ```sh
-python3 tools/write_sd_over_ssh.py ADRES_IP \
+python3 tools/write_sd_over_ssh.py IP_ADDRESS \
   --cid 035344534333324780d55bcc91012a00 \
   --image build/zc706/buildroot/images/sdcard.img \
   --output build/hardware/sd-write.json
 ```
 
-CID powyżej identyfikuje udostępnioną kartę SC32G; dla innej karty trzeba
-podać jej własny CID. Skrypt odmawia zapisu, jeśli rootfs nie działa w RAM
-lub SD jest zamontowana, sprawdza CID i pojemność, a następnie porównuje
-SHA-256 pełnego odczytu z obrazem. Odmowę przy rootfs z SD sprawdzono
-na fizycznej płycie. QSPI nie jest używana. Test PL obsługuje
-`--device /dev/uio0` oprócz `/dev/mem`.
+That CID identifies the supplied SC32G card; use the actual CID for any
+other card. The script refuses writes unless rootfs is in RAM and SD is
+unmounted, checks CID/capacity, then compares full readback SHA-256 with
+the image. Refusal with SD rootfs was physically tested. QSPI is unused.
+The PL test supports both `--device /dev/uio0` and `/dev/mem`.
 
-Końcowy obraz ma SHA-256
+The validated final image SHA-256 is
 `729c58c976ce71c6171a5a6e20f8d827a000702b7edc2853ad219f25d076d7de`.
-Zapisano go w całości z recovery RAM, odczytano wszystkie 335544832 bajty
-i potwierdzono zgodność hasha. Następnie uruchomiono ten obraz z SD:
-SPL, U-Boot, PL, Linux, konsola, rootfs ext4, DHCP, ping (0% strat) i SSH PASS.
-Klucz publiczny SSH hosta jest pobierany przez fizyczny UART i wpisywany do
-projektowego `build/ssh/known_hosts`; świeży rootfs/recovery może generować
-nowy klucz hosta. Nie wyłączamy sprawdzania kluczy SSH.
+It was fully written from recovery RAM; all 335,544,832 bytes were read back
+and the hash matched. The SD image then booted SPL, U-Boot, PL, Linux,
+console and ext4 rootfs; DHCP, ping with zero packet loss, and SSH passed.
 
-U-Boot korzysta z losowego MAC przy środowisku w RAM. Po uzyskaniu lub
-odnowieniu DHCP hook BusyBox wysyła gratuitous ARP, aby odświeżyć wpisy
-hosta/routera po restarcie. Nie zapisujemy środowiska w QSPI.
+SSH host keys are retrieved through the physical UART into the project's
+`build/ssh/known_hosts`; a fresh rootfs/recovery may generate a new host
+key. SSH host-key checks remain enabled. U-Boot uses a random MAC with its
+RAM environment. On DHCP acquisition/renewal, the BusyBox hook sends
+gratuitous ARP to refresh host/router entries. The environment is not
+written to QSPI.
 
-Pełny test automatyczny:
+Run the full automated hardware test:
 
 ```sh
-python3 tools/hardware_test.py ADRES_IP --output build/hardware/validation
+python3 tools/hardware_test.py IP_ADDRESS --output build/hardware/validation
 ```
 
-Domyślnie testuje `memtester 128M 3`; `--ddr-loops 1` pozwala skrócić
-kontrolę kolejnego bootu. Po wcześniejszym PASS trzech pętli wykonujemy
-jedną dodatkową pętlę na finalnym obrazie, następnie test UIO i dump PS7.
-Wyniki finalnego testu są zapisywane osobno i nie zastępują logów wcześniejszych.
+The default is `memtester 128M 3`; `--ddr-loops 1` shortens a later boot
+check. After three passing loops, one additional loop was run on the final
+image, followed by UIO and a PS7 dump. Final results are recorded separately
+and do not replace earlier logs.
 
-### Finalny wynik ZC706 rev. 1.2 — PASS
+### Current ZC706 rev. 1.2 status — PASS
 
-W `evidence/zc706/hardware-rev12-20261007/final-validation/` wszystkie
-kontrole zakończyły się kodem 0: ping (5/5, bez strat), SSH, `memtester 128M 1`,
-UIO (10036 zapisów/odczytów, licznik ~100 MHz) i odczyt rejestrów PS7.
-`validation.json` łączy te wyniki z logiem bootu i hashem pełnego odczytu SD.
-BootROM/SPL/U-Boot/PL/Linux działają bez ładowania przez JTAG.
-Potwierdzono restarty programowe; pełnego odłączenia zasilania nie testowano.
-Rev. 1.0 pozostaje osobnym, nierozwiązanym przypadkiem diagnostycznym.
+Element | Status
+---|---
+PS7 | PASS, upstream U-Boot SPL ZC706 with existing ps7_init
+DDR | PASS, 1 GiB / 533 MHz; `memtester 128M 3` on project Linux, no errors
+UART | PASS, 115200 8N1
+SD | PASS, full image write/readback SHA-256 match; boot without JTAG
+U-Boot | PASS, SPL and main 2026.10-rc5; full UART log
+Linux | PASS, upstream 6.18.40 / Buildroot from SD; both Cortex-A9 cores online
+Ethernet | PASS, 1000/Full, DHCP and ping
+SSH | PASS, project key
+AXI PS→PL | PASS on physical hardware
+LiteX CSR | PASS, 10,036 reads/writes each through devmem and UIO; counter ~100 MHz
+Yosys | PASS, used for the built and loaded PL
+nextpnr-xilinx/openXC7 | PASS, place-and-route and timing
+openXC7 bitstream | PASS, PCAP DONE and physical CSR tests
+ARTIQ RTIO PoC | Not started
 
-[Gotowy obraz SD i sumy kontrolne](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-poc-20261007).
-`make BOARD=zc706 image` odtwarza również `sdcard.img.gz` i `SHA256SUMS`.
-Archiwum rozpakowuje się do dokładnie zweryfikowanego obrazu SD.
+All checks in `evidence/zc706/hardware-rev12-20261007/final-validation/`
+exited with code 0: ping (5/5, no loss), SSH, `memtester 128M 1`, UIO
+(10,036 reads/writes, counter ~100 MHz) and PS7 register reads.
+`validation.json` links these results to the boot log and full SD readback
+hash. BootROM/SPL/U-Boot/PL/Linux work without JTAG loading.
+Software restarts were confirmed; complete power removal was not tested
+in that validation run. Rev. 1.0 remains a separate unresolved case.
 
-SSH z tego stanowiska:
+[Validated SD image and checksums](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-poc-20261007).
+`make BOARD=zc706 image` also produces `sdcard.img.gz` and `SHA256SUMS`.
+The archive decompresses to the exact validated image.
+
+Example SSH access using the address from the original validation run:
 
 ```sh
 ssh -i build/ssh/id_ed25519 -o UserKnownHostsFile=build/ssh/known_hosts root@192.168.2.15
 ```
 
-To zakończony bring-up ZC706. Milestone 1 Kasli-SoC wymaga nadal testów
-na fizycznej Kasli-SoC; RTIO PoC nie został rozpoczęty.
+Use the board's current DHCP address; it may differ after a reboot.
+ZC706 bring-up is complete. Kasli-SoC milestone 1 still requires physical
+Kasli-SoC tests; the RTIO proof of concept has not started.
 
-Investigation of the older ZC706 engineering-sample silicon, relevant errata, and the next controlled DDR experiment: [silicon revision comparison](evidence/zc706/silicon-revisions-20261007.md). The rev. 1.0 DDR fault remains unresolved.
+## FMC connectivity and independent PL SODIMM
 
-FMC ADC connectivity audit: [both ZC706 slots](evidence/zc706/fmc-adc-pin-audit-20261007.md). DCO and all ADC data lanes share an HR bank in each slot; J5 LPC is recommended for first acquisition. ADC gateware and physical acquisition remain unvalidated.
+[FMC connectivity audit for both ZC706 slots](evidence/zc706/fmc-adc-pin-audit-20261007.md).
+DCO and all ADC data lanes share an HR bank in each slot. J5 LPC was used
+for initial acquisition; both cards have since passed the tests described
+above.
 
-Independent PL SODIMM bring-up: [architecture, build and current status](docs/zc706-pl-ddr.md).
-Yosys, patched nextpnr routing/timing and openXC7 bitstream generation PASS
+Independent PL SODIMM bring-up:
+[architecture, build and current status](docs/zc706-pl-ddr.md).
+Yosys, patched nextpnr routing/timing and openXC7 bitstream generation passed
 at 333⅓ MHz DDR / 83⅓ MHz system / 50 MHz GP1 and BIST. The static ARM
 diagnostic and simulations (including clock crossings, injected errors,
-byte lanes and synthesized GP0 CSRs) pass. `make ddr-package` reproduces
-the bring-up bundle. Physical JTAG programming, eight-lane DDR leveling,
-GP1 address checks and three full-1-GiB BIST passes PASS on rev. 1.2 with
-zero errors: [hardware evidence](evidence/zc706/pl-ddr-20261008/validation.json).
-ADC remains separate; SD/QSPI unchanged. DCI termination is not supported
-by the current backend; long-term signal-integrity qualification remains pending.
+byte lanes and synthesized GP0 CSRs) passed.
 
-Sprawdzenie wszystkich ustawień zakresów i terminacji obu FMC oraz fizyczne
-pomiary CH1: [sterowanie i wyniki](docs/zc706-adc-controls.md).
-Zakresy i regulacja offsetu działają; niezależna impedancja BNC wszystkich
-8 wejść pozostaje do kwalifikacji. Test wykazał wspólne źródło AFG CH1
-oraz asymetrię obciążenia toru LPC.
+`make ddr-package` reproduces the bring-up bundle. Physical JTAG
+programming, eight-lane DDR leveling, GP1 address checks and three full
+1 GiB BIST passes passed on rev. 1.2 with zero errors:
+[hardware evidence](evidence/zc706/pl-ddr-20261008/validation.json).
+ADC acquisition remains separate from PL DDR; SD/QSPI were unchanged.
+DCI termination is not supported by the current backend; long-term
+signal-integrity qualification remains pending.
