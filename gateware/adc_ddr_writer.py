@@ -30,6 +30,10 @@ class ADCToDDR(LiteXModule):
             cd_from=domain, cd_to='sys', depth=fifo_depth, buffered=True,
             with_common_rst=True)
         self.writer = LiteDRAMDMAWriter(port, fifo_depth=16, fifo_buffered=True)
+        # Break native DDR command-ready feedback before the async FIFO BRAM address.
+        self.output_buffer = stream.Buffer(self.fifo.source.description,
+            pipe_valid=True, pipe_ready=True)
+        self.comb += self.fifo.source.connect(self.output_buffer.sink)
 
         request, request_adc, ack, ack_sys = [Signal() for _ in range(4)]
         busy, done, config_bad = Signal(), Signal(), Signal()
@@ -73,11 +77,11 @@ class ADCToDDR(LiteXModule):
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
-        self.comb += empty.eq(~self.fifo.source.valid & ~self.writer.fifo.source.valid)
-        self.comb += [self.writer.sink.valid.eq(busy & self.fifo.source.valid),
-            self.writer.sink.data.eq(self.fifo.source.data),
+        self.comb += empty.eq(~self.fifo.source.valid & ~self.output_buffer.source.valid & ~self.writer.fifo.source.valid)
+        self.comb += [self.writer.sink.valid.eq(busy & self.output_buffer.source.valid),
+            self.writer.sink.data.eq(self.output_buffer.source.data),
             self.writer.sink.address.eq(base_word + words),
-            self.fifo.source.ready.eq(busy & self.writer.sink.ready),
+            self.output_buffer.source.ready.eq(busy & self.writer.sink.ready),
             self.status.status.eq(Cat(busy, done, overflow_sys, frame_bad_sys, config_bad)),
             self.written.status.eq(words << 3)]
         # Widen the span/end calculation: no wrapped range can pass the check.

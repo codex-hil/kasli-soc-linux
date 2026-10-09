@@ -56,3 +56,9 @@ adc-ddr-software:
 	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -static -O2 -Wall -Wextra -D_FILE_OFFSET_BITS=64 software/pl_ddr/adc_read.c -o build/zc706-adc-ddr/adc-ddr-read
 adc-ddr-test:
 	$(ENV) build/python/bin/python tools/test_adc_ddr.py
+
+.PHONY: adc-ddr-axi-test adc-ddr-package
+adc-ddr-axi-test:
+	$(ENV) build/python/bin/python tools/test_ddr_axi.py --output-dir build/zc706-adc-ddr
+adc-ddr-package: adc-ddr-pl adc-ddr-software adc-ddr-test adc-ddr-axi-test
+	$(ENV) python3 tools/package_adc_ddr.py

@@ -1,0 +1,3 @@
+PASS: 100 AXI/CSR transactions with delayed channels and response backpressure (simulation)
+PASS: DDR target GP0 signature and PHY CSR read/write (simulation)
+/work/build/zc706-adc-ddr/tests/axi_ddr_tb.v:119: $finish called at 19800000 (1ps)

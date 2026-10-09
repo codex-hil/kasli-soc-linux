@@ -1,0 +1,5 @@
+{
+  "status": "REJECTED; not programmed",
+  "reason": "Three ADC BRAM hold violations remained after the default-radius hold repair",
+  "fmax": {}
+}

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -34,6 +35,7 @@ def main():
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
+    p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
     if args.cards != 1 and args.design != "fmc-adc":
         p.error("--cards only applies to the FMC ADC target")
@@ -43,11 +45,12 @@ def main():
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
-    subprocess.run(target_command, cwd=ROOT, check=True)
+    if not args.resume_assembly:
+        subprocess.run(target_command, cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
     # A failed rebuild must never leave an earlier bitstream approved.
     (work / "manifest.json").unlink(missing_ok=True)
-    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr"):
+    if not args.resume_assembly and args.design in ("fmc-adc", "pl-ddr", "adc-ddr"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
         script = work / "top.ys"
@@ -84,16 +87,40 @@ def main():
         chipdb_args = ["--chipdb", str(prepare_adc(args.openxc7.resolve(),
             source_binary=prepare_ddr(args.openxc7.resolve()),
             build=ROOT/'build/zc706-adc-ddr/chipdb'))]
-        from adc_nextpnr import prepare as prepare_nextpnr
+        from adc_ddr_nextpnr import prepare as prepare_nextpnr
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
         db = prepare_termination_db(db)
+    if args.design == "adc-ddr":
+        from adc_ddr_clock_db import prepare as prepare_clock_db
+        db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db")
+    if args.resume_assembly:
+        if args.design != "adc-ddr":
+            p.error("Assembly resume is only supported for the combined ADC DDR target")
+        latest_input = max((work/name).stat().st_mtime_ns for name in ("top.json", "top.xdc"))
+        if any((work/name).stat().st_mtime_ns < latest_input
+               for name in ("top.fasm", "timing.json", "stage1.log")):
+            raise RuntimeError('Cannot resume a route older than its netlist or constraints')
+        timing = json.loads((work/'timing.json').read_text())
+        if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
+            raise RuntimeError('Cannot resume a route with failing setup timing')
+        log = (work/'stage1.log').read_text()
+        hold = re.findall(r'Hold-fix: .*; (\d+) hold violation\(s\) remain\.', log)
+        if not hold or hold[-1] != '0' or 'Program finished normally.' not in log:
+            raise RuntimeError('Cannot resume without a completed zero-violation hold repair')
+        validate_ddr_io(work)
+        cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
+        requested = sum(c['type']=='IBUFDS' and c['parameters'].get('DIFF_TERM')=='TRUE' for c in cells.values())
+        emitted = sum(line.endswith('.DIFF.DIFF_TERM') for line in (work/'top.fasm').read_text().splitlines())
+        if requested != 22 or emitted != 22:
+            raise RuntimeError('Resumed route must include all 22 FMC terminations')
     cmds = [
         [str(args.yosys.resolve()), "-l", "top.rpt", "top.ys"],
         [str(nextpnr),
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
-         "--freq", "100", "--report", "timing.json", *chipdb_args],
+         "--freq", "100", "--report", "timing.json", *chipdb_args,
+         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design == "adc-ddr" else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
         [str(args.openxc7.resolve() / "bin/xc7frames2bit"),
@@ -101,6 +128,8 @@ def main():
          physical_part, "--frm_file", "top.frames", "--output_file", "top.bit"],
     ]
     for n, cmd in enumerate(cmds):
+        if args.resume_assembly and n < 2:
+            continue
         with (work / f"stage{n}.log").open("w") as log:
             if n == 2:
                 with (work / "top.frames").open("w") as frames:
@@ -109,6 +138,14 @@ def main():
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
         if n == 0 and args.design in ('pl-ddr', 'adc-ddr'):
             validate_ddr_io(work)
+        if n == 1 and args.design == 'adc-ddr':
+            timing = json.loads((work/'timing.json').read_text())
+            if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
+                raise RuntimeError('Combined ADC DDR setup timing must pass and be reported')
+            hold = re.findall(r'Hold-fix: .*; (\d+) hold violation\(s\) remain\.',
+                              (work/'stage1.log').read_text())
+            if not hold or hold[-1] != '0':
+                raise RuntimeError('Combined ADC DDR hold timing must pass')
         if n == 1 and args.design in ('fmc-adc', 'adc-ddr'):
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
@@ -125,6 +162,9 @@ def main():
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),
         "commands": cmds,
+        "route_input_sha256": {name: hashlib.sha256((work/name).read_bytes()).hexdigest()
+            for name in ("top.json", "top.fasm", "timing.json")},
+        "assembly_resumed": args.resume_assembly,
     }, indent=2) + "\n")
 
 

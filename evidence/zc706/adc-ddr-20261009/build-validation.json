@@ -1,0 +1,44 @@
+{
+  "result": "PASS",
+  "vivado_used": false,
+  "assembly_resumed": false,
+  "hold_repair": [
+    "Info: Hold-fix: 0 detour(s) + 4 feedthrough buffer(s) total; 0 hold violation(s) remain."
+  ],
+  "program_finished_normally": true,
+  "final_fmax": {
+    "adc2_clk": {
+      "achieved": 156.6416015625,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 151.26304626464844,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "ddrclock_clkin_signal": {
+      "achieved": 888.888916015625,
+      "constraint": 100
+    },
+    "ddrclock_clkout_buf0": {
+      "achieved": 88.92050170898438,
+      "constraint": 83.33333587646484
+    },
+    "ddrclock_clkout_buf2": {
+      "achieved": 430.2926330566406,
+      "constraint": 200
+    },
+    "ddrclock_clkout_buf3": {
+      "achieved": 74.81669616699219,
+      "constraint": 50
+    }
+  },
+  "fpga_differential_terminations": 22
+}

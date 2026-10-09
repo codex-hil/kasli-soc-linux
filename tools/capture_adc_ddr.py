@@ -19,6 +19,7 @@ def main():
     p.add_argument('--reader',default='/tmp/adc-ddr-read')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--max-samples',type=int,default=1<<22)
+    p.add_argument('--analog',action='store_true',help='Finally capture CH1 analog inputs at ±5 V, 50Ω OFF')
     a=p.parse_args()
     if a.max_samples<8192 or a.max_samples>1<<24 or a.max_samples%8:
         p.error('Maximum samples must be 8192..16777216 and a multiple of eight')
@@ -46,9 +47,15 @@ def main():
         cases=[('sequence',n) for n in sizes]+[('adc_pattern',min(1<<18,a.max_samples))]
         # Repeat the long sequence capture after the real ADC path to exercise rearming.
         cases.append(('sequence',a.max_samples))
+        if a.analog:cases.append(('analog',min(1<<18,a.max_samples)))
         for index,(mode,count) in enumerate(cases):
             run=dict(index=index,mode=mode,samples_per_card=count,cards={})
             result['runs'].append(run)
+            if mode=='analog':
+                run.update(range_full_scale_v=5,analog_50ohm=False)
+                for card,r,adc in opened:
+                    adc.pattern();adc.set_input(0,5,False)
+                time.sleep(.1)
             for card,r,adc in opened:
                 r.write('adc_dma_base',result['cards'][str(card)]['base_offset'])
                 r.write('adc_dma_length',count)
@@ -56,6 +63,8 @@ def main():
             time.sleep(.002)
             for card,r,adc in opened:r.write('adc_dma_start',1)
             run['initial_status']={str(card):r.read('adc_dma_status') for card,r,_ in opened}
+            if count >= 1<<18 and not all(s&1 for s in run['initial_status'].values()):
+                raise RuntimeError('Long captures must overlap on both cards')
             deadline=time.monotonic()+5
             while not all(r.read('adc_dma_status')&2 for _,r,_ in opened):
                 if time.monotonic()>deadline:raise TimeoutError('ADC DDR capture did not finish')
@@ -64,14 +73,16 @@ def main():
                 status=r.read('adc_dma_status');written=r.read('adc_dma_written')
                 dropped=r.read('adc_dma_dropped');ticks=r.read('adc_dma_ticks')
                 state=dict(status=status,written_samples=written,dropped_samples=dropped,
+                    adc_ssr=r.read('adc_ssr'),adc_a3=adc.reg(3),
                     system_ticks=ticks,system_clock_hz=r.map['constants']['config_clock_frequency'])
                 run['cards'][str(card)]=state
                 if status!=2 or written!=count or dropped:
                     raise RuntimeError(f'Card {card} DMA failed: {state}')
                 state['effective_write_bytes_per_second']=count*8*state['system_clock_hz']/ticks
-                pattern='seq' if mode=='sequence' else ('0x1235' if card==1 else '0x2dca')
+                pattern='seq' if mode=='sequence' else 'raw' if mode=='analog' else ('0x1235' if card==1 else '0x2dca')
                 command=[a.reader,str(card),str(result['cards'][str(card)]['base_offset']),str(count),pattern]
                 if index==0:command.append(str(a.output/f'card{card}-sequence.bin'))
+                if mode=='analog':command.append(str(a.output/f'card{card}-analog.bin'))
                 validation=subprocess.run(command,text=True,capture_output=True,timeout=300)
                 state['reader_returncode']=validation.returncode
                 state['reader_stdout']=validation.stdout;state['reader_stderr']=validation.stderr

@@ -1,0 +1,18 @@
+{
+  "file": "segbits_clk_hrow_top_r.db",
+  "source_sha256": {
+    "zynq7": "ebef5e7231db3d0a60a9f4206fa0bc3f76ade2178f073c3483f27b431f0b33bc",
+    "artix7": "8ab24467b7f56fa8ff0dd334c0588cb196a4d875895abb48afcd33e1e2ba1deb",
+    "spartan7": "8ab24467b7f56fa8ff0dd334c0588cb196a4d875895abb48afcd33e1e2ba1deb"
+  },
+  "matching_shared_features": 2582,
+  "features": {
+    "CLK_HROW_TOP_R.CLK_HROW_CK_IN_L10_ACTIVE": [
+      "26_240"
+    ],
+    "CLK_HROW_TOP_R.CLK_HROW_CK_IN_L11_ACTIVE": [
+      "27_240"
+    ]
+  },
+  "provenance": "Pinned openXC7 Project X-Ray databases; exact agreement across all shared CLK_HROW_TOP_R features"
+}

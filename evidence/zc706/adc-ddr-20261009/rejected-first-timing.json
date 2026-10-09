@@ -1,0 +1,38 @@
+{
+  "status": "REJECTED; not programmed",
+  "reason": "System setup failure and ADC BRAM hold violations",
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 148.83168029785156,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 128.1230010986328,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "ddrclock_clkin_signal": {
+      "achieved": 1001.0009765625,
+      "constraint": 100
+    },
+    "ddrclock_clkout_buf0": {
+      "achieved": 81.42658996582031,
+      "constraint": 83.33333587646484
+    },
+    "ddrclock_clkout_buf2": {
+      "achieved": 394.477294921875,
+      "constraint": 200
+    },
+    "ddrclock_clkout_buf3": {
+      "achieved": 75.93014526367188,
+      "constraint": 50
+    }
+  }
+}

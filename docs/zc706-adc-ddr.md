@@ -25,7 +25,8 @@ word. The earliest tick occupies bits 0..63. Each tick contains CH1..CH4
 as four little-endian 16-bit words, with signed 14-bit ADC data left-aligned.
 The 256-word FIFO per card stores 16 KiB, approximately 20.48 µs at nominal
 100 MS/s. Each writer uses an additional 16-word buffered native FIFO.
-The common FIFO reset is upstream LiteX `ClockDomainCrossing` with
+A registered valid/ready buffer separates each FIFO from DDR command
+backpressure. The common FIFO reset is upstream LiteX `ClockDomainCrossing` with
 `with_common_rst=True`, so resetting an ADC receiver also resets both
 sides of that card's FIFO.
 
@@ -71,20 +72,53 @@ LTC2174 asymmetric digital patterns through the receiver and memory path.
 ## Build
 
 ```sh
-make bootstrap BOARD=zc706
+make BOARD=zc706 image
 make adc-ddr-test
 make adc-ddr-pl
 make adc-ddr-software
 ```
 
+The baseline image step also supplies the ARM cross-compiler and working
+SD Linux. If it is already built, start with `make adc-ddr-test`.
 Artifacts are in `build/zc706-adc-ddr/`. The flow uses snapshot Debian Yosys
 0.52 with conventional ABC, the existing patched nextpnr with both HP DDR
 and HR DIFF_TERM support, a composed HP-metadata/HR-package chipdb, and the
-HR termination database overlay. Original upstream checkouts and standalone
+HR termination database overlay. The combined build enables nextpnr’s
+existing `-o hold-fix=8` pass with `-o hold-buffer-radius=48`;
+the isolated `nextpnr-hold-buffer-radius.patch` makes the search radius
+configurable while retaining the upstream default of 12. It repairs short paths with routing detours
+or identity LUTs and still rejects residual setup/hold violations.
+The same patch restores Fmax and critical-path reporting during the final
+hold-repair timing analysis; its original disabled Fmax reporting also
+disabled the final setup check. Both checks remain enabled in this build.
+
+Two missing `CLK_HROW_TOP_R` activation features, `CK_IN_L10_ACTIVE` and
+`CK_IN_L11_ACTIVE`, are supplied by an isolated database overlay. Their
+bit mappings agree in both pinned Artix-7 and Spartan-7 databases; all
+2,582 shared features of this tile type agree with the pinned Zynq database.
+`patches/prjxray-zynq-clock-inputs.json` records the source hashes and
+exact mappings. The build checks this agreement before applying the overlay.
+Original upstream checkouts and standalone
 build artifacts are preserved. DDR pad connectivity and all 22 requested
 FMC differential terminations must pass build audits.
 
 ## Hardware bring-up
+
+Automated loading, training and complete readback validation:
+
+```sh
+python3 tools/test_adc_ddr_hardware.py --host BOARD_IP --program --full-bist --analog
+```
+
+`--analog` additionally connects CH1 at ±5 V with analog termination OFF
+and captures the external signal after the pattern tests. It requires a
+suitable source; this setup uses the existing AFG1062 1 MHz / 1 Vpp signal.
+The other channels remain disconnected. To analyze the saved waveforms:
+
+```sh
+python3 tools/environment.py python3 tools/analyze_adc_ddr_sine.py PATH_TO_CAPTURE_DIRECTORY
+```
+
 
 Use the matched successful bitstream manifest. Load the combined bitstream
 through the existing SD/U-Boot loader:
@@ -123,6 +157,30 @@ qualification requires overlapping long captures with no drops and exact
 readback. This is buffered capture, not a continuous 1.6 GB/s Linux/network
 stream. GP1 readout is much slower than native DDR writes.
 
+## Timing investigation
+
+The first combined routing was rejected: the system domain reached
+81.43 MHz against an 83⅓ MHz requirement, and five ADC FIFO BRAM input
+arcs had approximately −0.02 ns hold slack. The critical setup path ran
+from the DDR bank-machine queue through native command-ready logic to
+the asynchronous FIFO read address. A registered valid/ready buffer now
+breaks that feedback path; the existing nextpnr hold-fix pass handles
+short data paths. The rejected artifact was not programmed.
+
+The next build passed setup (87.32 MHz before hold repair, 88.92 MHz
+after its first repair pass), but three 0.02–0.03 ns hold violations remained:
+the default 12-tile search required a completely empty tile and found none
+near those BRAM inputs. The combined backend now searches up to 48 tiles
+for a legal identity buffer. Residual violations still fail the build.
+
+The completed combined build passes all eight reported clock constraints.
+The system domain reaches 88.92 MHz against 83⅓ MHz, the two ADC sample
+domains reach 151.26 and 156.64 MHz against 100 MHz, and both DCO domains
+reach 589.97 MHz against 400 MHz. Four identity buffers repair the short
+BRAM input paths, leaving zero hold violations. Bitstream assembly and
+the 22 differential-termination audit pass without Vivado.
+See [build evidence](../evidence/zc706/adc-ddr-20261009/build-validation.json).
+
 ## Status
 
 Element | Status
@@ -132,7 +190,7 @@ Packing and asynchronous FIFO CDC | Implemented; simulation PASS
 Repeated captures and ADC reset | Simulation PASS
 Backpressure and overflow detection | Simulation PASS
 Real ADC payload and frame error checks | Simulation PASS
-Combined openXC7 bitstream | Build in progress
+Combined openXC7 bitstream | PASS: setup, hold, bitstream and 22 terminations
 DDR training with both FMC receivers present | Hardware pending
 Concurrent full-rate capture and exact DDR readback | Hardware pending
 Analog acquisition into DDR | Not yet tested

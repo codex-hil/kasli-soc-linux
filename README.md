@@ -615,5 +615,6 @@ make adc-ddr-pl
 make adc-ddr-software
 ```
 
+[Architecture, build and validation details](docs/zc706-adc-ddr.md).
 Output: `build/zc706-adc-ddr/`. Build and physical validation status will be
 updated after the combined design passes its tests.

@@ -12,14 +12,14 @@
 #include <unistd.h>
 int main(int argc, char **argv) {
     if (argc < 5 || argc > 6) {
-        fprintf(stderr,"Usage: %s card base_byte_offset samples seq|14bit_pattern [output.bin]\n",argv[0]); return 2;
+        fprintf(stderr,"Usage: %s card base_byte_offset samples seq|raw|14bit_pattern [output.bin]\n",argv[0]); return 2;
     }
     unsigned card=strtoul(argv[1],NULL,0);
     uint64_t base=strtoull(argv[2],NULL,0), count=strtoull(argv[3],NULL,0);
-    int sequence=!strcmp(argv[4],"seq");
-    unsigned pattern=sequence?0:strtoul(argv[4],NULL,0);
+    int sequence=!strcmp(argv[4],"seq"), raw=!strcmp(argv[4],"raw");
+    unsigned pattern=(sequence||raw)?0:strtoul(argv[4],NULL,0);
     if (card<1 || card>2 || !count || count>0x7ffffff || (base&63) ||
-        base+count*8>0x40000000 || pattern>16383) return 2;
+        base>=0x40000000 || base+count*8>0x40000000 || pattern>16383) return 2;
     int fd=open("/dev/mem",O_RDONLY|O_SYNC);
     if (fd<0) { perror("/dev/mem"); return 1; }
     uint64_t aligned=base&~4095ULL, displacement=base-aligned;
@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
         uint32_t lo=words[2*i], hi=words[2*i+1];
         uint32_t expected_lo=sequence?i:((pattern<<2)|((pattern<<2)<<16));
         uint32_t expected_hi=sequence?(i^(0xadc00000U+card)):expected_lo;
-        if(lo!=expected_lo || hi!=expected_hi) {
+        if(raw ? ((lo|hi)&0x00030003U)!=0 : (lo!=expected_lo || hi!=expected_hi)) {
             if(errors<8) fprintf(stderr,"card=%u sample=%u got=%08x:%08x expected=%08x:%08x\n",
                 card,i,hi,lo,expected_hi,expected_lo);
             errors++;

@@ -1,0 +1,63 @@
+--- a/himbaechel/uarch/xilinx/hold_fix.cc
++++ b/himbaechel/uarch/xilinx/hold_fix.cc
+@@ -259,7 +259,7 @@
+ // `origin`.  Binds and validates each candidate; a lone combinational LUT is
+ // legal in any otherwise-free 6-LUT bel, so this normally succeeds on the
+ // first ring.  Returns the chosen bel, or BelId() if none validated.
+-static BelId place_hold_buffer(XilinxImpl *impl, Context *ctx, CellInfo *buf, Loc origin)
++static BelId place_hold_buffer(XilinxImpl *impl, Context *ctx, CellInfo *buf, Loc origin, int search_radius)
+ {
+     auto try_tile = [&](int x, int y) -> BelId {
+         bool tile_on_grid = x >= 0 && y >= 0 && x < ctx->getGridDimX() && y < ctx->getGridDimY();
+@@ -302,7 +302,7 @@
+         return BelId();
+     };
+ 
+-    for (int r = 0; r <= PLACE_SEARCH_RADIUS; r++) {
++    for (int r = 0; r <= search_radius; r++) {
+         if (r == 0) {
+             BelId b = try_tile(origin.x, origin.y);
+             if (b != BelId())
+@@ -357,6 +357,13 @@
+         }
+         log_info("Hold-fix PROBE: iterated %ld wires OK.\n", n);
+         return;
++    }
++
++    int place_search_radius = PLACE_SEARCH_RADIUS;
++    if (args.options.count("hold-buffer-radius")) {
++        place_search_radius = args.options["hold-buffer-radius"].as<int>();
++        if (place_search_radius < 1 || place_search_radius > 128)
++            log_error("hold-buffer-radius must be between 1 and 128 tiles\n");
+     }
+ 
+     Router2Cfg rcfg(ctx);
+@@ -528,7 +535,7 @@
+             // Place each buffer near its sink; on the rare failure, undo the
+             // splice so the netlist stays consistent.
+             for (auto &p : pending) {
+-                BelId bel = place_hold_buffer(this, ctx, p.buf, p.origin);
++                BelId bel = place_hold_buffer(this, ctx, p.buf, p.origin, place_search_radius);
+                 if (bel != BelId()) {
+                     placed++;
+                     continue;
+@@ -672,7 +679,7 @@
+         // fails.  This is what lets hold-fix run without --timing-allow-fail and
+         // still surface real timing failures.
+         had_nonfatal_error = false;
+-        timing_analysis(ctx, false /*histogram*/, false /*fmax*/, false /*path*/, true /*warn_on_failure*/,
++        timing_analysis(ctx, false /*histogram*/, true /*fmax*/, true /*path*/, true /*warn_on_failure*/,
+                         true /*update_results*/);
+     }
+ }
+--- a/himbaechel/uarch/xilinx/xilinx.cc
++++ b/himbaechel/uarch/xilinx/xilinx.cc
+@@ -91,6 +91,8 @@
+     specific.add_options()("holdbufs", po::value<std::string>(),
+                            "before placing, re-create the reference build's hold-fix feedthrough buffers listed in "
+                            "this file (scripts/routing_dump.py), so -o preplaced / -o prerouted replay them too");
++    specific.add_options()("hold-buffer-radius", po::value<int>(),
++                           "hold-fix buffer placement search radius in tiles (default 12, range 1..128)");
+     specific.add_options()("hold-detour-max", po::value<double>(),
+                            "hold deficit (ns) up to which a routing detour is used instead of a feedthrough LUT "
+                            "(default 0.5)");
