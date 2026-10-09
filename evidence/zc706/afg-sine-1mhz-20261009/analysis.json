@@ -1,0 +1,101 @@
+{
+  "result": "PASS",
+  "sample_rate_hz": 100000000,
+  "sample_rate_source": "nominal; independent Si570s",
+  "voltage_calibrated": false,
+  "inter_card_synchronization": false,
+  "cards": {
+    "1": [
+      {
+        "frequency_hz": 1000091.4822881706,
+        "vpp_adc_codes": 1574.6315928150782,
+        "nominal_vpp": 0.9610788530365467,
+        "dc_adc_codes": 16.299841807825615,
+        "residual_rms_adc_codes": 2.923366309242574,
+        "r_squared": 0.9999724479215304,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 0
+      },
+      {
+        "frequency_hz": 1000076.7443785935,
+        "vpp_adc_codes": 1573.8055642449774,
+        "nominal_vpp": 0.9605746852081161,
+        "dc_adc_codes": 17.03990239343584,
+        "residual_rms_adc_codes": 3.008842483227275,
+        "r_squared": 0.9999707453011897,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 1
+      },
+      {
+        "frequency_hz": 999957.5555415142,
+        "vpp_adc_codes": 1573.7736550768498,
+        "nominal_vpp": 0.9605552093974913,
+        "dc_adc_codes": 17.124225288434122,
+        "residual_rms_adc_codes": 3.077921169478195,
+        "r_squared": 0.9999693933891516,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 2
+      },
+      {
+        "frequency_hz": 1000008.9237836639,
+        "vpp_adc_codes": 1574.0720670593155,
+        "nominal_vpp": 0.960737345617258,
+        "dc_adc_codes": 17.146183746234183,
+        "residual_rms_adc_codes": 3.178776865787646,
+        "r_squared": 0.9999670792284002,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 3
+      }
+    ],
+    "2": [
+      {
+        "frequency_hz": 999881.115724955,
+        "vpp_adc_codes": 1663.0929583446746,
+        "nominal_vpp": 1.0150713857084195,
+        "dc_adc_codes": 7.553219783027197,
+        "residual_rms_adc_codes": 2.97605755283657,
+        "r_squared": 0.9999747516244241,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 0
+      },
+      {
+        "frequency_hz": 999984.0077607404,
+        "vpp_adc_codes": 1663.3479948612203,
+        "nominal_vpp": 1.0152270476447878,
+        "dc_adc_codes": 6.696562262858515,
+        "residual_rms_adc_codes": 2.5959409246210137,
+        "r_squared": 0.9999802444519247,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 1
+      },
+      {
+        "frequency_hz": 999962.0549558301,
+        "vpp_adc_codes": 1663.0544853847503,
+        "nominal_vpp": 1.0150479036772158,
+        "dc_adc_codes": 7.458822130216792,
+        "residual_rms_adc_codes": 2.5426300348497297,
+        "r_squared": 0.9999814455841014,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 2
+      },
+      {
+        "frequency_hz": 999946.3270529606,
+        "vpp_adc_codes": 1663.2143454282768,
+        "nominal_vpp": 1.0151454745045636,
+        "dc_adc_codes": 7.276774142434497,
+        "residual_rms_adc_codes": 2.63937624136336,
+        "r_squared": 0.9999800289635202,
+        "clipped": false,
+        "passed": true,
+        "snapshot": 3
+      }
+    ]
+  }
+}

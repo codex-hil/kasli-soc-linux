@@ -1,0 +1,12 @@
+{
+  "1": {
+    "control": 1,
+    "ssr": 0,
+    "adc_pattern_register": 0
+  },
+  "2": {
+    "control": 1,
+    "ssr": 0,
+    "adc_pattern_register": 0
+  }
+}

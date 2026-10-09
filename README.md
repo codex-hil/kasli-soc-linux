@@ -33,6 +33,8 @@ przeszły. **Obie fizyczne karty przeszły test równoległy 2026-10-09:**
 Boot przez U-Boot z SD również działa bez JTAG. HPC przeszła dodatkowo
 wewnętrzny sweep offsetu na trzech zakresach (933888 wartości). Synchronizacja później.
 [Opis i test obu kart](docs/zc706-adc-dual.md).
+Zewnętrzny sinus AFG1062 1 MHz / 1 Vpp przechwycony na CH1 obu FMC:
+[przebiegi i wyniki](docs/zc706-afg.md).
 
 ## Hardware i źródła prawdy
 

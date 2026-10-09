@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "hardware_validated": true,
+  "generator": "TEKTRONIX AFG1062 serial 1544477",
+  "raspberry": "RPI-USBTMC.local 192.168.2.36",
+  "gateway": "HTTPS 8840 / slot afg1062",
+  "zc706_host": "192.168.2.10",
+  "frequency_requested_hz": 1000000,
+  "amplitude_requested_vpp": 1,
+  "offset_v": 0,
+  "output_load": "High-Z",
+  "analog_input_termination": false,
+  "analog_range": "\u00b15 V",
+  "voltage_calibrated": false,
+  "sampling_clock_calibrated": false,
+  "synchronized": false,
+  "snapshots_per_card": 4,
+  "samples_per_snapshot": 1024,
+  "bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "gateway_fix": "Preserved old config and cert on Pi; changed bind 192.168.2.16 -> .36; reissued cert using existing private key; token unchanged",
+  "generator_outputs_left_on": true,
+  "adc_receivers_stopped": true
+}
