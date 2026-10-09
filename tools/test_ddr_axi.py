@@ -45,6 +45,14 @@ if 'adc_dma_signature' in csr:
                         ('adc_dma_signature',0x41444452),('adc2_dma_signature',0x41444452)]:
         checks += [f"read_word(32'h{csr[name]['addr']:08x},result);",
                    f'if(result !== {value}) $fatal(1,"ADC DDR CSR {name}: %h",result);']
+    for engine in ('adc_dma', 'adc2_dma'):
+        # A rejected zero-length request needs no ADC clock or DDR model.
+        # Verify that start's added register is visible through a real AXI
+        # write acknowledgement followed by a status read.
+        checks += [f"write_word(32'h{csr[engine+'_length']['addr']:08x},0);",
+                   f"write_word(32'h{csr[engine+'_start']['addr']:08x},1);",
+                   f"read_word(32'h{csr[engine+'_status']['addr']:08x},result);",
+                   f'if(result !== 18) $fatal(1,"{engine} invalid request: %h",result);']
 checks.append('$display("PASS: DDR target GP0 signature and PHY CSR read/write (simulation)");')
 text = text.replace('        $finish;', '\n'.join(checks)+'\n        $finish;')
 (OUT/'axi_ddr_tb.v').write_text(text)

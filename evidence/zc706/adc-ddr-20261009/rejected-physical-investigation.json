@@ -1,0 +1,15 @@
+{
+  "tested_bitstream_sha256": "1a1bb94e0df1fd816dc00880c86939699734ac11e4c1d8bd0d633794439ec7d7",
+  "result": "REJECTED",
+  "core_timing": "PASS",
+  "physical_ddr": "FAIL: byte lane m4 has no DQ training window",
+  "forced_command_delay_15": "Rejected hypothesis: still failed",
+  "golden_ddr_with_two_fmc": "PASS: full 1 GiB, three BIST passes, zero errors",
+  "golden_bitstream_sha256": "c232613eb5882bc3df673d1ecdcdb882979f804a11c8e3142899783ce6971611",
+  "clock_placement_difference": {
+    "golden_mmcm": "MMCME2_ADV_X1Y4",
+    "combined_mmcm": "MMCME2_ADV_X0Y3"
+  },
+  "next_experiment": "Constrain DDR MMCM and four BUFGs to golden locations; leave frequency/PHY unchanged",
+  "uboot_startup": "Fixed separately: wait 50 ms after clock/reset setup before CSR read; same bitstream now boots from SD"
+}

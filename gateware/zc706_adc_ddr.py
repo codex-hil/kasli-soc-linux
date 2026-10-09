@@ -18,6 +18,16 @@ class ADCDDRSoC(DDRSoC):
 
     def __init__(self):
         super().__init__()
+        # Reuse the physically validated standalone DDR clock placement. The
+        # unconstrained combined build moved its MMCM to the opposite column;
+        # byte lane m4 then had no DQ training window despite passing core STA.
+        for cell, site in [('MMCME2_ADV', 'MMCME2_ADV_X1Y4'),
+                           ('BUFG', 'BUFGCTRL_X0Y20'),
+                           ('BUFG_1', 'BUFGCTRL_X0Y31'),
+                           ('BUFG_2', 'BUFGCTRL_X0Y24'),
+                           ('BUFG_3', 'BUFGCTRL_X0Y23')]:
+            self.platform.add_platform_command(
+                f'set_property LOC {site} [get_cells {cell}]')
         for name, bank in [('adc',7),('adc_spi',8),('adc_i2c',9),('board_i2c',10),
                            ('adc2',11),('adc2_spi',12),('adc2_i2c',13),
                            ('adc_dma',14),('adc2_dma',15)]:

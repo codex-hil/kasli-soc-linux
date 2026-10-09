@@ -181,6 +181,29 @@ BRAM input paths, leaving zero hold violations. Bitstream assembly and
 the 22 differential-termination audit pass without Vivado.
 See [build evidence](../evidence/zc706/adc-ddr-20261009/build-validation.json).
 
+The first physical combined build failed DDR training on byte lane m4;
+the other seven lanes trained. Restoring the golden command delay alone
+did not fix it. Loading the original standalone DDR bitstream on the same
+board with both FMCs still installed passed all three whole-capacity BISTs.
+The combined placer had moved the DDR MMCM from `MMCME2_ADV_X1Y4` to
+`MMCME2_ADV_X0Y3` and relocated its BUFGs. The combined target now constrains
+the MMCM and its four BUFGs to their physically validated golden locations.
+Frequency and PHY configuration remain identical. Core STA does not replace
+physical qualification of the serializer/clock relationship.
+See [investigation](../evidence/zc706/adc-ddr-20261009/rejected-physical-investigation.json).
+
+A separate SD/U-Boot startup issue was reproduced and fixed: probing GP0
+immediately after clock/reset setup could lose the response during MMCM
+startup. Waiting 50 ms before the first CSR read allows the same bitstream
+to pass the signature check and boot Linux. No persistent boot settings changed.
+
+The first clock-constrained route exposed a 13.04 ns control path from CSR
+address decoding to a DMA base-address register (76.67 MHz). It was rejected
+before bitstream assembly. A local registered start pulse separates CSR
+decode from configuration validation and launch. Independent-clock simulations
+and synthesized AXI tests pass after this change; the AXI test also checks
+both engines' rejected zero-length requests immediately after write acknowledgement.
+
 ## Status
 
 Element | Status
@@ -190,7 +213,7 @@ Packing and asynchronous FIFO CDC | Implemented; simulation PASS
 Repeated captures and ADC reset | Simulation PASS
 Backpressure and overflow detection | Simulation PASS
 Real ADC payload and frame error checks | Simulation PASS
-Combined openXC7 bitstream | PASS: setup, hold, bitstream and 22 terminations
+Combined openXC7 bitstream | Clock-constrained rebuild in progress; prior unconstrained bitstream passed STA
 DDR training with both FMC receivers present | Hardware pending
 Concurrent full-rate capture and exact DDR readback | Hardware pending
 Analog acquisition into DDR | Not yet tested

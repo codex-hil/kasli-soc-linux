@@ -44,10 +44,10 @@ def main():
             result['cards'][str(card)]=dict(training=training,sample_rate_hz=adc.sample_rate(),
                 adc_a2=adc.reg(2),base_offset=0x02000000 if card==1 else 0x10000000)
         sizes=sorted(set([8192,min(1<<18,a.max_samples),a.max_samples]))
-        cases=[('sequence',n) for n in sizes]+[('adc_pattern',min(1<<18,a.max_samples))]
+        cases=[('sequence',n) for n in sizes]+[('adc_pattern',a.max_samples)]
         # Repeat the long sequence capture after the real ADC path to exercise rearming.
         cases.append(('sequence',a.max_samples))
-        if a.analog:cases.append(('analog',min(1<<18,a.max_samples)))
+        if a.analog:cases.append(('analog',a.max_samples))
         for index,(mode,count) in enumerate(cases):
             run=dict(index=index,mode=mode,samples_per_card=count,cards={})
             result['runs'].append(run)

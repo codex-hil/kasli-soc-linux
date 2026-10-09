@@ -87,7 +87,12 @@ class ADCToDDR(LiteXModule):
         # Widen the span/end calculation: no wrapped range can pass the check.
         end = Signal(34)
         self.comb += end.eq(self.base.storage + (self.length.storage << 3))
-        self.sync += If(self.start.re & ~busy,
+        # CSR address decode must not feed the span check and capture launch
+        # muxes in one long path. The registered CSR bridge acknowledges after
+        # this additional cycle, so software observes busy after its start write.
+        start_pending = Signal()
+        self.sync += start_pending.eq(self.start.re)
+        self.sync += If(start_pending & ~busy,
             done.eq(0), config_bad.eq(0), self.ticks.status.eq(0),
             If((self.base.storage[:6] != 0) | (self.length.storage == 0)
                 | (self.length.storage[:3] != 0) | (end > 0x40000000) | ~empty,
