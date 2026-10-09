@@ -119,15 +119,7 @@ class DDRSoC(BaseSoC):
             self.platform.add_period_constraint(clk, period)
 
 
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--board", choices=["zc706"], default="zc706")
-    p.add_argument("--output-dir", default="build/zc706-ddr/gateware")
-    args = p.parse_args()
-    soc = DDRSoC()
-    soc.finalize()
-    output = Path(args.output_dir)
-    output.mkdir(parents=True, exist_ok=True)
+def export_soc(soc, output):
     (output/'csr.json').write_text(get_csr_json(csr_regions=soc.csr_regions, constants=soc.constants, mem_regions=soc.mem_regions))
     generated = output/'include/generated'
     generated.mkdir(parents=True, exist_ok=True)
@@ -137,6 +129,18 @@ def main():
     (generated/'sdram_phy.h').write_text(get_sdram_phy_c_header(soc.ddrphy.settings,
         soc.dram_module.timing_settings, soc.dram_module.geom_settings))
     soc.platform.build(soc, build_dir=str(output/'gateware'), run=False)
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--board", choices=["zc706"], default="zc706")
+    p.add_argument("--output-dir", default="build/zc706-ddr/gateware")
+    args = p.parse_args()
+    soc = DDRSoC()
+    soc.finalize()
+    output = Path(args.output_dir)
+    output.mkdir(parents=True, exist_ok=True)
+    export_soc(soc, output)
 
 
 if __name__ == '__main__':

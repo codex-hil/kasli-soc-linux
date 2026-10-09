@@ -1,0 +1,2 @@
+python3 tools/environment.py build/python/bin/python tools/test_adc_ddr.py
+PASS: independent-clock capture, consecutive runs and ADC reset, command/data stalls, overflow, frame failure, real-data path and invalid configuration

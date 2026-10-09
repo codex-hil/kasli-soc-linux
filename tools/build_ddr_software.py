@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Compile unmodified upstream liblitedram training for Linux userspace."""
 from pathlib import Path
+import argparse
 import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT/'build/zc706-ddr'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output-dir',type=Path,default=ROOT/'build/zc706-ddr')
+OUT = parser.parse_args().output_dir.resolve()
 SW = ROOT/'upstream/litex/litex/soc/software'
 INC = OUT/'software/include/hw'
 INC.mkdir(parents=True, exist_ok=True)

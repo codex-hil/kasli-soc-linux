@@ -89,7 +89,9 @@ static int address_test(int fd) {
     printf("GP1 address test: %d locations across 1 GiB: %s\n",n,ok?"PASS":"FAIL");
     return ok;
 }
-int main(void) {
+int main(int argc, char **argv) {
+    int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
+    if (argc != 1 && !init_only) { fprintf(stderr,"Usage: %s [--init-only]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -105,6 +107,7 @@ int main(void) {
     pl_ram=map(fd,16*1024*1024,0x80000000);
     if(!sdram_init()) { fprintf(stderr,"FAIL: upstream SDRAM initialization/memtest\n"); return 1; }
     if(!address_test(fd)) return 1;
+    if (init_only) { puts("PASS: PL SODIMM init/leveling and GP1 address test"); return 0; }
     for(unsigned pass=0;pass<3;pass++)
         for(unsigned half=0;half<2;half++)
             if(!bist(half*0x20000000U,pass==0?0:1)) return 1;

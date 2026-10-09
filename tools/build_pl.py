@@ -19,9 +19,9 @@ def validate_ddr_io(work):
         raise RuntimeError('Unmapped alias buffer in DDR netlist')
     for name, kind, port in [('ddram_dq', 'IOBUF', 'IO'),
             ('ddram_dqs_p', 'IOBUFDS', 'IO'), ('ddram_dqs_n', 'IOBUFDS', 'IOB')]:
-        actual = [bit for cell in cells if cell['type'] == kind
-            for bit in cell['connections'][port]]
         expected = top['ports'][name]['bits']
+        actual = [bit for cell in cells if cell['type'] == kind
+            for bit in cell['connections'][port] if bit in expected]
         if sorted(actual) != sorted(expected):
             raise RuntimeError(f'Disconnected or duplicated DDR pad: {name}')
 
@@ -31,15 +31,15 @@ def main():
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     args = p.parse_args()
     if args.cards != 1 and args.design != "fmc-adc":
         p.error("--cards only applies to the FMC ADC target")
-    if args.design in ("fmc-adc", "pl-ddr") and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py"}[args.design]
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
@@ -47,7 +47,7 @@ def main():
     work = args.output_dir / "gateware"
     # A failed rebuild must never leave an earlier bitstream approved.
     (work / "manifest.json").unlink(missing_ok=True)
-    if args.design in ("fmc-adc", "pl-ddr"):
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
         script = work / "top.ys"
@@ -56,7 +56,7 @@ def main():
         script.write_text(prelude + script.read_text().replace("verilog_defaults -add -defer", "")
             .replace("synth_xilinx", "hierarchy -check -top top\nproc\n"
                 "write_rtlil elaborated.il\ndesign -reset\nread_rtlil elaborated.il\nsynth_xilinx"))
-        if args.design == "pl-ddr":
+        if args.design in ("pl-ddr", "adc-ddr"):
             # Use stable ABC mapping for the standalone DDR controller.
             script.write_text(script.read_text().replace(" -abc9", ""))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
@@ -73,11 +73,21 @@ def main():
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
         db = prepare_termination_db(db)
-    if args.design == "pl-ddr":
+    if args.design in ("pl-ddr", "adc-ddr"):
         from ddr_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
         from ddr_nextpnr import prepare as prepare_nextpnr
         nextpnr = prepare_nextpnr()
+    if args.design == "adc-ddr":
+        from ddr_chipdb import prepare as prepare_ddr
+        from adc_chipdb import prepare as prepare_adc
+        chipdb_args = ["--chipdb", str(prepare_adc(args.openxc7.resolve(),
+            source_binary=prepare_ddr(args.openxc7.resolve()),
+            build=ROOT/'build/zc706-adc-ddr/chipdb'))]
+        from adc_nextpnr import prepare as prepare_nextpnr
+        from adc_termination_db import prepare as prepare_termination_db
+        nextpnr = prepare_nextpnr()
+        db = prepare_termination_db(db)
     cmds = [
         [str(args.yosys.resolve()), "-l", "top.rpt", "top.ys"],
         [str(nextpnr),
@@ -97,20 +107,20 @@ def main():
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
-        if n == 0 and args.design == 'pl-ddr':
+        if n == 0 and args.design in ('pl-ddr', 'adc-ddr'):
             validate_ddr_io(work)
-        if n == 1 and args.design == 'fmc-adc':
+        if n == 1 and args.design in ('fmc-adc', 'adc-ddr'):
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
                             for c in cells.values())
             emitted = sum(line.endswith('.DIFF.DIFF_TERM')
                           for line in (work/'top.fasm').read_text().splitlines())
-            if requested != 11 * args.cards or emitted != requested:
+            if requested != 11 * (2 if args.design == "adc-ddr" else args.cards) or emitted != requested:
                 raise RuntimeError(f'FPGA termination was not emitted: {emitted}/{requested}')
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
-        "adc_cards": args.cards if args.design == "fmc-adc" else None,
+        "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design == "fmc-adc" else None,
         "hardware_validated": False,
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),

@@ -47,3 +47,12 @@ adc-dual-test:
 	$(ENV) python3 tools/test_adc.py --soc --output-dir build/zc706-adc-dual
 adc-dual-package: adc-dual-pl adc-dual-test
 	$(ENV) python3 tools/package_adc.py --dual
+
+.PHONY: adc-ddr-pl adc-ddr-software adc-ddr-test
+adc-ddr-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design adc-ddr --output-dir build/zc706-adc-ddr/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+adc-ddr-software:
+	$(ENV) build/python/bin/python tools/build_ddr_software.py --output-dir build/zc706-adc-ddr
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -static -O2 -Wall -Wextra -D_FILE_OFFSET_BITS=64 software/pl_ddr/adc_read.c -o build/zc706-adc-ddr/adc-ddr-read
+adc-ddr-test:
+	$(ENV) build/python/bin/python tools/test_adc_ddr.py

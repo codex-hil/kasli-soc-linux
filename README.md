@@ -600,3 +600,20 @@ programming, eight-lane DDR leveling, GP1 address checks and three full
 ADC acquisition remains separate from PL DDR; SD/QSPI were unchanged.
 DCI termination is not supported by the current backend; long-term
 signal-integrity qualification remains pending.
+
+## ADC capture into PL DDR — implementation in progress
+
+The combined target retains both independent ADC clocks. Each card packs
+its four-channel 64-bit sample ticks into 512-bit words, crosses into the
+DDR domain through its own asynchronous FIFO, and writes a separate buffer
+through a LiteDRAM DMA writer. Captures are finite and loss-detecting;
+this target does not synchronize the two cards or continuously stream to Linux.
+
+```sh
+make adc-ddr-test
+make adc-ddr-pl
+make adc-ddr-software
+```
+
+Output: `build/zc706-adc-ddr/`. Build and physical validation status will be
+updated after the combined design passes its tests.

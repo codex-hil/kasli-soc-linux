@@ -89,6 +89,7 @@ class ADC(LiteXModule):
         self.cd_adc = ClockDomain(domain)
         rx_reset, adc_reset = Signal(), Signal()
         aligned, frame, samples = Signal(), Signal(8), Signal(64)
+        self.samples, self.aligned, self.frame_word = samples, aligned, frame
         live = Signal(64)
         raw, raw_sys = Signal(72), Signal(72)
         serial_div32, serial_sys, serial_previous = Signal(), Signal(), Signal()

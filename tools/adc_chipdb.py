@@ -9,9 +9,9 @@ import struct
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(openxc7):
+def prepare(openxc7, source_binary=None, build=None):
     original = openxc7/'share/nextpnr/external/prjxray-db/zynq7'
-    build = ROOT/'build/zc706-adc/chipdb'
+    build = build or ROOT/'build/zc706-adc/chipdb'
     build.mkdir(parents=True, exist_ok=True)
     patch = ROOT/'patches/xc7z045-ffg900-missing-hr.csv'
     provenance = json.loads((patch.with_suffix('.json')).read_text())
@@ -22,7 +22,7 @@ def prepare(openxc7):
     source_csv = original/'xc7z045ffg900-2/package_pins.csv'
     if hashlib.sha256(source_csv.read_bytes()).hexdigest() != provenance['original_csv_sha256']:
         raise RuntimeError('XC7Z045 package database changed; re-audit the HR patch')
-    source_binary = openxc7/'share/nextpnr/himbaechel/xilinx/chipdb-xc7z045.bin'
+    source_binary = source_binary or openxc7/'share/nextpnr/himbaechel/xilinx/chipdb-xc7z045.bin'
     original_data = source_binary.read_bytes()
     source_digest = hashlib.sha256(original_data).hexdigest()
     if binary.exists() and marker.exists():
