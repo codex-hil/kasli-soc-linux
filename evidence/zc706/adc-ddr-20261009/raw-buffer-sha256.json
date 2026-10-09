@@ -1,0 +1,18 @@
+{
+  "card1-sequence.bin": {
+    "bytes": 65536,
+    "sha256": "b175524165819e0f552c8fd5563431f5d2b741faaa9159118b4e066bc1e4c4ad"
+  },
+  "card2-analog.bin": {
+    "bytes": 33554432,
+    "sha256": "4277271849b7b6b7e11c3e3df096c80a93915094aeae005baf707e6c9990383f"
+  },
+  "card2-sequence.bin": {
+    "bytes": 65536,
+    "sha256": "d7b37080f21eeb15e6f3fe6242d5c76d602d85eb78c5705eb7d16c20ff3ae2c1"
+  },
+  "card1-analog.bin": {
+    "bytes": 33554432,
+    "sha256": "f3b1b0d50ee620aab499e6af40fd4581b4ef935545b8e9e8bbbe397c6b86afb1"
+  }
+}

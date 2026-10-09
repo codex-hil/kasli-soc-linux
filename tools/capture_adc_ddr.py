@@ -61,10 +61,20 @@ def main():
                 r.write('adc_dma_length',count)
                 r.write('adc_dma_synthetic',int(mode=='sequence'))
             time.sleep(.002)
+            issued=time.monotonic()
             for card,r,adc in opened:r.write('adc_dma_start',1)
             run['initial_status']={str(card):r.read('adc_dma_status') for card,r,_ in opened}
+            # Include readback: it orders both posted start writes. This
+            # conservatively bounds launch skew; it does not synchronize ADCs.
+            run['start_issue_seconds']=time.monotonic()-issued
+            duration=count/max(c['sample_rate_hz'] for c in result['cards'].values())
+            run['estimated_overlap_fraction']=max(0,1-(run['start_issue_seconds']+2e-6)/duration)
             if count >= 1<<18 and not all(s&1 for s in run['initial_status'].values()):
                 raise RuntimeError('Long captures must overlap on both cards')
+            # Short functional captures can be dominated by Python/MMIO
+            # overhead. Qualify sustained concurrency on captures >= 10 ms.
+            if count >= 1<<20 and run['estimated_overlap_fraction']<.95:
+                raise RuntimeError('Concurrent-rate qualification requires at least 95% estimated overlap')
             deadline=time.monotonic()+5
             while not all(r.read('adc_dma_status')&2 for _,r,_ in opened):
                 if time.monotonic()>deadline:raise TimeoutError('ADC DDR capture did not finish')

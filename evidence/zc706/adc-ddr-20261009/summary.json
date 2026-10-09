@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "board": "ZC706 rev. 1.2",
+  "bitstream_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "adc_clocks": "independent",
+  "synchronized": false,
+  "samples_per_long_capture_per_card": 4194304,
+  "bytes_per_long_capture_per_card": 33554432,
+  "total_bytes_read_back": 272760832,
+  "minimum_estimated_long_capture_overlap": 0.995119418114238,
+  "minimum_effective_write_bytes_per_second_per_card": 800007397.3811258,
+  "dropped_samples": 0,
+  "reader_errors": 0,
+  "ddr_bist_whole_capacity_passes": 3,
+  "analog_minimum_window_r_squared": 0.9999687474229049,
+  "analog_voltage_calibrated": false,
+  "vivado_used": false,
+  "qspi_written": false,
+  "boot_environment_written": false
+}

@@ -32,7 +32,8 @@ With FPGA HR termination and individual-lane training, all 34 patterns
 The internal offset DAC → ADC test passed on all four channels across
 all three ranges (933,888 values).
 [Offset results and plots](docs/zc706-adc-offset.md).
-Full analog characterization and ADC integration with PL DDR remain pending.
+Full analog characterization remains pending. Both cards now also capture
+into PL DDR: [validated independent-clock acquisition](docs/zc706-adc-ddr.md).
 See [the target, CSR map and limitations](docs/zc706-fmc-adc.md) and
 [DIFF_TERM mapping and physical A/B tests](docs/hr-diff-term.md).
 
@@ -597,11 +598,12 @@ byte lanes and synthesized GP0 CSRs) passed.
 programming, eight-lane DDR leveling, GP1 address checks and three full
 1 GiB BIST passes passed on rev. 1.2 with zero errors:
 [hardware evidence](evidence/zc706/pl-ddr-20261008/validation.json).
-ADC acquisition remains separate from PL DDR; SD/QSPI were unchanged.
+The standalone DDR target remains available; the combined target below adds
+ADC acquisition. Its original validation left SD/QSPI unchanged.
 DCI termination is not supported by the current backend; long-term
 signal-integrity qualification remains pending.
 
-## ADC capture into PL DDR — implementation in progress
+## ADC capture into PL DDR — physically validated
 
 The combined target retains both independent ADC clocks. Each card packs
 its four-channel 64-bit sample ticks into 512-bit words, crosses into the
@@ -613,8 +615,23 @@ this target does not synchronize the two cards or continuously stream to Linux.
 make adc-ddr-test
 make adc-ddr-pl
 make adc-ddr-software
+make adc-ddr-axi-test
+python3 tools/test_adc_ddr_hardware.py --host BOARD_IP --program --full-bist --analog
 ```
 
 [Architecture, build and validation details](docs/zc706-adc-ddr.md).
-Output: `build/zc706-adc-ddr/`. Build and physical validation status will be
-updated after the combined design passes its tests.
+**ZC706 rev. 1.2, 2026-10-09: PASS.** Both cards capture all eight channels
+at 100 MS/s into separate 32 MiB buffers: approximately 800 MB/s per card,
+1.6 GB/s combined using 16-bit storage. Long captures have more than 99.5%
+estimated overlap. Complete counter and real-ADC pattern readback has zero
+errors or dropped samples; CH1 on each card also captures the AFG1062
+1 MHz sine into DDR. All eight memory byte lanes train, and three full
+1 GiB BIST passes have zero errors.
+
+The build uses Yosys, nextpnr/openXC7 and audited database overlays without
+Vivado. It reuses the physically validated DDR MMCM/BUFG placement. SD
+loading preserves QSPI and persistent boot settings. This is finite buffered
+acquisition with independent clocks and epochs; Linux reads completed buffers
+through GP1. Output: `build/zc706-adc-ddr/`.
+[Hardware evidence](evidence/zc706/adc-ddr-20261009/hardware-validation.json).
+`make adc-ddr-package` reproduces the artifact bundle.

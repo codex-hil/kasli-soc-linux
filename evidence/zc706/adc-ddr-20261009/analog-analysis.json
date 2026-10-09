@@ -1,0 +1,103 @@
+{
+  "result": "PASS",
+  "source": "PL DDR GP1 readback",
+  "synchronized": false,
+  "sample_rate_hz": 100000000,
+  "voltage_calibrated": false,
+  "cards": {
+    "1": {
+      "frequency_hz": 999934.1738723966,
+      "vpp_adc_codes": 1576.4525673412434,
+      "nominal_vpp": 0.9621902876838644,
+      "dc_adc_codes": 15.468974712034557,
+      "residual_rms_adc_codes": 3.0397580997336378,
+      "r_squared": 0.9999699589271615,
+      "clipped": false,
+      "passed": true,
+      "samples_in_buffer": 4194304,
+      "windows": [
+        {
+          "start_sample": 0,
+          "frequency_hz": 999934.1738723966,
+          "vpp_adc_codes": 1576.4525673412434,
+          "nominal_vpp": 0.9621902876838644,
+          "dc_adc_codes": 15.468974712034557,
+          "residual_rms_adc_codes": 3.0397580997336378,
+          "r_squared": 0.9999699589271615,
+          "clipped": false,
+          "passed": true
+        },
+        {
+          "start_sample": 2097152,
+          "frequency_hz": 999987.9418503991,
+          "vpp_adc_codes": 1576.7005280092064,
+          "nominal_vpp": 0.9623416308649941,
+          "dc_adc_codes": 15.733155664373403,
+          "residual_rms_adc_codes": 3.1148032058102153,
+          "r_squared": 0.9999687474229049,
+          "clipped": false,
+          "passed": true
+        },
+        {
+          "start_sample": 4193280,
+          "frequency_hz": 1000054.1928885859,
+          "vpp_adc_codes": 1576.7281369848054,
+          "nominal_vpp": 0.96235848204639,
+          "dc_adc_codes": 15.478646243858552,
+          "residual_rms_adc_codes": 2.9286643436565165,
+          "r_squared": 0.9999721404189339,
+          "clipped": false,
+          "passed": true
+        }
+      ],
+      "buffer_sha256": "f3b1b0d50ee620aab499e6af40fd4581b4ef935545b8e9e8bbbe397c6b86afb1"
+    },
+    "2": {
+      "frequency_hz": 999952.2898403227,
+      "vpp_adc_codes": 1663.0200849611235,
+      "nominal_vpp": 1.0150269073249045,
+      "dc_adc_codes": 5.513927478843408,
+      "residual_rms_adc_codes": 2.7454828539313816,
+      "r_squared": 0.9999780496755095,
+      "clipped": false,
+      "passed": true,
+      "samples_in_buffer": 4194304,
+      "windows": [
+        {
+          "start_sample": 0,
+          "frequency_hz": 999952.2898403227,
+          "vpp_adc_codes": 1663.0200849611235,
+          "nominal_vpp": 1.0150269073249045,
+          "dc_adc_codes": 5.513927478843408,
+          "residual_rms_adc_codes": 2.7454828539313816,
+          "r_squared": 0.9999780496755095,
+          "clipped": false,
+          "passed": true
+        },
+        {
+          "start_sample": 2097152,
+          "frequency_hz": 1000065.64388686,
+          "vpp_adc_codes": 1665.611591744407,
+          "nominal_vpp": 1.0166086375393109,
+          "dc_adc_codes": 5.595426818578322,
+          "residual_rms_adc_codes": 2.4944885816350113,
+          "r_squared": 0.9999818706346032,
+          "clipped": false,
+          "passed": true
+        },
+        {
+          "start_sample": 4193280,
+          "frequency_hz": 1000073.0928023921,
+          "vpp_adc_codes": 1665.4368363231629,
+          "nominal_vpp": 1.0165019752948992,
+          "dc_adc_codes": 5.206468612723171,
+          "residual_rms_adc_codes": 2.5821618380383717,
+          "r_squared": 0.9999804696983019,
+          "clipped": false,
+          "passed": true
+        }
+      ],
+      "buffer_sha256": "4277271849b7b6b7e11c3e3df096c80a93915094aeae005baf707e6c9990383f"
+    }
+  }
+}

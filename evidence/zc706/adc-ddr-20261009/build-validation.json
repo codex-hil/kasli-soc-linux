@@ -2,41 +2,42 @@
   "result": "PASS",
   "vivado_used": false,
   "assembly_resumed": false,
+  "bitstream_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
   "hold_repair": [
-    "Info: Hold-fix: 0 detour(s) + 4 feedthrough buffer(s) total; 0 hold violation(s) remain."
+    "Info: Hold-fix: 0 detour(s) + 3 feedthrough buffer(s) total; 0 hold violation(s) remain."
   ],
   "program_finished_normally": true,
   "final_fmax": {
     "adc2_clk": {
-      "achieved": 156.6416015625,
+      "achieved": 153.8698272705078,
       "constraint": 100
     },
     "adc2_rx.io_clk": {
-      "achieved": 589.970458984375,
+      "achieved": 638.9776000976562,
       "constraint": 400
     },
     "adc_clk": {
-      "achieved": 151.26304626464844,
+      "achieved": 159.94882202148438,
       "constraint": 100
     },
     "adc_rx.io_clk": {
-      "achieved": 589.970458984375,
+      "achieved": 638.9776000976562,
       "constraint": 400
     },
     "ddrclock_clkin_signal": {
-      "achieved": 888.888916015625,
+      "achieved": 993.0487060546875,
       "constraint": 100
     },
     "ddrclock_clkout_buf0": {
-      "achieved": 88.92050170898438,
+      "achieved": 84.8896484375,
       "constraint": 83.33333587646484
     },
     "ddrclock_clkout_buf2": {
-      "achieved": 430.2926330566406,
+      "achieved": 531.349609375,
       "constraint": 200
     },
     "ddrclock_clkout_buf3": {
-      "achieved": 74.81669616699219,
+      "achieved": 72.97138977050781,
       "constraint": 50
     }
   },

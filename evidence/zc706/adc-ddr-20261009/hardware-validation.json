@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "started_utc": "20261009T195238Z",
+  "bitstream_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "host": "192.168.2.4",
+  "analog_requested": true,
+  "full_bist": true,
+  "files": {
+    "pl-ddr-test": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "adc-ddr-csr.json": "7a30d5bf7393ce87184ceb5021e9114c1dd9dc86dc0f9da48897c9d9bc892312",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "capture_adc_ddr.py": "e8a7eb6f9b2dccebe896fe489aae835ff552332bd7eadceddf5a216e179daa54"
+  },
+  "capture_result": "build/zc706-adc-ddr/hardware/20261009-final/capture/result.json",
+  "finished_utc": "2026-10-09T19:54:03.367047+00:00"
+}

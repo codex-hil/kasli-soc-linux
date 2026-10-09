@@ -1,6 +1,6 @@
 # Independent-clock FMC ADC acquisition into PL DDR
 
-Implementation and validation in progress. The existing standalone ADC and
+Physically validated on ZC706 rev. 1.2 on 2026-10-09. The existing standalone ADC and
 PL DDR targets remain available and unchanged in their hardware interfaces.
 The combined target is `gateware/zc706_adc_ddr.py`.
 
@@ -173,7 +173,7 @@ the default 12-tile search required a completely empty tile and found none
 near those BRAM inputs. The combined backend now searches up to 48 tiles
 for a legal identity buffer. Residual violations still fail the build.
 
-The completed combined build passes all eight reported clock constraints.
+The first timing-clean unconstrained build passed all eight reported clock constraints.
 The system domain reaches 88.92 MHz against 83⅓ MHz, the two ADC sample
 domains reach 151.26 and 156.64 MHz against 100 MHz, and both DCO domains
 reach 589.97 MHz against 400 MHz. Four identity buffers repair the short
@@ -204,17 +204,62 @@ decode from configuration validation and launch. Independent-clock simulations
 and synthesized AXI tests pass after this change; the AXI test also checks
 both engines' rejected zero-length requests immediately after write acknowledgement.
 
+## Physical result and artifacts
+
+The final target restores the golden DDR clock placement and registers the
+DMA start pulse. It passes all reported setup constraints (system Fmax
+84.89 MHz against 83⅓ MHz), with three hold buffers and zero residual hold
+violations. All 22 requested FPGA differential terminations are emitted.
+U-Boot loads it from SD, its CSR signature responds, and Linux/SSH start.
+
+All eight SODIMM byte lanes train. CPU memtest, 30 GP1 address locations
+across the 1 GiB aperture, and three full-capacity sequential/PRBS BIST
+passes have zero errors. The two receivers use separate sample clocks,
+FIFOs and writers. Each stores 4,194,304 four-channel sample ticks into
+its own 32 MiB buffer, approximately 41.94 ms at 100 MS/s.
+
+The final suite reads every stored tick: two long sequence captures, a
+long real LTC2174 pattern capture, a long analog capture and shorter
+functional captures. It reads 272,760,832 bytes: sequence and ADC-pattern
+checks are exact, and every analog tick passes the 14-bit format check.
+Both cards have status `0x02`, zero drops and zero reader errors. Native writes
+achieve approximately 800 MB/s per card, 1.6 GB/s combined. The host-side
+start/readback span conservatively estimates more than 99.5% overlap for
+every long capture; captures shorter than 10 ms are functional tests.
+This bound does not align sample phases or define a shared trigger epoch.
+
+CH1 on each card also records the existing AFG1062 1 MHz / 1 Vpp source,
+with the two inputs connected in parallel, ±5 V range and analog 50 Ω OFF.
+Sine fits to 1,024-tick windows at the beginning, middle and end of each
+32 MiB buffer pass, with R² above 0.99996. Voltage scale remains uncalibrated.
+
+Evidence: [hardware and file hashes](../evidence/zc706/adc-ddr-20261009/hardware-validation.json),
+[complete capture results](../evidence/zc706/adc-ddr-20261009/capture-result.json),
+[DDR training/BIST](../evidence/zc706/adc-ddr-20261009/ddr-init.log),
+[analog analysis](../evidence/zc706/adc-ddr-20261009/analog-analysis.json),
+[waveforms](../evidence/zc706/adc-ddr-20261009/ddr-waveforms.png).
+The qualified bitstream SHA-256 is
+`f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e`.
+
+`make adc-ddr-package` creates `build/zc706-adc-ddr/zc706-adc-ddr.tar.xz`
+with the bitstream, matched CSR map, ARM programs, capture scripts, timing,
+source/toolchain locks and checksums. Hardware evidence is included only
+when bitstream and software hashes match; `artifact-validation.json` records
+that decision. Raw captures are separate from this small bring-up bundle.
+The installed target remains volatile: an ordinary default boot restores
+the existing probe. QSPI and persistent U-Boot settings were unchanged.
+
 ## Status
 
 Element | Status
 ---|---
-Two independent ADC clocks | Retained from validated receivers
+Two independent ADC clocks | Hardware PASS: both approximately 100 MS/s
 Packing and asynchronous FIFO CDC | Implemented; simulation PASS
 Repeated captures and ADC reset | Simulation PASS
 Backpressure and overflow detection | Simulation PASS
-Real ADC payload and frame error checks | Simulation PASS
-Combined openXC7 bitstream | Clock-constrained rebuild in progress; prior unconstrained bitstream passed STA
-DDR training with both FMC receivers present | Hardware pending
-Concurrent full-rate capture and exact DDR readback | Hardware pending
-Analog acquisition into DDR | Not yet tested
+Real ADC payload and frame error checks | Real ADC → DDR PASS; frame-error injection simulation PASS
+Combined openXC7 bitstream | PASS without Vivado: setup, hold and bitstream
+DDR training with both FMC receivers present | All eight byte lanes and three full 1 GiB BIST passes PASS
+Concurrent full-rate capture and exact DDR readback | PASS: 32 MiB/card, approximately 1.6 GB/s combined, zero drops/errors
+Analog acquisition into DDR | Both CH1 inputs: 1 MHz sine and beginning/middle/end fits PASS
 Inter-card synchronization | Deferred

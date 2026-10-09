@@ -1,0 +1,13 @@
+{
+  "bitstream_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "sd_qspi_written": true,
+  "jtag_serial": "210251842914",
+  "boot_passed": true,
+  "sd_written": true,
+  "qspi_written": false,
+  "boot_environment_written": false,
+  "method": "sd-ext4-uboot",
+  "jtag_used": false,
+  "sd_file": "adc-f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e.bit",
+  "host": "192.168.2.4"
+}
