@@ -70,8 +70,15 @@ OFF/OFF powtórzenie | 1574 | 1664
 
 Włączenie terminacji jednej karty obciąża także drugą. Wyłączenie AFG CH1
 usuwa sinus z **obu** kart; wyłączenie AFG CH2 pozostawia sinus na obu.
-Potwierdzono więc wspólne źródło AFG CH1. Asymetria tłumienia LPC wymaga
-ustalenia rozgałęzienia/impedancji toru i osobnego pomiaru bez drugiej gałęzi.
+Potwierdzono więc wspólne źródło AFG CH1. Użytkownik potwierdził
+bezpośrednie równoległe połączenie obu wejść przez rozdzielacz. Dla takiego
+połączenia względna zmiana amplitudy obu ADC powinna być zbliżona
+(niezależnie od różnicy ich stałego gain). Samo wspólne źródło nie wyjaśnia
+asymetrii LPC: z jego terminacją amplitudy względne to około 0,354 LPC
+i 0,723 HPC. Z terminacją HPC obie spadają do około 0,533.
+Kod SSR bitu 3 sprawdzono ponownie względem golden CERN LA25_N;
+mapa przypisuje LPC AG29, HPC U29. To audyt konfiguracji, nie fizyczny
+odczyt stanu przekaźnika. Potrzebny jest osobny pomiar bez drugiej gałęzi.
 Nie przypisujemy jej automatycznie uszkodzeniu FMC.
 CH2–CH4 każdej FMC wymagają przełożenia przewodów do fizycznego pomiaru
 terminacji i gain toru BNC. Dotychczasowe testy ich DAC nie mierzą impedancji BNC.
