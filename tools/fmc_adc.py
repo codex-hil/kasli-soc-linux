@@ -113,6 +113,22 @@ class ADC:
             raise ValueError('Offset DAC requires channel 0..3 and code 0..65535')
         self.spi(code, dac=channel)
 
+    def set_input(self, channel, full_scale_v, termination=False, calibration=False):
+        """Select CERN analog range (positive full scale), and independent 50Ω load."""
+        normal = {5: 0x45, .5: 0x11, .05: 0x23}
+        calibrate = {5: 0x44, .5: 0x40, .05: 0x42}
+        if channel not in range(4) or full_scale_v not in normal:
+            raise ValueError('Channel 0..3, full scale 5, .5 or .05 V required')
+        code = (calibrate if calibration else normal)[full_scale_v]
+        code |= 8 if termination else 0
+        shift = 7*channel
+        previous = self.r.read('adc_ssr')
+        expected = (previous & ~(127 << shift)) | (code << shift)
+        self.r.write('adc_ssr', expected)
+        if self.r.read('adc_ssr') != expected:
+            raise RuntimeError('SSR readback mismatch')
+        return expected
+
     def initialize(self):
         self.r.write('adc_control', 3)  # receiver reset, oscillator enabled
         self.spi(0x0080)  # Datasheet A0 RESET; self-clearing, write-only.

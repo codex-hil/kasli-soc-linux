@@ -1,0 +1,43 @@
+{
+  "result": "PASS",
+  "frequency_hz": 1000000,
+  "vpp": 1,
+  "offset_v": 0,
+  "load": "high impedance",
+  "channels": {
+    "1": {
+      "FUNC": "SIN",
+      "FREQ:MODE": "CW",
+      "FREQ": "1.000000e+06",
+      "VOLT": "1.001000e+00",
+      "VOLT:OFFS": "0.000000e+00",
+      "load_raw_hex": "392e39452b3337a6b80a",
+      "load": "9.9E+37\\xa6\\xb8",
+      "amplitude_unit": "Vpp (AFG1000 VOLT amplitude)",
+      "output": "1"
+    },
+    "2": {
+      "FUNC": "SIN",
+      "FREQ:MODE": "CW",
+      "FREQ": "1.000000e+06",
+      "VOLT": "1.000000e+00",
+      "VOLT:OFFS": "0.000000e+00",
+      "load_raw_hex": "392e39452b3337a6b80a",
+      "load": "9.9E+37\\xa6\\xb8",
+      "amplitude_unit": "Vpp (AFG1000 VOLT amplitude)",
+      "output": "1"
+    }
+  },
+  "source": "physical SCPI readback",
+  "identity": "TEKTRONIX,AFG1062,1544477,SCPI:99.0 FV:V1.0.1",
+  "initial": {
+    "OUTP1?": "1",
+    "OUTP2?": "1",
+    "SOUR1:FREQ?": "1.000000e+06",
+    "SOUR2:FREQ?": "1.000000e+06",
+    "SOUR1:VOLT?": "5.000000e-02",
+    "SOUR2:VOLT?": "5.000000e-02"
+  },
+  "previous_error_queue": [],
+  "error_queue": "0,\"No error\""
+}

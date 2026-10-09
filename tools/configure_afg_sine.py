@@ -15,6 +15,8 @@ def main():
     parser.add_argument('--token-file', required=True)
     parser.add_argument('--ca-file', required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--vpp', type=float, choices=[.05, 1], default=1,
+                        help='50 mVpp range audit or original 1 Vpp sine test')
     args = parser.parse_args()
     sys.path.insert(0, str(args.lab_repo))
     from labinstruments.transport import Transport
@@ -22,7 +24,7 @@ def main():
     config = dict(kind='gateway', url=args.url, slot='afg1062',
                   token_file=args.token_file, ca_file=args.ca_file, timeout=4)
     args.output.mkdir(parents=True, exist_ok=True)
-    record = dict(result='FAIL', frequency_hz=1000000, vpp=1, offset_v=0,
+    record = dict(result='FAIL', frequency_hz=1000000, vpp=args.vpp, offset_v=0,
                   load='high impedance', channels={}, source='physical SCPI readback')
     with Transport(config) as io:
         driver = Driver(io, 'afg1062', serial='1544477')
@@ -43,7 +45,7 @@ def main():
                 for mode in ['AM', 'FM', 'PM', 'FSK', 'PSK', 'ASK', 'PWM', 'BURS']:
                     io.write(prefix+mode+':STAT OFF')
                 for command in ['FREQ:MODE CW', 'FUNC SIN',
-                                'FREQ 1000000', 'VOLT 1', 'VOLT:OFFS 0']:
+                                'FREQ 1000000', f'VOLT {args.vpp:g}', 'VOLT:OFFS 0']:
                     io.write(prefix+command)
                 readback = {q: io.query(prefix+q+'?') for q in
                             ['FUNC', 'FREQ:MODE', 'FREQ', 'VOLT', 'VOLT:OFFS']}
@@ -60,7 +62,7 @@ def main():
                     raise RuntimeError('High-impedance load was not confirmed: '+impedance)
                 if (readback['FUNC'].strip('"').upper() != 'SIN' or
                         readback['FREQ:MODE'].upper() != 'CW' or
-                        float(readback['FREQ']) != 1000000 or not math.isclose(float(readback['VOLT']), 1, abs_tol=.002) or
+                        float(readback['FREQ']) != 1000000 or not math.isclose(float(readback['VOLT']), args.vpp, abs_tol=.002) or
                         float(readback['VOLT:OFFS']) != 0):
                     raise RuntimeError('AFG setpoint/mode readback failed')
                 readback['amplitude_unit'] = 'Vpp (AFG1000 VOLT amplitude)'

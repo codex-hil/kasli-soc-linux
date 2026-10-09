@@ -1,0 +1,40 @@
+{
+  "result": "PARTIAL_VALIDATION",
+  "range_control": "PASS",
+  "setting_readbacks": 96,
+  "external_gain_ch1": "PASS",
+  "independent_bnc_50ohm": "UNQUALIFIED: common AFG CH1 source; LPC load asymmetry",
+  "external_channels": [
+    1
+  ],
+  "external_channels_pending": [
+    2,
+    3,
+    4
+  ],
+  "adc_source_termination": false,
+  "fpga_receiver_termination": true,
+  "bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "cern_software_revision": "949cbe3f687f0828a16dea18d83b331eceb5f8f4",
+  "snapshot_count": 96,
+  "offset_dac_all_channels": "Previously physically validated; linked evidence, not repeated here",
+  "digital_gain_correction": "Not implemented",
+  "final_state": {
+    "1": {
+      "adc_control": 1,
+      "adc_ssr": 0,
+      "adc_errors": 0,
+      "adc_status": 1,
+      "adc_a2": 0,
+      "adc_a3": 0
+    },
+    "2": {
+      "adc_control": 1,
+      "adc_ssr": 0,
+      "adc_errors": 0,
+      "adc_status": 1,
+      "adc_a2": 0,
+      "adc_a3": 0
+    }
+  }
+}

@@ -565,3 +565,9 @@ GP1 address checks and three full-1-GiB BIST passes PASS on rev. 1.2 with
 zero errors: [hardware evidence](evidence/zc706/pl-ddr-20261008/validation.json).
 ADC remains separate; SD/QSPI unchanged. DCI termination is not supported
 by the current backend; long-term signal-integrity qualification remains pending.
+
+Sprawdzenie wszystkich ustawień zakresów i terminacji obu FMC oraz fizyczne
+pomiary CH1: [sterowanie i wyniki](docs/zc706-adc-controls.md).
+Zakresy i regulacja offsetu działają; niezależna impedancja BNC wszystkich
+8 wejść pozostaje do kwalifikacji. Test wykazał wspólne źródło AFG CH1
+oraz asymetrię obciążenia toru LPC.
