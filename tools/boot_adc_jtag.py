@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Load verified ZC706 ADC PL at the U-Boot prompt, then boot existing SD Linux.
 
-Uses volatile JTAG and a PS system reset. Does not write SD, QSPI or U-Boot
-environment. Supply --host to sync a running Linux before resetting it.
+Default: volatile JTAG and PS system reset, without SD/QSPI writes.
+--sd: upload a checksummed bitstream file to the existing ext4 SD rootfs,
+reboot Linux, then load through U-Boot. Never changes QSPI, default boot
+files or persistent U-Boot environment. Supply --host to sync before reset.
 """
 import argparse
 from datetime import datetime, timezone
@@ -26,7 +28,10 @@ def main():
     p.add_argument('--port', default=UART)
     p.add_argument('--host', type=ipaddress.ip_address)
     p.add_argument('--output', type=Path)
+    p.add_argument('--sd', action='store_true', help='Upload a new content-addressed SD file and load via U-Boot; no JTAG needed')
     a = p.parse_args()
+    if a.sd and not a.host:
+        p.error("--sd requires --host for safe upload and reboot")
     if not re.fullmatch(r'[0-9]+', a.jtag_serial):
         p.error('Expected numeric Digilent adapter serial')
     manifest = json.loads((a.bit.parent/'manifest.json').read_text())
@@ -50,11 +55,29 @@ def main():
         'zynq.dap apreg 0 0 0x23000052; zynq.dap apreg 0 4 0xf8000008; '
         'zynq.dap apreg 0 0xc 0xdf0d; zynq.dap apreg 0 4 0xf8000200; '
         'zynq.dap apreg 0 0xc 1; shutdown')
+    if a.sd:
+        ssh = ['ssh', '-i', str(ROOT/'build/ssh/id_ed25519'),
+            '-o', 'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),
+            '-o', 'HostKeyAlias=192.168.2.15', '-o', 'StrictHostKeyChecking=yes',
+            '-o', 'ConnectTimeout=5', 'root@'+str(a.host)]
+        sd_name = 'adc-'+digest+'.bit'
+        # The minimal kernel has no VFAT driver; use its existing ext4 rootfs.
+        sd_path = '/root/'+sd_name
+        subprocess.run(ssh+['cat > '+sd_path+'.tmp'], input=a.bit.read_bytes(), check=True, timeout=30)
+        actual = subprocess.check_output(ssh+['sha256sum '+sd_path+'.tmp'], timeout=15).decode().split()[0]
+        if actual != digest:
+            raise RuntimeError('SD upload checksum mismatch')
+        subprocess.run(ssh+['mv '+sd_path+'.tmp '+sd_path+' && sync'], check=True, timeout=15)
     uart = serial.Serial(baudrate=115200, timeout=.1)
     uart.port, uart.dtr, uart.rts = a.port, False, False
     uart.open()
     result = {'bitstream_sha256': digest, 'sd_qspi_written': False,
-              'jtag_serial': a.jtag_serial, 'boot_passed': False}
+              'jtag_serial': a.jtag_serial, 'boot_passed': False,
+              'sd_written': a.sd, 'qspi_written': False, 'boot_environment_written': False,
+              'method': 'sd-ext4-uboot' if a.sd else 'jtag', 'jtag_used': not a.sd}
+    if a.sd:
+        result['sd_qspi_written'] = True
+        result['sd_file'] = sd_name
     try:
         with (out/'uart.log').open('wb') as log:
             def read():
@@ -72,8 +95,13 @@ def main():
                 raise TimeoutError('U-Boot command did not complete: '+text)
             print('Resetting PS and stopping U-Boot', flush=True)
             with (out/'reset.log').open('w') as f:
-                subprocess.run([suite/'openocd', '-f', config, '-c', reset],
-                    stdout=f, stderr=subprocess.STDOUT, check=True, timeout=15)
+                if a.sd:
+                    reboot = subprocess.run(ssh+['reboot'], stdout=f, stderr=subprocess.STDOUT, timeout=15)
+                    if reboot.returncode not in (0, 255):
+                        raise RuntimeError('Linux reboot failed')
+                else:
+                    subprocess.run([suite/'openocd', '-f', config, '-c', reset],
+                        stdout=f, stderr=subprocess.STDOUT, check=True, timeout=15)
             transcript = b''; interrupted = False
             deadline = time.monotonic()+20
             while time.monotonic() < deadline:
@@ -86,9 +114,15 @@ def main():
                 raise TimeoutError('Did not stop U-Boot')
             print('Loading ADC bitstream into volatile PL', flush=True)
             with (out/'program.log').open('w') as f:
-                subprocess.run([suite/'openFPGALoader', '-b', 'zc706',
-                    '--usb-serial-num', a.jtag_serial, '--write-sram', a.bit],
-                    stdout=f, stderr=subprocess.STDOUT, check=True, timeout=60)
+                if a.sd:
+                    programmed = command('ext4load mmc 0:2 ${kernel_addr_r} '+sd_path+' && fpga loadb 0 ${kernel_addr_r} ${filesize}')
+                    f.write(programmed.decode(errors='replace'))
+                    if b'Error' in programmed or b'Failed' in programmed:
+                        raise RuntimeError('U-Boot FPGA loading failed')
+                else:
+                    subprocess.run([suite/'openFPGALoader', '-b', 'zc706',
+                        '--usb-serial-num', a.jtag_serial, '--write-sram', a.bit],
+                        stdout=f, stderr=subprocess.STDOUT, check=True, timeout=60)
             probe = command('mw.l 0xf8000008 0xdf0d; mw.l 0xf8000900 0xf; '
                 'mw.l 0xf8000240 0xf; mw.l 0xf8000240 0; '
                 'mw.l 0xf8000170 0x00100a00; md.l 0x40000808 1')

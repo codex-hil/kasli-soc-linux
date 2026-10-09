@@ -1,9 +1,10 @@
 # Dwie karty CERN FMC ADC na ZC706
 
-Status 2026-10-08: **build, timing i symulacje PASS**. Bitstream dwóch kart
-został załadowany do fizycznej ZC706; Linux/SSH oraz regresja LPC przeszły. Druga karta
-zostanie podłączona później; **akwizycja z fizycznego HPC nie jest jeszcze
-potwierdzona**. Wyniki buildu, symulacji i regresji LPC zapisujemy w
+Status 2026-10-09: **akwizycja z obu fizycznych kart PASS**. Test obu kart
+równolegle sprawdził 278528 wartości kanałów wzorców oraz dwa snapshoty po
+1024 próbek na kanał. Osobne treningi IDELAY/BITSLIP przeszły; synchronizacja
+między kartami pozostaje późniejszym etapem. Wyniki obu kart i bootu:
+`evidence/zc706/adc-dual-20261009/`. Wcześniejszy build i symulacje:
 `evidence/zc706/adc-dual-20261008/`.
 
 Element | Status
@@ -15,13 +16,14 @@ AXI/CSR obu kart w syntetyzowanym SoC | PASS
 Boot fizycznej ZC706, Linux i Ethernet/SSH | PASS na bitstreamie dwóch kart
 Karta LPC: 34 wzorce i snapshot 1024 próbek | PASS, 139264 wartości kanałów
 Fizyczny zapis/odczyt CSR HPC, izolacja tapów LPC | PASS
-Fizyczny odbiór ADC z HPC | OCZEKUJE NA KARTĘ
+Fizyczny odbiór ADC z HPC | PASS: 34 wzorce i snapshot 1024 próbek
 Synchronizacja kart / ADC → DDR | późniejszy etap
 
 Finalny bitstream SHA-256:
 `ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560`.
 Po testach obie karty mają `control=1`, `ssr=0`; wszystkie tappy HPC
-przywrócono po próbie zapisu/odczytu. Nie uruchamialiśmy odbiornika nieobecnej karty.
+przywrócono po próbie zapisu/odczytu z 8 października. Obie fizyczne karty
+uruchomiono i przetestowano równolegle 9 października.
 
 ## Hardware i architektura
 
@@ -81,6 +83,24 @@ Build wymaga emisji dokładnie **22** par terminowanych LVDS, po 11 na kartę.
 Nakładki bazy pinów i DIFF_TERM są współdzielone z istniejącym targetem ADC;
 oryginalny backend i target DDR pozostają osobne.
 
+## Boot przez SD bez JTAG
+
+Sprawdzona fizycznie alternatywa, gdy USB JTAG nie ma uprawnień:
+
+```sh
+python3 tools/boot_adc_jtag.py --sd --host 192.168.2.9 \
+  --bit build/zc706-adc-dual/gateware/gateware/top.bit \
+  --output build/zc706-adc-dual/hardware/boot-sd
+```
+
+Opcja `--sd` dodaje plik `/root/adc-<SHA256>.bit` do istniejącego rootfs ext4
+na SD, sprawdza jego SHA-256, wykonuje sync i restart Linuksa. Zatrzymuje
+U-Boot przez UART i wykonuje `ext4load mmc 0:2` oraz `fpga loadb`.
+Nie zmienia domyślnych plików bootujących, QSPI ani trwałego środowiska U-Boot.
+W tym trybie **zapisujemy nowy plik na SD**; domyślny tryb JTAG nie zapisuje SD.
+Minimalny kernel nie ma VFAT, dlatego loader korzysta z ext4 zamiast FAT.
+Zwykły restart nadal wraca do dotychczasowego domyślnego obrazu.
+
 ## Bring-up po podłączeniu drugiej karty
 
 Nie programuj PL przez JTAG podczas dostępu Linuksa do GP0. Dotychczasowy
@@ -88,19 +108,19 @@ loader synchronizuje filesystem, resetuje PS, zatrzymuje U-Boot, wgrywa
 bitstream do SRAM i uruchamia istniejącego Linuksa z SD:
 
 ```sh
-python3 tools/boot_adc_jtag.py --host 192.168.2.2 \
+python3 tools/boot_adc_jtag.py --host 192.168.2.9 \
   --bit build/zc706-adc-dual/gateware/gateware/top.bit \
   --output build/zc706-adc-dual/hardware/boot
 ```
 
-Adres po restarcie odczytaj z UART; `.2` jest przykładem ostatniego adresu.
+Adres po restarcie odczytaj z UART; `.9` jest przykładem ostatniego adresu.
 Loader nie zapisuje SD, QSPI ani środowiska U-Boot. Powrót do poprzedniego
 bitstreamu przez ten sam loader lub zwykły restart do dotychczasowego obrazu SD.
 
 Test samego HPC:
 
 ```sh
-python3 tools/test_adc_hardware.py --host 192.168.2.2 --card 2 \
+python3 tools/test_adc_hardware.py --host 192.168.2.9 --card 2 \
   --bit build/zc706-adc-dual/gateware/gateware/top.bit \
   --csr-json build/zc706-adc-dual/gateware/csr.json \
   --output build/zc706-adc-dual/hardware/card2
@@ -109,7 +129,7 @@ python3 tools/test_adc_hardware.py --host 192.168.2.2 --card 2 \
 Test obu kart równolegle:
 
 ```sh
-python3 tools/test_adc_dual_hardware.py --host 192.168.2.2
+python3 tools/test_adc_dual_hardware.py --host 192.168.2.9
 ```
 
 Każdy proces ma osobny katalog na Linuksie i własny bank CSR. Test sprawdza

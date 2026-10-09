@@ -1,0 +1,10 @@
+ext4load mmc 0:2 ${kernel_addr_r} /root/adc-ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560.bit && fpga loadb 0 ${kernel_addr_r} ${filesize}
+13321505 bytes read in 715 ms (17.8 MiB/s)
+  design filename = "top.frames;Generator=xc7frames2bit"
+  part number = "xc7z045ffg900-2"
+  date = "2026/10/08"
+  time = "19:24:09"
+  bytes in bitstream = 13321404
+zynq_align_dma_buffer: Align buffer at 2000065 to 2000040(swap 1)
+INFO:post config was not run, please run manually if needed
+Zynq> 

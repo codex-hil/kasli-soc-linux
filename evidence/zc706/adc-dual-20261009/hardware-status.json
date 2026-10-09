@@ -1,0 +1,14 @@
+{
+  "bitstream_sha256": "ab7c43cd661a61b43dc35e4a299bd3cad9a75492a85febe9e88a16197f5f9560",
+  "dual_adc_hardware_validated": true,
+  "lpc_card1_hardware_validated": true,
+  "hpc_card2_hardware_validated": true,
+  "pattern_channel_values": 278528,
+  "snapshot_samples_per_card": 1024,
+  "inter_card_synchronization": false,
+  "adc_to_ddr": false,
+  "boot_method": "U-Boot ext4load + fpga loadb",
+  "sd_written": true,
+  "qspi_written": false,
+  "default_boot_modified": false
+}

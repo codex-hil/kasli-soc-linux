@@ -1,0 +1,936 @@
+{
+  "hardware_validated": true,
+  "result": "PASS",
+  "slot": "J4 HPC",
+  "card": 2,
+  "synchronized": false,
+  "adc_registers": {
+    "1": 32,
+    "2": 0
+  },
+  "si570_registers": [
+    34,
+    66,
+    188,
+    0,
+    255,
+    216
+  ],
+  "sample_rate_hz": 99997058.16036671,
+  "serial_clock_hz": 399996570.05590487,
+  "calibration": {
+    "taps": [
+      21,
+      21,
+      21,
+      21,
+      20,
+      21,
+      19,
+      21,
+      19
+    ],
+    "frame_window": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "windows": [
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    ],
+    "slips": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ],
+    "scan": [
+      {
+        "tap": 0,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 1,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 2,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 3,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 4,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 5,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 6,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 7,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 8,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 9,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 10,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "tap": 11,
+        "good": [
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          3,
+          7,
+          1,
+          1,
+          1,
+          3,
+          7,
+          1
+        ]
+      },
+      {
+        "tap": 12,
+        "good": [
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          1,
+          7,
+          7,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 13,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          0,
+          7,
+          0,
+          7
+        ]
+      },
+      {
+        "tap": 14,
+        "good": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          7,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 15,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 16,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 17,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 18,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 19,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 20,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 21,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 22,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 23,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 24,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 25,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 26,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "tap": 27,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "slips": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          7,
+          0
+        ]
+      },
+      {
+        "tap": 28,
+        "good": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          2,
+          7,
+          0,
+          7,
+          7,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 29,
+        "good": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          7,
+          7,
+          7,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 30,
+        "good": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false
+        ],
+        "slips": [
+          5,
+          3,
+          3,
+          7,
+          3,
+          7,
+          3,
+          7
+        ]
+      },
+      {
+        "tap": 31,
+        "good": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "slips": [
+          5,
+          3,
+          3,
+          3,
+          3,
+          5,
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  "pattern_samples_checked": 139264,
+  "samples": 1024,
+  "range": "open",
+  "analog_calibrated": false
+}

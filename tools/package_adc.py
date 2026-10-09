@@ -57,13 +57,21 @@ if args.dual:
     files['dual-acquisition.md'] = ROOT/'docs/zc706-adc-dual.md'
     files['test_adc_hardware.py'] = ROOT/'tools/test_adc_hardware.py'
     files['test_adc_dual_hardware.py'] = ROOT/'tools/test_adc_dual_hardware.py'
+    files['boot_adc_jtag.py'] = ROOT/'tools/boot_adc_jtag.py'
     recorded = ROOT/'evidence/zc706/adc-dual-20261008'
+    for candidate in sorted((ROOT/'evidence/zc706').glob('adc-dual-*'), reverse=True):
+        candidate_status = candidate/'hardware-status.json'
+        if candidate_status.exists() and json.loads(candidate_status.read_text()).get('bitstream_sha256') == bit_hash:
+            recorded = candidate
+            break
     status = json.loads((recorded/'hardware-status.json').read_text())
     if status['bitstream_sha256'] == bit_hash:
         files['evidence/hardware-status.json'] = recorded/'hardware-status.json'
-        files['evidence/build-summary.json'] = recorded/'build-summary.json'
+        files['evidence/build-summary.json'] = ROOT/'evidence/zc706/adc-dual-20261008/build-summary.json'
     for card in (1, 2):
-        directory = BUILD/f'hardware/card{card}'
+        directory = recorded/f'card{card}'
+        if not (directory/'validation.json').exists():
+            directory = BUILD/f'hardware/card{card}'
         if not (directory/'validation.json').exists():
             continue
         card_validation = json.loads((directory/'validation.json').read_text())

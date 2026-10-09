@@ -28,8 +28,9 @@ Mapowanie `DIFF_TERM` i fizyczny test A/B: [docs/hr-diff-term.md](docs/hr-diff-t
 
 Dodany także target **dwóch kart: J5 LPC + J4 HPC**, z osobnymi zegarami,
 CSR i snapshotami. Build: `make adc-dual-package`. Build/timing/symulacje
-przeszły; fizyczna LPC na tym bitstreamie przeszła wszystkie 34 wzorce i snapshot.
-Druga karta oczekuje na podłączenie i test fizyczny; synchronizacja później.
+przeszły. **Obie fizyczne karty przeszły test równoległy 2026-10-09:**
+278528 wartości wzorców oraz osobne snapshoty 1024 próbek na kanał.
+Boot przez U-Boot z SD również działa bez JTAG. Synchronizacja później.
 [Opis i test obu kart](docs/zc706-adc-dual.md).
 
 ## Hardware i źródła prawdy
