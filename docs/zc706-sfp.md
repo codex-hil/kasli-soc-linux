@@ -182,7 +182,9 @@ tracked separately; the fabric reference is a diagnostic option.
 | GTX/AA18 package mapping | Independently verified |
 | SFP module identification on current hardware | No EEPROM response |
 | Yosys / nextpnr / bitstream | PASS; setup and hold checks pass |
-| Physical near-end PMA loopback | Bring-up: disconnected CPLL selector fixed in backend, physical retest pending |
+| Local quad-110 physical MAC/PCS/GTX loopback | PASS: 1000/1000 frames, zero errors, TX/RX ~125 MHz |
+| Physical GTX DRP configuration readback | PASS: CPLL/dividers/CDR match generated configuration |
+| Physical near-end PMA loopback | FAIL: reference-clock-lost remains asserted after backend fix |
 | Switch link / ARP / ICMP / UDP | NOT_RUN |
 | Combined ADC/DDR/SFP design | Deferred until isolated SFP qualification |
 
@@ -205,3 +207,24 @@ probe now requires calibration clear and stable lock, with a 60-second
 bound. All register writes remain volatile. Current failed attempts and
 hardware diagnostics are retained in
 [bring-up evidence](../evidence/zc706/sfp-20261010/bringup-attempts.json).
+
+A system-clocked DRP bridge now reads the physical GTX CPLL, output-divider
+and CDR registers. Eleven reads match the generated configuration exactly,
+including CPLL N1=5/N2=5/M=1 for the 100 MHz fabric-reference variant. This
+validates these configuration fields and DRP access, not the reference-clock
+path or the Ethernet link. Corrected-selector and channel-reference-enable
+control builds still report CPLLREFCLKLOST, with zero reference counters.
+
+`make sfp-pl SFP_REFCLK=local` selects a diagnostic channel on unused HPC DP4
+(AH2/AH1 TX, AH6/AH5 RX), in Si5324 quad 110, using local GTREFCLK1 and
+CPLLREFCLKSEL=2. It isolates local reference bring-up from inter-quad routing;
+it cannot test the physical SFP connector or switch. No ADC FPGA fabric pins
+are used by this control build.
+
+The local-quad control passed 1000/1000 complete frames with zero payload,
+CRC or preamble errors on physical hardware. CPLL, TX/RX initialization,
+MMCMs and PCS all locked; TX/RX and the selected reference measured about
+125 MHz. Si5324 and local GTX operation are therefore confirmed. The ODIV2
+fabric-monitor counter remains zero even in this passing design, so that
+counter is not reliable evidence of a missing physical Si5324 clock. The
+SFP quad and switch link still need separate qualification.

@@ -6,6 +6,7 @@ from pathlib import Path
 from migen import Signal, Instance, Cat, If, Constant, ClockDomain, ClockSignal, ResetSignal
 from migen.genlib.cdc import MultiReg
 from litex.gen import LiteXModule
+from litex.build.generic_platform import Pins, Subsignal
 from litex.soc.cores.bitbang import I2CMaster
 from litex.soc.cores.clock import S7MMCM
 from litex.soc.interconnect import stream
@@ -75,7 +76,7 @@ class PacketTest(LiteXModule):
 
 
 class Diagnostics(LiteXModule):
-    def __init__(self, phy, si5324, tx_enable, fabric_refclk=False):
+    def __init__(self, phy, si5324, tx_enable, fabric_refclk=False, local_refclk=False):
         self.control = CSRStorage(5, reset=8, name="control")
         self.status = CSRStatus(8, name="status")
         self.signature = CSRStatus(32, reset=0x53465031, name="signature")
@@ -84,6 +85,16 @@ class Diagnostics(LiteXModule):
         self.si_ref_count = CSRStatus(32, name="si_ref_count")
         self.gt_ref_count = CSRStatus(32, name="gt_ref_count")
         self.clock_faults = CSRStatus(3, name="clock_faults")
+        self.drp_address = CSRStorage(9, name="drp_address")
+        self.drp_write_data = CSRStorage(16, name="drp_write_data")
+        self.drp_command = CSRStorage(2, name="drp_command")
+        self.drp_read_data = CSRStatus(16, name="drp_read_data")
+        self.drp_busy = CSRStatus(1, name="drp_busy")
+        drp_en = Signal(); drp_we = Signal(); drp_ready = Signal(); drp_data = Signal(16)
+        self.sync += [drp_en.eq(0),
+            If(self.drp_command.re & ~self.drp_busy.status,
+               drp_en.eq(1), drp_we.eq(self.drp_command.storage[0]), self.drp_busy.status.eq(1)),
+            If(drp_ready, self.drp_read_data.status.eq(drp_data), self.drp_busy.status.eq(0))]
         self.cd_si_ref = ClockDomain("si_ref", reset_less=True)
         self.cd_gt_ref = ClockDomain("gt_ref", reset_less=True)
         si_div2 = Signal(); gt_ref = Signal()
@@ -115,6 +126,15 @@ class Diagnostics(LiteXModule):
                     item.expr = feedback_lost
                 elif item.name == "GTREFCLKMONITOR":
                     item.expr = gt_ref
+                elif item.name == "DRPDO":
+                    item.expr = drp_data
+                elif item.name == "DRPRDY":
+                    item.expr = drp_ready
+            if isinstance(item, Instance.Input):
+                drp_inputs = {"DRPCLK": ClockSignal("sys"), "DRPADDR": self.drp_address.storage,
+                              "DRPDI": self.drp_write_data.storage, "DRPEN": drp_en, "DRPWE": drp_we}
+                if item.name in drp_inputs:
+                    item.expr = drp_inputs[item.name]
             if isinstance(item, Instance.Input) and item.name == "LOOPBACK":
                 item.expr = loop
             # Si5324 feeds REFCLK1 of quad 110 below SFP quad 111.
@@ -122,11 +142,13 @@ class Diagnostics(LiteXModule):
             elif isinstance(item, Instance.Input) and item.name == "GTREFCLK0":
                 item.expr = Constant(0)
             elif isinstance(item, Instance.Input) and item.name == "GTNORTHREFCLK1":
-                item.expr = phy.pll.refclk
+                item.expr = Constant(0) if local_refclk else phy.pll.refclk
+            elif isinstance(item, Instance.Input) and item.name == "GTREFCLK1":
+                item.expr = phy.pll.refclk if local_refclk else Constant(0)
             elif isinstance(item, Instance.Input) and item.name == "GTGREFCLK":
                 item.expr = ClockSignal("ps7") if fabric_refclk else Constant(0)
             elif isinstance(item, Instance.Input) and item.name == "CPLLREFCLKSEL":
-                item.expr = Constant(0b111 if fabric_refclk else 0b100, 3)
+                item.expr = Constant(0b111 if fabric_refclk else (0b010 if local_refclk else 0b100), 3)
         flags = Cat(phy.pll.lock, phy.tx_init.done, phy.rx_init.done,
             phy.tx_mmcm.locked, phy.rx_mmcm.locked, phy.link_up,
             si5324.int_n, phy.pcs.is_sgmii)
@@ -159,10 +181,15 @@ class SFPSoC(BaseSoC):
             ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324", "i2c")])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
+        if refclk == "local":
+            # Unused HPC DP4 in the Si5324 quad; no external FMC traffic.
+            self.platform.add_extension([("gtx_local", 0,
+                Subsignal("txp", Pins("AH2")), Subsignal("txn", Pins("AH1")),
+                Subsignal("rxp", Pins("AH6")), Subsignal("rxn", Pins("AH5")))])
         self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
-            self.platform.request("sfp"), 50e6, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
+            self.platform.request("gtx_local" if refclk == "local" else "sfp"), 50e6, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
         self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
-            self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk")
+            self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local")
         self.csr.add("sfp_status", 3)
         self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, 50e6,
             dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
@@ -209,7 +236,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--board", choices=["zc706"], default="zc706")
     p.add_argument("--output-dir", default="build/zc706-sfp/gateware")
-    p.add_argument("--refclk", choices=["si5324", "fclk"], default="si5324")
+    p.add_argument("--refclk", choices=["si5324", "fclk", "local"], default="si5324")
     a = p.parse_args()
     soc = SFPSoC(refclk=a.refclk); soc.finalize()
     out = Path(a.output_dir); out.mkdir(parents=True, exist_ok=True)

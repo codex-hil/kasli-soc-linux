@@ -40,7 +40,7 @@ def validate_sfp_clock(work):
     if gt['CPLLREFCLKSEL'] == ['1', '1', '1']:
         if gt['GTGREFCLK'] != top['netnames']['ps7_clk']['bits']:
             raise RuntimeError('Fabric CPLL reference must be the 100 MHz PS FCLK')
-    elif gt['CPLLREFCLKSEL'] != ['0', '0', '1']:
+    elif gt['CPLLREFCLKSEL'] not in (['0', '0', '1'], ['0', '1', '0']):
         raise RuntimeError('ZC706 SFP requires NORTHREFCLK1 or diagnostic FCLK')
 
 
@@ -72,7 +72,7 @@ def main():
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
-    p.add_argument("--sfp-refclk", choices=["si5324", "fclk"], default="si5324")
+    p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default="si5324")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
     if args.cards != 1 and args.design != "fmc-adc":

@@ -151,6 +151,19 @@ def status(r):
     return {n: r.read(n) for n in names}
 
 
+def drp_read(r, address):
+    if r.read("sfp_status_drp_busy"):
+        raise RuntimeError("GTX DRP was already busy")
+    r.write("sfp_status_drp_address", address)
+    r.write("sfp_status_drp_command", 0)  # A write strobe requests a read; bit 0 enables writes.
+    deadline = time.monotonic()+1
+    while r.read("sfp_status_drp_busy"):
+        if time.monotonic() > deadline:
+            raise TimeoutError(f"GTX DRP read 0x{address:03x} did not acknowledge")
+        time.sleep(.001)
+    return r.read("sfp_status_drp_read_data")
+
+
 def clock_rates(r):
     names = [n for n in ("sfp_status_si_ref_count", "sfp_status_gt_ref_count",
                          "sfp_status_rx_count", "sfp_status_tx_count")
@@ -222,6 +235,10 @@ def main():
         if not a.identify_only:
             if r.map["constants"].get("sfp_abi") != 1:
                 raise RuntimeError("Requires SFP target CSR map")
+            if "sfp_status_drp_address" in r.map["csr_registers"]:
+                # UG476 table D-2: CPLL configuration/dividers, output dividers, RX CDR.
+                result["drp"] = {f"0x{x:03x}": drp_read(r, x)
+                    for x in [0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x88, *range(0xa8, 0xad)]}
             if a.init_clock:
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:

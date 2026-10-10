@@ -29,6 +29,8 @@ def main():
     digest = hashlib.sha256(bit.read_bytes()).hexdigest()
     if manifest.get("design") != "sfp" or manifest.get("bitstream_sha256") != digest or not manifest.get("timing_passed"):
         raise RuntimeError("SFP bitstream must match its successful timing-checked build")
+    if a.external and manifest.get("sfp_refclk") == "local":
+        raise RuntimeError("Local-quad diagnostic does not use the SFP connector")
     result = {"result": "FAIL", "bitstream_sha256": digest,
         "program_requested": a.program, "external_requested": a.external,
         "hardware_validated": False, "input_sha256": {}}
