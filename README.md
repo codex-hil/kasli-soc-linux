@@ -636,3 +636,11 @@ through GP1. Output: `build/zc706-adc-ddr/`.
 [Hardware evidence](evidence/zc706/adc-ddr-20261009/hardware-validation.json).
 `make adc-ddr-package` reproduces the artifact bundle.
 [Download the qualified bitstream/tools and complete sample buffers](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-adc-ddr-validated-20261009).
+
+### ZC706 PL SFP diagnostic
+
+An isolated 1000BASE-X / LiteEth MAC target is under bring-up, with internal
+GTX loopback, numbered frames, hardware ICMP and UDP echo. Build with
+`make sfp-test sfp-pl`; see [SFP bring-up](docs/zc706-sfp.md) for clocking,
+open-source GTX database additions and physical test status. The qualified
+dual-FMC ADC/DDR design remains available separately.

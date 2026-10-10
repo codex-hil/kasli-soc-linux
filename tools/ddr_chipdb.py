@@ -11,12 +11,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(openxc7):
+def prepare(openxc7, *, out=None, database=None, extra_sites=()):
     source = ROOT/'upstream/nextpnr/himbaechel'
-    out = ROOT/'build/zc706-ddr/chipdb'
+    out = out or ROOT/'build/zc706-ddr/chipdb'
     out.mkdir(parents=True, exist_ok=True)
     binary = out/'chipdb-xc7z045.bin'
     marker = out/'manifest.json'
+    if database is None:
+        database = openxc7/'share/nextpnr/external/prjxray-db/zynq7'
     version = 2
     subprocess.run(['git', '-C', ROOT/'upstream/nextpnr', 'submodule', 'update',
         '--init', '--depth', '1', 'himbaechel/uarch/xilinx/meta'], check=True)
@@ -26,6 +28,9 @@ def prepare(openxc7):
         'rev-parse', 'HEAD'], text=True).strip()
     identity = {'nextpnr_revision': revision, 'metadata_revision': metadata_revision,
         'openxc7_build_info_sha256': hashlib.sha256((openxc7/'BUILD-INFO.json').read_bytes()).hexdigest()}
+    if extra_sites:
+        identity['extra_metadata'] = {name: hashlib.sha256((source/f'uarch/xilinx/meta/kintex7/site_type_{name}.json').read_bytes()).hexdigest() for name in extra_sites}
+        identity['tilegrid_sha256'] = hashlib.sha256((database/'xc7z045/tilegrid.json').read_bytes()).hexdigest()
     if binary.exists() and marker.exists():
         cached = json.loads(marker.read_text())
         if (cached.get('version') == version
@@ -40,7 +45,7 @@ def prepare(openxc7):
             dest.symlink_to(item)
     # HP banks share these Series-7 primitive definitions with Kintex-7.
     additions = {}
-    for name in ('ILOGICE2', 'OLOGICE2', 'ODELAYE2', 'IDELAYE2_FINEDELAY'):
+    for name in ('ILOGICE2', 'OLOGICE2', 'ODELAYE2', 'IDELAYE2_FINEDELAY') + tuple(extra_sites):
         original = source/f'uarch/xilinx/meta/kintex7/site_type_{name}.json'
         dest = metadata/original.name
         if dest.is_symlink(): dest.unlink()
@@ -80,7 +85,6 @@ def prepare(openxc7):
     text = text.replace(needle, needle+'                n.wires.clear()\n            t.wire_to_node.clear()\n')
     export.write_text(text)
     bba = out/'xc7z045.bba'
-    database = openxc7/'share/nextpnr/external/prjxray-db/zynq7'
     command = [sys.executable, '-u', gen/'xilinx_gen.py', '--xray', database,
         '--metadata', metadata, '--device', 'xc7z045', '--bba', bba]
     with (out/'generator.log').open('w') as log:

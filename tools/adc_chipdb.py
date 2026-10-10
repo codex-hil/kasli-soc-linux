@@ -9,13 +9,17 @@ import struct
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(openxc7, source_binary=None, build=None):
+def prepare(openxc7, source_binary=None, build=None, extra_rows=(), grid_path=None):
     original = openxc7/'share/nextpnr/external/prjxray-db/zynq7'
     build = build or ROOT/'build/zc706-adc/chipdb'
     build.mkdir(parents=True, exist_ok=True)
     patch = ROOT/'patches/xc7z045-ffg900-missing-hr.csv'
     provenance = json.loads((patch.with_suffix('.json')).read_text())
     digest = hashlib.sha256(patch.read_bytes()).hexdigest()
+    if extra_rows:
+        digest = hashlib.sha256((digest+json.dumps(list(extra_rows), sort_keys=True)).encode()).hexdigest()
+    if grid_path is not None:
+        digest = hashlib.sha256((digest+hashlib.sha256(grid_path.read_bytes()).hexdigest()).encode()).hexdigest()
     binary = build/'chipdb-xc7z045.bin'
     marker = build/'manifest.json'
     # Fail closed if the toolchain database differs from the audited artifact.
@@ -32,8 +36,8 @@ def prepare(openxc7, source_binary=None, build=None):
                 and cached.get('overlay_version') == 1
                 and hashlib.sha256(binary.read_bytes()).hexdigest() == cached.get('chipdb_sha256')):
             return binary
-    grid = json.loads((original/'xc7z045/tilegrid.json').read_text())
-    additions = list(csv.DictReader(patch.open()))
+    grid = json.loads((grid_path or original/'xc7z045/tilegrid.json').read_text())
+    additions = list(csv.DictReader(patch.open())) + list(extra_rows)
     for row in additions:
         if row['site'] not in grid[row['tile']]['sites']:
             raise RuntimeError('Patched pad does not exist in XC7Z045 tilegrid')

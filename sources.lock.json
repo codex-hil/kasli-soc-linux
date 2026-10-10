@@ -82,5 +82,17 @@
   "litedram": {
     "url": "https://github.com/enjoy-digital/litedram.git",
     "rev": "74522f715d7b10163ef6f6caa09887a90874be83"
+  },
+  "liteeth": {
+    "url": "https://github.com/enjoy-digital/liteeth.git",
+    "rev": "e3ebe03be76f33e0c2b2a024a1d0f19c99b7e96a"
+  },
+  "liteiclink": {
+    "url": "https://github.com/enjoy-digital/liteiclink.git",
+    "rev": "6e69216944e94c69f5a7d58d5c6d75dc3d754242"
+  },
+  "prjxray-db": {
+    "url": "https://github.com/openXC7/prjxray-db.git",
+    "rev": "75825f2e66e16a40a51cf1cfa61afb21f5958afe"
   }
 }

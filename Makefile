@@ -62,3 +62,12 @@ adc-ddr-axi-test:
 	$(ENV) build/python/bin/python tools/test_ddr_axi.py --output-dir build/zc706-adc-ddr
 adc-ddr-package: adc-ddr-pl adc-ddr-software adc-ddr-test adc-ddr-axi-test
 	$(ENV) python3 tools/package_adc_ddr.py
+
+.PHONY: sfp-pl
+sfp-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design sfp --output-dir build/zc706-sfp/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+.PHONY: sfp-test
+sfp-test:
+	$(ENV) build/python/bin/python tools/test_sfp_logic.py
+	$(ENV) sh -c 'cd upstream/liteeth && /work/build/python/bin/python -m unittest test.test_pcs_1000basex'

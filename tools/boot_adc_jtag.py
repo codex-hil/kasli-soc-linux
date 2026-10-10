@@ -41,7 +41,7 @@ def main():
         p.error('Expected numeric Digilent adapter serial')
     manifest = json.loads((a.bit.parent/'manifest.json').read_text())
     digest = hashlib.sha256(a.bit.read_bytes()).hexdigest()
-    if manifest.get('design') not in ('fmc-adc','adc-ddr') or manifest.get('bitstream_sha256') != digest:
+    if manifest.get('design') not in ('fmc-adc','adc-ddr','sfp') or manifest.get('bitstream_sha256') != digest:
         p.error('ADC bitstream must match its successful build manifest')
     out = a.output or ROOT/'build/zc706-adc/hardware'/datetime.now(timezone.utc).strftime('boot-%Y%m%dT%H%M%SZ')
     out.mkdir(parents=True, exist_ok=True)
@@ -131,7 +131,7 @@ def main():
                     break
             if not interrupted or b'Zynq> ' not in transcript:
                 raise TimeoutError('Did not stop U-Boot')
-            print('Loading ADC bitstream into volatile PL', flush=True)
+            print('Loading diagnostic bitstream into volatile PL', flush=True)
             with (out/'program.log').open('w') as f:
                 if sd_mode:
                     programmed = command('ext4load mmc 0:2 ${kernel_addr_r} '+sd_path+' && fpga loadb 0 ${kernel_addr_r} ${filesize}')

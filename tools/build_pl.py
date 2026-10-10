@@ -32,16 +32,16 @@ def main():
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
     if args.cards != 1 and args.design != "fmc-adc":
         p.error("--cards only applies to the FMC ADC target")
-    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr") and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py"}[args.design]
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
@@ -91,6 +91,21 @@ def main():
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
         db = prepare_termination_db(db)
+    if args.design == "sfp":
+        from ddr_chipdb import prepare
+        from adc_ddr_nextpnr import prepare as prepare_nextpnr
+        from sfp_database import prepare as prepare_sfp_db
+        db = prepare_sfp_db(db)
+        source_chipdb = prepare(args.openxc7.resolve(),
+            out=ROOT/"build/zc706-sfp/chipdb", database=db,
+            extra_sites=("GTXE2_CHANNEL", "GTXE2_COMMON", "IBUFDS_GTE2", "IPAD", "OPAD"))
+        from adc_chipdb import prepare as prepare_hr
+        chipdb_args = ["--chipdb", str(prepare_hr(args.openxc7.resolve(),
+            source_binary=source_chipdb, build=ROOT/"build/zc706-sfp/chipdb-hr",
+            grid_path=db/"xc7z045/tilegrid.json",
+            extra_rows=({"pin": "AA18", "bank": "9", "site": "IOB_X0Y24",
+                "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]
+        nextpnr = prepare_nextpnr()
     if args.design == "adc-ddr":
         from adc_ddr_clock_db import prepare as prepare_clock_db
         db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db")
@@ -120,7 +135,7 @@ def main():
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
          "--freq", "100", "--report", "timing.json", *chipdb_args,
-         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design == "adc-ddr" else [])],
+         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp") else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
         [str(args.openxc7.resolve() / "bin/xc7frames2bit"),
@@ -138,7 +153,7 @@ def main():
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
         if n == 0 and args.design in ('pl-ddr', 'adc-ddr'):
             validate_ddr_io(work)
-        if n == 1 and args.design == 'adc-ddr':
+        if n == 1 and args.design in ('adc-ddr', 'sfp'):
             timing = json.loads((work/'timing.json').read_text())
             if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
                 raise RuntimeError('Combined ADC DDR setup timing must pass and be reported')
