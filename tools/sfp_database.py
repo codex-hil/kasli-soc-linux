@@ -84,9 +84,18 @@ def prepare(original):
             dst.unlink()
         dst.write_bytes(f.read_bytes())
         copied[f.name] = hashlib.sha256(f.read_bytes()).hexdigest()
+    # Same GTX primitive: measured XC7Z030 vendor-model diff and physical
+    # XC7Z045 loopback qualify this test-only fabric-reference enable.
+    # Keep the donor databases unchanged; these additions belong to the overlay.
+    for channel in range(4):
+        feature = f"GTX_CHANNEL_{channel}.GTXE2_CHANNEL.GTGREFCLK_USED 31_54"
+        with (out/f"segbits_gtx_channel_{channel}.db").open("a") as segbits:
+            segbits.write(feature + "\n")
     (out.parent/"manifest.json").write_text(json.dumps({
         "experimental": True, "source_revision": "75825f2e66e16a40a51cf1cfa61afb21f5958afe",
         "source_sha256": copied, "gtx_tiles": changes,
+        "fabric_refclk_enable": {"bits": ["31_54"],
+            "evidence": "evidence/zc706/sfp-20261010/vivado-fabric-refclk-model.json"},
         "restored_aa18_tile": restored,
         "tilegrid_sha256": hashlib.sha256((out/"xc7z045/tilegrid.json").read_bytes()).hexdigest()
     }, indent=2)+"\n")

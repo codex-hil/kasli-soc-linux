@@ -1,6 +1,6 @@
 --- a/himbaechel/uarch/xilinx/pack_io.cc
 +++ b/himbaechel/uarch/xilinx/pack_io.cc
-@@ -1690,7 +1690,12 @@
+@@ -1690,7 +1690,15 @@
                  bool is_clock_status_port =
                          boost::contains(port_name, "CLKMONITOR") || boost::contains(port_name, "CLKLOST");
                  bool is_hardwired_clock_input =
@@ -11,6 +11,20 @@
 +                // Dropping their constant nets leaves selector 000 (reserved).
 +                // GTGREFCLK is the fabric reference input (UG476), so it must
 +                // also remain connected and be routed through the fabric.
++                if (!is_gtp && port_name == "GTGREFCLK" && net != nullptr &&
++                    net->name != ctx->id("$PACKER_GND_NET") && net->name != ctx->id("$PACKER_VCC_NET"))
++                    ci->params[ctx->id("_GTGREFCLK_USED")] = Property(1, 1);
                  if (is_hardwired_clock_input) {
                      bool tied_to_constant_net =
                              net->name == ctx->id("$PACKER_GND_NET") || net->name == ctx->id("$PACKER_VCC_NET");
+--- a/himbaechel/uarch/xilinx/fasm.cc
++++ b/himbaechel/uarch/xilinx/fasm.cc
+@@ -3886,6 +3886,8 @@
+         write_inv("CPLLLOCKDETCLK");
+         write_bit("GTREFCLK0_USED", bool_or_default(ci->params, ctx->id("_GTREFCLK0_USED"), false));
+         write_bit("GTREFCLK1_USED", bool_or_default(ci->params, ctx->id("_GTREFCLK1_USED"), false));
++        // Measured GTX fabric-reference enables; see ZC706 model/physical evidence.
++        write_bit("GTGREFCLK_USED", bool_or_default(ci->params, ctx->id("_GTGREFCLK_USED"), false));
+ 
+         auto outrefclk_sel_inv = int_or_default(ci->params, ctx->id("OUTREFCLK_SEL_INV"), 0b10);
+         write_int_vector("OUTREFCLK_SEL_INV[1:0]", outrefclk_sel_inv, 2);

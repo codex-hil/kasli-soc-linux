@@ -1,0 +1,81 @@
+[
+  {
+    "variant": "fclk-baseline-retry-20261010",
+    "added_channel_minor31_bits": [],
+    "result": "FAIL",
+    "bitstream_sha256": "2a17cf6acea56bc337b61936cdfa07d700b6338235cfa8dbcd2cc7c6810597c2",
+    "loopback": {
+      "result": "FAIL",
+      "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'sfp_status_drp_address': 172, 'sfp_status_drp_write_data': 0, 'sfp_status_drp_command': 0, 'sfp_status_drp_read_data': 3, 'sfp_status_drp_busy': 0, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}"
+    },
+    "network": null
+  },
+  {
+    "variant": "fclk-bits-10-54-20261010",
+    "added_channel_minor31_bits": [
+      10,
+      54
+    ],
+    "result": "PASS",
+    "bitstream_sha256": "c7da5fa20929fa4f6781b0488fe57fe4910482d8b359aa441a0c864d96297d9c",
+    "loopback": {
+      "result": "PASS",
+      "frames": 1000,
+      "user_clock_hz": {
+        "sfp_status_rx_count": 124751515.4602841,
+        "sfp_status_tx_count": 124745196.84453261
+      }
+    },
+    "network": null
+  },
+  {
+    "variant": "fclk-bit-10-20261010",
+    "added_channel_minor31_bits": [
+      10
+    ],
+    "result": "FAIL",
+    "bitstream_sha256": "04c1a839c4803028b2e9a35a4bf44264a253db240d4bd8fcd16881209b27aad3",
+    "loopback": {
+      "result": "FAIL",
+      "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'sfp_status_drp_address': 172, 'sfp_status_drp_write_data': 0, 'sfp_status_drp_command': 0, 'sfp_status_drp_read_data': 3, 'sfp_status_drp_busy': 0, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}"
+    },
+    "network": null
+  },
+  {
+    "variant": "fclk-bit-54-20261010",
+    "added_channel_minor31_bits": [
+      54
+    ],
+    "result": "PASS",
+    "bitstream_sha256": "6bd59450346012dab50195ef8f9bd5a37f4db2fffe371fd91721194a8daa140e",
+    "loopback": {
+      "result": "PASS",
+      "frames": 16,
+      "user_clock_hz": {
+        "sfp_status_rx_count": 124754780.40070333,
+        "sfp_status_tx_count": 124757049.48967555
+      }
+    },
+    "network": null
+  },
+  {
+    "variant": "fclk-bit-54-external-20261010",
+    "added_channel_minor31_bits": [
+      54
+    ],
+    "result": "PARTIAL",
+    "bitstream_sha256": "6bd59450346012dab50195ef8f9bd5a37f4db2fffe371fd91721194a8daa140e",
+    "loopback": {
+      "result": "PASS",
+      "frames": 1000,
+      "user_clock_hz": {
+        "sfp_status_rx_count": 124752003.20271479,
+        "sfp_status_tx_count": 124749674.60596947
+      }
+    },
+    "network": {
+      "result": "NOT_RUN",
+      "reason": "SFP EEPROM did not respond"
+    }
+  }
+]

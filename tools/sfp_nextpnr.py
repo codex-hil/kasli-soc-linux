@@ -33,8 +33,9 @@ def prepare():
         if line.startswith(('CXX_DEFINES =', 'CXX_INCLUDES =', 'CXX_FLAGS =')):
             key, value = line.split('=', 1)
             flags[key.strip()] = shlex.split(value.replace('-flto=auto', '-flto=2'))
-    subprocess.run(['/usr/bin/c++', *flags['CXX_DEFINES'], *flags['CXX_INCLUDES'], *flags['CXX_FLAGS'],
-                    '-c', str(source/'pack_io.cc'), '-o', str(out/'pack_io.cc.o')], check=True)
+    for name in ('pack_io.cc', 'fasm.cc'):
+        subprocess.run(['/usr/bin/c++', *flags['CXX_DEFINES'], *flags['CXX_INCLUDES'], *flags['CXX_FLAGS'],
+                        '-c', str(source/name), '-o', str(out/(name+'.o'))], check=True)
     command = []; output = False
     for token in shlex.split((objects/'link.txt').read_text()):
         if output: command.append(str(binary)); output = False
@@ -43,9 +44,8 @@ def prepare():
         elif token == '-flto=auto': command.append('-flto=2')
         elif token.endswith(('.o', '.a')):
             path = work/token
-            if path.name == 'fasm.cc.o': path = ROOT/'build/zc706-adc/nextpnr-term/fasm.cc.o'
             if path.name in ('hold_fix.cc.o', 'xilinx.cc.o'): path = base.parent/path.name
-            if path.name == 'pack_io.cc.o': path = out/path.name
+            if path.name in ('pack_io.cc.o', 'fasm.cc.o'): path = out/path.name
             command.append(str(path.resolve()))
         else: command.append(token)
     subprocess.run(command, cwd=out, check=True)

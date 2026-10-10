@@ -1,0 +1,175 @@
+{
+  "experimental": true,
+  "source_revision": "75825f2e66e16a40a51cf1cfa61afb21f5958afe",
+  "source_sha256": {
+    "ppips_gtx_channel_3.db": "706e1d766e5c1d9833c1805e9ec7726360db491df76751e6cde5b457114c55c2",
+    "segbits_gtx_channel_2.db": "3331e722c18e80120549a5c5928e04c268074842d730f6b082c4f4e6bc4921c4",
+    "ppips_gtx_channel_1.db": "74660a8c7e4f56981f52348b00d22692467a19f6a5ed95484bc547b916ddac3f",
+    "ppips_gtx_channel_2.db": "5491d88fbe6c1aaabcdd946bcf33ade487a76f70c180a6f9f4309f4fce9b0971",
+    "ppips_gtx_common.db": "496276c640f4989fc8f1e3266f6c296a4884c9e13836997f7ad36b42d10b328c",
+    "segbits_gtx_common.db": "3bf892ab151ca75690c458ac6c2eda62e54241f736a3277b81c04449977114a8",
+    "ppips_gtx_int_interface.db": "853709ccf9481745773e5a920e95939e1e2e25da13d9837b51dfe95a45a5e4eb",
+    "segbits_gtx_channel_0.db": "e170e4be8606f8be8655043aee3622098465d10ef72ab2abc3b04f55998192a5",
+    "mask_gtx_channel_1.db": "77c1412c3006a83fc5fc0907f06497854704d042d985d10986f7ad4a24a9507a",
+    "mask_gtx_channel_0.db": "77c1412c3006a83fc5fc0907f06497854704d042d985d10986f7ad4a24a9507a",
+    "mask_gtx_channel_2.db": "77c1412c3006a83fc5fc0907f06497854704d042d985d10986f7ad4a24a9507a",
+    "ppips_gtx_channel_0.db": "b1991cb14a76ff1485d404c8e533670aceafde1557897cc67daa39400cf5a443",
+    "mask_gtx_channel_3.db": "77c1412c3006a83fc5fc0907f06497854704d042d985d10986f7ad4a24a9507a",
+    "mask_gtx_common.db": "88fb18014c7bfe94dca20698ff6eb5bbfb68bde7edc215fac0bbc7d4856bbea9",
+    "segbits_gtx_channel_1.db": "638a958c10b939558f6006f70cbb8d012d51033f1687b21cf9ebad01052d2bb4",
+    "segbits_gtx_channel_3.db": "a68cd9654b21f929415d01c8aa00536df87f645bc2d6763f0ee493cfde35376e"
+  },
+  "gtx_tiles": {
+    "GTX_CHANNEL_0_X249Y6": {
+      "baseaddr": "0x004A3280",
+      "frames": 32,
+      "offset": 0,
+      "words": 22
+    },
+    "GTX_CHANNEL_0_X249Y58": {
+      "baseaddr": "0x00483280",
+      "frames": 32,
+      "offset": 0,
+      "words": 22
+    },
+    "GTX_CHANNEL_0_X249Y110": {
+      "baseaddr": "0x00463280",
+      "frames": 32,
+      "offset": 0,
+      "words": 22
+    },
+    "GTX_CHANNEL_0_X249Y162": {
+      "baseaddr": "0x00443280",
+      "frames": 32,
+      "offset": 0,
+      "words": 22
+    },
+    "GTX_CHANNEL_1_X249Y17": {
+      "baseaddr": "0x004A3280",
+      "frames": 32,
+      "offset": 22,
+      "words": 22
+    },
+    "GTX_CHANNEL_1_X249Y69": {
+      "baseaddr": "0x00483280",
+      "frames": 32,
+      "offset": 22,
+      "words": 22
+    },
+    "GTX_CHANNEL_1_X249Y121": {
+      "baseaddr": "0x00463280",
+      "frames": 32,
+      "offset": 22,
+      "words": 22
+    },
+    "GTX_CHANNEL_1_X249Y173": {
+      "baseaddr": "0x00443280",
+      "frames": 32,
+      "offset": 22,
+      "words": 22
+    },
+    "GTX_CHANNEL_2_X249Y35": {
+      "baseaddr": "0x004A3280",
+      "frames": 32,
+      "offset": 57,
+      "words": 22
+    },
+    "GTX_CHANNEL_2_X249Y87": {
+      "baseaddr": "0x00483280",
+      "frames": 32,
+      "offset": 57,
+      "words": 22
+    },
+    "GTX_CHANNEL_2_X249Y139": {
+      "baseaddr": "0x00463280",
+      "frames": 32,
+      "offset": 57,
+      "words": 22
+    },
+    "GTX_CHANNEL_2_X249Y191": {
+      "baseaddr": "0x00443280",
+      "frames": 32,
+      "offset": 57,
+      "words": 22
+    },
+    "GTX_CHANNEL_3_X249Y46": {
+      "baseaddr": "0x004A3280",
+      "frames": 32,
+      "offset": 79,
+      "words": 22
+    },
+    "GTX_CHANNEL_3_X249Y98": {
+      "baseaddr": "0x00483280",
+      "frames": 32,
+      "offset": 79,
+      "words": 22
+    },
+    "GTX_CHANNEL_3_X249Y150": {
+      "baseaddr": "0x00463280",
+      "frames": 32,
+      "offset": 79,
+      "words": 22
+    },
+    "GTX_CHANNEL_3_X249Y202": {
+      "baseaddr": "0x00443280",
+      "frames": 32,
+      "offset": 79,
+      "words": 22
+    },
+    "GTX_COMMON_X249Y23": {
+      "baseaddr": "0x004A3280",
+      "frames": 32,
+      "offset": 0,
+      "words": 101
+    },
+    "GTX_COMMON_X249Y75": {
+      "baseaddr": "0x00483280",
+      "frames": 32,
+      "offset": 0,
+      "words": 101
+    },
+    "GTX_COMMON_X249Y127": {
+      "baseaddr": "0x00463280",
+      "frames": 32,
+      "offset": 0,
+      "words": 101
+    },
+    "GTX_COMMON_X249Y179": {
+      "baseaddr": "0x00443280",
+      "frames": 32,
+      "offset": 0,
+      "words": 101
+    }
+  },
+  "fabric_refclk_enable": {
+    "bits": [
+      "31_10",
+      "31_54"
+    ],
+    "evidence": "evidence/zc706/sfp-20261010/vivado-fabric-refclk-model.json"
+  },
+  "restored_aa18_tile": {
+    "bits": {
+      "CLB_IO_CLK": {
+        "baseaddr": "0x004A0000",
+        "frames": 42,
+        "offset": 46,
+        "words": 4
+      }
+    },
+    "clock_region": "X0Y0",
+    "grid_x": 0,
+    "grid_y": 340,
+    "pin_functions": {
+      "IOB_X0Y23": "IO_L13N_T2_MRCC_9",
+      "IOB_X0Y24": "IO_L13P_T2_MRCC_9"
+    },
+    "prohibited_sites": [],
+    "sites": {
+      "IOB_X0Y23": "IOB33S",
+      "IOB_X0Y24": "IOB33M"
+    },
+    "type": "LIOB33"
+  },
+  "tilegrid_sha256": "4a69cdca498a3f54fb952b4e5151a493594dd52b09b564708ddfacb694584545"
+}

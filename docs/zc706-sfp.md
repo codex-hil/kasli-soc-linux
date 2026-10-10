@@ -328,3 +328,37 @@ python3 tools/environment.py build/python/bin/python \
 The source must first be built with `tools/build_pl.py --design sfp
 --board zc706 --sfp-refclk fclk`, using the normal pinned environment.
 This explicit experiment does not alter the default Si5324 build.
+
+### Isolation of the required bit
+
+A controlled physical comparison using identical routed logic established:
+
+| Added channel-relative bits, minor 31 | Result |
+| --- | --- |
+| none | Reference lost, CPLL/PCS unlocked, loopback FAIL |
+| 9, 10, 54 | 1000/1000 loopback PASS |
+| 10, 54 | 1000/1000 loopback PASS |
+| 10 | Reference lost, CPLL/PCS unlocked, loopback FAIL |
+| 54 | 16/16, then 1000/1000 loopback PASS |
+
+Thus only `31_54` is needed for this fabric-reference design. The isolated
+GTX packer now records a nonconstant GTGREFCLK input, the FASM writer emits
+`GTGREFCLK_USED`, and the Zynq database overlay maps that feature to `31_54`.
+Donor databases and the ADC/DDR backend remain unchanged. The normal
+`--sfp-refclk fclk` build passed setup and hold timing and emits this feature
+automatically. Its physical qualification is independent of the manual
+configuration experiment. Evidence: `evidence/zc706/sfp-20261010/
+fclk-bit-isolation/`.
+
+After the single-bit 1000-frame test, external mode was selected. Module
+EEPROM at mux channel 0, address 0x50 returned NACK, so ICMP/UDP switch
+tests were NOT_RUN. A loopback pass does not prove the module/link.
+
+The integrated backend build was loaded and independently passed 1000/1000
+physical loopback frames with zero errors. It was built and assembled using
+Yosys/nextpnr/openXC7, with no manual configuration-frame edits. Bitstream
+SHA-256: `297dd6d35e98d274c664b4525b5cbc3ec7754c680b9e3453e3a1f6764b1bb6ef`.
+Linux boot, UART and SSH passed; current management DHCP address was
+192.168.2.4. The checked loopback image is left running in volatile PL;
+QSPI and the default SD boot configuration are unchanged. Evidence is in
+`evidence/zc706/sfp-20261010/fclk-integrated/`.

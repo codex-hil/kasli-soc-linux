@@ -1,0 +1,48 @@
+{
+  "result": "PASS",
+  "hardware_validated": true,
+  "module_error": "SI570 I2C NACK for byte 0xa0",
+  "drp": {
+    "0x05b": 30,
+    "0x05c": 56320,
+    "0x05d": 48135,
+    "0x05e": 12419,
+    "0x05f": 488,
+    "0x088": 34,
+    "0x0a8": 32,
+    "0x0a9": 4112,
+    "0x0aa": 9215,
+    "0x0ab": 0,
+    "0x0ac": 3
+  },
+  "status": {
+    "sfp_status_control": 8,
+    "sfp_status_status": 95,
+    "sfp_status_signature": 1397116977,
+    "sfp_status_rx_count": 551532,
+    "sfp_status_tx_count": 160757770,
+    "sfp_status_si_ref_count": 0,
+    "sfp_status_gt_ref_count": 650821422,
+    "sfp_status_clock_faults": 0,
+    "sfp_status_drp_address": 172,
+    "sfp_status_drp_write_data": 0,
+    "sfp_status_drp_command": 0,
+    "sfp_status_drp_read_data": 3,
+    "sfp_status_drp_busy": 0,
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 2,
+    "mac_status_tx_frames": 1016,
+    "mac_status_rx_frames": 1077,
+    "packet_test_start": 1,
+    "packet_test_busy": 0,
+    "packet_test_tx_frames": 1016,
+    "packet_test_rx_frames": 1077,
+    "packet_test_errors": 0
+  },
+  "clock_rates_hz": {
+    "sfp_status_si_ref_count": 0.0,
+    "sfp_status_gt_ref_count": 100003901.5690958,
+    "sfp_status_rx_count": 21426307661.77292,
+    "sfp_status_tx_count": 125000411.61054635
+  }
+}

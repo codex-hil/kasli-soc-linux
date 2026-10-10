@@ -1,0 +1,28 @@
+{
+  "result": "FAIL",
+  "bitstream_sha256": "2a17cf6acea56bc337b61936cdfa07d700b6338235cfa8dbcd2cc7c6810597c2",
+  "program_requested": true,
+  "external_requested": false,
+  "hardware_validated": false,
+  "input_sha256": {
+    "sfp_probe.py": "22cdc3538c3e7b792e2fdeba53dbd49a3a88016eb7d2d2037d7690d720f59bef",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "csr.json": "215a72589affe4712727292ed5a549fc0d462e91b23249cc3223c973b371d610"
+  },
+  "reference_source": "fclk",
+  "boot": {
+    "bitstream_sha256": "2a17cf6acea56bc337b61936cdfa07d700b6338235cfa8dbcd2cc7c6810597c2",
+    "sd_qspi_written": true,
+    "jtag_serial": "210251842914",
+    "boot_passed": true,
+    "sd_written": true,
+    "qspi_written": false,
+    "boot_environment_written": false,
+    "method": "sd-ext4-uboot",
+    "jtag_used": false,
+    "sd_file": "adc-2a17cf6acea56bc337b61936cdfa07d700b6338235cfa8dbcd2cc7c6810597c2.bit",
+    "host": "192.168.2.4"
+  },
+  "management_host": "192.168.2.4",
+  "error": "Board loopback failed; see saved diagnostics"
+}

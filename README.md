@@ -645,8 +645,13 @@ GTX loopback, numbered frames, hardware ICMP and UDP echo. Build with
 open-source GTX database additions and physical test status. The qualified
 dual-FMC ADC/DDR design remains available separately.
 
-Physical local-quad GTX/MAC/PCS loopback passed **1000/1000 frames with zero
-errors** on 2026-10-10. Routing the Si5324 reference into the SFP quad remains
-under investigation; external switch traffic is not yet qualified.
+Physical local-quad and SFP-quad GTX/MAC/PCS loopbacks passed
+**1000/1000 frames with zero errors** on 2026-10-10. The SFP quad uses
+a test-only 100 MHz PS fabric reference; one measured GTX configuration
+bit restores its clock input. Routing the Si5324 reference into the SFP
+quad remains under investigation. External switch traffic is not qualified;
+the SFP module EEPROM currently returns NACK. For the qualified fabric-clock
+diagnostic build, use `make sfp-pl SFP_REFCLK=fclk`. The default continues
+to use the Si5324 reference under investigation.
 
 [Download the verified local-quad loopback bitstream and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010).
