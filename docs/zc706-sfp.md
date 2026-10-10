@@ -364,3 +364,27 @@ QSPI and the default SD boot configuration are unchanged. Evidence is in
 `evidence/zc706/sfp-20261010/fclk-integrated/`.
 
 [Published integrated SFP-quad diagnostic artifact](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-sfp-fclk-loopback-20261010).
+
+### Upstream contributions
+
+Submitted on the user's explicit instruction, with author and DCO sign-off
+`Greg Kasprowicz <gkasprow@gmail.com>` and disclosed Codex assistance:
+
+- [Project X-Ray PR #2576](https://github.com/f4pga/prjxray/pull/2576):
+  randomized GTGREFCLK connectivity, usage tags, test-only DRC permission,
+  regression tests and measured model/physical evidence. All four Python
+  tests pass; the full randomized fuzzer with Vivado 2017.2 remains NOT_RUN.
+  DCO and WIP checks passed; the PR is open for review.
+- [openXC7/nextpnr PR #83](https://github.com/openXC7/nextpnr/pull/83):
+  preserve selector/fabric clock nets and emit the GTX fabric-input feature.
+  The patch applies to current main; hardware qualification used the pinned
+  backend, so a full latest-main compile/hardware rerun is not claimed.
+
+No direct generated-database PR was sent to prjxray-db, following its
+contribution policy. The controlled port-only vendor comparison holds the
+selector and dedicated input fixed and reproduces the same three-bit diff;
+the physically required subset remains just bit `31_54`. Local copies of
+the PR bodies, heads and check status are in
+`evidence/zc706/sfp-20261010/upstream/`. Submitted patch snapshots are
+`patches/prjxray-gtx-fabric-refclk-fuzzer.patch` and
+`patches/nextpnr-gtx-fabric-refclk-upstream.patch`.
