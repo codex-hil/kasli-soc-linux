@@ -1167,7 +1167,237 @@
           "sfp_status_tx_count": 125001878.16156127
         }
       }
+    },
+    {
+      "attempt": "20261010-north-channel-gate",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "0247c9e4d08bc2eab6cf0728023f712fe91ac5047d520cc9d6435dc693f626ef",
+        "program_requested": true,
+        "external_requested": false,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "22cdc3538c3e7b792e2fdeba53dbd49a3a88016eb7d2d2037d7690d720f59bef",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "cc8914a4a48e84c423c61b47c1c19eca7fa5c4432aa71d62778b75b6758bf8ef"
+        },
+        "boot": {
+          "bitstream_sha256": "0247c9e4d08bc2eab6cf0728023f712fe91ac5047d520cc9d6435dc693f626ef",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-0247c9e4d08bc2eab6cf0728023f712fe91ac5047d520cc9d6435dc693f626ef.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "drp": {
+          "0x05b": 30,
+          "0x05c": 56320,
+          "0x05d": 48135,
+          "0x05e": 4099,
+          "0x05f": 488,
+          "0x088": 34,
+          "0x0a8": 32,
+          "0x0a9": 4112,
+          "0x0aa": 9215,
+          "0x0ab": 0,
+          "0x0ac": 3
+        },
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            0
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'sfp_status_drp_address': 172, 'sfp_status_drp_write_data': 0, 'sfp_status_drp_command': 0, 'sfp_status_drp_read_data': 3, 'sfp_status_drp_busy': 0, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}",
+        "status": {
+          "sfp_status_control": 10,
+          "sfp_status_status": 64,
+          "sfp_status_signature": 1397116977,
+          "sfp_status_rx_count": 0,
+          "sfp_status_tx_count": 0,
+          "sfp_status_si_ref_count": 0,
+          "sfp_status_gt_ref_count": 0,
+          "sfp_status_clock_faults": 1,
+          "sfp_status_drp_address": 172,
+          "sfp_status_drp_write_data": 0,
+          "sfp_status_drp_command": 0,
+          "sfp_status_drp_read_data": 3,
+          "sfp_status_drp_busy": 0,
+          "mac_status_crc_errors": 0,
+          "mac_status_preamble_errors": 0,
+          "mac_status_tx_frames": 0,
+          "mac_status_rx_frames": 0,
+          "packet_test_start": 0,
+          "packet_test_busy": 0,
+          "packet_test_tx_frames": 0,
+          "packet_test_rx_frames": 0,
+          "packet_test_errors": 0
+        },
+        "clock_rates_hz": {
+          "sfp_status_si_ref_count": 0.0,
+          "sfp_status_gt_ref_count": 0.0,
+          "sfp_status_rx_count": 0.0,
+          "sfp_status_tx_count": 0.0
+        }
+      }
+    },
+    {
+      "attempt": "20261010-north-two-gates",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "f6bee48680a90399fa4aee73a3fa9e6fba4017323d0838f6fb59840faac76fa4",
+        "program_requested": true,
+        "external_requested": false,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "22cdc3538c3e7b792e2fdeba53dbd49a3a88016eb7d2d2037d7690d720f59bef",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "cc8914a4a48e84c423c61b47c1c19eca7fa5c4432aa71d62778b75b6758bf8ef"
+        },
+        "boot": {
+          "bitstream_sha256": "f6bee48680a90399fa4aee73a3fa9e6fba4017323d0838f6fb59840faac76fa4",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-f6bee48680a90399fa4aee73a3fa9e6fba4017323d0838f6fb59840faac76fa4.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "drp": {
+          "0x05b": 30,
+          "0x05c": 56320,
+          "0x05d": 48135,
+          "0x05e": 4099,
+          "0x05f": 488,
+          "0x088": 34,
+          "0x0a8": 32,
+          "0x0a9": 4112,
+          "0x0aa": 9215,
+          "0x0ab": 0,
+          "0x0ac": 3
+        },
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            0
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'sfp_status_drp_address': 172, 'sfp_status_drp_write_data': 0, 'sfp_status_drp_command': 0, 'sfp_status_drp_read_data': 3, 'sfp_status_drp_busy': 0, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}",
+        "status": {
+          "sfp_status_control": 10,
+          "sfp_status_status": 64,
+          "sfp_status_signature": 1397116977,
+          "sfp_status_rx_count": 0,
+          "sfp_status_tx_count": 0,
+          "sfp_status_si_ref_count": 0,
+          "sfp_status_gt_ref_count": 0,
+          "sfp_status_clock_faults": 1,
+          "sfp_status_drp_address": 172,
+          "sfp_status_drp_write_data": 0,
+          "sfp_status_drp_command": 0,
+          "sfp_status_drp_read_data": 3,
+          "sfp_status_drp_busy": 0,
+          "mac_status_crc_errors": 0,
+          "mac_status_preamble_errors": 0,
+          "mac_status_tx_frames": 0,
+          "mac_status_rx_frames": 0,
+          "packet_test_start": 0,
+          "packet_test_busy": 0,
+          "packet_test_tx_frames": 0,
+          "packet_test_rx_frames": 0,
+          "packet_test_errors": 0
+        },
+        "clock_rates_hz": {
+          "sfp_status_si_ref_count": 0.0,
+          "sfp_status_gt_ref_count": 0.0,
+          "sfp_status_rx_count": 0.0,
+          "sfp_status_tx_count": 0.0
+        }
+      }
     }
   ],
-  "latest_conclusion": "Local quad-110 GTX/MAC/PCS physical loopback passed 1000 frames without errors at ~125 MHz. Dedicated Si5324 input works. SFP quad-111 reference routing remains under investigation; external switch test not run."
+  "latest_conclusion": "Quad-110 local GTX/MAC/PCS physical loopback PASS (1000 frames, no errors). Quad-111 SFP reference-clock routing remains unavailable; channel and source-bank activation flags did not help. SFP EEPROM NACK; external traffic not run. Optional Zynq Vivado comparator unavailable: missing cached installer packages and NAS 192.168.2.31 unreachable."
 }

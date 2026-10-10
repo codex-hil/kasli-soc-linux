@@ -228,3 +228,18 @@ MMCMs and PCS all locked; TX/RX and the selected reference measured about
 fabric-monitor counter remains zero even in this passing design, so that
 counter is not reliable evidence of a missing physical Si5324 clock. The
 SFP quad and switch link still need separate qualification.
+
+Further channel-GTREFCLK1_USED and source/common-plus-channel flag
+experiments did not restore the SFP quad reference. RapidWright shows a
+programmable BRKH_GTX mux between source REFCLK1 and target NORTHREFCLK1;
+the pinned database has no BRKH_GTX segbits, and the current packer drops
+this dedicated connection without configuring that mux. A source-clock
+routing fix needs evidence for those bits, rather than guessing them.
+
+An optional Vivado comparator could supply the missing routing reference.
+The shared installation currently has Artix-7 and ZynqMP support, but no
+Zynq-7000/Kintex-7 device parts. Adding Zynq-7000 from the cached offline
+installer failed validation before installation because packages are missing;
+its original NAS archive at `192.168.2.31` is unreachable. No Vivado
+bitstream was built or loaded, and the normal build retains no Vivado
+dependency. The physical SFP module EEPROM also did not acknowledge.
