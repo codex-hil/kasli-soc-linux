@@ -362,3 +362,5 @@ Linux boot, UART and SSH passed; current management DHCP address was
 192.168.2.4. The checked loopback image is left running in volatile PL;
 QSPI and the default SD boot configuration are unchanged. Evidence is in
 `evidence/zc706/sfp-20261010/fclk-integrated/`.
+
+[Published integrated SFP-quad diagnostic artifact](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-sfp-fclk-loopback-20261010).

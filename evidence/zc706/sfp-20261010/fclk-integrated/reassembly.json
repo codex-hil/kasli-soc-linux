@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "regenerated_overlay_bitstream_sha256": "007fd79ea9ab560cad5e8873ea7e28d3551fecb03749bd0412a83c3662cb14f1",
+  "physically_validated_artifact_sha256": "297dd6d35e98d274c664b4525b5cbc3ec7754c680b9e3453e3a1f6764b1bb6ef",
+  "configuration_payload_sha256": "ca1abf21064a7b3fc8ba9715fcd130c4ec9446f9ecffcdbff7213d16fbe7fe3a",
+  "matches_physically_validated_configuration": true,
+  "bitstream_header_has_build_timestamp": true,
+  "database_feature": "GTGREFCLK_USED 31_54"
+}

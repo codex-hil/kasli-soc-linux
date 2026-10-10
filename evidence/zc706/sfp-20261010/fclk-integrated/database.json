@@ -143,7 +143,6 @@
   },
   "fabric_refclk_enable": {
     "bits": [
-      "31_10",
       "31_54"
     ],
     "evidence": "evidence/zc706/sfp-20261010/vivado-fabric-refclk-model.json"

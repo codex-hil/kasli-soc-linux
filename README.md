@@ -655,3 +655,5 @@ diagnostic build, use `make sfp-pl SFP_REFCLK=fclk`. The default continues
 to use the Si5324 reference under investigation.
 
 [Download the verified local-quad loopback bitstream and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010).
+
+[Download the verified SFP-quad fabric-clock diagnostic and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-sfp-fclk-loopback-20261010).
