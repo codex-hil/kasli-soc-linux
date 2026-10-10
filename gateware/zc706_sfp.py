@@ -3,10 +3,11 @@
 """Isolated ZC706 SFP: upstream GTX BASE-X, MAC/ARP/ICMP/UDP and CSR diagnostics."""
 import argparse
 from pathlib import Path
-from migen import Signal, Instance, Cat, If, Constant
+from migen import Signal, Instance, Cat, If, Constant, ClockDomain, ClockSignal, ResetSignal
 from migen.genlib.cdc import MultiReg
 from litex.gen import LiteXModule
 from litex.soc.cores.bitbang import I2CMaster
+from litex.soc.cores.clock import S7MMCM
 from litex.soc.interconnect import stream
 from litex.soc.interconnect.csr import CSRStorage, CSRStatus
 from litex.soc.integration.export import get_csr_json
@@ -22,6 +23,20 @@ MAC = 0x02c0de706001
 class ZC706PHY(K7_1000BASEX):
     # All three frequencies give the supported 2.5 GHz CPLL / OUT_DIV=4.
     supported_refclk_freqs = (125e6, 156.25e6, 200e6)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # nextpnr does not yet constrain regional BUFH consumers to the
+        # region. Use global BUFGs for the three TX clocks, matching the
+        # upstream RX clocking. Clock rates, MMCM ratios and resets stay intact.
+        changed = 0
+        for module in (self.pma, self.tx_mmcm):
+            for special in module._fragment.specials:
+                if isinstance(special, Instance) and special.of == "BUFH":
+                    special.of = "BUFG"
+                    changed += 1
+        if changed != 3:
+            raise RuntimeError("Upstream TX clock-buffer structure changed")
 
 
 class PacketTest(LiteXModule):
@@ -98,22 +113,31 @@ class Diagnostics(LiteXModule):
             self.specials += MultiReg(gray, csr.status)
 
 
+class SFPClock(LiteXModule):
+    def __init__(self):
+        self.cd_sys = ClockDomain("sys")
+        self.mmcm = S7MMCM(speedgrade=-2, fractional=False)
+        self.mmcm.register_clkin(ClockSignal("ps7"), 100e6)
+        self.mmcm.create_clkout(self.cd_sys, 50e6)
+        self.comb += self.mmcm.reset.eq(ResetSignal("ps7"))
+
+
 class SFPSoC(BaseSoC):
     def __init__(self, ip="192.168.2.206"):
-        super().__init__("zc706")
+        super().__init__("zc706", crg=SFPClock(), sys_clk_freq=50e6)
         self.csr.add("probe", 1)
         self.platform.add_extension([r for r in _io if r[0] in
             ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324", "i2c")])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
         self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
-            self.platform.request("sfp"), 100e6, refclk_freq=125e6, with_csr=False)
+            self.platform.request("sfp"), 50e6, refclk_freq=125e6, with_csr=False)
         self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
             self.platform.request("sfp_tx_disable_n"))
         self.csr.add("sfp_status", 3)
-        self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, 100e6,
+        self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, 50e6,
             dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
-            tx_cdc_depth=2048, rx_cdc_depth=2048)
+            tx_cdc_depth=2048, rx_cdc_depth=2048, with_store_and_forward=True)
         self.mac_status = LiteXModule()
         for name in ("crc_errors", "preamble_errors"):
             csr = CSRStatus(32, name=name)
@@ -138,6 +162,9 @@ class SFPSoC(BaseSoC):
         self.add_constant("SFP_MAC", MAC)
         self.add_constant("SFP_IP", ip)
         self.add_constant("SFP_REFCLK_HZ", 125000000)
+        self.platform.add_period_constraint(self.crg.cd_sys.clk, 20)
+        self.platform.add_period_constraint(self.ethphy.cd_eth_tx.clk, 8)
+        self.platform.add_period_constraint(self.ethphy.cd_eth_rx.clk, 8)
         self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
         self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
         self.platform.add_false_path_constraints(self.crg.cd_sys.clk,

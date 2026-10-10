@@ -6,6 +6,11 @@ MAC, ARP, ICMP and UDP, with PS GP0 only for diagnostics. The PL has its own
 MAC `02:c0:de:70:60:01`, IP `192.168.2.206`, and UDP echo port `1234`.
 PS Linux Ethernet remains the separate management connection.
 
+The original 100 MHz system placement failed timing (77.54 MHz); the
+diagnostic uses an integer MMCM ratio at 50 MHz with explicit constraints.
+The complete MAC/preamble/CRC loopback also passes simulation across the
+50 MHz / 125 MHz boundary.
+
 ## Hardware configuration
 
 | Function | ZC706 connection |
@@ -37,12 +42,13 @@ N1=4, N2=5, M=1, OUT_DIV=4, producing a 1.25 Gbit/s serial link.
 
 The minimal PS7/GP0/CSR infrastructure is reused. GTX and LiteEth's software
 8b/10b PCS provide 1000BASE-X autonegotiation, independent 125 MHz TX/RX
-domains, and the upstream reset sequence. The MAC inserts/checks preamble,
+domains, and the upstream reset sequence. Complete-frame buffering prevents
+underruns while crossing from the slower system clock to the 1 Gbit/s PHY. The MAC inserts/checks preamble,
 padding and CRC. ARP and ICMP enable ping; UDP echoes payloads back to the
 sender using a 2048-byte FIFO. A private EtherType 0x88b5 sends a deterministic
 64-byte payload through the complete MAC/PCS/transceiver loopback path.
 
-The system datapath is 8 bits at 100 MHz. This diagnostic establishes
+The system datapath is 8 bits at 50 MHz. This diagnostic establishes
 functional Ethernet; it does not claim sustained 1 Gbit/s payload throughput.
 
 ## Open-source database additions
@@ -60,7 +66,9 @@ already has its correct Zynq frame geometry. The overlay restores only this
 pair using the existing XC7Z030 LIOB33 definition, physical sites verified
 independently against XC7Z045, and the official bank-9 package functions.
 The chipdb generator imports the five upstream Kintex GTX/IPAD/OPAD metadata
-definitions; the existing HR package overlay adds AA18. No Vivado is used.
+definitions; the existing HR package overlay adds AA18. The three upstream
+TX BUFH buffers are replaced by BUFG buffers because nextpnr currently
+places their reset-synchronizer consumers outside the reachable region. No Vivado is used.
 These additions remain experimental until physical loopback qualification.
 
 ## Build and test
@@ -76,6 +84,14 @@ venv/bin/python tools/boot_adc_jtag.py --host 192.168.2.4 --sd \
 
 The loader preserves QSPI, existing boot files and persistent U-Boot
 environment. It loads a content-addressed PL file for this boot only.
+The host orchestrator uploads/checksums the inputs, saves boot and board
+logs, and only runs external traffic tests after internal loopback and a
+real external link:
+
+```sh
+python3 tools/test_sfp_hardware.py --host 192.168.2.4 --program --external
+```
+
 Upload `tools/sfp_probe.py`, `tools/fmc_adc.py` and the generated CSR JSON to
 Linux, then run:
 
@@ -92,7 +108,11 @@ needed for this internal test.
 
 External testing needs a suitable 1 Gbit/s SFP, cable and switch port capable
 of 1000BASE-X. A 10G-only module/port is not sufficient. With internal loopback
-disabled and an external link established, run on the host:
+disabled and an external link established, run on the host. UG954 also
+documents J17 as a manual transmitter-enable jumper; a fitted jumper
+forces the transmitter enabled independently of the FPGA output.
+
+Run on the host:
 
 ```sh
 python3 tools/test_sfp_network.py --output build/zc706-sfp/network.json
@@ -124,6 +144,7 @@ bit 7 indicates SGMII detection. Clock counters are Gray encoded.
 | Element | Status |
 | --- | --- |
 | Numbered-payload logic simulation and negative cases | PASS |
+| Complete MAC/preamble/padding/CRC simulation at 50/125 MHz | PASS |
 | Upstream PCS/gearbox/autonegotiation suite, 25 tests | PASS |
 | GTX/AA18 package mapping | Independently verified |
 | SFP module identification on current hardware | No EEPROM response |

@@ -164,13 +164,22 @@ def loopback_test(r, count):
                 raise TimeoutError(f"Loopback packet {n} not received: {status(r)}")
             time.sleep(.001)
     after = status(r)
+    names = ("sfp_status_rx_count", "sfp_status_tx_count")
+    t0 = time.monotonic()
+    initial = [decode_gray(r.read(n)) for n in names]
+    time.sleep(.1)
+    final = [decode_gray(r.read(n)) for n in names]
+    elapsed = time.monotonic()-t0
+    frequencies = {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
+    if any(abs(f-125e6) > 125e6*.02 for f in frequencies.values()):
+        raise RuntimeError(f"GTX user clock frequency is not 125 MHz: {frequencies}")
     for name in ("packet_test_errors", "mac_status_crc_errors", "mac_status_preamble_errors"):
         if name in before and after[name] != before[name]:
             raise RuntimeError(f"Loopback error counter incremented: {name}")
     if (after["packet_test_tx_frames"]-before["packet_test_tx_frames"]) & 0xffffffff != count:
         raise RuntimeError("TX count mismatch")
     return {"result": "PASS", "frames": count, "payload_bytes": 64,
-            "before": before, "after": after}
+            "before": before, "after": after, "user_clock_hz": frequencies}
 
 
 def main():
