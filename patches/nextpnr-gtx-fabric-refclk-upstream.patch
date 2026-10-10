@@ -1,0 +1,64 @@
+diff --git a/docs/xilinx-porting/05-porting-plan.md b/docs/xilinx-porting/05-porting-plan.md
+index 76663ba1..1a8c29e7 100644
+--- a/docs/xilinx-porting/05-porting-plan.md
++++ b/docs/xilinx-porting/05-porting-plan.md
+@@ -377,3 +377,25 @@ cases block, the outstanding ones run `continue-on-error` naming their issue.
+ `dsp-const-only-pins` (#159) is **not** a blocker: it is red on the fork's main
+ too, with the fix unmerged in the fork's PR #159.
+ 
++
++### GTX fabric reference follow-up (2026-10-10)
++
++The GTX hardwired-clock filter also matched `CPLLREFCLKSEL` control pins and
++`GTGREFCLK`, disconnecting selectors and the routable fabric reference input.
++Preserve those connections, record nonconstant `GTGREFCLK` use and emit the
++`GTGREFCLK_USED` feature. The companion X-Ray database feature is minor 31,
++channel-relative bit 54 for the tested GTX_CHANNEL_2 on XC7Z045.
++
++Physical ZC706 validation: a timing-checked Yosys/nextpnr/openXC7 image
++with 100 MHz PS fabric reference passed 1000/1000 complete PCS/MAC PMA
++loopback frames, zero errors, user clocks approximately 125 MHz. The
++otherwise identical frame-only control without bit 31_54 lost the CPLL
++reference and failed loopback. Tests were performed on the pinned backend
++`c68c13582e972292c86a5025140d52e713384cbc` with the isolated patches in
++the linked reproducer; this rebased upstream change has not had a full
++8006fbc6 build/hardware rerun. Fabric reference is test-only; dedicated
++Si5324 cross-quad routing and external SFP/switch traffic remain unqualified.
++
++[Reproducer and qualification](https://github.com/codex-hil/kasli-soc-linux/blob/main/docs/zc706-sfp.md),
++[bit-isolation evidence](https://github.com/codex-hil/kasli-soc-linux/tree/main/evidence/zc706/sfp-20261010/fclk-bit-isolation),
++[integrated hardware evidence](https://github.com/codex-hil/kasli-soc-linux/tree/main/evidence/zc706/sfp-20261010/fclk-integrated).
+diff --git a/himbaechel/uarch/xilinx/fasm.cc b/himbaechel/uarch/xilinx/fasm.cc
+index b1cd0b9f..04d0c540 100644
+--- a/himbaechel/uarch/xilinx/fasm.cc
++++ b/himbaechel/uarch/xilinx/fasm.cc
+@@ -4159,6 +4159,8 @@ struct FasmBackend
+         write_inv("CPLLLOCKDETCLK");
+         write_bit("GTREFCLK0_USED", bool_or_default(ci->params, ctx->id("_GTREFCLK0_USED"), false));
+         write_bit("GTREFCLK1_USED", bool_or_default(ci->params, ctx->id("_GTREFCLK1_USED"), false));
++        // GTGREFCLK fabric-input enable, supplied by the GTX channel database.
++        write_bit("GTGREFCLK_USED", bool_or_default(ci->params, ctx->id("_GTGREFCLK_USED"), false));
+ 
+         auto outrefclk_sel_inv = int_or_default(ci->params, ctx->id("OUTREFCLK_SEL_INV"), 0b10);
+         write_int_vector("OUTREFCLK_SEL_INV[1:0]", outrefclk_sel_inv, 2);
+diff --git a/himbaechel/uarch/xilinx/pack_io.cc b/himbaechel/uarch/xilinx/pack_io.cc
+index a6a95f02..6521d176 100644
+--- a/himbaechel/uarch/xilinx/pack_io.cc
++++ b/himbaechel/uarch/xilinx/pack_io.cc
+@@ -1717,7 +1717,15 @@ void XC7Packer::pack_gt()
+                 bool is_clock_status_port =
+                         boost::contains(port_name, "CLKMONITOR") || boost::contains(port_name, "CLKLOST");
+                 bool is_hardwired_clock_input =
+-                        net != nullptr && (is_pll_clock_port || is_refclk_or_qpll_port) && !is_clock_status_port;
++                        net != nullptr && (is_pll_clock_port || is_refclk_or_qpll_port) && !is_clock_status_port &&
++                        !boost::contains(port_name, "REFCLKSEL") && port_name != "GTGREFCLK";
++                // REFCLKSEL pins are mux-control inputs, not hardwired clocks.
++                // Dropping their constant nets leaves selector 000 (reserved).
++                // GTGREFCLK is the fabric reference input (UG476), so it must
++                // also remain connected and be routed through the fabric.
++                if (!is_gtp && port_name == "GTGREFCLK" && net != nullptr &&
++                    net->name != ctx->id("$PACKER_GND_NET") && net->name != ctx->id("$PACKER_VCC_NET"))
++                    ci->params[ctx->id("_GTGREFCLK_USED")] = Property(1, 1);
+                 if (is_hardwired_clock_input) {
+                     bool tied_to_constant_net =
+                             net->name == ctx->id("$PACKER_GND_NET") || net->name == ctx->id("$PACKER_VCC_NET");

@@ -1,0 +1,220 @@
+diff --git a/fuzzers/064-gtx-channel-conf/README.md b/fuzzers/064-gtx-channel-conf/README.md
+new file mode 100644
+index 0000000..f705735
+--- /dev/null
++++ b/fuzzers/064-gtx-channel-conf/README.md
+@@ -0,0 +1,36 @@
++# GTX channel fabric-reference input
++
++In addition to channel attributes and inversion bits, this fuzzer records
++whether `GTGREFCLK` has a nonconstant fabric driver (`GTGREFCLK_USED`). The
++CPLL reference selector is held at 7 in both states so the input connection
++is randomized independently of the selector. Unused channels and legacy
++parameter files tag this input as unused. REQP-52 is disabled only because
++this is a configuration-mapping experiment: GTGREFCLK is a test-only input,
++not a recommended low-jitter transceiver reference.
++
++A controlled XC7Z030 model comparison using Vivado 2025.2 first identified
++three candidate bits when switching from dedicated to fabric reference:
++minor/channel-relative bits `31_09`, `31_10`, and `31_54`. A second model
++comparison held CPLLREFCLKSEL=7 and GTREFCLK1 fixed and changed only
++GTGREFCLK from the PS fabric clock to constant zero; it produced the same
++three-bit diff. This input-use tag records the vendor connection pattern;
++the minimal physically necessary subset is established separately. Physical bit
++isolation on ZC706 rev. 1.2 / XC7Z045 showed that `31_54` alone restores the
++fabric reference. Both no-extra-bit and `31_10`-only controls lose the CPLL
++reference. The `31_54`-only image passed 1000/1000 complete PCS/MAC PMA
++loopback frames, zero errors, approximately 100 MHz selected reference and
++125 MHz user clocks. An integrated Yosys/nextpnr/openXC7 build independently
++passed 1000 frames without manual frame edits.
++
++The randomized fuzzer has not been rerun with its supported Vivado 2017.2.
++The Python generator/tag regression tests pass. The measured Zynq channel
++mapping is evidence for review; no `_MID_LEFT`/`_MID_RIGHT` or additional
++family mapping is inferred. No generated database files are changed in this
++PR. Dedicated Si5324 cross-quad routing remains a separate open problem.
++External switch traffic was NOT_RUN because the module EEPROM returned NACK.
++
++- [Controlled model evidence](https://github.com/codex-hil/kasli-soc-linux/blob/main/evidence/zc706/sfp-20261010/vivado-fabric-refclk-model.json)
++- [Port-only model comparison](https://github.com/codex-hil/kasli-soc-linux/blob/main/evidence/zc706/sfp-20261010/vivado-fabric-refclk-port-only.json)
++- [Physical bit-isolation controls](https://github.com/codex-hil/kasli-soc-linux/tree/main/evidence/zc706/sfp-20261010/fclk-bit-isolation)
++- [Integrated build/hardware qualification](https://github.com/codex-hil/kasli-soc-linux/tree/main/evidence/zc706/sfp-20261010/fclk-integrated)
++- [Reproducer and limitations](https://github.com/codex-hil/kasli-soc-linux/blob/main/docs/zc706-sfp.md)
+diff --git a/fuzzers/064-gtx-channel-conf/generate.py b/fuzzers/064-gtx-channel-conf/generate.py
+index 9199023..2aff2de 100644
+--- a/fuzzers/064-gtx-channel-conf/generate.py
++++ b/fuzzers/064-gtx-channel-conf/generate.py
+@@ -62,6 +62,8 @@ def main():
+             in_use = params["IN_USE"]
+ 
+             segmk.add_site_tag(site, "IN_USE", in_use)
++            segmk.add_site_tag(
++                site, "GTGREFCLK_USED", params.get("GTGREFCLK_USED", False))
+ 
+             if in_use:
+                 for param, param_info in attrs.items():
+diff --git a/fuzzers/064-gtx-channel-conf/generate.tcl b/fuzzers/064-gtx-channel-conf/generate.tcl
+index b050e95..dca9478 100644
+--- a/fuzzers/064-gtx-channel-conf/generate.tcl
++++ b/fuzzers/064-gtx-channel-conf/generate.tcl
+@@ -16,6 +16,8 @@ proc run {} {
+ 
+     set_property IS_ENABLED 0 [get_drc_checks {NSTD-1}]
+     set_property IS_ENABLED 0 [get_drc_checks {UCIO-1}]
++    # GTGREFCLK is test-only; this fuzzer intentionally maps that input.
++    set_property IS_ENABLED 0 [get_drc_checks {REQP-52}]
+     set_property IS_ENABLED 0 [get_drc_checks {REQP-48}]
+     set_property IS_ENABLED 0 [get_drc_checks {REQP-47}]
+     set_property IS_ENABLED 0 [get_drc_checks {REQP-1619}]
+diff --git a/fuzzers/064-gtx-channel-conf/top.py b/fuzzers/064-gtx-channel-conf/top.py
+index 6a8d65c..a864a48 100644
+--- a/fuzzers/064-gtx-channel-conf/top.py
++++ b/fuzzers/064-gtx-channel-conf/top.py
+@@ -102,6 +102,7 @@ assign out = in;
+ 
+         in_use = bool(random.randint(0, 9))
+         params["IN_USE"] = in_use
++        params["GTGREFCLK_USED"] = False
+ 
+         if in_use:
+             for param, param_info in attrs.items():
+@@ -137,6 +138,14 @@ assign out = in;
+                 verilog_ports += """
+             .{}({}),""".format(param, luts.get_next_output_net())
+ 
++            # Hold the selector fixed; fuzz the fabric reference connection
++            # independently of the channel attribute/inversion tags.
++            params["GTGREFCLK_USED"] = bool(random.randint(0, 1))
++            refclk = luts.get_next_output_net() if params["GTGREFCLK_USED"] else "1'b0"
++            verilog_ports += """
++            .CPLLREFCLKSEL(3'd7),
++            .GTGREFCLK({}),""".format(refclk)
++
+             verilog_attr = verilog_attr.rstrip(",")
+             verilog_attr += "\n)"
+ 
+diff --git a/tests/test_gtx_fabric_refclk.py b/tests/test_gtx_fabric_refclk.py
+new file mode 100644
+index 0000000..9cbaf70
+--- /dev/null
++++ b/tests/test_gtx_fabric_refclk.py
+@@ -0,0 +1,119 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: ISC
++"""Regression tests for independently tagging the GTX fabric reference input."""
++import contextlib
++import importlib.util
++import io
++import json
++import os
++from pathlib import Path
++import random
++import re
++import tempfile
++import unittest
++from unittest.mock import patch
++
++FUZDIR = Path(__file__).resolve().parents[1] / 'fuzzers/064-gtx-channel-conf'
++
++
++def load(name):
++    spec = importlib.util.spec_from_file_location('gtx_' + name, FUZDIR / (name + '.py'))
++    module = importlib.util.module_from_spec(spec)
++    with patch.dict(os.environ, {'SEED': '1'}):
++        spec.loader.exec_module(module)
++    return module
++
++
++class Recorder:
++    def __init__(self, unused):
++        self.tags = {}
++        self.compiled = False
++        self.written = False
++
++    def add_site_tag(self, site, name, value):
++        self.tags[site, name] = value
++
++    def compile(self, bitfilter):
++        self.compiled = True
++
++    def write(self):
++        self.written = True
++
++
++class GTXFabricRefclkTest(unittest.TestCase):
++    def make_top(self, seed):
++        top = load('top')
++        sites = [('GTX_CHANNEL_%d_X0Y0' % n, 'GTX_CHANNEL_%d' % n,
++                  'GTXE2_CHANNEL_X0Y%d' % n, 'GTXE2_CHANNEL') for n in range(4)]
++        with tempfile.TemporaryDirectory() as directory:
++            old = os.getcwd()
++            os.chdir(directory)
++            try:
++                verilog = io.StringIO()
++                with patch.dict(os.environ, {'FUZDIR': str(FUZDIR)}), \
++                        patch.object(top, 'gen_sites', return_value=iter(sites)), \
++                        contextlib.redirect_stdout(verilog):
++                    top.random.seed(seed)
++                    top.main()
++                return json.loads(Path('params.json').read_text()), verilog.getvalue()
++            finally:
++                os.chdir(old)
++
++    def collect(self, primitives):
++        generate = load('generate')
++        recorder = Recorder('')
++        with tempfile.TemporaryDirectory() as directory:
++            old = os.getcwd()
++            os.chdir(directory)
++            try:
++                Path('params.json').write_text(json.dumps(primitives))
++                with patch.dict(os.environ, {'FUZDIR': str(FUZDIR)}), \
++                        patch.object(generate, 'Segmaker', return_value=recorder), \
++                        contextlib.redirect_stdout(io.StringIO()):
++                    generate.main()
++            finally:
++                os.chdir(old)
++        self.assertTrue(recorder.compiled)
++        self.assertTrue(recorder.written)
++        return recorder.tags
++
++    def test_connection_and_tag_follow_randomized_state(self):
++        seen = set()
++        unused = False
++        for seed in range(16):
++            primitives, verilog = self.make_top(seed)
++            used = [p for primitive in primitives for p in primitive['params'] if p['IN_USE']]
++            self.assertEqual(verilog.count('.CPLLREFCLKSEL(3\'d7)'), len(used))
++            tags = self.collect(primitives)
++            for primitive in primitives:
++                for params in primitive['params']:
++                    state = params['GTGREFCLK_USED']
++                    self.assertEqual(tags[params['site'], 'GTGREFCLK_USED'], state)
++                    if not params['IN_USE']:
++                        unused = True
++                        self.assertFalse(state)
++                        continue
++                    seen.add(state)
++                    instance = re.search(
++                        r'\) ' + primitive['tile_type'].lower() + r' \((.*?)\n\);',
++                        verilog, re.S).group(1)
++                    ref = re.search(r'\.GTGREFCLK\((.*?)\)', instance).group(1)
++                    self.assertEqual(ref != "1'b0", state)
++                    if state:
++                        self.assertRegex(ref, r'^lut_\d+_o$')
++        self.assertEqual(seen, {False, True})
++        self.assertTrue(unused)
++
++    def test_legacy_params_have_no_fabric_reference(self):
++        primitives, unused = self.make_top(1)
++        for primitive in primitives:
++            for params in primitive['params']:
++                del params['GTGREFCLK_USED']
++        tags = self.collect(primitives)
++        for primitive in primitives:
++            for params in primitive['params']:
++                self.assertFalse(tags[params['site'], 'GTGREFCLK_USED'])
++
++
++if __name__ == '__main__':
++    unittest.main()

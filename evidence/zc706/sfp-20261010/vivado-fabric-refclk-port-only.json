@@ -1,0 +1,16 @@
+{
+  "model_part": "xc7z030fbg676-2",
+  "selector_fixed": 7,
+  "gtrefclk1_connection_fixed": true,
+  "port_changed": "GTGREFCLK: PS FCLK to constant 0",
+  "connected_only_bits": [
+    "bit_0044249f_000_09",
+    "bit_0044249f_000_10",
+    "bit_0044249f_001_22"
+  ],
+  "disconnected_only_bits": [],
+  "bitstreams": {
+    "fabric-output": "bf5e54a75a551d3e6d7aadd844b1938960d4dd946cd21e6e747676090e349d4d",
+    "fabric-disconnected-output": "a4acd9ff7b3da6d61be254923cad0fa84297a4b549b01b26fcad0bae4deb7d38"
+  }
+}
