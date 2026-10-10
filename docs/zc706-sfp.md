@@ -385,6 +385,6 @@ contribution policy. The controlled port-only vendor comparison holds the
 selector and dedicated input fixed and reproduces the same three-bit diff;
 the physically required subset remains just bit `31_54`. Local copies of
 the PR bodies, heads and check status are in
-`evidence/zc706/sfp-20261010/upstream/`. Submitted patch snapshots are
+`evidence/zc706/sfp-20261010/upstream-reports/`. Submitted patch snapshots are
 `patches/prjxray-gtx-fabric-refclk-fuzzer.patch` and
 `patches/nextpnr-gtx-fabric-refclk-upstream.patch`.

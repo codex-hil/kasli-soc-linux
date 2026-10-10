@@ -1,0 +1,9 @@
+test_connection_and_tag_follow_randomized_state (test_gtx_fabric_refclk.GTXFabricRefclkTest.test_connection_and_tag_follow_randomized_state) ... ok
+test_legacy_params_have_no_fabric_reference (test_gtx_fabric_refclk.GTXFabricRefclkTest.test_legacy_params_have_no_fabric_reference) ... ok
+test_get_roi_gen_sites (test_util.TestUtil.test_get_roi_gen_sites) ... ok
+test_in_roi_overlay (test_util.TestUtil.test_in_roi_overlay) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.795s
+
+OK
