@@ -93,10 +93,6 @@ hardware configuration:
   for the PS USB controller was found; PS USB remains disabled.
 * GTX/SFP, RTIO clocks and EEM are unnecessary for the minimal PL design.
 
-Physical local-quad GTX/MAC/PCS loopback passed **1000/1000 frames with zero
-errors** on 2026-10-10. Routing the Si5324 reference into the SFP quad remains
-under investigation; external switch traffic is not yet qualified.
-
 Source revisions are pinned in `sources.lock.json`. The project uses
 [LiteX Zynq7000](https://github.com/enjoy-digital/litex/blob/master/litex/soc/cores/cpu/zynq7000/core.py)
 and [openXC7](https://github.com/openXC7/toolchain-nix).
@@ -648,3 +644,7 @@ GTX loopback, numbered frames, hardware ICMP and UDP echo. Build with
 `make sfp-test sfp-pl`; see [SFP bring-up](docs/zc706-sfp.md) for clocking,
 open-source GTX database additions and physical test status. The qualified
 dual-FMC ADC/DDR design remains available separately.
+
+Physical local-quad GTX/MAC/PCS loopback passed **1000/1000 frames with zero
+errors** on 2026-10-10. Routing the Si5324 reference into the SFP quad remains
+under investigation; external switch traffic is not yet qualified.
