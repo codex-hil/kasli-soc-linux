@@ -236,13 +236,17 @@ the pinned database has no BRKH_GTX segbits, and the current packer drops
 this dedicated connection without configuring that mux. A source-clock
 routing fix needs evidence for those bits, rather than guessing them.
 
-An optional Vivado comparator could supply the missing routing reference.
-The shared installation currently has Artix-7 and ZynqMP support, but no
-Zynq-7000/Kintex-7 device parts. Adding Zynq-7000 from the cached offline
-installer failed validation before installation because packages are missing;
-its original NAS archive at `192.168.2.31` is unreachable. No Vivado
-bitstream was built or loaded, and the normal build retains no Vivado
-dependency. The physical SFP module EEPROM also did not acknowledge.
+The optional Vivado comparator can supply a routing reference. The offline
+installer was found on GREG-CTI at `192.168.2.6`; its former address
+`192.168.2.31` was unreachable. Zynq-7000 packages were installed successfully,
+including the Enterprise device package needed to expose `xc7z045ffg900-2`.
+The comparator reached synthesis, which failed with `Common 17-345`: no
+Synthesis/XC7Z045 license is installed. This is a licensing limitation of the
+optional comparator, not a dependency of the normal open-source build.
+A model-only XC7Z030 experiment is being used to investigate GTX fabric-clock
+configuration without an Enterprise license. Its bitstream must never be
+programmed onto ZC706. No vendor bitstream has been loaded. The physical SFP
+module EEPROM also did not acknowledge.
 
 The [verified local-quad image and checksums](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010)
 are published separately from the ADC/DDR release. The hardware orchestrator

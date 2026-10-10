@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-10",
+  "source_server": "GREG-CTI",
+  "source_host": "192.168.2.6",
+  "vivado_version": "2025.2",
+  "zynq_parts": 122,
+  "artix_parts": 210,
+  "zynq7000_standard_add": "PASS",
+  "zynq7000_enterprise_device_add": "PASS",
+  "xc7z045_comparator_synthesis": "LICENSE_BLOCKED",
+  "error": "Common 17-345: Synthesis/xc7z045 license not found",
+  "vendor_bitstream_loaded": false,
+  "normal_open_source_build_requires_vivado": false,
+  "standard_missing_archives": 46,
+  "standard_download_bytes": 194316962,
+  "enterprise_missing_archives": 41,
+  "enterprise_download_bytes": 323037438
+}
