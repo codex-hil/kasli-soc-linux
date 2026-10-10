@@ -648,3 +648,5 @@ dual-FMC ADC/DDR design remains available separately.
 Physical local-quad GTX/MAC/PCS loopback passed **1000/1000 frames with zero
 errors** on 2026-10-10. Routing the Si5324 reference into the SFP quad remains
 under investigation; external switch traffic is not yet qualified.
+
+[Download the verified local-quad loopback bitstream and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010).

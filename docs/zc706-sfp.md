@@ -243,3 +243,27 @@ installer failed validation before installation because packages are missing;
 its original NAS archive at `192.168.2.31` is unreachable. No Vivado
 bitstream was built or loaded, and the normal build retains no Vivado
 dependency. The physical SFP module EEPROM also did not acknowledge.
+
+The [verified local-quad image and checksums](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010)
+are published separately from the ADC/DDR release. The hardware orchestrator
+accepts `--build-dir` to test a saved artifact tree containing `csr.json` and
+`gateware/{top.bit,manifest.json}` without replacing the normal build output.
+
+### Optional vendor routing comparator
+
+`tools/sfp_vivado_reference.tcl` consumes the same generated RTL/XDC and
+writes into a separate ignored directory. It is not called by `make image`
+or `make sfp-pl`, and it does not program hardware. Its missing-part guard
+was tested with the current shared installation; synthesis/place/route and
+bitstream generation through this comparator have **not** been run. Once
+Zynq-7000 part support is available, use:
+
+```sh
+vivado -mode batch -source tools/sfp_vivado_reference.tcl \
+  -tclargs build/zc706-sfp/gateware/gateware build/zc706-sfp/vivado-reference
+```
+
+The intended comparison is the cross-quad reference mux, using source
+Si5324 REFCLK1 and target SFP NORTHREFCLK1. A vendor reference would be
+used to document the missing database bits; it is not the deliverable
+open-source bitstream.

@@ -16,6 +16,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--host", required=True, type=ipaddress.IPv4Address)
     p.add_argument("--program", action="store_true")
+    p.add_argument("--build-dir", type=Path, default=ROOT/"build/zc706-sfp/gateware")
     p.add_argument("--external", action="store_true")
     p.add_argument("--frames", type=int, default=1000)
     p.add_argument("--output", type=Path)
@@ -24,7 +25,7 @@ def main():
         p.error("--frames must be 1..100000")
     out = a.output or ROOT/"build/zc706-sfp/hardware"/datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out.mkdir(parents=True, exist_ok=True)
-    bit = ROOT/"build/zc706-sfp/gateware/gateware/top.bit"
+    bit = a.build_dir/"gateware/top.bit"
     manifest = json.loads((bit.parent/"manifest.json").read_text())
     digest = hashlib.sha256(bit.read_bytes()).hexdigest()
     if manifest.get("design") != "sfp" or manifest.get("bitstream_sha256") != digest or not manifest.get("timing_passed"):
@@ -33,7 +34,8 @@ def main():
         raise RuntimeError("Local-quad diagnostic does not use the SFP connector")
     result = {"result": "FAIL", "bitstream_sha256": digest,
         "program_requested": a.program, "external_requested": a.external,
-        "hardware_validated": False, "input_sha256": {}}
+        "hardware_validated": False, "input_sha256": {},
+        "reference_source": manifest.get("sfp_refclk")}
     host = str(a.host)
     try:
         if a.program:
@@ -52,7 +54,7 @@ def main():
         remote = "/tmp/sfp-"+digest[:16]
         subprocess.run(ssh+["mkdir -p "+remote], check=True, timeout=15)
         for source in [ROOT/"tools/sfp_probe.py", ROOT/"tools/fmc_adc.py",
-                       ROOT/"build/zc706-sfp/gateware/csr.json"]:
+                       a.build_dir/"csr.json"]:
             data = source.read_bytes()
             expected = hashlib.sha256(data).hexdigest()
             subprocess.run(ssh+["cat > "+remote+"/"+source.name], input=data, check=True, timeout=15)
