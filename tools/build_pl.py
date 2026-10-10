@@ -27,6 +27,43 @@ def validate_ddr_io(work):
             raise RuntimeError(f'Disconnected or duplicated DDR pad: {name}')
 
 
+
+def validate_sfp_clock(work):
+    top = json.loads((work/'top.json').read_text())['modules']['top']
+    ps = [c for c in top['cells'].values() if c['type'] == 'PS7']
+    gt = [c for c in top['cells'].values() if c['type'] == 'GTXE2_CHANNEL']
+    if len(ps) != 1 or len(gt) != 1:
+        raise RuntimeError('SFP target requires exactly one PS7 and one GTX')
+    if ps[0]['connections']['MAXIGP0ACLK'] != top['netnames']['sys_clk']['bits']:
+        raise RuntimeError('PS GP0 and its AXI frontend must share the system clock')
+    gt = gt[0]['connections']
+    if gt['CPLLREFCLKSEL'] == ['1', '1', '1']:
+        if gt['GTGREFCLK'] != top['netnames']['ps7_clk']['bits']:
+            raise RuntimeError('Fabric CPLL reference must be the 100 MHz PS FCLK')
+    elif gt['CPLLREFCLKSEL'] != ['0', '0', '1']:
+        raise RuntimeError('ZC706 SFP requires NORTHREFCLK1 or diagnostic FCLK')
+
+
+def validate_sfp_route(work):
+    top = json.loads((work/'top_routed.json').read_text())['modules']['top']
+    gt = next(c for c in top['cells'].values() if c['type'] == 'GTXE2_CHANNEL')
+    connected = {b for net in top['netnames'].values() for b in net['bits']}
+    pins = gt['connections']
+    selector = pins.get('CPLLREFCLKSEL', []) or [b for i in range(3)
+        for b in pins.get(f'CPLLREFCLKSEL{i}', [])]
+    if len(selector) != 3 or not set(selector) <= connected:
+        raise RuntimeError('Packed GTX CPLL reference selector was disconnected')
+    fasm = (work/'top.fasm').read_text()
+    for bit in range(3):
+        if f'.GTXE2_CHANNEL_CPLLREFCLKSEL{bit}.' not in fasm:
+            raise RuntimeError(f'CPLL reference selection bit {bit} was not routed')
+
+
+def hold_passed(log):
+    repaired = re.findall(r'Hold-fix: .*; (\d+) hold violation\(s\) remain\.', log)
+    return repaired[-1] == '0' if repaired else 'Hold-fix: no hold violations to fix.' in log
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
@@ -35,6 +72,7 @@ def main():
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
+    p.add_argument("--sfp-refclk", choices=["si5324", "fclk"], default="si5324")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
     if args.cards != 1 and args.design != "fmc-adc":
@@ -43,6 +81,8 @@ def main():
         p.error("FMC ADC target requires ZC706")
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
+    if args.design == "sfp":
+        target_command += ["--refclk", args.sfp_refclk]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
     if not args.resume_assembly:
@@ -93,7 +133,7 @@ def main():
         db = prepare_termination_db(db)
     if args.design == "sfp":
         from ddr_chipdb import prepare
-        from adc_ddr_nextpnr import prepare as prepare_nextpnr
+        from sfp_nextpnr import prepare as prepare_nextpnr
         from sfp_database import prepare as prepare_sfp_db
         db = prepare_sfp_db(db)
         source_chipdb = prepare(args.openxc7.resolve(),
@@ -110,8 +150,8 @@ def main():
         from adc_ddr_clock_db import prepare as prepare_clock_db
         db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db")
     if args.resume_assembly:
-        if args.design != "adc-ddr":
-            p.error("Assembly resume is only supported for the combined ADC DDR target")
+        if args.design not in ("adc-ddr", "sfp"):
+            p.error("Assembly resume requires a timing-checked ADC DDR or SFP target")
         latest_input = max((work/name).stat().st_mtime_ns for name in ("top.json", "top.xdc"))
         if any((work/name).stat().st_mtime_ns < latest_input
                for name in ("top.fasm", "timing.json", "stage1.log")):
@@ -120,15 +160,18 @@ def main():
         if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
             raise RuntimeError('Cannot resume a route with failing setup timing')
         log = (work/'stage1.log').read_text()
-        hold = re.findall(r'Hold-fix: .*; (\d+) hold violation\(s\) remain\.', log)
-        if not hold or hold[-1] != '0' or 'Program finished normally.' not in log:
+        if not hold_passed(log) or 'Program finished normally.' not in log:
             raise RuntimeError('Cannot resume without a completed zero-violation hold repair')
-        validate_ddr_io(work)
-        cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
-        requested = sum(c['type']=='IBUFDS' and c['parameters'].get('DIFF_TERM')=='TRUE' for c in cells.values())
-        emitted = sum(line.endswith('.DIFF.DIFF_TERM') for line in (work/'top.fasm').read_text().splitlines())
-        if requested != 22 or emitted != 22:
-            raise RuntimeError('Resumed route must include all 22 FMC terminations')
+        if args.design == "sfp":
+            validate_sfp_clock(work)
+            validate_sfp_route(work)
+        if args.design == "adc-ddr":
+            validate_ddr_io(work)
+            cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
+            requested = sum(c['type']=='IBUFDS' and c['parameters'].get('DIFF_TERM')=='TRUE' for c in cells.values())
+            emitted = sum(line.endswith('.DIFF.DIFF_TERM') for line in (work/'top.fasm').read_text().splitlines())
+            if requested != 22 or emitted != 22:
+                raise RuntimeError('Resumed route must include all 22 FMC terminations')
     cmds = [
         [str(args.yosys.resolve()), "-l", "top.rpt", "top.ys"],
         [str(nextpnr),
@@ -151,16 +194,18 @@ def main():
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
+        if n == 0 and args.design == "sfp":
+            validate_sfp_clock(work)
         if n == 0 and args.design in ('pl-ddr', 'adc-ddr'):
             validate_ddr_io(work)
+        if n == 1 and args.design == "sfp":
+            validate_sfp_route(work)
         if n == 1 and args.design in ('adc-ddr', 'sfp'):
             timing = json.loads((work/'timing.json').read_text())
             if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
-                raise RuntimeError('Combined ADC DDR setup timing must pass and be reported')
-            hold = re.findall(r'Hold-fix: .*; (\d+) hold violation\(s\) remain\.',
-                              (work/'stage1.log').read_text())
-            if not hold or hold[-1] != '0':
-                raise RuntimeError('Combined ADC DDR hold timing must pass')
+                raise RuntimeError('Target setup timing must pass and be reported')
+            if not hold_passed((work/'stage1.log').read_text()):
+                raise RuntimeError('Target hold timing must pass')
         if n == 1 and args.design in ('fmc-adc', 'adc-ddr'):
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
@@ -172,6 +217,7 @@ def main():
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
+        "sfp_refclk": args.sfp_refclk if args.design == "sfp" else None,
         "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design == "fmc-adc" else None,
         "hardware_validated": False,
         "timing_passed": True,

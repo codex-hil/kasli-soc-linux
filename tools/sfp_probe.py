@@ -117,10 +117,18 @@ def initialize_clock(r, bus):
                 write(first+n, (val >> (16-8*n)) & 255)
         rmw(137, 0xff, 1)
         rmw(136, 0xff, 0x40)
-        deadline = time.monotonic()+10
-        while read(130) & 1:
-            if time.monotonic() > deadline:
-                raise TimeoutError("Si5324 failed to lock")
+        # LOL can read zero immediately after ICAL is requested, before
+        # calibration starts. Require ICAL clear and a stable lock interval.
+        deadline = time.monotonic()+60
+        stable_since = None
+        while True:
+            now = time.monotonic()
+            ready = not (read(136) & 0x40) and not (read(130) & 1)
+            stable_since = (stable_since if stable_since is not None else now) if ready else None
+            if stable_since is not None and now-stable_since >= .2:
+                break
+            if now > deadline:
+                raise TimeoutError("Si5324 calibration/lock did not settle")
             time.sleep(.05)
         return {"product_id": "0x0182", "reference_hz": 125000000,
             "status_128_130": bus.read(0x68, 128, 3),
@@ -141,6 +149,18 @@ def decode_gray(word):
 def status(r):
     names = [n for n in r.map["csr_registers"] if n.startswith(("sfp_status_", "packet_test_", "mac_status_"))]
     return {n: r.read(n) for n in names}
+
+
+def clock_rates(r):
+    names = [n for n in ("sfp_status_si_ref_count", "sfp_status_gt_ref_count",
+                         "sfp_status_rx_count", "sfp_status_tx_count")
+             if n in r.map["csr_registers"]]
+    initial = [decode_gray(r.read(n)) for n in names]
+    start = time.monotonic()
+    time.sleep(.2)
+    final = [decode_gray(r.read(n)) for n in names]
+    elapsed = time.monotonic()-start
+    return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
 def loopback_test(r, count):
@@ -211,10 +231,13 @@ def main():
                 time.sleep(.01); r.write("sfp_status_control", 8)
                 time.sleep(2)
             result["status"] = status(r)
+            result["clock_rates_hz"] = clock_rates(r)
         result.update(result="PASS" if not a.identify_only or "module" in result else "NOT_PRESENT",
                       hardware_validated=not a.identify_only or "module" in result)
     except Exception as e:
         result["error"] = str(e)
+        result["status"] = status(r)
+        result["clock_rates_hz"] = clock_rates(r)
         raise
     finally:
         r.mem.close()

@@ -4,7 +4,9 @@ This is an isolated diagnostic target, leaving the physically qualified dual
 FMC ADC/PL DDR design available unchanged. It uses upstream LiteEth 1000BASE-X,
 MAC, ARP, ICMP and UDP, with PS GP0 only for diagnostics. The PL has its own
 MAC `02:c0:de:70:60:01`, IP `192.168.2.206`, and UDP echo port `1234`.
-PS Linux Ethernet remains the separate management connection.
+PS Linux Ethernet remains the separate management connection. GP0 ACLK is
+explicitly driven by the 50 MHz system clock, matching the frontend; the
+build checks this connection in the synthesized netlist.
 
 The original 100 MHz system placement failed timing (77.54 MHz); the
 diagnostic uses an integer MMCM ratio at 50 MHz with explicit constraints.
@@ -18,7 +20,7 @@ The complete MAC/preamble/CRC loopback also passes simulation across the
 | SFP TX P/N | W4/W3, GTXE2_CHANNEL_X0Y10, quad 111 |
 | SFP RX P/N | Y6/Y5, same channel |
 | Si5324 reference P/N | AC8/AC7, IBUFDS_GTE2_X0Y3, REFCLK1 of quad 110 |
-| Channel reference selection | GTSOUTHREFCLK1, CPLLREFCLKSEL=6 |
+| Channel reference selection | GTNORTHREFCLK1, CPLLREFCLKSEL=4 |
 | Si5324 reset / interrupt | W23 / AJ25 |
 | SFP TX_DISABLE_N | AA18, bank 9; board transistor inverts it |
 | Board I2C | AJ14/AJ18, PCA9548 at 0x74 |
@@ -29,6 +31,10 @@ Pins come from the pinned LiteX-Boards target and platform, AMD's
 [UG954](https://docs.amd.com/api/khub/documents/m4fPXowvxKd5JZRfe046WQ/content)
 and the official XC7Z045 FFG900 package file. An independent RapidWright
 device query verifies the seven reference/data/control pin-to-site mappings.
+[UG476](https://docs.amd.com/v/u/en-US/ug476_7Series_Transceivers),
+pages 36–40, defines NORTH as the clock propagated from the quad below.
+The Si5324 input is in quad 110 below the SFP channel in quad 111; hence
+GTNORTHREFCLK1 and selector 4. This selection is checked after synthesis.
 
 Si5324 uses the golden ARTIQ internal 125 MHz crystal profile: N1_HS=10,
 NC1_LS=4, N2_HS=10, N2_LS=19972, N31=N32=4565, BWSEL=4, free-running
@@ -77,19 +83,27 @@ These additions remain experimental until physical loopback qualification.
 make BOARD=zc706 bootstrap
 make sfp-test
 make sfp-pl
-venv/bin/python tools/boot_adc_jtag.py --host 192.168.2.4 --sd \
+.venv/bin/python tools/boot_adc_jtag.py --host 192.168.2.4 --sd \
   --bit build/zc706-sfp/gateware/gateware/top.bit \
   --output build/zc706-sfp/hardware/boot
 ```
 
 The loader preserves QSPI, existing boot files and persistent U-Boot
 environment. It loads a content-addressed PL file for this boot only.
+Hardware orchestration runs on the host. If its local Python environment
+has not been prepared:
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.lock
+```
+
 The host orchestrator uploads/checksums the inputs, saves boot and board
 logs, and only runs external traffic tests after internal loopback and a
 real external link:
 
 ```sh
-python3 tools/test_sfp_hardware.py --host 192.168.2.4 --program --external
+.venv/bin/python tools/test_sfp_hardware.py --host 192.168.2.4 --program --external
 ```
 
 Upload `tools/sfp_probe.py`, `tools/fmc_adc.py` and the generated CSR JSON to
@@ -130,14 +144,33 @@ Generated `csr.json` supplies the precise offsets.
 | --- | --- |
 | 1 | Existing scratch/counter/signature probe |
 | 2 | Board I2C bitbang |
-| 3 | SFP signature, control, synchronized GTX/PCS flags, Gray TX/RX clocks |
+| 3 | SFP signature, control, GTX/PCS flags, Gray user/reference clocks, CPLL clock-loss flags |
 | 4 | MAC preamble/CRC errors and accepted TX/RX frame counts |
 | 5 | Numbered-payload start/busy, TX/RX frames, payload/length errors |
 
 Control bits 0–2 select transceiver loopback, bit 3 drives Si5324 RESET_N,
 bit 4 resets the PHY. Status bits 0–5 are CPLL lock, TX init done, RX init
 done, TX MMCM lock, RX MMCM lock and PCS link. Bit 6 is Si5324 INT_N;
-bit 7 indicates SGMII detection. Clock counters are Gray encoded.
+bit 7 indicates SGMII detection. Clock counters are Gray encoded. Additional
+`clock_faults` bits 0/1/2 are reference clock lost, feedback clock lost and
+CPLL reset. `si_ref_count` measures IBUFDS_GTE2.ODIV2 (half the Si5324 clock),
+while `gt_ref_count` measures the CPLL-selected reference via GTREFCLKMONITOR.
+
+An experimental control build can select the already configured 100 MHz
+PS FCLK through the documented GTX GTGREFCLK fabric input:
+
+```sh
+make sfp-pl SFP_REFCLK=fclk
+```
+
+This isolates GTX/PCS/MAC testing from the dedicated inter-quad reference
+route. `tools/sfp_nextpnr.py` applies an isolated patch preserving this fabric
+input for routing, instead of discarding it as a dedicated hardwired GT
+connection. The same patch prevents `CPLLREFCLKSEL` control pins from being
+discarded by that rule; an independent post-route check verifies all three
+selector connections and FASM routes. With 100 MHz, CPLL uses N1=5, N2=5, M=1, OUT_DIV=4, still
+producing 1.25 Gbit/s. Dedicated external reference clock qualification is
+tracked separately; the fabric reference is a diagnostic option.
 
 ## Status
 
@@ -148,7 +181,27 @@ bit 7 indicates SGMII detection. Clock counters are Gray encoded.
 | Upstream PCS/gearbox/autonegotiation suite, 25 tests | PASS |
 | GTX/AA18 package mapping | Independently verified |
 | SFP module identification on current hardware | No EEPROM response |
-| Yosys / nextpnr / bitstream | Build in progress |
-| Physical near-end PMA loopback | NOT_RUN |
+| Yosys / nextpnr / bitstream | PASS; setup and hold checks pass |
+| Physical near-end PMA loopback | Bring-up: disconnected CPLL selector fixed in backend, physical retest pending |
 | Switch link / ARP / ICMP / UDP | NOT_RUN |
 | Combined ADC/DDR/SFP design | Deferred until isolated SFP qualification |
+
+### Bring-up findings (2026-10-10)
+
+The first 50 MHz target inherited LiteX's 100 MHz GP0 ACLK. UART boot
+succeeded, but Linux MMIO could stall AXI. Explicitly assigning GP0 ACLK to
+`sys` fixed it; Linux/SSH and repeated CSR reads then remained responsive.
+
+GTX did not lock with either the dedicated reference or the FCLK control
+variant. Inspection found that nextpnr's broad REFCLK-port rule removed the
+three `CPLLREFCLKSEL` connections. The synthesized selectors were correct,
+but the packed bits had no nets and FASM contained no selector routes.
+The reference-selection patch and post-route guard address this defect.
+The earlier source-bank GTREFCLK1_USED/COMMON activation experiments did
+not restore a clock and are not part of the build.
+
+Si5324 ICAL/LOL can initially look clear before calibration completes. The
+probe now requires calibration clear and stable lock, with a 60-second
+bound. All register writes remain volatile. Current failed attempts and
+hardware diagnostics are retained in
+[bring-up evidence](../evidence/zc706/sfp-20261010/bringup-attempts.json).

@@ -1,0 +1,434 @@
+{
+  "board": "ZC706 rev 1.2 / XC7Z045 FFG900 -2",
+  "vivado_used": false,
+  "attempts": [
+    {
+      "attempt": "20261010-first",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "8cad68709db0729109b9b32014f16039b135384144ed03b9c25d7e094694b0c2",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "c54b6aaa9d690fbc072aabc3f40b8fe211ded9ff4fb161ea4cce2bd457b557ca",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "baa6a65025a37a01aa3d3da4386593cbc194d5a922f3268c28160a26b60cb33b"
+        },
+        "boot": {
+          "bitstream_sha256": "8cad68709db0729109b9b32014f16039b135384144ed03b9c25d7e094694b0c2",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-8cad68709db0729109b9b32014f16039b135384144ed03b9c25d7e094694b0c2.bit",
+          "host": "192.168.2.4"
+        },
+        "management_host": "192.168.2.4"
+      }
+    },
+    {
+      "attempt": "20261010-gp0-clock",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "2045b9db7cbc621324d799ea101524b70c4baa16e2831e161bbe0136c19dfeb9",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "c54b6aaa9d690fbc072aabc3f40b8fe211ded9ff4fb161ea4cce2bd457b557ca",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "baa6a65025a37a01aa3d3da4386593cbc194d5a922f3268c28160a26b60cb33b"
+        },
+        "boot": {
+          "bitstream_sha256": "2045b9db7cbc621324d799ea101524b70c4baa16e2831e161bbe0136c19dfeb9",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-2045b9db7cbc621324d799ea101524b70c4baa16e2831e161bbe0136c19dfeb9.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            1
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}"
+      }
+    },
+    {
+      "attempt": "20261010-north-reference",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "11aa6fea27ffd8454727fa3e451bb2a1f887413e1eefe14e400231ae907c5881",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "560353b8a44b7f365bf8460d3eca7401bf97bde4f2e567b331e3db879d5be244",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "baa6a65025a37a01aa3d3da4386593cbc194d5a922f3268c28160a26b60cb33b"
+        },
+        "boot": {
+          "bitstream_sha256": "11aa6fea27ffd8454727fa3e451bb2a1f887413e1eefe14e400231ae907c5881",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-11aa6fea27ffd8454727fa3e451bb2a1f887413e1eefe14e400231ae907c5881.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "error": "Si5324 calibration/lock did not settle"
+      }
+    },
+    {
+      "attempt": "20261010-reference-monitors",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "4bf77d1dc45000d169f7688cc35709d6d1d654ebafd76105e1a790370d80dfaa",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "9074cca23554394dcfa769f1d85d8a457829c39f03aca5df7fa3f186b57ef375",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "1b29f4d7e70ce59ac694975f020ced5d7f492ce1d143c8e3837a1a3334dc41d0"
+        },
+        "boot": {
+          "bitstream_sha256": "4bf77d1dc45000d169f7688cc35709d6d1d654ebafd76105e1a790370d80dfaa",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-4bf77d1dc45000d169f7688cc35709d6d1d654ebafd76105e1a790370d80dfaa.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            0
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}",
+        "status": {
+          "sfp_status_control": 10,
+          "sfp_status_status": 64,
+          "sfp_status_signature": 1397116977,
+          "sfp_status_rx_count": 0,
+          "sfp_status_tx_count": 0,
+          "sfp_status_si_ref_count": 0,
+          "sfp_status_gt_ref_count": 0,
+          "sfp_status_clock_faults": 1,
+          "mac_status_crc_errors": 0,
+          "mac_status_preamble_errors": 0,
+          "mac_status_tx_frames": 0,
+          "mac_status_rx_frames": 0,
+          "packet_test_start": 0,
+          "packet_test_busy": 0,
+          "packet_test_tx_frames": 0,
+          "packet_test_rx_frames": 0,
+          "packet_test_errors": 0
+        },
+        "clock_rates_hz": {
+          "sfp_status_si_ref_count": 0.0,
+          "sfp_status_gt_ref_count": 0.0,
+          "sfp_status_rx_count": 0.0,
+          "sfp_status_tx_count": 0.0
+        }
+      }
+    },
+    {
+      "attempt": "20261010-source-reference-gate",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "e2e8c76b7d5c1c8c06caa9750a50755a3f062014a2ec4bba7c0aec321400a838",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "9074cca23554394dcfa769f1d85d8a457829c39f03aca5df7fa3f186b57ef375",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "1b29f4d7e70ce59ac694975f020ced5d7f492ce1d143c8e3837a1a3334dc41d0"
+        },
+        "boot": {
+          "bitstream_sha256": "e2e8c76b7d5c1c8c06caa9750a50755a3f062014a2ec4bba7c0aec321400a838",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-e2e8c76b7d5c1c8c06caa9750a50755a3f062014a2ec4bba7c0aec321400a838.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            0
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}",
+        "status": {
+          "sfp_status_control": 10,
+          "sfp_status_status": 64,
+          "sfp_status_signature": 1397116977,
+          "sfp_status_rx_count": 0,
+          "sfp_status_tx_count": 0,
+          "sfp_status_si_ref_count": 0,
+          "sfp_status_gt_ref_count": 0,
+          "sfp_status_clock_faults": 1,
+          "mac_status_crc_errors": 0,
+          "mac_status_preamble_errors": 0,
+          "mac_status_tx_frames": 0,
+          "mac_status_rx_frames": 0,
+          "packet_test_start": 0,
+          "packet_test_busy": 0,
+          "packet_test_tx_frames": 0,
+          "packet_test_rx_frames": 0,
+          "packet_test_errors": 0
+        },
+        "clock_rates_hz": {
+          "sfp_status_si_ref_count": 0.0,
+          "sfp_status_gt_ref_count": 0.0,
+          "sfp_status_rx_count": 0.0,
+          "sfp_status_tx_count": 0.0
+        }
+      }
+    },
+    {
+      "attempt": "20261010-source-common-enable",
+      "validation": {
+        "result": "FAIL",
+        "bitstream_sha256": "ffcd3d5591f7865363bc54531c9d68f8048cce75703f5af724bd7a8423ec377a",
+        "program_requested": true,
+        "external_requested": true,
+        "hardware_validated": false,
+        "input_sha256": {
+          "sfp_probe.py": "9074cca23554394dcfa769f1d85d8a457829c39f03aca5df7fa3f186b57ef375",
+          "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+          "csr.json": "1b29f4d7e70ce59ac694975f020ced5d7f492ce1d143c8e3837a1a3334dc41d0"
+        },
+        "boot": {
+          "bitstream_sha256": "ffcd3d5591f7865363bc54531c9d68f8048cce75703f5af724bd7a8423ec377a",
+          "sd_qspi_written": true,
+          "jtag_serial": "210251842914",
+          "boot_passed": true,
+          "sd_written": true,
+          "qspi_written": false,
+          "boot_environment_written": false,
+          "method": "sd-ext4-uboot",
+          "jtag_used": false,
+          "sd_file": "adc-ffcd3d5591f7865363bc54531c9d68f8048cce75703f5af724bd7a8423ec377a.bit",
+          "host": "192.168.2.5"
+        },
+        "management_host": "192.168.2.5",
+        "error": "Board loopback failed; see saved diagnostics"
+      },
+      "loopback": {
+        "result": "FAIL",
+        "hardware_validated": false,
+        "module_error": "SI570 I2C NACK for byte 0xa0",
+        "clock": {
+          "product_id": "0x0182",
+          "reference_hz": 125000000,
+          "status_128_130": [
+            2,
+            2,
+            0
+          ],
+          "divider_registers_25_48": [
+            192,
+            0,
+            49,
+            0,
+            0,
+            49,
+            0,
+            0,
+            3,
+            0,
+            0,
+            3,
+            0,
+            0,
+            49,
+            192,
+            78,
+            3,
+            0,
+            17,
+            212,
+            0,
+            17,
+            212
+          ],
+          "persistent_writes": false
+        },
+        "error": "GTX/PCS loopback did not lock: {'sfp_status_control': 10, 'sfp_status_status': 64, 'sfp_status_signature': 1397116977, 'sfp_status_rx_count': 0, 'sfp_status_tx_count': 0, 'sfp_status_si_ref_count': 0, 'sfp_status_gt_ref_count': 0, 'sfp_status_clock_faults': 1, 'mac_status_crc_errors': 0, 'mac_status_preamble_errors': 0, 'mac_status_tx_frames': 0, 'mac_status_rx_frames': 0, 'packet_test_start': 0, 'packet_test_busy': 0, 'packet_test_tx_frames': 0, 'packet_test_rx_frames': 0, 'packet_test_errors': 0}",
+        "status": {
+          "sfp_status_control": 10,
+          "sfp_status_status": 64,
+          "sfp_status_signature": 1397116977,
+          "sfp_status_rx_count": 0,
+          "sfp_status_tx_count": 0,
+          "sfp_status_si_ref_count": 0,
+          "sfp_status_gt_ref_count": 0,
+          "sfp_status_clock_faults": 1,
+          "mac_status_crc_errors": 0,
+          "mac_status_preamble_errors": 0,
+          "mac_status_tx_frames": 0,
+          "mac_status_rx_frames": 0,
+          "packet_test_start": 0,
+          "packet_test_busy": 0,
+          "packet_test_tx_frames": 0,
+          "packet_test_rx_frames": 0,
+          "packet_test_errors": 0
+        },
+        "clock_rates_hz": {
+          "sfp_status_si_ref_count": 0.0,
+          "sfp_status_gt_ref_count": 0.0,
+          "sfp_status_rx_count": 0.0,
+          "sfp_status_tx_count": 0.0
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 .PHONY: bootstrap pl test-pl szl linux image adc-pl adc-test adc-package ddr-pl
 .NOTPARALLEL:
 BOARD ?= kasli-soc
+SFP_REFCLK ?= si5324
 ENV = python3 tools/environment.py
 bootstrap:
 	$(ENV) python3 tools/image.py bootstrap --board $(BOARD)
@@ -65,7 +66,7 @@ adc-ddr-package: adc-ddr-pl adc-ddr-software adc-ddr-test adc-ddr-axi-test
 
 .PHONY: sfp-pl
 sfp-pl:
-	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design sfp --output-dir build/zc706-sfp/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design sfp --sfp-refclk $(SFP_REFCLK) --output-dir build/zc706-sfp/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
 
 .PHONY: sfp-test
 sfp-test:

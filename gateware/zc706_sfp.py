@@ -21,8 +21,8 @@ MAC = 0x02c0de706001
 
 
 class ZC706PHY(K7_1000BASEX):
-    # All three frequencies give the supported 2.5 GHz CPLL / OUT_DIV=4.
-    supported_refclk_freqs = (125e6, 156.25e6, 200e6)
+    # These frequencies support a 2.5 GHz CPLL / OUT_DIV=4.
+    supported_refclk_freqs = (100e6, 125e6, 156.25e6, 200e6)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -75,12 +75,28 @@ class PacketTest(LiteXModule):
 
 
 class Diagnostics(LiteXModule):
-    def __init__(self, phy, si5324, tx_enable):
+    def __init__(self, phy, si5324, tx_enable, fabric_refclk=False):
         self.control = CSRStorage(5, reset=8, name="control")
         self.status = CSRStatus(8, name="status")
         self.signature = CSRStatus(32, reset=0x53465031, name="signature")
         self.rx_count = CSRStatus(32, name="rx_count")
         self.tx_count = CSRStatus(32, name="tx_count")
+        self.si_ref_count = CSRStatus(32, name="si_ref_count")
+        self.gt_ref_count = CSRStatus(32, name="gt_ref_count")
+        self.clock_faults = CSRStatus(3, name="clock_faults")
+        self.cd_si_ref = ClockDomain("si_ref", reset_less=True)
+        self.cd_gt_ref = ClockDomain("gt_ref", reset_less=True)
+        si_div2 = Signal(); gt_ref = Signal()
+        ref_lost = Signal(); feedback_lost = Signal()
+        self.specials += [Instance("BUFG", i_I=si_div2, o_O=self.cd_si_ref.clk),
+                          Instance("BUFG", i_I=gt_ref, o_O=self.cd_gt_ref.clk)]
+        buffers = [s for s in phy.pma._fragment.specials
+                   if isinstance(s, Instance) and s.of == "IBUFDS_GTE2"]
+        if len(buffers) != 1:
+            raise RuntimeError("Expected a dedicated GTX reference buffer")
+        buffers[0].items.append(Instance.Output("ODIV2", si_div2))
+        self.specials += MultiReg(Cat(ref_lost, feedback_lost, phy.pll.reset),
+                                  self.clock_faults.status)
         # 0:2 loopback, 3 Si5324 reset_n, 4 PHY reset. TX enable_n is inverted
         # by the board's discrete transistor (same polarity as upstream target).
         loop = Signal(3)
@@ -92,21 +108,32 @@ class Diagnostics(LiteXModule):
         if len(instances) != 1:
             raise RuntimeError("Expected upstream PMA's single GTX channel")
         for item in instances[0].items:
+            if isinstance(item, Instance.Output):
+                if item.name == "CPLLREFCLKLOST":
+                    item.expr = ref_lost
+                elif item.name == "CPLLFBCLKLOST":
+                    item.expr = feedback_lost
+                elif item.name == "GTREFCLKMONITOR":
+                    item.expr = gt_ref
             if isinstance(item, Instance.Input) and item.name == "LOOPBACK":
                 item.expr = loop
-            # Si5324 feeds REFCLK1 of quad 110; SFP is in adjacent quad 111.
+            # Si5324 feeds REFCLK1 of quad 110 below SFP quad 111.
+            # UG476: clocks from the quad below enter GTNORTHREFCLK*.
             elif isinstance(item, Instance.Input) and item.name == "GTREFCLK0":
                 item.expr = Constant(0)
-            elif isinstance(item, Instance.Input) and item.name == "GTSOUTHREFCLK1":
+            elif isinstance(item, Instance.Input) and item.name == "GTNORTHREFCLK1":
                 item.expr = phy.pll.refclk
+            elif isinstance(item, Instance.Input) and item.name == "GTGREFCLK":
+                item.expr = ClockSignal("ps7") if fabric_refclk else Constant(0)
             elif isinstance(item, Instance.Input) and item.name == "CPLLREFCLKSEL":
-                item.expr = Constant(0b110, 3)
+                item.expr = Constant(0b111 if fabric_refclk else 0b100, 3)
         flags = Cat(phy.pll.lock, phy.tx_init.done, phy.rx_init.done,
             phy.tx_mmcm.locked, phy.rx_mmcm.locked, phy.link_up,
             si5324.int_n, phy.pcs.is_sgmii)
         self.specials += MultiReg(flags, self.status.status)
         # Gray counters permit frequency measurement without incoherent binary CDC.
-        for domain, csr in [("eth_tx", self.tx_count), ("eth_rx", self.rx_count)]:
+        for domain, csr in [("eth_tx", self.tx_count), ("eth_rx", self.rx_count),
+                            ("si_ref", self.si_ref_count), ("gt_ref", self.gt_ref_count)]:
             count = Signal(32); gray = Signal(32)
             getattr(self.sync, domain).__iadd__([count.eq(count + 1),
                 gray.eq((count + 1) ^ ((count + 1) >> 1))])
@@ -123,17 +150,19 @@ class SFPClock(LiteXModule):
 
 
 class SFPSoC(BaseSoC):
-    def __init__(self, ip="192.168.2.206"):
+    def __init__(self, ip="192.168.2.206", refclk="si5324"):
         super().__init__("zc706", crg=SFPClock(), sys_clk_freq=50e6)
+        # The AXI master and GP0 frontend run in sys, not the 100 MHz FCLK.
+        self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
         self.csr.add("probe", 1)
         self.platform.add_extension([r for r in _io if r[0] in
             ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324", "i2c")])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
         self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
-            self.platform.request("sfp"), 50e6, refclk_freq=125e6, with_csr=False)
+            self.platform.request("sfp"), 50e6, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
         self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
-            self.platform.request("sfp_tx_disable_n"))
+            self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk")
         self.csr.add("sfp_status", 3)
         self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, 50e6,
             dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
@@ -161,10 +190,15 @@ class SFPSoC(BaseSoC):
         self.add_constant("SFP_ABI", 1)
         self.add_constant("SFP_MAC", MAC)
         self.add_constant("SFP_IP", ip)
-        self.add_constant("SFP_REFCLK_HZ", 125000000)
+        self.add_constant("SFP_REFCLK_HZ", 100000000 if refclk == "fclk" else 125000000)
+        self.add_constant("SFP_REFCLK_SOURCE", refclk)
         self.platform.add_period_constraint(self.crg.cd_sys.clk, 20)
         self.platform.add_period_constraint(self.ethphy.cd_eth_tx.clk, 8)
         self.platform.add_period_constraint(self.ethphy.cd_eth_rx.clk, 8)
+        self.platform.add_period_constraint(self.sfp_status.cd_si_ref.clk, 16)
+        self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
+        self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
+            self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
         self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
         self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
         self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
@@ -175,8 +209,9 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--board", choices=["zc706"], default="zc706")
     p.add_argument("--output-dir", default="build/zc706-sfp/gateware")
+    p.add_argument("--refclk", choices=["si5324", "fclk"], default="si5324")
     a = p.parse_args()
-    soc = SFPSoC(); soc.finalize()
+    soc = SFPSoC(refclk=a.refclk); soc.finalize()
     out = Path(a.output_dir); out.mkdir(parents=True, exist_ok=True)
     (out/"csr.json").write_text(get_csr_json(csr_regions=soc.csr_regions,
         constants=soc.constants, mem_regions=soc.mem_regions))
