@@ -94,5 +94,13 @@
   "prjxray-db": {
     "url": "https://github.com/openXC7/prjxray-db.git",
     "rev": "75825f2e66e16a40a51cf1cfa61afb21f5958afe"
+  },
+  "wr-cores-afcz-v5": {
+    "url": "https://gitlab.com/ohwr/project/wr-cores.git",
+    "rev": "0f8fbced87988254f5c9ca55c0e04585b29b485c"
+  },
+  "wrpc-sw-wrs-v4": {
+    "url": "https://gitlab.com/ohwr/project/wrpc-sw.git",
+    "rev": "c3f553d267f3b8bad4f4ff6c321cf214ab09b97a"
   }
 }

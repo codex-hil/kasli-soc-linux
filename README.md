@@ -657,3 +657,17 @@ to use the Si5324 reference under investigation.
 [Download the verified local-quad loopback bitstream and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-gtx-local-loopback-20261010).
 
 [Download the verified SFP-quad fabric-clock diagnostic and evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-sfp-fclk-loopback-20261010).
+
+### Reciprocal frequency counter / FMC synchronization preparation
+
+The two independent FMC clocks have a physically validated reciprocal counter
+target (`make frequency-pl`). This small development target omits ADC data
+reception, FIFO and SDRAM; it measures each DCO divided by four against nominal
+100 MHz PS FCLK0. 120 simultaneous one-second gates, exact 1:1 reference checks,
+missing-clock isolation and recovery passed on ZC706 rev. 1.2. Mean offsets were
++13.530 ppm (LPC) and +15.134 ppm (HPC), with a -1.604 ppm LPC/HPC difference.
+`make frequency-sim` covers asynchronous clocks, exact gates and rollover.
+The qualified ADC/DDR targets remain available. No oscillator tuning or phase
+lock is enabled.
+
+See [counter architecture, build, CSR ABI and pinned WR/AFCZ sources](docs/zc706-frequency.md).

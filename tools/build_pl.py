@@ -69,28 +69,36 @@ def main():
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default="si5324")
+    p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
-    if args.cards != 1 and args.design != "fmc-adc":
+    if args.design == "frequency":
+        args.reciprocal = True
+        args.cards = 2
+    if args.reciprocal and args.design not in ("fmc-adc", "frequency"):
+        p.error("--reciprocal requires the FMC ADC target")
+    if args.cards != 1 and args.design not in ("fmc-adc", "frequency"):
         p.error("--cards only applies to the FMC ADC target")
-    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp") and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py"}[args.design]
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.design == "sfp":
         target_command += ["--refclk", args.sfp_refclk]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
+        if args.reciprocal:
+            target_command += ["--reciprocal"]
     if not args.resume_assembly:
         subprocess.run(target_command, cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
     # A failed rebuild must never leave an earlier bitstream approved.
     (work / "manifest.json").unlink(missing_ok=True)
-    if not args.resume_assembly and args.design in ("fmc-adc", "pl-ddr", "adc-ddr"):
+    if not args.resume_assembly and args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "frequency"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
         script = work / "top.ys"
@@ -109,12 +117,15 @@ def main():
     physical_part = "xc7z045ffg900-2" if args.board == "zc706" else "xc7z030ffg676-3"
     chipdb_args = []
     nextpnr = args.openxc7.resolve() / "bin/nextpnr-xilinx"
-    if args.design == "fmc-adc":
+    if args.design in ("fmc-adc", "frequency"):
         from adc_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
         from adc_nextpnr import prepare as prepare_nextpnr
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
+        if args.reciprocal:
+            from adc_ddr_nextpnr import prepare as prepare_hold
+            nextpnr = prepare_hold()
         db = prepare_termination_db(db)
     if args.design in ("pl-ddr", "adc-ddr"):
         from ddr_chipdb import prepare
@@ -178,7 +189,7 @@ def main():
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
          "--freq", "100", "--report", "timing.json", *chipdb_args,
-         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp") else [])],
+         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp") or args.reciprocal else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
         [str(args.openxc7.resolve() / "bin/xc7frames2bit"),
@@ -200,25 +211,27 @@ def main():
             validate_ddr_io(work)
         if n == 1 and args.design == "sfp":
             validate_sfp_route(work)
-        if n == 1 and args.design in ('adc-ddr', 'sfp'):
+        if n == 1 and (args.design in ('adc-ddr', 'sfp') or args.reciprocal):
             timing = json.loads((work/'timing.json').read_text())
             if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
                 raise RuntimeError('Target setup timing must pass and be reported')
             if not hold_passed((work/'stage1.log').read_text()):
                 raise RuntimeError('Target hold timing must pass')
-        if n == 1 and args.design in ('fmc-adc', 'adc-ddr'):
+        if n == 1 and args.design in ('fmc-adc', 'adc-ddr', 'frequency'):
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
                             for c in cells.values())
             emitted = sum(line.endswith('.DIFF.DIFF_TERM')
                           for line in (work/'top.fasm').read_text().splitlines())
-            if requested != 11 * (2 if args.design == "adc-ddr" else args.cards) or emitted != requested:
+            expected = 2 if args.design == "frequency" else 11 * (2 if args.design == "adc-ddr" else args.cards)
+            if requested != expected or emitted != requested:
                 raise RuntimeError(f'FPGA termination was not emitted: {emitted}/{requested}')
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
         "sfp_refclk": args.sfp_refclk if args.design == "sfp" else None,
-        "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design == "fmc-adc" else None,
+        "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design in ("fmc-adc", "frequency") else None,
+        "reciprocal": args.reciprocal,
         "hardware_validated": False,
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),

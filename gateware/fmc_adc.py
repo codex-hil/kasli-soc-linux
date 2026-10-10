@@ -184,7 +184,7 @@ class ADCSoC(BaseSoC):
         # puts AXI burst-address arithmetic and bank decode on one long path.
         return super().add_csr_bridge(name, origin, with_register=True)
 
-    def __init__(self, cards=1):
+    def __init__(self, cards=1, reciprocal=False):
         if cards not in (1, 2):
             raise ValueError("Expected one or two FMC cards")
         super().__init__("zc706", crg=ADCCRG())
@@ -224,6 +224,17 @@ class ADCSoC(BaseSoC):
             self.adc2 = ADC(self.platform, ready, index=1)
             self.adc2_spi = SPIMaster(self.platform.request("adc_spi", 1))
             self.adc2_i2c = I2CMaster(self.platform.request("adc_i2c", 1))
+        if reciprocal:
+            from reciprocal import ReciprocalCounter
+            for index in range(cards):
+                name = "frequency" if index == 0 else "frequency2"
+                self.csr.add(name, 9 + index)
+                setattr(self, name, ReciprocalCounter(self.platform,
+                    "adc" if index == 0 else "adc2"))
+            self.csr.add("frequency_reference", 11)
+            self.frequency_reference = ReciprocalCounter(self.platform, "sys")
+            self.add_constant("RECIPROCAL_ABI", 1)
+            self.add_constant("RECIPROCAL_REFERENCE_HZ", 100000000)
         self.add_constant("ADC_CARDS", cards)
         self.add_constant("ADC_CAPTURE_SAMPLES", 1024)
         self.add_constant("ADC_SAMPLE_RATE", 100000000)
@@ -237,8 +248,9 @@ def main():
     parser.add_argument("--output-dir", default="build/zc706-adc/gateware")
     parser.add_argument("--board", choices=["zc706"], default="zc706")
     parser.add_argument("--cards", type=int, choices=[1, 2], default=1)
+    parser.add_argument("--reciprocal", action="store_true")
     args = parser.parse_args()
-    soc = ADCSoC(cards=args.cards)
+    soc = ADCSoC(cards=args.cards, reciprocal=args.reciprocal)
     soc.finalize()
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)

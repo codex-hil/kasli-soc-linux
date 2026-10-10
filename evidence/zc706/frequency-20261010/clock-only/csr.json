@@ -1,0 +1,264 @@
+{
+    "csr_bases": {
+        "identifier_mem": 1073741824,
+        "probe": 1073743872,
+        "adc": 1073745920,
+        "adc_spi": 1073747968,
+        "adc_i2c": 1073750016,
+        "adc2": 1073754112,
+        "adc2_spi": 1073756160,
+        "adc2_i2c": 1073758208,
+        "frequency": 1073760256,
+        "frequency2": 1073762304,
+        "frequency_reference": 1073764352
+    },
+    "csr_registers": {
+        "probe_scratch": {
+            "addr": 1073743872,
+            "size": 1,
+            "type": "rw"
+        },
+        "probe_counter": {
+            "addr": 1073743876,
+            "size": 1,
+            "type": "ro"
+        },
+        "probe_signature": {
+            "addr": 1073743880,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_control": {
+            "addr": 1073745920,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_ssr": {
+            "addr": 1073745924,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_card_id": {
+            "addr": 1073745928,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_spi_w": {
+            "addr": 1073747968,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_spi_r": {
+            "addr": 1073747972,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc_i2c_w": {
+            "addr": 1073750016,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc_i2c_r": {
+            "addr": 1073750020,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc2_control": {
+            "addr": 1073754112,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc2_ssr": {
+            "addr": 1073754116,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc2_card_id": {
+            "addr": 1073754120,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc2_spi_w": {
+            "addr": 1073756160,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc2_spi_r": {
+            "addr": 1073756164,
+            "size": 1,
+            "type": "ro"
+        },
+        "adc2_i2c_w": {
+            "addr": 1073758208,
+            "size": 1,
+            "type": "rw"
+        },
+        "adc2_i2c_r": {
+            "addr": 1073758212,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_gate": {
+            "addr": 1073760256,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_reset": {
+            "addr": 1073760260,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_start": {
+            "addr": 1073760264,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_signature": {
+            "addr": 1073760268,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_status": {
+            "addr": 1073760272,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_ticks": {
+            "addr": 1073760276,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_measured_cycles": {
+            "addr": 1073760280,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_sequence": {
+            "addr": 1073760284,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency2_gate": {
+            "addr": 1073762304,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency2_reset": {
+            "addr": 1073762308,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency2_start": {
+            "addr": 1073762312,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency2_signature": {
+            "addr": 1073762316,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency2_status": {
+            "addr": 1073762320,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency2_reference_ticks": {
+            "addr": 1073762324,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency2_measured_cycles": {
+            "addr": 1073762328,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency2_sequence": {
+            "addr": 1073762332,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_gate": {
+            "addr": 1073764352,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_reference_reset": {
+            "addr": 1073764356,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_reference_start": {
+            "addr": 1073764360,
+            "size": 1,
+            "type": "rw"
+        },
+        "frequency_reference_signature": {
+            "addr": 1073764364,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_status": {
+            "addr": 1073764368,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_reference_ticks": {
+            "addr": 1073764372,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_measured_cycles": {
+            "addr": 1073764376,
+            "size": 1,
+            "type": "ro"
+        },
+        "frequency_reference_sequence": {
+            "addr": 1073764380,
+            "size": 1,
+            "type": "ro"
+        }
+    },
+    "constants": {
+        "config_platform_name": "kasli_soc",
+        "config_clock_frequency": 100000000,
+        "config_cpu_has_interrupt": null,
+        "config_cpu_reset_addr": 4227858432,
+        "config_cpu_type_zynq7000": null,
+        "config_cpu_variant_standard": null,
+        "config_cpu_family": "arm",
+        "config_cpu_name": "zynq7000",
+        "config_cpu_human_name": "Zynq7000",
+        "config_cpu_nop": "nop",
+        "config_bios_no_build_time": null,
+        "config_identifier": "zc706 Linux openXC7 probe",
+        "adc_abi": 1,
+        "adc_cards": 2,
+        "adc_fpga_diff_term": 1,
+        "reciprocal_abi": 1,
+        "reciprocal_reference_hz": 100000000,
+        "reciprocal_clock_only": 1,
+        "reciprocal_dco_divider": 4,
+        "config_csr_data_width": 32,
+        "config_csr_alignment": 32,
+        "config_csr_ordering_big": null,
+        "config_bus_standard": "wishbone",
+        "config_bus_data_width": 32,
+        "config_bus_address_width": 32,
+        "config_bus_bursting": 0,
+        "config_cpu_interrupts": 0
+    },
+    "memories": {
+        "rom": {
+            "base": 4227858432,
+            "size": 65536,
+            "type": "cached+linker"
+        },
+        "csr": {
+            "base": 1073741824,
+            "size": 65536,
+            "type": "io"
+        }
+    },
+    "cores": {}
+}

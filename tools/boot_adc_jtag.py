@@ -41,7 +41,7 @@ def main():
         p.error('Expected numeric Digilent adapter serial')
     manifest = json.loads((a.bit.parent/'manifest.json').read_text())
     digest = hashlib.sha256(a.bit.read_bytes()).hexdigest()
-    if manifest.get('design') not in ('fmc-adc','adc-ddr','sfp') or manifest.get('bitstream_sha256') != digest:
+    if manifest.get('design') not in ('fmc-adc','adc-ddr','sfp','frequency') or manifest.get('bitstream_sha256') != digest:
         p.error('ADC bitstream must match its successful build manifest')
     out = a.output or ROOT/'build/zc706-adc/hardware'/datetime.now(timezone.utc).strftime('boot-%Y%m%dT%H%M%SZ')
     out.mkdir(parents=True, exist_ok=True)

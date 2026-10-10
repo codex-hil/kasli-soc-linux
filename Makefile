@@ -72,3 +72,20 @@ sfp-pl:
 sfp-test:
 	$(ENV) build/python/bin/python tools/test_sfp_logic.py
 	$(ENV) sh -c 'cd upstream/liteeth && /work/build/python/bin/python -m unittest test.test_pcs_1000basex'
+
+.PHONY: frequency-pl frequency-adc-pl frequency-sim
+
+# Two independent ADC clocks measured against the PS FCLK hardware reference.
+frequency-adc-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design fmc-adc --cards 2 --reciprocal --output-dir build/zc706-frequency/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+frequency-sim:
+	$(ENV) sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -o build/reciprocal-test gateware/reciprocal_counter.v tests/reciprocal_counter_tb.v && build/tools/oss-cad-suite/bin/vvp build/reciprocal-test'
+
+# Default development build: clock inputs only, without ADC/DDR data paths.
+frequency-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design frequency --output-dir build/zc706-frequency-small/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+.PHONY: frequency-package
+frequency-package:
+	python3 tools/package_frequency.py

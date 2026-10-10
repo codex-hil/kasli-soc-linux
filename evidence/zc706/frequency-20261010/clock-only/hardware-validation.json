@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "d1c6183a48afd83c6c3123bcf1d9f34fd1d1e50d908bf361ff8968a808dd8bad",
+  "tests": [
+    "120 simultaneous one-second gates on both FMCs",
+    "1:1 reference counter on every gate",
+    "1 ms/10 ms/100 ms/1 s gate sweep",
+    "FMC1 output disabled: FMC1 watchdog timeout, FMC2 valid completion",
+    "FMC1 restored: both counters recover",
+    "Si570 RFREQ/divider registers unchanged"
+  ],
+  "files": {
+    "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "build/zc706-frequency-small/gateware/csr.json": "f36e46125ebd8849d04a683650c72d5a2867cda0933f9412c60c367c8385b6bf"
+  },
+  "resources": {
+    "zc706-frequency": {
+      "cells": {
+        "LUT5": 640,
+        "LUT6": 373,
+        "LUT3": 299,
+        "LUT2": 600,
+        "LUT4": 239,
+        "INV": 87,
+        "CARRY4": 240,
+        "BUFG": 9,
+        "FDRE": 2060,
+        "FDCE": 374,
+        "FDSE": 59,
+        "FDPE": 12,
+        "OBUF": 77,
+        "IBUF": 2,
+        "IBUFDS": 22,
+        "IDELAYCTRL": 1,
+        "IOBUF": 8,
+        "MMCME2_ADV": 3,
+        "PS7": 1,
+        "$scopeinfo": 7,
+        "IDELAYE2": 18,
+        "ISERDESE2": 18,
+        "RAMB36E1": 4
+      },
+      "place_route_wall_seconds": 167.52160143852234
+    },
+    "zc706-frequency-small": {
+      "cells": {
+        "LUT5": 356,
+        "LUT2": 478,
+        "LUT6": 219,
+        "LUT4": 117,
+        "LUT3": 237,
+        "INV": 56,
+        "CARRY4": 177,
+        "BUFG": 6,
+        "FDRE": 1324,
+        "FDCE": 126,
+        "FDSE": 52,
+        "OBUF": 77,
+        "IBUF": 2,
+        "FDPE": 2,
+        "IBUFDS": 2,
+        "IOBUF": 6,
+        "PS7": 1,
+        "$scopeinfo": 3
+      },
+      "place_route_wall_seconds": 107.44770908355713
+    }
+  },
+  "oscillator_tuning": false,
+  "phase_lock": false
+}
