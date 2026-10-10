@@ -1,0 +1,25 @@
+{
+  "model_part": "xc7z030fbg676-2",
+  "hardware_part": "xc7z045ffg900-2",
+  "model_only": true,
+  "vendor_model_bitstream_loaded": false,
+  "channel": "GTXE2_CHANNEL_X0Y0",
+  "gtx_frame_base": "0x00442480",
+  "fabric_only_bits": [
+    "bit_0044249f_000_09",
+    "bit_0044249f_000_10",
+    "bit_0044249f_001_22"
+  ],
+  "local_only_bits": [],
+  "interpretation": "Candidate GTX fabric-reference configuration bits; physical validation pending",
+  "variants": {
+    "fabric": {
+      "bitstream_sha256": "bf5e54a75a551d3e6d7aadd844b1938960d4dd946cd21e6e747676090e349d4d",
+      "build": "PASS"
+    },
+    "local": {
+      "bitstream_sha256": "256f203407abe598f1701e9d0c2a9ed7f75b9b51a14d5d9683f451e0248b060f",
+      "build": "PASS"
+    }
+  }
+}

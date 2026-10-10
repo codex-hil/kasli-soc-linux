@@ -257,10 +257,10 @@ accepts `--build-dir` to test a saved artifact tree containing `csr.json` and
 
 `tools/sfp_vivado_reference.tcl` consumes the same generated RTL/XDC and
 writes into a separate ignored directory. It is not called by `make image`
-or `make sfp-pl`, and it does not program hardware. Its missing-part guard
-was tested with the current shared installation; synthesis/place/route and
-bitstream generation through this comparator have **not** been run. Once
-Zynq-7000 part support is available, use:
+or `make sfp-pl`, and it does not program hardware. The missing-part guard
+was tested before the device addition. After installation, synthesis was
+attempted and failed the license check; place/route and bitstream generation
+for XC7Z045 have **not** been run. With an appropriate license, use:
 
 ```sh
 vivado -mode batch -source tools/sfp_vivado_reference.tcl \
@@ -271,3 +271,28 @@ The intended comparison is the cross-quad reference mux, using source
 Si5324 REFCLK1 and target SFP NORTHREFCLK1. A vendor reference would be
 used to document the missing database bits; it is not the deliverable
 open-source bitstream.
+
+### Model-only fabric-clock comparator
+
+The smaller XC7Z030 is supported by the free Standard license and has the
+same GTX primitive. The following experiment generates two model-only
+variants, with a 100 MHz fabric clock or a dedicated reference input:
+
+```sh
+python3 tools/sfp_fabric_reference.py
+vivado -mode batch -source tools/sfp_fabric_reference.tcl \
+  -tclargs build/zc706-sfp/fabric-refclk-fuzz/fabric \
+  build/zc706-sfp/fabric-refclk-fuzz/fabric-output
+vivado -mode batch -source tools/sfp_fabric_reference.tcl \
+  -tclargs build/zc706-sfp/fabric-refclk-fuzz/local \
+  build/zc706-sfp/fabric-refclk-fuzz/local-output
+```
+
+These model bitstreams must never be programmed on ZC706. The script
+intentionally permits unassigned pads and the test-only GTGREFCLK DRC
+(`REQP-52`); no such exceptions apply to the normal hardware build.
+Both models completed synthesis, placement, routing and bitstream generation.
+The fabric variant adds three channel bits: minor/word/bit `31/0/9`,
+`31/0/10`, and `31/1/22`; no channel bits are removed. These are candidate
+configuration bits, not a completed database fix. Physical validation remains
+pending; this does not qualify a fabric reference for Ethernet operation.
