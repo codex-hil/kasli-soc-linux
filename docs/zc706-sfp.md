@@ -296,3 +296,35 @@ The fabric variant adds three channel bits: minor/word/bit `31/0/9`,
 `31/0/10`, and `31/1/22`; no channel bits are removed. These are candidate
 configuration bits, not a completed database fix. Physical validation remains
 pending; this does not qualify a fabric reference for Ethernet operation.
+
+### Physical fabric-clock experiment (2026-10-10)
+
+The three vendor-model candidate bits were added to an otherwise unchanged,
+timing-checked Yosys/nextpnr ZC706 fabric-reference design. All three are in
+SFP channel minor 31: frame `0x0046329f`, word 57 bits 9 and 10, and word 58
+bit 22. Decoding the assembled bitstreams confirmed exactly these additions
+and no removed bits (frame ECC excluded).
+
+On physical ZC706 the reference monitor measured about 100 MHz; CPLL,
+TX/RX, MMCMs and PCS locked. The complete PCS/MAC PMA loopback passed
+1000/1000 frames with zero payload, CRC or preamble errors, and TX/RX clocks
+about 125 MHz. Linux boot and SSH also passed. This is the first physical
+SFP-quad loopback success, using a bitstream assembled entirely by openXC7.
+The reference is test-only PS fabric clock; the Si5324 cross-quad mux and
+external switch link remain unqualified. Evidence: `evidence/zc706/
+sfp-20261010/fclk-three-bits/`.
+
+Reproduce the controlled configuration experiment with:
+
+```sh
+python3 tools/environment.py build/python/bin/python \
+  tools/sfp_refclk_bit_experiment.py \
+  --source build/zc706-sfp/fclk-bit-test \
+  --output build/zc706-sfp/fclk-three-bits --openxc7 build/tools/openxc7
+.venv/bin/python tools/test_sfp_hardware.py --host 192.168.2.5 --program \
+  --build-dir build/zc706-sfp/fclk-three-bits --frames 1000
+```
+
+The source must first be built with `tools/build_pl.py --design sfp
+--board zc706 --sfp-refclk fclk`, using the normal pinned environment.
+This explicit experiment does not alter the default Si5324 build.

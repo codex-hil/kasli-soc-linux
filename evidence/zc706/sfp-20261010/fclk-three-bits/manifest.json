@@ -1,0 +1,89 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "sfp",
+  "sfp_refclk": "fclk",
+  "adc_cards": null,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "a4a7de7a3904d6092cbf69479d087fe971bc9e45928fb42260602d99bf6325ff",
+  "commands": [
+    [
+      "/usr/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/zc706-sfp/nextpnr/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/work/build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/zc706-sfp/database/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/zc706-sfp/database/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "91fc190b2ee6c3c6e02bd1e2e5760acc78696fbfbc794fc0cd6fbe3231a0e15c",
+    "top.fasm": "d4e9d8041602f027686e4930b26f85d4a74f30f7bc439a6704f6a0e79847785d",
+    "timing.json": "741fd1ab2aec6c036b07424981fba33e9162b5427ccc8a98df5807576e47848a"
+  },
+  "assembly_resumed": false,
+  "configuration_experiment": {
+    "source_bitstream_sha256": "2a17cf6acea56bc337b61936cdfa07d700b6338235cfa8dbcd2cc7c6810597c2",
+    "model_evidence": "evidence/zc706/sfp-20261010/vivado-fabric-refclk-model.json",
+    "added_bits": [
+      {
+        "frame": "0x46329f",
+        "word": 57,
+        "bit": 9
+      },
+      {
+        "frame": "0x46329f",
+        "word": 57,
+        "bit": 10
+      },
+      {
+        "frame": "0x46329f",
+        "word": 58,
+        "bit": 22
+      }
+    ],
+    "routing_unchanged": true,
+    "normal_build": false
+  }
+}

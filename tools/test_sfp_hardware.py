@@ -36,6 +36,8 @@ def main():
         "program_requested": a.program, "external_requested": a.external,
         "hardware_validated": False, "input_sha256": {},
         "reference_source": manifest.get("sfp_refclk")}
+    if "configuration_experiment" in manifest:
+        result["configuration_experiment"] = manifest["configuration_experiment"]
     host = str(a.host)
     try:
         if a.program:
