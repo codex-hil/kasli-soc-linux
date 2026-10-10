@@ -671,3 +671,5 @@ The qualified ADC/DDR targets remain available. No oscillator tuning or phase
 lock is enabled.
 
 See [counter architecture, build, CSR ABI and pinned WR/AFCZ sources](docs/zc706-frequency.md).
+
+[Download the qualified clock-only bitstream, tools and measurement evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-reciprocal-validated-20261010).
