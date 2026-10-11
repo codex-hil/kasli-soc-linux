@@ -391,3 +391,20 @@ This excludes absent serialized control sinks; it does not prove correct
 logical drivers, FASM encoding, electrical timing, or physical connectivity.
 No hardware was accessed for this audit. Next compare lane-4 control logic
 and route-to-FASM coverage against adjacent working lanes and golden.
+
+### DDR control LUT encoding audit (2026-10-11)
+
+`tools/audit_ddr_control_luts.py` checks emitted FASM INIT truth tables against
+packed logical INIT and original-to-physical input mappings for the CE/LD
+LUT drivers of DDR delay cells. Each image has 50 driver outputs; all match
+for every physical input assignment allowed by constant-connected pins.
+Shared O5/O6 LUTs require respecting the tied-high A6 input of O6; checking
+its unused lower INIT half would incorrectly report the neighboring O5
+function as a mismatch. A deliberately inverted emitted INIT is detected.
+The fixture leaves original build artifacts unchanged.
+Evidence: `evidence/zc706/integrated-20261011/ddr-control-lut-audit.json`.
+This rules out INIT pin-permutation encoding errors in these control LUTs,
+not wrong upstream logical drivers, missing routing configuration bits,
+external timing, or electrical faults. No hardware access occurred.
+The next check is the lane-4 route PIP encoding and upstream training-pulse
+logic relative to golden and neighboring functioning lanes.

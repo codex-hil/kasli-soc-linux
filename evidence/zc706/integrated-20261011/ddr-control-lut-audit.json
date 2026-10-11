@@ -1,0 +1,1069 @@
+{
+  "candidate": {
+    "hardware_access": false,
+    "qualification": false,
+    "checked_outputs": 50,
+    "mismatched_outputs": 0,
+    "outputs": [
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274758",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y243.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 3
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274760",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y231.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274761",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y219.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 3
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274762",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y208.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274763",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y256.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274764",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y328.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274765",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y320.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274766",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y307.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274767",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y238.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274770",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y227.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274771",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y213.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274772",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y211.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274773",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y253.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274774",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y323.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "1": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274775",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y321.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274776",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y304.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274777",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y238.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274779",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y231.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274780",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y214.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "1": 0,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274781",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y211.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274782",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y253.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274783",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y324.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274784",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y317.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274785",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y306.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274839",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y214.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274841",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y243.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 0,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274843",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y231.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 2,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274844",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y219.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 0,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274845",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y208.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "2": 3,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274846",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y256.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274847",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y322.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 2,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274848",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y320.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "1": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274849",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y307.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "0": 0,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274850",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y237.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274852",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y225.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "2": 3,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274853",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y214.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274854",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y211.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 3,
+          "2": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274855",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y253.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 3,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274856",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y322.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274857",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y321.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "2": 0,
+          "1": 3,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274858",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y304.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 0,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274859",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y237.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274861",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y225.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "1": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274862",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y214.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274863",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y211.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 0,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274864",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y253.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "1": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274865",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y322.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274866",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y314.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$274867",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y306.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$255102$auto$blifparse.cc:535:parse_blif$276186",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y214.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 1
+        },
+        "mismatches": []
+      }
+    ]
+  },
+  "golden": {
+    "hardware_access": false,
+    "qualification": false,
+    "checked_outputs": 50,
+    "mismatched_outputs": 0,
+    "outputs": [
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200312",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y301.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "2": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200314",
+        "output": "O6",
+        "feature": "CLBLM_R_X93Y263.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200465",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y306.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200471",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y244.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200472",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y256.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "0": 0,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200479",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y232.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200480",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y243.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "1": 0,
+          "2": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200487",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y218.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "2": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200488",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y317.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 0,
+          "2": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200495",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y318.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 0,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200503",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y223.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 0,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200511",
+        "output": "O5",
+        "feature": "CLBLL_L_X92Y263.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 0,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200519",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y313.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "0": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200520",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y231.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "1": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200521",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y219.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "2": 0,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200522",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y218.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "1": 3,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200528",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y257.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 3,
+          "2": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200529",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y222.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "2": 3,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200530",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y318.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "2": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200531",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y318.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200532",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y307.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "0": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200538",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y245.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 0,
+          "2": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200539",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y231.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "2": 4,
+          "1": 3,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200540",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y223.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 3,
+          "2": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200541",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y253.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 0,
+          "2": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200542",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y317.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "2": 3,
+          "1": 2,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200667",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y243.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200669",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y231.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200670",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y219.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 3
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200671",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y218.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 2,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200672",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y257.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200673",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y325.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200674",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y319.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200675",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y307.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200676",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y245.SLICEM_X0.DLUT.INIT",
+        "input_mapping": {
+          "1": 4,
+          "0": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200678",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y235.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 3,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200679",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y223.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200680",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y211.SLICEL_X1.ALUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200681",
+        "output": "O6",
+        "feature": "CLBLL_L_X104Y254.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200682",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y325.SLICEL_X1.DLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200683",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y314.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200684",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y305.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200685",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y244.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200687",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y232.SLICEM_X0.BLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200688",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y222.SLICEL_X1.CLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 2
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200689",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y214.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 4,
+          "1": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200690",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y258.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "0": 0,
+          "1": 1
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200691",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y316.SLICEM_X0.ALUT.INIT",
+        "input_mapping": {
+          "1": 3,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200692",
+        "output": "O6",
+        "feature": "CLBLM_R_X105Y313.SLICEL_X1.BLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 0
+        },
+        "mismatches": []
+      },
+      {
+        "cell": "$abc$184173$auto$blifparse.cc:535:parse_blif$200693",
+        "output": "O5",
+        "feature": "CLBLM_R_X105Y302.SLICEM_X0.CLUT.INIT",
+        "input_mapping": {
+          "1": 2,
+          "0": 0
+        },
+        "mismatches": []
+      }
+    ]
+  },
+  "negative_control": "Inverting one emitted LUT INIT was detected; original artifacts unchanged."
+}
