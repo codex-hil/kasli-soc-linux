@@ -158,11 +158,12 @@ def main():
         from sfp_database import prepare as prepare_sfp_db
         db = prepare_sfp_db(db, out=ROOT/"build/zc706-integrated/database/zynq7" if args.design == "integrated" else None)
         source_chipdb = prepare(args.openxc7.resolve(),
-            out=ROOT/"build/zc706-sfp/chipdb", database=db,
+            out=ROOT/"build/zc706-integrated/chipdb-cascade" if args.design == "integrated" else ROOT/"build/zc706-sfp/chipdb", database=db,
+            clock_cascade=args.design == "integrated",
             extra_sites=("GTXE2_CHANNEL", "GTXE2_COMMON", "IBUFDS_GTE2", "IPAD", "OPAD"))
         from adc_chipdb import prepare as prepare_hr
         chipdb_args = ["--chipdb", str(prepare_hr(args.openxc7.resolve(),
-            source_binary=source_chipdb, build=ROOT/"build/zc706-sfp/chipdb-hr",
+            source_binary=source_chipdb, build=ROOT/"build/zc706-integrated/chipdb-cascade-hr" if args.design == "integrated" else ROOT/"build/zc706-sfp/chipdb-hr",
             grid_path=db/"xc7z045/tilegrid.json",
             extra_rows=({"pin": "AA18", "bank": "9", "site": "IOB_X0Y24",
                 "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]

@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(openxc7, *, out=None, database=None, extra_sites=()):
+def prepare(openxc7, *, out=None, database=None, extra_sites=(), clock_cascade=False):
     source = ROOT/'upstream/nextpnr/himbaechel'
     out = out or ROOT/'build/zc706-ddr/chipdb'
     out.mkdir(parents=True, exist_ok=True)
@@ -20,6 +20,8 @@ def prepare(openxc7, *, out=None, database=None, extra_sites=()):
     if database is None:
         database = openxc7/'share/nextpnr/external/prjxray-db/zynq7'
     version = 2
+    if clock_cascade:
+        version = 3
     subprocess.run(['git', '-C', ROOT/'upstream/nextpnr', 'submodule', 'update',
         '--init', '--depth', '1', 'himbaechel/uarch/xilinx/meta'], check=True)
     revision = subprocess.check_output(['git', '-C', source.parent,
@@ -28,6 +30,8 @@ def prepare(openxc7, *, out=None, database=None, extra_sites=()):
         'rev-parse', 'HEAD'], text=True).strip()
     identity = {'nextpnr_revision': revision, 'metadata_revision': metadata_revision,
         'openxc7_build_info_sha256': hashlib.sha256((openxc7/'BUILD-INFO.json').read_bytes()).hexdigest()}
+    if clock_cascade:
+        identity["clock_cascade"] = True
     if extra_sites:
         identity['extra_metadata'] = {name: hashlib.sha256((source/f'uarch/xilinx/meta/kintex7/site_type_{name}.json').read_bytes()).hexdigest() for name in extra_sites}
         identity['tilegrid_sha256'] = hashlib.sha256((database/'xc7z045/tilegrid.json').read_bytes()).hexdigest()
@@ -57,6 +61,30 @@ def prepare(openxc7, *, out=None, database=None, extra_sites=()):
     gen = generator_himbaechel/'uarch/xilinx/gen'
     shutil.copytree(source/'uarch/xilinx/gen', gen, dirs_exist_ok=True)
     shutil.copyfile(source/'uarch/xilinx/constids.inc', gen.parent/'constids.inc')
+    if clock_cascade:
+        # Restore programmable cascade arcs removed by the generic exporter.
+        # Audit every restored feature before generating an experimental DB.
+        restored = []
+        for tile_file in database.glob('tile_type_CLK_HROW_TOP*.json'):
+            tile = json.loads(tile_file.read_text())
+            tile_type = tile_file.stem.removeprefix('tile_type_')
+            bits_file = database/('segbits_'+tile_type.lower()+'.db')
+            features = {line.split()[0] for line in bits_file.read_text().splitlines()}
+            for pip in tile['pips'].values():
+                if 'CK_BUFG_CASCO' in pip['dst_wire'] and 'CK_BUFG_CASCIN' in pip['src_wire']:
+                    feature = tile_type+'.'+pip['dst_wire']+'.'+pip['src_wire']
+                    if feature not in features:
+                        raise RuntimeError('Unaudited clock cascade: '+feature)
+                    restored.append(feature)
+        if not restored:
+            raise RuntimeError('No clock cascade features audited')
+        filters = gen/'filters.py'
+        text = filters.read_text()
+        block = '    if tile_type.startswith("CLK_HROW_TOP"):\n        if "CK_BUFG_CASCO" in p.dst_wire().name() and "CK_BUFG_CASCIN" in p.src_wire().name():\n            return False\n'
+        if text.count(block) != 1:
+            raise RuntimeError('Clock cascade filter changed; re-audit')
+        filters.write_text(text.replace(block, ''))
+        (out/'clock-cascade-audit.json').write_text(json.dumps(restored, indent=2)+'\n')
     # Node union must be idempotent: merging a node with itself appends to the
     # very list being iterated, grows without bound, and exhausts host memory.
     tc = gen/'tileconn.py'

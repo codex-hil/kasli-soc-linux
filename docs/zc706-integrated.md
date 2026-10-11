@@ -120,3 +120,42 @@ checks and does not bind any routing resources. Its bounded routing run was
 stopped after 120 seconds; no hardware action occurred. Next: inspect a search
 restricted to dedicated clock resources and compare its stopping edges with
 chip database connectivity and router reservations.
+
+### Confirmed clock database export defect — 2026-10-11
+
+The pinned nextpnr exporter deliberately filtered `CK_BUFG_CASCIN` to
+`CK_BUFG_CASCO` PIPs in `CLK_HROW_TOP` tiles. This prevented MMCMs farther
+from the central BUFG row from using the dedicated clock cascade. A controlled
+comparison used the identical placed JSON, XDC and diagnostic backend with
+only the chip database changed: both DDR CLKOUT0 and SFP RX CLKOUT0 were
+disconnected in the restricted clock graph before the fix and connected after
+it. The restored paths explicitly traverse the previously filtered cascade
+PIPs. The qualified standalone SFP RX MMCM sits in the nearest region, so its
+route did not need those PIPs. The qualified DDR SYS route instead traversed
+general fabric and a LUT; it was not a dedicated-route reference.
+
+`patches/nextpnr-clock-cascade.patch` contains the exporter change.
+`ddr_chipdb.prepare(clock_cascade=True)` applies it in an isolated generator
+and checks all 32 restored PIPs against Project X-Ray configuration features.
+The integrated build now uses its own `chipdb-cascade` and `chipdb-cascade-hr`
+outputs. Existing ADC, DDR and standalone SFP databases remain untouched.
+The default generator mode and its cache identity remain unchanged.
+
+Evidence: `evidence/zc706/integrated-20261011/clock-cascade-{baseline,fixed}.json`,
+compressed connectivity logs and the complete audited feature list. This is
+a connectivity fix; full routed timing and physical integration remain pending.
+
+To probe a generated placement without programming hardware:
+
+```sh
+python3 tools/environment.py build/python/bin/python tools/diagnose_integrated_clocks.py \
+  --json build/zc706-integrated/gateware/gateware/top_placed.json \
+  --xdc build/zc706-integrated/gateware/gateware/top.xdc \
+  --chipdb build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin \
+  --output build/zc706-integrated/clock-connectivity
+```
+
+The probe intentionally exits before the main router, checks neither final
+timing nor bitstream correctness, and searches a subset selected by clock PIP
+names. `--topology-only` ignores occupancy/availability for diagnosis and must
+never be interpreted as proof of a programmable route.

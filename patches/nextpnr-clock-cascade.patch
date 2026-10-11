@@ -1,0 +1,12 @@
+--- a/himbaechel/uarch/xilinx/gen/filters.py
++++ b/himbaechel/uarch/xilinx/gen/filters.py
+@@ -83,9 +83,6 @@
+         return False
+     # if tile_type.startswith("HCLK_CMT") and "FREQ_REF" in p.dst_wire().name():
+     #     return False
+-    if tile_type.startswith("CLK_HROW_TOP"):
+-        if "CK_BUFG_CASCO" in p.dst_wire().name() and "CK_BUFG_CASCIN" in p.src_wire().name():
+-            return False
+     if tile_type.startswith("HCLK_IOI"):
+         if "RCLK_BEFORE_DIV" in p.dst_wire().name() and "IMUX" in p.src_wire().name():
+             return False

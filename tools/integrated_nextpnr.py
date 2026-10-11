@@ -47,6 +47,9 @@ def prepare(out=None):
         WireId root = ctx->getNetinfoSourceWire(net);
         for (auto &usr : net->users) {
             WireId sink = ctx->getNetinfoSinkWire(net,usr,0);
+            bool clock_only=std::getenv("NEXTPNR_CLOCK_ONLY");
+            bool topology_only=std::getenv("NEXTPNR_CLOCK_TOPOLOGY");
+            log_info("Clock-BFS-endpoints: net=%s source=%s sink=%s clock_only=%d topology_only=%d\n",ctx->nameOf(net),ctx->nameOfWire(root),ctx->nameOfWire(sink),int(clock_only),int(topology_only));
             std::queue<WireId> forward, backward;
             dict<WireId,PipId> previous, following;
             forward.push(root); previous[root]=PipId();
@@ -61,10 +64,14 @@ def prepare(out=None):
                 auto &opposite=reverse ? previous : following;
                 WireId current=pending.front();pending.pop();
                 auto inspect=[&](PipId pip) {
-                    if (!ctx->checkPipAvailForNet(pip,net)) return;
+                    if (clock_only) {
+                        std::string name=ctx->nameOfPip(pip);
+                        if (name.find("CLK")==std::string::npos && name.find("BUFG")==std::string::npos && name.find("MMCM")==std::string::npos) return;
+                    }
+                    if (!topology_only && !ctx->checkPipAvailForNet(pip,net)) return;
                     WireId next=reverse ? ctx->getPipSrcWire(pip) : ctx->getPipDstWire(pip);
                     NetInfo *owner=ctx->getBoundWireNet(next);
-                    if ((owner && owner!=net) || visited.count(next)) return;
+                    if ((!topology_only && owner && owner!=net) || visited.count(next)) return;
                     visited[next]=pip;pending.push(next);
                     if (opposite.count(next)) {meet=next;found=true;}
                 };
@@ -90,6 +97,7 @@ def prepare(out=None):
             }
         }
     }
+    if (std::getenv("NEXTPNR_CLOCK_DIAGNOSTIC_EXIT")) log_error("Clock diagnostic complete; intentionally skipping router\n");
     for (auto &entry : ctx->nets) {
         NetInfo *net = entry.second.get();
         if (!net->driver.cell || !net->driver.cell->type.in(id_BUFGCTRL, id_MMCME2_ADV_MMCME2_ADV)) continue;

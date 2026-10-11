@@ -50,7 +50,7 @@
   },
   "routing_result": "NOT_COMPLETED",
   "physical_image_unchanged": true,
-  "next_step": "Trace the legal MMCM-to-BUFG path against forward router expansion using the saved placement; then fix routing, require final setup/hold PASS, and run the locked integrated hardware wrapper.",
+  "next_step": "Full integrated build with restored programmable clock cascade PIPs; final setup/hold must pass before locked hardware qualification.",
   "placed_state": {
     "local_file": "build/zc706-integrated/gateware/gateware/top_placed.json",
     "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
@@ -101,5 +101,15 @@
     "hardware_access": false,
     "log_sha256": "37d14ca154023bae5f759982b009e5a251288c2c26c3f4c48db9829642ed6a41",
     "interpretation": "Both frontiers remain nonempty. No proof of absent connectivity; next isolate dedicated clock routing resources."
+  },
+  "clock_cascade_fix": {
+    "result": "CONNECTIVITY_PASS",
+    "cause": "filters.py removed CLK_HROW_TOP CK_BUFG_CASCIN to CK_BUFG_CASCO routing PIPs from chipdb",
+    "restored_features": 32,
+    "identical_placement_comparison": true,
+    "baseline_connected_nets": 0,
+    "fixed_connected_nets": 2,
+    "hardware_validation": "NOT_RUN",
+    "full_build": "IN_PROGRESS"
   }
 }
