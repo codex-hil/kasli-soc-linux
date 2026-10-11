@@ -15,7 +15,8 @@ static int lines(struct bus *b, int scl, int sda) {
   while(!(*b->r&2)) if(now()>end) return ETIMEDOUT;
  }
  if(b->counter) {
-  /* SYS=100 MHz. Unsigned subtraction also handles the 32-bit wrap. */
+  /* 150 ticks: 1.5 us at 100 MHz, 1.8 us at 83 1/3 MHz.
+   * Caller enables this only for those clocks. Unsigned subtraction handles wrap. */
   uint32_t start=*b->counter;
   unsigned polls=0;uint64_t deadline=0;
   while((uint32_t)(*b->counter-start)<150) {

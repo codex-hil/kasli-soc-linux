@@ -21,3 +21,21 @@ Board I2C is shared by control software; it must have one owner per transaction.
 Initialize DDR and train both receivers before starting the dual PLL runner
 with `--preinitialized`. Do not initialize/reset receivers while acquisition
 or the PLL control loop is running. No flash, OTP or default SD boot changes.
+
+Build and verification commands:
+
+```sh
+make integrated-pl integrated-software
+python3 tools/test_integrated_hardware.py --host BOARD_IP --program --output build/zc706-integrated/hardware
+```
+
+The host wrapper owns the ZC706 lock throughout JTAG boot, training and tests.
+It uses volatile JTAG programming, verifies uploaded file hashes and retains
+logs, phase records and board-side capture results. The initial test includes
+1,000 complete SFP MAC/PCS/GTX loopback packets. External tests use ICMP and
+byte-exact UDP echo through the switch while acquisition and PLL control run.
+
+Regression checks passed: independent-clock ADC DMA simulation (stalls,
+overflow, reset, frame failure, invalid configuration), original WR dual
+DDMTD simulation, PI model, I2C fault handling and parallel control ownership.
+Standalone SFP CSR export remains byte-for-byte equivalent as a parsed map.
