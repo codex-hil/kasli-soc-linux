@@ -686,3 +686,5 @@ lock is enabled.
 See [counter architecture, build, CSR ABI and pinned WR/AFCZ sources](docs/zc706-frequency.md).
 
 [Download the qualified clock-only bitstream, tools and measurement evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-reciprocal-validated-20261010).
+
+Integrated ADC/DDR/SFP with dual WR PLL development: [status and clocks](docs/zc706-integrated.md). Physical integration validation is pending.

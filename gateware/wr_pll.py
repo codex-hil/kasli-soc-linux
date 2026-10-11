@@ -9,7 +9,7 @@ from litex.soc.interconnect.csr import CSR, CSRStorage, CSRStatus
 
 
 class WRPhase(LiteXModule):
-    def __init__(self, platform, adc_domain='adc', helper_locked=None):
+    def __init__(self, platform, adc_domain='adc', helper_locked=None, reference_domain='sys'):
         import sys
         sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
         from build_wr_ddmtd import prepare
@@ -19,7 +19,7 @@ class WRPhase(LiteXModule):
             self.cd_helper = ClockDomain('helper')
             self.helper_mmcm = S7MMCM(speedgrade=-2, fractional=False)
             self.comb += self.helper_mmcm.reset.eq(ResetSignal())
-            self.helper_mmcm.register_clkin(ClockSignal(), 100e6)
+            self.helper_mmcm.register_clkin(ClockSignal(reference_domain), 100e6)
             self.helper_mmcm.create_clkout(self.cd_helper, 100e6*63/64, margin=0)
             platform.add_period_constraint(self.cd_helper.clk, 1e9/(100e6*63/64))
             helper_locked = self.helper_mmcm.locked
@@ -36,7 +36,7 @@ class WRPhase(LiteXModule):
         reset_helper = Signal()
         self.specials += MultiReg(self.reset.storage, reset_helper, odomain='helper')
         tags, strobes = [], []
-        for domain in ('sys', adc_domain):
+        for domain in (reference_domain, adc_domain):
             tag, strobe = Signal(32), Signal()
             tags.append(tag); strobes.append(strobe)
             self.specials += Instance('dmtd_with_deglitcher',

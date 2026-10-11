@@ -59,7 +59,7 @@ class NativeI2C:
             ctypes.c_int, ctypes.c_uint8, ctypes.c_void_p, ctypes.c_uint]
         self.lib.wr_i2c.restype = ctypes.c_int
         self.timed = (hasattr(self.lib, 'wr_i2c_timed') and
-            registers.map['constants'].get('config_clock_frequency') == 100000000)
+            registers.map['constants'].get('config_clock_frequency') in (83333333, 100000000))
         if self.timed:
             self.lib.wr_i2c_timed.argtypes = [ctypes.c_void_p, ctypes.c_uint,
                 ctypes.c_uint, ctypes.c_uint, ctypes.c_int, ctypes.c_uint8,

@@ -126,3 +126,13 @@ wr-pll-dual-sim:
 .PHONY: wr-pll-dual-package
 wr-pll-dual-package:
 	python3 tools/package_wr_pll.py --dual
+
+.PHONY: integrated-pl
+integrated-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --output-dir build/zc706-integrated/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+.PHONY: integrated-software
+integrated-software:
+	$(ENV) build/python/bin/python tools/build_ddr_software.py --output-dir build/zc706-integrated
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -static -O2 -Wall -Wextra -D_FILE_OFFSET_BITS=64 software/pl_ddr/adc_read.c -o build/zc706-integrated/adc-ddr-read
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o build/zc706-integrated/i2c.so

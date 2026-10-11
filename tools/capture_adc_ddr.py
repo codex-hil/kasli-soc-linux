@@ -20,6 +20,7 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--max-samples',type=int,default=1<<22)
     p.add_argument('--analog',action='store_true',help='Finally capture CH1 analog inputs at ±5 V, 50Ω OFF')
+    p.add_argument('--preinitialized',action='store_true',help='Use trained receivers and leave their clocks running')
     a=p.parse_args()
     if a.max_samples<8192 or a.max_samples>1<<24 or a.max_samples%8:
         p.error('Maximum samples must be 8192..16777216 and a multiple of eight')
@@ -32,12 +33,12 @@ def main():
             opened.append((card,r,ADC(r)))
             if r.map['constants'].get('adc_ddr_abi')!=1 or r.read('adc_dma_signature')!=0x41444452:
                 raise RuntimeError('Requires ADC DDR ABI 1')
-            if r.read('adc_control')!=1 or r.read('adc_ssr')!=0 or r.read('adc_dma_status')&1:
+            if (not a.preinitialized and (r.read('adc_control')!=1 or r.read('adc_ssr')!=0)) or r.read('adc_dma_status')&1:
                 raise RuntimeError('Requires both receivers stopped and DMA idle')
         for card,r,adc in opened:
             active.append(r)
-            adc.initialize()
-            training=adc.calibrate()
+            if not a.preinitialized: adc.initialize()
+            training=None if a.preinitialized else adc.calibrate()
             # Qualify real receiver words before enabling the RAM stream.
             for pattern in (0,0x3fff,0x1235,0x2dca):adc.check_pattern(pattern)
             adc.pattern(0x1235 if card==1 else 0x2dca)
@@ -111,7 +112,8 @@ def main():
             if r.read('adc_dma_status')&1:
                 result['requires_pl_reload']=True
             else:
-                r.write('adc_ssr',0);r.write('adc_control',1)
+                if not a.preinitialized:
+                    r.write('adc_ssr',0);r.write('adc_control',1)
         for _,r,_ in opened:r.mem.close()
         (a.output/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     print('PASS: both independent-clock ADC streams stored and verified in PL DDR')

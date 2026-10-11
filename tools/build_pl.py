@@ -69,7 +69,7 @@ def main():
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default="si5324")
@@ -89,9 +89,9 @@ def main():
         p.error("--reciprocal requires the FMC ADC target")
     if args.cards != 1 and args.design not in ("fmc-adc", "frequency"):
         p.error("--cards only applies to the FMC ADC target")
-    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency") and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py"}[args.design]
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py", "integrated": "zc706_integrated.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.wr_pll:
         target_command += ["--wr-pll", "--wr-pll-cards", str(args.wr_pll_cards)]
@@ -106,7 +106,7 @@ def main():
     work = args.output_dir / "gateware"
     # A failed rebuild must never leave an earlier bitstream approved.
     (work / "manifest.json").unlink(missing_ok=True)
-    if not args.resume_assembly and args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "frequency"):
+    if not args.resume_assembly and args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "frequency", "integrated"):
         # Resolve custom HDL before synth_xilinx flattening; deferred vendor
         # parameter specialization can otherwise re-elaborate the original top.
         script = work / "top.ys"
@@ -115,7 +115,7 @@ def main():
         script.write_text(prelude + script.read_text().replace("verilog_defaults -add -defer", "")
             .replace("synth_xilinx", "hierarchy -check -top top\nproc\n"
                 "write_rtlil elaborated.il\ndesign -reset\nread_rtlil elaborated.il\nsynth_xilinx"))
-        if args.design in ("pl-ddr", "adc-ddr"):
+        if args.design in ("pl-ddr", "adc-ddr", "integrated"):
             # Use stable ABC mapping for the standalone DDR controller.
             script.write_text(script.read_text().replace(" -abc9", ""))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
@@ -135,7 +135,7 @@ def main():
             from adc_ddr_nextpnr import prepare as prepare_hold
             nextpnr = prepare_hold()
         db = prepare_termination_db(db)
-    if args.design in ("pl-ddr", "adc-ddr"):
+    if args.design in ("pl-ddr", "adc-ddr", "integrated"):
         from ddr_chipdb import prepare
         chipdb_args = ["--chipdb", str(prepare(args.openxc7.resolve()))]
         from ddr_nextpnr import prepare as prepare_nextpnr
@@ -150,11 +150,11 @@ def main():
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
         db = prepare_termination_db(db)
-    if args.design == "sfp":
+    if args.design in ("sfp", "integrated"):
         from ddr_chipdb import prepare
         from sfp_nextpnr import prepare as prepare_nextpnr
         from sfp_database import prepare as prepare_sfp_db
-        db = prepare_sfp_db(db)
+        db = prepare_sfp_db(db, out=ROOT/"build/zc706-integrated/database/zynq7" if args.design == "integrated" else None)
         source_chipdb = prepare(args.openxc7.resolve(),
             out=ROOT/"build/zc706-sfp/chipdb", database=db,
             extra_sites=("GTXE2_CHANNEL", "GTXE2_COMMON", "IBUFDS_GTE2", "IPAD", "OPAD"))
@@ -165,11 +165,15 @@ def main():
             extra_rows=({"pin": "AA18", "bank": "9", "site": "IOB_X0Y24",
                 "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]
         nextpnr = prepare_nextpnr()
-    if args.design == "adc-ddr":
+    if args.design == "integrated":
+        from adc_termination_db import prepare as prepare_termination_db
+        db = prepare_termination_db(db, overlay=ROOT/"build/zc706-integrated/termination-db/zynq7")
+    if args.design in ("adc-ddr", "integrated"):
         from adc_ddr_clock_db import prepare as prepare_clock_db
-        db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db")
+        db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db",
+            out=ROOT/"build/zc706-integrated/clock-db/zynq7" if args.design == "integrated" else None)
     if args.resume_assembly:
-        if args.design not in ("adc-ddr", "sfp"):
+        if args.design not in ("adc-ddr", "sfp", "integrated"):
             p.error("Assembly resume requires a timing-checked ADC DDR or SFP target")
         latest_input = max((work/name).stat().st_mtime_ns for name in ("top.json", "top.xdc"))
         if any((work/name).stat().st_mtime_ns < latest_input
@@ -181,10 +185,10 @@ def main():
         log = (work/'stage1.log').read_text()
         if not hold_passed(log) or 'Program finished normally.' not in log:
             raise RuntimeError('Cannot resume without a completed zero-violation hold repair')
-        if args.design == "sfp":
+        if args.design in ("sfp", "integrated"):
             validate_sfp_clock(work)
             validate_sfp_route(work)
-        if args.design == "adc-ddr":
+        if args.design in ("adc-ddr", "integrated"):
             validate_ddr_io(work)
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type']=='IBUFDS' and c['parameters'].get('DIFF_TERM')=='TRUE' for c in cells.values())
@@ -197,7 +201,7 @@ def main():
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
          "--freq", "100", "--report", "timing.json", *chipdb_args,
-         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp") or args.reciprocal else [])],
+         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp", "integrated") or args.reciprocal else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
         [str(args.openxc7.resolve() / "bin/xc7frames2bit"),
@@ -213,35 +217,35 @@ def main():
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
-        if n == 0 and args.design == "sfp":
+        if n == 0 and args.design in ("sfp", "integrated"):
             validate_sfp_clock(work)
-        if n == 0 and args.design in ('pl-ddr', 'adc-ddr'):
+        if n == 0 and args.design in ('pl-ddr', 'adc-ddr', 'integrated'):
             validate_ddr_io(work)
-        if n == 1 and args.design == "sfp":
+        if n == 1 and args.design in ("sfp", "integrated"):
             validate_sfp_route(work)
-        if n == 1 and (args.design in ('adc-ddr', 'sfp') or args.reciprocal):
+        if n == 1 and (args.design in ('adc-ddr', 'sfp', 'integrated') or args.reciprocal):
             timing = json.loads((work/'timing.json').read_text())
             if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
                 raise RuntimeError('Target setup timing must pass and be reported')
             if not hold_passed((work/'stage1.log').read_text()):
                 raise RuntimeError('Target hold timing must pass')
-        if n == 1 and args.design in ('fmc-adc', 'adc-ddr', 'frequency'):
+        if n == 1 and args.design in ('fmc-adc', 'adc-ddr', 'frequency', 'integrated'):
             cells = json.loads((work/'top.json').read_text())['modules']['top']['cells']
             requested = sum(c['type'] == 'IBUFDS' and c['parameters'].get('DIFF_TERM') == 'TRUE'
                             for c in cells.values())
             emitted = sum(line.endswith('.DIFF.DIFF_TERM')
                           for line in (work/'top.fasm').read_text().splitlines())
-            expected = 2 if args.design == "frequency" else 11 * (2 if args.design == "adc-ddr" else args.cards)
+            expected = 2 if args.design == "frequency" else 11 * (2 if args.design in ("adc-ddr", "integrated") else args.cards)
             if requested != expected or emitted != requested:
                 raise RuntimeError(f'FPGA termination was not emitted: {emitted}/{requested}')
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
-        "sfp_refclk": args.sfp_refclk if args.design == "sfp" else None,
-        "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design in ("fmc-adc", "frequency") else None,
-        "reciprocal": args.reciprocal,
-        "wr_pll": args.wr_pll,
-        "wr_pll_cards": args.wr_pll_cards if args.wr_pll else None,
+        "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,
+        "adc_cards": 2 if args.design in ("adc-ddr", "integrated") else args.cards if args.design in ("fmc-adc", "frequency") else None,
+        "reciprocal": args.reciprocal or args.design == "integrated",
+        "wr_pll": args.wr_pll or args.design == "integrated",
+        "wr_pll_cards": 2 if args.design == "integrated" else args.wr_pll_cards if args.wr_pll else None,
         "hardware_validated": False,
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),

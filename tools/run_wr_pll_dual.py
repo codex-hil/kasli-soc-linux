@@ -31,7 +31,7 @@ def reset_phases(registers):
 def acquire(registers, oscillators, active):
     rows=[]
     for _ in range(3):
-        row=measure(registers[0],BANKS,100000000,100000000)
+        row=measure(registers[0],BANKS,100000000,registers[0].map['constants']['reciprocal_reference_hz'])
         rows.append(dict(tune_ppm=[s.ppm for s in oscillators], measurement=row))
         for index in active:
             s=oscillators[index]
@@ -134,7 +134,7 @@ def _loop(registers, oscillators, active, duration, label, output, pool):
                 if new[bank]!=((sequences[bank]+1)&0xffffffff):
                     raise RuntimeError('Unexpected reciprocal sequence: '+bank)
                 row[bank]=dict(reference_ticks=ticks,measured_cycles=cycles,
-                    offset_ppm=(cycles/ticks-1)*1e6)
+                    offset_ppm=(cycles*r.map['constants']['reciprocal_reference_hz']/ticks/100000000-1)*1e6)
             if row['frequency_reference']['reference_ticks']!=100000000:
                 raise RuntimeError('Reference counter self-check failed')
             row['locked']={str(i+1):lock_count[i]>=30 for i in active}
@@ -163,6 +163,8 @@ def main():
     p.add_argument('--seconds',type=float,default=60)
     p.add_argument('--control',choices=['fmc2','both'],default='both')
     p.add_argument('--loss-test',action='store_true')
+    p.add_argument('--preinitialized',action='store_true',
+        help='Keep trained ADC receivers and active DMA state; caller owns initialization')
     a=p.parse_args()
     if not 25<=a.seconds<=600:p.error('Require 25..600 seconds per run')
     for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,stopped)
@@ -181,7 +183,7 @@ def main():
         for i,r in enumerate(registers):
             if r.read(PHASE_BANKS[i]+'_signature')!=0x57525031:
                 raise RuntimeError(f'FMC{i+1}: phase ABI signature mismatch')
-            ADC(r).initialize()
+            if not a.preinitialized: ADC(r).initialize()
             oscillators.append(Si570(r))
         result['original_si570']={str(i+1):s.original for i,s in enumerate(oscillators)}
         reset_counters(registers[0],BANKS)

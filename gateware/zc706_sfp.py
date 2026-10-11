@@ -177,59 +177,63 @@ class SFPSoC(BaseSoC):
         # The AXI master and GP0 frontend run in sys, not the 100 MHz FCLK.
         self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
         self.csr.add("probe", 1)
-        self.platform.add_extension([r for r in _io if r[0] in
-            ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324", "i2c")])
+        self.platform.add_extension([r for r in _io if r[0] == "i2c"])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
-        if refclk == "local":
-            # Unused HPC DP4 in the Si5324 quad; no external FMC traffic.
-            self.platform.add_extension([("gtx_local", 0,
-                Subsignal("txp", Pins("AH2")), Subsignal("txn", Pins("AH1")),
-                Subsignal("rxp", Pins("AH6")), Subsignal("rxn", Pins("AH5")))])
-        self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
-            self.platform.request("gtx_local" if refclk == "local" else "sfp"), 50e6, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
-        self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
-            self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local")
-        self.csr.add("sfp_status", 3)
-        self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, 50e6,
-            dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
-            tx_cdc_depth=2048, rx_cdc_depth=2048, with_store_and_forward=True)
-        self.mac_status = LiteXModule()
-        for name in ("crc_errors", "preamble_errors"):
-            csr = CSRStatus(32, name=name)
-            setattr(self.mac_status, name, csr)
-            self.comb += csr.status.eq(getattr(self.ethcore.mac.core.rx_datapath, name).status)
-        for name, endpoint in [("tx_frames", self.ethcore.mac.core.sink),
-                               ("rx_frames", self.ethcore.mac.core.source)]:
-            csr = CSRStatus(32, name=name)
-            setattr(self.mac_status, name, csr)
-            self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
-                csr.status.eq(csr.status + 1))
-        self.csr.add("mac_status", 4)
-        self.packet_test = PacketTest(self.ethcore.mac.crossbar.get_port(0x88b5))
-        self.csr.add("packet_test", 5)
-        udp = self.ethcore.udp.crossbar.get_port(1234)
-        self.echo_fifo = stream.SyncFIFO(eth_udp_user_description(8), 2048, buffered=True)
-        self.comb += [udp.source.connect(self.echo_fifo.sink),
-            self.echo_fifo.source.connect(udp.sink, omit={"src_port", "dst_port"}),
-            udp.sink.src_port.eq(self.echo_fifo.source.dst_port),
-            udp.sink.dst_port.eq(self.echo_fifo.source.src_port)]
-        self.add_constant("SFP_ABI", 1)
-        self.add_constant("SFP_MAC", MAC)
-        self.add_constant("SFP_IP", ip)
-        self.add_constant("SFP_REFCLK_HZ", 100000000 if refclk == "fclk" else 125000000)
-        self.add_constant("SFP_REFCLK_SOURCE", refclk)
-        self.platform.add_period_constraint(self.crg.cd_sys.clk, 20)
-        self.platform.add_period_constraint(self.ethphy.cd_eth_tx.clk, 8)
-        self.platform.add_period_constraint(self.ethphy.cd_eth_rx.clk, 8)
-        self.platform.add_period_constraint(self.sfp_status.cd_si_ref.clk, 16)
-        self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
-        self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
-            self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
-        self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
-        self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
-        self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
-            self.ethphy.cd_eth_tx.clk, self.ethphy.cd_eth_rx.clk)
+        add_sfp(self, ip, refclk)
+
+def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3):
+    self.platform.add_extension([r for r in _io if r[0] in
+        ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324")])
+    if refclk == "local":
+        # Unused HPC DP4 in the Si5324 quad; no external FMC traffic.
+        self.platform.add_extension([("gtx_local", 0,
+            Subsignal("txp", Pins("AH2")), Subsignal("txn", Pins("AH1")),
+            Subsignal("rxp", Pins("AH6")), Subsignal("rxn", Pins("AH5")))])
+    self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
+        self.platform.request("gtx_local" if refclk == "local" else "sfp"), sys_clk_freq, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
+    self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
+        self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local")
+    self.csr.add("sfp_status", bank)
+    self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, sys_clk_freq,
+        dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
+        tx_cdc_depth=2048, rx_cdc_depth=2048, with_store_and_forward=True)
+    self.mac_status = LiteXModule()
+    for name in ("crc_errors", "preamble_errors"):
+        csr = CSRStatus(32, name=name)
+        setattr(self.mac_status, name, csr)
+        self.comb += csr.status.eq(getattr(self.ethcore.mac.core.rx_datapath, name).status)
+    for name, endpoint in [("tx_frames", self.ethcore.mac.core.sink),
+                           ("rx_frames", self.ethcore.mac.core.source)]:
+        csr = CSRStatus(32, name=name)
+        setattr(self.mac_status, name, csr)
+        self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
+            csr.status.eq(csr.status + 1))
+    self.csr.add("mac_status", bank+1)
+    self.packet_test = PacketTest(self.ethcore.mac.crossbar.get_port(0x88b5))
+    self.csr.add("packet_test", bank+2)
+    udp = self.ethcore.udp.crossbar.get_port(1234)
+    self.echo_fifo = stream.SyncFIFO(eth_udp_user_description(8), 2048, buffered=True)
+    self.comb += [udp.source.connect(self.echo_fifo.sink),
+        self.echo_fifo.source.connect(udp.sink, omit={"src_port", "dst_port"}),
+        udp.sink.src_port.eq(self.echo_fifo.source.dst_port),
+        udp.sink.dst_port.eq(self.echo_fifo.source.src_port)]
+    self.add_constant("SFP_ABI", 1)
+    self.add_constant("SFP_MAC", MAC)
+    self.add_constant("SFP_IP", ip)
+    self.add_constant("SFP_REFCLK_HZ", 100000000 if refclk == "fclk" else 125000000)
+    self.add_constant("SFP_REFCLK_SOURCE", refclk)
+    self.platform.add_period_constraint(self.crg.cd_sys.clk, 1e9/sys_clk_freq)
+    self.platform.add_period_constraint(self.ethphy.cd_eth_tx.clk, 8)
+    self.platform.add_period_constraint(self.ethphy.cd_eth_rx.clk, 8)
+    self.platform.add_period_constraint(self.sfp_status.cd_si_ref.clk, 16)
+    self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
+    self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
+        self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
+    self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
+    self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
+    self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
+        self.ethphy.cd_eth_tx.clk, self.ethphy.cd_eth_rx.clk)
 
 
 def main():

@@ -8,12 +8,12 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(original):
+def prepare(original, overlay=None):
     mapping_file = ROOT/'patches/prjxray-hr-diff-term.json'
     mapping = json.loads(mapping_file.read_text())
     if not mapping['repeated_baseline_identical'] or not mapping['all_on_union_verified']:
         raise RuntimeError('Unverified termination reference')
-    overlay = ROOT/'build/zc706-adc/termination-db/zynq7'
+    overlay = overlay or ROOT/'build/zc706-adc/termination-db/zynq7'
     overlay.mkdir(parents=True, exist_ok=True)
     patched = {feature.split('.')[0].lower() for feature in mapping['features']}
     for file in original.iterdir():

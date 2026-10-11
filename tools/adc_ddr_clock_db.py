@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def prepare(original,reference):
+def prepare(original,reference,out=None):
     mapping=json.loads((ROOT/'patches/prjxray-zynq-clock-inputs.json').read_text())
     tables={}
     for family,sha in mapping['source_sha256'].items():
@@ -22,7 +22,7 @@ def prepare(original,reference):
             raise RuntimeError('Clock feature was not audited: '+name)
     if hashlib.sha256((original/mapping['file']).read_bytes()).hexdigest()!=mapping['source_sha256']['zynq7']:
         raise RuntimeError('Overlay clock base differs from audited source')
-    out=ROOT/'build/zc706-adc-ddr/clock-db/zynq7'
+    out=out or ROOT/'build/zc706-adc-ddr/clock-db/zynq7'
     out.mkdir(parents=True,exist_ok=True)
     for source in original.iterdir():
         target=out/source.name

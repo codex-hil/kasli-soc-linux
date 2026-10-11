@@ -14,9 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(original):
+def prepare(original, out=None):
     source = ROOT / "upstream/prjxray-db/kintex7"
-    out = ROOT / "build/zc706-sfp/database/zynq7"
+    out = out or ROOT / "build/zc706-sfp/database/zynq7"
     out.mkdir(parents=True, exist_ok=True)
     for item in original.iterdir():
         dst = out / item.name
