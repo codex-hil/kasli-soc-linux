@@ -222,3 +222,12 @@ constraints passed. A fresh full build will produce proper constrained timing.
 The previous reroute's long path was CSR address decode to a distant register
 enable (1.30 ns logic, 15.74 ns routing); if it remains failing with valid
 constraints, repair the CSR placement/decode path instead of relaxing timing.
+
+The offline regression `tools/test_integrated_clock_snapshot.py` passed with
+the production backend: a snapshot retaining `pack=1` but missing timing
+metadata is rejected before routing, and six native timing fields are restored
+on each of two annotated clock nets. Results are in `snapshot-regression.json`
+and compressed missing/restored logs. Run it through `tools/environment.py`.
+It tests replay restoration; full-build snapshot emission and timing remain
+separate checks. A fresh build with all fixes and verbose hold diagnostics is
+running with a 1500-second bound.

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "missing_constraints_rejected": true,
+  "native_constraints_restored": 2,
+  "fields_per_clock": 6,
+  "limitation": "Tests replay restoration; full-build snapshot emission and timing remain separate checks."
+}
