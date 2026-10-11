@@ -426,3 +426,21 @@ configuration bits or hardware timing. No hardware access occurred.
 Evidence: `evidence/zc706/integrated-20261011/ddr-route-fasm-audit.json`.
 Next investigate the upstream training-pulse/read-bitslip logic and lane-4
 site mux encoding; integrated DDR remains FAIL, golden remains restored.
+
+### DDR delay-control logic comparison (2026-10-11)
+
+`tools/compare_ddr_control_logic.py` reconstructs logical LUT cones from packed
+INIT and original input mappings, stopping at named signal boundaries. A
+canonical binary decision diagram compares all 342 CE/LD sink functions,
+without sampling the CSR decoder address space: all match golden. The report
+explicitly assumes candidate per-bank CSR address copies equal golden's shared
+CSR address on the same cycle, and maps the respective CSR write-enable names.
+The separate CSR replication simulation supports that design assumption, but
+this audit does not prove its physical implementation or sequential behavior.
+The BDD evaluator was checked against direct LUT evaluation for 1,260 input
+assignments; inverting only DQ32 IDELAY CE produces one mismatch with a verified
+counterexample. No original artifacts or hardware were changed.
+Evidence: `evidence/zc706/integrated-20261011/ddr-control-logic-comparison.json`.
+Next inspect the actual lane-select storage/CSR readback and sequential bitslip
+control, since equivalent combinational control cones do not prove delivered
+training pulses or correctly updated lane-select state on hardware.
