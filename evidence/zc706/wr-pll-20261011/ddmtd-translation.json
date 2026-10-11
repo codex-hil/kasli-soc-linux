@@ -1,0 +1,22 @@
+{
+  "sources": {
+    "upstream/general-cores-wr/modules/common/gencores_pkg.vhd": "8e5e359d6ae56bb4e91c9b597d895dfdea72106be455946c00e5a1d438a97442",
+    "upstream/general-cores-wr/modules/common/gc_sync.vhd": "8d0b91bb4d7180f6544397e9013bbd391a7825ae078eaa73e0c23f4e6e662b33",
+    "upstream/general-cores-wr/modules/common/gc_edge_detect.vhd": "a30ac3733dfd9cde3a04f934bc4a91baa8370f9bc621ac26fd56f59ae63f118d",
+    "upstream/general-cores-wr/modules/common/gc_sync_ffs.vhd": "da33500bc97a928560f34d0fd3cf29fc7bc0db5e0b118912a1ecf3feb7b4a620",
+    "upstream/general-cores-wr/modules/common/gc_sync_register.vhd": "e7bfd351237723c140aec85595f878b5bada7b84a64dd1a9369c83fe069104a0",
+    "upstream/general-cores-wr/modules/common/gc_pulse_synchronizer2.vhd": "58acd5d632f2ec503c967f39da1d59de7d5423b0658fef7a6a25c2b890d39fa6",
+    "upstream/general-cores-wr/modules/common/gc_extend_pulse.vhd": "2b581b37b743d1befbc79a848f8c5f912b72b262ce4633e0bf53434f5ef1ac4d",
+    "upstream/wr-cores-afcz-v5/modules/timing/dmtd_sampler.vhd": "acb0cefdb64d19cad2f9e5c343a0558305639c8bdf560fdb9610405e363296ef",
+    "upstream/wr-cores-afcz-v5/modules/timing/dmtd_with_deglitcher.vhd": "a74e4d0358d7dbafa1ec166c0b141d10aab2b5399127eac7b5f1cc201f5ca168"
+  },
+  "ghdl": "GHDL 5.0.1 (Debian 5.0.1+dfsg-1+b1) [Dunoon edition]\n Compiled with GNAT Version: 14.2.0\n static elaboration, mcode JIT code generator\nWritten by Tristan Gingold.\n\nCopyright (C) 2003 - 2025 Tristan Gingold.\nGHDL is free software, covered by the GNU General Public License.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n",
+  "tag_bits": 32,
+  "options": [
+    "--std=08",
+    "-frelaxed-rules",
+    "--no-formal"
+  ],
+  "license": "LGPL-2.1-or-later WR / Solderpad-2.0 general-cores",
+  "verilog_sha256": "f3eaf6f11545feae8ec3da7a8a2d1cdcd9875e0b59fcc944408171f6482d5612"
+}

@@ -1,0 +1,123 @@
+{
+  "card": 1,
+  "hardware_validated": true,
+  "original": [
+    34,
+    66,
+    187,
+    255,
+    240,
+    31
+  ],
+  "rows": [
+    {
+      "requested_ppm": 0,
+      "actual_ppm": 0.0,
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 99998656,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001344.0180636,
+          "offset_ppm": 13.440180635981847,
+          "one_tick_resolution_ppm": 0.01000013440180636
+        },
+        "frequency2": {
+          "reference_ticks": 99998495,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001505.02265058,
+          "offset_ppm": 15.050226505941566,
+          "one_tick_resolution_ppm": 0.010000150502265059
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    },
+    {
+      "requested_ppm": 5,
+      "actual_ppm": 4.999979932307497,
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 99998142,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001858.03452228,
+          "offset_ppm": 18.580345222840577,
+          "one_tick_resolution_ppm": 0.010000185803452228
+        },
+        "frequency2": {
+          "reference_ticks": 99998484,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001516.02298291,
+          "offset_ppm": 15.160229829058736,
+          "one_tick_resolution_ppm": 0.010000151602298292
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    },
+    {
+      "requested_ppm": -5,
+      "actual_ppm": -4.999979932418519,
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 99999150,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000850.00722507,
+          "offset_ppm": 8.500072250727797,
+          "one_tick_resolution_ppm": 0.010000085000722506
+        },
+        "frequency2": {
+          "reference_ticks": 99998491,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001509.02277115,
+          "offset_ppm": 15.090227711400672,
+          "one_tick_resolution_ppm": 0.010000150902277115
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    },
+    {
+      "requested_ppm": 0,
+      "actual_ppm": 0.0,
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 99998647,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001353.01830634,
+          "offset_ppm": 13.530183063492629,
+          "one_tick_resolution_ppm": 0.010000135301830634
+        },
+        "frequency2": {
+          "reference_ticks": 99998490,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001510.02280134,
+          "offset_ppm": 15.10022801332056,
+          "one_tick_resolution_ppm": 0.010000151002280135
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    }
+  ],
+  "restored": true
+}

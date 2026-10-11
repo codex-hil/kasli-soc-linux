@@ -15,7 +15,7 @@ PACKAGES = ("build-essential patch perl python3 python3-venv python3-pip bison f
             "bc cpio unzip rsync file wget xz-utils libssl-dev libncurses-dev git "
             "ca-certificates libelf-dev clang llvm device-tree-compiler rustup "
             "openssh-client curl cmake libboost-dev libboost-program-options-dev "
-            "libboost-iostreams-dev libboost-thread-dev libeigen3-dev yosys").split()
+            "libboost-iostreams-dev libboost-thread-dev libeigen3-dev yosys ghdl").split()
 
 
 def call(args, **kwargs):

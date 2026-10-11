@@ -1,0 +1,68 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "frequency",
+  "sfp_refclk": null,
+  "adc_cards": 2,
+  "reciprocal": true,
+  "wr_pll": true,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "8524d9883b768e15f27ddf421da5903006e225271fc7fa019b5da5ce39acad60",
+  "commands": [
+    [
+      "/usr/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/zc706-adc-ddr/nextpnr-hold/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/work/build/zc706-adc/chipdb/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/zc706-adc/termination-db/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/zc706-adc/termination-db/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "4cb75983a2813ecb66b8d2ce8df8bf510faaee0ddc4ca6118a62d528f312bd42",
+    "top.fasm": "aca7e8682b5915620d920a4241c3149c4e7c444dd0fa1562f629d7d1f7e465a7",
+    "timing.json": "57f1b2e5ad7a46a8de1aaab3f663fe1d105e3ebfc86d331eda6992725b824137"
+  },
+  "assembly_resumed": false
+}

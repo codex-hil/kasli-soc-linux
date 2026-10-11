@@ -73,9 +73,12 @@ def main():
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default="si5324")
+    p.add_argument("--wr-pll", action="store_true", help="Add original WR DDMTD phase taggers to the clock-only target")
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
+    if args.wr_pll and args.design != "frequency":
+        p.error("--wr-pll requires --design frequency")
     if args.design == "frequency":
         args.reciprocal = True
         args.cards = 2
@@ -87,6 +90,8 @@ def main():
         p.error("FMC ADC target requires ZC706")
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
+    if args.wr_pll:
+        target_command += ["--wr-pll"]
     if args.design == "sfp":
         target_command += ["--refclk", args.sfp_refclk]
     if args.design == "fmc-adc":
@@ -232,6 +237,7 @@ def main():
         "sfp_refclk": args.sfp_refclk if args.design == "sfp" else None,
         "adc_cards": 2 if args.design == "adc-ddr" else args.cards if args.design in ("fmc-adc", "frequency") else None,
         "reciprocal": args.reciprocal,
+        "wr_pll": args.wr_pll,
         "hardware_validated": False,
         "timing_passed": True,
         "bitstream_sha256": hashlib.sha256((work / "top.bit").read_bytes()).hexdigest(),

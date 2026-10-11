@@ -1,0 +1,110 @@
+[
+  {
+    "attempt": "attempt-slow-i2c",
+    "error": "Initial phase hold qualification failed",
+    "factory_restored": true,
+    "files": {
+      "build/zc706-wr-pll/gateware/csr.json": "abeb9a55644c078c9bb239e9d0c21fcce086f14807ac36f7fca923ad72fd5bc9",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "bd5ab7e59bfa904979227e6e6756d38ecbefbc54807fdfd56d5234f42203c781",
+      "tools/run_wr_pll.py": "a6152a91291438d09561c3f7190dc8f7f221e9c91d39418d51de5545a87c7452"
+    },
+    "statistics": {
+      "mean_phase_ns": -0.6547619047619048,
+      "min_phase_ns": -80.0,
+      "max_phase_ns": 66.82539682539682,
+      "stddev_phase_ns": 32.45016162991975,
+      "locked_fraction": 0.0,
+      "last_tune_ppm": -13.47252767136542
+    },
+    "acceptance_note": "These runs used the preliminary strict +/-1 ns criterion and failed it."
+  },
+  {
+    "attempt": "fast-i2c",
+    "error": "Initial phase hold qualification failed",
+    "factory_restored": true,
+    "files": {
+      "build/zc706-wr-pll/gateware/csr.json": "abeb9a55644c078c9bb239e9d0c21fcce086f14807ac36f7fca923ad72fd5bc9",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "7800dddee3401c4f3df70c6e3cc42ea134984c7e8e87945a9aa4d233b2746ee7",
+      "tools/run_wr_pll.py": "a6152a91291438d09561c3f7190dc8f7f221e9c91d39418d51de5545a87c7452"
+    },
+    "statistics": {
+      "mean_phase_ns": 0.13424286151558876,
+      "min_phase_ns": -63.17460317460318,
+      "max_phase_ns": 72.22222222222223,
+      "stddev_phase_ns": 22.728442919218924,
+      "locked_fraction": 0.0,
+      "last_tune_ppm": -13.590630058346598
+    },
+    "acceptance_note": "These runs used the preliminary strict +/-1 ns criterion and failed it."
+  },
+  {
+    "attempt": "native-i2c",
+    "error": "Initial phase hold qualification failed",
+    "factory_restored": true,
+    "files": {
+      "build/zc706-wr-pll/gateware/csr.json": "abeb9a55644c078c9bb239e9d0c21fcce086f14807ac36f7fca923ad72fd5bc9",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "0ebcbae040e6c893034240f7b1046733186fb71b70e53140254fa11149689848",
+      "tools/run_wr_pll.py": "a6152a91291438d09561c3f7190dc8f7f221e9c91d39418d51de5545a87c7452",
+      "build/zc706-wr-pll/i2c.so": "1e16055feaf19ba1bc6b2df5f963fc2534a3f7db2f49c11cd20e1ae40a4cd431"
+    },
+    "statistics": {
+      "mean_phase_ns": -0.23378497404471432,
+      "min_phase_ns": -40.0,
+      "max_phase_ns": 33.65079365079365,
+      "stddev_phase_ns": 14.852248761572215,
+      "locked_fraction": 0.0,
+      "last_tune_ppm": -13.52898180440043
+    },
+    "acceptance_note": "These runs used the preliminary strict +/-1 ns criterion and failed it."
+  },
+  {
+    "attempt": "native-faster-pi",
+    "error": "Initial phase hold qualification failed",
+    "factory_restored": true,
+    "files": {
+      "build/zc706-wr-pll/gateware/csr.json": "abeb9a55644c078c9bb239e9d0c21fcce086f14807ac36f7fca923ad72fd5bc9",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "0ebcbae040e6c893034240f7b1046733186fb71b70e53140254fa11149689848",
+      "tools/run_wr_pll.py": "ebac0a1b2e47b05a83789e8da2c2b4c3a3cf1ea4a2dc3e47797478db4f52ae11",
+      "build/zc706-wr-pll/i2c.so": "1e16055feaf19ba1bc6b2df5f963fc2534a3f7db2f49c11cd20e1ae40a4cd431"
+    },
+    "statistics": {
+      "mean_phase_ns": -0.024614405510631925,
+      "min_phase_ns": -13.333333333333334,
+      "max_phase_ns": 14.444444444444445,
+      "stddev_phase_ns": 4.240325368231896,
+      "locked_fraction": 0.0,
+      "last_tune_ppm": -13.795670107397129
+    },
+    "acceptance_note": "These runs used the preliminary strict +/-1 ns criterion and failed it."
+  },
+  {
+    "attempt": "native-fast-mode",
+    "error": "Initial phase hold qualification failed",
+    "factory_restored": true,
+    "files": {
+      "build/zc706-wr-pll/gateware/csr.json": "abeb9a55644c078c9bb239e9d0c21fcce086f14807ac36f7fca923ad72fd5bc9",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "0ebcbae040e6c893034240f7b1046733186fb71b70e53140254fa11149689848",
+      "tools/run_wr_pll.py": "e390d4e5d5e3802ccef263eb20868f342e5855ea6b807f4c732555d7e1e3f4a9",
+      "build/zc706-wr-pll/i2c.so": "5ba06793d7b3df3a0ea9da0fa70b3967abe529fd96419888a5a9e8ee662173ec"
+    },
+    "statistics": {
+      "mean_phase_ns": -0.009981797897950794,
+      "min_phase_ns": -7.619047619047619,
+      "max_phase_ns": 7.142857142857143,
+      "stddev_phase_ns": 2.067844481799616,
+      "locked_fraction": 0.00468557336621455,
+      "last_tune_ppm": -13.707710651122973
+    },
+    "acceptance_note": "These runs used the preliminary strict +/-1 ns criterion and failed it."
+  }
+]

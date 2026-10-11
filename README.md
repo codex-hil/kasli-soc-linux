@@ -13,6 +13,15 @@ through `/dev/mem` and `/dev/uio0`; the counter runs at approximately
 final image. Full SD write/readback verification and the final test suite
 passed. Physical Kasli-SoC validation remains pending.
 
+## White Rabbit phase PLL development
+
+A small clock-only target integrates original CERN WR DDMTD taggers, coherent
+phase snapshots and a WR-derived PI regulating the FMC1 Si570. Build with
+`make wr-pll-pl wr-pll-software`; see [development and physical test status](docs/zc706-wr-pll.md).
+FMC1 phase hold and clock-loss/reacquisition passed two 60-second physical runs
+(2.20–2.29 ns sampled phase standard deviation; peaks within ±8.74 ns).
+The bounded test restores the original Si570 setting. FMC2 remains an untuned control.
+
 ## CERN FMC ADC on ZC706
 
 The **single-card J5 LPC target** provides four channels, an ISERDES

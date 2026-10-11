@@ -1,0 +1,12 @@
+python3 tools/environment.py python3 tools/build_wr_ddmtd.py
+/work/build/wr-ddmtd/tagger.v
+python3 tools/environment.py sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -o build/wr-ddmtd/sim build/wr-ddmtd/tagger.v gateware/wr_phase_tracker.v tests/wr_ddmtd_tb.v && build/tools/oss-cad-suite/bin/vvp build/wr-ddmtd/sim'
+phase drift -20.000000 ns, events       3157, rejected          1
+PASS: original WR taggers, phase polarity, unwrap, loss and recovery
+tests/wr_ddmtd_tb.v:46: $finish called at 2240400000000 (1fs)
+python3 tests/test_wr_pi.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.030s
+
+OK

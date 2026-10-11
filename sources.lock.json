@@ -102,5 +102,9 @@
   "wrpc-sw-wrs-v4": {
     "url": "https://gitlab.com/ohwr/project/wrpc-sw.git",
     "rev": "c3f553d267f3b8bad4f4ff6c321cf214ab09b97a"
+  },
+  "general-cores-wr": {
+    "url": "https://gitlab.com/ohwr/project/general-cores.git",
+    "rev": "20f990e96f9293e597f48789e85de0fda3f17d2c"
   }
 }

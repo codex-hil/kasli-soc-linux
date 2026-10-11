@@ -89,3 +89,20 @@ frequency-pl:
 .PHONY: frequency-package
 frequency-package:
 	python3 tools/package_frequency.py
+
+.PHONY: wr-pll-pl
+wr-pll-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design frequency --wr-pll --output-dir build/zc706-wr-pll/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+.PHONY: wr-pll-software wr-pll-sim
+wr-pll-software:
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o build/zc706-wr-pll/i2c.so
+
+wr-pll-sim:
+	$(ENV) python3 tools/build_wr_ddmtd.py
+	$(ENV) sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -o build/wr-ddmtd/sim build/wr-ddmtd/tagger.v gateware/wr_phase_tracker.v tests/wr_ddmtd_tb.v && build/tools/oss-cad-suite/bin/vvp build/wr-ddmtd/sim'
+	python3 tests/test_wr_pi.py
+
+.PHONY: wr-pll-package
+wr-pll-package:
+	python3 tools/package_wr_pll.py
