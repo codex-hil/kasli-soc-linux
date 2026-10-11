@@ -47,11 +47,13 @@ def main():
                           pending_forward=int(pending_forward), pending_backward=int(pending_backward), reason=reason)
     if len(nets) != 2:
         raise RuntimeError('Expected both clock nets, got '+str(list(nets)))
+    roots = re.findall(r'Clock-root: net=(\S+) pip=(\S+) available=\d+ dst_owner=(\S+)', text)
+    conflicts = [dict(driver_net=net, pip=pip, owner=owner) for net, pip, owner in roots if owner not in (net, 'none')]
     digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
     report = dict(hardware_access=False, input_files_modified=False,
                   diagnostic_search_binds_resources=False, writes_bitstream=False,
                   search_subset='PIP names containing CLK, BUFG or MMCM',
-                  topology_only=args.topology_only, nets=nets, diagnostic_exit_code=result.returncode,
+                  topology_only=args.topology_only, nets=nets, clock_root_conflicts=conflicts, diagnostic_exit_code=result.returncode,
                   sha256={str(p): digest(p) for p in [args.json, args.xdc, args.chipdb, binary, logfile]})
     (args.output/'connectivity.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(nets, indent=2))

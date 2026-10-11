@@ -48,14 +48,15 @@
     "integrated-sfp-simulation.log.gz": "0e04d75363551cf9a53f0e93c6d04371940923352f3482cabd8677a57d331618",
     "integrated-software.log.gz": "5ba52577f63f49f9d81239be05ab2b96ead961b8bcabb25e9eb89d686bdd652a"
   },
-  "routing_result": "NOT_COMPLETED",
+  "routing_result": "MAIN_ROUTE_PASS_HOLD_ASSERT",
   "physical_image_unchanged": true,
-  "next_step": "Full integrated build with restored programmable clock cascade PIPs; final setup/hold must pass before locked hardware qualification.",
+  "next_step": "Fresh full build with clock snapshot serialization and unique hold-buffer IDs; inspect real clock timing, then repair any failing CSR path before hardware qualification.",
   "placed_state": {
     "local_file": "build/zc706-integrated/gateware/gateware/top_placed.json",
     "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
-    "generated_from_commit": "92af414",
-    "experimental_buffer_changes": "Development JSON only: TX input BUFG 0 to 4; RX half 21 to 18; RX full 16 to 19. Not applied to release target or hardware."
+    "generated_from_commit": "9725e21 plus absolute snapshot path fix",
+    "experimental_buffer_changes": "Development JSON only: TX input BUFG 0 to 4; RX half 21 to 18; RX full 16 to 19. Not applied to release target or hardware.",
+    "clock_constraints_serialized": false
   },
   "clock_bfs": {
     "result": "LIMIT_REACHED",
@@ -111,5 +112,22 @@
     "fixed_connected_nets": 2,
     "hardware_validation": "NOT_RUN",
     "full_build": "IN_PROGRESS"
+  },
+  "bufg0_bypass_fix": {
+    "result": "MINIMAL_REPRODUCER_PASS",
+    "before_output_owner": "adc2_rx.dco",
+    "after_output_owner": "pma_k7_gtx_basex_s7mmcm0_clkin_signal",
+    "cause": "CLK_BUFG_BUFGCTRL0_I0 to CLK_BUFG_BUFGCTRL0_O pseudo-PIP bypassed an instantiated global buffer site and consumed its output node",
+    "hardware_validation": "NOT_RUN"
+  },
+  "snapshot_path_fix": "Use an absolute path for snapshot after changing subprocess cwd; first full build stopped before routing on relative snapshot path.",
+  "latest_route": {
+    "main_router_seconds": 178.46,
+    "hold_reroute_seconds": 41.49,
+    "hold_pass0_buffers": 8,
+    "remaining_hold_violations": 3,
+    "termination": "assertion on reusing a rolled-back buffer net alias",
+    "timing_constraints_valid": false,
+    "hardware_access": false
   }
 }

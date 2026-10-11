@@ -1,0 +1,34 @@
+{
+  "hardware_access": false,
+  "input_files_modified": false,
+  "diagnostic_search_binds_resources": false,
+  "writes_bitstream": false,
+  "search_subset": "PIP names containing CLK, BUFG or MMCM",
+  "topology_only": false,
+  "nets": {
+    "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+      "found": true,
+      "forward": 73,
+      "backward": 42,
+      "pending_forward": 68,
+      "pending_backward": 37,
+      "reason": "connected"
+    },
+    "integratedsoc_ddrclock_clkout0": {
+      "found": true,
+      "forward": 73,
+      "backward": 42,
+      "pending_forward": 68,
+      "pending_backward": 37,
+      "reason": "connected"
+    }
+  },
+  "diagnostic_exit_code": 125,
+  "sha256": {
+    "evidence/zc706/integrated-20261011/bufg0-reproducer.json": "c9e68b268bf3e346519dda05a707267fcd613e85e215a02e0acea862ec44a1e9",
+    "evidence/zc706/integrated-20261011/bufg0-reproducer.xdc": "9448580e2acdd05fea5a59613548f2f4769677f52ae26a694fa06e0d3b2de9d5",
+    "build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin": "6bf64be43b250fef2dea49033fa9fb3044c3c00582ac684eb4dba51bf0ab19e5",
+    "/work/build/zc706-integrated/nextpnr-bufg-fixed/nextpnr-himbaechel-xilinx": "8ce7e8cb027851ad0f028d539a16241ccfd3e0dd1f8355027a11d143e3df09c5",
+    "build/zc706-integrated/bufg0-fixed-production/connectivity.log": "baf8e06f199386190701c092e910da920c9a6e4e0ada2e46c26fd8ca513990e6"
+  }
+}

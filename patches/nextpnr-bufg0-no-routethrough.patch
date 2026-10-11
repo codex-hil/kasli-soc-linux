@@ -1,0 +1,16 @@
+--- a/himbaechel/uarch/xilinx/xilinx.cc
++++ b/himbaechel/uarch/xilinx/xilinx.cc
+@@ -391,6 +391,13 @@
+     // since deciding which regional clock a given BUFR serves needs placement
+     // context this predicate does not have.
+     if (pip_type == PIP_TILE_ROUTING) {
++        // Never route an unrelated net through the BUFG0 tile pseudo-PIP.
++        // The instantiated buffer output starts at its separate site O pin.
++        IdString dst_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.dst_wire].name);
++        IdString src_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.src_wire].name);
++        if (dst_name == ctx->id("CLK_BUFG_BUFGCTRL0_O") && src_name == ctx->id("CLK_BUFG_BUFGCTRL0_I0"))
++            return true;
++
+         if (!design_has_bufr_valid) {
+             design_has_bufr = false;
+             for (auto &cell : ctx->cells)

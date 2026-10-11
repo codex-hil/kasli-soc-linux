@@ -1,0 +1,7 @@
+set_property LOC MMCME2_ADV_X1Y4 [get_cells MMCME2_ADV]
+set_property LOC BUFGCTRL_X0Y20 [get_cells BUFG]
+set_property LOC MMCME2_ADV_X0Y4 [get_cells MMCME2_ADV_3]
+set_property LOC BUFGCTRL_X0Y18 [get_cells BUFG_6]
+set_property LOC MMCME2_ADV_X0Y3 [get_cells adc2_rx.dco_mmcm]
+set_property LOC MMCME2_ADV_X0Y2 [get_cells MMCME2_ADV_2]
+set_property LOC BUFGCTRL_X0Y0 [get_cells BUFH]

@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 import re
 from pathlib import Path
@@ -57,6 +58,30 @@ def validate_sfp_route(work):
     for bit in range(3):
         if f'.GTXE2_CHANNEL_CPLLREFCLKSEL{bit}.' not in fasm:
             raise RuntimeError(f'CPLL reference selection bit {bit} was not routed')
+
+
+def validate_integrated_clock_constraints(work, timing):
+    constants = json.loads((work.parent/'csr.json').read_text())['constants']
+    sys_mhz = constants['config_clock_frequency']/1e6
+    expected = {'sys_clk':sys_mhz, 'integratedsoc_ddrclock_clkout_buf0':sys_mhz,
+        'gp1_clk':50, 'adc_clk':100, 'adc2_clk':100,
+        'adc_rx.io_clk':400, 'adc2_rx.io_clk':400,
+        'idelay_clk':200, 'helper_clk':98.4375,
+        'eth_tx_clk':125, 'eth_rx_clk':125, 'eth_tx_half_clk':62.5, 'eth_rx_half_clk':62.5}
+    if not any(name in timing['fmax'] for name in ('sys_clk', 'integratedsoc_ddrclock_clkout_buf0')):
+        raise RuntimeError('Integrated system clock is absent from timing report')
+    for name, report in timing['fmax'].items():
+        if name in expected and not math.isclose(report['constraint'], expected[name], rel_tol=2e-4, abs_tol=1e-3):
+            raise RuntimeError(f'Wrong clock constraint for {name}: {report["constraint"]} MHz, expected {expected[name]} MHz')
+
+
+def validate_clock_source_owners(log):
+    roots = re.findall(r'Clock-root: net=(\S+) pip=(\S+) available=\d+ dst_owner=(\S+)', log)
+    if not roots:
+        raise RuntimeError('Integrated clock ownership diagnostics are missing')
+    conflicts = [(net, pip, owner) for net, pip, owner in roots if owner not in (net, 'none')]
+    if conflicts:
+        raise RuntimeError('Clock output nodes consumed by other nets: '+repr(conflicts))
 
 
 def hold_passed(log):
@@ -185,9 +210,13 @@ def main():
                for name in ("top.fasm", "timing.json", "stage1.log")):
             raise RuntimeError('Cannot resume a route older than its netlist or constraints')
         timing = json.loads((work/'timing.json').read_text())
+        if args.design == 'integrated':
+            validate_integrated_clock_constraints(work, timing)
         if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
             raise RuntimeError('Cannot resume a route with failing setup timing')
         log = (work/'stage1.log').read_text()
+        if args.design == 'integrated':
+            validate_clock_source_owners(log)
         if not hold_passed(log) or 'Program finished normally.' not in log:
             raise RuntimeError('Cannot resume without a completed zero-violation hold repair')
         if args.design in ("sfp", "integrated"):
@@ -222,7 +251,7 @@ def main():
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
                 subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True,
-                        env=dict(os.environ, NEXTPNR_ROUTE_SNAPSHOT=str(work/'top_placed.json'))
+                        env=dict(os.environ, NEXTPNR_ROUTE_SNAPSHOT=str((work/'top_placed.json').resolve()))
                         if n == 1 and args.design == 'integrated' else None)
         if n == 0 and args.design in ("sfp", "integrated"):
             validate_sfp_clock(work)
@@ -230,8 +259,12 @@ def main():
             validate_ddr_io(work)
         if n == 1 and args.design in ("sfp", "integrated"):
             validate_sfp_route(work)
+            if args.design == "integrated":
+                validate_clock_source_owners((work/"stage1.log").read_text())
         if n == 1 and (args.design in ('adc-ddr', 'sfp', 'integrated') or args.reciprocal):
             timing = json.loads((work/'timing.json').read_text())
+            if args.design == 'integrated':
+                validate_integrated_clock_constraints(work, timing)
             if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
                 raise RuntimeError('Target setup timing must pass and be reported')
             if not hold_passed((work/'stage1.log').read_text()):

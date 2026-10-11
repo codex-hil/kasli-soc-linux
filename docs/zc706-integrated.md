@@ -171,3 +171,54 @@ not synthesizable or programmable gateware. Use these two files as the probe's
 The ordinary nextpnr `preRoute` pass binds available dedicated clock routes
 before the diagnostic inspects the graph. The diagnostic search itself binds
 no resources, changes no input files and emits no bitstream.
+
+### BUFG0 pseudo-PIP ownership defect — 2026-10-11
+
+A second controlled reproducer shows `adc2_rx.dco` using the tile pseudo-PIP
+`CLK_BUFG_BUFGCTRL0_I0 -> CLK_BUFG_BUFGCTRL0_O`. That wire belongs to the
+separately instantiated SFP TX input BUFG. The source site pin is a different
+node, so the clock pre-router failed to protect the buffer's output tile wire.
+The SFP clock then had no dedicated route into its MMCM. Blocking just this
+pseudo-PIP changes the output owner from `adc2_rx.dco` to the expected
+`pma_k7_gtx_basex_s7mmcm0_clkin_signal` and removes those input routing failures.
+The proper instantiated-buffer path from site O to the tile output remains
+available. `patches/nextpnr-bufg0-no-routethrough.patch` records the guard,
+which is enabled by default in the isolated integrated backend.
+
+The evidence directory contains `bufg0-reproducer.{json,xdc}` and compressed
+baseline/blocked logs. The two controlled runs used one experimental backend
+with its guard toggled by environment; the production helper now always
+enforces the guard. Physical validation remains pending.
+
+The first complete placement stopped at snapshot writing because a relative
+output path was interpreted from the gateware subprocess directory. This was
+a build wrapper bug; `NEXTPNR_ROUTE_SNAPSHOT` now uses an absolute path.
+
+### Complete main route, pending hold and setup — 2026-10-11
+
+Both clock fixes allowed the full placed design to finish its main route
+(178.46 s) and the first hold-buffer reroute (41.49 s). The clock-source
+ownership check passed for the full pre-router state. No bitstream was
+qualified or programmed. Hold pass 0 inserted eight buffers and left three
+violations; the next pass asserted when reusing a rolled-back buffer's net
+alias. The isolated helper now uses a separate monotonic allocation counter,
+checks both cell names and net aliases, and removes the new self-alias when
+rolling a buffer back. The patch is `nextpnr-hold-buffer-unique-names.patch`.
+Compilation passed; completion of actual hold repair remains pending.
+
+The old placed JSON snapshots also dropped clock constraints. Since
+`--no-pack` skips the XDC packing stage, the reroute incorrectly used the
+default 100 MHz on every domain, including SYS and GP1. That timing result
+is invalid. Snapshot hooks now serialize min/max period, high time and low
+time in native timing units, and restore all six fields before routing.
+Production replay rejects old snapshots without clock metadata; graph-only
+diagnostics may still inspect them without generating a bitstream.
+
+The build additionally checks the reported constraint frequencies against the
+actual integrated clock plan and rejects foreign ownership of driver output
+wires. Negative tests rejected the measured BUFG0 misroute and the incorrect
+100 MHz SYS constraint; correctly owned roots and the 83.33/50 MHz SYS/GP1
+constraints passed. A fresh full build will produce proper constrained timing.
+The previous reroute's long path was CSR address decode to a distant register
+enable (1.30 ns logic, 15.74 ns routing); if it remains failing with valid
+constraints, repair the CSR placement/decode path instead of relaxing timing.

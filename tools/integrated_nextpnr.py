@@ -18,6 +18,17 @@ def prepare(out=None):
         'log_assert(src_wire != WireId());\n            // A reserved driver root is valid before any sink arc is routed.\n            valid_wires_for_net.insert(src_wire);')
     content=content.replace('        router.setup();','''        router.setup();
         if (const char *snapshot = std::getenv("NEXTPNR_ROUTE_SNAPSHOT")) {
+            for (auto &entry : ctx->nets) {
+                NetInfo *net=entry.second.get();
+                if (!net->clkconstr) continue;
+                auto &cc=*net->clkconstr;
+                net->attrs[ctx->id("NEXTPNR_CLK_PERIOD_MIN")]=int64_t(cc.period.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_PERIOD_MAX")]=int64_t(cc.period.maxDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_HIGH_MIN")]=int64_t(cc.high.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_HIGH_MAX")]=int64_t(cc.high.maxDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_LOW_MIN")]=int64_t(cc.low.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_LOW_MAX")]=int64_t(cc.low.maxDelay());
+            }
             std::string filename(snapshot); std::ofstream file(filename);
             if (!write_json_file(file, filename, ctx)) log_error("Snapshot failed\\n");
         }''')
@@ -33,12 +44,47 @@ def prepare(out=None):
                             log_info("Root-step: net=%s pip=%s box=%d avail=%d reserved=%d own=%d unavailable=%d known=%d samepip=%d\n", ctx->nameOf(net), ctx->nameOfPip(dh), int(hit_test_pip(nd.bb,ctx->getPipLocation(dh))), int(ctx->checkPipAvailForNet(dh,net)), wd_debug.reserved_net, net->udata, int(wd_debug.unavailable), int(known_debug != nd.wires.end()), int(known_debug == nd.wires.end() || known_debug->second.first == dh));
                         }''')
     router2 = router2.replace('        setup_resources();', '''        if (const char *snapshot = std::getenv("NEXTPNR_ROUTE_SNAPSHOT")) {
+            for (auto &entry : ctx->nets) {
+                NetInfo *net=entry.second.get();
+                if (!net->clkconstr) continue;
+                auto &cc=*net->clkconstr;
+                net->attrs[ctx->id("NEXTPNR_CLK_PERIOD_MIN")]=int64_t(cc.period.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_PERIOD_MAX")]=int64_t(cc.period.maxDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_HIGH_MIN")]=int64_t(cc.high.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_HIGH_MAX")]=int64_t(cc.high.maxDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_LOW_MIN")]=int64_t(cc.low.minDelay());
+                net->attrs[ctx->id("NEXTPNR_CLK_LOW_MAX")]=int64_t(cc.low.maxDelay());
+            }
             std::string filename(snapshot); std::ofstream file(filename);
             if (!write_json_file(file, filename, ctx)) log_error("Snapshot failed\\n");
         }
         setup_resources();''')
     (out/'router2.cc').write_text(router2)
     xilinx = (base.parent/'source/himbaechel/uarch/xilinx/xilinx.cc').read_text()
+    xilinx = xilinx.replace('void XilinxImpl::preRoute()\n{', 'void XilinxImpl::preRoute()\n{\n    bool loading_preplaced = !cell_tags_set;', 1)
+    xilinx = xilinx.replace('    find_source_sink_locs();', r'''    int restored_clocks=0;
+    for (auto &entry : ctx->nets) {
+        NetInfo *net=entry.second.get();
+        if (!net->attrs.count(ctx->id("NEXTPNR_CLK_PERIOD_MIN"))) continue;
+        auto read=[&](const char *name) {return delay_t(net->attrs.at(ctx->id(name)).as_int64());};
+        net->clkconstr=std::make_unique<ClockConstraint>();
+        net->clkconstr->period=DelayPair(read("NEXTPNR_CLK_PERIOD_MIN"),read("NEXTPNR_CLK_PERIOD_MAX"));
+        net->clkconstr->high=DelayPair(read("NEXTPNR_CLK_HIGH_MIN"),read("NEXTPNR_CLK_HIGH_MAX"));
+        net->clkconstr->low=DelayPair(read("NEXTPNR_CLK_LOW_MIN"),read("NEXTPNR_CLK_LOW_MAX"));
+        ++restored_clocks;
+    }
+    if (restored_clocks) log_info("Restored %d snapshot clock constraints\n",restored_clocks);
+    if (!restored_clocks && loading_preplaced && !std::getenv("NEXTPNR_CLOCK_DIAGNOSTIC_EXIT"))
+        log_error("Preplaced snapshot lacks clock constraints; regenerate it before routing\n");
+    find_source_sink_locs();''', 1)
+    xilinx = xilinx.replace('    if (pip_type == PIP_TILE_ROUTING) {', r'''    if (pip_type == PIP_TILE_ROUTING) {
+        // A tile pseudo-PIP must not bypass the separately driven BUFG site.
+        {
+            IdString dst_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.dst_wire].name);
+            IdString src_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.src_wire].name);
+            if (dst_name == ctx->id("CLK_BUFG_BUFGCTRL0_O") && src_name == ctx->id("CLK_BUFG_BUFGCTRL0_I0"))
+                return true;
+        }''', 1)
     xilinx = xilinx.replace('    apply_prerouted();', r'''    apply_prerouted();
 
     if (std::getenv("NEXTPNR_CLOCK_BFS")) for (auto &entry : ctx->nets) {
@@ -97,7 +143,6 @@ def prepare(out=None):
             }
         }
     }
-    if (std::getenv("NEXTPNR_CLOCK_DIAGNOSTIC_EXIT")) log_error("Clock diagnostic complete; intentionally skipping router\n");
     for (auto &entry : ctx->nets) {
         NetInfo *net = entry.second.get();
         if (!net->driver.cell || !net->driver.cell->type.in(id_BUFGCTRL, id_MMCME2_ADV_MMCME2_ADV)) continue;
@@ -109,9 +154,29 @@ def prepare(out=None):
                 log_info("Clock-child: net=%s pip=%s available=%d\n", ctx->nameOf(net), ctx->nameOfPip(child), int(ctx->checkPipAvailForNet(child,net)));
             }
         }
-    }''')
+    }
+    if (std::getenv("NEXTPNR_CLOCK_DIAGNOSTIC_EXIT")) log_error("Clock diagnostic complete; intentionally skipping router\n");''')
     (out/'xilinx.cc').write_text(xilinx)
-    identity=dict(base_sha256=hashlib.sha256(base.read_bytes()).hexdigest(),source_sha256=hashlib.sha256(content.encode()).hexdigest(),router2_sha256=hashlib.sha256(router2.encode()).hexdigest(),xilinx_sha256=hashlib.sha256(xilinx.encode()).hexdigest())
+    hold_original=ROOT/'build/zc706-adc-ddr/nextpnr-hold/source/himbaechel/uarch/xilinx/hold_fix.cc'
+    hold=hold_original.read_text().replace('    int total_buffers = 0, total_detours = 0;',
+        '    int total_buffers = 0, total_detours = 0;\n    int next_buffer_id = 0;')
+    old='''            NetInfo *buf_out = ctx->createNet(ctx->idf("%s$holdbuf%d$net", net->name.c_str(ctx), total_buffers));
+            CellInfo *buf = ctx->createCell(ctx->idf("%s$holdbuf%d", net->name.c_str(ctx), total_buffers), id_SLICE_LUTX);'''
+    new='''            IdString cell_name, net_name;
+            do {
+                cell_name=ctx->idf("%s$holdbuf%d",net->name.c_str(ctx),next_buffer_id);
+                net_name=ctx->idf("%s$holdbuf%d$net",net->name.c_str(ctx),next_buffer_id++);
+            } while (ctx->cells.count(cell_name) || ctx->nets.count(net_name) || ctx->net_aliases.count(net_name));
+            NetInfo *buf_out = ctx->createNet(net_name);
+            CellInfo *buf = ctx->createCell(cell_name, id_SLICE_LUTX);'''
+    if hold.count(old)!=1:raise RuntimeError('Hold buffer allocation changed; re-audit')
+    hold=hold.replace(old,new).replace('                ctx->nets.erase(buf_out->name);',
+        '                ctx->net_aliases.erase(buf_out->name);\n                ctx->nets.erase(buf_out->name);',1)
+    hold=hold.replace('                if (buf_out)\n                    ctx->nets.erase(buf_out->name);',
+        '                if (buf_out) {\n                    ctx->net_aliases.erase(buf_out->name);\n                    ctx->nets.erase(buf_out->name);\n                }')
+    (out/'hold_fix.cc').write_text(hold)
+
+    identity=dict(base_sha256=hashlib.sha256(base.read_bytes()).hexdigest(),source_sha256=hashlib.sha256(content.encode()).hexdigest(),router2_sha256=hashlib.sha256(router2.encode()).hexdigest(),xilinx_sha256=hashlib.sha256(xilinx.encode()).hexdigest(),hold_sha256=hashlib.sha256(hold.encode()).hexdigest())
     marker=out/'manifest.json';binary=out/'nextpnr-himbaechel-xilinx'
     if marker.exists() and binary.exists() and json.loads(marker.read_text())==identity:return binary
     work=ROOT/'build/zc706-ddr/nextpnr-build/himbaechel/uarch/xilinx'
@@ -123,6 +188,7 @@ def prepare(out=None):
     subprocess.run(['/usr/bin/c++',*flags['CXX_DEFINES'],*flags['CXX_INCLUDES'],*flags['CXX_FLAGS'],'-c',str(source),'-o',str(out/'router1.cc.o')],check=True)
     subprocess.run(['/usr/bin/c++',*flags['CXX_DEFINES'],*flags['CXX_INCLUDES'],*flags['CXX_FLAGS'],'-c',str(out/'router2.cc'),'-o',str(out/'router2.cc.o')],check=True)
     subprocess.run(['/usr/bin/c++',*flags['CXX_DEFINES'],*flags['CXX_INCLUDES'],*flags['CXX_FLAGS'],'-I'+str(base.parent/'source/himbaechel/uarch/xilinx'),'-c',str(out/'xilinx.cc'),'-o',str(out/'xilinx.cc.o')],check=True)
+    subprocess.run(['/usr/bin/c++',*flags['CXX_DEFINES'],*flags['CXX_INCLUDES'],*flags['CXX_FLAGS'],'-I'+str(base.parent/'source/himbaechel/uarch/xilinx'),'-c',str(out/'hold_fix.cc'),'-o',str(out/'hold_fix.cc.o')],check=True)
     command=[];output=False
     for token in shlex.split((objects/'link.txt').read_text()):
         if output:command.append(str(binary));output=False
@@ -133,7 +199,7 @@ def prepare(out=None):
             path=work/token
             if path.name in ('fasm.cc.o','pack_io.cc.o'):path=base.parent/path.name
             if path.name in ('hold_fix.cc.o','xilinx.cc.o'):path=ROOT/'build/zc706-adc-ddr/nextpnr-hold'/path.name
-            if path.name in ('router1.cc.o','router2.cc.o','xilinx.cc.o'):path=out/path.name
+            if path.name in ('router1.cc.o','router2.cc.o','xilinx.cc.o','hold_fix.cc.o'):path=out/path.name
             command.append(str(path.resolve()))
         else:command.append(token)
     subprocess.run(command,cwd=out,check=True)
