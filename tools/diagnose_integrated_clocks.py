@@ -48,7 +48,8 @@ def main():
     if len(nets) != 2:
         raise RuntimeError('Expected both clock nets, got '+str(list(nets)))
     digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-    report = dict(hardware_access=False, routing_mutations=False,
+    report = dict(hardware_access=False, input_files_modified=False,
+                  diagnostic_search_binds_resources=False, writes_bitstream=False,
                   search_subset='PIP names containing CLK, BUFG or MMCM',
                   topology_only=args.topology_only, nets=nets, diagnostic_exit_code=result.returncode,
                   sha256={str(p): digest(p) for p in [args.json, args.xdc, args.chipdb, binary, logfile]})

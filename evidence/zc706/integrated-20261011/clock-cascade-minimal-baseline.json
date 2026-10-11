@@ -1,0 +1,34 @@
+{
+  "hardware_access": false,
+  "search_subset": "PIP names containing CLK, BUFG or MMCM",
+  "topology_only": false,
+  "nets": {
+    "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+      "found": false,
+      "forward": 517,
+      "backward": 759,
+      "pending_forward": 394,
+      "pending_backward": 0,
+      "reason": "exhausted"
+    },
+    "integratedsoc_ddrclock_clkout0": {
+      "found": false,
+      "forward": 531,
+      "backward": 759,
+      "pending_forward": 408,
+      "pending_backward": 0,
+      "reason": "exhausted"
+    }
+  },
+  "diagnostic_exit_code": 125,
+  "sha256": {
+    "evidence/zc706/integrated-20261011/clock-cascade-reproducer.json": "c7ec37035297b6b0e6aca807161c99d4d0d9bc5e885482b1459816c56049d954",
+    "evidence/zc706/integrated-20261011/clock-cascade-reproducer.xdc": "4544406b5792d0e231b12252114a7070d253aa777d7eb289a78478df67453ceb",
+    "build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin": "72eaa756d07ebb2a81a9a9c3189f1c3632fc7690d20252c9d70c3d54c4033d69",
+    "/work/build/zc706-integrated/nextpnr-clock-only/nextpnr-himbaechel-xilinx": "7a439180adb4697179dd47d8323d4f9edfc6f0e9b0aa34755ab459fcf3a24066",
+    "build/zc706-integrated/clock-minimal-baseline/connectivity.log": "31b5eb9a072995e24ae6684c0a48d3dc5893177b3e79d13a15e3db4276968fe6"
+  },
+  "input_files_modified": false,
+  "diagnostic_search_binds_resources": false,
+  "writes_bitstream": false
+}

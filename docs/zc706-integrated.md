@@ -159,3 +159,15 @@ The probe intentionally exits before the main router, checks neither final
 timing nor bitstream correctness, and searches a subset selected by clock PIP
 names. `--topology-only` ignores occupancy/availability for diagnosis and must
 never be interpreted as proof of a programmable route.
+
+A compact reproducer is now committed as `clock-cascade-reproducer.json` and
+`.xdc` in the same evidence directory: only two placed MMCMs and two BUFGs,
+8.7 kB of JSON. It reproduces both disconnected baseline paths and both
+connected fixed paths without the ADC/DMA/MAC design. Its MMCM inputs and
+feedback are intentionally absent: it is a routing-graph reproducer only,
+not synthesizable or programmable gateware. Use these two files as the probe's
+`--json` and `--xdc` arguments to reproduce the database comparison.
+
+The ordinary nextpnr `preRoute` pass binds available dedicated clock routes
+before the diagnostic inspects the graph. The diagnostic search itself binds
+no resources, changes no input files and emits no bitstream.

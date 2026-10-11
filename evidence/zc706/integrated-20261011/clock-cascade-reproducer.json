@@ -1,0 +1,239 @@
+{
+  "creator": "Next Generation Place and Route (Version db2bda8)",
+  "modules": {
+    "top": {
+      "settings": {
+        "router2/perfProfile": "0 ",
+        "router2/smoothStagnant": "0 ",
+        "router2/smoothMinWires": "8",
+        "router2/smoothCapFrac": "0.250000",
+        "router2/smoothMaxFanout": "2147483647",
+        "router2/smoothMaxCrit": "0.800000",
+        "router2/smoothPercentile": "0.950000",
+        "router2/smoothWeight": "1.000000",
+        "router2/smoothIters": "0 ",
+        "router2/slackOrder": "0 ",
+        "router2/estimateWeight": "1.250000",
+        "router2/currCongWeightMult": "2.000000",
+        "router2/histCongWeight": "1.000000",
+        "router2/initCurrCongWeight": "0.500000",
+        "router2/biasCostFactor": "0.250000",
+        "router2/ipinCostAdder": "0.000000",
+        "router2/bbBudgetMax": "60",
+        "router2/bbBudget": "0 ",
+        "router2/bbExpandMax": "0 ",
+        "router2/bbMargin/y": "3",
+        "router2/bbMargin/x": "3",
+        "router2/glbBwdMaxIter": "200",
+        "router2/bwdMaxIter": "20",
+        "place": "00000000000000000000000000000001",
+        "placer1/startTemp": "1.000000",
+        "placer1/minBelsForGridPick": "64",
+        "placer1/netShareWeight": "0.000000",
+        "placer1/constraintWeight": "10.000000",
+        "placerHeap/cellPlacementTimeout": "8",
+        "placerHeap/noCtrlSet": "0 ",
+        "placerHeap/netShareWeight": "0.000000",
+        "placerHeap/parallelRefine": "0 ",
+        "placerHeap/congestionWeight": "0.500000",
+        "placerHeap/congestionSpread": "0 ",
+        "xilinx/delayMatrixSources": "3",
+        "xilinx/delayMatrixExplore": "4000000",
+        "xilinx/delayMatrixWindow": "24",
+        "pack": "00000000000000000000000000000001",
+        "synth": "00000000000000000000000000000001",
+        "placerHeap/timingWeight": "10 ",
+        "placerHeap/criticalityExponent": "2",
+        "placerHeap/beta": "0.900000",
+        "placerHeap/alpha": "0.100000",
+        "seed": "0011000101000001010110010010011001010011010110001001011110010011",
+        "arch.type": " ",
+        "arch.name": "himbaechel",
+        "placer": "heap",
+        "auto_freq": "00000000000000000000000000000000",
+        "timing_driven": "00000000000000000000000000000001",
+        "target_freq": "100000000.000000",
+        "router": "router2"
+      },
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "/work/build/zc706-integrated/gateware/gateware/top.v:23.1-54151.10"
+      },
+      "ports": {},
+      "cells": {
+        "MMCME2_ADV": {
+          "hide_name": 0,
+          "type": "MMCME2_ADV_MMCME2_ADV",
+          "parameters": {
+            "IS_PWRDWN_INVERTED": "00000000000000000000000000000001",
+            "REF_JITTER1": "0.010000",
+            "DIVCLK_DIVIDE": "1",
+            "CLKOUT3_PHASE": "0",
+            "CLKOUT3_DIVIDE": "10100",
+            "CLKOUT2_PHASE": "0",
+            "CLKOUT2_DIVIDE": "101",
+            "CLKOUT1_PHASE": "0",
+            "CLKOUT1_DIVIDE": "11",
+            "CLKOUT0_PHASE": "0",
+            "CLKOUT0_DIVIDE_F": "1100",
+            "CLKIN1_PERIOD": "10.000000",
+            "CLKFBOUT_MULT_F": "1010",
+            "BANDWIDTH": "OPTIMIZED"
+          },
+          "attributes": {
+            "BEL_STRENGTH": "00000000000000000000000000000101",
+            "NEXTPNR_BEL": "X258Y147/MMCME2_ADV_X0Y0.MMCME2_ADV",
+            "X_ORIG_PORT_CLKFBIN": "CLKFBIN",
+            "X_ORIG_PORT_CLKFBOUT": "CLKFBOUT",
+            "X_ORIG_PORT_CLKIN1": "CLKIN1",
+            "X_ORIG_PORT_CLKOUT0": "CLKOUT0",
+            "X_ORIG_PORT_CLKOUT1": "CLKOUT1",
+            "X_ORIG_PORT_CLKOUT2": "CLKOUT2",
+            "X_ORIG_PORT_CLKOUT3": "CLKOUT3",
+            "X_ORIG_PORT_LOCKED": "LOCKED",
+            "X_ORIG_PORT_PWRDWN": "PWRDWN",
+            "X_ORIG_PORT_RST": "RST",
+            "X_ORIG_TYPE": "MMCME2_ADV",
+            "LOC": "MMCME2_ADV_X1Y4",
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:53001.3-53015.2",
+            "module_not_derived": "00000000000000000000000000000001"
+          },
+          "port_directions": {
+            "CLKOUT0": "output"
+          },
+          "connections": {
+            "CLKOUT0": [
+              444856
+            ]
+          }
+        },
+        "BUFG": {
+          "hide_name": 0,
+          "type": "BUFGCTRL",
+          "parameters": {
+            "IS_IGNORE1_INVERTED": "00000000000000000000000000000001",
+            "IS_CE1_INVERTED": "00000000000000000000000000000001",
+            "IS_S1_INVERTED": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "BEL_STRENGTH": "00000000000000000000000000000101",
+            "NEXTPNR_BEL": "X137Y207/BUFGCTRL_X0Y4.BUFGCTRL",
+            "X_ORIG_PORT_O": "O",
+            "X_ORIG_PORT_I0": "I0",
+            "X_ORIG_PORT_CE0": "CE0",
+            "X_ORIG_PORT_S0": "S0",
+            "X_ORIG_PORT_S1": "S1",
+            "X_ORIG_PORT_IGNORE0": "IGNORE0",
+            "X_ORIG_PORT_CE1": "CE1",
+            "X_ORIG_PORT_IGNORE1": "IGNORE1",
+            "X_ORIG_TYPE": "BUFGCTRL",
+            "LOC": "BUFGCTRL_X0Y20",
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:40388.6-40394.2",
+            "module_not_derived": "00000000000000000000000000000001"
+          },
+          "port_directions": {
+            "I0": "input"
+          },
+          "connections": {
+            "I0": [
+              444856
+            ]
+          }
+        },
+        "MMCME2_ADV_3": {
+          "hide_name": 0,
+          "type": "MMCME2_ADV_MMCME2_ADV",
+          "parameters": {
+            "IS_PWRDWN_INVERTED": "00000000000000000000000000000001",
+            "REF_JITTER1": "0.010000",
+            "DIVCLK_DIVIDE": "1",
+            "CLKOUT1_PHASE": "0",
+            "CLKOUT1_DIVIDE": "1001",
+            "CLKOUT0_PHASE": "0",
+            "CLKOUT0_DIVIDE_F": "10010",
+            "CLKIN1_PERIOD": "16.000000",
+            "CLKFBOUT_MULT_F": "10010",
+            "BANDWIDTH": "OPTIMIZED"
+          },
+          "attributes": {
+            "BEL_STRENGTH": "00000000000000000000000000000101",
+            "NEXTPNR_BEL": "X8Y147/MMCME2_ADV_X0Y0.MMCME2_ADV",
+            "X_ORIG_PORT_CLKFBIN": "CLKFBIN",
+            "X_ORIG_PORT_CLKFBOUT": "CLKFBOUT",
+            "X_ORIG_PORT_CLKIN1": "CLKIN1",
+            "X_ORIG_PORT_CLKOUT0": "CLKOUT0",
+            "X_ORIG_PORT_CLKOUT1": "CLKOUT1",
+            "X_ORIG_PORT_LOCKED": "LOCKED",
+            "X_ORIG_PORT_PWRDWN": "PWRDWN",
+            "X_ORIG_PORT_RST": "RST",
+            "X_ORIG_TYPE": "MMCME2_ADV",
+            "LOC": "MMCME2_ADV_X0Y4",
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:53537.3-53549.2",
+            "module_not_derived": "00000000000000000000000000000001"
+          },
+          "port_directions": {
+            "CLKOUT0": "output"
+          },
+          "connections": {
+            "CLKOUT0": [
+              444870
+            ]
+          }
+        },
+        "BUFG_6": {
+          "hide_name": 0,
+          "type": "BUFGCTRL",
+          "parameters": {
+            "IS_IGNORE1_INVERTED": "00000000000000000000000000000001",
+            "IS_CE1_INVERTED": "00000000000000000000000000000001",
+            "IS_S1_INVERTED": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "BEL_STRENGTH": "00000000000000000000000000000101",
+            "NEXTPNR_BEL": "X137Y207/BUFGCTRL_X0Y2.BUFGCTRL",
+            "X_ORIG_PORT_O": "O",
+            "X_ORIG_PORT_I0": "I0",
+            "X_ORIG_PORT_CE0": "CE0",
+            "X_ORIG_PORT_S0": "S0",
+            "X_ORIG_PORT_S1": "S1",
+            "X_ORIG_PORT_IGNORE0": "IGNORE0",
+            "X_ORIG_PORT_CE1": "CE1",
+            "X_ORIG_PORT_IGNORE1": "IGNORE1",
+            "X_ORIG_TYPE": "BUFGCTRL",
+            "LOC": "BUFGCTRL_X0Y18",
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:52660.6-52666.2",
+            "module_not_derived": "00000000000000000000000000000001"
+          },
+          "port_directions": {
+            "I0": "input"
+          },
+          "connections": {
+            "I0": [
+              444870
+            ]
+          }
+        }
+      },
+      "netnames": {
+        "integratedsoc_ddrclock_clkout0": {
+          "hide_name": 0,
+          "bits": [
+            444856
+          ],
+          "attributes": {
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:4139.15-4139.45"
+          }
+        },
+        "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+          "hide_name": 0,
+          "bits": [
+            444870
+          ],
+          "attributes": {
+            "src": "/work/build/zc706-integrated/gateware/gateware/top.v:9046.15-9046.47"
+          }
+        }
+      }
+    }
+  }
+}

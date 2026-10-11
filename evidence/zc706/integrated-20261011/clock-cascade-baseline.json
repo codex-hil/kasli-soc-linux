@@ -1,6 +1,5 @@
 {
   "hardware_access": false,
-  "routing_mutations": false,
   "search_subset": "PIP names containing CLK, BUFG or MMCM",
   "topology_only": false,
   "nets": {
@@ -28,5 +27,8 @@
     "build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin": "72eaa756d07ebb2a81a9a9c3189f1c3632fc7690d20252c9d70c3d54c4033d69",
     "/work/build/zc706-integrated/nextpnr-clock-only/nextpnr-himbaechel-xilinx": "7a439180adb4697179dd47d8323d4f9edfc6f0e9b0aa34755ab459fcf3a24066",
     "build/zc706-integrated/clock-diagnostic-baseline/connectivity.log": "588b8f89b0de62b6207f870589eb9cb0de55b85d20bba0c23fce1428db6c17cf"
-  }
+  },
+  "input_files_modified": false,
+  "diagnostic_search_binds_resources": false,
+  "writes_bitstream": false
 }
