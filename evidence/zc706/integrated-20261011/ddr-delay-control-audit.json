@@ -1,0 +1,17 @@
+{
+  "candidate": {
+    "input": "build/zc706-integrated/gateware/gateware/top_routed.json",
+    "hardware_access": false,
+    "qualification": false,
+    "delay_cell_count": 171,
+    "missing_sinks": []
+  },
+  "golden": {
+    "input": "build/zc706-adc-ddr/gateware/gateware/top_routed.json",
+    "hardware_access": false,
+    "qualification": false,
+    "delay_cell_count": 171,
+    "missing_sinks": []
+  },
+  "negative_control": "Removing the candidate DQ32 IDELAY CE sink produced exactly one missing-sink failure."
+}

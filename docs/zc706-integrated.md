@@ -378,3 +378,16 @@ with the current `software/pl_ddr/main.c` first. Existing images require their
 matching timing-clean manifests. The wrapper uses volatile JTAG and `/tmp`
 uploads, without SD/QSPI writes. The next investigation is lane-4-specific
 read/write/control routing and its clock sinks against the working reference.
+
+### DDR delay-control sink audit (2026-10-11)
+
+`tools/audit_ddr_delay_routes.py` checks serialized route destinations for
+C/CE/LD/INC/LDPIPEEN on every non-ADC IDELAY/ODELAY. Golden and integrated
+both contain 171 delay cells and all 855 checked control sinks. Removing
+DQ32 IDELAY CE from a copy of the routed design produces exactly the expected
+single missing-sink error. Results are recorded in
+`evidence/zc706/integrated-20261011/ddr-delay-control-audit.json`.
+This excludes absent serialized control sinks; it does not prove correct
+logical drivers, FASM encoding, electrical timing, or physical connectivity.
+No hardware was accessed for this audit. Next compare lane-4 control logic
+and route-to-FASM coverage against adjacent working lanes and golden.
