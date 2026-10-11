@@ -1,0 +1,15 @@
+{
+  "integrated_golden_software": {
+    "exit": 1,
+    "software_sha256": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6"
+  },
+  "integrated_command15": {
+    "exit": 1,
+    "software_sha256": "8c62cef5c2dd6c85604adb6acf3fc9f43af5502d187d1e0034357c00fef35d8a"
+  },
+  "restored_golden": {
+    "exit": 0,
+    "software_sha256": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6"
+  },
+  "final_host": "192.168.2.11"
+}

@@ -688,3 +688,11 @@ See [counter architecture, build, CSR ABI and pinned WR/AFCZ sources](docs/zc706
 [Download the qualified clock-only bitstream, tools and measurement evidence](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-reciprocal-validated-20261010).
 
 Integrated ADC/DDR/SFP with dual WR PLL development: [status and clocks](docs/zc706-integrated.md). Clock cascade and BUFG0 routing defects have controlled reproducers and isolated fixes. Final setup/hold and physical integration validation are pending.
+
+
+Integrated ZC706 update (2026-10-11): the complete dual-PLL/ADC/DDR/SFP PL now
+builds with all reported setup and hold checks passing. Linux and management
+Ethernet boot on the new image, but PL DDR fails its memory test. A direct
+comparison restored the golden ADC+DDR image and passed three complete 1 GiB
+BIST runs twice; integrated acquisition/PLL/SFP qualification remains pending.
+See [the integration evidence and status](docs/zc706-integrated.md).

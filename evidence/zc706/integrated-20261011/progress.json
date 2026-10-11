@@ -1,6 +1,19 @@
 {
   "status": "IN_PROGRESS",
-  "hardware_validation": "NOT_RUN",
+  "hardware_validation": {
+    "status": "DDR_FAIL",
+    "linux_boot": "PASS",
+    "uart": "PASS",
+    "management_ethernet_dhcp_ssh": "PASS",
+    "first_host": "192.168.2.7",
+    "adc_sfp_pll": "NOT_RUN after DDR failure",
+    "golden_software_same_hash": true,
+    "command_delay_15": "FAIL",
+    "golden_ddr_bist": "PASS twice: three full-1-GiB passes each",
+    "restored_baseline": "adc-ddr golden",
+    "current_host": "192.168.2.11",
+    "sd_qspi_written": false
+  },
   "qualified_integrated_bitstream": false,
   "source_commit": "92af414259affc0f53cc62dac1dbbfb2f58769d9",
   "architecture": {
@@ -50,7 +63,7 @@
   },
   "routing_result": "MAIN_ROUTE_PASS_HOLD_ASSERT",
   "physical_image_unchanged": true,
-  "next_step": "Fresh full build with clock snapshot serialization and unique hold-buffer IDs; inspect real clock timing, then repair any failing CSR path before hardware qualification.",
+  "next_step": "Compare integrated DDR I/O placement/routing and FASM against physically passing golden; preserve native timing requirements",
   "placed_state": {
     "local_file": "build/zc706-integrated/gateware/gateware/top_placed.json",
     "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
@@ -139,14 +152,14 @@
     "limitation": "Tests replay restoration; full-build snapshot emission and timing remain separate checks."
   },
   "fresh_full_build": {
-    "status": "IN_PROGRESS",
-    "log": "build/zc706-integrated/csr-replicated-full.log",
-    "timeout_seconds": 1500,
-    "timeout_scope": "Inside container process group",
-    "changes": [
-      "Per-bank CSR address registers",
-      "All-BUFG pseudo-PIP guard"
-    ]
+    "status": "PASS",
+    "bitstream_sha256": "2cd907d2308cbc77a89b4b5a08c7ee7ceeb130c8cb013b92fb1d6f467cc943c9",
+    "setup": "ALL_REPORTED_DOMAINS_PASS",
+    "sys_fmax_mhz": 85.56,
+    "sys_required_mhz": 83.33,
+    "hold_remaining": 0,
+    "hold_buffers": 9,
+    "hold_detour_rollback_patch_used": false
   },
   "all_bufg_guard": {
     "status": "COMPILED_PREROUTE_PASS",
@@ -189,5 +202,6 @@
     "patched": "PASS: failed attempt restored, successful longer path committed",
     "hardware_access": false,
     "current_full_build_uses_patch": false
-  }
+  },
+  "result": "IN_PROGRESS"
 }

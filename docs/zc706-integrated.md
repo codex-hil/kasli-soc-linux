@@ -323,3 +323,32 @@ The rollback regression also covers an initially LOCKED private branch.
 Rollback now restores each saved binding strength as well as its PIP;
 otherwise a failed attempt would downgrade a previous locked route to STRONG.
 All four graph cases (short/long path, STRONG/LOCKED initial binding) pass.
+
+
+### First complete integrated bitstream and hardware comparison (2026-10-11)
+
+The CSR-replicated full build passed setup in every reported domain and hold
+with zero remaining violations after nine feedthrough buffers. Final SYS Fmax
+is 85.56 MHz against 83.33 MHz; GP1 is 55.70 MHz against 50 MHz. All 22
+requested ADC differential terminations were emitted. Qualified bitstream SHA:
+`2cd907d2308cbc77a89b4b5a08c7ee7ceeb130c8cb013b92fb1d6f467cc943c9`.
+This run used the pre-rollback backend, as noted above.
+
+Volatile JTAG programming, DONE, U-Boot CSR signature, Linux/UART and management
+Ethernet/DHCP/SSH passed. Linux initially obtained 192.168.2.7. PL SODIMM
+training/memtest failed, so integrated ADC capture, SFP and dual PLL tests were
+not run. Internal nextpnr timing closure alone does not prove the external DDR
+interface. The same DDR test binary passed on the golden ADC+DDR image, with
+three complete 1 GiB random BIST passes and zero errors. It failed on integrated
+PL again; a diagnostic command-delay override of 15 taps (golden calibration)
+also failed. Thus neither the test binary nor this single delay setting explains
+the regression. Matched DDR primitive parameters and all 38 DDR MMCM FASM
+configuration lines are identical to golden.
+
+Both experiments held the shared ZC706 lock throughout programming/UART/SSH/
+testing/restoration. No SD, QSPI, OTP or persistent boot environment was written.
+The golden ADC+DDR image was restored and passed another three whole-memory
+BIST passes. Current management DHCP: 192.168.2.11. Hardware results and logs
+are recorded under `evidence/zc706/integrated-20261011`. Next work is comparison
+of DDR I/O placement/routing/FASM against this confirmed physical baseline;
+this is an integration regression, not evidence that the SODIMM is defective.
