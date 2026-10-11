@@ -466,3 +466,20 @@ current management address is 192.168.2.14. Evidence:
 `control-readback-hardware-result.json`, both control logs and compressed
 restored golden BIST log. Integrated DDR remains FAIL. Next compare lane-4
 bitslip counter CE/reset/update and physical site mux configuration.
+
+### Lane-four bitslip counter controls and FF encoding (2026-10-11)
+
+`tools/compare_ddr_bitslip_controls.py` locates all 48 counter state FFs for
+DQ32..39, write/read bitslip (two three-bit counters per DQ). Clock, CE and
+set/reset combinational cones match golden at the previously documented
+named-signal boundaries: 144 comparisons, zero mismatches. INIT, synchronous
+mode and primitive type match. FASM ZINI/ZRST, FFSYNC, clock inversion and
+CE/SR used-mux settings agree with each FF's packed configuration in both
+images. Changing only DQ32 read-bitslip bit0 INIT in a fixture produces exactly
+one missing required ZINI feature; original artifacts remain unchanged.
+Evidence: `evidence/zc706/integrated-20261011/ddr-bitslip-controls.json`.
+No hardware access occurred. This does not prove the D/arithmetic update path,
+assembled configuration bits or physical pulse delivery. Integrated DDR still
+fails byte 4; golden remains on 192.168.2.14. Next trace counter arithmetic and
+the lane-4 data/strobe path, followed by a targeted physical experiment once
+there is a discriminating hypothesis rather than another unchanged reload.

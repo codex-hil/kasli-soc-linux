@@ -1,0 +1,2709 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "checked_sinks": 144,
+  "mismatched_sinks": 0,
+  "comparisons": [
+    {
+      "sink": "k7ddrphy_bitslip32_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip32_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip33_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip34_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip35_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip36_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip37_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip38_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value0[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[0]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[0]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[0]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[1]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[1]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[1]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[2]:CE",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[2]:CK",
+      "inputs": [
+        "ddrclock_clkout_buf0"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    },
+    {
+      "sink": "k7ddrphy_bitslip39_value1[2]:SR",
+      "inputs": [
+        "csr_bankarray_csrbank10_dly_sel_w[4]",
+        "csr_bankarray_csrbank10_rst_w",
+        "csr_bus_address[0]",
+        "csr_bus_address[10]",
+        "csr_bus_address[11]",
+        "csr_bus_address[12]",
+        "csr_bus_address[13]",
+        "csr_bus_address[1]",
+        "csr_bus_address[2]",
+        "csr_bus_address[3]",
+        "csr_bus_address[4]",
+        "csr_bus_address[5]",
+        "csr_bus_address[6]",
+        "csr_bus_address[7]",
+        "csr_bus_address[8]",
+        "csr_bus_address[9]",
+        "csr_bus_write_enable",
+        "sys_rst"
+      ],
+      "equivalent": true,
+      "counterexample": null
+    }
+  ],
+  "boundary_assumptions": [
+    "integratedsoc_ prefix removed",
+    "golden adcddrsoc_interface1_adr and candidate csr_local_address_N are same-cycle CSR address",
+    "golden adcddrsoc_interface1_we and candidate csr_bankarray_interface0_bank_bus_we are CSR write enable"
+  ],
+  "limitation": "Named boundaries are assumed equivalent; sequential logic, routing and hardware timing are not proven. Counter D/arithmetic, assembled bits and pulse delivery are not checked.",
+  "ff_encoding_errors": {
+    "golden": [],
+    "candidate": []
+  },
+  "counter_ff_count": 48,
+  "ff_mode_differences": {},
+  "negative_control": "Changing only DQ32 read-bitslip bit0 INIT to zero produced exactly one FASM encoding mismatch; originals unchanged."
+}
