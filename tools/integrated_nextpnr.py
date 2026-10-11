@@ -177,6 +177,10 @@ def prepare(out=None):
         '                ctx->net_aliases.erase(buf_out->name);\n                ctx->nets.erase(buf_out->name);',1)
     hold=hold.replace('                if (buf_out)\n                    ctx->nets.erase(buf_out->name);',
         '                if (buf_out) {\n                    ctx->net_aliases.erase(buf_out->name);\n                    ctx->nets.erase(buf_out->name);\n                }')
+    # An unsuccessful detour must leave the exact original private branch.
+    hold = hold.replace('    if (!detour_reached_sink) {',
+        '    if (!detour_reached_sink || acc < target) {', 1)
+    hold = hold.replace('    return acc >= target;', '    return true;', 1)
     (out/'hold_fix.cc').write_text(hold)
 
     identity=dict(base_sha256=hashlib.sha256(base.read_bytes()).hexdigest(),source_sha256=hashlib.sha256(content.encode()).hexdigest(),router2_sha256=hashlib.sha256(router2.encode()).hexdigest(),xilinx_sha256=hashlib.sha256(xilinx.encode()).hexdigest(),hold_sha256=hashlib.sha256(hold.encode()).hexdigest())

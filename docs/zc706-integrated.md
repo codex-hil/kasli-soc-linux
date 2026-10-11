@@ -295,3 +295,26 @@ pseudo-PIP guard is running (`csr-replicated-full.log`). Its timeout is inside
 the container, so expiry terminates the build process group there. Setup/hold
 closure, the three prior FIFO hold arcs and physical integrated validation
 remain pending. No hardware was accessed during this implementation.
+
+
+### Transactional hold detour rollback (2026-10-11)
+
+A hold detour that reached the sink but failed to accumulate the requested
+delay previously bound its path as LOCKED before returning false. The fallback
+therefore ran on a modified route even though the attempt reported failure.
+The isolated helper now tests the accumulated delay before binding and rolls
+back the original private branch on failure. A successful detour commits as
+before. This does not change any timing requirement or accept a violation.
+
+`tools/test_hold_detour_rollback.py --source <hold_fix.cc>` compiles and executes
+the actual C++ detour function with a minimal graph context. The original
+function fails the insufficient-delay rollback assertion; the patched function
+passes both failure rollback and successful longer-path cases. The harness
+checks path PIPs and binding strength, but does not model FPGA site legality.
+Full nextpnr/physical qualification remains separate. The running CSR build
+uses the backend loaded before this rollback change; do not attribute its
+results to the new patch.
+
+Yosys retained 332 used per-bank address FDRE cells from the CSR replication.
+The fresh CSR build has reached routing. Placement estimates are not final
+setup/hold qualification.

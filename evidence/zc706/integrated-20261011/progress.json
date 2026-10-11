@@ -180,6 +180,14 @@
     "csr_map": "UNCHANGED",
     "target_scope": "Integrated only",
     "physical_timing": "PENDING",
-    "hardware_access": false
+    "hardware_access": false,
+    "yosys_used_fdre_count": 332
+  },
+  "hold_detour_rollback": {
+    "status": "CPP_REGRESSION_PASS",
+    "baseline": "FAIL: unsuccessful attempt changes binding strength",
+    "patched": "PASS: failed attempt restored, successful longer path committed",
+    "hardware_access": false,
+    "current_full_build_uses_patch": false
   }
 }

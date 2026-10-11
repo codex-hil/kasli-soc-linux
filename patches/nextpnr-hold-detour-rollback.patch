@@ -1,0 +1,20 @@
+--- a/himbaechel/uarch/xilinx/hold_fix.cc
++++ b/himbaechel/uarch/xilinx/hold_fix.cc
+@@ -232,7 +232,7 @@
+         cur = ctx->getPipDstWire(it->second);
+     }
+     bool detour_reached_sink = cur == sink_wire;
+-    if (!detour_reached_sink) {
++    if (!detour_reached_sink || acc < target) {
+         rollback();
+         return false;
+     }
+@@ -252,7 +252,7 @@
+         ctx->bindPip(p, net, STRENGTH_LOCKED);
+         bound.push_back(p);
+     }
+-    return acc >= target;
++    return true;
+ }
+ 
+ // Try to place `buf` at a free SLICE_LUTX 6-LUT bel, searching outward from
