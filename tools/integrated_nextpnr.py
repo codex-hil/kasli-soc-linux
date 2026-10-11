@@ -181,6 +181,12 @@ def prepare(out=None):
     hold = hold.replace('    if (!detour_reached_sink) {',
         '    if (!detour_reached_sink || acc < target) {', 1)
     hold = hold.replace('    return acc >= target;', '    return true;', 1)
+    hold = hold.replace('    std::vector<PipId> priv_pips;',
+        '    std::vector<PipId> priv_pips;\n    std::vector<decltype(net->wires.begin()->second.strength)> priv_strengths;', 1)
+    hold = hold.replace('        priv_pips.push_back(pip);',
+        '        priv_pips.push_back(pip);\n        priv_strengths.push_back(it->second.strength);', 1)
+    hold = hold.replace('ctx->bindPip(priv_pips[i], net, STRENGTH_STRONG);',
+        'ctx->bindPip(priv_pips[i], net, priv_strengths[i]);', 1)
     (out/'hold_fix.cc').write_text(hold)
 
     identity=dict(base_sha256=hashlib.sha256(base.read_bytes()).hexdigest(),source_sha256=hashlib.sha256(content.encode()).hexdigest(),router2_sha256=hashlib.sha256(router2.encode()).hexdigest(),xilinx_sha256=hashlib.sha256(xilinx.encode()).hexdigest(),hold_sha256=hashlib.sha256(hold.encode()).hexdigest())

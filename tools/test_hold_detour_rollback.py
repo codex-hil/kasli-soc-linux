@@ -43,17 +43,18 @@ static void wire_xy(Context*,WireId w,int &x,int &y){x=w.i;y=0;}
 '''
 MAIN = r'''
 int main(){
+ for(int initial_strength:{STRENGTH_STRONG,STRENGTH_LOCKED})
  for(bool extra_path:{false,true}) {
   NetInfo n; Context c; c.net=&n;
   c.edges={{0,1,1},{1,3,1}};
   if(extra_path){c.edges.push_back({0,2,2});c.edges.push_back({2,3,2});}
   n.wires[0]={PipId(),STRENGTH_STRONG};
-  c.bindPip(0,&n,STRENGTH_STRONG);c.bindPip(1,&n,STRENGTH_STRONG);
+  c.bindPip(0,&n,initial_strength);c.bindPip(1,&n,initial_strength);
   bool result=detour_arc(&c,&n,3,extra_path?2:1);
   if(!extra_path){assert(!result);assert(n.wires.size()==3);
    assert(n.wires.at(1).pip==PipId(0));assert(n.wires.at(3).pip==PipId(1));
-   assert(n.wires.at(1).strength==STRENGTH_STRONG);
-   assert(n.wires.at(3).strength==STRENGTH_STRONG);
+   assert(n.wires.at(1).strength==initial_strength);
+   assert(n.wires.at(3).strength==initial_strength);
   }else{assert(result);assert(!n.wires.count(1));assert(n.wires.at(3).pip==PipId(3));}
  }
  std::cout<<"PASS: insufficient detour restores original route; sufficient detour commits\n";

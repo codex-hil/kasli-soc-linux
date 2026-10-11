@@ -318,3 +318,8 @@ results to the new patch.
 Yosys retained 332 used per-bank address FDRE cells from the CSR replication.
 The fresh CSR build has reached routing. Placement estimates are not final
 setup/hold qualification.
+
+The rollback regression also covers an initially LOCKED private branch.
+Rollback now restores each saved binding strength as well as its PIP;
+otherwise a failed attempt would downgrade a previous locked route to STRONG.
+All four graph cases (short/long path, STRONG/LOCKED initial binding) pass.

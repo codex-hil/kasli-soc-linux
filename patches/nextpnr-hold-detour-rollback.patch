@@ -1,6 +1,31 @@
 --- a/himbaechel/uarch/xilinx/hold_fix.cc
 +++ b/himbaechel/uarch/xilinx/hold_fix.cc
-@@ -232,7 +232,7 @@
+@@ -87,6 +87,7 @@
+     // saving this sink's private wires and their driving pips for rollback.
+     std::vector<WireId> priv;
+     std::vector<PipId> priv_pips;
++    std::vector<decltype(net->wires.begin()->second.strength)> priv_strengths;
+     WireId cur = sink_wire, branch = WireId();
+     delay_t branch_delay = 0;
+     for (int guard = 0; guard < 100000; guard++) {
+@@ -99,6 +100,7 @@
+         PipId pip = it->second.pip;
+         priv.push_back(cur);
+         priv_pips.push_back(pip);
++        priv_strengths.push_back(it->second.strength);
+         branch_delay += ctx->getPipDelay(pip).maxDelay();
+         WireId parent = ctx->getPipSrcWire(pip);
+         bool parent_is_branch_point = child_count.at(parent) > 1;
+@@ -183,7 +185,7 @@
+         for (int i = int(priv.size()) - 1; i >= 0; i--) {
+             WireId w = priv[i];
+             if (ctx->getBoundWireNet(w) == nullptr)
+-                ctx->bindPip(priv_pips[i], net, STRENGTH_STRONG);
++                ctx->bindPip(priv_pips[i], net, priv_strengths[i]);
+         }
+     };
+ 
+@@ -232,7 +234,7 @@
          cur = ctx->getPipDstWire(it->second);
      }
      bool detour_reached_sink = cur == sink_wire;
@@ -9,7 +34,7 @@
          rollback();
          return false;
      }
-@@ -252,7 +252,7 @@
+@@ -252,7 +254,7 @@
          ctx->bindPip(p, net, STRENGTH_LOCKED);
          bound.push_back(p);
      }
