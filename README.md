@@ -23,8 +23,10 @@ FMC1 phase hold and clock-loss/reacquisition passed two 60-second physical runs
 The bounded test restores the original Si570 setting. FMC2 remains an untuned control.
 
 The [dual-loop target](docs/zc706-wr-pll-dual.md) adds an independent FMC2 DDMTD
-phase monitor and PI. FMC2-only hold and clock-loss/reacquisition passed
-(2.00–2.16 ns sampled phase standard deviation); simultaneous testing is in progress.
+phase monitor and PI. Both loops passed three 60-second physical runs, including
+isolated clock-loss/reacquisition on each card (1.98–2.22 ns sampled phase standard
+deviation; all final-window phases within ±8.42 ns). Build with
+`make wr-pll-dual-pl wr-pll-dual-software`. Tests restore both initial Si570 settings.
 
 ## CERN FMC ADC on ZC706
 

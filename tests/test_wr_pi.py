@@ -28,7 +28,7 @@ class WRLoopTests(unittest.TestCase):
             for card in range(2):
                 phase[card]-=1000*(free[card]+actual[card])*dt
                 actual[card]=pis[card].update(round(phase[card]*63/10),
-                    round((.1 if card==0 else .15)*(10/63)*1e6*(1<<19)),
+                    round(.15*(10/63)*1e6*(1<<19)),
                     round(.3*dt*(10/63)*1e6*(1<<19)))/1e6
         for card,free in enumerate((14.25,15.1)):
             self.assertLess(abs(phase[card]),.3)

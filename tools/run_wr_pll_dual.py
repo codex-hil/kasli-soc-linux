@@ -2,8 +2,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Bounded independent WR-derived phase PLLs on the two ZC706 FMC clocks."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import json
+import gc
 from pathlib import Path
 import signal
 import statistics
@@ -55,11 +57,40 @@ def summarize(records, duration, oscillator):
 
 
 def loop(registers, oscillators, active, duration, label, output):
+    # Long generation-2 scans of phase records caused physical control gaps.
+    # Reference counting continues; cyclic collection runs between bounded loops.
+    enabled=gc.isenabled()
+    gc.collect();gc.disable()
+    try:
+        # ctypes releases the GIL inside stateless native I2C transactions.
+        # Context shutdown joins all updates before restoration can run.
+        if len(active)==2:
+            with ThreadPoolExecutor(max_workers=2,thread_name_prefix='si570') as pool:
+                return _loop(registers,oscillators,active,duration,label,output,pool)
+        return _loop(registers,oscillators,active,duration,label,output,None)
+    finally:
+        if enabled:gc.enable()
+
+
+def program_pending(oscillators, pending, pool):
+    if pool is None:
+        return {i:oscillators[i].program(row['correction']) for i,row in pending.items()}
+    futures={i:pool.submit(oscillators[i].program,row['correction']) for i,row in pending.items()}
+    actuals={};errors=[]
+    # Wait for BOTH buses even if one fails; restoration must not overlap I2C.
+    for i,future in futures.items():
+        try:actuals[i]=future.result()
+        except Exception as exc:errors.append(f'FMC{i+1}: {exc}')
+    if errors:raise RuntimeError('Si570 updates failed: '+'; '.join(errors))
+    return actuals
+
+
+def _loop(registers, oscillators, active, duration, label, output, pool):
     """Each PI uses its own sample interval; reciprocal gates have one owner."""
     r=registers[0]
     controllers={i:WRPI(round(oscillators[i].ppm*1e6),-50000000,50000000) for i in active}
     scale=1<<19
-    kp={i:round((.1 if i==0 else .15)*(10/63)*1e6*scale) for i in active}
+    kp={i:round(.15*(10/63)*1e6*scale) for i in active}
     start=time.monotonic()
     previous={i:start for i in active}
     lock_count={i:0 for i in active}
@@ -71,6 +102,7 @@ def loop(registers, oscillators, active, duration, label, output):
         r.write(bank+'_gate',100000000);r.write(bank+'_start',1)
     iteration=0
     while time.monotonic()-start<duration:
+        pending={}
         for i in active:
             now=time.monotonic();dt=now-previous[i];previous[i]=now
             snapshot=phase_snapshot(registers[i],PHASE_BANKS[i])
@@ -85,10 +117,12 @@ def loop(registers, oscillators, active, duration, label, output):
             correction=controllers[i].update(snapshot['phase'],kp[i],ki)/1e6
             s=oscillators[i]
             correction=s.ppm+max(-1,min(1,correction-s.ppm))
-            actual=s.program(correction)
-            lock_count[i]=lock_count[i]+1 if abs(snapshot['phase_ns'])<=10 else 0
-            output['cards'][str(i+1)]['records'].append(dict(elapsed_seconds=now-start,
-                dt=dt, phase=snapshot,tune_ppm=actual,locked=lock_count[i]>=30))
+            pending[i]=dict(correction=correction,elapsed_seconds=now-start,dt=dt,phase=snapshot)
+        actuals=program_pending(oscillators,pending,pool)
+        for i,row in pending.items():
+            lock_count[i]=lock_count[i]+1 if abs(row['phase']['phase_ns'])<=10 else 0
+            output['cards'][str(i+1)]['records'].append(dict(elapsed_seconds=row['elapsed_seconds'],
+                dt=row['dt'], phase=row['phase'],tune_ppm=actuals[i],locked=lock_count[i]>=30))
         new={bank:r.read(bank+'_sequence') for bank in BANKS}
         if all(new[bank]!=sequences[bank] for bank in BANKS):
             row=dict(elapsed_seconds=time.monotonic()-start)
@@ -136,7 +170,9 @@ def main():
     active=[1] if a.control=='fmc2' else [0,1]
     result=dict(started_utc=datetime.now(timezone.utc).isoformat(),hardware_validated=False,
         controlled_cards=[i+1 for i in active],phase_lock_requested=True,
-        flash_otp_written=False,frequency_reference='PS FCLK0 nominal 100 MHz')
+        flash_otp_written=False,frequency_reference='PS FCLK0 nominal 100 MHz',
+        cyclic_gc='disabled only during bounded phase-control loops',
+        proportional_gain_ppm_per_ns=.15,integral_gain_ppm_per_ns_second=.3)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     try:
         for card in (1,2):registers.append(Registers(a.csr_json,'/dev/uio0',card=card))

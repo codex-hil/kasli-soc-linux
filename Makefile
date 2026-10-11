@@ -121,6 +121,7 @@ wr-pll-dual-sim:
 	$(ENV) sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -s wr_ddmtd_dual_tb -o build/wr-ddmtd/dual-sim build/wr-ddmtd/tagger.v gateware/wr_phase_tracker.v tests/wr_ddmtd_dual_tb.v && build/tools/oss-cad-suite/bin/vvp build/wr-ddmtd/dual-sim'
 	python3 tests/test_wr_pi.py
 	python3 tests/test_wr_i2c.py
+	python3 tests/test_wr_parallel.py
 
 .PHONY: wr-pll-dual-package
 wr-pll-dual-package:

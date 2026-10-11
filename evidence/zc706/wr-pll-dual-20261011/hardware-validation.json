@@ -1,0 +1,4456 @@
+{
+  "started_utc": "1970-01-01T00:16:57.643605+00:00",
+  "hardware_validated": true,
+  "controlled_cards": [
+    1,
+    2
+  ],
+  "phase_lock_requested": true,
+  "flash_otp_written": false,
+  "frequency_reference": "PS FCLK0 nominal 100 MHz",
+  "cyclic_gc": "disabled only during bounded phase-control loops",
+  "proportional_gain_ppm_per_ns": 0.15,
+  "integral_gain_ppm_per_ns_second": 0.3,
+  "original_si570": {
+    "1": [
+      34,
+      66,
+      187,
+      255,
+      240,
+      31
+    ],
+    "2": [
+      34,
+      66,
+      188,
+      0,
+      255,
+      216
+    ]
+  },
+  "frequency_acquisition": [
+    {
+      "tune_ppm": [
+        0,
+        0
+      ],
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 99998632,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001368.0187145,
+          "offset_ppm": 13.680187145093115,
+          "one_tick_resolution_ppm": 0.01000013680187145
+        },
+        "frequency2": {
+          "reference_ticks": 99998472,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100001528.0233482,
+          "offset_ppm": 15.280233482073413,
+          "one_tick_resolution_ppm": 0.01000015280233482
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    },
+    {
+      "tune_ppm": [
+        -13.680207355482032,
+        -15.280246666971031
+      ],
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 100000009,
+          "measured_cycles": 100000000,
+          "frequency_hz": 99999991.0000008,
+          "offset_ppm": -0.08999999190351105,
+          "one_tick_resolution_ppm": 0.009999999100000082
+        },
+        "frequency2": {
+          "reference_ticks": 100000009,
+          "measured_cycles": 100000000,
+          "frequency_hz": 99999991.0000008,
+          "offset_ppm": -0.08999999190351105,
+          "one_tick_resolution_ppm": 0.009999999100000082
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    },
+    {
+      "tune_ppm": [
+        -13.59020431079827,
+        -15.190244155305344
+      ],
+      "measurement": {
+        "frequency": {
+          "reference_ticks": 100000011,
+          "measured_cycles": 100000000,
+          "frequency_hz": 99999989.0000012,
+          "offset_ppm": -0.10999998789618104,
+          "one_tick_resolution_ppm": 0.00999999890000012
+        },
+        "frequency2": {
+          "reference_ticks": 100000012,
+          "measured_cycles": 100000000,
+          "frequency_hz": 99999988.00000145,
+          "offset_ppm": -0.11999998550393798,
+          "one_tick_resolution_ppm": 0.009999998800000144
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "frequency_hz": 100000000.0,
+          "offset_ppm": 0.0,
+          "one_tick_resolution_ppm": 0.01
+        }
+      }
+    }
+  ],
+  "initial": {
+    "cards": {
+      "1": {
+        "statistics": {
+          "mean_phase_ns": -0.020757020757020756,
+          "min_phase_ns": -6.984126984126984,
+          "max_phase_ns": 8.412698412698413,
+          "stddev_phase_ns": 2.221561295775099,
+          "median_update_seconds": 0.005289078000032532,
+          "locked_fraction": 1.0,
+          "last_tune_ppm": -13.912580401065355,
+          "maximum_update_seconds": 0.007840728000019226,
+          "mean_frequency_offset_ppm": 5.551115123125783e-11
+        },
+        "criteria": {
+          "peak_phase_ns": 10,
+          "stddev_phase_ns": 3,
+          "mean_phase_ns": 1,
+          "locked_fraction": 0.95,
+          "evaluation_seconds": 20
+        },
+        "passed": true,
+        "record_count": 11319
+      },
+      "2": {
+        "statistics": {
+          "mean_phase_ns": -0.0206307102858827,
+          "min_phase_ns": -6.825396825396825,
+          "max_phase_ns": 8.253968253968255,
+          "stddev_phase_ns": 2.2137286225701223,
+          "median_update_seconds": 0.0052910160000010364,
+          "locked_fraction": 1.0,
+          "last_tune_ppm": -15.454972451145466,
+          "maximum_update_seconds": 0.007828080000081172,
+          "mean_frequency_offset_ppm": 5.551115123125783e-11
+        },
+        "criteria": {
+          "peak_phase_ns": 10,
+          "stddev_phase_ns": 3,
+          "mean_phase_ns": 1,
+          "locked_fraction": 0.95,
+          "evaluation_seconds": 20
+        },
+        "passed": true,
+        "record_count": 11319
+      }
+    },
+    "frequency_windows": [
+      {
+        "elapsed_seconds": 1.0014575559999912,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 2.002735705999953,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 3.0076316880000604,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 4.010459866000019,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 5.013701198000035,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 6.016881552000086,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 7.021991692000029,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 8.023545968000008,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 9.024172085999908,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 10.02730219,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 11.03272962799997,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 12.0379520460001,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 13.040288866000083,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 14.045949097999937,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 15.048906402000057,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 16.053075412,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 17.056991299999936,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 18.059756346000086,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 19.063441468000065,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 20.067343544000096,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 21.07080867500008,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 22.072391726999967,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 23.074257264999915,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 24.076428136999994,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 25.080179337000118,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 26.08219219900002,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 27.08668065500001,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 28.087853613000107,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 29.09084807499994,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 30.091747913000063,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 31.096754366999903,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 32.098372302999906,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 33.09938174900003,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 34.103269904999934,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 35.10555548499997,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 36.106558253,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 37.10837876100004,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 38.10951996099993,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 39.11299541299991,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 40.11865506899994,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 41.12205237100011,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 42.123481102999904,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 43.127139254999975,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 44.13285874899998,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 45.13840883900002,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 46.14349356899993,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 47.14860759099997,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 48.15190226799996,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 49.15309398199997,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 50.15476482600002,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 51.15789578199997,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 52.16007485599994,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 53.163041238000005,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 54.16709059000004,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 55.16902817000005,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 56.17201569600002,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 57.174534010000116,
+        "frequency": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency2": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 58.17821185999992,
+        "frequency": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency2": {
+          "reference_ticks": 99999999,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.010000000161269895
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      },
+      {
+        "elapsed_seconds": 59.179324338000015,
+        "frequency": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency2": {
+          "reference_ticks": 100000001,
+          "measured_cycles": 100000000,
+          "offset_ppm": -0.00999999993922529
+        },
+        "frequency_reference": {
+          "reference_ticks": 100000000,
+          "measured_cycles": 100000000,
+          "offset_ppm": 0.0
+        },
+        "locked": {
+          "1": true,
+          "2": true
+        }
+      }
+    ],
+    "criteria": {
+      "peak_phase_ns": 10,
+      "stddev_phase_ns": 3,
+      "mean_phase_ns": 1,
+      "locked_fraction": 0.95,
+      "evaluation_seconds": 20
+    },
+    "passed": true
+  },
+  "clock_loss_tests": [
+    {
+      "card": 1,
+      "other_card": 2,
+      "lost": {
+        "status": 1,
+        "phase": 227,
+        "raw_phase": -25,
+        "events": 94669729,
+        "rejected": 0,
+        "ref_age": 29,
+        "adc_age": 1383030,
+        "phase_ns": 36.03174603174603
+      },
+      "other_before": {
+        "status": 3,
+        "phase": -174,
+        "raw_phase": 15,
+        "events": 94668976,
+        "rejected": 0,
+        "ref_age": 52,
+        "adc_age": 37,
+        "phase_ns": -27.61904761904762
+      },
+      "other_during": {
+        "status": 3,
+        "phase": -142,
+        "raw_phase": -16,
+        "events": 94701519,
+        "rejected": 0,
+        "ref_age": 53,
+        "adc_age": 5,
+        "phase_ns": -22.53968253968254
+      },
+      "reacquisition": [
+        {
+          "tune_ppm": [
+            0.0,
+            -15.454972451145466
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 99998621,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100001379.01901667,
+              "offset_ppm": 13.79019016667371,
+              "one_tick_resolution_ppm": 0.010000137901901667
+            },
+            "frequency2": {
+              "reference_ticks": 100000009,
+              "measured_cycles": 100000000,
+              "frequency_hz": 99999991.0000008,
+              "offset_ppm": -0.08999999190351105,
+              "one_tick_resolution_ppm": 0.009999999100000082
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        },
+        {
+          "tune_ppm": [
+            -13.790220537934772,
+            -15.364969939479778
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 99999995,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000005.00000025,
+              "offset_ppm": 0.050000002582706315,
+              "one_tick_resolution_ppm": 0.010000000500000024
+            },
+            "frequency2": {
+              "reference_ticks": 99999997,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000003.00000009,
+              "offset_ppm": 0.030000000927898895,
+              "one_tick_resolution_ppm": 0.01000000030000001
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        },
+        {
+          "tune_ppm": [
+            -13.840203307413645,
+            -15.394942393665012
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 100000003,
+              "measured_cycles": 100000000,
+              "frequency_hz": 99999997.00000009,
+              "offset_ppm": -0.029999999151542056,
+              "one_tick_resolution_ppm": 0.009999999700000008
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "frequency_hz": 99999999.00000001,
+              "offset_ppm": -0.009999999828202988,
+              "one_tick_resolution_ppm": 0.0099999999
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        }
+      ],
+      "recovered": {
+        "cards": {
+          "1": {
+            "statistics": {
+              "mean_phase_ns": 0.029754024988337936,
+              "min_phase_ns": -6.984126984126984,
+              "max_phase_ns": 5.873015873015873,
+              "stddev_phase_ns": 1.9829853032769111,
+              "median_update_seconds": 0.005284056000164128,
+              "locked_fraction": 1.0,
+              "last_tune_ppm": -13.599996505853085,
+              "maximum_update_seconds": 0.007802952000020014,
+              "mean_frequency_offset_ppm": 4.440892098500626e-11
+            },
+            "criteria": {
+              "peak_phase_ns": 10,
+              "stddev_phase_ns": 3,
+              "mean_phase_ns": 1,
+              "locked_fraction": 0.95,
+              "evaluation_seconds": 20
+            },
+            "passed": true,
+            "record_count": 11326
+          },
+          "2": {
+            "statistics": {
+              "mean_phase_ns": 0.029123643102991793,
+              "min_phase_ns": -6.984126984126984,
+              "max_phase_ns": 6.031746031746032,
+              "stddev_phase_ns": 1.9764392488639901,
+              "median_update_seconds": 0.0052894020000167075,
+              "locked_fraction": 1.0,
+              "last_tune_ppm": -15.16376281074372,
+              "maximum_update_seconds": 0.0077921459999288345,
+              "mean_frequency_offset_ppm": 0.0005000000413701855
+            },
+            "criteria": {
+              "peak_phase_ns": 10,
+              "stddev_phase_ns": 3,
+              "mean_phase_ns": 1,
+              "locked_fraction": 0.95,
+              "evaluation_seconds": 20
+            },
+            "passed": true,
+            "record_count": 11326
+          }
+        },
+        "frequency_windows": [
+          {
+            "elapsed_seconds": 1.0009153959999821,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 2.004982994000102,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 3.0084037980000176,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 4.01050467999994,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 5.015870186000029,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 6.017876994000062,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 7.022207320000007,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 8.022865484000022,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 9.025973082000064,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 10.031455342000072,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 11.036587706000091,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 12.041336208000075,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 13.043011402000047,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 14.04677355800004,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 15.051931235999973,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 16.057449634000022,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 17.06306358200004,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 18.066360923000047,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 19.072090773000127,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 20.077305301000024,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 21.082092557000124,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 22.08677637300002,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 23.092619502999923,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 24.09390294500008,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 25.095587804999923,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 26.101186177000045,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 27.105049577000045,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 28.106189019000112,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 29.109866065000006,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 30.112143808999917,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 31.112982267000007,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 32.117229439000084,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 33.11942701099997,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 34.122089163000055,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 35.122766059000014,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 36.12576547100002,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 37.127373387000034,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 38.130190230999915,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 39.13208740699997,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 40.13394326100001,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 41.13541957899997,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 42.139724933000025,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 43.14075671699993,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 44.141701123000075,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 45.142709991999936,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 46.143521083999985,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 47.14440525600003,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 48.15038553399995,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 49.15241187200013,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 50.153658581999935,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 51.15825427000004,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 52.161003001999916,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 53.16610975799995,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 54.169354930000054,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 55.16998586,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 56.17400326200004,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 57.17456706400003,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 58.17919931000006,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 59.17992752400005,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          }
+        ],
+        "criteria": {
+          "peak_phase_ns": 10,
+          "stddev_phase_ns": 3,
+          "mean_phase_ns": 1,
+          "locked_fraction": 0.95,
+          "evaluation_seconds": 20
+        },
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "card": 2,
+      "other_card": 1,
+      "lost": {
+        "status": 1,
+        "phase": 1030,
+        "raw_phase": 22,
+        "events": 94886860,
+        "rejected": 0,
+        "ref_age": 25,
+        "adc_age": 1122882,
+        "phase_ns": 163.4920634920635
+      },
+      "other_before": {
+        "status": 3,
+        "phase": 629,
+        "raw_phase": -1,
+        "events": 94886203,
+        "rejected": 1,
+        "ref_age": 31,
+        "adc_age": 33,
+        "phase_ns": 99.84126984126983
+      },
+      "other_during": {
+        "status": 3,
+        "phase": 648,
+        "raw_phase": 18,
+        "events": 94918806,
+        "rejected": 1,
+        "ref_age": 57,
+        "adc_age": 38,
+        "phase_ns": 102.85714285714286
+      },
+      "reacquisition": [
+        {
+          "tune_ppm": [
+            -13.599996505853085,
+            0.0
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 99999993,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000007.00000049,
+              "offset_ppm": 0.07000000490364755,
+              "one_tick_resolution_ppm": 0.01000000070000005
+            },
+            "frequency2": {
+              "reference_ticks": 99998475,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100001525.0232566,
+              "offset_ppm": 15.250232566099697,
+              "one_tick_resolution_ppm": 0.01000015250232566
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        },
+        {
+          "tune_ppm": [
+            -13.669989412878891,
+            -15.250274212674775
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000001.00000001,
+              "offset_ppm": 0.010000000161269895,
+              "one_tick_resolution_ppm": 0.010000000100000002
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        },
+        {
+          "tune_ppm": [
+            -13.669989412878891,
+            -15.260236647773873
+          ],
+          "measurement": {
+            "frequency": {
+              "reference_ticks": 100000002,
+              "measured_cycles": 100000000,
+              "frequency_hz": 99999998.00000004,
+              "offset_ppm": -0.019999999545383673,
+              "one_tick_resolution_ppm": 0.009999999800000004
+            },
+            "frequency2": {
+              "reference_ticks": 100000003,
+              "measured_cycles": 100000000,
+              "frequency_hz": 99999997.00000009,
+              "offset_ppm": -0.029999999151542056,
+              "one_tick_resolution_ppm": 0.009999999700000008
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "frequency_hz": 100000000.0,
+              "offset_ppm": 0.0,
+              "one_tick_resolution_ppm": 0.01
+            }
+          }
+        }
+      ],
+      "recovered": {
+        "cards": {
+          "1": {
+            "statistics": {
+              "mean_phase_ns": -0.034395038368548306,
+              "min_phase_ns": -6.825396825396825,
+              "max_phase_ns": 6.031746031746032,
+              "stddev_phase_ns": 2.118409422917771,
+              "median_update_seconds": 0.0052871460000005754,
+              "locked_fraction": 1.0,
+              "last_tune_ppm": -14.050096879159035,
+              "maximum_update_seconds": 0.0077614740000626625,
+              "mean_frequency_offset_ppm": 0.0005000000524724157
+            },
+            "criteria": {
+              "peak_phase_ns": 10,
+              "stddev_phase_ns": 3,
+              "mean_phase_ns": 1,
+              "locked_fraction": 0.95,
+              "evaluation_seconds": 20
+            },
+            "passed": true,
+            "record_count": 11321
+          },
+          "2": {
+            "statistics": {
+              "mean_phase_ns": -0.0329654157468727,
+              "min_phase_ns": -6.825396825396825,
+              "max_phase_ns": 7.301587301587301,
+              "stddev_phase_ns": 2.111780334020001,
+              "median_update_seconds": 0.005289233999974385,
+              "locked_fraction": 1.0,
+              "last_tune_ppm": -15.656690473986323,
+              "maximum_update_seconds": 0.007761497999808853,
+              "mean_frequency_offset_ppm": -0.0004999999414501133
+            },
+            "criteria": {
+              "peak_phase_ns": 10,
+              "stddev_phase_ns": 3,
+              "mean_phase_ns": 1,
+              "locked_fraction": 0.95,
+              "evaluation_seconds": 20
+            },
+            "passed": true,
+            "record_count": 11321
+          }
+        },
+        "frequency_windows": [
+          {
+            "elapsed_seconds": 1.0052092539999649,
+            "frequency": {
+              "reference_ticks": 99999994,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.06000000363215463
+            },
+            "frequency2": {
+              "reference_ticks": 99999994,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.06000000363215463
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 2.0096480839999913,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 3.0140551560000404,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 4.0190907759999845,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 5.020365739999988,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 6.0221747819998654,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 7.027365519999876,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 8.030706289999898,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 9.031742202000032,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 10.03678067199985,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 11.040585572000055,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 12.042253961999904,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 13.042902903999902,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 14.044277318000013,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 15.04856556599998,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 16.05129215199986,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 17.053278253999906,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 18.054472602000033,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 19.057178583999985,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 20.05779549199997,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 21.05879664500003,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 22.060592468999857,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 23.065787149000016,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 24.071206433000043,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 25.072805385000038,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 26.07443391699985,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 27.077284870999847,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 28.083064340999954,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 29.087920266999845,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 30.092523881000034,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 31.097293407000052,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 32.099417653000046,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 33.100576636999904,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 34.10542635899992,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 35.10879379900007,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 36.1095275749999,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 37.113581462999946,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 38.114871714999936,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 39.115761742999894,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 40.119959924999876,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 41.12348172099996,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 42.124936156999865,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 43.12738747499998,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 44.13256771300007,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 45.135754679,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 46.14121391100002,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 47.14613764899991,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 48.1502591389999,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 49.155362577000005,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 50.15595225699985,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 51.16136477300006,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 52.16525869999987,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 53.16918257999987,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 54.171578601999954,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 55.17217011799994,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 56.173878882000054,
+            "frequency": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency2": {
+              "reference_ticks": 99999999,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.010000000161269895
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 57.17821789599998,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 58.18157928200003,
+            "frequency": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency2": {
+              "reference_ticks": 100000001,
+              "measured_cycles": 100000000,
+              "offset_ppm": -0.00999999993922529
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          },
+          {
+            "elapsed_seconds": 59.183512787999916,
+            "frequency": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency2": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "frequency_reference": {
+              "reference_ticks": 100000000,
+              "measured_cycles": 100000000,
+              "offset_ppm": 0.0
+            },
+            "locked": {
+              "1": true,
+              "2": true
+            }
+          }
+        ],
+        "criteria": {
+          "peak_phase_ns": 10,
+          "stddev_phase_ns": 3,
+          "mean_phase_ns": 1,
+          "locked_fraction": 0.95,
+          "evaluation_seconds": 20
+        },
+        "passed": true
+      },
+      "passed": true
+    }
+  ],
+  "original_settings_restored": true,
+  "finished_utc": "1970-01-01T00:20:09.405829+00:00",
+  "bitstream_sha256": "5b937de507bf32e884003baa60d7c2232dca43c4876909810a47649a784b9c2d",
+  "host_started_utc": "2026-10-11T07:43:00.802560+00:00",
+  "host_finished_utc": "2026-10-11T07:46:29.742576+00:00",
+  "files": {
+    "build/zc706-wr-pll-dual/gateware/csr.json": "934b83598c62ba96d4feda5b1f0e94b58a24e802217004812922e1040e23c10c",
+    "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "tools/wr_pll_control.py": "87463850a148f90df95fde1f141c41bb053715fe4d14734170af121f714f9196",
+    "tools/run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "tools/run_wr_pll_dual.py": "3eb54069f06fded46247b24e8f40734f9e405710a2bd915937f80b802465b4bf",
+    "build/zc706-wr-pll-dual/i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "software/wr_pll/i2c.c": "3d35992b3766481f728992a31762a90ba9edbb48e338dbe2a3a5e18fd8596d93"
+  },
+  "raw_record_archive": "phase-records.json.gz",
+  "raw_record_archive_sha256": "e279679e070b9c6df5a99b24ebdabeea68ded20d8c4ee2cf2e3a26c089f09a99"
+}

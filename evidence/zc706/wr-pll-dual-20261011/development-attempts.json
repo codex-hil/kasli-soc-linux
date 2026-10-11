@@ -45,5 +45,83 @@
       "locked_fraction": 0.9877981142540211,
       "last_tune_ppm": -15.547699731444098
     }
+  },
+  {
+    "attempt": "attempt-serialized-both",
+    "error": "Initial phase hold qualification failed",
+    "restored": true,
+    "files": {
+      "build/zc706-wr-pll-dual/gateware/csr.json": "934b83598c62ba96d4feda5b1f0e94b58a24e802217004812922e1040e23c10c",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "87463850a148f90df95fde1f141c41bb053715fe4d14734170af121f714f9196",
+      "tools/run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+      "tools/run_wr_pll_dual.py": "d63073050a973c8f1eebd44bbc9fd22a3ffa9fa0f328ec85440ef621f941a5ea",
+      "build/zc706-wr-pll-dual/i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+      "software/wr_pll/i2c.c": "3d35992b3766481f728992a31762a90ba9edbb48e338dbe2a3a5e18fd8596d93"
+    },
+    "statistics": {
+      "1": {
+        "mean_phase_ns": -0.0045078728673783805,
+        "min_phase_ns": -12.380952380952381,
+        "max_phase_ns": 16.666666666666668,
+        "stddev_phase_ns": 3.18926575601242,
+        "median_update_seconds": 0.0066463260000091395,
+        "locked_fraction": 0.9786167724690945,
+        "last_tune_ppm": -13.909259569788723
+      },
+      "2": {
+        "mean_phase_ns": -0.003340013360053444,
+        "min_phase_ns": -8.253968253968255,
+        "max_phase_ns": 15.714285714285714,
+        "stddev_phase_ns": 2.242149616866855,
+        "median_update_seconds": 0.006644825999956083,
+        "locked_fraction": 0.9896459585838343,
+        "last_tune_ppm": -15.49967568548194
+      }
+    },
+    "maximum_control_interval_seconds": {
+      "1": 0.05859484200004772,
+      "2": 0.05844944500006477
+    }
+  },
+  {
+    "attempt": "attempt-parallel-gc",
+    "error": "Initial phase hold qualification failed",
+    "restored": true,
+    "files": {
+      "build/zc706-wr-pll-dual/gateware/csr.json": "934b83598c62ba96d4feda5b1f0e94b58a24e802217004812922e1040e23c10c",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "87463850a148f90df95fde1f141c41bb053715fe4d14734170af121f714f9196",
+      "tools/run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+      "tools/run_wr_pll_dual.py": "799022ec1f8f72679d9b8c137a05e449ba63656ba9ecff3b6e941381387d4e18",
+      "build/zc706-wr-pll-dual/i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+      "software/wr_pll/i2c.c": "3d35992b3766481f728992a31762a90ba9edbb48e338dbe2a3a5e18fd8596d93"
+    },
+    "statistics": {
+      "1": {
+        "mean_phase_ns": 0.008199306212551242,
+        "min_phase_ns": -22.6984126984127,
+        "max_phase_ns": 10.317460317460318,
+        "stddev_phase_ns": 3.026165915475127,
+        "median_update_seconds": 0.00526533599997947,
+        "locked_fraction": 0.9833112582781457,
+        "last_tune_ppm": -14.058271233241548
+      },
+      "2": {
+        "mean_phase_ns": 0.016104278355933987,
+        "min_phase_ns": -21.26984126984127,
+        "max_phase_ns": 7.301587301587301,
+        "stddev_phase_ns": 2.145820847029274,
+        "median_update_seconds": 0.005268192000016825,
+        "locked_fraction": 0.991523178807947,
+        "last_tune_ppm": -15.638042839105637
+      }
+    },
+    "maximum_control_interval_seconds": {
+      "1": 0.06095557200001167,
+      "2": 0.060983993999911945
+    }
   }
 ]

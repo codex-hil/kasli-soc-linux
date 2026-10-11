@@ -1,0 +1,17 @@
+{
+  "board": "ZC706 Cortex-A9",
+  "workload": "json.load of /tmp/zc706-wr-pll-dual/result.json from failed parallel-gc run; four explicit gc.collect calls with trace alive",
+  "collection_seconds": [
+    0.14035858299996562,
+    0.14002079499994124,
+    0.13977080600000136,
+    0.14006751700003406
+  ],
+  "objects_collected": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "interpretation": "Full scans of retained phase records are costly even without reclaiming cycles; disable cyclic collection during bounded control."
+}
