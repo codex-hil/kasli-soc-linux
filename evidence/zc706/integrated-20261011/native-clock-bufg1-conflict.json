@@ -1,0 +1,231 @@
+{
+  "hardware_access": false,
+  "bitstream_qualified": false,
+  "snapshot_sha256": "e98d4e35647dd5d00b2a56d930d00f6eb7abfa77021509c400181d581712ff41",
+  "native_clock_count": 27,
+  "native_clock_constraints": {
+    "adc2_rx.dco": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    },
+    "adc_dco1_p": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    },
+    "eth_rx_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 4000,
+      "NEXTPNR_CLK_LOW_MIN": 4000,
+      "NEXTPNR_CLK_HIGH_MAX": 4000,
+      "NEXTPNR_CLK_HIGH_MIN": 4000,
+      "NEXTPNR_CLK_PERIOD_MAX": 8000,
+      "NEXTPNR_CLK_PERIOD_MIN": 8000
+    },
+    "eth_rx_half_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "eth_tx_half_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "gp1_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 10000,
+      "NEXTPNR_CLK_LOW_MIN": 10000,
+      "NEXTPNR_CLK_HIGH_MAX": 10000,
+      "NEXTPNR_CLK_HIGH_MIN": 10000,
+      "NEXTPNR_CLK_PERIOD_MAX": 20000,
+      "NEXTPNR_CLK_PERIOD_MIN": 20000
+    },
+    "idelay_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 2500,
+      "NEXTPNR_CLK_LOW_MIN": 2500,
+      "NEXTPNR_CLK_HIGH_MAX": 2500,
+      "NEXTPNR_CLK_HIGH_MIN": 2500,
+      "NEXTPNR_CLK_PERIOD_MAX": 5000,
+      "NEXTPNR_CLK_PERIOD_MIN": 5000
+    },
+    "subfragments_s7mmcm1_mmcm_fb": {
+      "NEXTPNR_CLK_LOW_MAX": 444,
+      "NEXTPNR_CLK_LOW_MIN": 444,
+      "NEXTPNR_CLK_HIGH_MAX": 444,
+      "NEXTPNR_CLK_HIGH_MIN": 444,
+      "NEXTPNR_CLK_PERIOD_MAX": 888,
+      "NEXTPNR_CLK_PERIOD_MIN": 888
+    },
+    "subfragments_s7mmcm0_mmcm_fb": {
+      "NEXTPNR_CLK_LOW_MAX": 444,
+      "NEXTPNR_CLK_LOW_MIN": 444,
+      "NEXTPNR_CLK_HIGH_MAX": 444,
+      "NEXTPNR_CLK_HIGH_MIN": 444,
+      "NEXTPNR_CLK_PERIOD_MAX": 888,
+      "NEXTPNR_CLK_PERIOD_MIN": 888
+    },
+    "helper_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 5079,
+      "NEXTPNR_CLK_LOW_MIN": 5079,
+      "NEXTPNR_CLK_HIGH_MAX": 5079,
+      "NEXTPNR_CLK_HIGH_MIN": 5079,
+      "NEXTPNR_CLK_PERIOD_MAX": 10158,
+      "NEXTPNR_CLK_PERIOD_MIN": 10158
+    },
+    "eth_tx_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 4000,
+      "NEXTPNR_CLK_LOW_MIN": 4000,
+      "NEXTPNR_CLK_HIGH_MAX": 4000,
+      "NEXTPNR_CLK_HIGH_MIN": 4000,
+      "NEXTPNR_CLK_PERIOD_MAX": 8000,
+      "NEXTPNR_CLK_PERIOD_MIN": 8000
+    },
+    "adc2_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 5000,
+      "NEXTPNR_CLK_LOW_MIN": 5000,
+      "NEXTPNR_CLK_HIGH_MAX": 5000,
+      "NEXTPNR_CLK_HIGH_MIN": 5000,
+      "NEXTPNR_CLK_PERIOD_MAX": 10000,
+      "NEXTPNR_CLK_PERIOD_MIN": 10000
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "NEXTPNR_CLK_LOW_MAX": 6000,
+      "NEXTPNR_CLK_LOW_MIN": 6000,
+      "NEXTPNR_CLK_HIGH_MAX": 6000,
+      "NEXTPNR_CLK_HIGH_MIN": 6000,
+      "NEXTPNR_CLK_PERIOD_MAX": 12000,
+      "NEXTPNR_CLK_PERIOD_MIN": 12000
+    },
+    "adc_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 5000,
+      "NEXTPNR_CLK_LOW_MIN": 5000,
+      "NEXTPNR_CLK_HIGH_MAX": 5000,
+      "NEXTPNR_CLK_HIGH_MIN": 5000,
+      "NEXTPNR_CLK_PERIOD_MAX": 10000,
+      "NEXTPNR_CLK_PERIOD_MIN": 10000
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkout1": {
+      "NEXTPNR_CLK_LOW_MAX": 4000,
+      "NEXTPNR_CLK_LOW_MIN": 4000,
+      "NEXTPNR_CLK_HIGH_MAX": 4000,
+      "NEXTPNR_CLK_HIGH_MIN": 4000,
+      "NEXTPNR_CLK_PERIOD_MAX": 8000,
+      "NEXTPNR_CLK_PERIOD_MIN": 8000
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkout0": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "pma_k7_gtx_basex_txoutclk": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "pma_k7_gtx_basex_s7mmcm1_clkout1": {
+      "NEXTPNR_CLK_LOW_MAX": 4000,
+      "NEXTPNR_CLK_LOW_MIN": 4000,
+      "NEXTPNR_CLK_HIGH_MAX": 4000,
+      "NEXTPNR_CLK_HIGH_MIN": 4000,
+      "NEXTPNR_CLK_PERIOD_MAX": 8000,
+      "NEXTPNR_CLK_PERIOD_MIN": 8000
+    },
+    "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "pma_k7_gtx_basex_rxoutclk": {
+      "NEXTPNR_CLK_LOW_MAX": 8000,
+      "NEXTPNR_CLK_LOW_MIN": 8000,
+      "NEXTPNR_CLK_HIGH_MAX": 8000,
+      "NEXTPNR_CLK_HIGH_MIN": 8000,
+      "NEXTPNR_CLK_PERIOD_MAX": 16000,
+      "NEXTPNR_CLK_PERIOD_MIN": 16000
+    },
+    "adc_rx.io_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    },
+    "adc2_rx.io_clk": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    },
+    "integratedsoc_ddrclock_clkout_buf1": {
+      "NEXTPNR_CLK_LOW_MAX": 1500,
+      "NEXTPNR_CLK_LOW_MIN": 1500,
+      "NEXTPNR_CLK_HIGH_MAX": 1500,
+      "NEXTPNR_CLK_HIGH_MIN": 1500,
+      "NEXTPNR_CLK_PERIOD_MAX": 3000,
+      "NEXTPNR_CLK_PERIOD_MIN": 3000
+    },
+    "adc_rx.dco": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    },
+    "adc_dco0_p": {
+      "NEXTPNR_CLK_LOW_MAX": 1250,
+      "NEXTPNR_CLK_LOW_MIN": 1250,
+      "NEXTPNR_CLK_HIGH_MAX": 1250,
+      "NEXTPNR_CLK_HIGH_MIN": 1250,
+      "NEXTPNR_CLK_PERIOD_MAX": 2500,
+      "NEXTPNR_CLK_PERIOD_MIN": 2500
+    }
+  },
+  "full_route_status": "TERMINATED_AFTER_CLOCK_SEARCH_STALL",
+  "conflict": {
+    "driver_net": "adc_rx.io_clk",
+    "owner": "adc2_rx.dco",
+    "wire": "X137Y212/CLK_BUFG_BUFGCTRL1_O"
+  },
+  "remediation": "Reject all 16 I0-to-O BUFG pseudo-PIPs rather than BUFG0 only"
+}

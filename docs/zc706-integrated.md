@@ -231,3 +231,42 @@ and compressed missing/restored logs. Run it through `tools/environment.py`.
 It tests replay restoration; full-build snapshot emission and timing remain
 separate checks. A fresh build with all fixes and verbose hold diagnostics is
 running with a 1500-second bound.
+
+
+### Native-clock full build: BUFG1 conflict (2026-10-11)
+
+The fresh full build emitted all six native timing fields on 27 clock nets.
+SYS has a 12,000 ps period, GP1 20,000 ps and ADC IO 2,500 ps, so the
+snapshot now preserves the intended 83.33/50/400 MHz constraints.
+However, the full route stalled before setup/hold evaluation: ADC2 DCO
+claimed `CLK_BUFG_BUFGCTRL1_O`, owned by the ADC1 IO clock. The original
+BUFG0-only guard was insufficient. The same database exposes 16 identical
+I0-to-O pseudo-PIPs in each BUFG tile; the isolated helper now rejects
+this class for every buffer index while retaining the real site-output PIP.
+Evidence is `native-clock-bufg1-conflict.json` and the compressed full log.
+A bounded native-constraint snapshot replay is also running to separate
+preroute state from main-router timing. Neither route is qualified for hardware.
+
+Both host filesystems ran low on free space during this attempt. Only the
+reproducible intermediate cascade BBA was removed; its binary chip database,
+audit, golden images and hardware evidence remain intact. Direct use of the
+existing resource-limited container avoids a Docker configuration update;
+compiler temporary files must still use `/work/build/tmp`. A link attempt
+without that temporary-directory setting failed with ENOSPC.
+
+The native-clock replay completed routing and both hold repair passes without
+an alias assertion. Eight buffers were inserted; three ADC2 FIFO-to-BRAM
+arcs remain because their source slices have no output mux available.
+SYS setup still fails at 58.67 MHz against 83.33 MHz, while GP1 passes at
+57.64 MHz against 50 MHz. This confirms the hold-name crash fix but does
+not qualify the design. The next implementation steps are to localize CSR
+address/decode without changing transaction latency and repair the three
+remaining hold arcs without accepting timing failure.
+
+The generalized BUFG guard compiled successfully with project-local temporary
+storage. A controlled probe after clearing all 70,069 serialized routing
+attributes restored 27 clock constraints, connected both tested MMCM/BUFG
+paths, and reported no foreign owners of clock-root outputs. ADC1 IO's
+BUFG output now belongs to `adc_rx.io_clk`. This is a preroute regression,
+not proof of full setup/hold closure or hardware operation. The raw database
+contains 16 such I0-to-O pseudo-PIPs in each of BOT and TOP tiles (32 total).

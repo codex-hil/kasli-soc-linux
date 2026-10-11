@@ -82,7 +82,10 @@ def prepare(out=None):
         {
             IdString dst_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.dst_wire].name);
             IdString src_name(chip_tile_info(ctx->chip_info, pip.tile).wires[pip_data.src_wire].name);
-            if (dst_name == ctx->id("CLK_BUFG_BUFGCTRL0_O") && src_name == ctx->id("CLK_BUFG_BUFGCTRL0_I0"))
+            const auto &dst_text = dst_name.str(ctx);
+            if (dst_text.compare(0, 17, "CLK_BUFG_BUFGCTRL") == 0 &&
+                dst_text.size() > 18 && dst_text.compare(dst_text.size()-2, 2, "_O") == 0 &&
+                src_name.str(ctx) == dst_text.substr(0, dst_text.size()-2) + "_I0")
                 return true;
         }''', 1)
     xilinx = xilinx.replace('    apply_prerouted();', r'''    apply_prerouted();

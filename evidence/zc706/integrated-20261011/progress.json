@@ -139,10 +139,29 @@
     "limitation": "Tests replay restoration; full-build snapshot emission and timing remain separate checks."
   },
   "fresh_full_build": {
-    "status": "IN_PROGRESS",
-    "source_commit": "699c710",
-    "log": "build/zc706-integrated/cascade-bufg-clock-hold-full.log",
-    "timeout_seconds": 1500,
-    "hold_verbose": true
+    "status": "TERMINATED_CLOCK_ROUTING_STALL",
+    "native_clock_count": 27,
+    "conflict": "ADC2 DCO owns ADC1 BUFG1 output",
+    "evidence": "native-clock-bufg1-conflict.json"
+  },
+  "all_bufg_guard": {
+    "status": "COMPILED_PREROUTE_PASS",
+    "scope": "32 BUFG I0-to-O pseudo-PIPs across BOT/TOP",
+    "cleared_route_probe": "No foreign clock-root owners; 27 native constraints restored",
+    "evidence": "all-bufg-clear-probe.json",
+    "full_route_and_hardware": "PENDING"
+  },
+  "native_replay": {
+    "status": "TIMING_FAIL",
+    "routing": "COMPLETED",
+    "constraints": "27 native clocks restored",
+    "sys_fmax_mhz": 58.67,
+    "sys_required_mhz": 83.33,
+    "gp1_fmax_mhz": 57.64,
+    "gp1_required_mhz": 50,
+    "hold_remaining": 3,
+    "hold_buffers": 8,
+    "hold_name_assertion": "FIXED: pass 1 completed without alias collision",
+    "hardware_access": false
   }
 }
