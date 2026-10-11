@@ -408,3 +408,21 @@ not wrong upstream logical drivers, missing routing configuration bits,
 external timing, or electrical faults. No hardware access occurred.
 The next check is the lane-4 route PIP encoding and upstream training-pulse
 logic relative to golden and neighboring functioning lanes.
+
+### DDR routing feature-presence audit (2026-10-11)
+
+`tools/audit_ddr_route_fasm.py` selects delay C/CE/LD nets and all nets of
+52 I/O/serializer/delay cells associated with eight byte-4 DQ pins and two
+DQS pins. Shared clocks and constants expand coverage across the design.
+Tile PIPs are matched to tile-type JSON and emitted FASM. Database ppips
+are classified separately: initial apparent omissions on eleven output
+edges are `always` entries, present in both candidate and golden routing.
+Candidate has 33,137 ordinary emitted real PIPs; golden has 28,581, with
+zero missing ordinary features. Removing an included real feature from a
+fixture is detected; original artifacts remain intact.
+Site-internal/boundary edges and database default/hint/pseudo entries are
+explicitly unproven by this feature-presence audit. It does not check assembled
+configuration bits or hardware timing. No hardware access occurred.
+Evidence: `evidence/zc706/integrated-20261011/ddr-route-fasm-audit.json`.
+Next investigate the upstream training-pulse/read-bitslip logic and lane-4
+site mux encoding; integrated DDR remains FAIL, golden remains restored.

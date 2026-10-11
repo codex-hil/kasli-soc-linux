@@ -1,0 +1,239 @@
+{
+  "candidate": {
+    "hardware_access": false,
+    "qualification": false,
+    "selected_net_bits": 248,
+    "unique_pips": 165111,
+    "lane4_cell_count": 52,
+    "lane4_site_coordinates": [
+      "X1Y251",
+      "X1Y253",
+      "X1Y254",
+      "X1Y255",
+      "X1Y256",
+      "X1Y257",
+      "X1Y258",
+      "X1Y259",
+      "X1Y260",
+      "X1Y262"
+    ],
+    "counts": {
+      "not_tile_pip": 59788,
+      "database_ppip_always": 54512,
+      "emitted_real_pip": 33137,
+      "database_ppip_default": 17643,
+      "database_ppip_hint": 23,
+      "pseudo_pip": 8
+    },
+    "emitted_real_pip_examples": [
+      "INT_L_X2Y228.CLK_L0.GCLK_L_B0",
+      "INT_L_X2Y228.CLK_L1.GCLK_L_B0",
+      "INT_L_X2Y227.CLK_L0.GCLK_L_B0",
+      "INT_L_X2Y227.CLK_L1.GCLK_L_B0",
+      "INT_L_X2Y227.CTRL_L0.GFAN1",
+      "INT_L_X2Y227.GFAN1.GND_WIRE",
+      "INT_L_X2Y226.CLK_L0.GCLK_L_B0",
+      "INT_L_X2Y226.CTRL_L0.GFAN1",
+      "INT_L_X2Y226.GFAN1.GND_WIRE",
+      "INT_L_X2Y226.IMUX_L15.GFAN1",
+      "INT_L_X2Y226.IMUX_L29.GFAN1",
+      "INT_L_X2Y226.IMUX_L47.GFAN1"
+    ],
+    "non_tile_edge_examples": [
+      {
+        "pip": "X0Y125/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y229.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y229.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y229.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y229.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y171.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y171.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y171.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y171.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y265/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y95.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y265/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y95.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y267/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y93.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y267/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y93.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      }
+    ],
+    "missing_real_pips": []
+  },
+  "golden": {
+    "hardware_access": false,
+    "qualification": false,
+    "selected_net_bits": 248,
+    "unique_pips": 137309,
+    "lane4_cell_count": 52,
+    "lane4_site_coordinates": [
+      "X1Y251",
+      "X1Y253",
+      "X1Y254",
+      "X1Y255",
+      "X1Y256",
+      "X1Y257",
+      "X1Y258",
+      "X1Y259",
+      "X1Y260",
+      "X1Y262"
+    ],
+    "counts": {
+      "not_tile_pip": 50423,
+      "database_ppip_always": 45437,
+      "database_ppip_default": 12847,
+      "emitted_real_pip": 28581,
+      "database_ppip_hint": 13,
+      "pseudo_pip": 8
+    },
+    "emitted_real_pip_examples": [
+      "INT_L_X2Y249.GFAN0.GND_WIRE",
+      "INT_L_X2Y249.IMUX_L2.GFAN0",
+      "INT_L_X2Y249.IMUX_L27.GFAN0",
+      "INT_L_X2Y249.IMUX_L32.GFAN0",
+      "INT_L_X2Y249.IMUX_L40.GFAN0",
+      "INT_L_X2Y248.GFAN1.GND_WIRE",
+      "INT_L_X2Y248.IMUX_L15.GFAN1",
+      "INT_L_X2Y248.IMUX_L22.GFAN1",
+      "INT_L_X2Y248.IMUX_L47.GFAN1",
+      "INT_L_X2Y248.IMUX_L7.GFAN1",
+      "INT_L_X2Y247.CLK_L0.GCLK_L_B10_WEST",
+      "INT_L_X2Y247.CLK_L1.GCLK_L_B10_WEST"
+    ],
+    "non_tile_edge_examples": [
+      {
+        "pip": "X0Y125/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y229.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y229.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y229.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y125/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y229.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y171.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y171.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y171.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y186/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y171.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y265/IOB_X0Y0.O/IOB_O1",
+        "feature": "LIOB33_X0Y95.IOB_X0Y0.O.IOB_O1",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y265/IOB_X0Y0.OUSED_OUT/IOB_X0Y0.O",
+        "feature": "LIOB33_X0Y95.IOB_X0Y0.OUSED_OUT.IOB_X0Y0.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y267/IOB_X0Y1.O/IOB_O0",
+        "feature": "LIOB33_X0Y93.IOB_X0Y1.O.IOB_O0",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      },
+      {
+        "pip": "X0Y267/IOB_X0Y1.OUSED_OUT/IOB_X0Y1.O",
+        "feature": "LIOB33_X0Y93.IOB_X0Y1.OUSED_OUT.IOB_X0Y1.O",
+        "tile_type": "LIOB33",
+        "status": "not_tile_pip"
+      }
+    ],
+    "missing_real_pips": []
+  },
+  "negative_control": {
+    "removed_feature": "INT_L_X2Y228.CLK_L0.GCLK_L_B0",
+    "detected": true
+  },
+  "limits": "Site edges and database default/hint/pseudo entries are not proven. Shared clocks/constants widen coverage beyond byte 4."
+}
