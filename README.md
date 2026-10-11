@@ -15,18 +15,16 @@ passed. Physical Kasli-SoC validation remains pending.
 
 ## White Rabbit phase PLL development
 
-A small clock-only target integrates original CERN WR DDMTD taggers, coherent
-phase snapshots and a WR-derived PI regulating the FMC1 Si570. Build with
-`make wr-pll-pl wr-pll-software`; see [development and physical test status](docs/zc706-wr-pll.md).
-FMC1 phase hold and clock-loss/reacquisition passed two 60-second physical runs
-(2.20–2.29 ns sampled phase standard deviation; peaks within ±8.74 ns).
-The bounded test restores the original Si570 setting. FMC2 remains an untuned control.
+The small [dual-loop target](docs/zc706-wr-pll-dual.md) integrates original CERN
+WR DDMTD taggers and independent WR-derived PI controllers for both FMC Si570
+oscillators. Both loops passed three 60-second physical runs, including isolated
+clock-loss/reacquisition on each card. Final-window phase standard deviation was
+1.98–2.22 ns, with every sampled phase within ±8.42 ns.
 
-The [dual-loop target](docs/zc706-wr-pll-dual.md) adds an independent FMC2 DDMTD
-phase monitor and PI. Both loops passed three 60-second physical runs, including
-isolated clock-loss/reacquisition on each card (1.98–2.22 ns sampled phase standard
-deviation; all final-window phases within ±8.42 ns). Build with
-`make wr-pll-dual-pl wr-pll-dual-software`. Tests restore both initial Si570 settings.
+Build with `make wr-pll-dual-pl wr-pll-dual-software`. Bounded tests restore both
+initial Si570 settings. The [qualified bundle](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-wr-pll-dual-20261011)
+contains the matched bitstream, software and full evidence. The original
+[FMC1-only target and release](docs/zc706-wr-pll.md) remain available separately.
 
 ## CERN FMC ADC on ZC706
 

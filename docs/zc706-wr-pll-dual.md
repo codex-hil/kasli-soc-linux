@@ -1,5 +1,7 @@
 # Two independent FMC clock PLLs on ZC706
 
+[Download the physically qualified dual-PLL bundle](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-wr-pll-dual-20261011).
+
 The dual target disciplines both CERN FMC ADC Si570 oscillators to nominal
 100 MHz PS FCLK0. FMC1 is J5 LPC; FMC2 is J4 HPC. The two independent DCO
 inputs are divided from 400 MHz to 100 MHz. One shared 98.4375 MHz helper
@@ -90,6 +92,7 @@ FMC2-only phase hold and isolated clock-loss/reacquisition passed two
 windows. FMC1 Si570 registers remained unchanged and its DDMTD detector
 continued during FMC2 clock loss. Initial settings were restored on both cards.
 [Evidence](../evidence/zc706/wr-pll-dual-20261011/fmc2-only/hardware-validation.json).
+
 **Simultaneous dual-loop qualification passed.** Three 60-second runs covered
 initial hold, reacquisition after isolated FMC1 loss, and reacquisition after
 isolated FMC2 loss. Every final 20-second window passed the same prototype

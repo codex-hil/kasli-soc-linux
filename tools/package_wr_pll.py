@@ -51,7 +51,10 @@ for name, expected in translation['sources'].items():
 for name in ('tagger.v','manifest.json'):
     shutil.copyfile(ROOT/'build/wr-ddmtd'/name,out/('ddmtd-'+name))
 readme = out/'README.md'
-readme.write_text(readme.read_text()+
+text=readme.read_text().replace('../evidence/zc706/'+evidence.name+'/', 'evidence/')
+if args.dual:
+    text=text.replace('](zc706-wr-pll.md)', '](https://github.com/codex-hil/kasli-soc-linux/blob/main/docs/zc706-wr-pll.md)')
+readme.write_text(text+
     '\nOn matching Linux/PL, run `python3 '+('run_wr_pll_dual.py' if args.dual else 'run_wr_pll.py')+
     ' --csr-json csr.json --output result.json --seconds 60 --loss-test`. This is bounded and restores initial Si570 settings. Do not use this clock-only bitstream for ADC acquisition.\n')
 (out/'SHA256SUMS').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(out)}\n'
