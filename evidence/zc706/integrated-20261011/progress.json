@@ -56,5 +56,25 @@
     "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
     "generated_from_commit": "92af414",
     "experimental_buffer_changes": "Development JSON only: TX input BUFG 0 to 4; RX half 21 to 18; RX full 16 to 19. Not applied to release target or hardware."
+  },
+  "clock_bfs": {
+    "result": "LIMIT_REACHED",
+    "hardware_access": false,
+    "budget_vertices_per_net": 250000,
+    "nets": {
+      "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+        "visited": 250008,
+        "pending": 180245,
+        "found": false
+      },
+      "integratedsoc_ddrclock_clkout0": {
+        "visited": 250008,
+        "pending": 180245,
+        "found": false
+      }
+    },
+    "interpretation": "Search was bounded and did not exhaust the graph; does not prove that no legal route exists.",
+    "log_sha256": "d65d6a62129687486f65d6cd588f4cd01fb0e6316fb4d8516a4adb9bf363e64d",
+    "next_step": "Bidirectional bounded search from source and BUFG input, including sink-owner and initial uphill-edge diagnostics."
   }
 }

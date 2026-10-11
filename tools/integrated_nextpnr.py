@@ -40,6 +40,36 @@ def prepare(out=None):
     (out/'router2.cc').write_text(router2)
     xilinx = (base.parent/'source/himbaechel/uarch/xilinx/xilinx.cc').read_text()
     xilinx = xilinx.replace('    apply_prerouted();', r'''    apply_prerouted();
+
+    if (std::getenv("NEXTPNR_CLOCK_BFS")) for (auto &entry : ctx->nets) {
+        NetInfo *net = entry.second.get();
+        if (net->name != ctx->id("integratedsoc_ddrclock_clkout0") && net->name != ctx->id("pma_k7_gtx_basex_s7mmcm1_clkout0")) continue;
+        WireId root = ctx->getNetinfoSourceWire(net);
+        for (auto &usr : net->users) {
+            WireId sink = ctx->getNetinfoSinkWire(net,usr,0);
+            std::queue<WireId> pending; dict<WireId,PipId> previous;
+            pending.push(root);previous[root]=PipId();
+            while (!pending.empty() && previous.size()<250000 && !previous.count(sink)) {
+                WireId current=pending.front();pending.pop();
+                for (auto pip : ctx->getPipsDownhill(current)) {
+                    if (!ctx->checkPipAvailForNet(pip,net)) continue;
+                    WireId next=ctx->getPipDstWire(pip);
+                    NetInfo *owner=ctx->getBoundWireNet(next);
+                    if ((owner && owner!=net) || previous.count(next)) continue;
+                    previous[next]=pip;pending.push(next);
+                }
+            }
+            log_info("Clock-BFS: net=%s found=%d visited=%zu pending=%zu\n",ctx->nameOf(net),int(previous.count(sink)>0),previous.size(),pending.size());
+            if (previous.count(sink)) {
+                WireId current=sink;int length=0;
+                while (current!=root && length<200) {
+                    PipId pip=previous.at(current);
+                    log_info("Clock-BFS-path: net=%s pip=%s\n",ctx->nameOf(net),ctx->nameOfPip(pip));
+                    current=ctx->getPipSrcWire(pip);++length;
+                }
+            }
+        }
+    }
     for (auto &entry : ctx->nets) {
         NetInfo *net = entry.second.get();
         if (!net->driver.cell || !net->driver.cell->type.in(id_BUFGCTRL, id_MMCME2_ADV_MMCME2_ADV)) continue;

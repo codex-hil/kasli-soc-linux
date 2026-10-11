@@ -102,3 +102,12 @@ are not release images and must not be assembled or programmed as qualified
 builds. Next: trace a legal MMCM-to-BUFG path against forward router expansion,
 repair the measured issue, rerun the reproducible build and all setup/hold
 checks, then run `test_integrated_hardware.py --program` under the board lock.
+
+
+A bounded, architecture-availability-aware forward BFS for DDR CLKOUT0 and
+SFP RX CLKOUT0 reached 250,008 vertices each with 180,245 vertices pending,
+without finding the sink. This is an inconclusive budget-limited result,
+not evidence that a route is absent. The optional `NEXTPNR_CLOCK_BFS=1`
+diagnostic performs no routing mutations. Next diagnostic: bidirectional
+search from the MMCM output and BUFG input, checking sink ownership and
+uphill connectivity before changing placement or hardware parameters.
