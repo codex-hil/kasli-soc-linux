@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import json
 import gc
+import os
 from pathlib import Path
 import signal
 import statistics
@@ -164,6 +165,7 @@ def main():
     p.add_argument('--seconds',type=float,default=60)
     p.add_argument('--control',choices=['fmc2','both'],default='both')
     p.add_argument('--loss-test',action='store_true')
+    p.add_argument('--realtime',action='store_true',help='Run bounded control with SCHED_FIFO priority 10 (requires privilege)')
     p.add_argument('--preinitialized',action='store_true',
         help='Keep trained ADC receivers and active DMA state; caller owns initialization')
     a=p.parse_args()
@@ -178,6 +180,9 @@ def main():
         proportional_gain_ppm_per_ns=.15,integral_gain_ppm_per_ns_second=.3)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     try:
+        if a.realtime:
+            os.sched_setscheduler(0,os.SCHED_FIFO,os.sched_param(10))
+        result['scheduler']=dict(policy=os.sched_getscheduler(0),priority=os.sched_getparam(0).sched_priority)
         for card in (1,2):registers.append(Registers(a.csr_json,'/dev/uio0',card=card))
         if registers[0].map['constants'].get('wr_phase_cards')!=2:
             raise RuntimeError('Requires matched dual WR phase target')

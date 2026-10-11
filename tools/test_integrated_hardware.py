@@ -56,7 +56,7 @@ def main():
         run('train-adc', '''python3 -c 'from fmc_adc import Registers,ADC; rs=[Registers("csr.json","/dev/uio0",card=i) for i in (1,2)]; [(ADC(r).initialize(),ADC(r).calibrate()) for r in rs]; [r.mem.close() for r in rs]' ''')
         run('adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output initial --max-samples 4194304 --preinitialized')
         with (a.output/'pll.log').open('w') as log:
-            pll=subprocess.Popen(ssh+['cd '+remote+' && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --seconds 120 --output pll.json'],stdout=log,stderr=subprocess.STDOUT)
+            pll=subprocess.Popen(ssh+['cd '+remote+' && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --realtime --seconds 120 --output pll.json'],stdout=log,stderr=subprocess.STDOUT)
             try:
                 import time
                 time.sleep(15)

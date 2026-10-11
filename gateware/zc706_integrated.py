@@ -3,6 +3,7 @@
 """Dual WR PLL, independent ADC DMA, PL DDR and SFP Ethernet."""
 import argparse
 from pathlib import Path
+from migen import Signal, Instance, ClockSignal, ResetSignal
 from zc706_adc_ddr import ADCDDRSoC
 from zc706_ddr import export_soc, SYS_CLK_FREQ
 from zc706_sfp import add_sfp
@@ -28,7 +29,7 @@ class IntegratedSoC(ADCDDRSoC):
                 RECIPROCAL_ABI=1,RECIPROCAL_REFERENCE_HZ=round(SYS_CLK_FREQ),
                 RECIPROCAL_CLOCK_ONLY=0,INTEGRATED_ABI=1).items():
             self.add_constant(name,value)
-        add_sfp(self, refclk=refclk, sys_clk_freq=SYS_CLK_FREQ, bank=21, register_usrready=True)
+        add_sfp(self, refclk=refclk, sys_clk_freq=SYS_CLK_FREQ, bank=21, register_usrready=False, clock_monitors=False)
         # Retain qualified SFP TX clock placement and all SFP BUFG sites.
         # RX and ADC2 share the upper left clock column on integration.
         # Unconstrained TX at X0Y0 could not route CLKOUT1 to its BUFG.
@@ -43,11 +44,36 @@ class IntegratedSoC(ADCDDRSoC):
                           ('BUFG_5','BUFGCTRL_X0Y6'),
                           ('BUFG_6','BUFGCTRL_X0Y21'),
                           ('BUFG_7','BUFGCTRL_X0Y16'),
-                          ('BUFG_8','BUFGCTRL_X0Y5'),
-                          ('BUFG_9','BUFGCTRL_X0Y14'),
                           ]:
             self.platform.add_platform_command(
                 f'set_property LOC {site} [get_cells {cell}]')
+
+    def do_finalize(self):
+        super().do_finalize()
+        # Capture each asynchronous LOCKED output adjacent to its hard macro.
+        # All existing consumers (reset sequencers, READY and diagnostics) use
+        # the synchronized value; SYS remains independent of these MMCMs.
+        for name, mmcm, site in (
+                ('sfp_tx',self.ethphy.tx_mmcm,('SLICE_X0Y108','SLICE_X1Y108')),
+                ('sfp_rx',self.ethphy.rx_mmcm,('SLICE_X0Y208','SLICE_X1Y208'))):
+            raw, first = Signal(name=name+'_lock_raw'), Signal(name=name+'_lock_first')
+            instances=[special for special in mmcm._fragment.specials
+                if isinstance(special,Instance) and special.of=='MMCME2_ADV']
+            if len(instances)!=1:raise RuntimeError('Expected finalized SFP MMCM')
+            changed=0
+            for item in instances[0].items:
+                if isinstance(item,Instance.Output) and item.name=='LOCKED':
+                    item.expr=raw;changed+=1
+            if changed!=1:raise RuntimeError('Expected one MMCM LOCKED output')
+            for index,(source,destination) in enumerate(((raw,first),(first,mmcm.locked))):
+                cell=name+'_lock_sync'+str(index)
+                register=Instance('FDRE',name=cell,p_INIT=0,i_C=ClockSignal('sys'),
+                    i_CE=1,i_R=ResetSignal('sys'),i_D=source,o_Q=destination)
+                register.attr.add(('ASYNC_REG','TRUE'))
+                register.attr.add(('DONT_TOUCH','TRUE'))
+                self.specials += register
+                self.platform.add_platform_command(
+                    f'set_property LOC {site[index]} [get_cells {cell}]')
 
 def main():
     p=argparse.ArgumentParser()

@@ -129,7 +129,7 @@ wr-pll-dual-package:
 
 .PHONY: integrated-pl
 integrated-pl:
-	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --output-dir build/zc706-integrated/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --router router2 --output-dir build/zc706-integrated/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
 
 .PHONY: integrated-software
 integrated-software:

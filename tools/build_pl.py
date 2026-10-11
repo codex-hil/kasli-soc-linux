@@ -76,6 +76,7 @@ def main():
     p.add_argument("--wr-pll", action="store_true", help="Add original WR DDMTD phase taggers to the clock-only target")
     p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
+    p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
     args.sfp_refclk = args.sfp_refclk or ("fclk" if args.design == "integrated" else "si5324")
@@ -167,6 +168,8 @@ def main():
                 "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]
         nextpnr = prepare_nextpnr()
     if args.design == "integrated":
+        from integrated_nextpnr import prepare as prepare_integrated
+        nextpnr = prepare_integrated()
         from adc_termination_db import prepare as prepare_termination_db
         db = prepare_termination_db(db, overlay=ROOT/"build/zc706-integrated/termination-db/zynq7")
     if args.design in ("adc-ddr", "integrated"):
@@ -201,7 +204,7 @@ def main():
         [str(nextpnr),
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
-         "--freq", "100", "--report", "timing.json", *chipdb_args,
+         "--router", args.router, "--freq", "100", "--report", "timing.json", *chipdb_args,
          *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp", "integrated") or args.reciprocal else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],

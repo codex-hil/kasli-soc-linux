@@ -40,14 +40,16 @@ byte-exact UDP echo through the switch while acquisition and PLL control run.
 Regression checks passed: independent-clock ADC DMA simulation (stalls,
 overflow, reset, frame failure, invalid configuration), original WR dual
 DDMTD simulation, PI model, I2C fault handling and parallel control ownership.
-Standalone SFP CSR export remains byte-for-byte equivalent as a parsed map.
+Standalone SFP register addresses and widths remain unchanged; the reference-monitor constant is additive.
 
 Clock-placement findings: unconstrained TX MMCM placement could not route a
 clock to its BUFG. The target retains the qualified SFP TX MMCM/BUFG sites,
 DDR sites and reserves other available MMCMs for RX, the WR helper and ADC2.
 The dense design also exposed an expensive MMCM-LOCKED to GTX-TXUSERRDY
-route. The integrated target synchronizes LOCKED through two SYS flip-flops
-before TXUSERRDY; the isolated target keeps its qualified behavior. This
+route. The integrated target synchronizes each SFP MMCM LOCKED output through two
+SYS flip-flops placed adjacent to the MMCM, before all downstream consumers
+(including TXUSERRDY and reset logic); the isolated target keeps its qualified
+behavior. This
 delays READY until the user clock is stable and still requires physical
 startup/loopback validation.
 
@@ -56,3 +58,21 @@ unqualified. External switch operation was NOT_RUN in that qualification
 because module EEPROM returned NACK. The integrated wrapper attempts the
 external test and records PARTIAL rather than PASS if it fails, even when
 DDR, both ADC streams, both PLLs and internal SFP loopback pass.
+
+During concurrent DDR readback the bounded PLL process uses SCHED_FIFO
+priority 10, inherited by its two native I2C workers. Each control iteration
+sleeps, I2C failures have bounded timeouts, and the process terminates after
+120 seconds, restoring both RFREQ settings. DDR readback uses normal priority.
+This protects control deadlines from a CPU-bound diagnostic reader; the
+reported phase statistics must still pass during the actual readback interval.
+
+Two optional SFP reference-clock diagnostic counters are omitted in the
+integrated target (`SFP_REFERENCE_MONITORS=0`), freeing their two BUFGs and
+clock domains. Their CSR values stay zero; TX/RX frequency counters, PHY/PLL
+flags and DRP remain active. The isolated SFP target retains both monitors.
+The initial placement used twelve distinct BUFG clocks in each of two regions.
+
+An isolated backend extension fixes router1's consistency check for a
+reserved source wire before any sink arc is routed. Other wires remain
+subject to the full consistency check. `NEXTPNR_ROUTE_SNAPSHOT` optionally
+saves the placed state at routing entry to speed backend experiments.

@@ -76,7 +76,7 @@ class PacketTest(LiteXModule):
 
 
 class Diagnostics(LiteXModule):
-    def __init__(self, phy, si5324, tx_enable, fabric_refclk=False, local_refclk=False):
+    def __init__(self, phy, si5324, tx_enable, fabric_refclk=False, local_refclk=False, clock_monitors=True):
         self.control = CSRStorage(5, reset=8, name="control")
         self.status = CSRStatus(8, name="status")
         self.signature = CSRStatus(32, reset=0x53465031, name="signature")
@@ -95,17 +95,18 @@ class Diagnostics(LiteXModule):
             If(self.drp_command.re & ~self.drp_busy.status,
                drp_en.eq(1), drp_we.eq(self.drp_command.storage[0]), self.drp_busy.status.eq(1)),
             If(drp_ready, self.drp_read_data.status.eq(drp_data), self.drp_busy.status.eq(0))]
-        self.cd_si_ref = ClockDomain("si_ref", reset_less=True)
-        self.cd_gt_ref = ClockDomain("gt_ref", reset_less=True)
         si_div2 = Signal(); gt_ref = Signal()
         ref_lost = Signal(); feedback_lost = Signal()
-        self.specials += [Instance("BUFG", i_I=si_div2, o_O=self.cd_si_ref.clk),
-                          Instance("BUFG", i_I=gt_ref, o_O=self.cd_gt_ref.clk)]
-        buffers = [s for s in phy.pma._fragment.specials
-                   if isinstance(s, Instance) and s.of == "IBUFDS_GTE2"]
-        if len(buffers) != 1:
-            raise RuntimeError("Expected a dedicated GTX reference buffer")
-        buffers[0].items.append(Instance.Output("ODIV2", si_div2))
+        if clock_monitors:
+            self.cd_si_ref = ClockDomain("si_ref", reset_less=True)
+            self.cd_gt_ref = ClockDomain("gt_ref", reset_less=True)
+            self.specials += [Instance("BUFG", i_I=si_div2, o_O=self.cd_si_ref.clk),
+                              Instance("BUFG", i_I=gt_ref, o_O=self.cd_gt_ref.clk)]
+            buffers = [s for s in phy.pma._fragment.specials
+                       if isinstance(s, Instance) and s.of == "IBUFDS_GTE2"]
+            if len(buffers) != 1:
+                raise RuntimeError("Expected a dedicated GTX reference buffer")
+            buffers[0].items.append(Instance.Output("ODIV2", si_div2))
         self.specials += MultiReg(Cat(ref_lost, feedback_lost, phy.pll.reset),
                                   self.clock_faults.status)
         # 0:2 loopback, 3 Si5324 reset_n, 4 PHY reset. TX enable_n is inverted
@@ -154,8 +155,10 @@ class Diagnostics(LiteXModule):
             si5324.int_n, phy.pcs.is_sgmii)
         self.specials += MultiReg(flags, self.status.status)
         # Gray counters permit frequency measurement without incoherent binary CDC.
-        for domain, csr in [("eth_tx", self.tx_count), ("eth_rx", self.rx_count),
-                            ("si_ref", self.si_ref_count), ("gt_ref", self.gt_ref_count)]:
+        monitors = [("eth_tx", self.tx_count), ("eth_rx", self.rx_count)]
+        if clock_monitors:
+            monitors += [("si_ref", self.si_ref_count), ("gt_ref", self.gt_ref_count)]
+        for domain, csr in monitors:
             count = Signal(32); gray = Signal(32)
             getattr(self.sync, domain).__iadd__([count.eq(count + 1),
                 gray.eq((count + 1) ^ ((count + 1) >> 1))])
@@ -182,7 +185,7 @@ class SFPSoC(BaseSoC):
         self.csr.add("board_i2c", 2)
         add_sfp(self, ip, refclk)
 
-def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False):
+def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False, clock_monitors=True):
     self.platform.add_extension([r for r in _io if r[0] in
         ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324")])
     if refclk == "local":
@@ -208,7 +211,7 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         if changed != 1:
             raise RuntimeError("Expected one GTX TXUSERRDY input")
     self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
-        self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local")
+        self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local", clock_monitors=clock_monitors)
     self.csr.add("sfp_status", bank)
     self.ethcore = LiteEthUDPIPCore(self.ethphy, MAC, ip, sys_clk_freq,
         dw=8, with_sys_datapath=True, icmp_fifo_depth=1536,
@@ -234,6 +237,7 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         udp.sink.src_port.eq(self.echo_fifo.source.dst_port),
         udp.sink.dst_port.eq(self.echo_fifo.source.src_port)]
     self.add_constant("SFP_ABI", 1)
+    self.add_constant("SFP_REFERENCE_MONITORS", int(clock_monitors))
     self.add_constant("SFP_MAC", MAC)
     self.add_constant("SFP_IP", ip)
     self.add_constant("SFP_REFCLK_HZ", 100000000 if refclk == "fclk" else 125000000)
@@ -241,10 +245,11 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
     self.platform.add_period_constraint(self.crg.cd_sys.clk, 1e9/sys_clk_freq)
     self.platform.add_period_constraint(self.ethphy.cd_eth_tx.clk, 8)
     self.platform.add_period_constraint(self.ethphy.cd_eth_rx.clk, 8)
-    self.platform.add_period_constraint(self.sfp_status.cd_si_ref.clk, 16)
-    self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
-    self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
-        self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
+    if clock_monitors:
+        self.platform.add_period_constraint(self.sfp_status.cd_si_ref.clk, 16)
+        self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
+        self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
+            self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
     self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
     self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
     self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
