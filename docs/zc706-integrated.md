@@ -270,3 +270,28 @@ paths, and reported no foreign owners of clock-root outputs. ADC1 IO's
 BUFG output now belongs to `adc_rx.io_clk`. This is a preroute regression,
 not proof of full setup/hold closure or hardware operation. The raw database
 contains 16 such I0-to-O pseudo-PIPs in each of BOT and TOP tiles (32 total).
+
+
+### Per-bank CSR address replication (2026-10-11)
+
+The integrated target now replicates the registered Wishbone2CSR address
+into one set of explicit DONT_TOUCH FDREs per CSR bank. The replicas capture
+and clear from the same FSM branches as the upstream register; they add no
+transaction cycle. CSR write/read strobes, data and response mux retain the
+existing LiteX interconnect. The helper rejects unexpected bridge/interconnect
+structure instead of silently accepting a different bus implementation.
+Only the integrated target uses this change; standalone golden targets remain
+unchanged. The exported CSR bases and register map match the previous image.
+
+`tools/test_csr_address_replication.py` compares the original and replicated
+bridges cycle by cycle. All 450 deterministic transactions passed, including
+mapped/unmapped reads and writes, zero/partial/full byte masks, idle gaps and
+resets. ACK, read data and all scratch storage values are checked. Explicit
+FDRE instances use a synchronous model for simulation; this is not physical
+timing validation. Run with the project build Python in its container.
+
+A fresh full synthesis/place/route with native clock constraints and the all-BUFG
+pseudo-PIP guard is running (`csr-replicated-full.log`). Its timeout is inside
+the container, so expiry terminates the build process group there. Setup/hold
+closure, the three prior FIFO hold arcs and physical integrated validation
+remain pending. No hardware was accessed during this implementation.

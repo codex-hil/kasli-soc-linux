@@ -48,6 +48,14 @@ class IntegratedSoC(ADCDDRSoC):
             self.platform.add_platform_command(
                 f'set_property LOC {site} [get_cells {cell}]')
 
+    def _finalize_csr(self):
+        super()._finalize_csr()
+        from csr_address_replication import CSRAddressReplication
+        if len(self.csr.masters) != 1:
+            raise RuntimeError('CSR address replication requires one registered master')
+        self.csr_address_replication = CSRAddressReplication(
+            self.csr_bridge, self.csr_interconnect, self.csr_bankarray.get_buses())
+
     def do_finalize(self):
         super().do_finalize()
         # Capture each asynchronous LOCKED output adjacent to its hard macro.

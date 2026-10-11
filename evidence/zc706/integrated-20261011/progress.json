@@ -139,10 +139,14 @@
     "limitation": "Tests replay restoration; full-build snapshot emission and timing remain separate checks."
   },
   "fresh_full_build": {
-    "status": "TERMINATED_CLOCK_ROUTING_STALL",
-    "native_clock_count": 27,
-    "conflict": "ADC2 DCO owns ADC1 BUFG1 output",
-    "evidence": "native-clock-bufg1-conflict.json"
+    "status": "IN_PROGRESS",
+    "log": "build/zc706-integrated/csr-replicated-full.log",
+    "timeout_seconds": 1500,
+    "timeout_scope": "Inside container process group",
+    "changes": [
+      "Per-bank CSR address registers",
+      "All-BUFG pseudo-PIP guard"
+    ]
   },
   "all_bufg_guard": {
     "status": "COMPILED_PREROUTE_PASS",
@@ -162,6 +166,20 @@
     "hold_remaining": 3,
     "hold_buffers": 8,
     "hold_name_assertion": "FIXED: pass 1 completed without alias collision",
+    "hardware_access": false
+  },
+  "csr_address_replication": {
+    "status": "IMPLEMENTED_SIMULATION_PASS",
+    "transactions": 450,
+    "reset_tests": true,
+    "cycle_exact": [
+      "ACK",
+      "read_data",
+      "scratch_storage"
+    ],
+    "csr_map": "UNCHANGED",
+    "target_scope": "Integrated only",
+    "physical_timing": "PENDING",
     "hardware_access": false
   }
 }
