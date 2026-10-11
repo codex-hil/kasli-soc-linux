@@ -1,5 +1,7 @@
 # ZC706 White Rabbit phase PLL development
 
+[Download the physically qualified prototype bundle](https://github.com/codex-hil/kasli-soc-linux/releases/tag/zc706-wr-pll-prototype-20261011).
+
 This is a bounded, clock-only development target. It leaves ADC acquisition,
 FIFO and PL DDR out of the design. FMC1 (J5 LPC) is the controlled oscillator;
 FMC2 (J4 HPC) remains an independent, untuned control. The reference is the
