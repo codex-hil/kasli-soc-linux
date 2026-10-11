@@ -111,3 +111,12 @@ not evidence that a route is absent. The optional `NEXTPNR_CLOCK_BFS=1`
 diagnostic performs no routing mutations. Next diagnostic: bidirectional
 search from the MMCM output and BUFG input, checking sink ownership and
 uphill connectivity before changing placement or hardware parameters.
+
+The subsequent bidirectional search also reached its 500,000-vertex budget.
+SFP RX visited 237,428 forward and 262,574 backward vertices; DDR visited
+238,516 forward and 261,490 backward vertices. Both queues remained nonempty.
+This remains inconclusive. The diagnostic preserves availability and ownership
+checks and does not bind any routing resources. Its bounded routing run was
+stopped after 120 seconds; no hardware action occurred. Next: inspect a search
+restricted to dedicated clock resources and compare its stopping edges with
+chip database connectivity and router reservations.

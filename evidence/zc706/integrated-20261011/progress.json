@@ -76,5 +76,30 @@
     "interpretation": "Search was bounded and did not exhaust the graph; does not prove that no legal route exists.",
     "log_sha256": "d65d6a62129687486f65d6cd588f4cd01fb0e6316fb4d8516a4adb9bf363e64d",
     "next_step": "Bidirectional bounded search from source and BUFG input, including sink-owner and initial uphill-edge diagnostics."
+  },
+  "clock_bidirectional_bfs": {
+    "result": "LIMIT_REACHED",
+    "budget_vertices_total": 500000,
+    "nets": {
+      "pma_k7_gtx_basex_s7mmcm1_clkout0": {
+        "found": false,
+        "forward": 237428,
+        "backward": 262574,
+        "pending_forward": 168405,
+        "pending_backward": 168400,
+        "reason": "vertex-limit"
+      },
+      "integratedsoc_ddrclock_clkout0": {
+        "found": false,
+        "forward": 238516,
+        "backward": 261490,
+        "pending_forward": 169429,
+        "pending_backward": 169377,
+        "reason": "vertex-limit"
+      }
+    },
+    "hardware_access": false,
+    "log_sha256": "37d14ca154023bae5f759982b009e5a251288c2c26c3f4c48db9829642ed6a41",
+    "interpretation": "Both frontiers remain nonempty. No proof of absent connectivity; next isolate dedicated clock routing resources."
   }
 }

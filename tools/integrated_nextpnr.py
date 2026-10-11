@@ -47,25 +47,45 @@ def prepare(out=None):
         WireId root = ctx->getNetinfoSourceWire(net);
         for (auto &usr : net->users) {
             WireId sink = ctx->getNetinfoSinkWire(net,usr,0);
-            std::queue<WireId> pending; dict<WireId,PipId> previous;
-            pending.push(root);previous[root]=PipId();
-            while (!pending.empty() && previous.size()<250000 && !previous.count(sink)) {
+            std::queue<WireId> forward, backward;
+            dict<WireId,PipId> previous, following;
+            forward.push(root); previous[root]=PipId();
+            backward.push(sink); following[sink]=PipId();
+            WireId meet; bool found=(root==sink);
+            if (found) meet=root;
+            while (!forward.empty() && !backward.empty() &&
+                   previous.size()+following.size()<500000 && !found) {
+                bool reverse=backward.size()<forward.size();
+                auto &pending=reverse ? backward : forward;
+                auto &visited=reverse ? following : previous;
+                auto &opposite=reverse ? previous : following;
                 WireId current=pending.front();pending.pop();
-                for (auto pip : ctx->getPipsDownhill(current)) {
-                    if (!ctx->checkPipAvailForNet(pip,net)) continue;
-                    WireId next=ctx->getPipDstWire(pip);
+                auto inspect=[&](PipId pip) {
+                    if (!ctx->checkPipAvailForNet(pip,net)) return;
+                    WireId next=reverse ? ctx->getPipSrcWire(pip) : ctx->getPipDstWire(pip);
                     NetInfo *owner=ctx->getBoundWireNet(next);
-                    if ((owner && owner!=net) || previous.count(next)) continue;
-                    previous[next]=pip;pending.push(next);
-                }
+                    if ((owner && owner!=net) || visited.count(next)) return;
+                    visited[next]=pip;pending.push(next);
+                    if (opposite.count(next)) {meet=next;found=true;}
+                };
+                if (reverse) {for (auto pip : ctx->getPipsUphill(current)) inspect(pip);}
+                else {for (auto pip : ctx->getPipsDownhill(current)) inspect(pip);}
             }
-            log_info("Clock-BFS: net=%s found=%d visited=%zu pending=%zu\n",ctx->nameOf(net),int(previous.count(sink)>0),previous.size(),pending.size());
-            if (previous.count(sink)) {
-                WireId current=sink;int length=0;
+            log_info("Clock-BFS: net=%s found=%d forward=%zu backward=%zu pending_forward=%zu pending_backward=%zu reason=%s\n",
+                     ctx->nameOf(net),int(found),previous.size(),following.size(),forward.size(),backward.size(),
+                     found ? "connected" : (forward.empty() || backward.empty()) ? "exhausted" : "vertex-limit");
+            if (found) {
+                WireId current=meet;int length=0;
                 while (current!=root && length<200) {
                     PipId pip=previous.at(current);
-                    log_info("Clock-BFS-path: net=%s pip=%s\n",ctx->nameOf(net),ctx->nameOfPip(pip));
+                    log_info("Clock-BFS-path-up: net=%s pip=%s\n",ctx->nameOf(net),ctx->nameOfPip(pip));
                     current=ctx->getPipSrcWire(pip);++length;
+                }
+                current=meet;length=0;
+                while (current!=sink && length<200) {
+                    PipId pip=following.at(current);
+                    log_info("Clock-BFS-path-down: net=%s pip=%s\n",ctx->nameOf(net),ctx->nameOfPip(pip));
+                    current=ctx->getPipDstWire(pip);++length;
                 }
             }
         }
