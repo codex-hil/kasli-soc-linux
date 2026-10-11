@@ -444,3 +444,25 @@ Evidence: `evidence/zc706/integrated-20261011/ddr-control-logic-comparison.json`
 Next inspect the actual lane-select storage/CSR readback and sequential bitslip
 control, since equivalent combinational control cones do not prove delivered
 training pulses or correctly updated lane-select state on hardware.
+
+### Physical DDR lane-select readback (2026-10-11)
+
+`pl-ddr-test --diagnose-controls` saves/restores the PHY lane-select register,
+tests all 256 byte values and 512 walking-one/walking-zero transitions per
+lane. It performs 4,352 writes/readbacks without DDR initialization, pulse
+writes, or DDR RAM access. Both integrated and golden images passed with
+zero errors using identical software SHA-256
+`6279f08a79c0733c04e17ac589f8124203313ae539bf38b412139099332b70ad`.
+Thus a simple lane-select CSR read/write fault, including bit 4, was not observed.
+This does not prove delivery of training pulses to PHY delays/bitslip counters.
+
+Reproducer: build current DDR software against integrated generated headers,
+then run `tools/test_ddr_reference_hardware.py --host <current-IP>
+--diagnostic controls --software <new-pl-ddr-test> --output <new-directory>`.
+The wrapper held the shared ZC706 lock throughout both volatile JTAG loads,
+UART boots, SSH transfers/tests and restoration. No SD/QSPI writes. Golden
+was restored and passed three complete 1-GiB BIST runs with zero errors;
+current management address is 192.168.2.14. Evidence:
+`control-readback-hardware-result.json`, both control logs and compressed
+restored golden BIST log. Integrated DDR remains FAIL. Next compare lane-4
+bitslip counter CE/reset/update and physical site mux configuration.

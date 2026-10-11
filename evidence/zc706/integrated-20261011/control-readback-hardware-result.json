@@ -1,0 +1,23 @@
+{
+  "diagnostic": "controls",
+  "hardware_access": true,
+  "sd_qspi_written": false,
+  "tests": {
+    "candidate-controls": {
+      "exit": 0,
+      "software_sha256": "6279f08a79c0733c04e17ac589f8124203313ae539bf38b412139099332b70ad"
+    },
+    "golden-controls": {
+      "exit": 0,
+      "software_sha256": "6279f08a79c0733c04e17ac589f8124203313ae539bf38b412139099332b70ad"
+    },
+    "golden-bist": {
+      "exit": 0,
+      "software_sha256": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6"
+    }
+  },
+  "candidate_bit_sha256": "2cd907d2308cbc77a89b4b5a08c7ee7ceeb130c8cb013b92fb1d6f467cc943c9",
+  "golden_bit_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "restoration_passed": true,
+  "final_host": "192.168.2.14"
+}

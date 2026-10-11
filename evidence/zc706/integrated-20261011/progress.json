@@ -231,5 +231,16 @@
     "clock_route_difference": "Golden has fabric/LUT MMCM-to-BUFG routes; candidate has dedicated cascade routes. Causality not established.",
     "restored_golden_bist": "PASS: three full-1-GiB passes",
     "current_host": "192.168.2.13"
+  },
+  "ddr_select_readback": {
+    "status": "PASS",
+    "operations_per_image": 4352,
+    "candidate_errors": 0,
+    "golden_errors": 0,
+    "byte4_errors": 0,
+    "hardware_result": "control-readback-hardware-result.json",
+    "ddr_qualification": "Integrated DDR remains FAIL; CSR readback does not prove pulse delivery",
+    "restored_golden_full_bist": "PASS",
+    "current_host": "192.168.2.14"
   }
 }

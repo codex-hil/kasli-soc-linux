@@ -14,13 +14,14 @@ LOCK=Path('/home/codex-hil/.cache/zc706-210251842914.lock')
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
+    p.add_argument('--diagnostic',choices=('lanes','controls'),default='lanes')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--candidate-bit',type=Path,default=ROOT/'build/zc706-integrated/gateware/gateware/top.bit')
     p.add_argument('--golden-bit',type=Path,default=ROOT/'build/zc706-adc-ddr/gateware/gateware/top.bit')
     p.add_argument('--software',type=Path,default=ROOT/'build/zc706-integrated/pl-ddr-test')
     p.add_argument('--golden-software',type=Path,default=ROOT/'build/zc706-adc-ddr/pl-ddr-test')
     a=p.parse_args();a.output=a.output.resolve();a.output.mkdir(parents=True,exist_ok=True)
-    record={'hardware_access':True,'sd_qspi_written':False,'tests':{}}
+    record={'diagnostic':a.diagnostic,'hardware_access':True,'sd_qspi_written':False,'tests':{}}
     for name,bit in [('candidate',a.candidate_bit),('golden',a.golden_bit)]:
         manifest=json.loads((bit.parent/'manifest.json').read_text())
         sha=hashlib.sha256(bit.read_bytes()).hexdigest()
@@ -46,7 +47,7 @@ def main():
         if subprocess.check_output(ssh+['sha256sum '+path],timeout=10).decode().split()[0]!=sha:
             raise RuntimeError('Diagnostic upload mismatch')
         with (a.output/(name+'.log')).open('w') as log:
-            result=subprocess.run(ssh+[path+(' --diagnose-errors' if diagnostic else '')],
+            result=subprocess.run(ssh+[path+((' --diagnose-controls' if a.diagnostic == 'controls' else ' --diagnose-errors') if diagnostic else '')],
                 stdout=log,stderr=subprocess.STDOUT,timeout=300)
         record['tests'][name]={'exit':result.returncode,'software_sha256':sha}
         return result.returncode
@@ -54,11 +55,11 @@ def main():
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         try:
             boot(a.candidate_bit,'candidate-boot')
-            test(a.software,'candidate-lanes',True)
+            test(a.software,'candidate-'+a.diagnostic,True)
         finally:
             try:
                 boot(a.golden_bit,'restore-golden')
-                test(a.software,'golden-lanes',True)
+                test(a.software,'golden-'+a.diagnostic,True)
                 record['restoration_passed']=test(a.golden_software,'golden-bist',False)==0
             finally:
                 record['final_host']=host

@@ -696,3 +696,8 @@ Ethernet boot on the new image, but PL DDR fails its memory test. A direct
 comparison restored the golden ADC+DDR image and passed three complete 1 GiB
 BIST runs twice; integrated acquisition/PLL/SFP qualification remains pending.
 See [the integration evidence and status](docs/zc706-integrated.md).
+
+DDR diagnosis update (2026-10-11): lane-select CSR readback passed 4,352
+operations on each integrated/golden image, including byte 4. The integrated
+DDR byte-4 data failure remains unresolved. Golden ADC+DDR was restored and
+passed three full-capacity BIST runs; current management IP is 192.168.2.14.

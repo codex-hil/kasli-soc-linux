@@ -119,10 +119,46 @@ static int diagnose_errors(void) {
     return total_errors == 0;
 }
 
+/* CSR-only diagnostic: does not reset, train or access DDR memory. */
+static int diagnose_controls(void) {
+    uint32_t saved = ddrphy_dly_sel_read();
+    unsigned errors = 0, operations = 0;
+    for (unsigned value = 0; value < 256; value++) {
+        ddrphy_dly_sel_write(value);
+        __sync_synchronize();
+        uint32_t got = ddrphy_dly_sel_read();
+        operations++;
+        if (got != value) {
+            if (errors < 16) fprintf(stderr, "SELECT expected=%02x got=%08x\n", value, got);
+            errors++;
+        }
+    }
+    for (unsigned lane = 0; lane < 8; lane++) {
+        unsigned lane_errors = 0;
+        for (unsigned repeat = 0; repeat < 512; repeat++) {
+            uint32_t value = (repeat & 1) ? (1U << lane) : (0xffU ^ (1U << lane));
+            ddrphy_dly_sel_write(value);
+            __sync_synchronize();
+            if (ddrphy_dly_sel_read() != value) lane_errors++;
+            operations++;
+        }
+        errors += lane_errors;
+        printf("SELECT lane=%u errors=%u/512\n", lane, lane_errors);
+    }
+    ddrphy_dly_sel_write(saved);
+    __sync_synchronize();
+    uint32_t restored = ddrphy_dly_sel_read();
+    if (restored != saved) errors++;
+    printf("SELECT operations=%u errors=%u saved=%08x restored=%08x %s\n",
+        operations, errors, saved, restored, errors ? "FAIL" : "PASS");
+    return errors == 0;
+}
+
 int main(int argc, char **argv) {
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
     int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
-    if (argc != 1 && !init_only && !diagnostic) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors]\n",argv[0]); return 2; }
+    int controls = argc == 2 && !strcmp(argv[1], "--diagnose-controls");
+    if (argc != 1 && !init_only && !diagnostic && !controls) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -130,6 +166,7 @@ int main(int argc, char **argv) {
     if(ddr_status_signature_read()!=0x504c4444 || probe_signature_read()!=0x4b534f43) {
         fprintf(stderr,"Wrong PL DDR bitstream signature\n"); return 1;
     }
+    if (controls) { int clean = diagnose_controls(); munmap((void *)pl_csr,65536); close(fd); return clean ? 0 : 1; }
     uint64_t timeout=now_ns()+2000000000ULL;
     while(ddr_status_ready_read()!=3) {
         if(now_ns()>timeout) { fprintf(stderr,"MMCM/IDELAYCTRL not ready\n"); return 1; }

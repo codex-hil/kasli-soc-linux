@@ -1,0 +1,9 @@
+SELECT lane=0 errors=0/512
+SELECT lane=1 errors=0/512
+SELECT lane=2 errors=0/512
+SELECT lane=3 errors=0/512
+SELECT lane=4 errors=0/512
+SELECT lane=5 errors=0/512
+SELECT lane=6 errors=0/512
+SELECT lane=7 errors=0/512
+SELECT operations=4352 errors=0 saved=00000000 restored=00000000 PASS
