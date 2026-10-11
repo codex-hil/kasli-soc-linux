@@ -220,7 +220,9 @@ def main():
                 with (work / "top.frames").open("w") as frames:
                     subprocess.run(cmd, cwd=work, stdout=frames, stderr=log, check=True)
             else:
-                subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True)
+                subprocess.run(cmd, cwd=work, stdout=log, stderr=subprocess.STDOUT, check=True,
+                        env=dict(os.environ, NEXTPNR_ROUTE_SNAPSHOT=str(work/'top_placed.json'))
+                        if n == 1 and args.design == 'integrated' else None)
         if n == 0 and args.design in ("sfp", "integrated"):
             validate_sfp_clock(work)
         if n == 0 and args.design in ('pl-ddr', 'adc-ddr', 'integrated'):

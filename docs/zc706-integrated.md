@@ -76,3 +76,29 @@ An isolated backend extension fixes router1's consistency check for a
 reserved source wire before any sink arc is routed. Other wires remain
 subject to the full consistency check. `NEXTPNR_ROUTE_SNAPSHOT` optionally
 saves the placed state at routing entry to speed backend experiments.
+
+
+### Integration routing checkpoint — 2026-10-11
+
+No integrated bitstream has passed routing and timing, and no integrated
+hardware qualification has run. The existing clock-only image remains on
+ZC706. Yosys and all three regression suites passed; matching software built.
+
+Router2 searched individual hard clock arcs for millions of steps. Router1
+also slowed on the same placement. Diagnostic logs are preserved under
+`evidence/zc706/integrated-20261011`. Moving two BUFG index-zero allocations
+in an experimental placement eliminated the corresponding initial blocked
+clock arcs, but MMCM-to-BUFG routes remained expensive, including DDR's
+unchanged clock placement. This does not yet establish the root cause.
+The preliminary SYS timing estimate was 74.92 MHz versus 83.33 MHz;
+final timing has not been obtained and must pass before programming.
+
+The isolated backend now prints clock-root connectivity, reservation checks
+and progress every 100,000 search iterations. It writes the placed state to
+`top_placed.json`; this enables offline rerouting without repeating synthesis
+and placement. JSON snapshots retain a `settings.router` value, which must
+also be changed when comparing routers. Development placement experiments
+are not release images and must not be assembled or programmed as qualified
+builds. Next: trace a legal MMCM-to-BUFG path against forward router expansion,
+repair the measured issue, rerun the reproducible build and all setup/hold
+checks, then run `test_integrated_hardware.py --program` under the board lock.

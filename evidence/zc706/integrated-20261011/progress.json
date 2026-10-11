@@ -1,0 +1,60 @@
+{
+  "status": "IN_PROGRESS",
+  "hardware_validation": "NOT_RUN",
+  "qualified_integrated_bitstream": false,
+  "source_commit": "92af414259affc0f53cc62dac1dbbfb2f58769d9",
+  "architecture": {
+    "adc_cards": 2,
+    "independent_adc_clocks": true,
+    "sys_hz": 83333333.33333333,
+    "ddr_hz": 333333333.3333333,
+    "wr_reference_hz": 100000000,
+    "wr_helper_hz": 98437500.0,
+    "sfp_reference": "qualified FCLK100 path"
+  },
+  "regressions": {
+    "adc_dma": {
+      "result": "PASS",
+      "log_sha256": "73eab608e5b8ba965e6b55ecc765ecff3797c0c926163f1488fef0abe1afec6a"
+    },
+    "dual_wr_pll": {
+      "result": "PASS",
+      "log_sha256": "f8e32098941830ebad9e9dc3159fa5a59d7585dfb320f2c73451c7c9f633e78e"
+    },
+    "sfp_mac_pcs": {
+      "result": "PASS",
+      "log_sha256": "0e04d75363551cf9a53f0e93c6d04371940923352f3482cabd8677a57d331618"
+    },
+    "software": {
+      "result": "PASS",
+      "log_sha256": "5ba52577f63f49f9d81239be05ab2b96ead961b8bcabb25e9eb89d686bdd652a"
+    }
+  },
+  "build_attempts": [
+    "Unconstrained SFP TX clock route failed",
+    "MMCM placement corrected; far LOCKED routes expensive",
+    "FCLK selected from qualified SFP reference",
+    "Optional reference counters removed to reduce clock pressure",
+    "Local two-stage MMCM LOCKED synchronizers added; distinct slice LOCs required",
+    "Current route uses diagnostic backend, all timing checks remain mandatory"
+  ],
+  "diagnostic_logs": {
+    "local-lock-diagnostic-router.log.gz": "089d6f1599cfd03e1a5a82862db1ff52aa9f9bbfd362f9ee0e1ea4933edfb75e",
+    "bufg-zero-experiment.log.gz": "7c5b16bdfe7d2501e2bb17f57a1ed3d393e4daadb543b5d3fcea3feb83a8f123",
+    "mmcm-output-experiment.log.gz": "b561d10e1b7f69d22fb07bf2bf2dd038a3bc8e64a383d656e0369d5ed238fc18",
+    "clock-root-debug3.log.gz": "6e154a1c827d4d85f498da2cf57d0c3a6a04d6dd1ac5f4fa2aee0f09c7a24fe4",
+    "integrated-adc-regression.log.gz": "73eab608e5b8ba965e6b55ecc765ecff3797c0c926163f1488fef0abe1afec6a",
+    "integrated-pll-regression.log.gz": "f8e32098941830ebad9e9dc3159fa5a59d7585dfb320f2c73451c7c9f633e78e",
+    "integrated-sfp-simulation.log.gz": "0e04d75363551cf9a53f0e93c6d04371940923352f3482cabd8677a57d331618",
+    "integrated-software.log.gz": "5ba52577f63f49f9d81239be05ab2b96ead961b8bcabb25e9eb89d686bdd652a"
+  },
+  "routing_result": "NOT_COMPLETED",
+  "physical_image_unchanged": true,
+  "next_step": "Trace the legal MMCM-to-BUFG path against forward router expansion using the saved placement; then fix routing, require final setup/hold PASS, and run the locked integrated hardware wrapper.",
+  "placed_state": {
+    "local_file": "build/zc706-integrated/gateware/gateware/top_placed.json",
+    "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
+    "generated_from_commit": "92af414",
+    "experimental_buffer_changes": "Development JSON only: TX input BUFG 0 to 4; RX half 21 to 18; RX full 16 to 19. Not applied to release target or hardware."
+  }
+}
