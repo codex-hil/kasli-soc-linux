@@ -58,12 +58,24 @@ class NativeI2C:
         self.lib.wr_i2c.argtypes = [ctypes.c_void_p, ctypes.c_uint, ctypes.c_uint,
             ctypes.c_int, ctypes.c_uint8, ctypes.c_void_p, ctypes.c_uint]
         self.lib.wr_i2c.restype = ctypes.c_int
+        self.timed = (hasattr(self.lib, 'wr_i2c_timed') and
+            registers.map['constants'].get('config_clock_frequency') == 100000000)
+        if self.timed:
+            self.lib.wr_i2c_timed.argtypes = [ctypes.c_void_p, ctypes.c_uint,
+                ctypes.c_uint, ctypes.c_uint, ctypes.c_int, ctypes.c_uint8,
+                ctypes.c_void_p, ctypes.c_uint]
+            self.lib.wr_i2c_timed.restype = ctypes.c_int
 
     def transfer(self, read, register, values):
         data = (ctypes.c_uint8*len(values))(*values)
         address = ctypes.addressof(ctypes.c_uint32.from_buffer(self.r.mem))
-        error = self.lib.wr_i2c(address, self.r._offset('adc_i2c_w'),
-            self.r._offset('adc_i2c_r'), read, register, data, len(values))
+        if self.timed:
+            error = self.lib.wr_i2c_timed(address, self.r._offset('adc_i2c_w'),
+                self.r._offset('adc_i2c_r'), self.r._offset('probe_counter'),
+                read, register, data, len(values))
+        else:
+            error = self.lib.wr_i2c(address, self.r._offset('adc_i2c_w'),
+                self.r._offset('adc_i2c_r'), read, register, data, len(values))
         if error:
             raise OSError(error, 'Si570 native I2C transaction failed')
         return list(data)
@@ -138,9 +150,9 @@ def signed(value):
     return value-(1 << 32) if value & (1 << 31) else value
 
 
-def phase_snapshot(registers):
-    registers.write('wr_phase_snapshot', 1)
-    output = {name: registers.read('wr_phase_'+name) for name in
+def phase_snapshot(registers, bank='wr_phase'):
+    registers.write(bank+'_snapshot', 1)
+    output = {name: registers.read(bank+'_'+name) for name in
         ('status', 'phase', 'raw_phase', 'events', 'rejected', 'ref_age', 'adc_age')}
     output['phase'] = signed(output['phase'])
     output['raw_phase'] = signed(output['raw_phase'])

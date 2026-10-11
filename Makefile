@@ -106,3 +106,22 @@ wr-pll-sim:
 .PHONY: wr-pll-package
 wr-pll-package:
 	python3 tools/package_wr_pll.py
+
+.PHONY: wr-pll-dual-pl wr-pll-dual-software
+wr-pll-dual-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design frequency --wr-pll --wr-pll-cards 2 --output-dir build/zc706-wr-pll-dual/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+
+wr-pll-dual-software:
+	mkdir -p build/zc706-wr-pll-dual
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o build/zc706-wr-pll-dual/i2c.so
+
+.PHONY: wr-pll-dual-sim
+wr-pll-dual-sim:
+	$(ENV) python3 tools/build_wr_ddmtd.py
+	$(ENV) sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -s wr_ddmtd_dual_tb -o build/wr-ddmtd/dual-sim build/wr-ddmtd/tagger.v gateware/wr_phase_tracker.v tests/wr_ddmtd_dual_tb.v && build/tools/oss-cad-suite/bin/vvp build/wr-ddmtd/dual-sim'
+	python3 tests/test_wr_pi.py
+	python3 tests/test_wr_i2c.py
+
+.PHONY: wr-pll-dual-package
+wr-pll-dual-package:
+	python3 tools/package_wr_pll.py --dual

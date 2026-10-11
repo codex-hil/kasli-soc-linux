@@ -1,0 +1,49 @@
+[
+  {
+    "attempt": "attempt-cpu-timer",
+    "error": "Initial phase hold qualification failed",
+    "restored": true,
+    "files": {
+      "build/zc706-wr-pll-dual/gateware/csr.json": "934b83598c62ba96d4feda5b1f0e94b58a24e802217004812922e1040e23c10c",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "de882fd45a3cbaa3ff3f43d0fdfd0d624f17f8c16e27d576bfc3be421e8c3f99",
+      "tools/run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+      "tools/run_wr_pll_dual.py": "093f4cfcbb05bdb7969b8e92654d993fd221fcc48af07d131cb38f510f19c6d8",
+      "build/zc706-wr-pll-dual/i2c.so": "5ba06793d7b3df3a0ea9da0fa70b3967abe529fd96419888a5a9e8ee662173ec"
+    },
+    "statistics": {
+      "mean_phase_ns": -0.02703159317452272,
+      "min_phase_ns": -9.841269841269842,
+      "max_phase_ns": 10.793650793650794,
+      "stddev_phase_ns": 3.1674526255018347,
+      "median_update_seconds": 0.005057420999989404,
+      "locked_fraction": 0.9918905220476432,
+      "last_tune_ppm": -15.490649889593477
+    }
+  },
+  {
+    "attempt": "attempt-pl-timer",
+    "error": "Initial phase hold qualification failed",
+    "restored": true,
+    "files": {
+      "build/zc706-wr-pll-dual/gateware/csr.json": "934b83598c62ba96d4feda5b1f0e94b58a24e802217004812922e1040e23c10c",
+      "tools/fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "tools/measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "tools/wr_pll_control.py": "87463850a148f90df95fde1f141c41bb053715fe4d14734170af121f714f9196",
+      "tools/run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+      "tools/run_wr_pll_dual.py": "093f4cfcbb05bdb7969b8e92654d993fd221fcc48af07d131cb38f510f19c6d8",
+      "build/zc706-wr-pll-dual/i2c.so": "af5d1d39ff3d10c96a683d003ebc14535bcfb11062f427ea3fb9c4867bc4e3bf",
+      "software/wr_pll/i2c.c": "5dd704f527cb7e5599656730d492e5436f7f38abcbac7b727759f15e6dadf24f"
+    },
+    "statistics": {
+      "mean_phase_ns": 0.005634348396411624,
+      "min_phase_ns": -11.746031746031745,
+      "max_phase_ns": 10.952380952380953,
+      "stddev_phase_ns": 3.053713945372849,
+      "median_update_seconds": 0.0036706500000036613,
+      "locked_fraction": 0.9877981142540211,
+      "last_tune_ppm": -15.547699731444098
+    }
+  }
+]

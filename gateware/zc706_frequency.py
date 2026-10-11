@@ -50,7 +50,7 @@ class FrequencySoC(BaseSoC):
     def add_csr_bridge(self, name="csr", origin=None, with_register=False):
         return super().add_csr_bridge(name, origin, with_register=True)
 
-    def __init__(self, wr_pll=False):
+    def __init__(self, wr_pll=False, wr_pll_cards=1):
         super().__init__("zc706", crg=ADCCRG())
         self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
         self.csr.add("probe", 1)
@@ -71,7 +71,12 @@ class FrequencySoC(BaseSoC):
             from wr_pll import WRPhase
             self.csr.add("wr_phase", 12)
             self.wr_phase = WRPhase(self.platform)
+            if wr_pll_cards == 2:
+                self.csr.add("wr_phase2", 13)
+                self.wr_phase2 = WRPhase(self.platform, adc_domain="adc2",
+                    helper_locked=self.wr_phase.helper_mmcm.locked)
             self.add_constant("WR_PHASE_ABI", 1)
+            self.add_constant("WR_PHASE_CARDS", wr_pll_cards)
             self.add_constant("WR_DDMTD_HELPER_NUMERATOR", 63)
             self.add_constant("WR_DDMTD_HELPER_DENOMINATOR", 64)
         for name, value in dict(ADC_ABI=1, ADC_CARDS=2, ADC_FPGA_DIFF_TERM=1,
@@ -85,8 +90,9 @@ def main():
     p.add_argument("--board", choices=["zc706"], default="zc706")
     p.add_argument("--output-dir", default="build/zc706-frequency-small/gateware")
     p.add_argument("--wr-pll", action="store_true")
+    p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     a = p.parse_args()
-    soc = FrequencySoC(wr_pll=a.wr_pll)
+    soc = FrequencySoC(wr_pll=a.wr_pll, wr_pll_cards=a.wr_pll_cards)
     soc.finalize()
     out = Path(a.output_dir)
     out.mkdir(parents=True, exist_ok=True)

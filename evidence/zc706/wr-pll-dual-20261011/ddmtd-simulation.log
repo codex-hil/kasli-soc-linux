@@ -1,0 +1,11 @@
+python3 tools/environment.py python3 tools/build_wr_ddmtd.py
+/work/build/wr-ddmtd/tagger.v
+python3 tools/environment.py sh -c 'build/tools/oss-cad-suite/bin/iverilog -g2012 -s wr_ddmtd_dual_tb -o build/wr-ddmtd/dual-sim build/wr-ddmtd/tagger.v gateware/wr_phase_tracker.v tests/wr_ddmtd_dual_tb.v && build/tools/oss-cad-suite/bin/vvp build/wr-ddmtd/dual-sim'
+PASS: dual WR phase drift -20.000000/16.190476 ns; independent loss/reset recovery
+tests/wr_ddmtd_dual_tb.v:51: $finish called at 2240400000000 (1fs)
+python3 tests/test_wr_pi.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.078s
+
+OK

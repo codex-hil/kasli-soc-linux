@@ -22,6 +22,10 @@ FMC1 phase hold and clock-loss/reacquisition passed two 60-second physical runs
 (2.20–2.29 ns sampled phase standard deviation; peaks within ±8.74 ns).
 The bounded test restores the original Si570 setting. FMC2 remains an untuned control.
 
+The [dual-loop target](docs/zc706-wr-pll-dual.md) adds an independent FMC2 DDMTD
+phase monitor and PI. FMC2-only hold and clock-loss/reacquisition passed
+(2.00–2.16 ns sampled phase standard deviation); simultaneous testing is in progress.
+
 ## CERN FMC ADC on ZC706
 
 The **single-card J5 LPC target** provides four channels, an ISERDES
