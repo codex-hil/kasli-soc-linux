@@ -89,9 +89,40 @@ static int address_test(int fd) {
     printf("GP1 address test: %d locations across 1 GiB: %s\n",n,ok?"PASS":"FAIL");
     return ok;
 }
+/* Diagnostic only: isolate faulty physical byte lanes after failed training.
+ * GP1 is uncached; pairs of 32-bit words correspond to eight DDR byte lanes.
+ */
+static int diagnose_errors(void) {
+    const unsigned words = 8192;
+    const uint32_t patterns[] = {0x00000000, 0xffffffff, 0x55aa55aa, 0xaa55aa55};
+    unsigned total_errors = 0;
+    for (unsigned pattern = 0; pattern < 4; pattern++) {
+        unsigned lane_errors[8] = {0};
+        uint8_t lane_xor[8] = {0};
+        for (unsigned i = 0; i < words; i++) pl_ram[i] = patterns[pattern];
+        __sync_synchronize();
+        for (unsigned i = 0; i < words; i++) {
+            uint32_t difference = pl_ram[i] ^ patterns[pattern];
+            for (unsigned byte = 0; byte < 4; byte++) {
+                uint8_t error = difference >> (8*byte);
+                unsigned lane = (i & 1)*4 + byte;
+                if (error) { lane_errors[lane]++; lane_xor[lane] |= error; }
+            }
+        }
+        for (unsigned lane = 0; lane < 8; lane++) {
+            total_errors += lane_errors[lane];
+            printf("LANE pattern=%08x lane=%u errors=%u/%u xor=%02x\n",
+                patterns[pattern], lane, lane_errors[lane], words/2, lane_xor[lane]);
+        }
+    }
+    printf("DIAGNOSTIC: byte errors=%u (does not qualify DDR)\n", total_errors);
+    return total_errors == 0;
+}
+
 int main(int argc, char **argv) {
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
-    if (argc != 1 && !init_only) { fprintf(stderr,"Usage: %s [--init-only]\n",argv[0]); return 2; }
+    int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
+    if (argc != 1 && !init_only && !diagnostic) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -105,7 +136,9 @@ int main(int argc, char **argv) {
         usleep(1000);
     }
     pl_ram=map(fd,16*1024*1024,0x80000000);
-    if(!sdram_init()) { fprintf(stderr,"FAIL: upstream SDRAM initialization/memtest\n"); return 1; }
+    int initialized = sdram_init();
+    if (diagnostic) { int clean = diagnose_errors(); return initialized && clean ? 0 : 1; }
+    if(!initialized) { fprintf(stderr,"FAIL: upstream SDRAM initialization/memtest\n"); return 1; }
     if(!address_test(fd)) return 1;
     if (init_only) { puts("PASS: PL SODIMM init/leveling and GP1 address test"); return 0; }
     for(unsigned pass=0;pass<3;pass++)

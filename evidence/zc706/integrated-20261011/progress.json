@@ -11,7 +11,7 @@
     "command_delay_15": "FAIL",
     "golden_ddr_bist": "PASS twice: three full-1-GiB passes each",
     "restored_baseline": "adc-ddr golden",
-    "current_host": "192.168.2.11",
+    "current_host": "192.168.2.13",
     "sd_qspi_written": false
   },
   "qualified_integrated_bitstream": false,
@@ -63,7 +63,7 @@
   },
   "routing_result": "MAIN_ROUTE_PASS_HOLD_ASSERT",
   "physical_image_unchanged": true,
-  "next_step": "Compare integrated DDR I/O placement/routing and FASM against physically passing golden; preserve native timing requirements",
+  "next_step": "Trace data/control/clock routing of DDR byte lane 4 and compare against golden; no timing relaxation",
   "placed_state": {
     "local_file": "build/zc706-integrated/gateware/gateware/top_placed.json",
     "sha256": "a7ed872d051b2efc2172fc71d759295e800a8817a39a3b2c0e6f425a66e6930e",
@@ -203,5 +203,33 @@
     "hardware_access": false,
     "current_full_build_uses_patch": false
   },
-  "result": "IN_PROGRESS"
+  "result": "IN_PROGRESS",
+  "ddr_lane_diagnosis": {
+    "hardware": "PASS localization, DDR still FAIL",
+    "candidate_byte_error_counts": [
+      0,
+      0,
+      0,
+      0,
+      13356,
+      0,
+      0,
+      0
+    ],
+    "golden_byte_error_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "io_matching_bels": 528,
+    "static_features_matching": 4452,
+    "clock_route_difference": "Golden has fabric/LUT MMCM-to-BUFG routes; candidate has dedicated cascade routes. Causality not established.",
+    "restored_golden_bist": "PASS: three full-1-GiB passes",
+    "current_host": "192.168.2.13"
+  }
 }

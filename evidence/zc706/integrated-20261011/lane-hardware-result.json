@@ -1,0 +1,15 @@
+{
+  "integrated_lanes": {
+    "exit": 1,
+    "software_sha256": "979fc2b9a27299335a5d9e7e468ce69165ea1288402ed3906ba552e044f5051f"
+  },
+  "golden_lanes": {
+    "exit": 0,
+    "software_sha256": "979fc2b9a27299335a5d9e7e468ce69165ea1288402ed3906ba552e044f5051f"
+  },
+  "restored_golden": {
+    "exit": 0,
+    "software_sha256": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6"
+  },
+  "final_host": "192.168.2.13"
+}

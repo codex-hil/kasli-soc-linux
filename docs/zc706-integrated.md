@@ -352,3 +352,29 @@ BIST passes. Current management DHCP: 192.168.2.11. Hardware results and logs
 are recorded under `evidence/zc706/integrated-20261011`. Next work is comparison
 of DDR I/O placement/routing/FASM against this confirmed physical baseline;
 this is an integration regression, not evidence that the SODIMM is defective.
+
+
+### DDR byte-lane localization (2026-10-11)
+
+`pl-ddr-test --diagnose-errors` writes four fixed patterns over 32 KiB and
+counts read XOR failures per byte of each 64-bit DDR word. It may run after
+training failure to gather evidence, but never turns failed initialization
+into a successful qualification. The same binary reported 13,356 byte errors
+only in lane 4 (DQ32..39) on integrated PL; all seven other lanes had zero.
+Golden PL reported zero for all lanes, then passed three whole-1-GiB BIST runs.
+The board remains on golden ADC+DDR at 192.168.2.13. Logs and per-lane counts
+are in `lane-hardware-result.json` and `lane-error-summary.json`.
+
+`tools/compare_ddr_reference.py` reproduces the offline comparison. All 528
+non-ADC DDR I/O resource locations/types/parameters and 4,452 static I/O FASM
+features match. Both DDR MMCM-to-BUFG input routes changed from fabric/LUT
+paths in golden to dedicated clock cascades in integrated. This is a route
+difference, not an established cause of the isolated lane failure.
+
+`tools/test_ddr_reference_hardware.py --host <current-IP> --output <directory>`
+repeats candidate/golden lane diagnostics under one shared ZC706 lock and
+restores the golden image followed by its full BIST. Build diagnostic software
+with the current `software/pl_ddr/main.c` first. Existing images require their
+matching timing-clean manifests. The wrapper uses volatile JTAG and `/tmp`
+uploads, without SD/QSPI writes. The next investigation is lane-4-specific
+read/write/control routing and its clock sinks against the working reference.
