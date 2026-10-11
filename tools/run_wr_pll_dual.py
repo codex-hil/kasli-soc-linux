@@ -92,6 +92,7 @@ def _loop(registers, oscillators, active, duration, label, output, pool):
     scale=1<<19
     kp={i:round(.15*(10/63)*1e6*scale) for i in active}
     start=time.monotonic()
+    output['start_monotonic']=start
     previous={i:start for i in active}
     lock_count={i:0 for i in active}
     last_rejected={i:None for i in active}

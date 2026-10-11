@@ -10,7 +10,7 @@ from reciprocal import ReciprocalCounter
 from wr_pll import WRPhase
 
 class IntegratedSoC(ADCDDRSoC):
-    def __init__(self):
+    def __init__(self, refclk="fclk"):
         super().__init__()
         for bank, name, domain in ((16,'frequency','adc'),
                                   (17,'frequency2','adc2'),
@@ -28,13 +28,33 @@ class IntegratedSoC(ADCDDRSoC):
                 RECIPROCAL_ABI=1,RECIPROCAL_REFERENCE_HZ=round(SYS_CLK_FREQ),
                 RECIPROCAL_CLOCK_ONLY=0,INTEGRATED_ABI=1).items():
             self.add_constant(name,value)
-        add_sfp(self, sys_clk_freq=SYS_CLK_FREQ, bank=21)
+        add_sfp(self, refclk=refclk, sys_clk_freq=SYS_CLK_FREQ, bank=21, register_usrready=True)
+        # Retain qualified SFP TX clock placement and all SFP BUFG sites.
+        # RX and ADC2 share the upper left clock column on integration.
+        # Unconstrained TX at X0Y0 could not route CLKOUT1 to its BUFG.
+        for cell,site in [('MMCME2_ADV_2','MMCME2_ADV_X0Y2'),
+                          ('MMCME2_ADV_3','MMCME2_ADV_X0Y4'),
+                          ('MMCME2_ADV_1','MMCME2_ADV_X1Y5'),
+                          ('adc_rx.dco_mmcm','MMCME2_ADV_X0Y1'),
+                          ('adc2_rx.dco_mmcm','MMCME2_ADV_X0Y3'),
+                          ('BUFH','BUFGCTRL_X0Y0'),
+                          ('BUFH_1','BUFGCTRL_X0Y8'),
+                          ('BUFH_2','BUFGCTRL_X0Y7'),
+                          ('BUFG_5','BUFGCTRL_X0Y6'),
+                          ('BUFG_6','BUFGCTRL_X0Y21'),
+                          ('BUFG_7','BUFGCTRL_X0Y16'),
+                          ('BUFG_8','BUFGCTRL_X0Y5'),
+                          ('BUFG_9','BUFGCTRL_X0Y14'),
+                          ]:
+            self.platform.add_platform_command(
+                f'set_property LOC {site} [get_cells {cell}]')
 
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--board',choices=['zc706'],default='zc706')
     p.add_argument('--output-dir',type=Path,required=True)
-    a=p.parse_args(); soc=IntegratedSoC();soc.finalize()
+    p.add_argument('--refclk',choices=['fclk','si5324'],default='fclk')
+    a=p.parse_args(); soc=IntegratedSoC(a.refclk);soc.finalize()
     a.output_dir.mkdir(parents=True,exist_ok=True)
     export_soc(soc,a.output_dir)
 

@@ -25,7 +25,7 @@ def main():
     if a.max_samples<8192 or a.max_samples>1<<24 or a.max_samples%8:
         p.error('Maximum samples must be 8192..16777216 and a multiple of eight')
     a.output.mkdir(parents=True,exist_ok=True)
-    result=dict(result='FAIL',synchronized=False,adc_clocks='independent',cards={},runs=[])
+    result=dict(start_monotonic=time.monotonic(),result='FAIL',synchronized=False,adc_clocks='independent',cards={},runs=[])
     opened=[];active=[]
     try:
         for card in (1,2):
@@ -115,6 +115,7 @@ def main():
                 if not a.preinitialized:
                     r.write('adc_ssr',0);r.write('adc_control',1)
         for _,r,_ in opened:r.mem.close()
+        result['end_monotonic']=time.monotonic()
         (a.output/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     print('PASS: both independent-clock ADC streams stored and verified in PL DDR')
 

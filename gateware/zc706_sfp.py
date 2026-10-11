@@ -182,7 +182,7 @@ class SFPSoC(BaseSoC):
         self.csr.add("board_i2c", 2)
         add_sfp(self, ip, refclk)
 
-def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3):
+def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False):
     self.platform.add_extension([r for r in _io if r[0] in
         ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324")])
     if refclk == "local":
@@ -192,6 +192,21 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
             Subsignal("rxp", Pins("AH6")), Subsignal("rxn", Pins("AH5")))])
     self.ethphy = ZC706PHY(self.platform.request("mgt_refclk"),
         self.platform.request("gtx_local" if refclk == "local" else "sfp"), sys_clk_freq, refclk_freq=100e6 if refclk == "fclk" else 125e6, with_csr=False)
+    if register_usrready:
+        # UG476: assert TXUSERRDY after TXUSRCLK is stable. Synchronizing
+        # MMCM LOCKED delays assertion safely and avoids a hard-macro to
+        # hard-macro fabric arc that exhausted router2's search budget.
+        ready = Signal()
+        self.specials += MultiReg(self.ethphy.tx_mmcm.locked, ready)
+        changed = 0
+        for special in self.ethphy.pma._fragment.specials:
+            if isinstance(special, Instance) and special.of == "GTXE2_CHANNEL":
+                for item in special.items:
+                    if isinstance(item, Instance.Input) and item.name == "TXUSERRDY":
+                        item.expr = ready
+                        changed += 1
+        if changed != 1:
+            raise RuntimeError("Expected one GTX TXUSERRDY input")
     self.sfp_status = Diagnostics(self.ethphy, self.platform.request("si5324"),
         self.platform.request("sfp_tx_disable_n"), fabric_refclk=refclk == "fclk", local_refclk=refclk == "local")
     self.csr.add("sfp_status", bank)

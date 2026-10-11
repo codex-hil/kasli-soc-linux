@@ -15,7 +15,7 @@ CSR banks 1–15 retain the ADC/DDR ABI. Reciprocal counters occupy 16–18,
 WR phase detectors 19–20, and SFP diagnostics/MAC/packet test 21–23.
 Reciprocal timestamps use the DDR system clock; software uses the exported
 reference frequency rather than assuming 100 MHz. Phase units remain 10/63 ns.
-SFP uses the Si5324 125 MHz reference, the existing MAC/IP and UDP echo port.
+SFP uses the physically qualified PS FCLK 100 MHz reference, the existing MAC/IP and UDP echo port.
 Board I2C is shared by control software; it must have one owner per transaction.
 
 Initialize DDR and train both receivers before starting the dual PLL runner
@@ -29,6 +29,8 @@ make integrated-pl integrated-software
 python3 tools/test_integrated_hardware.py --host BOARD_IP --program --output build/zc706-integrated/hardware
 ```
 
+The host wrapper first trains DDR and performs full-capacity BIST.
+It then trains both receivers before the phase-control run.
 The host wrapper owns the ZC706 lock throughout JTAG boot, training and tests.
 It uses volatile JTAG programming, verifies uploaded file hashes and retains
 logs, phase records and board-side capture results. The initial test includes
@@ -39,3 +41,18 @@ Regression checks passed: independent-clock ADC DMA simulation (stalls,
 overflow, reset, frame failure, invalid configuration), original WR dual
 DDMTD simulation, PI model, I2C fault handling and parallel control ownership.
 Standalone SFP CSR export remains byte-for-byte equivalent as a parsed map.
+
+Clock-placement findings: unconstrained TX MMCM placement could not route a
+clock to its BUFG. The target retains the qualified SFP TX MMCM/BUFG sites,
+DDR sites and reserves other available MMCMs for RX, the WR helper and ADC2.
+The dense design also exposed an expensive MMCM-LOCKED to GTX-TXUSERRDY
+route. The integrated target synchronizes LOCKED through two SYS flip-flops
+before TXUSERRDY; the isolated target keeps its qualified behavior. This
+delays READY until the user clock is stable and still requires physical
+startup/loopback validation.
+
+The qualified isolated SFP image uses FCLK; the Si5324 inter-quad path remains
+unqualified. External switch operation was NOT_RUN in that qualification
+because module EEPROM returned NACK. The integrated wrapper attempts the
+external test and records PARTIAL rather than PASS if it fails, even when
+DDR, both ADC streams, both PLLs and internal SFP loopback pass.

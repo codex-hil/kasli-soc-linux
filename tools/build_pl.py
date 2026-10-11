@@ -72,12 +72,13 @@ def main():
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
-    p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default="si5324")
+    p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default=None)
     p.add_argument("--wr-pll", action="store_true", help="Add original WR DDMTD phase taggers to the clock-only target")
     p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
+    args.sfp_refclk = args.sfp_refclk or ("fclk" if args.design == "integrated" else "si5324")
     if args.wr_pll and args.design != "frequency":
         p.error("--wr-pll requires --design frequency")
     if args.wr_pll_cards == 2 and not args.wr_pll:
@@ -95,7 +96,7 @@ def main():
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.wr_pll:
         target_command += ["--wr-pll", "--wr-pll-cards", str(args.wr_pll_cards)]
-    if args.design == "sfp":
+    if args.design in ("sfp", "integrated"):
         target_command += ["--refclk", args.sfp_refclk]
     if args.design == "fmc-adc":
         target_command += ["--cards", str(args.cards)]
