@@ -4,7 +4,7 @@ import argparse
 import json
 import re
 from pathlib import Path
-from compare_ddr_control_logic import Design, compare
+from compare_ddr_control_logic import Design, compare, evaluate, leaves
 
 
 def inspect(path, database):
@@ -53,10 +53,28 @@ def inspect(path, database):
                     if (feature in features) != value:
                         encoding_errors.append(dict(signal=signal, feature=feature,
                                                     expected=value, present=feature in features))
-                for port in ('CK', 'CE', 'SR'):
+                for port in ('CK', 'CE', 'SR', 'D'):
                     wire, = cell['connections'][port]
                     controls[signal + ':' + port] = design.cone(wire)
     return controls, registers, encoding_errors
+
+
+def check_increment(controls):
+    failures = []
+    cases = 0
+    for dq in range(32, 40):
+        for direction in range(2):
+            signals = [f'k7ddrphy_bitslip{dq}_value{direction}[{bit}]' for bit in range(3)]
+            expressions = [controls[signal + ':D'] for signal in signals]
+            if not set().union(*(leaves(expr) for expr in expressions)) <= set(signals):
+                raise ValueError('Counter update has unexpected input boundaries')
+            for state in range(8):
+                values = {signal: (state >> bit) & 1 for bit, signal in enumerate(signals)}
+                got = sum(evaluate(expr, values) << bit for bit, expr in enumerate(expressions))
+                cases += 1
+                if got != (state + 1) % 8:
+                    failures.append(dict(dq=dq, direction=direction, state=state, got=got))
+    return dict(cases=cases, failures=failures)
 
 
 def main():
@@ -69,16 +87,17 @@ def main():
     left, lr, le = inspect(a.golden, a.database)
     right, rr, re_errors = inspect(a.candidate, a.database)
     report = compare(left, right)
+    report['increment_check'] = dict(golden=check_increment(left), candidate=check_increment(right))
     report['ff_encoding_errors'] = dict(golden=le, candidate=re_errors)
     report['counter_ff_count'] = len(lr)
     report['ff_mode_differences'] = {name: dict(golden=lr[name], candidate=rr[name])
                                     for name in lr if lr[name] != rr[name]}
-    report['limitation'] += ' Counter D/arithmetic, assembled bits and pulse delivery are not checked.'
+    report['limitation'] += ' Assembled bits and physical pulse delivery are not checked.'
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(report, indent=2) + '\n')
     print('Counter FFs:',len(lr),'control mismatches:',report['mismatched_sinks'],
           'mode differences:',len(report['ff_mode_differences']), 'FF encoding errors:',len(le)+len(re_errors))
-    return bool(report['mismatched_sinks'] or report['ff_mode_differences'] or le or re_errors)
+    return bool(report['mismatched_sinks'] or report['ff_mode_differences'] or le or re_errors or any(x['failures'] for x in report['increment_check'].values()))
 
 
 if __name__ == '__main__':

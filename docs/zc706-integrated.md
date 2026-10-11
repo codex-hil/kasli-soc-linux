@@ -483,3 +483,20 @@ assembled configuration bits or physical pulse delivery. Integrated DDR still
 fails byte 4; golden remains on 192.168.2.14. Next trace counter arithmetic and
 the lane-4 data/strobe path, followed by a targeted physical experiment once
 there is a discriminating hypothesis rather than another unchanged reload.
+
+### Lane-four bitslip counter next-state logic (2026-10-11)
+
+The packed-netlist logic reader now traverses CARRY4 sum/carry outputs and
+excludes generated `$legal` net aliases from assumed named boundaries. A
+1024-case exhaustive carry sum/carry test agrees with integer addition.
+Byte-4 bitslip comparison now includes D as well as CK/CE/SR: 192 functions
+match golden. Independently, all sixteen three-bit write/read counters
+implement `(state + 1) mod 8` for every state in each image (128 checks per
+image). Inverting just DQ32 read-counter bit0 next-state function is detected
+as exactly one mismatch with a directly verified counterexample. The earlier
+342 delay CE/LD comparisons still pass with this stricter alias handling.
+Evidence: `evidence/zc706/integrated-20261011/ddr-bitslip-next-state.json`.
+No hardware was accessed; golden remains restored at 192.168.2.14. These checks
+prove logical combinational behavior at named signal boundaries, not timing
+or physical delivery. Next prepare a raw DFI read-data diagnostic during
+training to distinguish byte-4 sampling failure from write/strobe failure.

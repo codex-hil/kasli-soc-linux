@@ -28,7 +28,7 @@ class Design:
         self.drivers = {}
         self.cache = {}
         for name, net in self.top['netnames'].items():
-            if len(net['bits']) == 1 and not name.startswith('$'):
+            if len(net['bits']) == 1 and '$' not in name:
                 self.names.setdefault(net['bits'][0], []).append(boundary(name))
         for name, cell in self.top['cells'].items():
             for port, bits in cell['connections'].items():
@@ -47,6 +47,19 @@ class Design:
         kind = cell['type']
         if kind in ('PSEUDO_GND', 'PSEUDO_VCC'):
             result = ('constant', int(kind == 'PSEUDO_VCC'))
+        elif kind == 'CARRY4':
+            def pin(port):
+                bits = cell['connections'].get(port, [])
+                if not bits:
+                    return ('constant', 0)
+                source, = bits
+                return self.cone(source)
+            carry = ('lut', 14, (pin('CIN'), pin('CYINIT')))
+            for index in range(int(output.removeprefix('CO').removeprefix('O')) + 1):
+                select, data = pin('S' + str(index)), pin('DI' + str(index))
+                summed = ('lut', 6, (select, carry))
+                carry = ('lut', 216, (select, carry, data))
+            result = carry if output.startswith('CO') else summed
         elif bit in self.names:
             result = ('signal', min(self.names[bit]))
         elif kind == 'SLICE_LUTX':
