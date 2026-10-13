@@ -15,6 +15,7 @@ p.add_argument('--tilegrid',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--package',type=Path,required=True)
 p.add_argument('--chipdb',type=Path,required=True)
+p.add_argument('--prerouted',type=Path,help='Also normalize SITEWIRE names in a reference preroute file')
 a=p.parse_args();grid=json.loads(a.tilegrid.read_text());sites={}
 # Package records explicitly locate IOB sites omitted from tilegrid metadata.
 for row in csv.DictReader(a.package.open()):
@@ -81,3 +82,15 @@ report={'hardware_access':False,'qualification':False,'converted_cells':count,'r
         'tilegrid_sha256':hashlib.sha256(a.tilegrid.read_bytes()).hexdigest(),
         'output_sha256':hashlib.sha256(a.output.read_bytes()).hexdigest()}
 a.output.with_suffix('.summary.json').write_text(json.dumps(report,indent=2)+'\n');print(report)
+
+if a.prerouted:
+    rows=[]
+    for line in a.prerouted.read_text().splitlines():
+        name,route=line.split('\t',1);fields=route.split(';')
+        for i in range(0,len(fields)-2,3):
+            if fields[i].startswith('SITEWIRE/'):
+                _,site,pin=fields[i].split('/')
+                if site not in sites:raise ValueError('Unknown reference wire site '+site)
+                fields[i]=sites[site]+'.'+pin
+        rows.append(name+'\t'+';'.join(fields))
+    a.output.with_suffix('.prerouted.txt').write_text('\n'.join(rows)+'\n')

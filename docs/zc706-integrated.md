@@ -1005,3 +1005,25 @@ Evidence native-placement-per-tile-summary/replay records complete digests.
 Next convert golden preroute source wire names, bind its two MMCM→BUFG
 paths with collision checks, and inspect resulting route/timing. No hardware
 access; physically qualified golden remains untouched.
+
+### Golden MMCM reference trees bind without collision (2026-10-13)
+
+Normalizer optionally converts physical SITEWIRE entries in `--prerouted`
+to exact grid/local-site wire names. Original PIP names remain unchanged.
+Backend replay restored placement and all 27 clock constraints, replaced
+both eight-wire cascade trees with golden reference trees and reports:
+2 nets given reference routes, zero missing nets, zero collisions, zero
+dangling wires pruned. Controlled diagnostic exit reached. Evidence:
+`golden-clock-preroute-success.log`, `golden-mmcm-native-prerouted.txt`.
+This is successful binding, not route/timing/hardware qualification.
+
+Started full router2 replay with no-pack/no-place, fixed golden MMCM paths,
+8-GiB no-swap container limit, 2 CPUs, hold-fix=8/radius=48. Output directory
+`build/zc706-integrated-golden-clock`, log `full-route.log`, report timing.json,
+routed JSON/FASM. Placement comes from the synchronized-reset seed-2 candidate;
+comparison therefore isolates upstream reference paths within that placed
+design but still requires routing legality and full timing checks. Physical
+LUT route-through compatibility must be checked before assembly/testing.
+Current status ROUTING; no hardware access or bitstream programming. Next
+inspect completion, verify exact paths and timing, restore 6-GiB container
+limit, then assemble only if qualified.

@@ -1,0 +1,216 @@
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Info: Device utilisation:
+Info: 	          SLICE_LUTX:   38078/ 437200     8%
+Info: 	           SLICE_FFX:   22833/ 437200     5%
+Info: 	              CARRY4:    1330/  54650     2%
+Info: 	          PSEUDO_GND:       1/      1   100%
+Info: 	          PSEUDO_VCC:       1/      1   100%
+Info: 	               HARD0:       0/   2680     0%
+Info: 	             DSP48E1:       0/    900     0%
+Info: 	                 PAD:     256/    772    33%
+Info: 	       IOB33M_OUTBUF:       0/     97     0%
+Info: 	       IOB33S_OUTBUF:       0/     97     0%
+Info: 	        IOB33_OUTBUF:      86/    202    42%
+Info: 	     IOB33M_INBUF_EN:      22/     97    22%
+Info: 	     IOB33S_INBUF_EN:       0/     97     0%
+Info: 	      IOB33_INBUF_EN:      11/    202     5%
+Info: 	IOB33M_TERM_OVERRIDE:       0/     97     0%
+Info: 	IOB33S_TERM_OVERRIDE:       0/     97     0%
+Info: 	 IOB33_TERM_OVERRIDE:       0/    202     0%
+Info: 	       PULL_OR_KEEP1:       0/    690     0%
+Info: 	            IDELAYE2:      82/    400    20%
+Info: 	        OLOGICE3_TFF:       0/    250     0%
+Info: 	      OLOGICE3_OUTFF:       0/    250     0%
+Info: 	       OLOGICE3_MISR:       0/    250     0%
+Info: 	           OSERDESE2:     107/    400    26%
+Info: 	        ILOGICE3_IFF:       0/    250     0%
+Info: 	ILOGICE3_ZHOLD_DELAY:       0/    250     0%
+Info: 	           ISERDESE2:      82/    400    20%
+Info: 	               BUFIO:       0/     32     0%
+Info: 	            BUFGCTRL:      18/     32    56%
+Info: 	                 PS7:       1/      1   100%
+Info: 	               BSCAN:       0/      4     0%
+Info: 	            DCIRESET:       0/      1     0%
+Info: 	            DNA_PORT:       0/      1     0%
+Info: 	           EFUSE_USR:       0/      1     0%
+Info: 	                BUFG:       0/     32     0%
+Info: 	              BUFHCE:       0/    168     0%
+Info: 	            FIFO18E1:       0/    545     0%
+Info: 	       GTXE2_CHANNEL:       1/     16     6%
+Info: 	        GTXE2_COMMON:       0/      4     0%
+Info: 	         IBUFDS_GTE2:       1/      8    12%
+Info: 	          IDELAYCTRL:       5/      8    62%
+Info: 	            INVERTER:       9/    169     5%
+Info: 	 IOB18M_OUTBUF_DCIEN:       9/     72    12%
+Info: 	   IOB18_INBUF_DCIEN:      64/    150    42%
+Info: 	  IOB18M_INBUF_DCIEN:       0/     72     0%
+Info: 	  IOB18_OUTBUF_DCIEN:      99/    150    66%
+Info: 	          MMCME2_ADV:       6/      8    75%
+Info: 	            ODELAYE2:     107/    150    71%
+Info: 	        OLOGICE2_TFF:       0/    400     0%
+Info: 	      OLOGICE2_OUTFF:       0/    400     0%
+Info: 	           PLLE2_ADV:       0/      8     0%
+Info: 	            RAMB18E1:      41/   1090     3%
+Info: 	            RAMB36E1:       9/    545     1%
+Info: 	           SELMUX2_1:     439/ 165250     0%
+Info: 	        RAMBFIFO36E1:       0/    545     0%
+Info: 	           FRAME_ECC:       0/      1     0%
+Info: 	                ICAP:       0/      2     0%
+Info: 	             STARTUP:       0/      1     0%
+Info: 	          USR_ACCESS:       0/      1     0%
+Info: 	              BUFFER:       0/     82     0%
+Info: 	        ILOGICE2_IFF:       0/    400     0%
+Info: 	       OLOGICE2_MISR:       0/    400     0%
+Info: 	 IOB18_TERM_OVERRIDE:       0/    150     0%
+Info: 	  IOB18S_INBUF_DCIEN:       0/     72     0%
+Info: 	 IOB18S_OUTBUF_DCIEN:       9/     72    12%
+Info: 	IOB18S_TERM_OVERRIDE:       0/     72     0%
+Info: 	IOB18M_TERM_OVERRIDE:       0/     72     0%
+Info: 	  IDELAYE2_FINEDELAY:       0/    150     0%
+
+Info: Indexed 878 control sets.
+Info: Restored 27 snapshot clock constraints
+Info: Routing global clocks...
+Info:     routing clock 'adc_rx.serial_clock'
+Info:     routing clock 'adc_rx.dco'
+Info:     routing clock 'adc_rx.feedback_buffered'
+Info:     routing clock 'adc_rx.feedback'
+Info:     routing clock 'adc_rx.divided'
+Info:     routing clock 'adc2_rx.serial_clock'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_rx.dco'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_rx.feedback_buffered'
+Info:     routing clock 'adc2_rx.feedback'
+Info:     routing clock 'adc2_rx.divided'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkout1'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkout0'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkin_signal'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm1_clkout1'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm1_clkout0'
+Info:     routing clock 'pma_k7_gtx_basex_rxoutclk_rebuffer'
+Info:     routing clock 'wr_phase_wrphase_clkout'
+Info:     routing clock 'integratedsoc_ddrclock_clkout3'
+Info:     routing clock 'integratedsoc_ddrclock_clkout2'
+Info:     routing clock 'integratedsoc_ddrclock_clkout_buf1'
+Info:     routing clock 'integratedsoc_ddrclock_clkout1'
+Info:     routing clock 'integratedsoc_ddrclock_clkout0'
+Info:     routing clock 'adc_rx.io_clk'
+Info:     routing clock 'adc2_rx.io_clk'
+Info:     routing clock 'eth_rx_clk'
+Info:     routing clock 'eth_rx_half_clk'
+Info:     routing clock 'eth_tx_half_clk'
+Info:     routing clock 'gp1_clk'
+Info:     routing clock 'idelay_clk'
+Info:     routing clock 'helper_clk'
+Info:     routing clock 'eth_tx_clk'
+Info:     routing clock 'adc2_clk'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'integratedsoc_ddrclock_clkout_buf0'
+Info:     routing clock 'adc_clk'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'integratedsoc_ddrclock_clkin_signal'
+Info:             failed to find a route using dedicated resources.
+Info: Pre-routed: net 'integratedsoc_ddrclock_clkout0' was routed already (8 wires); the reference route replaces it
+Info: Pre-routed: net 'integratedsoc_ddrclock_clkout1' was routed already (8 wires); the reference route replaces it
+Info: Pre-routed: 2 net(s) given their reference route (0 dangling wire(s) pruned), 0 not in this design, 0 collided and left to the router.
+Info: Clock-root: net=adc_rx.serial_clock pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=adc_rx.serial_clock
+Info: Clock-root: net=adc_rx.feedback_buffered pip=X137Y212/CLK_BUFG_BUFGCTRL4_O/BUFGCTRL_X0Y4.O available=1 dst_owner=adc_rx.feedback_buffered
+Info: Clock-root: net=adc_rx.feedback pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=adc_rx.feedback
+Info: Clock-root: net=adc_rx.divided pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=adc_rx.divided
+Info: Clock-root: net=adc2_rx.serial_clock pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_MMCM2/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=1
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/MMCMOUT_CLK_FREQ_BB_1/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=1
+Info: Clock-root: net=adc2_rx.feedback_buffered pip=X137Y207/CLK_BUFG_BUFGCTRL3_O/BUFGCTRL_X0Y3.O available=1 dst_owner=adc2_rx.feedback_buffered
+Info: Clock-root: net=adc2_rx.feedback pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=adc2_rx.feedback
+Info: Clock-root: net=adc2_rx.divided pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_MMCM0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=1
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/MMCMOUT_CLK_FREQ_BB_0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=1
+Info: Clock-root: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkout1 pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkout1
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkout0 pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkout0
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkin_signal pip=X137Y212/CLK_BUFG_BUFGCTRL0_O/BUFGCTRL_X0Y0.O available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkin_signal
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm1_clkout1 pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm1_clkout1
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm1_clkout0 pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm1_clkout0
+Info: Clock-root: net=pma_k7_gtx_basex_rxoutclk_rebuffer pip=X137Y212/CLK_BUFG_BUFGCTRL6_O/BUFGCTRL_X0Y6.O available=1 dst_owner=pma_k7_gtx_basex_rxoutclk_rebuffer
+Info: Clock-root: net=wr_phase_wrphase_clkout pip=X258Y95/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=wr_phase_wrphase_clkout
+Info: Clock-root: net=integratedsoc_ddrclock_clkout3 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT3/MMCME2_ADV_X0Y0.CLKOUT3 available=1 dst_owner=integratedsoc_ddrclock_clkout3
+Info: Clock-root: net=integratedsoc_ddrclock_clkout2 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT2/MMCME2_ADV_X0Y0.CLKOUT2 available=1 dst_owner=integratedsoc_ddrclock_clkout2
+Info: Clock-root: net=integratedsoc_ddrclock_clkout_buf1 pip=X137Y207/CLK_BUFG_BUFGCTRL15_O/BUFGCTRL_X0Y15.O available=1 dst_owner=integratedsoc_ddrclock_clkout_buf1
+Info: Clock-root: net=integratedsoc_ddrclock_clkout1 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=integratedsoc_ddrclock_clkout1
+Info: Clock-root: net=integratedsoc_ddrclock_clkout0 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=integratedsoc_ddrclock_clkout0
+Info: Clock-root: net=adc_rx.io_clk pip=X137Y212/CLK_BUFG_BUFGCTRL10_O/BUFGCTRL_X0Y10.O available=1 dst_owner=adc_rx.io_clk
+Info: Clock-root: net=adc2_rx.io_clk pip=X137Y212/CLK_BUFG_BUFGCTRL1_O/BUFGCTRL_X0Y1.O available=1 dst_owner=adc2_rx.io_clk
+Info: Clock-root: net=eth_rx_clk pip=X137Y207/CLK_BUFG_BUFGCTRL0_O/BUFGCTRL_X0Y0.O available=1 dst_owner=eth_rx_clk
+Info: Clock-root: net=eth_rx_half_clk pip=X137Y207/CLK_BUFG_BUFGCTRL5_O/BUFGCTRL_X0Y5.O available=1 dst_owner=eth_rx_half_clk
+Info: Clock-root: net=eth_tx_half_clk pip=X137Y212/CLK_BUFG_BUFGCTRL8_O/BUFGCTRL_X0Y8.O available=1 dst_owner=eth_tx_half_clk
+Info: Clock-root: net=gp1_clk pip=X137Y207/CLK_BUFG_BUFGCTRL7_O/BUFGCTRL_X0Y7.O available=1 dst_owner=gp1_clk
+Info: Clock-root: net=idelay_clk pip=X137Y207/CLK_BUFG_BUFGCTRL8_O/BUFGCTRL_X0Y8.O available=1 dst_owner=idelay_clk
+Info: Clock-root: net=helper_clk pip=X137Y207/CLK_BUFG_BUFGCTRL10_O/BUFGCTRL_X0Y10.O available=1 dst_owner=helper_clk
+Info: Clock-root: net=eth_tx_clk pip=X137Y212/CLK_BUFG_BUFGCTRL7_O/BUFGCTRL_X0Y7.O available=1 dst_owner=eth_tx_clk
+Info: Clock-root: net=adc2_clk pip=X137Y212/CLK_BUFG_BUFGCTRL5_O/BUFGCTRL_X0Y5.O available=1 dst_owner=adc2_clk
+Info: Clock-root: net=integratedsoc_ddrclock_clkout_buf0 pip=X137Y207/CLK_BUFG_BUFGCTRL4_O/BUFGCTRL_X0Y4.O available=1 dst_owner=integratedsoc_ddrclock_clkout_buf0
+Info: Clock-root: net=adc_clk pip=X137Y212/CLK_BUFG_BUFGCTRL9_O/BUFGCTRL_X0Y9.O available=1 dst_owner=adc_clk
+Info: Clock-root: net=integratedsoc_ddrclock_clkin_signal pip=X137Y207/CLK_BUFG_BUFGCTRL9_O/BUFGCTRL_X0Y9.O available=1 dst_owner=integratedsoc_ddrclock_clkin_signal
+Info: Clock-root: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=wr_phase_wrphase_locked0 pip=X258Y95/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=wr_phase_wrphase_locked0 pip=X258Y95/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=adc_rx.locked pip=X8Y303/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=adc_rx.locked pip=X8Y303/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=adc2_rx.locked pip=X8Y199/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.locked pip=X8Y199/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+ERROR: Clock diagnostic complete; intentionally skipping router
+0 warnings, 1 error
+Traceback (most recent call last):
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 86, in <module>
+    main()
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 80, in main
+    call(["docker", "exec", "-w", "/work", "-e", "CARGO_HOME=/work/build/cargo",
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 25, in call
+    return subprocess.run(args, check=True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['docker', 'exec', '-w', '/work', '-e', 'CARGO_HOME=/work/build/cargo', '-e', 'RUSTUP_HOME=/work/build/rustup', '-e', 'TMPDIR=/work/build/tmp', 'kasli-a4983c2304ef', 'env', 'NEXTPNR_CLOCK_DIAGNOSTIC_EXIT=1', 'build/zc706-integrated/nextpnr/nextpnr-himbaechel-xilinx', '--device', 'xc7z045ffg900-2', '--json', '/work/build/zc706-integrated-golden-clock/native-placement.json', '--no-pack', '--no-place', '--chipdb', '/work/build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin', '-o', 'prerouted=/work/build/zc706-integrated-golden-clock/native-placement.prerouted.txt']' returned non-zero exit status 125.
