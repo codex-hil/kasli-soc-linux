@@ -714,3 +714,8 @@ restored and full-capacity BIST passed; current management IP is 192.168.2.15.
 Extended byte-4 sweep (2026-10-13): all 262,144 write-DQ/DQS/read combinations
 failed on integrated PL; golden found a valid setting and passed full BIST
 again after restoration. Current management IP: 192.168.2.18.
+
+Per-DQ diagnostic (2026-10-13): candidate best-setting errors affect five of
+DQ32..39; DQ32/36/38 matched all 384 sampled bits each. Golden was restored and
+full BIST passed; current IP is 192.168.2.21. An intermittent USB claim failure
+was recovered and the wrapper's failed-boot restoration path was corrected.

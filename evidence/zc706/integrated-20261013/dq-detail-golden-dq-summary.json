@@ -1,0 +1,68 @@
+{
+  "qualification": false,
+  "rows": 192,
+  "seeds": [
+    36,
+    42,
+    84
+  ],
+  "bits": [
+    {
+      "dq": 32,
+      "samples": 384,
+      "errors": 128,
+      "expected_ones": 208,
+      "actual_ones": 240
+    },
+    {
+      "dq": 33,
+      "samples": 384,
+      "errors": 142,
+      "expected_ones": 208,
+      "actual_ones": 222
+    },
+    {
+      "dq": 34,
+      "samples": 384,
+      "errors": 151,
+      "expected_ones": 256,
+      "actual_ones": 297
+    },
+    {
+      "dq": 35,
+      "samples": 384,
+      "errors": 176,
+      "expected_ones": 144,
+      "actual_ones": 160
+    },
+    {
+      "dq": 36,
+      "samples": 384,
+      "errors": 112,
+      "expected_ones": 160,
+      "actual_ones": 112
+    },
+    {
+      "dq": 37,
+      "samples": 384,
+      "errors": 160,
+      "expected_ones": 272,
+      "actual_ones": 240
+    },
+    {
+      "dq": 38,
+      "samples": 384,
+      "errors": 120,
+      "expected_ones": 256,
+      "actual_ones": 280
+    },
+    {
+      "dq": 39,
+      "samples": 384,
+      "errors": 206,
+      "expected_ones": 192,
+      "actual_ones": 146
+    }
+  ],
+  "limitation": "Fixed diagnostic settings may be untrained on golden. Error distribution alone does not establish a physical pin fault or write/read causality."
+}

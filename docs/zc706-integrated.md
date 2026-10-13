@@ -586,3 +586,30 @@ and that cosmetic correction compiled successfully in a separate output director
 Next capture per-DQ bit errors/raw DFI at the best scored configuration using
 multiple seeds, to establish whether the residual failure is localized to a
 particular data bit before choosing further timing or routing experiments.
+
+### Per-DQ raw errors at the candidate's best sweep setting (2026-10-13)
+
+Diagnostic builds now provide `--dq-detail`, measuring 16 repeats × 3 seeds ×
+4 phases at write-DQ offset 0, write-DQS offset 1, read bitslip offset 4 and
+read delay 13. `tools/analyze_ddr_dq_detail.py` counts each DQ's errors and
+expected/actual ones. Parser fixtures verify an isolated DQ35 error and reject
+malformed rows. Candidate produced 384 samples per DQ, with errors for DQ32..39:
+`[0, 48, 16, 132, 0, 145, 0, 172]`. DQ32/36/38 match for all sampled seeds;
+residual failure affects multiple other bits, rather than one stuck DQ.
+Golden was intentionally forced to the same candidate-specific settings and
+also failed that diagnostic; its counts do not invalidate golden qualification.
+Golden was subsequently reloaded/retrained and passed three full-capacity BIST
+runs. Current IP: 192.168.2.21. No SD/QSPI writes.
+
+The first attempt reset PS and stopped at U-Boot, then openFPGALoader reported
+USB interface claim failure. The original wrapper's restoration was blocked
+by SSH sync to the stopped Linux. A separate locked golden JTAG recovery without
+SSH dependency succeeded, including full BIST; no shared hw_server was stopped
+or reconfigured. The claim failure did not recur during recovery or the retry.
+Its owner/cause is unproven. The wrapper now omits SSH sync during restoration
+when candidate boot did not complete and initializes restoration status to false.
+The successful retry held the board lock for all boot/UART/SSH/tests/restoration.
+Evidence: `dq-detail-*` files in the 20261013 directory.
+Next compare physical sites and DDR clock branches for failing versus passing
+DQ bits, and obtain a per-bit eye map to assess whether their timing windows
+fail to overlap. Current fixed-setting counts do not establish write/read cause.

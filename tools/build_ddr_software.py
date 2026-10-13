@@ -48,6 +48,15 @@ if args.trace_dfi:
     sdram_source.write_text(text)
 if args.dqs_sweep:
     text = sdram_source.read_text()
+    anchor = '\t\tcsr_rd_buf_uint8(sdram_dfii_pix_rddata_addr(p), tst, DFII_PIX_DATA_BYTES);\n'
+    assert text.count(anchor) == 1
+    text = 'static int sdram_lab_detail_active;\n' + text
+    text = text.replace(anchor, anchor + r"""
+        if (module == 4 && sdram_lab_detail_active) {
+            printf("DQ_DETAIL seed=%u phase=%d expected=%02x%02x actual=%02x%02x\n",
+                seed,p,prs[p][4],prs[p][12],tst[4],tst[12]);
+        }
+""", 1)
     text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text()
     sdram_source = OUT/'software/sdram-dqs-sweep.c'
     sdram_source.write_text(text)

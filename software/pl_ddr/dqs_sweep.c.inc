@@ -4,6 +4,27 @@ int sdram_lab_dqs_sweep(int sweep_dq) {
     unsigned tested = 0, best_errors = ~0U;
     int result = 0;
     sdram_software_control_on();
+    if (sweep_dq == 2) {
+        sdram_leveling_action(4, 0, write_rst_dq_delay);
+        sdram_leveling_action(4, 0, write_rst_dqs_delay);
+        sdram_leveling_action(4, 0, write_inc_dqs_delay);
+        sdram_leveling_action(4, 0, read_rst_dq_bitslip);
+        for (unsigned i=0;i<4;i++) sdram_leveling_action(4, 0, read_inc_dq_bitslip);
+        sdram_leveling_action(4, 0, read_rst_dq_delay);
+        for (unsigned i=0;i<13;i++) sdram_leveling_action(4, 0, read_inc_dq_delay);
+        printf("DQ_DETAIL settings dq_offset=0 dqs_offset=1 read_slip_offset=4 read_delay=13 repeats=16 seeds=3\n");
+        sdram_lab_detail_active = 1;
+        unsigned total_errors = 0;
+        for (unsigned repeat=0;repeat<16;repeat++) {
+            if (sdram_lab_timed_out()) { result = -1; break; }
+            total_errors += run_test_pattern(4, 0);
+            tested += 3;
+        }
+        sdram_lab_detail_active = 0;
+        best_errors = total_errors;
+        if (result != -1) result = total_errors == 0 ? 1 : 0;
+        goto done;
+    }
     if (sweep_dq) sdram_leveling_action(4, 0, write_rst_dq_delay);
     for (unsigned dq = 0; dq < (sweep_dq ? 32U : 1U); dq++) {
         sdram_leveling_action(4, 0, write_rst_dqs_delay);

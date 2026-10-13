@@ -1,0 +1,3 @@
+write to ram
+unable to open ftdi device: -5 (unable to claim usb device. Make sure the default FTDI driver is not in use)
+JTAG init failed with: unable to open ftdi device

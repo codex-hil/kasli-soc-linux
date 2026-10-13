@@ -14,14 +14,14 @@ LOCK=Path('/home/codex-hil/.cache/zc706-210251842914.lock')
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
-    p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep','dq-dqs-sweep'),default='lanes')
+    p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep','dq-dqs-sweep','dq-detail'),default='lanes')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--candidate-bit',type=Path,default=ROOT/'build/zc706-integrated/gateware/gateware/top.bit')
     p.add_argument('--golden-bit',type=Path,default=ROOT/'build/zc706-adc-ddr/gateware/gateware/top.bit')
     p.add_argument('--software',type=Path,default=ROOT/'build/zc706-integrated/pl-ddr-test')
     p.add_argument('--golden-software',type=Path,default=ROOT/'build/zc706-adc-ddr/pl-ddr-test')
     a=p.parse_args();a.output=a.output.resolve();a.output.mkdir(parents=True,exist_ok=True)
-    record={'diagnostic':a.diagnostic,'hardware_access':True,'sd_qspi_written':False,'tests':{}}
+    record={'diagnostic':a.diagnostic,'hardware_access':True,'sd_qspi_written':False,'tests':{},'restoration_passed':False}
     for name,bit in [('candidate',a.candidate_bit),('golden',a.golden_bit)]:
         manifest=json.loads((bit.parent/'manifest.json').read_text())
         sha=hashlib.sha256(bit.read_bytes()).hexdigest()
@@ -31,10 +31,10 @@ def main():
             raise ValueError('Expected ZC706 part for '+name)
         record[name+'_bit_sha256']=sha
     host=a.host
-    def boot(bit,name):
+    def boot(bit,name,sync_host=True):
         nonlocal host
         subprocess.run([ROOT/'.venv/bin/python',ROOT/'tools/boot_adc_jtag.py',
-            '--host',host,'--bit',bit,'--output',a.output/name],check=True,timeout=150)
+            *(['--host',host] if sync_host else []),'--bit',bit,'--output',a.output/name],check=True,timeout=150)
         host=json.loads((a.output/name/'result.json').read_text())['host']
     def test(binary,name,diagnostic):
         ssh=['ssh','-i',str(ROOT/'build/ssh/id_ed25519'),'-o',
@@ -47,18 +47,20 @@ def main():
         if subprocess.check_output(ssh+['sha256sum '+path],timeout=10).decode().split()[0]!=sha:
             raise RuntimeError('Diagnostic upload mismatch')
         with (a.output/(name+'.log')).open('w') as log:
-            result=subprocess.run(ssh+[path+({'controls':' --diagnose-controls','lanes':' --diagnose-errors','dqs-sweep':' --sweep-dqs','dq-dqs-sweep':' --sweep-dq-dqs'}[a.diagnostic] if diagnostic else '')],
+            result=subprocess.run(ssh+[path+({'controls':' --diagnose-controls','lanes':' --diagnose-errors','dqs-sweep':' --sweep-dqs','dq-dqs-sweep':' --sweep-dq-dqs','dq-detail':' --dq-detail'}[a.diagnostic] if diagnostic else '')],
                 stdout=log,stderr=subprocess.STDOUT,timeout=300)
         record['tests'][name]={'exit':result.returncode,'software_sha256':sha}
         return result.returncode
     with LOCK.open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        candidate_boot_passed=False
         try:
             boot(a.candidate_bit,'candidate-boot')
+            candidate_boot_passed=True
             test(a.software,'candidate-'+a.diagnostic,True)
         finally:
             try:
-                boot(a.golden_bit,'restore-golden')
+                boot(a.golden_bit,'restore-golden',sync_host=candidate_boot_passed)
                 test(a.software,'golden-'+a.diagnostic,True)
                 record['restoration_passed']=test(a.golden_software,'golden-bist',False)==0
             finally:
