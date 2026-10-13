@@ -1,0 +1,29 @@
+{
+  "hardware_access": true,
+  "qualification": false,
+  "restored_golden_full_bist": "PASS",
+  "current_host": "192.168.2.11",
+  "lane_error_totals": {
+    "candidate": [
+      0,
+      0,
+      0,
+      0,
+      14776,
+      0,
+      0,
+      0
+    ],
+    "golden": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "conclusion": "Candidate byte-four failure reproduced. Raw DFI byte four varies; not a frozen 00/ff path. Samples include deliberately untrained settings and do not distinguish write vs read timing."
+}

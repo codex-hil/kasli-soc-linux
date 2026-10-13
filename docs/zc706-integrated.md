@@ -500,3 +500,25 @@ No hardware was accessed; golden remains restored at 192.168.2.14. These checks
 prove logical combinational behavior at named signal boundaries, not timing
 or physical delivery. Next prepare a raw DFI read-data diagnostic during
 training to distinguish byte-4 sampling failure from write/strobe failure.
+
+### Sampled raw DFI training data (2026-10-13)
+
+`tools/build_ddr_software.py --trace-dfi` instruments a build-local copy of
+liblitedram's existing pattern check. It logs expected/actual 16-byte DFI
+phase data for module 4, first eight checks and every 128th check thereafter,
+with a hard 256-row cap. Default builds still compile the original source.
+`tools/analyze_ddr_dfi_trace.py` checks formatting and summarizes per-byte
+values/errors; exact-match, isolated-bit-error and malformed-input fixtures pass.
+
+A locked volatile-JTAG comparison used identical instrumented software on
+candidate and golden. Candidate again failed training and showed 14,776 byte
+errors only in lane 4; golden passed with all lanes clean. Candidate sampled
+256 raw phase rows, byte 4 had 60 distinct values; golden sampled 232 rows,
+byte 4 had 34 values. The candidate path is not frozen at 00/FF. Sampled
+training mismatches are expected at deliberately untrained scan settings:
+these counts do not establish whether write/strobe or read timing is faulty.
+Golden was restored and passed three complete 1-GiB BIST runs. Current IP:
+192.168.2.11. Shared ZC706 lock covered JTAG/UART/SSH/testing/restoration;
+no SD/QSPI writes. Evidence: `evidence/zc706/integrated-20261013/`.
+Next correlate byte-4 expected/actual bit sequences across phases and scan
+settings, then select a targeted write-vs-read timing experiment.
