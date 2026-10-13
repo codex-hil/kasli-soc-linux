@@ -1,0 +1,22 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "fixture_checks": "rotated byte, inverted substituted lane and duplicate rejection PASS",
+  "results": {
+    "candidate": {
+      "complete_bursts": 64,
+      "exact_same_lane_rotation_bursts": 0,
+      "exact_any_lane_rotation_bursts": 0,
+      "best_same_lane_bit_errors": 11,
+      "exact_independent_bit_rotation_bursts": 0
+    },
+    "golden": {
+      "complete_bursts": 58,
+      "exact_same_lane_rotation_bursts": 9,
+      "exact_any_lane_rotation_bursts": 9,
+      "best_same_lane_bit_errors": 0,
+      "exact_independent_bit_rotation_bursts": 9
+    }
+  },
+  "limits": "Only sampled untrained bursts; fits over eight beats can be accidental. Neither write-vs-read causality nor complete scan coverage is established."
+}

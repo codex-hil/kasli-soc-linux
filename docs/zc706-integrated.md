@@ -522,3 +522,20 @@ Golden was restored and passed three complete 1-GiB BIST runs. Current IP:
 no SD/QSPI writes. Evidence: `evidence/zc706/integrated-20261013/`.
 Next correlate byte-4 expected/actual bit sequences across phases and scan
 settings, then select a targeted write-vs-read timing experiment.
+
+### Raw byte-four burst correlation (2026-10-13)
+
+`tools/correlate_ddr_dfi_trace.py` groups four phases into eight-beat bursts,
+then tests all source lanes, cyclic beat shifts and inversion. Candidate has
+64 complete bursts with zero exact fits; its best same-lane rotation still
+has 11 bit errors. Even independent per-bit shift/inversion fits yield zero
+exact bursts. Golden has 58 complete bursts, including nine exact same-lane
+fits. These sampled settings include intentionally untrained states; this
+is not proof of write-vs-read causality or an exhaustive hardware scan.
+Synthetic rotated-byte, inverted substituted-lane and duplicate-rejection
+checks pass. Evidence: `dfi-correlation-summary.json` and compressed full
+correlation reports in `evidence/zc706/integrated-20261013/`.
+No hardware access occurred. Next implement a bounded module-4 write-DQS
+sweep together with read bitslip/delay scanning, using existing LiteDRAM
+training helpers in a build-local diagnostic copy; compare with golden
+under the shared board lock and restore the golden full BIST afterward.
