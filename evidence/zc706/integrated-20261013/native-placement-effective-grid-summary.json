@@ -1,0 +1,10 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "converted_cells": 63705,
+  "removed_existing_routes": true,
+  "input_sha256": "f4aa4137a03af7d133aac92011e3dfc5996d5c40e3d0ee5d3a5d387008177782",
+  "package_sha256": "414347f7357847e1e8e354853795e0e4f2a2c9b4bd586087fdb9dc75f8b8320c",
+  "tilegrid_sha256": "4a69cdca498a3f54fb952b4e5151a493594dd52b09b564708ddfacb694584545",
+  "output_sha256": "f5a1c60ef408e781055f02229d462cffde0abd8a81586ebdc3fd89c4478240b4"
+}

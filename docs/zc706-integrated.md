@@ -966,3 +966,22 @@ insufficient. Next obtain full effective per-tile site geometry/native BEL
 list, including unbonded peers, and validate against that list rather than
 guessing PAD index. Previous output remains unchanged; no successful corrected
 replay is claimed. No hardware access.
+
+### Effective grid resolves PAD geometry; per-tile variant check required
+
+Located exact generator overlay at
+`build/zc706-integrated/database/zynq7/xc7z045/tilegrid.json`. Unlike raw
+openXC7 grid, LIOB33_X0Y23 explicitly lists IOB_X0Y23=IOB33S and
+IOB_X0Y24=IOB33M. Using this grid resolves the previously rejected PAD
+without inventing peers. All 63705 physical BELs normalize, including the
+BRAM variant suffix, and replay advances to rejection of
+`IOBUF_8$subcell$OBUFT`, physical IOB_X1Y233, normalized
+`X266Y121/IOB_X0Y0.IOB18.OUTBUF_DCIEN`.
+
+Both bare and `~IOB18` local names occur in the binary string table. Global
+name membership is therefore insufficient: the base name exists elsewhere
+but not in this tile type. Need read native per-tile BEL tables (or query
+backend enumeration), select exact site variant there, and reject ambiguity.
+Effective-grid SHA and output SHA in native-placement-effective-grid-summary;
+replay-effective-grid.log records fail-closed rejection. No successful replay
+yet, no HW access. Normalizer remains an experimental diagnostic.
