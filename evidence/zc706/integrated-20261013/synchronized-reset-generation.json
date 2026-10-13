@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "serializer_count": 171,
+  "common_reset_net": "ddr_serdes_reset_sync",
+  "upstream_phy_modified": false,
+  "timing": "PENDING",
+  "physical_test": "NOT_RUN"
+}

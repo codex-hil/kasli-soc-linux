@@ -11,8 +11,34 @@ from reciprocal import ReciprocalCounter
 from wr_pll import WRPhase
 
 class IntegratedSoC(ADCDDRSoC):
-    def __init__(self, refclk="fclk"):
+    def __init__(self, refclk="fclk", ddr_sync_reset=False):
         super().__init__()
+        if ddr_sync_reset:
+            # One shared release edge for all DDR input/output serializers.
+            # Assertion remains asynchronous; deassertion waits two SYS edges.
+            raw = ResetSignal("sys") | self.ddrphy._rst.storage
+            first = Signal(reset=1, name="ddr_serdes_reset_first")
+            released = Signal(reset=1, name="ddr_serdes_reset_sync")
+            for name, source, destination in (
+                    ("ddr_reset_sync0", 0, first),
+                    ("ddr_reset_sync1", first, released)):
+                register = Instance("FDPE", name=name, p_INIT=1,
+                    i_C=ClockSignal("sys"), i_CE=1, i_PRE=raw,
+                    i_D=source, o_Q=destination)
+                register.attr.add(("ASYNC_REG", "TRUE"))
+                register.attr.add(("DONT_TOUCH", "TRUE"))
+                self.specials += register
+            changed = 0
+            for special in self.ddrphy._fragment.specials:
+                if isinstance(special, Instance) and special.of in ("ISERDESE2", "OSERDESE2"):
+                    for item in special.items:
+                        if isinstance(item, Instance.Input) and item.name == "RST":
+                            item.expr = released
+                            changed += 1
+            if changed != 171:
+                raise RuntimeError(f"Unexpected DDR serializer count: {changed}")
+            self.add_constant("DDR_SERDES_SYNC_RESET", 1)
+
         for bank, name, domain in ((16,'frequency','adc'),
                                   (17,'frequency2','adc2'),
                                   (18,'frequency_reference','sys')):
@@ -88,7 +114,8 @@ def main():
     p.add_argument('--board',choices=['zc706'],default='zc706')
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--refclk',choices=['fclk','si5324'],default='fclk')
-    a=p.parse_args(); soc=IntegratedSoC(a.refclk);soc.finalize()
+    p.add_argument("--ddr-sync-reset", action="store_true")
+    a=p.parse_args(); soc=IntegratedSoC(a.refclk, a.ddr_sync_reset);soc.finalize()
     a.output_dir.mkdir(parents=True,exist_ok=True)
     export_soc(soc,a.output_dir)
 

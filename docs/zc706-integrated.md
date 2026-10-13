@@ -712,3 +712,33 @@ Golden reloaded and passed three complete 1-GiB BIST runs, zero errors;
 Linux IP 192.168.2.29. Shared board lock covered all accesses/restoration.
 No SD/QSPI writes. Evidence: `dq-eye-reset-no-training-*` and
 `reset-no-training-*` in the 20261013 directory. Integrated DDR remains FAIL.
+
+### Experimental synchronized serializer reset build (2026-10-13)
+
+Opt-in `--ddr-sync-reset` on the integrated target replaces RST on all 171
+DDR ISERDESE2/OSERDESE2 instances with one shared two-FDPE synchronizer: async
+assert from SYS reset or PHY CSR reset, deassert after two SYS rising edges.
+Both registers use INIT=1, ASYNC_REG and DONT_TOUCH. Delay reload and fabric
+Bitslip reset retain their original behavior. Upstream LiteDRAM is unchanged;
+the experiment rewrites only this target's primitive inputs. Default target
+behavior is unchanged. This is a hypothesis test, not a qualified fix.
+
+RTL generation passed; all 171 serializer RST ports verified to share
+`ddr_serdes_reset_sync`, with both FDPE stages present. Evidence:
+`synchronized-reset-generation.json`. Full build started in isolated directory
+`build/zc706-integrated-reset/gateware`, log
+`build/zc706-integrated-reset-build.log`. Timing/bitstream and hardware tests
+remain PENDING/NOT_RUN. Build command:
+
+```sh
+python3 tools/environment.py build/python/bin/python tools/build_pl.py \
+  --board zc706 --design integrated --ddr-sync-reset --router router2 \
+  --output-dir build/zc706-integrated-reset/gateware \
+  --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+```
+
+No hardware accessed in this step. Board retains qualified golden at
+192.168.2.29 from the preceding restoration. Next inspect completed setup/hold
+results and reset routing before a locked candidate/golden comparison. A whole
+design rebuild also changes placement/routing, so any improvement will require
+further controls before attributing it exclusively to reset synchronization.

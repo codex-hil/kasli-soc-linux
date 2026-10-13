@@ -101,9 +101,12 @@ def main():
     p.add_argument("--wr-pll", action="store_true", help="Add original WR DDMTD phase taggers to the clock-only target")
     p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
+    p.add_argument("--ddr-sync-reset", action="store_true", help="Experimental shared serializer reset release (integrated only)")
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
+    if args.ddr_sync_reset and args.design != "integrated":
+        p.error("--ddr-sync-reset requires --design integrated")
     args.sfp_refclk = args.sfp_refclk or ("fclk" if args.design == "integrated" else "si5324")
     if args.wr_pll and args.design != "frequency":
         p.error("--wr-pll requires --design frequency")
@@ -120,6 +123,8 @@ def main():
         p.error("FMC ADC target requires ZC706")
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py", "integrated": "zc706_integrated.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
+    if args.ddr_sync_reset:
+        target_command += ["--ddr-sync-reset"]
     if args.wr_pll:
         target_command += ["--wr-pll", "--wr-pll-cards", str(args.wr_pll_cards)]
     if args.design in ("sfp", "integrated"):
@@ -281,6 +286,7 @@ def main():
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
+        "ddr_serdes_sync_reset": args.ddr_sync_reset,
         "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,
         "adc_cards": 2 if args.design in ("adc-ddr", "integrated") else args.cards if args.design in ("fmc-adc", "frequency") else None,
         "reciprocal": args.reciprocal or args.design == "integrated",
