@@ -1027,3 +1027,11 @@ LUT route-through compatibility must be checked before assembly/testing.
 Current status ROUTING; no hardware access or bitstream programming. Next
 inspect completion, verify exact paths and timing, restore 6-GiB container
 limit, then assemble only if qualified.
+
+Immediate full replay result: timing analysis rejects combinational loops
+in WR phase tracker logic before routing. Full-route outcome FAIL, no
+qualified bitstream produced. Container returned to 6 GiB. Reference binding
+remains successful but does not establish replayed packed logic correctness.
+Next run the same normalized snapshot without preroute to separate packed
+logic restoration from clock route-through interactions. Evidence
+`golden-clock-full-route-failure.log`. No hardware access.
