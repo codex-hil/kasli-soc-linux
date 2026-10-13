@@ -888,3 +888,22 @@ the ordinary vector exception. Next collect the concrete cell/BEL name at
 JSON restoration (instrumented source if needed), then stack trace at the
 later indexing failure. Evidence `replay-gdb-*` and `replay-absolute-paths.log`.
 No hardware access, no bitstream writes, golden remains restored.
+
+### BEL naming mismatch identified in replay investigation (2026-10-13)
+
+Source inspection identifies a concrete mismatch: generic Himbaechel
+`Arch::getBelByName` expects two components, first an indexed chipdb tile name
+(e.g. X258Y147), second a tile-local BEL name (MMCME2_ADV_X0Y0.MMCME2_ADV).
+Existing successful minimal replay uses that representation. Full exported
+netlists contain physical site form (MMCME2_ADV_X1Y4/MMCME2_ADV or
+SLICE_X146Y215/A6LUT). The first component is not a generic tile-name key,
+consistent with debugger dict::at in getBelByName. This is a replay-format
+incompatibility; it is not evidence that the generated hardware bitstream
+is wrong.
+
+An attempted offline normalization from upstream tilegrid was deliberately
+aborted on unmapped IOB_X0Y24 rather than guessing: the HR-converted chipdb
+uses transformed IOB sites absent from the original tilegrid. No candidate
+JSON was produced or routed. Next use the exact effective chipdb site mapping
+(or backend lookup/export metadata) for validated bidirectional conversion;
+retain explicit rejection for missing/ambiguous sites. All work was offline.
