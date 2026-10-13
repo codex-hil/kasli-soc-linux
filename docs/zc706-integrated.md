@@ -826,3 +826,28 @@ Next compare upstream SYS and DDR4x clock branches and their relative phase,
 particularly the changed MMCM-to-BUFG cascade routing versus golden's fabric
 path. A local ILOGIC configuration difference is not supported by these
 artifacts; common clock distribution remains an unproved hypothesis.
+
+### Upstream DDR clock tree comparison (2026-10-13)
+
+New SHA-recording `compare_ddr_clock_tree.py` compares four unique routed
+DDR clock nets and fixed-site MMCM parameters. MMCM parameters are identical
+to golden for both failing candidates. MMCM-to-BUFG SYS route changes from
+23 to 7 PIPs; DDR4x route from 22 to 7 (fabric versus dedicated cascade).
+The downstream DDR4x net has 839 PIPs in every image: exactly 12 removed/12
+added versus golden. Changed HROW/IOI selections occur at grid Y26/Y78,
+using index 11 in golden, 4 in original candidate, 3 in reset candidate.
+Byte-four endpoints are grid Y92–102; the changed IOI branches are outside
+that byte's local tiles. Thus those two changed local branches alone do
+not explain its intra-byte groups. Their broader effects are not measured.
+
+SYS net fanout includes fabric consumers and changes massively on integration:
+counts 28264 golden, 32257 original, 36412 reset candidate. Reports cap detailed
+changes at 256 and explicitly flag truncation; do not interpret these whole-net
+counts as a clock-only skew estimate. Evidence `clock-tree-original.json` and
+`clock-tree-sync-reset.json`; no hardware accessed.
+
+Next prepare a controlled clock-route experiment restoring golden MMCM→BUFG
+paths while retaining integrated consumers, or an equivalent measured phase
+comparison. This requires audited routing constraints/tool support rather than
+blind bitstream edits. Current evidence still does not prove a clock or
+toolchain root cause; golden remains physically validated.
