@@ -1,0 +1,19 @@
+{
+  "hardware_access": true,
+  "qualification": false,
+  "current_host": "192.168.2.15",
+  "restored_golden_full_bist": "PASS",
+  "results": {
+    "candidate-dqs-sweep": {
+      "result": 0,
+      "tested": 8192,
+      "best_single_seed_bit_errors": 10
+    },
+    "golden-dqs-sweep": {
+      "result": 1,
+      "tested": 65,
+      "best_single_seed_bit_errors": 0
+    }
+  },
+  "limits": "Only write-DQS/read settings varied; write-DQ delay/bitslip and global timings retained. No passing combination does not identify which path is faulty."
+}

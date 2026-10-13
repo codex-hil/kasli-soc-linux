@@ -154,11 +154,21 @@ static int diagnose_controls(void) {
     return errors == 0;
 }
 
+#ifdef SDRAM_LAB_DQS_SWEEP
+static uint64_t lab_deadline;
+int sdram_lab_timed_out(void) { return now_ns() >= lab_deadline; }
+extern int sdram_lab_dqs_sweep(void);
+#endif
+
 int main(int argc, char **argv) {
+    int sweep = 0;
+#ifdef SDRAM_LAB_DQS_SWEEP
+    sweep = argc == 2 && !strcmp(argv[1], "--sweep-dqs");
+#endif
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
     int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
     int controls = argc == 2 && !strcmp(argv[1], "--diagnose-controls");
-    if (argc != 1 && !init_only && !diagnostic && !controls) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls]\n",argv[0]); return 2; }
+    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs (diagnostic build)]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -174,6 +184,14 @@ int main(int argc, char **argv) {
     }
     pl_ram=map(fd,16*1024*1024,0x80000000);
     int initialized = sdram_init();
+#ifdef SDRAM_LAB_DQS_SWEEP
+    if (sweep) {
+        printf("DQS_SWEEP initial_training=%d; retaining other lanes and write-DQ settings\n", initialized);
+        lab_deadline = now_ns() + 120000000000ULL;
+        int result = sdram_lab_dqs_sweep();
+        return result == 1 ? 0 : 1;
+    }
+#endif
     if (diagnostic) { int clean = diagnose_errors(); return initialized && clean ? 0 : 1; }
     if(!initialized) { fprintf(stderr,"FAIL: upstream SDRAM initialization/memtest\n"); return 1; }
     if(!address_test(fd)) return 1;

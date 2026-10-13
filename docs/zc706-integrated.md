@@ -539,3 +539,28 @@ No hardware access occurred. Next implement a bounded module-4 write-DQS
 sweep together with read bitslip/delay scanning, using existing LiteDRAM
 training helpers in a build-local diagnostic copy; compare with golden
 under the shared board lock and restore the golden full BIST afterward.
+
+### Physical byte-four DQS/read sweep (2026-10-13)
+
+`tools/build_ddr_software.py --dqs-sweep` appends the diagnostic fragment
+`software/pl_ddr/dqs_sweep.c.inc` to a build-local liblitedram copy. The new
+`pl-ddr-test --sweep-dqs` option initializes with ordinary training, then
+varies only module-4 write-DQS across 32 offsets, read bitslip across 8 offsets
+and read delay across 32 taps. Write-DQ settings and other lanes are retained.
+The scan has a 120-second deadline, switches back to hardware control on every
+normal exit, and validates any one-seed match against all three training seeds.
+Offsets are relative to the PHY reset settings, not absolute DQS tap numbers.
+It is diagnostic only; modified delays require retraining/restoration afterward.
+
+Under one shared ZC706 lock, candidate exhausted all 8192 combinations without
+a passing setting; best single-seed result was 10 bit errors. Identical software
+found a three-seed passing setting on golden after 65 tests (DQS reset offset 0,
+read bitslip offset 2, read delay 0). Thus the scan detects a working window on
+the reference, but a DQS-only adjustment does not repair the candidate failure.
+Golden was reloaded and passed three complete 1-GiB BIST runs; current IP is
+192.168.2.15. No SD/QSPI writes. Evidence: `dqs-sweep-hardware-result.json`,
+`dqs-sweep-summary.json` and compressed logs in the 20261013 evidence directory.
+Reproducer: `tools/test_ddr_reference_hardware.py --host <current-IP>
+--diagnostic dqs-sweep --software <diagnostic-pl-ddr-test> --output <directory>`.
+Next include write-DQ delay in the bounded sweep while retaining golden
+comparison and restoration, since that dimension was explicitly held fixed.

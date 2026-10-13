@@ -706,3 +706,7 @@ DDR diagnostic update (2026-10-13): sampled raw DFI data reproduced the isolated
 byte-4 failure and showed changing input values. Golden was restored and again
 passed three full-capacity BIST runs; current management IP is 192.168.2.11.
 The integrated DDR failure remains unresolved.
+
+Byte-4 DQS/read sweep (2026-10-13): all 8192 candidate combinations failed;
+the same diagnostic found a valid golden setting after 65 tests. Golden was
+restored and full-capacity BIST passed; current management IP is 192.168.2.15.

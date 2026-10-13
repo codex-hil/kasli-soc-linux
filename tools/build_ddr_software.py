@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output-dir',type=Path,default=ROOT/'build/zc706-ddr')
 parser.add_argument('--cmd-delay',type=int,choices=range(32),help='Diagnostic override of upstream clock/command tap selection')
 parser.add_argument('--trace-dfi',action='store_true',help='Instrument an isolated liblitedram copy with bounded byte-four raw DFI logs')
+parser.add_argument('--dqs-sweep',action='store_true',help='Build bounded byte-four DQS/read sweep diagnostic')
 args=parser.parse_args()
 OUT = args.output_dir.resolve()
 SW = ROOT/'upstream/litex/litex/soc/software'
@@ -45,9 +46,15 @@ if args.trace_dfi:
     text = text.replace(anchor, anchor + trace, 1)
     sdram_source = OUT/'software/sdram-dfi-trace.c'
     sdram_source.write_text(text)
+if args.dqs_sweep:
+    text = sdram_source.read_text()
+    text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text()
+    sdram_source = OUT/'software/sdram-dqs-sweep.c'
+    sdram_source.write_text(text)
 subprocess.run([ROOT/'build/zc706/buildroot/host/bin/arm-linux-gcc', '-std=gnu11', '-O2', '-static',
     '-D_FILE_OFFSET_BITS=64', '-DMEMTEST_DATA_SIZE=262144', '-ffunction-sections', '-fdata-sections',
     *([] if args.cmd_delay is None else [f'-DSDRAM_PHY_CMD_DELAY={args.cmd_delay}']),
+    *(['-DSDRAM_LAB_DQS_SWEEP'] if args.dqs_sweep else []),
     '-Wl,--gc-sections', '-I'+str(ROOT/'software/pl_ddr/include'),
     '-I'+str(OUT/'software/include'), '-I'+str(OUT/'gateware/include'), '-I'+str(SW),
     ROOT/'software/pl_ddr/main.c', sdram_source, SW/'liblitedram/accessors.c',
