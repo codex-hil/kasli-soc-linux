@@ -50,11 +50,18 @@ if args.dqs_sweep:
     text = sdram_source.read_text()
     anchor = '\t\tcsr_rd_buf_uint8(sdram_dfii_pix_rddata_addr(p), tst, DFII_PIX_DATA_BYTES);\n'
     assert text.count(anchor) == 1
-    text = 'static int sdram_lab_detail_active;\n' + text
+    text = 'static int sdram_lab_detail_active;\nstatic unsigned sdram_lab_bit_errors[8], sdram_lab_samples;\n' + text
     text = text.replace(anchor, anchor + r"""
-        if (module == 4 && sdram_lab_detail_active) {
+        if (module == 4 && sdram_lab_detail_active == 1) {
             printf("DQ_DETAIL seed=%u phase=%d expected=%02x%02x actual=%02x%02x\n",
                 seed,p,prs[p][4],prs[p][12],tst[4],tst[12]);
+        }
+        if (module == 4 && sdram_lab_detail_active == 2) {
+            for (unsigned bit=0;bit<8;bit++) {
+                sdram_lab_bit_errors[bit] += ((prs[p][4]^tst[4]) >> bit) & 1;
+                sdram_lab_bit_errors[bit] += ((prs[p][12]^tst[12]) >> bit) & 1;
+            }
+            sdram_lab_samples += 2;
         }
 """, 1)
     text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text()

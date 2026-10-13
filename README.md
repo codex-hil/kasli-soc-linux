@@ -719,3 +719,7 @@ Per-DQ diagnostic (2026-10-13): candidate best-setting errors affect five of
 DQ32..39; DQ32/36/38 matched all 384 sampled bits each. Golden was restored and
 full BIST passed; current IP is 192.168.2.21. An intermittent USB claim failure
 was recovered and the wrapper's failed-boot restoration path was corrected.
+
+Per-DQ eye scan (2026-10-13): every candidate DQ has a passing window, but byte 4
+splits into two incompatible bitslip groups. Golden has 23 common passing
+settings and again passed full BIST after restoration; IP 192.168.2.23.

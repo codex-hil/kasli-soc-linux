@@ -613,3 +613,29 @@ Evidence: `dq-detail-*` files in the 20261013 directory.
 Next compare physical sites and DDR clock branches for failing versus passing
 DQ bits, and obtain a per-bit eye map to assess whether their timing windows
 fail to overlap. Current fixed-setting counts do not establish write/read cause.
+
+### Physical per-DQ read eyes expose incompatible beat alignment (2026-10-13)
+
+Diagnostic `--dq-eye` fixes write-DQ offset 0/write-DQS offset 1 and scans all
+8 read bitslips × 32 read taps. At each point it runs three seeds four times:
+96 sampled bits per DQ. The build-local pattern hook accumulates per-bit errors;
+`tools/analyze_ddr_dq_eye.py` requires all 256 distinct points and rejects
+missing/duplicate data. Known-window and completeness fixtures pass.
+
+Candidate has individual passing windows on every DQ, but no common setting:
+DQ32/37/39 pass at bitslip offsets 2–3, while DQ33/34/35/36/38 pass at 4–5.
+Golden has all eight DQ passing at 2–3 with 23 common zero-error settings.
+This exposes incompatible beat alignment inside candidate byte 4 rather than
+absence of a usable input eye on every bit. Finite sample windows remain
+laboratory diagnostics, not full DDR qualification. Clock/reset alignment is
+now a hypothesis; cause has not been proved. The passing/failing groups are
+not simply the two halves of each physical I/O tile.
+
+Both tests and golden restoration held the shared board lock. Golden reloaded
+and passed three complete 1-GiB BIST runs; current IP 192.168.2.23. No SD/QSPI
+writes. Evidence: `dq-eye-*` files in the 20261013 directory. The measured eye
+mode did not update the older final `best_errors` field; use the per-point
+counters/summary instead. That scalar logging omission was corrected afterward
+and compiled separately. Next repeat PHY initialization/eye measurement within
+one candidate load to determine whether the groups vary with reset release,
+before changing physical clock/reset implementation.

@@ -163,13 +163,13 @@ extern int sdram_lab_dqs_sweep(int sweep_dq);
 int main(int argc, char **argv) {
     int sweep = 0, sweep_dq = 0;
 #ifdef SDRAM_LAB_DQS_SWEEP
-    sweep_dq = argc == 2 && !strcmp(argv[1], "--dq-detail") ? 2 : (argc == 2 && !strcmp(argv[1], "--sweep-dq-dqs"));
+    sweep_dq = argc == 2 && !strcmp(argv[1], "--dq-eye") ? 3 : (argc == 2 && !strcmp(argv[1], "--dq-detail") ? 2 : (argc == 2 && !strcmp(argv[1], "--sweep-dq-dqs")));
     sweep = sweep_dq || (argc == 2 && !strcmp(argv[1], "--sweep-dqs"));
 #endif
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
     int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
     int controls = argc == 2 && !strcmp(argv[1], "--diagnose-controls");
-    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs|--sweep-dq-dqs|--dq-detail (diagnostic build)]\n",argv[0]); return 2; }
+    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs|--sweep-dq-dqs|--dq-detail|--dq-eye (diagnostic build)]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
