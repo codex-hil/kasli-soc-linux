@@ -61,6 +61,15 @@ def prepare(out=None):
         setup_resources();''')
     (out/'router2.cc').write_text(router2)
     xilinx = (base.parent/'source/himbaechel/uarch/xilinx/xilinx.cc').read_text()
+    guard = 'void XilinxImpl::notifyBelChange(BelId bel, CellInfo *cell)\n{'
+    assert xilinx.count(guard) == 1
+    xilinx = xilinx.replace(guard, guard + r'''
+    if (bel == BelId()) {
+        auto attr = cell->attrs.find(ctx->id("NEXTPNR_BEL"));
+        log_error("Invalid restored BEL: cell=%s bel=%s\n", ctx->nameOf(cell),
+            attr == cell->attrs.end() ? "<missing>" : attr->second.as_string().c_str());
+    }
+''', 1)
     xilinx = xilinx.replace('void XilinxImpl::preRoute()\n{', 'void XilinxImpl::preRoute()\n{\n    bool loading_preplaced = !cell_tags_set;', 1)
     xilinx = xilinx.replace('    find_source_sink_locs();', r'''    int restored_clocks=0;
     for (auto &entry : ctx->nets) {

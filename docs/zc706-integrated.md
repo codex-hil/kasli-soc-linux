@@ -931,3 +931,19 @@ Reproduce in project environment with tool arguments:
 `--package build/zc706-integrated/chipdb-cascade-hr/zynq7/xc7z045ffg900-2/package_pins.csv`,
 `--output build/zc706-integrated-golden-clock/native-placement.json`.
 All work offline; no hardware changes.
+
+### Native placement exception precisely localized (2026-10-13)
+
+GDB breakpoint on std::__throw_out_of_range_fmt with the normalized snapshot
+identifies XilinxImpl::notifyBelChange → tile_status.at(bel.tile), reached
+from Arch::bindBel during BaseCtx::attributesToArchInfo. bel.tile is -1.
+A native BEL name resolved to invalid BelId and was bound without validation.
+This is a concrete replay error path, distinct from hardware DDR failure.
+Stack trace: native-placement-vector-backtrace.log.
+
+Added explicit invalid-BEL rejection to isolated backend generator, logging
+cell name and NEXTPNR_BEL instead of vector exception. Backend compilation
+started, log build/zc706-integrated-golden-clock/guard-build.log; regression
+and concrete rejected-name capture remain PENDING. This is diagnostic guard,
+not a mapping repair. Next replay with rebuilt backend and fix only the
+identified mapping after checking the binary database. No HW access.

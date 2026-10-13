@@ -1,0 +1,21 @@
+Breakpoint 1 at 0x15b90
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Breakpoint 1, 0x00007f662fca4465 in std::__throw_out_of_range_fmt(char const*, ...) () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#0  0x00007f662fca4465 in std::__throw_out_of_range_fmt(char const*, ...) () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#1  0x00006357ebce73fb in std::vector<nextpnr_himbaechel::XilinxImpl::TileStatus, std::allocator<nextpnr_himbaechel::XilinxImpl::TileStatus> >::_M_range_check (this=<optimized out>, __n=18446744073709551615) at /usr/include/c++/14/bits/stl_vector.h:1160
+#2  std::vector<nextpnr_himbaechel::XilinxImpl::TileStatus, std::allocator<nextpnr_himbaechel::XilinxImpl::TileStatus> >::at (this=<optimized out>, __n=18446744073709551615) at /usr/include/c++/14/bits/stl_vector.h:1182
+#3  nextpnr_himbaechel::XilinxImpl::notifyBelChange (this=<optimized out>, bel=..., cell=0x635850009840) at /work/build/zc706-integrated/nextpnr/xilinx.cc:246
+#4  0x00006357ebde9130 in nextpnr_himbaechel::Arch::bindBel (this=0x63582275b490, bel=..., cell=0x635850009840, strength=nextpnr_himbaechel::STRENGTH_WEAK) at /work/build/zc706-ddr/nextpnr-source/himbaechel/arch.h:708
+#5  nextpnr_himbaechel::BaseCtx::attributesToArchInfo (this=0x63582275b490) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:224
+#6  0x00006357ebecf3a4 in nextpnr_himbaechel::(anonymous namespace)::GenericFrontend<nextpnr_himbaechel::JsonFrontendImpl>::operator() (this=0x7fffdd1f8390) at /work/build/zc706-ddr/nextpnr-source/frontend/frontend_base.h:142
+#7  nextpnr_himbaechel::parse_json (in=..., filename="/work/build/zc706-integrated-golden-clock/native-placement.json", ctx=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/frontend/json_frontend.cc:206
+#8  nextpnr_himbaechel::CommandHandler::executeMain(std::unique_ptr<nextpnr_himbaechel::Context, std::default_delete<nextpnr_himbaechel::Context> >) [clone .constprop.0] (this=this@entry=0x7fffdd1f8730, ctx=std::unique_ptr<nextpnr_himbaechel::Context> = {...}) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:682
+#9  0x00006357ebd07885 in nextpnr_himbaechel::CommandHandler::exec (this=0x7fffdd1f8730) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:815
+#10 main (argc=<optimized out>, argv=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/himbaechel/main.cc:102
+#4  0x00006357ebde9130 in nextpnr_himbaechel::Arch::bindBel (this=0x63582275b490, bel=..., cell=0x635850009840, strength=nextpnr_himbaechel::STRENGTH_WEAK) at /work/build/zc706-ddr/nextpnr-source/himbaechel/arch.h:708
+708	        uarch->notifyBelChange(bel, cell);
+No locals.
