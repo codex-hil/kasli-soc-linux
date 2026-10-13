@@ -985,3 +985,23 @@ backend enumeration), select exact site variant there, and reject ambiguity.
 Effective-grid SHA and output SHA in native-placement-effective-grid-summary;
 replay-effective-grid.log records fail-closed rejection. No successful replay
 yet, no HW access. Normalizer remains an experimental diagnostic.
+
+### Full placement replay reaches controlled exit (2026-10-13)
+
+Normalizer now reads exact schema-6 chipdb using read-only mmap, pinned
+constids plus database strings, per-instance tile type and that type's BEL
+table. Variant selection checks the specific tile, resolving both lost BRAM
+and IOB18 suffixes. Explicit schema/const-ID checks reject incompatible DBs.
+Generic tile names reconstruct prefix+grid coordinates per Arch::init_tiles.
+No global string-name heuristic remains.
+
+All 63705 physical-site BELs normalize; two native pseudo constants retained.
+Full snapshot frontend/placement restoration succeeds, backend restores 27
+native clock constraints and reaches the deliberate diagnostic exit
+`Clock diagnostic complete; intentionally skipping router`. Exit code 1
+is expected from this guard, not a route/timing PASS. This qualifies only
+placement/clock-metadata replay; routes were cleared and no bitstream built.
+Evidence native-placement-per-tile-summary/replay records complete digests.
+Next convert golden preroute source wire names, bind its two MMCM→BUFG
+paths with collision checks, and inspect resulting route/timing. No hardware
+access; physically qualified golden remains untouched.

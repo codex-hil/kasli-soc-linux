@@ -5,7 +5,8 @@ import csv
 import hashlib
 import json
 import re
-import subprocess
+import struct
+import mmap
 from pathlib import Path
 
 p=argparse.ArgumentParser(description=__doc__)
@@ -31,9 +32,29 @@ for tile in grid.values():
         for site,x,y in rows:
             if site in sites:raise ValueError('Duplicate site '+site)
             sites[site]=f"X{tile['grid_x']}Y{tile['grid_y']}/{prefix}_X{x-minx}Y{y-miny}"
-proc=subprocess.Popen(['strings',str(a.chipdb)],stdout=subprocess.PIPE,text=True)
-local_names={line.strip() for line in proc.stdout if re.match(r'^[A-Z0-9_]+_X[0-9]+Y[0-9]+\.',line)}
-if proc.wait():raise ValueError('chipdb string extraction failed')
+chipfile=a.chipdb.open('rb')
+data=mmap.mmap(chipfile.fileno(),0,access=mmap.ACCESS_READ)
+u32=lambda pos:struct.unpack_from('<I',data,pos)[0]
+rel=lambda pos:pos+struct.unpack_from('<i',data,pos)[0]
+root=rel(0)
+if (u32(root),u32(root+4))!=(0x00ca7ca7,6):raise ValueError('Unsupported chipdb schema')
+const=rel(root+76);known=u32(const);strings=rel(const+4)
+constids=Path(__file__).resolve().parents[1]/'upstream/nextpnr/himbaechel/uarch/xilinx/constids.inc'
+names=['']+[line.strip()[2:-1].strip() for line in constids.read_text().splitlines() if line.strip().startswith('X(')]
+if len(names)!=known:raise ValueError('Const ID mismatch')
+for i in range(u32(const+8)):
+    ptr=rel(strings+4*i);names.append(data[ptr:data.find(b'\0',ptr)].decode())
+types=rel(root+28);tiles=rel(root+36);tile_names={}
+for i in range(u32(root+40)):
+    pos=tiles+16*i;width=u32(root+8)
+    tile_names[f'{names[u32(pos)]}X{i%width}Y{i//width}']=u32(pos+4)
+cache={}
+def bel_names(tile):
+    index=tile_names[tile]
+    if index not in cache:
+        pos=types+40*index;ptr=rel(pos+4)
+        cache[index]={names[u32(ptr+36*i)] for i in range(u32(pos+8))}
+    return cache[index]
 design=json.loads(a.input.read_text());module=design['modules']['top'];count=0
 for name,cell in module['cells'].items():
     bel=cell['attributes'].get('NEXTPNR_BEL')
@@ -44,6 +65,7 @@ for name,cell in module['cells'].items():
     if site not in sites:raise ValueError('Unknown site '+site)
     tile,local=sites[site].split('/')
     local += '.'+kind
+    local_names=bel_names(tile)
     if local not in local_names:
         variants=sorted(n for n in local_names if n.startswith(local+'~'))
         if len(variants)!=1:raise ValueError('Missing/ambiguous native BEL '+local)
@@ -54,6 +76,7 @@ for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')
 report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_existing_routes':True,
         'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),
+        'chipdb_sha256':hashlib.sha256(data).hexdigest(),
         'package_sha256':hashlib.sha256(a.package.read_bytes()).hexdigest(),
         'tilegrid_sha256':hashlib.sha256(a.tilegrid.read_bytes()).hexdigest(),
         'output_sha256':hashlib.sha256(a.output.read_bytes()).hexdigest()}
