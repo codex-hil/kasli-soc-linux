@@ -739,3 +739,8 @@ DDR reset control (2026-10-13): PHY reset plus JEDEC initialization reproduces
 DQ35 group movement without retraining, while golden remains stable. Root
 cause remains unproved. Golden restored, three full 1-GiB BIST passes clean;
 Linux IP 192.168.2.29. Details and evidence in the integration log.
+
+DDR reset experiment (2026-10-13): timing-clean synchronized serializer reset
+bitstream physically tested; byte-four split alignment persists. Integrated
+DDR remains FAIL. Golden restored with three clean full 1-GiB BIST passes;
+Linux IP 192.168.2.10. Evidence and next clock-path comparison in integration log.

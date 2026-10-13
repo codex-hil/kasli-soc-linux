@@ -781,3 +781,26 @@ command with `KASLI_BUILD_MEMORY=8g` to reproduce. All prior artifacts kept.
 No HW accessed; golden remains the last validated board image. Next inspect
 retry completion, return container to default memory after the build, then
 perform locked hardware tests only if setup/hold and manifest validate.
+
+### Synchronized-reset candidate physically fails DDR (2026-10-13)
+
+The 8-GiB seed-2 retry completed bitstream assembly with SYS 83.82 MHz and
+zero final hold violations (13 buffers). SHA-256:
+`bd66e49ac89e64d1690fb021b8bea12ea35e0a341767f0a9dd158c05c435d3a2`.
+Container memory returned to default 6 GiB after completion.
+
+Locked hardware test booted Linux and ran one trained eye scan plus two
+PHY-reset/JEDEC/timing-replay scans. All three have DQ32–36/38 passing
+at bitslip 4–5, DQ37/39 at 2–3, zero common settings. Shared two-stage
+serializer reset release therefore does not fix byte-four alignment. No
+movement occurred in these three scans, insufficient to establish whether
+synchronization improves repeatability. Golden control has a common eye;
+restored golden passes three complete 1-GiB BIST runs with zero errors.
+Current Linux IP 192.168.2.10. No SD/QSPI writes; shared board lock held
+through all transports, reset/programming and restoration.
+
+Evidence: `sync-reset-*` files in the 20261013 directory. This experiment
+remains optional and unqualified; original baseline is preserved. Next
+compare routed SYS/DDR4x clock pin paths and emitted ILOGIC clock polarity
+for DQ37/39 versus the other six bits, using golden as the control. Reset
+release alone is no longer a sufficient repair hypothesis.

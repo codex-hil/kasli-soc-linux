@@ -1,0 +1,228 @@
+{
+  "qualification": false,
+  "experiment": "Synchronized serializer reset candidate, trained scan plus two reset/JEDEC/replay scans",
+  "runs": {
+    "golden-dq-eye-reset-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "golden-dq-eye-reset-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "golden-dq-eye-reset-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "candidate-dq-eye-reset-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-reset-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-reset-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    }
+  }
+}
