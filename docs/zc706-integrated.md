@@ -804,3 +804,25 @@ remains optional and unqualified; original baseline is preserved. Next
 compare routed SYS/DDR4x clock pin paths and emitted ILOGIC clock polarity
 for DQ37/39 versus the other six bits, using golden as the control. Reset
 release alone is no longer a sufficient repair hypothesis.
+
+### Byte-four clock endpoint comparison (2026-10-13)
+
+Added `tools/compare_ddr_byte_clocks.py`: it requires exactly one routed
+ISERDES at each known DQ32–39 physical site and nonempty local clock routing
+records, records input SHA-256, compares packed parameters and SITEWIRE
+clock endpoints for CLK/CLKB/CLKDIV. Both original integrated candidate and
+synchronized-reset candidate have zero differences against golden. This
+includes clock inversion parameters; no local endpoint polarity discrepancy
+separates the failing and passing DQ groups. This tool does not establish
+upstream clock-route/skew equivalence or physical bitstream correctness.
+
+Full existing static comparison for the synchronized-reset candidate also
+finds all 528 DDR I/O BELs/types/parameters identical, and all 4452 static
+RIOB/RIOI features identical to golden. Evidence: `byte-clock-original.json`,
+`byte-clock-sync-reset.json`, `sync-reset-static-comparison.json`. No HW
+access this step. Golden remains the last restored/qualified image.
+
+Next compare upstream SYS and DDR4x clock branches and their relative phase,
+particularly the changed MMCM-to-BUFG cascade routing versus golden's fabric
+path. A local ILOGIC configuration difference is not supported by these
+artifacts; common clock distribution remains an unproved hypothesis.

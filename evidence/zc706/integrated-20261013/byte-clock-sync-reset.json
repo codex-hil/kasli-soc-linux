@@ -1,0 +1,1232 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "golden": {
+    "sha256": "cfadd0928aee420b4b209200468a9526de431ee1e8761466c962e9743a9fd800",
+    "rows": [
+      {
+        "dq": 32,
+        "site": "ILOGIC_X1Y255",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLK",
+                "X265Y98/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKB",
+                "X265Y98/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLK",
+                "X265Y98/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKB",
+                "X265Y98/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKDIV",
+                "X265Y98/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKDIVINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 33,
+        "site": "ILOGIC_X1Y253",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLK",
+                "X265Y100/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKB",
+                "X265Y100/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLK",
+                "X265Y100/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKB",
+                "X265Y100/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKDIV",
+                "X265Y100/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKDIVINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 34,
+        "site": "ILOGIC_X1Y251",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLK",
+                "X265Y102/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKB",
+                "X265Y102/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKBINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLK",
+                "X265Y102/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKB",
+                "X265Y102/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKBINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKDIV",
+                "X265Y102/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKDIVINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 35,
+        "site": "ILOGIC_X1Y259",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLK",
+                "X265Y94/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKB",
+                "X265Y94/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLK",
+                "X265Y94/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKB",
+                "X265Y94/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKDIV",
+                "X265Y94/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKDIVINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 36,
+        "site": "ILOGIC_X1Y256",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLK",
+                "X265Y98/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKB",
+                "X265Y98/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLK",
+                "X265Y98/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKB",
+                "X265Y98/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKDIV",
+                "X265Y98/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKDIVINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 37,
+        "site": "ILOGIC_X1Y254",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLK",
+                "X265Y100/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKB",
+                "X265Y100/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLK",
+                "X265Y100/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKB",
+                "X265Y100/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKDIV",
+                "X265Y100/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKDIVINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 38,
+        "site": "ILOGIC_X1Y260",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLK",
+                "X265Y94/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKB",
+                "X265Y94/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLK",
+                "X265Y94/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKB",
+                "X265Y94/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKDIV",
+                "X265Y94/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKDIVINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 39,
+        "site": "ILOGIC_X1Y262",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLK",
+                "X265Y92/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKB",
+                "X265Y92/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKBINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLK",
+                "X265Y92/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKB",
+                "X265Y92/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKBINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKDIV",
+                "X265Y92/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKDIVINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "candidate": {
+    "sha256": "f4aa4137a03af7d133aac92011e3dfc5996d5c40e3d0ee5d3a5d387008177782",
+    "rows": [
+      {
+        "dq": 32,
+        "site": "ILOGIC_X1Y255",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLK",
+                "X265Y98/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKB",
+                "X265Y98/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLK",
+                "X265Y98/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKB",
+                "X265Y98/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKDIV",
+                "X265Y98/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y255/CLKDIVINV_OUT",
+                "X265Y98/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 33,
+        "site": "ILOGIC_X1Y253",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLK",
+                "X265Y100/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKB",
+                "X265Y100/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLK",
+                "X265Y100/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKB",
+                "X265Y100/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKDIV",
+                "X265Y100/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y253/CLKDIVINV_OUT",
+                "X265Y100/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 34,
+        "site": "ILOGIC_X1Y251",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLK",
+                "X265Y102/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKB",
+                "X265Y102/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKBINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLK",
+                "X265Y102/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKB",
+                "X265Y102/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKBINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKDIV",
+                "X265Y102/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y251/CLKDIVINV_OUT",
+                "X265Y102/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 35,
+        "site": "ILOGIC_X1Y259",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLK",
+                "X265Y94/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKB",
+                "X265Y94/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLK",
+                "X265Y94/ILOGIC_X0Y0.CLK/IOI_ILOGIC1_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKB",
+                "X265Y94/ILOGIC_X0Y0.CLKB/IOI_ILOGIC1_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKBINV_OUT/ILOGIC_X0Y0.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKINV_OUT/ILOGIC_X0Y0.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKDIV",
+                "X265Y94/ILOGIC_X0Y0.CLKDIV/IOI_ILOGIC1_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y259/CLKDIVINV_OUT",
+                "X265Y94/ILOGIC_X0Y0.CLKDIVINV_OUT/ILOGIC_X0Y0.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 36,
+        "site": "ILOGIC_X1Y256",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLK",
+                "X265Y98/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKB",
+                "X265Y98/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLK",
+                "X265Y98/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKB",
+                "X265Y98/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKBINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKDIV",
+                "X265Y98/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y256/CLKDIVINV_OUT",
+                "X265Y98/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 37,
+        "site": "ILOGIC_X1Y254",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLK",
+                "X265Y100/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKB",
+                "X265Y100/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLK",
+                "X265Y100/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKB",
+                "X265Y100/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKBINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKDIV",
+                "X265Y100/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y254/CLKDIVINV_OUT",
+                "X265Y100/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 38,
+        "site": "ILOGIC_X1Y260",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLK",
+                "X265Y94/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKB",
+                "X265Y94/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLK",
+                "X265Y94/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKB",
+                "X265Y94/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKBINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKDIV",
+                "X265Y94/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y260/CLKDIVINV_OUT",
+                "X265Y94/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "dq": 39,
+        "site": "ILOGIC_X1Y262",
+        "parameters": {
+          "IS_CLKB_INVERTED": "00000000000000000000000000000001",
+          "SERDES_MODE": "MASTER",
+          "NUM_CE": "1",
+          "IOBDELAY": "IFD",
+          "INTERFACE_TYPE": "NETWORKING",
+          "DATA_WIDTH": "1000",
+          "DATA_RATE": "DDR"
+        },
+        "clocks": {
+          "CLK": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLK",
+                "X265Y92/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKB",
+                "X265Y92/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKBINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKB": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf1"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLK",
+                "X265Y92/ILOGIC_X0Y1.CLK/IOI_ILOGIC0_CLK"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKB",
+                "X265Y92/ILOGIC_X0Y1.CLKB/IOI_ILOGIC0_CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKBINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKBINV_OUT/ILOGIC_X0Y1.CLKB"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKINV_OUT/ILOGIC_X0Y1.CLK"
+              ]
+            ]
+          },
+          "CLKDIV": {
+            "aliases": [
+              "integratedsoc_ddrclock_clkout_buf0"
+            ],
+            "site_route": [
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKDIV",
+                "X265Y92/ILOGIC_X0Y1.CLKDIV/IOI_ILOGIC0_CLKDIV"
+              ],
+              [
+                "SITEWIRE/ILOGIC_X1Y262/CLKDIVINV_OUT",
+                "X265Y92/ILOGIC_X0Y1.CLKDIVINV_OUT/ILOGIC_X0Y1.CLKDIV"
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "differences": [],
+  "limitation": "Endpoint records and parameters only; does not prove clock skew, upstream routing, or bitstream correctness."
+}
