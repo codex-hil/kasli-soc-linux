@@ -907,3 +907,27 @@ uses transformed IOB sites absent from the original tilegrid. No candidate
 JSON was produced or routed. Next use the exact effective chipdb site mapping
 (or backend lookup/export metadata) for validated bidirectional conversion;
 retain explicit rejection for missing/ambiguous sites. All work was offline.
+
+### Package-assisted native BEL conversion reproducer (2026-10-13)
+
+Added fail-closed `normalize_placed_bels.py` accepting explicit tilegrid and
+package CSV. Package rows locate IOB sites absent from tilegrid. Relative
+site coordinates use subtraction of per-tile minima (same rule as package
+chipdb builder), not coordinate rank. Two native PSEUDO_GND/VCC BELs are kept.
+Unknown/duplicate sites and unplaced cells reject; existing ROUTING records
+are removed so the output tests placement reconstruction only.
+
+Converted 63705 cells using pinned openXC7 tilegrid and effective HR package
+CSV. Output remains experimental: replay still throws vector index -1 before
+control-set logging. Conversion success does not prove that every resulting
+BEL exists in the binary database. Need debugger stack on this native-name
+reproducer and validate resolved BELs before binding them; no clock-route
+experiment has succeeded yet. Evidence native-placement-summary.json and
+native-placement-replay.log records input/package/grid/output digests.
+
+Reproduce in project environment with tool arguments:
+`--input build/zc706-integrated-reset-seed2-8g/gateware/gateware/top_routed.json`,
+`--tilegrid build/tools/openxc7/share/nextpnr/external/prjxray-db/zynq7/xc7z045/tilegrid.json`,
+`--package build/zc706-integrated/chipdb-cascade-hr/zynq7/xc7z045ffg900-2/package_pins.csv`,
+`--output build/zc706-integrated-golden-clock/native-placement.json`.
+All work offline; no hardware changes.
