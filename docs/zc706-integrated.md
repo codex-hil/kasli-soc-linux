@@ -761,3 +761,23 @@ seed-1 artifacts and both original/golden bitstreams are preserved. This
 placement trial is not a change in DDR electrical/timing parameters. Next
 inspect the completed report; hardware comparison remains gated on clean
 setup/hold and matching bitstream manifest. Board was not accessed this turn.
+
+### Seed 2 reaches setup target but exhausts 6-GiB routing limit (2026-10-13)
+
+Second seed reaches SYS 83.82 MHz (required 83.33) before final hold repair.
+First repair adds 12 buffers with one violation remaining; next router2 pass
+is killed by SIGKILL. Container cgroup memory.events shows oom=1/oom_kill=1
+(max=68660). This is a resource failure, not a qualified timing result or
+a demonstrated gateware defect. No manifest/qualified bitstream exists.
+Evidence: `synchronized-reset-seed2-oom.json` and compressed stage1 log.
+
+Host had 13 GiB available of 15 GiB; a bounded retry was started with 8 GiB
+container memory, two CPUs and no swap. `tools/environment.py` now accepts
+`KASLI_BUILD_MEMORY=6g|8g`, defaults to the existing 6g; invalid values reject.
+Retry retains identical RTL and seed 2, isolated output
+`build/zc706-integrated-reset-seed2-8g/gateware`, log
+`build/zc706-integrated-reset-seed2-8g-build.log`. Prefix previous build
+command with `KASLI_BUILD_MEMORY=8g` to reproduce. All prior artifacts kept.
+No HW accessed; golden remains the last validated board image. Next inspect
+retry completion, return container to default memory after the build, then
+perform locked hardware tests only if setup/hold and manifest validate.

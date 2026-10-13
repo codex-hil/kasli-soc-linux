@@ -1,0 +1,12 @@
+{
+  "hardware_access": false,
+  "seed": 2,
+  "memory_limit_gib": 6,
+  "swap_allowed": false,
+  "outcome": "SIGKILL, cgroup oom_kill=1",
+  "sys_setup_before_second_hold_route_mhz": 83.82,
+  "sys_required_mhz": 83.33,
+  "hold_after_first_pass": 1,
+  "qualification": false,
+  "retry_memory_limit_gib": 8
+}

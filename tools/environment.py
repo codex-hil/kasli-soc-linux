@@ -2,12 +2,15 @@
 """Project-local Debian container, with its writable /usr and /var in build/."""
 import argparse
 import hashlib
+import os
 from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 # Keep FPGA routing from exhausting the interactive host. No swap spill.
-BUILD_MEMORY = "6g"
+BUILD_MEMORY = os.environ.get("KASLI_BUILD_MEMORY", "6g")
+if BUILD_MEMORY not in ("6g", "8g"):
+    raise ValueError("KASLI_BUILD_MEMORY must be 6g or 8g (no swap)")
 BUILD_CPUS = "2"
 IMAGE = "debian@sha256:a99cfc517144bc59b1978475ec53b46ecabec7e43635402ee5b77cc54cd1b20a"
 NAME = "kasli-" + hashlib.sha256(str(ROOT).encode()).hexdigest()[:12]
