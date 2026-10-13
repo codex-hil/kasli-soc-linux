@@ -742,3 +742,22 @@ No hardware accessed in this step. Board retains qualified golden at
 results and reset routing before a locked candidate/golden comparison. A whole
 design rebuild also changes placement/routing, so any improvement will require
 further controls before attributing it exclusively to reset synchronization.
+
+### Synchronized-reset first route rejected; second seed building (2026-10-13)
+
+The first reset experiment route finishes but fails SYS setup: 82.67196 MHz
+achieved versus 83.33334 MHz required. Final hold repair inserts 13 buffers
+and reports zero remaining violations; earlier hold errors in the log precede
+repair. The failing SYS path ends at a distant register CE through a large
+logic/mux cone. Both reset synchronizer stages survive packing as SLICE_FFX.
+No bitstream is qualified and no hardware programming was attempted.
+Evidence: `synchronized-reset-seed1-route.json` and compressed stage1 log.
+
+Added explicit `--seed` (default 1) to nextpnr invocation and recorded it in
+the manifest. A second bounded trial uses seed 2 with identical RTL/clocks,
+isolated output `build/zc706-integrated-reset-seed2/gateware`, log
+`build/zc706-integrated-reset-seed2-build.log`; currently BUILDING. Existing
+seed-1 artifacts and both original/golden bitstreams are preserved. This
+placement trial is not a change in DDR electrical/timing parameters. Next
+inspect the completed report; hardware comparison remains gated on clean
+setup/hold and matching bitstream manifest. Board was not accessed this turn.

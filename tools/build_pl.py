@@ -102,6 +102,7 @@ def main():
     p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
     p.add_argument("--ddr-sync-reset", action="store_true", help="Experimental shared serializer reset release (integrated only)")
+    p.add_argument("--seed", type=int, default=1, help="Recorded nextpnr placement/routing seed")
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
@@ -239,7 +240,7 @@ def main():
         [str(nextpnr),
          "--device", part, "--json", "top.json", "-o", "xdc=top.xdc",
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
-         "--router", args.router, "--freq", "100", "--report", "timing.json", *chipdb_args,
+         "--router", args.router, "--seed", str(args.seed), "--freq", "100", "--report", "timing.json", *chipdb_args,
          *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp", "integrated") or args.reciprocal else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
@@ -286,6 +287,7 @@ def main():
     (work / "manifest.json").write_text(json.dumps({
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
+        "nextpnr_seed": args.seed,
         "ddr_serdes_sync_reset": args.ddr_sync_reset,
         "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,
         "adc_cards": 2 if args.design in ("adc-ddr", "integrated") else args.cards if args.design in ("fmc-adc", "frequency") else None,

@@ -1,0 +1,135 @@
+{
+  "hardware_access": false,
+  "bitstream_qualified": false,
+  "reason": "SYS setup timing failed; router exited 1",
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 131.90872192382812,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 126.42225646972656,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "eth_rx_clk": {
+      "achieved": 166.0577850341797,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 210.70376586914062,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1050.420166015625,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 58.73025131225586,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 254.8419952392578,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 541.7117919921875,
+      "constraint": 200
+    },
+    "integratedsoc_ddrclock_clkin_signal": {
+      "achieved": 814.9959106445312,
+      "constraint": 100
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "achieved": 82.67195892333984,
+      "constraint": 83.33333587646484
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 834.0283813476562,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 1023.5414428710938,
+      "constraint": 62.5
+    }
+  },
+  "reset_registers": {
+    "ddr_reset_sync1": {
+      "type": "SLICE_FFX",
+      "connections": {
+        "CK": [
+          332828
+        ],
+        "Q": [
+          449201
+        ],
+        "D": [
+          453214
+        ],
+        "CE": [
+          472592
+        ],
+        "SR": [
+          185414
+        ]
+      },
+      "attributes": {
+        "BEL_STRENGTH": "00000000000000000000000000000001",
+        "NEXTPNR_BEL": "SLICE_X169Y275/A5FF",
+        "X_ORIG_PORT_CK": "C",
+        "X_ORIG_PORT_CE": "CE",
+        "X_ORIG_PORT_D": "D",
+        "X_ORIG_PORT_SR": "PRE",
+        "X_ORIG_PORT_Q": "Q",
+        "X_ORIG_TYPE": "FDPE",
+        "src": "/work/build/zc706-integrated-reset/gateware/gateware/top.v:52311.3-52320.2",
+        "module_not_derived": "00000000000000000000000000000001",
+        "DONT_TOUCH": "TRUE",
+        "ASYNC_REG": "TRUE"
+      }
+    },
+    "ddr_reset_sync0": {
+      "type": "SLICE_FFX",
+      "connections": {
+        "CK": [
+          332828
+        ],
+        "Q": [
+          453214
+        ],
+        "D": [
+          472590
+        ],
+        "CE": [
+          472592
+        ],
+        "SR": [
+          185414
+        ]
+      },
+      "attributes": {
+        "BEL_STRENGTH": "00000000000000000000000000000001",
+        "NEXTPNR_BEL": "SLICE_X168Y275/AFF",
+        "X_ORIG_PORT_CK": "C",
+        "X_ORIG_PORT_CE": "CE",
+        "X_ORIG_PORT_D": "D",
+        "X_ORIG_PORT_SR": "PRE",
+        "X_ORIG_PORT_Q": "Q",
+        "X_ORIG_TYPE": "FDPE",
+        "src": "/work/build/zc706-integrated-reset/gateware/gateware/top.v:52293.3-52302.2",
+        "module_not_derived": "00000000000000000000000000000001",
+        "DONT_TOUCH": "TRUE",
+        "ASYNC_REG": "TRUE"
+      }
+    }
+  },
+  "hold_fix_final": "13 buffers, 0 remaining violations",
+  "next_attempt_seed": 2
+}
