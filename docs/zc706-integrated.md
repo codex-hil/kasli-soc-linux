@@ -851,3 +851,21 @@ paths while retaining integrated consumers, or an equivalent measured phase
 comparison. This requires audited routing constraints/tool support rather than
 blind bitstream edits. Current evidence still does not prove a clock or
 toolchain root cause; golden remains physically validated.
+
+### Golden MMCM route replay probes expose snapshot backend failure (2026-10-13)
+
+Extracted exact golden ROUTING records for both MMCM output nets into
+`golden-mmcm-prerouted.txt`, renamed only the target net names. Existing
+backend supports `-o prerouted=FILE` and collision rollback; no custom bitstream
+edits are needed. A bounded offline connectivity probe with diagnostic exit
+failed before preroute processing: vector out_of_range index -1.
+
+Placed snapshot includes 13 hold buffers without NEXTPNR_BEL because it is
+rewritten when the second hold-fix routing pass begins. This snapshot cannot
+be directly replayed with no-place. Final routed JSON has BEL on those buffers,
+but replay also fails with the same exception before preroute logs. Thus
+missing buffer BEL explains an invalid placed snapshot but is not established
+as the sole exception cause. Need obtain backend stack trace and validate
+packed snapshot reconstruction before a full golden-route experiment. No
+route replay success or clock diagnosis is claimed. Logs: golden-clock-replay-
+placed/final.log in the 20261013 evidence directory. No hardware accessed.
