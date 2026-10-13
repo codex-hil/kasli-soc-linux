@@ -14,6 +14,8 @@ LOCK=Path('/home/codex-hil/.cache/zc706-210251842914.lock')
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
+    p.add_argument('--repeats',type=int,choices=range(1,4),default=1,
+                   help='Repeat initialization/diagnostic without reloading PL (maximum 3).')
     p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep','dq-dqs-sweep','dq-detail','dq-eye'),default='lanes')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--candidate-bit',type=Path,default=ROOT/'build/zc706-integrated/gateware/gateware/top.bit')
@@ -21,7 +23,7 @@ def main():
     p.add_argument('--software',type=Path,default=ROOT/'build/zc706-integrated/pl-ddr-test')
     p.add_argument('--golden-software',type=Path,default=ROOT/'build/zc706-adc-ddr/pl-ddr-test')
     a=p.parse_args();a.output=a.output.resolve();a.output.mkdir(parents=True,exist_ok=True)
-    record={'diagnostic':a.diagnostic,'hardware_access':True,'sd_qspi_written':False,'tests':{},'restoration_passed':False}
+    record={'diagnostic':a.diagnostic,'repeats':a.repeats,'hardware_access':True,'sd_qspi_written':False,'tests':{},'restoration_passed':False}
     for name,bit in [('candidate',a.candidate_bit),('golden',a.golden_bit)]:
         manifest=json.loads((bit.parent/'manifest.json').read_text())
         sha=hashlib.sha256(bit.read_bytes()).hexdigest()
@@ -51,17 +53,21 @@ def main():
                 stdout=log,stderr=subprocess.STDOUT,timeout=300)
         record['tests'][name]={'exit':result.returncode,'software_sha256':sha}
         return result.returncode
+    def repeat_test(name):
+        for run in range(a.repeats):
+            suffix='' if a.repeats==1 else '-run'+str(run+1)
+            test(a.software,name+'-'+a.diagnostic+suffix,True)
     with LOCK.open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         candidate_boot_passed=False
         try:
             boot(a.candidate_bit,'candidate-boot')
             candidate_boot_passed=True
-            test(a.software,'candidate-'+a.diagnostic,True)
+            repeat_test('candidate')
         finally:
             try:
                 boot(a.golden_bit,'restore-golden',sync_host=candidate_boot_passed)
-                test(a.software,'golden-'+a.diagnostic,True)
+                repeat_test('golden')
                 record['restoration_passed']=test(a.golden_software,'golden-bist',False)==0
             finally:
                 record['final_host']=host

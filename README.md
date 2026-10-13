@@ -723,3 +723,9 @@ was recovered and the wrapper's failed-boot restoration path was corrected.
 Per-DQ eye scan (2026-10-13): every candidate DQ has a passing window, but byte 4
 splits into two incompatible bitslip groups. Golden has 23 common passing
 settings and again passed full BIST after restoration; IP 192.168.2.23.
+
+DDR diagnostic update (2026-10-13): repeated initialization without PL reload
+changes one candidate DQ's bitslip group; golden is stable across all three
+runs (23 common passing settings). Integrated DDR remains FAIL. Golden restored
+with three full 1-GiB BIST passes, zero errors; Linux IP 192.168.2.25. See
+[the integration log](docs/zc706-integrated.md) for evidence and limitations.

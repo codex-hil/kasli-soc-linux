@@ -639,3 +639,25 @@ counters/summary instead. That scalar logging omission was corrected afterward
 and compiled separately. Next repeat PHY initialization/eye measurement within
 one candidate load to determine whether the groups vary with reset release,
 before changing physical clock/reset implementation.
+
+### Reinitialization changes candidate per-DQ alignment (2026-10-13)
+
+The locked comparison wrapper now supports bounded `--repeats 1..3`. Three
+full PHY/JEDEC initialization and training runs followed by complete per-DQ
+eye scans were performed within one candidate PL load, then three within one
+golden load. This is not a reset-only experiment: write/read training repeats.
+
+Candidate runs 1/3: DQ32–36/38 pass at bitslip 4–5, DQ37/39 at 2–3.
+Candidate run 2: DQ35 additionally moves to 2–3. All runs have zero common
+passing settings. Golden remains identical across all three runs: all eight
+DQ at 2–3, with 23 common passing settings. Each scan contains 256 points,
+96 samples per DQ per point. Thus alignment is not entirely fixed by the
+placed/routed image; initialization/training state affects the failing design.
+This supports investigating clock/reset/gearbox startup, but does not isolate
+a read-side cause, a write-side cause, or a toolchain defect.
+
+Golden restored and qualified with three full 1-GiB BIST passes, zero errors;
+current Linux IP 192.168.2.25. Shared ZC706 lock covered all accesses and
+restoration. No SD/QSPI writes. Evidence: `dq-eye-repeat-*` and `repeat-*`
+in `evidence/zc706/integrated-20261013`. Next isolate reset-only behavior from
+training and inspect ISERDES reset release relative to the DDR clock domains.
