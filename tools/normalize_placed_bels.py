@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 
 p=argparse.ArgumentParser(description=__doc__)
@@ -12,6 +13,7 @@ p.add_argument('--input',type=Path,required=True)
 p.add_argument('--tilegrid',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--package',type=Path,required=True)
+p.add_argument('--chipdb',type=Path,required=True)
 a=p.parse_args();grid=json.loads(a.tilegrid.read_text());sites={}
 # Package records explicitly locate IOB sites omitted from tilegrid metadata.
 for row in csv.DictReader(a.package.open()):
@@ -29,6 +31,9 @@ for tile in grid.values():
         for site,x,y in rows:
             if site in sites:raise ValueError('Duplicate site '+site)
             sites[site]=f"X{tile['grid_x']}Y{tile['grid_y']}/{prefix}_X{x-minx}Y{y-miny}"
+proc=subprocess.Popen(['strings',str(a.chipdb)],stdout=subprocess.PIPE,text=True)
+local_names={line.strip() for line in proc.stdout if re.match(r'^[A-Z0-9_]+_X[0-9]+Y[0-9]+\.',line)}
+if proc.wait():raise ValueError('chipdb string extraction failed')
 design=json.loads(a.input.read_text());module=design['modules']['top'];count=0
 for name,cell in module['cells'].items():
     bel=cell['attributes'].get('NEXTPNR_BEL')
@@ -37,7 +42,13 @@ for name,cell in module['cells'].items():
     if site == 'X0Y0' and kind in ('PSEUDO_VCC','PSEUDO_GND'):
         continue
     if site not in sites:raise ValueError('Unknown site '+site)
-    cell['attributes']['NEXTPNR_BEL']=sites[site]+'.'+kind;count+=1
+    tile,local=sites[site].split('/')
+    local += '.'+kind
+    if local not in local_names:
+        variants=sorted(n for n in local_names if n.startswith(local+'~'))
+        if len(variants)!=1:raise ValueError('Missing/ambiguous native BEL '+local)
+        local=variants[0]
+    cell['attributes']['NEXTPNR_BEL']=tile+'/'+local;count+=1
 # Route names are also exported physically; replay placement only, reroute later.
 for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')

@@ -947,3 +947,22 @@ started, log build/zc706-integrated-golden-clock/guard-build.log; regression
 and concrete rejected-name capture remain PENDING. This is diagnostic guard,
 not a mapping repair. Next replay with rebuilt backend and fix only the
 identified mapping after checking the binary database. No HW access.
+
+### Guard identifies dropped BRAM variant suffix (2026-10-13)
+
+Rebuilt backend correctly rejects invalid replay BEL instead of crashing:
+cell `storage_32.0.9`, `X184Y192/RAMB18_X0Y0.RAMB18E1`. Exact chipdb
+contains `RAMB18_X0Y0.RAMB18E1~RAMB18E1`; generator xilinx_gen.py adds
+`~variant` for non-primary site variants to preserve uniqueness. Physical
+export omits this suffix, so coordinate conversion alone cannot reconstruct
+variant-specific names. Evidence replay-invalid-bram-bel.log.
+
+Normalizer now accepts exact chipdb and checks local name strings, selecting
+a suffix only when exactly one candidate exists. This check is preliminary:
+string existence does not prove tile-local presence. Attempt rejects
+`IOB_X0Y0.IOB33M.PAD` before writing new JSON: sparse bonded package rows
+do not define all local IOB peer coordinates, so minima from those rows are
+insufficient. Next obtain full effective per-tile site geometry/native BEL
+list, including unbonded peers, and validate against that list rather than
+guessing PAD index. Previous output remains unchanged; no successful corrected
+replay is claimed. No hardware access.

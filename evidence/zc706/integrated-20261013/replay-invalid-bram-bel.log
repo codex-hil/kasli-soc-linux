@@ -1,0 +1,14 @@
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+ERROR: Invalid restored BEL: cell=storage_32.0.9 bel=X184Y192/RAMB18_X0Y0.RAMB18E1
+0 warnings, 1 error
+Traceback (most recent call last):
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 86, in <module>
+    main()
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 80, in main
+    call(["docker", "exec", "-w", "/work", "-e", "CARGO_HOME=/work/build/cargo",
+  File "/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/environment.py", line 25, in call
+    return subprocess.run(args, check=True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['docker', 'exec', '-w', '/work', '-e', 'CARGO_HOME=/work/build/cargo', '-e', 'RUSTUP_HOME=/work/build/rustup', '-e', 'TMPDIR=/work/build/tmp', 'kasli-a4983c2304ef', 'env', 'NEXTPNR_CLOCK_DIAGNOSTIC_EXIT=1', 'build/zc706-integrated/nextpnr/nextpnr-himbaechel-xilinx', '--device', 'xc7z045ffg900-2', '--json', '/work/build/zc706-integrated-golden-clock/native-placement.json', '--no-pack', '--no-place', '--chipdb', '/work/build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin']' returned non-zero exit status 125.
