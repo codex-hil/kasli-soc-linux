@@ -1,0 +1,228 @@
+{
+  "qualification": false,
+  "experiment": "Three eye scans after one initialization/training; no further PHY reset or training",
+  "runs": {
+    "golden-dq-eye-no-retrain-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 22
+    },
+    "golden-dq-eye-no-retrain-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "golden-dq-eye-no-retrain-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "candidate-dq-eye-no-retrain-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-no-retrain-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-no-retrain-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    }
+  }
+}

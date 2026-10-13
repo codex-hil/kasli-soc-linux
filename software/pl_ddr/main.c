@@ -161,15 +161,17 @@ extern int sdram_lab_dqs_sweep(int sweep_dq);
 #endif
 
 int main(int argc, char **argv) {
-    int sweep = 0, sweep_dq = 0;
+    int sweep = 0, sweep_dq = 0, eye_repeat = 0;
 #ifdef SDRAM_LAB_DQS_SWEEP
+    eye_repeat = argc == 2 && !strcmp(argv[1], "--dq-eye-no-retrain");
     sweep_dq = argc == 2 && !strcmp(argv[1], "--dq-eye") ? 3 : (argc == 2 && !strcmp(argv[1], "--dq-detail") ? 2 : (argc == 2 && !strcmp(argv[1], "--sweep-dq-dqs")));
+    if (eye_repeat) sweep_dq = 3;
     sweep = sweep_dq || (argc == 2 && !strcmp(argv[1], "--sweep-dqs"));
 #endif
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
     int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
     int controls = argc == 2 && !strcmp(argv[1], "--diagnose-controls");
-    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs|--sweep-dq-dqs|--dq-detail|--dq-eye (diagnostic build)]\n",argv[0]); return 2; }
+    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs|--sweep-dq-dqs|--dq-detail|--dq-eye|--dq-eye-no-retrain (diagnostic build)]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -189,7 +191,13 @@ int main(int argc, char **argv) {
     if (sweep) {
         printf("DQS_SWEEP initial_training=%d; retaining other lanes; sweep_write_dq=%d\n", initialized, sweep_dq);
         lab_deadline = now_ns() + 120000000000ULL;
-        int result = sdram_lab_dqs_sweep(sweep_dq);
+        int result = 1;
+        for (unsigned run=0; run<(eye_repeat ? 3U : 1U); run++) {
+            printf("DQ_SCAN_RUN run=%u retraining=0\n", run+1);
+            int scan = sdram_lab_dqs_sweep(sweep_dq);
+            if (scan != 1) result = 0;
+            if (sdram_lab_timed_out()) break;
+        }
         return result == 1 ? 0 : 1;
     }
 #endif

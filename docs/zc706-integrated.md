@@ -661,3 +661,29 @@ current Linux IP 192.168.2.25. Shared ZC706 lock covered all accesses and
 restoration. No SD/QSPI writes. Evidence: `dq-eye-repeat-*` and `repeat-*`
 in `evidence/zc706/integrated-20261013`. Next isolate reset-only behavior from
 training and inspect ISERDES reset release relative to the DDR clock domains.
+
+### Control: repeated scans without reset or retraining (2026-10-13)
+
+New diagnostic `--dq-eye-no-retrain` runs three complete eye scans after one
+initialization/training, with a shared 120-second deadline. Each scan resets
+and sweeps byte-four software read bitslip/delays and normalizes write delays;
+it does not reset the PHY/serializers or rerun training. Candidate passing
+bitslip groups stay identical in all three scans: DQ32/35/36/37/39 at 2–3,
+DQ33/34/38 at 4–5, zero common settings. Golden keeps every DQ at 2–3;
+common passing setting counts are 22/23/23 (finite-sample boundary variation).
+Thus scanning alone did not reproduce the group movement seen across full
+initializations. Startup/training remains implicated; reset versus write
+training and read versus write cause are still unresolved.
+
+Source inspection shows `ddrphy_rst` also reloads command/DQ/DQS delays,
+resets both software Bitslip directions, and resets OSERDESE2/ISERDESE2.
+A bare reset cannot preserve the prior timing state. ISERDESE2 uses NETWORKING
+DDR, CLK=DDR4x, CLKDIV=sys, BITSLIP=0; scanned read bitslip is fabric logic.
+Next prepare a controlled build-local initialization variant that preserves
+the command delay and explicitly normalizes write bitslip before comparing
+reset-only effects; do not assume scanned bitslip directly controls ISERDES.
+
+Shared lock held through candidate/golden tests and restoration. Golden full
+three 1-GiB BIST passes have zero errors; Linux IP 192.168.2.27. No SD/QSPI
+writes. Evidence: `dq-eye-no-retrain-*` and `no-retrain-*` in the 20261013
+directory. Integrated DDR remains FAIL; ADC/PLL/SFP integration is not qualified.

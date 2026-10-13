@@ -729,3 +729,8 @@ changes one candidate DQ's bitslip group; golden is stable across all three
 runs (23 common passing settings). Integrated DDR remains FAIL. Golden restored
 with three full 1-GiB BIST passes, zero errors; Linux IP 192.168.2.25. See
 [the integration log](docs/zc706-integrated.md) for evidence and limitations.
+
+DDR control update (2026-10-13): three scans without further reset/training
+retain identical candidate bitslip groups. Golden retains a common eye and
+passes three full 1-GiB BIST runs; restored Linux IP 192.168.2.27. Reset and
+training effects still need separation; integrated DDR remains FAIL.
