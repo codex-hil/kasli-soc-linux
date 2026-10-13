@@ -94,3 +94,19 @@ done:
         result,tested,best_errors);
     return result;
 }
+
+/* Restore the tested lane's explicit state after reset; no leveling search. */
+int sdram_lab_reset_no_training(void) {
+    int command = sdram_clock_delay, slip = sdram_lab_write_slip;
+    if (slip < 0 || slip >= 8 || command < 0 || command >= SDRAM_PHY_DELAYS) return 0;
+    sdram_software_control_on();
+    ddrphy_rst_write(1); cdelay(1000);
+    ddrphy_rst_write(0); cdelay(1000);
+    sdram_rst_clock_delay();
+    for (int i=0;i<command;i++) sdram_inc_clock_delay();
+    init_sequence();
+    sdram_write_latency_set_bitslip(4,0,slip);
+    printf("DQ_RESET command_offset=%d write_slip=%d jedec=1 training=0 other_lanes_untrained=1\n",command,slip);
+    sdram_software_control_off();
+    return 1;
+}

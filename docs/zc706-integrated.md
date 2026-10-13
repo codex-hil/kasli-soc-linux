@@ -687,3 +687,28 @@ Shared lock held through candidate/golden tests and restoration. Golden full
 three 1-GiB BIST passes have zero errors; Linux IP 192.168.2.27. No SD/QSPI
 writes. Evidence: `dq-eye-no-retrain-*` and `no-retrain-*` in the 20261013
 directory. Integrated DDR remains FAIL; ADC/PLL/SFP integration is not qualified.
+
+### Reset/JEDEC reproduces movement without training (2026-10-13)
+
+`--dq-eye-reset` performs an initial trained scan followed by two scans after
+PHY reset, explicit command delay replay, JEDEC initialization and replay of
+byte-four write bitslip. A build-local hook records the final write bitslip
+selected by the upstream setter; invalid/unrecorded values abort replay.
+Write DQ/DQS delays are normalized by each scan, read bitslip/delay swept.
+No leveling search runs after either diagnostic reset. Other lanes are
+untreated after reset, so this is strictly a byte-four diagnostic.
+
+Candidate retained command offset 17/write bitslip 6. DQ35 changes from
+passing at 4–5 in scans 1/2 to 2–3 in scan 3; other DQ groups remain unchanged.
+All three have zero common settings. Golden has every DQ passing at 2–3
+and exactly 23 common settings in all three scans. Therefore full retraining
+is not necessary for group movement. Reset/JEDEC/startup remains implicated;
+this does not distinguish read/write serializer startup, command effects,
+or reset distribution from a clock-route/toolchain defect. No timing/pin
+parameters were changed in PL. Next inspect reset fanout/routing and prepare
+a controlled synchronized-reset candidate, retaining the current image.
+
+Golden reloaded and passed three complete 1-GiB BIST runs, zero errors;
+Linux IP 192.168.2.29. Shared board lock covered all accesses/restoration.
+No SD/QSPI writes. Evidence: `dq-eye-reset-no-training-*` and
+`reset-no-training-*` in the 20261013 directory. Integrated DDR remains FAIL.

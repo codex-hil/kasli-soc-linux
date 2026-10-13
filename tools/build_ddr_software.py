@@ -64,6 +64,10 @@ if args.dqs_sweep:
             sdram_lab_samples += 2;
         }
 """, 1)
+    setter = 'static void sdram_write_latency_set_bitslip(int module, int dq_line, int bitslip) {\n'
+    assert text.count(setter) == 1, 'Upstream write bitslip setter changed'
+    text = 'static int sdram_lab_write_slip = -1;\n' + text
+    text = text.replace(setter, setter + '\tif (module == 4) sdram_lab_write_slip = bitslip;\n', 1)
     text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text()
     sdram_source = OUT/'software/sdram-dqs-sweep.c'
     sdram_source.write_text(text)

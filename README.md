@@ -734,3 +734,8 @@ DDR control update (2026-10-13): three scans without further reset/training
 retain identical candidate bitslip groups. Golden retains a common eye and
 passes three full 1-GiB BIST runs; restored Linux IP 192.168.2.27. Reset and
 training effects still need separation; integrated DDR remains FAIL.
+
+DDR reset control (2026-10-13): PHY reset plus JEDEC initialization reproduces
+DQ35 group movement without retraining, while golden remains stable. Root
+cause remains unproved. Golden restored, three full 1-GiB BIST passes clean;
+Linux IP 192.168.2.29. Details and evidence in the integration log.

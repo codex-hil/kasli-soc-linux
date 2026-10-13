@@ -1,0 +1,236 @@
+{
+  "qualification": false,
+  "experiment": "One training then two PHY resets with command/write-slip replay and JEDEC; no further training",
+  "runs": {
+    "golden-dq-eye-reset-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "golden-dq-eye-reset-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "golden-dq-eye-reset-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 23
+    },
+    "candidate-dq-eye-reset-1": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-reset-2": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    },
+    "candidate-dq-eye-reset-3": {
+      "dq32_to_39_passing_bitslips": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "common_passing_settings": 0
+    }
+  },
+  "golden-dq-eye-reset-reset_parameters": [
+    "DQ_RESET command_offset=15 write_slip=6 jedec=1 training=0 other_lanes_untrained=1",
+    "DQ_RESET command_offset=15 write_slip=6 jedec=1 training=0 other_lanes_untrained=1"
+  ],
+  "candidate-dq-eye-reset-reset_parameters": [
+    "DQ_RESET command_offset=17 write_slip=6 jedec=1 training=0 other_lanes_untrained=1",
+    "DQ_RESET command_offset=17 write_slip=6 jedec=1 training=0 other_lanes_untrained=1"
+  ]
+}
