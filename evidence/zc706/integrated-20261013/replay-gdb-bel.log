@@ -1,0 +1,13 @@
+warning: Error disabling address space randomization: Operation not permitted
+Catchpoint 1 (throw)
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Catchpoint 1 (exception thrown), 0x00007b978c2b3691 in __cxa_throw () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#3  0x00005b03fd5cfb2e in nextpnr_himbaechel::BaseCtx::getBelByNameStr(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0] (str=..., this=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:76
+76	    return ctx->getBelByName(IdStringList::parse(ctx, str));
+$1 = <optimized out>
+#4  0x00005b03fd4d10fb in nextpnr_himbaechel::BaseCtx::attributesToArchInfo (this=0x5b0433b07560) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:223
+223	            BelId b = getCtx()->getBelByNameStr(val->second.as_string());
+$2 = {index = 306791}

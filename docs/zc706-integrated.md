@@ -869,3 +869,22 @@ as the sole exception cause. Need obtain backend stack trace and validate
 packed snapshot reconstruction before a full golden-route experiment. No
 route replay success or clock diagnosis is claimed. Logs: golden-clock-replay-
 placed/final.log in the 20261013 evidence directory. No hardware accessed.
+
+### Snapshot debugger evidence (2026-10-13)
+
+Installed optional GDB 16.3-1 inside the existing project container from its
+configured dated Debian snapshot (`apt-get install --no-install-recommends
+gdb`); no global host installation. Host GDB with container loader could not
+reproduce the intended environment, so only container traces are relevant.
+Container GDB catch-throw stops at dict::at in Arch::getBelByName, called by
+BaseCtx::attributesToArchInfo while restoring NEXTPNR_BEL. The cell IdString
+index is 306791; optimized string local is unavailable. No patched router
+behavior or successful replay is claimed. A vector-break probe terminates
+at that earlier exception too; ordinary execution reaches control-set indexing
+and reports vector index -1. These observations must not be conflated.
+
+Retry with absolute input/chipdb/preroute paths and target XDC still produces
+the ordinary vector exception. Next collect the concrete cell/BEL name at
+JSON restoration (instrumented source if needed), then stack trace at the
+later indexing failure. Evidence `replay-gdb-*` and `replay-absolute-paths.log`.
+No hardware access, no bitstream writes, golden remains restored.

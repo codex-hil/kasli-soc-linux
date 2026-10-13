@@ -1,0 +1,17 @@
+Catchpoint 1 (throw)
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Catchpoint 1 (exception thrown), 0x000077c4becb3691 in __cxa_throw () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#0  0x000077c4becb3691 in __cxa_throw () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#1  0x000055fcd49a613c in nextpnr_himbaechel::dict<nextpnr_himbaechel::IdString, int, nextpnr_himbaechel::hash_ops<nextpnr_himbaechel::IdString> >::at (this=<optimized out>, key=...) at /work/build/zc706-ddr/nextpnr-source/common/kernel/hashlib.h:607
+#2  0x000055fcd49ebf51 in nextpnr_himbaechel::Arch::getBelByName (this=this@entry=0x55fcd7168870, name=...) at /work/build/zc706-ddr/nextpnr-source/common/kernel/sso_array.h:123
+#3  0x000055fcd4bb5b2e in nextpnr_himbaechel::BaseCtx::getBelByNameStr(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0] (str=..., this=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:76
+#4  0x000055fcd4ab70fb in nextpnr_himbaechel::BaseCtx::attributesToArchInfo (this=0x55fcd7168870) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:223
+#5  0x000055fcd4b9d3a4 in nextpnr_himbaechel::(anonymous namespace)::GenericFrontend<nextpnr_himbaechel::JsonFrontendImpl>::operator() (this=0x7ffc69c727b0) at /work/build/zc706-ddr/nextpnr-source/frontend/frontend_base.h:142
+#6  nextpnr_himbaechel::parse_json (in=..., filename="build/zc706-integrated-reset-seed2-8g/gateware/gateware/top_routed.json", ctx=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/frontend/json_frontend.cc:206
+#7  nextpnr_himbaechel::CommandHandler::executeMain(std::unique_ptr<nextpnr_himbaechel::Context, std::default_delete<nextpnr_himbaechel::Context> >) [clone .constprop.0] (this=this@entry=0x7ffc69c72b50, ctx=std::unique_ptr<nextpnr_himbaechel::Context> = {...}) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:682
+#8  0x000055fcd49d5885 in nextpnr_himbaechel::CommandHandler::exec (this=0x7ffc69c72b50) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:815
+#9  main (argc=<optimized out>, argv=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/himbaechel/main.cc:102

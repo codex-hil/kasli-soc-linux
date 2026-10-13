@@ -1,0 +1,26 @@
+Breakpoint 1 at 0x15b90
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+terminate called after throwing an instance of 'std::out_of_range'
+  what():  dict::at()
+
+Program received signal SIGABRT, Aborted.
+0x000074ccf15b069c in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#0  0x000074ccf15b069c in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x000074ccf155bc42 in raise () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x000074ccf15444ac in abort () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x000074ccf18a1a3d in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#4  0x000074ccf18b344a in ?? () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#5  0x000074ccf18a15e9 in std::terminate() () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#6  0x000074ccf18b36c8 in __cxa_throw () from /lib/x86_64-linux-gnu/libstdc++.so.6
+#7  0x0000634f02a6c13c in nextpnr_himbaechel::dict<nextpnr_himbaechel::IdString, int, nextpnr_himbaechel::hash_ops<nextpnr_himbaechel::IdString> >::at (this=<optimized out>, key=...) at /work/build/zc706-ddr/nextpnr-source/common/kernel/hashlib.h:607
+#8  0x0000634f02ab1f51 in nextpnr_himbaechel::Arch::getBelByName (this=this@entry=0x634f2289a870, name=...) at /work/build/zc706-ddr/nextpnr-source/common/kernel/sso_array.h:123
+#9  0x0000634f02c7bb2e in nextpnr_himbaechel::BaseCtx::getBelByNameStr(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .isra.0] (str=..., this=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:76
+#10 0x0000634f02b7d0fb in nextpnr_himbaechel::BaseCtx::attributesToArchInfo (this=0x634f2289a870) at /work/build/zc706-ddr/nextpnr-source/common/kernel/basectx.cc:223
+#11 0x0000634f02c633a4 in nextpnr_himbaechel::(anonymous namespace)::GenericFrontend<nextpnr_himbaechel::JsonFrontendImpl>::operator() (this=0x7ffd014c7110) at /work/build/zc706-ddr/nextpnr-source/frontend/frontend_base.h:142
+#12 nextpnr_himbaechel::parse_json (in=..., filename="build/zc706-integrated-reset-seed2-8g/gateware/gateware/top_routed.json", ctx=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/frontend/json_frontend.cc:206
+#13 nextpnr_himbaechel::CommandHandler::executeMain(std::unique_ptr<nextpnr_himbaechel::Context, std::default_delete<nextpnr_himbaechel::Context> >) [clone .constprop.0] (this=this@entry=0x7ffd014c74b0, ctx=std::unique_ptr<nextpnr_himbaechel::Context> = {...}) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:682
+#14 0x0000634f02a9b885 in nextpnr_himbaechel::CommandHandler::exec (this=0x7ffd014c74b0) at /work/build/zc706-ddr/nextpnr-source/common/kernel/command.cc:815
+#15 main (argc=<optimized out>, argv=<optimized out>) at /work/build/zc706-ddr/nextpnr-source/himbaechel/main.cc:102
