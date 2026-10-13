@@ -14,7 +14,7 @@ LOCK=Path('/home/codex-hil/.cache/zc706-210251842914.lock')
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
-    p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep'),default='lanes')
+    p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep','dq-dqs-sweep'),default='lanes')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--candidate-bit',type=Path,default=ROOT/'build/zc706-integrated/gateware/gateware/top.bit')
     p.add_argument('--golden-bit',type=Path,default=ROOT/'build/zc706-adc-ddr/gateware/gateware/top.bit')
@@ -47,7 +47,7 @@ def main():
         if subprocess.check_output(ssh+['sha256sum '+path],timeout=10).decode().split()[0]!=sha:
             raise RuntimeError('Diagnostic upload mismatch')
         with (a.output/(name+'.log')).open('w') as log:
-            result=subprocess.run(ssh+[path+({'controls':' --diagnose-controls','lanes':' --diagnose-errors','dqs-sweep':' --sweep-dqs'}[a.diagnostic] if diagnostic else '')],
+            result=subprocess.run(ssh+[path+({'controls':' --diagnose-controls','lanes':' --diagnose-errors','dqs-sweep':' --sweep-dqs','dq-dqs-sweep':' --sweep-dq-dqs'}[a.diagnostic] if diagnostic else '')],
                 stdout=log,stderr=subprocess.STDOUT,timeout=300)
         record['tests'][name]={'exit':result.returncode,'software_sha256':sha}
         return result.returncode

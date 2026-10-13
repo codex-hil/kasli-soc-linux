@@ -157,18 +157,19 @@ static int diagnose_controls(void) {
 #ifdef SDRAM_LAB_DQS_SWEEP
 static uint64_t lab_deadline;
 int sdram_lab_timed_out(void) { return now_ns() >= lab_deadline; }
-extern int sdram_lab_dqs_sweep(void);
+extern int sdram_lab_dqs_sweep(int sweep_dq);
 #endif
 
 int main(int argc, char **argv) {
-    int sweep = 0;
+    int sweep = 0, sweep_dq = 0;
 #ifdef SDRAM_LAB_DQS_SWEEP
-    sweep = argc == 2 && !strcmp(argv[1], "--sweep-dqs");
+    sweep_dq = argc == 2 && !strcmp(argv[1], "--sweep-dq-dqs");
+    sweep = sweep_dq || (argc == 2 && !strcmp(argv[1], "--sweep-dqs"));
 #endif
     int init_only = argc == 2 && !strcmp(argv[1], "--init-only");
     int diagnostic = argc == 2 && !strcmp(argv[1], "--diagnose-errors");
     int controls = argc == 2 && !strcmp(argv[1], "--diagnose-controls");
-    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs (diagnostic build)]\n",argv[0]); return 2; }
+    if (argc != 1 && !init_only && !diagnostic && !controls && !sweep) { fprintf(stderr,"Usage: %s [--init-only|--diagnose-errors|--diagnose-controls|--sweep-dqs|--sweep-dq-dqs (diagnostic build)]\n",argv[0]); return 2; }
     setvbuf(stdout,NULL,_IONBF,0);
     int fd=open("/dev/mem",O_RDWR|O_SYNC);
     if(fd<0) { perror("/dev/mem"); return 1; }
@@ -186,9 +187,9 @@ int main(int argc, char **argv) {
     int initialized = sdram_init();
 #ifdef SDRAM_LAB_DQS_SWEEP
     if (sweep) {
-        printf("DQS_SWEEP initial_training=%d; retaining other lanes and write-DQ settings\n", initialized);
+        printf("DQS_SWEEP initial_training=%d; retaining other lanes; sweep_write_dq=%d\n", initialized, sweep_dq);
         lab_deadline = now_ns() + 120000000000ULL;
-        int result = sdram_lab_dqs_sweep();
+        int result = sdram_lab_dqs_sweep(sweep_dq);
         return result == 1 ? 0 : 1;
     }
 #endif

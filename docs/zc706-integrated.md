@@ -564,3 +564,25 @@ Reproducer: `tools/test_ddr_reference_hardware.py --host <current-IP>
 --diagnostic dqs-sweep --software <diagnostic-pl-ddr-test> --output <directory>`.
 Next include write-DQ delay in the bounded sweep while retaining golden
 comparison and restoration, since that dimension was explicitly held fixed.
+
+### Physical byte-four write-DQ/DQS/read sweep (2026-10-13)
+
+The diagnostic now accepts `--sweep-dq-dqs`: 32 write-DQ offsets × 32 write-DQS
+offsets × 8 read bitslips × 32 read taps, still under a 120-second deadline.
+The candidate exhausted all 262,144 combinations without a passing setting.
+Best single-seed score was 7 bit errors at write-DQ offset 0, write-DQS offset
+1, read bitslip offset 4, read delay 13. This is not a stable or passing setting.
+Write bitslip and global timing were held fixed. Golden, with identical test
+software, again found a three-seed passing setting after 65 tests.
+
+Reproducer: build with `--dqs-sweep`, then run the locked comparison wrapper
+with `--diagnostic dq-dqs-sweep`. The wrapper restored golden and its three
+full-capacity BIST runs passed with zero errors; current IP is 192.168.2.18.
+No SD/QSPI writes. Evidence: `dq-dqs-sweep-hardware-result.json`,
+`dq-dqs-sweep-summary.json` and compressed logs in the 20261013 directory.
+The measured binary's initial banner inherited the earlier "write-DQ retained"
+text; actual progress records the full sweep. The banner was corrected afterward
+and that cosmetic correction compiled successfully in a separate output directory.
+Next capture per-DQ bit errors/raw DFI at the best scored configuration using
+multiple seeds, to establish whether the residual failure is localized to a
+particular data bit before choosing further timing or routing experiments.

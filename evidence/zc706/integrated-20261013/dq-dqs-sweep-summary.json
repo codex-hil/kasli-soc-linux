@@ -1,0 +1,37 @@
+{
+  "hardware_access": true,
+  "qualification": false,
+  "current_host": "192.168.2.18",
+  "restored_golden_full_bist": "PASS",
+  "results": {
+    "candidate-dq-dqs-sweep": {
+      "result": 0,
+      "tested": 262144,
+      "best_single_seed_bit_errors": 7,
+      "best_records": [
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=0 errors=31 tested=1",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=6 errors=30 tested=7",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=12 errors=28 tested=13",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=14 errors=27 tested=15",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=2 read_delay=0 errors=24 tested=65",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=4 read_delay=0 errors=8 tested=129",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=1 read_slip_offset=4 read_delay=13 errors=7 tested=398"
+      ]
+    },
+    "golden-dq-dqs-sweep": {
+      "result": 1,
+      "tested": 65,
+      "best_single_seed_bit_errors": 0,
+      "best_records": [
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=0 errors=38 tested=1",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=5 errors=37 tested=6",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=9 errors=36 tested=10",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=17 errors=35 tested=18",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=0 read_delay=26 errors=34 tested=27",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=1 read_delay=0 errors=25 tested=33",
+        "DQS_SWEEP best dq_offset=0 dqs_offset=0 read_slip_offset=2 read_delay=0 errors=0 tested=65"
+      ]
+    }
+  },
+  "limits": "Write bitslip and global timings held fixed. Best score is single-seed and not a passing or stable configuration. Legacy initial log banner incorrectly says write-DQ retained; progress correctly records swept offsets; banner corrected after measurement."
+}
