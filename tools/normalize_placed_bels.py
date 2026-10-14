@@ -15,6 +15,7 @@ p.add_argument('--tilegrid',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--package',type=Path,required=True)
 p.add_argument('--chipdb',type=Path,required=True)
+p.add_argument('--logical-lut-inputs',action='store_true',help='Experimental: retain only original mapped LUT A inputs')
 p.add_argument('--prerouted',type=Path,help='Also normalize SITEWIRE names in a reference preroute file')
 a=p.parse_args();grid=json.loads(a.tilegrid.read_text());sites={}
 # Package records explicitly locate IOB sites omitted from tilegrid metadata.
@@ -72,10 +73,20 @@ for name,cell in module['cells'].items():
         if len(variants)!=1:raise ValueError('Missing/ambiguous native BEL '+local)
         local=variants[0]
     cell['attributes']['NEXTPNR_BEL']=tile+'/'+local;count+=1
+removed_lut_inputs=0
+if a.logical_lut_inputs:
+    for cell in module['cells'].values():
+        if cell['type']!='SLICE_LUTX':continue
+        keep={k.removeprefix('X_ORIG_PORT_') for k in cell['attributes'] if k.startswith('X_ORIG_PORT_')}
+        if not keep:raise ValueError('LUT lacks original port mapping')
+        for port in list(cell['connections']):
+            if port in ('A1','A2','A3','A4','A5','A6') and port not in keep:
+                del cell['connections'][port];cell['port_directions'].pop(port,None)
+                removed_lut_inputs+=1
 # Route names are also exported physically; replay placement only, reroute later.
 for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')
-report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_existing_routes':True,
+report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'removed_existing_routes':True,
         'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),
         'chipdb_sha256':hashlib.sha256(data).hexdigest(),
         'package_sha256':hashlib.sha256(a.package.read_bytes()).hexdigest(),

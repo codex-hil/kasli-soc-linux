@@ -1071,3 +1071,25 @@ Bounded 60-second diagnostic in progress, log control-logical-luts.log, input
 logical-lut-placement.json. Next preserve a reproducible explicit logical-pin
 normalization mode and validate INIT/port truth tables before full reference
 route experiment. No hardware accessed.
+
+### Reproducible logical LUT replay mode and bounded route (2026-10-14)
+
+Added opt-in `--logical-lut-inputs` to normalizer; original default is unchanged.
+It retains only A inputs with X_ORIG_PORT metadata, rejecting LUTs without
+metadata, and records 54424 removed input records. 21588 named LUTs match
+pre-pack synthesis INIT exactly (zero integer-value mismatches). This is not
+a full semantic/pin legality proof: packer-generated LUTs, shared pins,
+SRL/DRAM modes and physical routing remain separate checks.
+
+Earlier 60-second control reached router2 resource setup without reported
+loops and ended by timeout124; it was not a completed routing pass. Evidence:
+replay-logical-luts-bounded.log.gz and replay-lut-init-comparison.json.
+
+Started 900-second bounded full replay with both golden MMCM reference trees,
+logical-lut-placement.json/.prerouted.txt, router2 and hold-fix=8/radius=48.
+Container 8 GiB/no swap/2 CPUs. Log logical-full-route.log, output
+logical-top_routed.json/logical-top.fasm/logical-timing.json under
+build/zc706-integrated-golden-clock. Status RUNNING; next inspect completion,
+restore memory limit6 GiB, validate reference paths and timing. Do not program
+or qualify hardware from this experimental normalization alone.
+No hardware accessed in this step.

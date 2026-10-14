@@ -1,0 +1,7 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "matched_source_luts": 21588,
+  "init_mismatches": [],
+  "limitation": "INIT integer comparison only; no packed-generated LUT or physical pin equivalence proof."
+}
