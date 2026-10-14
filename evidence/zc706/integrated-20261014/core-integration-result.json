@@ -1,0 +1,35 @@
+{
+  "result": "PARTIAL",
+  "bitstream_sha256": "5435b9f1131b2ed0177d9adc19ec2457b72e4c4e058c19173a9f54ccdd80c021",
+  "files": {
+    "pl-ddr-test": "979fc2b9a27299335a5d9e7e468ce69165ea1288402ed3906ba552e044f5051f",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "csr.json": "d214bae161909b2b015df1daebeb566838c735aa896d0053540127b10aa85b44",
+    "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "sfp_probe.py": "85cd72a8309bb6a1a248210980adeedfe8e3a04e77cd8f294126ff75b9296e8d",
+    "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+    "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "run_wr_pll_dual.py": "d7cf65f38fc1d182a08748e1da0d794f0621937cb253ff7c533fa9084b072a22",
+    "capture_adc_ddr.py": "300429edb234985fc7061c5f89258c97e14da978f8a7ddde7f57d3eeba72b312"
+  },
+  "restoration_passed": true,
+  "concurrent_phase": {
+    "1": {
+      "samples": 19221,
+      "peak_ns": 5.714285714285714,
+      "stddev_ns": 1.475290550368616,
+      "mean_ns": -0.0001156142876136633
+    },
+    "2": {
+      "samples": 19221,
+      "peak_ns": 5.714285714285714,
+      "stddev_ns": 1.4701553008496646,
+      "mean_ns": -0.00025600306543025457
+    }
+  },
+  "network_result": "NOT_RUN",
+  "core_integration_passed": true,
+  "final_host": "192.168.2.18"
+}

@@ -17,6 +17,7 @@ def main():
     p.add_argument('--preflight-only',action='store_true',help='Validate artifacts without hardware access')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--program',action='store_true')
+    p.add_argument('--external-network',action='store_true',help='Also test a physically connected external SFP link')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
     work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
@@ -29,7 +30,12 @@ def main():
         report=dict(hardware_access=False,qualification=False,bitstream_sha256=digest,artifacts=hashes)
         (a.output/'preflight.json').write_text(json.dumps(report,indent=2)+'\n')
         print(json.dumps(report,indent=2));return
-    record=dict(result='FAIL',bitstream_sha256=digest,files={})
+    golden=ROOT/'build/zc706-adc-ddr/gateware/gateware/top.bit'
+    gm=json.loads((golden.parent/'manifest.json').read_text())
+    if not gm.get('timing_passed') or hashlib.sha256(golden.read_bytes()).hexdigest()!=gm['bitstream_sha256']:
+        raise RuntimeError('Matching timing-clean golden required for restoration')
+    record=dict(result='FAIL',bitstream_sha256=digest,files={},restoration_passed=False)
+    booted=False
     lock=open('/home/codex-hil/.cache/zc706-210251842914.lock','a')
     fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     try:
@@ -37,6 +43,7 @@ def main():
             subprocess.run([ROOT/'.venv/bin/python',ROOT/'tools/boot_adc_jtag.py',
                 '--host',a.host,'--bit',bit,'--output',a.output/'boot'],check=True)
             a.host=json.loads((a.output/'boot/result.json').read_text())['host']
+            booted=True
         ssh=['ssh','-i',str(ROOT/'build/ssh/id_ed25519'),'-o',
             'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),'-o',
             'HostKeyAlias=192.168.2.15','-o','StrictHostKeyChecking=yes',
@@ -60,7 +67,7 @@ def main():
                 subprocess.run(ssh+['cd '+remote+' && '+command],stdout=log,
                     stderr=subprocess.STDOUT,timeout=timeout,check=True)
         run('ddr','./pl-ddr-test')
-        run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --external --output sfp.json')
+        run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 '+('--external ' if a.external_network else '')+'--output sfp.json')
         run('train-adc', '''python3 -c 'from fmc_adc import Registers,ADC; rs=[Registers("csr.json","/dev/uio0",card=i) for i in (1,2)]; [(ADC(r).initialize(),ADC(r).calibrate()) for r in rs]; [r.mem.close() for r in rs]' ''')
         run('adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output initial --max-samples 4194304 --preinitialized')
         with (a.output/'pll.log').open('w') as log:
@@ -69,8 +76,9 @@ def main():
                 import time
                 time.sleep(15)
                 run('concurrent-adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output concurrent --max-samples 4194304 --preinitialized')
-                subprocess.run(['python3',str(ROOT/'tools/test_sfp_network.py'),'--repeat','50',
-                    '--output',str(a.output/'network.json')],check=False,timeout=120)
+                if a.external_network:
+                    subprocess.run(['python3',str(ROOT/'tools/test_sfp_network.py'),'--repeat','50',
+                        '--output',str(a.output/'network.json')],check=False,timeout=120)
                 if pll.poll() is not None:raise RuntimeError('PLL ended before concurrent tests completed')
                 if pll.wait(timeout=120):raise RuntimeError('Dual PLL qualification failed')
             finally:
@@ -89,7 +97,7 @@ def main():
             record['concurrent_phase'][card]=stats
             if stats['peak_ns']>10 or stats['stddev_ns']>=3 or abs(stats['mean_ns'])>=1:
                 raise RuntimeError('Concurrent phase qualification failed: '+card)
-        network=json.loads((a.output/'network.json').read_text())
+        network=json.loads((a.output/'network.json').read_text()) if a.external_network else {'result':'NOT_RUN'}
         record['network_result']=network['result']
         record['result']='PASS' if network['result']=='PASS' else 'PARTIAL'
         record['core_integration_passed']=True
@@ -97,10 +105,29 @@ def main():
         record['error']=str(exc)
         raise
     finally:
-        if 'ssh' in locals():
-            with (a.output/'board.tar').open('wb') as output:
-                subprocess.run(ssh+['tar -C '+remote+' -cf - .'],stdout=output,check=False)
-        (a.output/'validation.json').write_text(json.dumps(record,indent=2)+'\n')
-        lock.close()
+        try:
+            if 'ssh' in locals():
+                with (a.output/'board.tar').open('wb') as output:
+                    subprocess.run(ssh+['tar -C '+remote+' -cf - .'],stdout=output,check=False,timeout=60)
+        finally:
+            try:
+                if a.program:
+                    subprocess.run([ROOT/'.venv/bin/python',ROOT/'tools/boot_adc_jtag.py',
+                        *(['--host',a.host] if booted else []),'--bit',golden,
+                        '--output',a.output/'restore-golden'],check=True,timeout=150)
+                    a.host=json.loads((a.output/'restore-golden/result.json').read_text())['host']
+                    restore_ssh=['ssh','-i',str(ROOT/'build/ssh/id_ed25519'),'-o',
+                        'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),'-o',
+                        'HostKeyAlias=192.168.2.15','-o','StrictHostKeyChecking=yes',
+                        '-o','ConnectTimeout=5','root@'+a.host]
+                    data=(ROOT/'build/zc706-adc-ddr/pl-ddr-test').read_bytes()
+                    subprocess.run(restore_ssh+['cat > /tmp/integrated-restore-bist; chmod 700 /tmp/integrated-restore-bist'],input=data,check=True,timeout=20)
+                    with (a.output/'restored-golden-bist.log').open('w') as output:
+                        subprocess.run(restore_ssh+['/tmp/integrated-restore-bist'],stdout=output,stderr=subprocess.STDOUT,check=True,timeout=300)
+                    record['restoration_passed']=True
+            finally:
+                record['final_host']=a.host
+                (a.output/'validation.json').write_text(json.dumps(record,indent=2)+'\n')
+                lock.close()
 
 if __name__=='__main__':main()

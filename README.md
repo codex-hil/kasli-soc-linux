@@ -756,3 +756,10 @@ passes physical initialization/GP1/address tests and three full1-GiB BIST
 passes with zero errors. Byte-four eyes now overlap across both resets.
 Golden restored and requalified; current Linux192.168.2.16. Dual ADC DMA,
 PLL and SFP integration still need validation. See integration log/evidence.
+
+**2026-10-14 core integration PASS:** dual independent-clock ADC→PL DDR,
+both WR-derived PLLs during acquisition, and1000-frame internal SFP
+PMA/PCS/MAC loopback passed on the integrated golden-clock seed3 image.
+Concurrent phase std≈1.47ns/card; no capture drops/data errors. External
+SFP switch networking remains NOT_RUN. Golden restored and full BIST clean;
+current Linux192.168.2.18. Evidence in integration log.

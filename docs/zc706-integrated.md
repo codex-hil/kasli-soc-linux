@@ -1334,3 +1334,29 @@ PMA/PCS/MAC loopback is independently testable. Dual PLL runner already has
 oscillator restoration in finally. Next implement bounded integrated-test
 cleanup, then exercise dual ADC DMA and PLL on DDR-passing candidate under
 shared lock. External SFP qualification remains dependent on physical link.
+
+### Physical core integration PASS (2026-10-14)
+
+Updated locked integration wrapper accepts candidate work directory, validates
+timing/hash, restores golden and runs its full BIST in finally. Board archive
+collection cannot skip restoration; external SFP network requires explicit
+--external-network. FCLK reference now skips unnecessary Si5324 programming
+in sfp_probe. Dual PLL runner restores original oscillator settings.
+
+Physical test on bit5435b9f1… passed DDR full BIST, both ADC calibrations,
+dual independent-clock sequence/ADC-pattern captures through4194304 samples
+per card plus rearm, and repeated capture with both PLLs running. No dropped
+samples or reader errors. Internal SFP PMA/PCS/MAC loopback1000frames passes,
+CRC/preamble/packet errors zero. During concurrent capture19221 phase records
+per card: FMC1 std1.47529ns/mean−0.000116ns, FMC2 std1.47016ns/mean−0.000256ns,
+peak5.71429ns both. Both PLLs stayed locked; original oscillator registers
+restored. Evidence core-integration-* JSON/logs (large board results gzipped).
+
+core_integration_passed=true; overall PARTIAL solely because external SFP
+network was NOT_RUN. Golden reloaded and passed3 whole1-GiB BIST runs; final
+Linux192.168.2.18. Shared lock held across programming/reset/UART/network/
+I2C/captures/PLL/restoration. No SD/QSPI/OTP writes. Existing golden remains
+the final running design. Next timing-clean direct-clock seed3 control
+(bit b4905e33…, SYS84.14MHz) can be tested in a separate locked comparison
+to distinguish clock-route impact from placement. External switch traffic
+remains a separate pending qualification.

@@ -86,6 +86,8 @@ def identify_module(bus):
 
 
 def initialize_clock(r, bus):
+    if r.map["constants"].get("sfp_refclk_source") == "fclk":
+        return dict(source="fclk", si5324_programmed=False)
     # Same logical divider profile and register mapping as golden ARTIQ
     # artiq-zynq/src/runtime/src/rtio_clocking.rs: Int_125, Si5324 crystal input.
     r.write("sfp_status_control", 16)  # PHY reset, Si5324 reset asserted.
