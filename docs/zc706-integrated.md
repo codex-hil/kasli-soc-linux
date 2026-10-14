@@ -1206,3 +1206,25 @@ shell EXIT trap returns memory to6GiB on normal success/failure/timeout.
 Status ROUTING. Next audit newly emitted physical INIT against original
 logical metadata, verify reference routes remain exact, and check timing.
 No hardware accessed; no image qualified or programmed.
+
+### BEL-aware replay passes LUT audit; SYS setup still fails
+
+Router2 replay completed. Independent physical INIT audit:31496 LUTs,
+1222144 valid physical input assignments, zero mismatches. Logical audit:
+37699 LUT1–6 INIT/active original net checks, zero issues; disconnected
+metadata explicitly listed. Both MMCM reference routes stay exact golden
+PIP sets23/22. Hold clean; SYS75.64MHz fails83.33MHz. This is not a qualified
+bitstream. Audit excludes SRL/DRAM, multiple/disconnected LUT outputs and
+full shared-site/routing legality. No hardware test.
+
+Critical path13.220ns now traverses ADC0 word/address logic to register CE,
+with final route4.910ns. It differs from the prior580-fanout bottleneck.
+Evidence bel-constant-physical-lut-init.json, bel-constant-logical-luts.json,
+bel-constant-routing-result.json and compressed log.
+
+Started bounded900-second router1 control on identical normalized placement
+and golden preroutes,8GiB/no swap/2CPUs, automatic6GiB restoration. Outputs
+router1-timing.json/router1-top_routed.json/router1-top.fasm, log
+router1-full-route.log under build/zc706-integrated-golden-clock. This
+changes routing algorithm only, not RTL/placement/clock targets. Next check
+completion and repeat audits before any assembly/hardware decision.

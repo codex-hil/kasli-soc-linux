@@ -1,0 +1,53 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "checked_by_original_type": {
+    "LUT1": 9921,
+    "LUT2": 5807,
+    "LUT5": 3489,
+    "LUT4": 1210,
+    "LUT3": 4653,
+    "LUT6": 6419
+  },
+  "disconnected_metadata": [
+    {
+      "cell": "$flatten\\reciprocal_counter.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "O"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "CI"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "LI"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_1.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "O"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_1.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "CI"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_1.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "LI"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_2.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "O"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_2.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "CI"
+    },
+    {
+      "cell": "$flatten\\reciprocal_counter_2.$lt$/work/gateware/reciprocal_counter.v:70$14669.genblk1.slice[0].genblk1.carry4$split$xorcy0",
+      "pin": "LI"
+    }
+  ],
+  "issue_count": 0,
+  "issues": [],
+  "limitation": "Checks INIT and named logical connectivity only. Does not prove emitted physical LUT truth tables, shared pins, SRL/DRAM, generated route-throughs or routing legality."
+}
