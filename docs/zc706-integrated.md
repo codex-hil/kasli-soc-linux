@@ -1383,3 +1383,27 @@ No SD/QSPI writes. Evidence direct-clock-placement-control.json and
 direct-clock-seed3-hardware-*/direct-clock-control-* logs. Next make the
 qualified configuration a documented reproducible build target, then continue
 targeted byte7 diagnosis separately from operational integration.
+
+### Reproducible qualified target and verified bundle (2026-10-14)
+
+Added integrated-qualified-pl/software/package Make targets using the exact
+seed3/reset-sync/golden-MMCM-path configuration and isolated output directory.
+PL recipe retains20-minute bound and8GiB/no swap, restoring6GiB afterward.
+Dedicated docs/zc706-integrated-qualified.md describes rebuild, hardware
+wrapper, evidence scope and packaging. Existing experimental target unchanged.
+
+package_integrated.py requires successful timing/bitstream hash plus matching
+physical core result/restoration, validates every tested binary/script/CSR
+hash and embeds build/timing/source/toolchain manifests and evidence. It
+explicitly records external network NOT_RUN. No secrets or SSH keys included.
+Generated zc706-integrated-qualified.tar.xz in qualified work directory:
+3156416bytes,31 checksummed members, SHA256
+`507c4478035d08927f8268a6cbd679e3697ac183c2734611c05b3f011ad42d8e`.
+All archive member hashes verified; no absolute/parent/symlink entries.
+Evidence qualified-package-integrity.json. Make dry-run and Python compile
+checks pass; no redundant FPGA rebuild or hardware access in this step.
+
+This is an existing-Linux PL bring-up bundle, not a new SD image or external
+network qualification. Future changed artifacts require fresh matching HW
+evidence. Next continue targeted byte7 clock-route diagnosis offline while
+retaining this operational configuration.

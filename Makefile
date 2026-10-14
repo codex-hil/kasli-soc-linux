@@ -136,3 +136,15 @@ integrated-software:
 	$(ENV) build/python/bin/python tools/build_ddr_software.py --output-dir build/zc706-integrated
 	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -static -O2 -Wall -Wextra -D_FILE_OFFSET_BITS=64 software/pl_ddr/adc_read.c -o build/zc706-integrated/adc-ddr-read
 	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o build/zc706-integrated/i2c.so
+
+# Physically validated DDR + dual ADC/PLL + internal SFP configuration.
+INTEGRATED_QUALIFIED_DIR = build/zc706-integrated-golden-clock-clean-seed3
+.PHONY: integrated-qualified-pl integrated-qualified-software integrated-qualified-package
+integrated-qualified-pl:
+	trap 'docker update --memory 6g --memory-swap 6g kasli-a4983c2304ef >/dev/null' EXIT; KASLI_BUILD_MEMORY=8g $(ENV) timeout 1200 build/python/bin/python tools/build_pl.py --board zc706 --design integrated --ddr-sync-reset --seed 3 --router router2 --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt --output-dir $(INTEGRATED_QUALIFIED_DIR)/gateware --openxc7 build/tools/openxc7 --yosys /usr/bin/yosys
+integrated-qualified-software:
+	$(ENV) build/python/bin/python tools/build_ddr_software.py --output-dir $(INTEGRATED_QUALIFIED_DIR)
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -static -O2 -Wall -Wextra -D_FILE_OFFSET_BITS=64 software/pl_ddr/adc_read.c -o $(INTEGRATED_QUALIFIED_DIR)/adc-ddr-read
+	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o $(INTEGRATED_QUALIFIED_DIR)/i2c.so
+integrated-qualified-package:
+	python3 tools/package_integrated.py --work-dir $(INTEGRATED_QUALIFIED_DIR)

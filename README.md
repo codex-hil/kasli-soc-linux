@@ -1,3 +1,9 @@
+> Validated ZC706 core (2026-10-14): dual ADC→DDR, dual PLL during acquisition
+> and internal SFP loopback PASS. Rebuild/package: `make integrated-qualified-pl`,
+> `make integrated-qualified-software`, `make integrated-qualified-package`.
+> See [qualified configuration and bundle](docs/zc706-integrated-qualified.md).
+> External SFP link remains NOT_RUN; this package is not an SD image.
+
 # Kasli-SoC Linux / LiteX / openXC7
 
 Work in progress. **Kasli-SoC milestone 1 has not been validated on hardware.**
