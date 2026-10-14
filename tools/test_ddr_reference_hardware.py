@@ -14,6 +14,7 @@ LOCK=Path('/home/codex-hil/.cache/zc706-210251842914.lock')
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
+    p.add_argument('--candidate-bist',action='store_true',help='Also run full reference DDR BIST on candidate before restoration')
     p.add_argument('--repeats',type=int,choices=range(1,4),default=1,
                    help='Repeat initialization/diagnostic without reloading PL (maximum 3).')
     p.add_argument('--diagnostic',choices=('lanes','controls','dqs-sweep','dq-dqs-sweep','dq-detail','dq-eye','dq-eye-no-retrain','dq-eye-reset'),default='lanes')
@@ -64,6 +65,7 @@ def main():
             boot(a.candidate_bit,'candidate-boot')
             candidate_boot_passed=True
             repeat_test('candidate')
+            if a.candidate_bist:test(a.golden_software,'candidate-bist',False)
         finally:
             try:
                 boot(a.golden_bit,'restore-golden',sync_host=candidate_boot_passed)

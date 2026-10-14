@@ -1283,3 +1283,31 @@ build/zc706-integrated-golden-clock-clean-seed3-build.log;1200sec bounded,
 8GiB/no swap/2CPUs with automatic6GiB restoration. Next validate final timing,
 exact reference routes and physical INIT before deciding on hardware.
 No hardware accessed.
+
+### Integrated golden-clock seed3 physically passes DDR (2026-10-14)
+
+Clean RTL seed3 passes internal setup (SYS83.668MHz required83.333MHz),
+final hold, physical LUT INIT audit31497 LUTs/1221024 assignments, zero
+errors. Both MMCM reference paths match golden exactly23/22 PIPs. Bitstream:
+`5435b9f1131b2ed0177d9adc19ec2457b72e4c4e058c19173a9f54ccdd80c021`.
+Manifest and compressed route log archived as clean-golden-clock-seed3-*.
+
+Two locked physical candidate/golden windows completed. First: candidate
+trained byte-four eye plus two reset/JEDEC/replay scans now have24/22/23
+common passing settings (previous integrated candidates had zero). Second:
+normal upstream initialization/GP1 smoke/address test and three whole1-GiB
+BIST passes on candidate PASS, zero errors. Candidate diagnostic lane test
+also PASS. New wrapper `--candidate-bist` records this bounded full test
+before mandatory golden restoration.
+
+Golden reloaded and passed its three whole1-GiB BIST passes, zero errors;
+final Linux IP192.168.2.16. Shared ZC706 lock covered all boot/JTAG/reset/
+UART/SSH/tests/restoration. No SD/QSPI writes. Evidence clean-seed3-eye-*
+and clean-seed3-bist-*/clean-seed3-full-bist-result.json.
+
+This is DDR success for the specific integrated image, not full ADC/PLL/SFP
+qualification or proof of sole root cause: seed3 placement differs from
+prior failing builds, though clock trees are controlled. Next build seed3
+without forced MMCM paths as a control, then exercise actual dual independent
+ADC DMA→DDR with PLL/SFP in this timing-clean design. Entire integrated
+manifest hardware_validated remains false until those tests pass.

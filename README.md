@@ -750,3 +750,9 @@ replay LUT audits now pass but setup fails; actual router1 control did not
 complete its bounded window. A clean RTL build with golden MMCM reference
 routes is running, with timing and physical tests pending. Golden hardware
 has not been changed. See integration log for evidence and reproduction.
+
+**2026-10-14 DDR milestone:** clean integrated seed3 with golden MMCM routes
+passes physical initialization/GP1/address tests and three full1-GiB BIST
+passes with zero errors. Byte-four eyes now overlap across both resets.
+Golden restored and requalified; current Linux192.168.2.16. Dual ADC DMA,
+PLL and SFP integration still need validation. See integration log/evidence.
