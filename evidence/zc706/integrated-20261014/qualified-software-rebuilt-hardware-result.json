@@ -1,0 +1,28 @@
+{
+  "diagnostic": "lanes",
+  "repeats": 1,
+  "hardware_access": true,
+  "sd_qspi_written": false,
+  "tests": {
+    "candidate-lanes": {
+      "exit": 0,
+      "software_sha256": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36"
+    },
+    "candidate-bist": {
+      "exit": 0,
+      "software_sha256": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36"
+    },
+    "golden-lanes": {
+      "exit": 0,
+      "software_sha256": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36"
+    },
+    "golden-bist": {
+      "exit": 0,
+      "software_sha256": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36"
+    }
+  },
+  "restoration_passed": true,
+  "candidate_bit_sha256": "5435b9f1131b2ed0177d9adc19ec2457b72e4c4e058c19173a9f54ccdd80c021",
+  "golden_bit_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "final_host": "192.168.2.24"
+}

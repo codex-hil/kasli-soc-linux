@@ -1,0 +1,31 @@
+{
+  "hardware_access": false,
+  "phase_measured": false,
+  "configurations": [
+    {
+      "sys": "direct",
+      "ddr4x": "direct",
+      "build": "zc706-integrated-direct-clock-seed3",
+      "hardware": "FAIL byte7"
+    },
+    {
+      "sys": "golden",
+      "ddr4x": "golden",
+      "build": "zc706-integrated-golden-clock-clean-seed3",
+      "hardware": "PASS DDR+core integration"
+    },
+    {
+      "sys": "golden",
+      "ddr4x": "direct",
+      "build": "zc706-integrated-golden-sys-only-seed3",
+      "hardware": "NOT_RUN",
+      "build_status": "ROUTING"
+    },
+    {
+      "sys": "direct",
+      "ddr4x": "golden",
+      "build_status": "NOT_BUILT",
+      "hardware": "NOT_RUN"
+    }
+  ]
+}

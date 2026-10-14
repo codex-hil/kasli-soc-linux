@@ -1470,3 +1470,26 @@ build/zc706-integrated-golden-sys-only-seed3-build.log. Bounded1200sec,8GiB
 no swap/2CPUs with automatic6GiB restoration. Next require timing/hold,
 physical INIT audit and exact intended clock route sets before locked HW
 comparison. No hardware accessed this step; operational artifacts preserved.
+
+### SYS-only build remains routing; software rebuild physically checked
+
+SYS-only reference build is still within its20-minute bounded window,
+router2 main loop; no manifest/timing result yet. Offline four-configuration
+matrix explicitly distinguishes measured direct/direct and golden/golden
+from running golden/direct and unbuilt direct/golden. No phase measurement
+is implied by the matrix.
+
+Rebuilt software into isolated qualified-software-recheck without changing
+the tested candidate/package. ADC reader and I2C shared object hashes match
+exactly. Current source pl-ddr-test hash a02d0bea… differs from original
+979fc2b9…, so did not silently inherit validation. Locked physical test
+ran rebuilt software initialization/lane diagnostics and3 whole1-GiB BIST
+passes on the qualified bitstream, all PASS. Golden restored and3 whole1-GiB
+BIST passes using rebuilt program PASS, zero errors; final IP192.168.2.24.
+
+Evidence qualified-software-rebuild-check.json and
+qualified-software-rebuilt-hardware-result/logs. No SD/QSPI writes. Existing
+qualified archive/evidence unchanged; packaging still requires its exact
+core-test artifact hashes, and updated software is not retroactively marked
+as the software from that earlier full integration run. Next inspect SYS-only
+completion and gate hardware tests on timing/INIT/route checks.
