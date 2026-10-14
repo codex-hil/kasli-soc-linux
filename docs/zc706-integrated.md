@@ -1035,3 +1035,19 @@ remains successful but does not establish replayed packed logic correctness.
 Next run the same normalized snapshot without preroute to separate packed
 logic restoration from clock route-through interactions. Evidence
 `golden-clock-full-route-failure.log`. No hardware access.
+
+### Replay control without reference routes reproduces 594 loops (2026-10-14)
+
+Project container was stopped; restarted only this existing container through
+the normal environment wrapper. Bounded 90-second no-pack/no-place replay of
+the identical normalized placement, without `-o prerouted`, reports 594
+combinational loops and rejects timing before routing. Thus golden MMCM
+reference binding is not required for the failure. Do not suppress loop
+checks or attribute the loops to physical golden routes.
+
+Evidence in integrated-20261014: replay-control-summary.json and compressed
+control log. Next inspect packed netlist/timing metadata reconstruction,
+particularly register timing classes and LUT legality transformations, versus
+the original successful in-memory route. Original candidate hardware fault
+and packed replay failure remain separate issues. No hardware accessed;
+last qualified golden unchanged.

@@ -1,0 +1,7 @@
+{
+  "hardware_access": false,
+  "prerouted_reference_used": false,
+  "combinational_loops": 594,
+  "outcome": "Timing analysis failed before routing",
+  "conclusion": "Reference routes are not required to reproduce packed replay failure"
+}
