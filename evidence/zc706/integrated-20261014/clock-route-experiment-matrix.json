@@ -19,13 +19,14 @@
       "ddr4x": "direct",
       "build": "zc706-integrated-golden-sys-only-seed3",
       "hardware": "NOT_RUN",
-      "build_status": "ROUTING"
+      "build_status": "SETUP_FAIL 77.99MHz; hold clean"
     },
     {
       "sys": "direct",
       "ddr4x": "golden",
-      "build_status": "NOT_BUILT",
-      "hardware": "NOT_RUN"
+      "build_status": "BUILDING",
+      "hardware": "NOT_RUN",
+      "build": "zc706-integrated-golden-ddr4x-only-seed3"
     }
   ]
 }

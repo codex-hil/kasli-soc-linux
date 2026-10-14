@@ -1,0 +1,12 @@
+{
+  "hardware_access": false,
+  "docker_calls_mocked": true,
+  "cases": [
+    "success",
+    "command exit7"
+  ],
+  "result": "PASS",
+  "restored_memory": "6g",
+  "restored_swap_limit": "6g",
+  "container_name": "derived from checkout path, not hardcoded"
+}

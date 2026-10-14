@@ -1493,3 +1493,25 @@ qualified archive/evidence unchanged; packaging still requires its exact
 core-test artifact hashes, and updated software is not retroactively marked
 as the software from that earlier full integration run. Next inspect SYS-only
 completion and gate hardware tests on timing/INIT/route checks.
+
+### SYS-only reference result and opposite clock control (2026-10-14)
+
+SYS-only completed rather than timing out. Intended route counts confirmed:
+SYS23 PIPs, DDR4x7. Final SYS77.99MHz fails83.33MHz;15 hold buffers leave
+zero hold violations. No qualified bitstream/hardware test. Evidence
+sys-only-seed3-result.json and compressed route log; matrix updated.
+
+Prepared golden-ddr4x-only-prerouted.txt and started opposite clean seed3
+control: direct SYS, golden DDR4x, same RTL/reset/clock targets. Output
+build/zc706-integrated-golden-ddr4x-only-seed3/gateware; log
+build/zc706-integrated-golden-ddr4x-only-seed3-build.log. Bounded1200sec,
+8GiB/no swap/2CPUs and automatic6GiB restoration. Next check final timing,
+actual path selection and physical INIT before considering HW.
+
+Fixed portability issue in qualified Make target: removed hardcoded container
+name from cleanup. Environment wrapper now restores6GiB in finally after
+8GiB command success/failure using its checkout-derived NAME. Mocked
+success/exit7 tests confirm cleanup and original error propagation; no real
+Docker/HW used by these checks. Evidence environment-limit-cleanup-check.
+Existing running build retains its prior outer EXIT trap. No hardware access
+this turn; golden image and validated package unchanged.

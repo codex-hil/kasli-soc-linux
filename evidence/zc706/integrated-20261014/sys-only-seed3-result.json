@@ -1,0 +1,15 @@
+{
+  "hardware_access": false,
+  "qualified": false,
+  "sys_fmax": {
+    "achieved": 77.99095916748047,
+    "constraint": 83.33333587646484
+  },
+  "hold_remaining": 0,
+  "hold_buffers": 15,
+  "hardware_test": "NOT_RUN",
+  "clock_pip_counts": {
+    "ddrclock_clkout0": 23,
+    "ddrclock_clkout1": 7
+  }
+}

@@ -77,9 +77,14 @@ def main():
     if args.command:
         # Keep compiler/download temporary files on the project's data disk.
         (ROOT / "build/tmp").mkdir(exist_ok=True)
-        call(["docker", "exec", "-w", "/work", "-e", "CARGO_HOME=/work/build/cargo",
-              "-e", "RUSTUP_HOME=/work/build/rustup", "-e", "TMPDIR=/work/build/tmp",
-              NAME, *args.command])
+        try:
+            call(["docker", "exec", "-w", "/work", "-e", "CARGO_HOME=/work/build/cargo",
+                  "-e", "RUSTUP_HOME=/work/build/rustup", "-e", "TMPDIR=/work/build/tmp",
+                  NAME, *args.command])
+        finally:
+            if BUILD_MEMORY != "6g":
+                call(["docker", "update", "--memory", "6g", "--memory-swap", "6g", NAME],
+                     stdout=subprocess.DEVNULL)
 
 
 if __name__ == "__main__":
