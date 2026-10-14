@@ -1538,3 +1538,15 @@ Full clean Yosys/openXC7 seed3 build started in
 and synchronous DDR reset; bounded 1200 seconds and 8 GiB. Build log:
 `build/zc706-integrated-dma-pipeline-build.log`. Timing and hardware validation
 remain pending. The qualified golden bitstream/package have not been replaced.
+
+Pipeline continuation: DDR BIST, ADC reader and I2C helper rebuilt successfully
+against the new generated headers. Complete CSR JSON matches the qualified
+build exactly. Artifact hashes: `dma-pipeline-software.json` in the 20261014
+evidence directory. Placement completed and router2 is resolving congestion;
+no final timing/bitstream yet and no hardware accessed. Next: finish bounded
+build, audit LUT INIT and setup/hold, then use the locked integrated hardware
+wrapper with golden restoration if all offline gates pass.
+
+The preceding DDR4x-only clock-route control completed with SYS 83.11 MHz
+against required 83.33 MHz (FAIL); it was not programmed. Its failed timing
+is separate from the new DMA pipeline experiment.

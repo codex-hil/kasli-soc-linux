@@ -774,3 +774,10 @@ Clock-route control2026-10-14: identical-placement seed3 with direct MMCM
 paths fails DDR byte7 initialization; the golden-route image remains the
 qualified core-integration candidate. Golden restored/full BIST clean at
 Linux192.168.2.20. A passing byte4 eye alone is insufficient for full DDR.
+
+DMA pipeline experiment (2026-10-14): registered address/data beats and an
+incrementing DMA pointer pass independent-clock simulation, including stalls,
+overflow, short bursts and changed-base rearm. Full integrated Yosys/openXC7
+build is routing in `build/zc706-integrated-dma-pipeline`; timing and physical
+qualification are pending. The generated CSR map matches the qualified build
+exactly. Qualified bitstream/package are preserved. See the integration log.
