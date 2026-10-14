@@ -1228,3 +1228,20 @@ router1-timing.json/router1-top_routed.json/router1-top.fasm, log
 router1-full-route.log under build/zc706-integrated-golden-clock. This
 changes routing algorithm only, not RTL/placement/clock targets. Next check
 completion and repeat audits before any assembly/hardware decision.
+
+### Corrected router-selection control (2026-10-14)
+
+Previously labeled router1 attempt completed with SYS75.64MHz/hold clean,
+but log says Running router2 and output settings.router remains router2.
+Loaded JSON settings override CLI router choice. Therefore prior attempt
+is a repeated router2 result, not independent router1 evidence. Recorded
+router-choice-override-control.json/.log.gz.
+
+Normalizer adds explicit `--replay-router router1|router2`, sets the loaded
+setting and records it in summary. Generated router1-placement.json with
+otherwise same BEL-aware constants and reference clocks. Started actual
+router1 replay bounded900sec,8GiB/no swap/2CPUs with automatic6GiB restore.
+Output prefix actual-router1 and actual-router1-full-route.log under
+build/zc706-integrated-golden-clock. Need confirm actual algorithm from log
+and final settings before reporting comparison. Then repeat LUT audits and
+setup/hold checks. No hardware accessed.

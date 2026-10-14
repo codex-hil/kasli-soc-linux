@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "requested_cli_router": "router1",
+  "actual_snapshot_router": "router2",
+  "independent_router1_trial": false,
+  "setup_sys_mhz": 75.64,
+  "qualified": false
+}

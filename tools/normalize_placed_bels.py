@@ -15,6 +15,7 @@ p.add_argument('--tilegrid',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--package',type=Path,required=True)
 p.add_argument('--chipdb',type=Path,required=True)
+p.add_argument('--replay-router',choices=('router1','router2'),help='Set snapshot router explicitly; loaded settings override nextpnr CLI')
 p.add_argument('--logical-lut-inputs',action='store_true',help='Experimental: retain only original mapped LUT A inputs')
 p.add_argument('--prerouted',type=Path,help='Also normalize SITEWIRE names in a reference preroute file')
 a=p.parse_args();grid=json.loads(a.tilegrid.read_text());sites={}
@@ -100,10 +101,11 @@ if a.logical_lut_inputs:
         for port,bits in cell['connections'].items():
             if bits and port not in pins:raise ValueError('No physical LUT pin '+name+'/'+port)
             if bits:validated_lut_pins+=1
+if a.replay_router:module['settings']['router']=a.replay_router
 # Route names are also exported physically; replay placement only, reroute later.
 for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')
-report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'preserved_constant_inputs':preserved_constant_inputs,'validated_lut_pins':validated_lut_pins,'removed_existing_routes':True,
+report={'hardware_access':False,'qualification':False,'replay_router':a.replay_router,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'preserved_constant_inputs':preserved_constant_inputs,'validated_lut_pins':validated_lut_pins,'removed_existing_routes':True,
         'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),
         'chipdb_sha256':hashlib.sha256(data).hexdigest(),
         'package_sha256':hashlib.sha256(a.package.read_bytes()).hexdigest(),
