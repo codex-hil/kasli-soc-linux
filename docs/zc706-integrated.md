@@ -1180,3 +1180,11 @@ constant-top.fasm, log constant-full-route.log. Status ROUTING.
 Next inspect completion and rerun physical INIT audit on actual newly
 produced JSON/FASM before timing qualification. Return resource limit6GiB
 after completion. No hardware accessed.
+
+Immediate corrected-route result: router rejects A6 on a destination D5LUT
+(`$PACKER_GND_NET$LUT$...replace_alu$64859...DI[1]`), because a5LUT has no
+physical A6 input. Blanket constant preservation is therefore too broad.
+No route completed. Container returned6GiB. Next preserve A6 high constraints
+only for physical6LUT/O6 while removing inapplicable fifth-LUT A6 metadata;
+validate all retained destination pins exist before routing. This rejection
+is not a reason to bypass pin checks or program the failed variant.
