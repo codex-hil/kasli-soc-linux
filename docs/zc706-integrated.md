@@ -1113,3 +1113,23 @@ and inspect the66.38-MHz critical path before further route attempts.
 The reference clock-routing experiment is now reproducible through completed
 routing, but physical DDR hypothesis remains untested due setup failure.
 No HW accessed; last qualified golden remains on board.
+
+### Critical path and logical LUT connectivity audit (2026-10-14)
+
+SYS critical path15.064ns includes10.908ns routing on
+`integratedsoc_wdata_cdc_cdc_graycounter1_q_next_binary[1]`. It drives580
+input pins in both original reset candidate and replay, primarily distributed
+RAM address inputs; endpoint span is [174,57]→[241,188]. This is a concrete
+route/fanout bottleneck, not evidence of a DDR electrical fault. Path in
+replay-sys-critical-path.json.
+
+Added compare_replayed_lut_logic.py comparing INIT and logical input/output
+net aliases through X_ORIG_PORT metadata after rerouting. Checked37699 LUT1–6
+cells;9 unresolved logical alias checks are confined to3 transformed
+reciprocal comparator XORCY cells (ports O/CI/LI). Do not mark equivalence
+PASS: these may be stale original-port entries but require explicit inspection.
+Physical LUT INIT/pin equivalence, SRL/DRAM and generated route-through logic
+remain outside this check. Evidence replay-logical-lut-connectivity.json.
+Next resolve these9 metadata cases and inspect physical INIT pin mapping;
+then address580-fanout routing with measured constraints rather than relaxing
+SYS timing. No hardware access.
