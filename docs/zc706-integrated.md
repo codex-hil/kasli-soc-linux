@@ -1311,3 +1311,26 @@ prior failing builds, though clock trees are controlled. Next build seed3
 without forced MMCM paths as a control, then exercise actual dual independent
 ADC DMA→DDR with PLL/SFP in this timing-clean design. Entire integrated
 manifest hardware_validated remains false until those tests pass.
+
+### Direct-clock seed3 control and integrated test preflight (2026-10-14)
+
+Started clean seed3/reset-sync/router2 build without forced golden routes:
+build/zc706-integrated-direct-clock-seed3/gateware, log
+build/zc706-integrated-direct-clock-seed3-build.log. Same RTL/clock targets,
+1200sec bounded8GiB/no swap/2CPUs, automatic6GiB restore. This control tests
+whether passing DDR correlates with reference clock paths versus seed3
+placement. No conclusion until completed and physically compared.
+
+Integrated test wrapper now accepts --work-dir and --preflight-only and
+requires timing_passed plus matching bitstream hash. Reused existing static
+software binaries with unchanged register ABI, staged them beside the passing
+seed3 candidate. Offline preflight validates artifact presence/digests;
+evidence integration-candidate-preflight.json. No hardware access.
+
+Review also found old integrated wrapper lacks mandatory golden restoration
+and always requires external SFP networking. Do not run it on hardware until
+restoration/BIST and optional external-link handling are implemented; internal
+PMA/PCS/MAC loopback is independently testable. Dual PLL runner already has
+oscillator restoration in finally. Next implement bounded integrated-test
+cleanup, then exercise dual ADC DMA and PLL on DDR-passing candidate under
+shared lock. External SFP qualification remains dependent on physical link.

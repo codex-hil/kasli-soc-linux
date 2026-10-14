@@ -13,14 +13,22 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--host',required=True)
+    p.add_argument('--work-dir',type=Path,default=ROOT/'build/zc706-integrated')
+    p.add_argument('--preflight-only',action='store_true',help='Validate artifacts without hardware access')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--program',action='store_true')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
-    work=ROOT/'build/zc706-integrated';bit=work/'gateware/gateware/top.bit'
+    work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
     manifest=json.loads((bit.parent/'manifest.json').read_text())
-    if manifest['design']!='integrated' or manifest['bitstream_sha256']!=digest:
+    if manifest['design']!='integrated' or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching integrated build required')
+    required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
+    hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in required}
+    if a.preflight_only:
+        report=dict(hardware_access=False,qualification=False,bitstream_sha256=digest,artifacts=hashes)
+        (a.output/'preflight.json').write_text(json.dumps(report,indent=2)+'\n')
+        print(json.dumps(report,indent=2));return
     record=dict(result='FAIL',bitstream_sha256=digest,files={})
     lock=open('/home/codex-hil/.cache/zc706-210251842914.lock','a')
     fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)

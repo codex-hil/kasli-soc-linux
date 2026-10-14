@@ -1,0 +1,11 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "5435b9f1131b2ed0177d9adc19ec2457b72e4c4e058c19173a9f54ccdd80c021",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-integrated-golden-clock-clean-seed3/pl-ddr-test": "979fc2b9a27299335a5d9e7e468ce69165ea1288402ed3906ba552e044f5051f",
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-integrated-golden-clock-clean-seed3/adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-integrated-golden-clock-clean-seed3/i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-integrated-golden-clock-clean-seed3/gateware/csr.json": "d214bae161909b2b015df1daebeb566838c735aa896d0053540127b10aa85b44"
+  }
+}
