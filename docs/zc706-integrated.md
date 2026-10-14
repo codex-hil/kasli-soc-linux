@@ -1617,3 +1617,34 @@ New clean build: build/zc706-integrated-dma-bram, seed3, same synchronous DDR
 reset/golden MMCM routes, bounded2400seconds/8GiB. Next verify inferred BRAM
 resources and setup/hold before any physical test. No claim of timing or
 hardware success yet; golden bitstream/package remain unchanged.
+
+### DMA pipeline + BRAM physical integration PASS — 2026-10-14
+
+Clean Yosys/openXC7 build in build/zc706-integrated-dma-bram passes all
+reported setup clocks: SYS86.24MHz versus83.333MHz required, final hold clean
+after three feedthrough buffers. Four explicitly annotated CDC data memories
+map to block RAM. Combinational INIT audit:31567 LUTs/1226544 assignments,
+zero issues. Bitstream SHA256:
+6da4da64a004caac5ae27ac35ad2cbfe29a12016298043a4c63244e3096a771b.
+
+Locked physical test tools/test_integrated_hardware.py --program completed:
+Linux boot, DDR init/leveling and PS GP1 smoke/address access, three whole1GiB
+BIST passes; both independent ADC streams pass sequence/pattern captures up
+to4194304 samples/card, no errors or drops, approximately800MB/s/card during
+capture. Repeat captures with both PLLs active pass. Concurrent phase statistics:
+FMC1 std1.5396ns/mean-0.0133ns, FMC2 std1.5320ns/mean-0.0135ns; peak6.1905ns
+each. Internal SFP loopback test passed. External switch networking NOT_RUN.
+Result PARTIAL refers to absent external-network qualification; core integration
+passed=true. These finite bursts do not establish indefinite continuous capture.
+
+Wrapper held shared ZC706 lock for boot/JTAG/UART/network/test/restoration.
+Golden standalone ADC+DDR restored and three whole1GiB BIST passes repeated
+cleanly. Final Linux192.168.2.7. No SD/QSPI/boot-environment writes. Evidence:
+dma-bram-* in integrated-20261014. Old qualified package remains intact.
+
+Reproduce with the same build_pl.py command documented above using output
+build/zc706-integrated-dma-bram, seed3 and2400second budget. Build software
+with tools/build_ddr_software.py --output-dir build/zc706-integrated-dma-bram
+and compile adc_read.c/i2c.c as in integrated-software, targeting that directory.
+Run the locked wrapper with --work-dir build/zc706-integrated-dma-bram,
+--host ACTUAL_BOARD_IP, --program and a fresh --output directory.

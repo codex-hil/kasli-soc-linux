@@ -1,0 +1,146 @@
+{
+  "hardware_access": false,
+  "forced_bram_memories": [
+    "top.storage_14",
+    "top.storage_20",
+    "top.storage_21",
+    "top.storage_9"
+  ],
+  "mapping": "PASS",
+  "timing": {
+    "adc2_clk": {
+      "achieved": 146.82131958007812,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 123.70114135742188,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "eth_rx_clk": {
+      "achieved": 154.17822265625,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 193.49844360351562,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1002.0039672851562,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 58.37711715698242,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 254.2588348388672,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 541.7117919921875,
+      "constraint": 200
+    },
+    "integratedsoc_ddrclock_clkin_signal": {
+      "achieved": 821.0180053710938,
+      "constraint": 100
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "achieved": 86.24407196044922,
+      "constraint": 83.33333587646484
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 1002.0039672851562,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 991.080322265625,
+      "constraint": 62.5
+    }
+  },
+  "manifest": {
+    "physical_part": "xc7z045ffg900-2",
+    "database_part": "xc7z045ffg900-2",
+    "design": "integrated",
+    "nextpnr_seed": 3,
+    "prerouted_sha256": "754c50916bd2eebeb4991e140b8f1cc088647a770562e8114ddda0e5ebbf5ccf",
+    "ddr_serdes_sync_reset": true,
+    "sfp_refclk": "fclk",
+    "adc_cards": 2,
+    "reciprocal": true,
+    "wr_pll": true,
+    "wr_pll_cards": 2,
+    "hardware_validated": false,
+    "timing_passed": true,
+    "bitstream_sha256": "6da4da64a004caac5ae27ac35ad2cbfe29a12016298043a4c63244e3096a771b",
+    "commands": [
+      [
+        "/usr/bin/yosys",
+        "-l",
+        "top.rpt",
+        "top.ys"
+      ],
+      [
+        "/work/build/zc706-integrated/nextpnr/nextpnr-himbaechel-xilinx",
+        "--device",
+        "xc7z045ffg900-2",
+        "--json",
+        "top.json",
+        "-o",
+        "xdc=top.xdc",
+        "-o",
+        "fasm=top.fasm",
+        "--write",
+        "top_routed.json",
+        "-o",
+        "prerouted=/work/evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt",
+        "--router",
+        "router2",
+        "--seed",
+        "3",
+        "--freq",
+        "100",
+        "--report",
+        "timing.json",
+        "--chipdb",
+        "/work/build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin",
+        "-o",
+        "hold-fix=8",
+        "-o",
+        "hold-buffer-radius=48"
+      ],
+      [
+        "/work/build/tools/openxc7/bin/fasm2frames",
+        "--part",
+        "xc7z045ffg900-2",
+        "--db-root",
+        "/work/build/zc706-integrated/clock-db/zynq7",
+        "top.fasm"
+      ],
+      [
+        "/work/build/tools/openxc7/bin/xc7frames2bit",
+        "--part_file",
+        "/work/build/zc706-integrated/clock-db/zynq7/xc7z045ffg900-2/part.yaml",
+        "--part_name",
+        "xc7z045ffg900-2",
+        "--frm_file",
+        "top.frames",
+        "--output_file",
+        "top.bit"
+      ]
+    ],
+    "route_input_sha256": {
+      "top.json": "1b63c086e0bc60fa213dfd8dfe9c670e47cd10027e4c8ae81724193dea5466c9",
+      "top.fasm": "0ca55895ab6b96bb913d4753263fc6e30500b962b09176bba53e05607fd1d306",
+      "timing.json": "a396bcba9c1b857be14fda4f67beb994074427858d01c06d820e3dca7e4cbb38"
+    },
+    "assembly_resumed": false
+  }
+}

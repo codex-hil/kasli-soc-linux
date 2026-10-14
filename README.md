@@ -797,3 +797,10 @@ Pipeline seed2 also misses SYS timing (83.15/83.33MHz), again in the wide native
 CDC FIFO read-address path. A controlled BRAM-mapping build is now running in
 `build/zc706-integrated-dma-bram`; four data FIFOs are annotated, keeping upstream
 CDC logic. Synthesis mapping, timing and hardware validation remain pending.
+
+DMA pipeline + BRAM mapping physically validated (2026-10-14): SYS86.24MHz
+(required83.33), hold clean, DDR three whole1GiB BIST passes, dual independent
+ADC captures up to4194304 samples/card at about800MB/s/card with no errors/drops,
+both PLLs active during captures, internal SFP loopback PASS. External SFP switch
+link remains NOT_RUN. Shared-lock test restored golden and repeated full DDR
+BIST cleanly; Linux192.168.2.7. Reproducer/evidence in the integration log.
