@@ -1427,3 +1427,24 @@ restoration passed; Linux192.168.2.7. No SD/QSPI writes. Evidence byte7-control-
 contains full per-point logs and summaries. Operational golden-clock package
 unchanged. Next compare module7 eyes on the qualified integrated image under
 the same software settings, then inspect common clock phase/skew evidence.
+
+### Qualified integrated byte7 passes identical eye control (2026-10-14)
+
+Same module7 binary7dd19940… on qualified golden-clock seed3 image yields
+24 common passing settings in each of three scans (trained, reset1, reset2).
+The direct-clock image yielded zero settings in all3 scans with split DQ
+groups, while standalone golden yielded23. Same diagnostic/write offsets
+and finite96 samples per DQ per point. This confirms the operational image
+has a full-byte7 eye; it does not independently identify read versus write
+cause or prove a particular clock PIP wrong.
+
+Shared lock covered full candidate/golden boot/UART/SSH/reset/test/restoration.
+Golden restored and passed3 full1-GiB BIST runs, zero errors; final Linux
+192.168.2.22. Evidence byte7-qualified-*; no SD/QSPI writes. Qualified
+archive and working integration bitstream remain unchanged.
+
+Next prepare a compact offline diagnostic/reproducer separating clock route
+configuration from relative SYS/DDR4x phase evidence, retaining these measured
+controls. Do not propose speculative polarity/phase changes as a general fix.
+External SFP switch qualification remains NOT_RUN and module EEPROM was NACK
+in the last integration test; internal loopback result does not cover it.
