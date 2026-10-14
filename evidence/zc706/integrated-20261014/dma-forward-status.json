@@ -1,0 +1,11 @@
+{
+  "simulation": "PASS",
+  "hardware_access": false,
+  "timing": "BUILD_RUNNING",
+  "ready_pipeline": "existing output_buffer; command_buffer forward register only",
+  "build_dir": "build/zc706-integrated-dma-forward",
+  "timeout_seconds": 2400,
+  "seed": 3,
+  "memory_gib": 8,
+  "golden_replaced": false
+}

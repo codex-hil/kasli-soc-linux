@@ -781,3 +781,8 @@ overflow, short bursts and changed-base rearm. Full integrated Yosys/openXC7
 build is routing in `build/zc706-integrated-dma-pipeline`; timing and physical
 qualification are pending. The generated CSR map matches the qualified build
 exactly. Qualified bitstream/package are preserved. See the integration log.
+
+Pipeline follow-up: the first route timed out before timing analysis. A smaller
+forward-only command register passes the same simulation suite; clean build is
+now in `build/zc706-integrated-dma-forward` with a bounded 2400-second budget.
+Hardware qualification is still pending; the qualified golden remains intact.

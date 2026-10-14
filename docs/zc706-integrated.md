@@ -1550,3 +1550,24 @@ wrapper with golden restoration if all offline gates pass.
 The preceding DDR4x-only clock-route control completed with SYS 83.11 MHz
 against required 83.33 MHz (FAIL); it was not programmed. Its failed timing
 is separate from the new DMA pipeline experiment.
+
+### Pipeline routing budget and storage reduction — 2026-10-14
+
+The full valid+ready command buffer experiment hit the overall 1200-second
+build timeout (exit124), router iteration10, 105 overused wires remaining.
+No timing report or bitstream was produced; no hardware test was attempted.
+Archived stage1 log and result: dma-pipeline-full-buffer-* in 20261014 evidence.
+
+The existing output_buffer already registers ready feedback. Reduced the new
+command buffer to a forward-only valid/address/data register, retaining the
+existing ready cut. This avoids a redundant 512-bit skid store plus its address
+and mux. The complete independent-clock simulation suite passed again, including
+command-address stability through stalls and changed-base rearm. Evidence:
+dma-forward-simulation.log.
+
+Started a clean build in build/zc706-integrated-dma-forward, same seed3,
+synchronous DDR reset and both golden MMCM routes, with an increased but bounded
+2400-second budget and 8GiB memory (automatic 6GiB restoration). Log:
+build/zc706-integrated-dma-forward-build.log. Timing/bitstream/hardware remain
+pending. Golden artifacts unchanged. Next step: inspect final setup/hold and
+LUT INIT, rebuild matching software, then locked physical qualification if clean.

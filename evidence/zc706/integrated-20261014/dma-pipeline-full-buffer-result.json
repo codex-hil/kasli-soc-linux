@@ -1,0 +1,12 @@
+{
+  "result": "TIMEOUT",
+  "exit_code": 124,
+  "timeout_seconds": 1200,
+  "timing": "NOT_AVAILABLE",
+  "bitstream": "NOT_GENERATED",
+  "hardware_access": false,
+  "last_router_iteration": 10,
+  "last_overused_wires": 105,
+  "rtl_commit": "c6792de",
+  "next_experiment": "Forward-only address/data register; upstream buffer retains ready pipeline"
+}

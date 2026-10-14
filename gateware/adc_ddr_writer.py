@@ -77,8 +77,11 @@ class ADCToDDR(LiteXModule):
         # pipeline, independently of command acceptance downstream. Preloading
         # an incrementing pointer removes base+words from the native command path.
         next_address = Signal(port.address_width)
+        # The existing output_buffer already cuts ready feedback. Only the
+        # forward beat needs another register here; a second skid buffer would
+        # duplicate 512-bit storage and its mux without another required cut.
         self.command_buffer = stream.Buffer(self.writer.sink.description,
-            pipe_valid=True, pipe_ready=True)
+            pipe_valid=True, pipe_ready=False)
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
