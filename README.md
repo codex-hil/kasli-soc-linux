@@ -763,3 +763,8 @@ PMA/PCS/MAC loopback passed on the integrated golden-clock seed3 image.
 Concurrent phase std≈1.47ns/card; no capture drops/data errors. External
 SFP switch networking remains NOT_RUN. Golden restored and full BIST clean;
 current Linux192.168.2.18. Evidence in integration log.
+
+Clock-route control2026-10-14: identical-placement seed3 with direct MMCM
+paths fails DDR byte7 initialization; the golden-route image remains the
+qualified core-integration candidate. Golden restored/full BIST clean at
+Linux192.168.2.20. A passing byte4 eye alone is insufficient for full DDR.

@@ -1,0 +1,18 @@
+{
+  "hardware_access": true,
+  "candidate_qualified": false,
+  "read_leveling_best": [
+    "best: m0, b02 delays: 07+-07",
+    "best: m1, b02 delays: 06+-06",
+    "best: m2, b03 delays: 23+-07",
+    "best: m3, b03 delays: 23+-06",
+    "best: m4, b03 delays: 23+-07",
+    "best: m5, b03 delays: 24+-06",
+    "best: m6, b03 delays: 21+-07",
+    "best: m7, b06 delays: -"
+  ],
+  "full_bist_started": false,
+  "initialization_failed": true,
+  "golden_restored": true,
+  "final_host": "192.168.2.20"
+}

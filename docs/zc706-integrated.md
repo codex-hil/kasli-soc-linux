@@ -1360,3 +1360,26 @@ the final running design. Next timing-clean direct-clock seed3 control
 (bit b4905e33…, SYS84.14MHz) can be tested in a separate locked comparison
 to distinguish clock-route impact from placement. External switch traffic
 remains a separate pending qualification.
+
+### Same-placement direct-clock hardware control fails byte7 (2026-10-14)
+
+Compared both seed3 builds:63548 common named cells have identical physical
+BEL placement (zero differences). Direct-clock MMCM paths are7/7 PIPs versus
+qualified golden-reference23/22. Under shared lock, direct candidate boots
+Linux and byte4 diagnostic has common eyes, but normal DDR initialization
+fails: byte7 has no read window at any of8 bitslips; bytes0–6 have windows.
+Normal memtest fails before full BIST starts; do not count it as a completed
+BIST. This exposes why byte4 alone cannot qualify the full64-bit DDR interface.
+
+Qualified forced-golden build previously passed full BIST and complete core
+integration at the same placement. This supports clock-routing/relative
+phase influence, but other signal routes also differ; no individual PIP
+defect is proved. Need targeted byte7/clock timing evidence before proposing
+a general upstream repair. Keep the proven golden-clock build as operational
+choice; do not replace it with this control.
+
+Golden restored and passed3 full1-GiB BIST runs, zero errors; Linux192.168.2.20.
+No SD/QSPI writes. Evidence direct-clock-placement-control.json and
+direct-clock-seed3-hardware-*/direct-clock-control-* logs. Next make the
+qualified configuration a documented reproducible build target, then continue
+targeted byte7 diagnosis separately from operational integration.
