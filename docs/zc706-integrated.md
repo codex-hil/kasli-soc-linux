@@ -1188,3 +1188,21 @@ No route completed. Container returned6GiB. Next preserve A6 high constraints
 only for physical6LUT/O6 while removing inapplicable fifth-LUT A6 metadata;
 validate all retained destination pins exist before routing. This rejection
 is not a reason to bypass pin checks or program the failed variant.
+
+### BEL-aware constant pin reconstruction passes physical pin validation
+
+Normalizer retains explicit constants except inapplicable A6 on5LUT, while
+retaining A6→VCC on6LUT. It now reads each selected BEL's actual pin table
+from exact schema6 chipdb and rejects any connected LUT port absent there.
+230435 connected LUT pins validated,14082 constant inputs retained and
+40342 extra input records removed. Input/output digest evidence:
+replay-bel-constants-summary.json. This validates pin existence, not shared
+site compatibility or final physical truth tables.
+
+Started full900-second bounded router2 replay with reference MMCM routes,
+8GiB/no swap/2CPUs. Output prefix bel-constant under
+build/zc706-integrated-golden-clock; log bel-constant-full-route.log. Host
+shell EXIT trap returns memory to6GiB on normal success/failure/timeout.
+Status ROUTING. Next audit newly emitted physical INIT against original
+logical metadata, verify reference routes remain exact, and check timing.
+No hardware accessed; no image qualified or programmed.

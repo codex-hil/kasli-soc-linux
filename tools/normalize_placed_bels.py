@@ -55,7 +55,10 @@ def bel_names(tile):
     index=tile_names[tile]
     if index not in cache:
         pos=types+40*index;ptr=rel(pos+4)
-        cache[index]={names[u32(ptr+36*i)] for i in range(u32(pos+8))}
+        cache[index]={}
+        for i in range(u32(pos+8)):
+            bel=ptr+36*i;pinptr=rel(bel+24)
+            cache[index][names[u32(bel)]]={names[u32(pinptr+12*j)] for j in range(u32(bel+28))}
     return cache[index]
 design=json.loads(a.input.read_text());module=design['modules']['top'];count=0
 for name,cell in module['cells'].items():
@@ -82,14 +85,25 @@ if a.logical_lut_inputs:
         if not keep:raise ValueError('LUT lacks original port mapping')
         for port in list(cell['connections']):
             if port in ('A1','A2','A3','A4','A5','A6') and port not in keep:
-                if cell['connections'][port] and all(bit in constant_bits for bit in cell['connections'][port]):
+                native_bel=cell['attributes']['NEXTPNR_BEL'].split('/')[-1]
+                pin_exists=not (port=='A6' and native_bel.endswith('5LUT'))
+                if pin_exists and cell['connections'][port] and all(bit in constant_bits for bit in cell['connections'][port]):
                     preserved_constant_inputs+=1;continue
                 del cell['connections'][port];cell['port_directions'].pop(port,None)
                 removed_lut_inputs+=1
+validated_lut_pins=0
+if a.logical_lut_inputs:
+    for name,cell in module['cells'].items():
+        if cell['type']!='SLICE_LUTX':continue
+        tile,bel=cell['attributes']['NEXTPNR_BEL'].split('/')
+        pins=bel_names(tile)[bel]
+        for port,bits in cell['connections'].items():
+            if bits and port not in pins:raise ValueError('No physical LUT pin '+name+'/'+port)
+            if bits:validated_lut_pins+=1
 # Route names are also exported physically; replay placement only, reroute later.
 for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')
-report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'preserved_constant_inputs':preserved_constant_inputs,'removed_existing_routes':True,
+report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'preserved_constant_inputs':preserved_constant_inputs,'validated_lut_pins':validated_lut_pins,'removed_existing_routes':True,
         'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),
         'chipdb_sha256':hashlib.sha256(data).hexdigest(),
         'package_sha256':hashlib.sha256(a.package.read_bytes()).hexdigest(),
