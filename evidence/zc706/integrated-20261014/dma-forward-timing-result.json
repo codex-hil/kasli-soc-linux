@@ -1,0 +1,313 @@
+{
+  "result": "TIMING_FAIL",
+  "hardware_access": false,
+  "bitstream": "NOT_GENERATED",
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 165.23463439941406,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 137.7410430908203,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "eth_rx_clk": {
+      "achieved": 141.8842315673828,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 212.72068786621094,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 900.0900268554688,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 72.98737335205078,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 252.908447265625,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 463.8218994140625,
+      "constraint": 200
+    },
+    "integratedsoc_ddrclock_clkin_signal": {
+      "achieved": 809.0615234375,
+      "constraint": 100
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "achieved": 79.9872055053711,
+      "constraint": 83.33333587646484
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 1001.0009765625,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 914.0767822265625,
+      "constraint": 62.5
+    }
+  },
+  "system_critical_path": [
+    {
+      "from": "posedge integratedsoc_ddrclock_clkout_buf0",
+      "path": [
+        {
+          "delay": 0.3499999940395355,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$133793",
+            "loc": [
+              171,
+              48
+            ],
+            "port": "Q"
+          },
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$133793",
+            "loc": [
+              171,
+              48
+            ],
+            "port": "Q"
+          },
+          "type": "clk-to-q"
+        },
+        {
+          "delay": 1.3459999561309814,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$133793",
+            "loc": [
+              171,
+              48
+            ],
+            "port": "Q"
+          },
+          "net": "integratedsoc_wdata_cdc_cdc_graycounter1_q_binary[0]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward/gateware/gateware/top.v:8141.15-8141.64"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$278765",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "A1"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$278765",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "A1"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$278765",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$278765",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "O6"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$64984.X[0]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward/gateware/gateware/top.v:19429.67-19429.123",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:112.23-112.24"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$64984.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "S0"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.5839999914169312,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$64984.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "S0"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$64984.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "O3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.4690000116825104,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$64984.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              174,
+              19
+            ],
+            "port": "O3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$64984.Y[3]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward/gateware/gateware/top.v:19429.67-19429.123",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:168.23-168.24"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272683",
+            "loc": [
+              174,
+              21
+            ],
+            "port": "A5"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272683",
+            "loc": [
+              174,
+              21
+            ],
+            "port": "A5"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272683",
+            "loc": [
+              174,
+              21
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 8.184000015258789,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272683",
+            "loc": [
+              174,
+              21
+            ],
+            "port": "O6"
+          },
+          "net": "integratedsoc_wdata_cdc_cdc_graycounter1_q_next_binary[3]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward/gateware/gateware/top.v:8145.15-8145.53"
+          ],
+          "to": {
+            "cell": "storage_20.0.15/DPR0_0",
+            "loc": [
+              231,
+              193
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.15000000596046448,
+          "from": {
+            "cell": "storage_20.0.15/DPR0_0",
+            "loc": [
+              231,
+              193
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "storage_20.0.15/DPR0_0",
+            "loc": [
+              231,
+              193
+            ],
+            "port": "O5"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 1.069000005722046,
+          "from": {
+            "cell": "storage_20.0.15/DPR0_0",
+            "loc": [
+              231,
+              193
+            ],
+            "port": "O5"
+          },
+          "net": "$\\storage_20$rdreg[0]$d[94]",
+          "sources": [],
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$87900",
+            "loc": [
+              231,
+              209
+            ],
+            "port": "D"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.10000000149011612,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$87900",
+            "loc": [
+              231,
+              209
+            ],
+            "port": "D"
+          },
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$87900",
+            "loc": [
+              231,
+              209
+            ],
+            "port": "D"
+          },
+          "type": "setup"
+        }
+      ],
+      "to": "posedge integratedsoc_ddrclock_clkout_buf0"
+    }
+  ],
+  "final_hold_violations": 0,
+  "next_experiment": "Same RTL and golden clock paths with placement seed2; isolated output directory"
+}

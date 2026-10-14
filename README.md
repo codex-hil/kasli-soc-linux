@@ -786,3 +786,9 @@ Pipeline follow-up: the first route timed out before timing analysis. A smaller
 forward-only command register passes the same simulation suite; clean build is
 now in `build/zc706-integrated-dma-forward` with a bounded 2400-second budget.
 Hardware qualification is still pending; the qualified golden remains intact.
+
+Forward pipeline seed3 completed routing but fails SYS timing (79.99 versus
+83.33MHz), with zero remaining hold violations. Its worst path is now the
+PS write-data CDC FIFO read-address route (8.184ns routing segment). LUT INIT
+audit passed; no hardware programming. Same RTL seed2 build is running in
+`build/zc706-integrated-dma-forward-seed2`; physical validation remains pending.

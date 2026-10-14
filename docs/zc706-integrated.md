@@ -1571,3 +1571,27 @@ synchronous DDR reset and both golden MMCM routes, with an increased but bounded
 build/zc706-integrated-dma-forward-build.log. Timing/bitstream/hardware remain
 pending. Golden artifacts unchanged. Next step: inspect final setup/hold and
 LUT INIT, rebuild matching software, then locked physical qualification if clean.
+
+### Forward pipeline seed3 timing result — 2026-10-14
+
+Routing completed, but final SYS Fmax is 79.9872MHz versus required 83.3333MHz.
+Final hold-fix reports zero remaining violations (six feedthrough buffers).
+No bitstream was accepted/generated and no hardware was accessed. All other
+reported clock domains meet their constraints.
+
+The worst SYS path is now the PS native write-data CDC FIFO read pointer:
+q_binary[0] -> increment/mux -> q_next_binary[3] -> storage_20 LUTRAM read
+address -> read-data register. Its largest routing segment is 8.184ns, from
+placement (174,21) to (231,193). Total path is approximately12.502ns. The
+previous ADC base+words command path is absent from this worst-path report;
+this is not proof that all ADC paths have enough margin. Evidence:
+dma-forward-timing-result.json and dma-forward-stage1.log.gz.
+
+Upstream NativePortCDC defaults to depth16 wide data FIFOs. Crossbar get_port
+automatically inserts this CDC for the 50MHz gp1 domain; the failing path
+ends in distributed RAM rather than an ADC-domain register. No upstream CDC
+implementation has been changed. First controlled experiment: same RTL,
+reset and golden clock paths with seed2, bounded2400seconds/8GiB, output
+build/zc706-integrated-dma-forward-seed2, log with -build.log suffix.
+Next compare its timing before choosing any explicit PS FIFO buffering/BRAM
+change. Hardware qualification remains pending and golden is preserved.
