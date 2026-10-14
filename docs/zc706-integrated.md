@@ -1263,3 +1263,23 @@ build/zc706-integrated-golden-clock-clean-build.log. Container8GiB/no swap/
 2CPUs, command bounded1200sec then6GiB restoration. Status BUILDING.
 Next inspect timing, exact route sets, FASM/physical LUT audit and route-through
 legality before any hardware action. No FPGA/SD/QSPI accesses this turn.
+
+### Clean RTL golden-clock seed2 nearly meets setup (2026-10-14)
+
+Clean build completed routing, but SYS82.05MHz fails83.33MHz. Final hold
+repair12 buffers leaves zero violations. Physical INIT audit checks31495
+connected combinational LUTs/1222080 assignments, zero errors. Both reference
+MMCM paths remain exact golden PIP sets. No qualified manifest/bitstream and
+no hardware programming. Resource cap returned6GiB. Evidence:
+clean-golden-clock-lut-init.json, clean-golden-clock-seed2-result.json and
+compressed route log.
+
+Critical ADC0 address/word→register CE path about12.19ns; final routing segment
+4.083ns. Setup deficit about0.19ns. Started a single controlled seed3
+placement/routing trial with identical RTL, DDR/clock parameters and fixed
+golden MMCM reference paths. Output
+build/zc706-integrated-golden-clock-clean-seed3/gateware, log
+build/zc706-integrated-golden-clock-clean-seed3-build.log;1200sec bounded,
+8GiB/no swap/2CPUs with automatic6GiB restoration. Next validate final timing,
+exact reference routes and physical INIT before deciding on hardware.
+No hardware accessed.
