@@ -1093,3 +1093,23 @@ build/zc706-integrated-golden-clock. Status RUNNING; next inspect completion,
 restore memory limit6 GiB, validate reference paths and timing. Do not program
 or qualify hardware from this experimental normalization alone.
 No hardware accessed in this step.
+
+### Golden clock replay completes routing but fails setup (2026-10-14)
+
+Full replay completes before the 900-second limit. Both upstream reference
+clock PIP sets remain exact: SYS23 and DDR4x22 PIPs, no added/removed PIPs
+relative to golden. Final hold reports no violations. SYS setup fails:
+66.38 MHz achieved versus 83.33 required; no hardware test/qualified bitstream.
+Container returned to6 GiB/no swap. Other clocks and complete route log in
+`golden-route-replay-result.json`/`golden-route-replay-full.log.gz`.
+
+Comparing emitted LUT INIT feature lines to the original reset candidate
+shows30747 reference versus33578 replay lines,22497 removed/25328 added.
+Rerouting may permute pins and insert route-through logic, so raw feature
+differences do not prove a functional mismatch. They also prohibit claiming
+that source INIT equality alone establishes replay equivalence. Need validate
+final functions against mapped pins, including generated LUTs/shared sites,
+and inspect the66.38-MHz critical path before further route attempts.
+The reference clock-routing experiment is now reproducible through completed
+routing, but physical DDR hypothesis remains untested due setup failure.
+No HW accessed; last qualified golden remains on board.
