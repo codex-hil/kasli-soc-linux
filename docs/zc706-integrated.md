@@ -1133,3 +1133,29 @@ remain outside this check. Evidence replay-logical-lut-connectivity.json.
 Next resolve these9 metadata cases and inspect physical INIT pin mapping;
 then address580-fanout routing with measured constraints rather than relaxing
 SYS timing. No hardware access.
+
+### Replay physical LUT INIT audit fails with clean reference control
+
+The nine unresolved alias checks were O/CI/LI entries disconnected on both
+sides of three transformed carry cells. Comparator now records these cases
+explicitly rather than reporting nonexistent active nets as changed. All
+37699 LUT1–6 INIT and active original logical net checks pass; disconnected
+metadata remains separately listed.
+
+Added independent physical INIT checker: parse FASM64-bit INIT, OR duplicate
+feature assignments, evaluate each connected single-output combinational
+LUT through X_ORIG_PORT physical pin mapping under known GND/VCC constraints.
+Original reset candidate control:31496 LUTs/1222144 assignments, zero errors.
+Replay: same31496 LUTs/1406544 assignments,6966 LUTs report truth-table
+mismatch. Counts differ because physical constant-pin constraints differ.
+The experimental logical-pin normalization is therefore not physically
+qualified; source INIT equality and logical connectivity are insufficient.
+Do not assemble/program this replay. More work must distinguish missing
+constant-pin ties from shared-LUT permutations.
+
+Evidence: replay-logical-lut-connectivity-resolved.json,
+reference-physical-lut-init-control.json and replay-physical-lut-init.json.
+Checker records first100 mismatch examples and total count; it excludes
+SRL/DRAM, disconnected/multiple outputs and routing legality. Next repair
+replay's physical constant/pin reconstruction and repeat the clean-reference
+control before optimizing its timing. No hardware accessed.

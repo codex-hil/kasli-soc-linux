@@ -10,7 +10,7 @@ def load(path):
  for n,v in m['netnames'].items():
   for index,bit in enumerate(v['bits']):nets.setdefault(bit,set()).add((n,index))
  return m['cells'],nets
-x,xn=load(a.reference);y,yn=load(a.candidate);counts={};issues=[]
+x,xn=load(a.reference);y,yn=load(a.candidate);counts={};issues=[];disconnected_metadata=[]
 for name,c in x.items():
  if c['type']!='SLICE_LUTX':continue
  if name not in y:issues.append({'cell':name,'issue':'missing cell'});continue
@@ -23,8 +23,10 @@ for name,c in x.items():
  cp,dp=pins(c),pins(d)
  if set(cp)!=set(dp):issues.append({'cell':name,'issue':'logical port set changed'});continue
  for pin in cp:
+  if not cp[pin] and not dp[pin]:
+   disconnected_metadata.append({'cell':name,'pin':pin});continue
   if len(cp[pin])!=1 or len(dp[pin])!=1 or not (xn.get(cp[pin][0],set()) & yn.get(dp[pin][0],set())):
    issues.append({'cell':name,'pin':pin,'issue':'no shared logical net alias'})
-r={'hardware_access':False,'qualification':False,'checked_by_original_type':counts,'issue_count':len(issues),'issues':issues,
+r={'hardware_access':False,'qualification':False,'checked_by_original_type':counts,'disconnected_metadata':disconnected_metadata,'issue_count':len(issues),'issues':issues,
    'limitation':'Checks INIT and named logical connectivity only. Does not prove emitted physical LUT truth tables, shared pins, SRL/DRAM, generated route-throughs or routing legality.'}
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(r,indent=2)+'\n');print(counts,'issues',len(issues))

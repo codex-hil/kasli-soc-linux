@@ -1,0 +1,612 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "checked_luts": 31496,
+  "checked_assignments": 1406544,
+  "skipped_luts": 6582,
+  "issues": [
+    {
+      "cell": "wr_phase_wrphase9[9]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[8]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[7]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[6]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[5]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[4]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[3]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[31]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[30]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[2]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[29]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[28]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[27]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[26]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[25]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[24]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[23]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[22]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[21]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[20]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[1]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[19]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[18]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[17]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[16]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[15]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[14]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[13]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[12]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[11]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase9[10]$LUT$$auto$alumacc.cc:495:replace_alu$66065.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[9]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[8]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[7]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[6]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[5]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[4]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[3]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[31]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[30]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[2]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[29]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[28]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[27]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[26]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[25]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[24]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[23]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[22]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[21]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[20]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[1]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[19]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[18]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[17]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[16]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[15]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[14]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[13]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[12]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[11]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase8[10]$LUT$$auto$alumacc.cc:495:replace_alu$66062.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[9]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[8]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[7]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[6]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[5]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[4]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[3]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[31]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[30]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[2]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[29]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[28]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[7].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[27]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[26]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[25]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[24]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[23]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[22]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[21]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[20]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[1]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[19]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[18]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[17]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[16]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[15]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[14]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[13]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[12]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[11]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase7[10]$LUT$$auto$alumacc.cc:495:replace_alu$66068.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[9]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[8]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[7]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[6]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[2]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[5]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[1]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[4]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[0]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    },
+    {
+      "cell": "wr_phase_wrphase6[3]$LUT$$auto$alumacc.cc:495:replace_alu$66074.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$$S[3]",
+      "issue": "truth table mismatch",
+      "cases": 32,
+      "errors": 8
+    }
+  ],
+  "limitation": "Finite combinational LUT INIT/pin audit only; excludes SRL/DRAM, disconnected or multiple outputs and routing legality.",
+  "issue_count": 6966,
+  "issues_truncated": true
+}
