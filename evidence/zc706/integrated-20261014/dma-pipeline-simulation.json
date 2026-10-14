@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "kind": "RTL simulation; no hardware access",
+  "command": "build/python/bin/python tools/test_adc_ddr.py",
+  "sys_period": 12,
+  "adc_periods": [
+    10,
+    14
+  ],
+  "cases": [
+    "256 samples/card; three runs with changed nonzero base and ADC reset",
+    "8 samples/card; three runs",
+    "16 samples/card; three runs",
+    "1024 samples/card; bounded full stall, overflow/drop accounting and drain",
+    "zero length rejected",
+    "unaligned length rejected",
+    "unaligned base rejected",
+    "real data path",
+    "frame failure sticky status"
+  ],
+  "checks": [
+    "exact sample sequence/data at every address",
+    "no duplicate addresses",
+    "native command valid/address stable during backpressure",
+    "written+dropped equals capture length on overflow",
+    "completion/rearm with no stale addresses"
+  ],
+  "hardware_validation": "NOT_RUN",
+  "timing_validation": "BUILD_RUNNING"
+}

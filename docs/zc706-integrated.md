@@ -1515,3 +1515,26 @@ success/exit7 tests confirm cleanup and original error propagation; no real
 Docker/HW used by these checks. Evidence environment-limit-cleanup-check.
 Existing running build retains its prior outer EXIT trap. No hardware access
 this turn; golden image and validated package unchanged.
+
+### DMA address/data pipeline — 2026-10-14
+
+Added a registered LiteX stream buffer carrying the complete native address/data
+beat before each LiteDRAM DMA writer. An incrementing address pointer is loaded
+from the capture base and advances only when this buffer accepts a beat; the
+written counter still advances on DMA command acceptance. This removes the
+base-plus-word-count adder from the native DDR command path. Completion drains
+the new buffer as well as the existing FIFO/data queues. ADC packing and the
+two independent clock-domain crossings are unchanged; CSR layout is unchanged.
+
+RTL simulation PASS: independent 10/14-unit ADC clocks versus 12-unit system
+clock, command/data stalls, native address stability under backpressure, exact
+data/address matching, overflow/drop accounting, 8/16/256-sample captures,
+changed nonzero bases on rearm, ADC reset, real input, frame/config failures.
+Evidence: integrated-20261014/dma-pipeline-simulation.json. This is simulation,
+not physical DDR qualification.
+
+Full clean Yosys/openXC7 seed3 build started in
+`build/zc706-integrated-dma-pipeline`, with both qualified golden MMCM paths
+and synchronous DDR reset; bounded 1200 seconds and 8 GiB. Build log:
+`build/zc706-integrated-dma-pipeline-build.log`. Timing and hardware validation
+remain pending. The qualified golden bitstream/package have not been replaced.

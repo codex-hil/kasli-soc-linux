@@ -73,15 +73,21 @@ class ADCToDDR(LiteXModule):
         )
 
         words = Signal(24)
-        base_word = Signal(port.address_width)
+        # Address advances when the complete address/data beat enters the
+        # pipeline, independently of command acceptance downstream. Preloading
+        # an incrementing pointer removes base+words from the native command path.
+        next_address = Signal(port.address_width)
+        self.command_buffer = stream.Buffer(self.writer.sink.description,
+            pipe_valid=True, pipe_ready=True)
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
-        self.comb += empty.eq(~self.fifo.source.valid & ~self.output_buffer.source.valid & ~self.writer.fifo.source.valid)
-        self.comb += [self.writer.sink.valid.eq(busy & self.output_buffer.source.valid),
-            self.writer.sink.data.eq(self.output_buffer.source.data),
-            self.writer.sink.address.eq(base_word + words),
-            self.output_buffer.source.ready.eq(busy & self.writer.sink.ready),
+        self.comb += empty.eq(~self.fifo.source.valid & ~self.output_buffer.source.valid & ~self.command_buffer.source.valid & ~self.writer.fifo.source.valid)
+        self.comb += [self.command_buffer.sink.valid.eq(busy & self.output_buffer.source.valid),
+            self.command_buffer.sink.data.eq(self.output_buffer.source.data),
+            self.command_buffer.sink.address.eq(next_address),
+            self.output_buffer.source.ready.eq(busy & self.command_buffer.sink.ready),
+            self.command_buffer.source.connect(self.writer.sink),
             self.status.status.eq(Cat(busy, done, overflow_sys, frame_bad_sys, config_bad)),
             self.written.status.eq(words << 3)]
         # Widen the span/end calculation: no wrapped range can pass the check.
@@ -98,12 +104,14 @@ class ADCToDDR(LiteXModule):
                 | (self.length.storage[:3] != 0) | (end > 0x40000000) | ~empty,
                 config_bad.eq(1), done.eq(1)
             ).Else(
-                base_word.eq(self.base.storage[6:]), words.eq(0),
+                next_address.eq(self.base.storage[6:]), words.eq(0),
                 settling.eq(0), launching.eq(0), busy.eq(1),
                 size_latched.eq(self.length.storage), synthetic_latched.eq(self.synthetic.storage)
             )
         ).Elif(busy,
             self.ticks.status.eq(self.ticks.status + 1),
+            If(self.command_buffer.sink.valid & self.command_buffer.sink.ready,
+                next_address.eq(next_address + 1)),
             If(self.writer.sink.valid & self.writer.sink.ready, words.eq(words + 1)),
             If(launching != 8,
                 launching.eq(launching + 1),

@@ -25,8 +25,14 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
     @passive
     def memory():
         cycle=0
+        held=[None, None]
         while True:
             for i,port in enumerate(ports):
+                # Native command address must remain stable throughout a stall.
+                if held[i] is not None:
+                    assert (yield port.cmd.valid)
+                    assert (yield port.cmd.addr)==held[i], 'Address changed under backpressure'
+                held[i]=(yield port.cmd.addr) if (yield port.cmd.valid) and not (yield port.cmd.ready) else None
                 (yield port.cmd.ready.eq(not stall and cycle%7!=0))
                 (yield port.wdata.ready.eq(bool(queues[i]) and cycle%5!=0))
                 if (yield port.cmd.valid) and (yield port.cmd.ready):
@@ -50,6 +56,12 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
                 for _ in range(8):yield
                 yield top.cd_adc.rst.eq(0);yield top.cd_adc2.rst.eq(0)
                 for _ in range(8):yield
+            # Rearm at a different nonzero base: queued addresses must not leak
+            # from the previous capture, including after an ADC-domain reset.
+            base_offset=(run+1)*0x20000
+            for i,w in enumerate(writers):
+                yield w.base.storage.eq(base_offset+i*0x10000+(1 if misaligned else 0))
+            yield
             for w in writers:yield w.start.re.eq(1)
             yield
             for w in writers:yield w.start.re.eq(0)
@@ -76,9 +88,9 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
                     assert status==(10 if frame_bad else 2),status
                     assert (yield w.written.status)==length
                     assert (yield w.dropped.status)==0
-                    assert i*0x10000//64 in ram, (i, len(ram), sorted(ram)[:8], sorted(ram)[-8:])
+                    assert (base_offset+i*0x10000)//64 in ram, (i, len(ram), sorted(ram)[:8], sorted(ram)[-8:])
                     for index in range(length):
-                        word=ram[i*0x10000//64+index//8]
+                        word=ram[(base_offset+i*0x10000)//64+index//8]
                         value=(word>>(64*(index%8)))&((1<<64)-1)
                         assert value == (0x1111222233334444+i if real else index | ((index^(0xadc00001+i))<<32)),(i,index,hex(value))
             ram.clear()
@@ -113,6 +125,8 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
 
 
 exercise()
+exercise(length=8)
+exercise(length=16)
 exercise(stall=True,length=1024)
 exercise(invalid=True,length=0)
 exercise(invalid=True,length=7)
