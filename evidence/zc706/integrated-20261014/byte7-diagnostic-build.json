@@ -1,0 +1,11 @@
+{
+  "hardware_access": false,
+  "module": 7,
+  "dq_bits": [
+    56,
+    63
+  ],
+  "software_sha256": "7dd19940540d68a3acbd4a09c7119aa32ee64856f4aa3c351c08f5b0f26ee68f",
+  "generated_source_sha256": "b297f261adefc74808aa7095fec91d230d37fca2afbc1e6ba6502710367ee178",
+  "analyzer_module_fixture": "PASS for modules 0,4,7; rejects8"
+}

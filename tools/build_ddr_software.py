@@ -10,8 +10,10 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output-dir',type=Path,default=ROOT/'build/zc706-ddr')
 parser.add_argument('--cmd-delay',type=int,choices=range(32),help='Diagnostic override of upstream clock/command tap selection')
 parser.add_argument('--trace-dfi',action='store_true',help='Instrument an isolated liblitedram copy with bounded byte-four raw DFI logs')
+parser.add_argument('--module',type=int,choices=range(8),default=4,help='Diagnostic DDR byte (requires --dqs-sweep)')
 parser.add_argument('--dqs-sweep',action='store_true',help='Build bounded byte-four DQS/read sweep diagnostic')
 args=parser.parse_args()
+if args.module != 4 and not args.dqs_sweep:parser.error("--module requires --dqs-sweep")
 OUT = args.output_dir.resolve()
 SW = ROOT/'upstream/litex/litex/soc/software'
 INC = OUT/'software/include/hw'
@@ -68,7 +70,11 @@ if args.dqs_sweep:
     assert text.count(setter) == 1, 'Upstream write bitslip setter changed'
     text = 'static int sdram_lab_write_slip = -1;\n' + text
     text = text.replace(setter, setter + '\tif (module == 4) sdram_lab_write_slip = bitslip;\n', 1)
-    text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text()
+    text += '\n' + (ROOT/'software/pl_ddr/dqs_sweep.c.inc').read_text().replace('(4,', '(SDRAM_LAB_MODULE,')
+    text=text.replace('module == 4','module == SDRAM_LAB_MODULE')
+    for name in ('prs[p]','tst'):
+        text=text.replace(name+'[4]',name+'[SDRAM_LAB_MODULE]').replace(name+'[12]',name+'[SDRAM_LAB_MODULE+8]')
+    text=f'#define SDRAM_LAB_MODULE {args.module}\n'+text
     sdram_source = OUT/'software/sdram-dqs-sweep.c'
     sdram_source.write_text(text)
 subprocess.run([ROOT/'build/zc706/buildroot/host/bin/arm-linux-gcc', '-std=gnu11', '-O2', '-static',

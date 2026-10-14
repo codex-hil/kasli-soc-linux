@@ -1,0 +1,24 @@
+{
+  "diagnostic": "dq-eye-reset",
+  "repeats": 1,
+  "hardware_access": true,
+  "sd_qspi_written": false,
+  "tests": {
+    "candidate-dq-eye-reset": {
+      "exit": 1,
+      "software_sha256": "7dd19940540d68a3acbd4a09c7119aa32ee64856f4aa3c351c08f5b0f26ee68f"
+    },
+    "golden-dq-eye-reset": {
+      "exit": 0,
+      "software_sha256": "7dd19940540d68a3acbd4a09c7119aa32ee64856f4aa3c351c08f5b0f26ee68f"
+    },
+    "golden-bist": {
+      "exit": 0,
+      "software_sha256": "3a5404850e5fb7a4d8ebeb9b25f9386d12d78c6c21eac9577ab78d82268e2bd6"
+    }
+  },
+  "restoration_passed": true,
+  "candidate_bit_sha256": "b4905e33587eabb34e7e5b510e04add28fe2facf0d333b4c899cb0292867e3ba",
+  "golden_bit_sha256": "f0e51e4ab9297cc5bb8f6236c77bd9945a5d24db96c5448e659c5f6dd3da654e",
+  "final_host": "192.168.2.7"
+}

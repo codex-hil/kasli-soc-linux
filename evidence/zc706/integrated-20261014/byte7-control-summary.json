@@ -1,0 +1,233 @@
+{
+  "hardware_access": true,
+  "qualification": false,
+  "module": 7,
+  "dq_range": [
+    56,
+    63
+  ],
+  "runs": {
+    "golden-dq-eye-reset-1": {
+      "common_passing_settings": 23,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "golden-dq-eye-reset-2": {
+      "common_passing_settings": 23,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "golden-dq-eye-reset-3": {
+      "common_passing_settings": 23,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "candidate-dq-eye-reset-1": {
+      "common_passing_settings": 0,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "candidate-dq-eye-reset-2": {
+      "common_passing_settings": 0,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "candidate-dq-eye-reset-3": {
+      "common_passing_settings": 0,
+      "dq56_to_63_passing_slips": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    }
+  }
+}

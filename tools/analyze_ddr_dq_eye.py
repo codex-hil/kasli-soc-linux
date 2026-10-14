@@ -7,7 +7,8 @@ import re
 from pathlib import Path
 
 
-def analyze(text):
+def analyze(text, module=4):
+    if module not in range(8):raise ValueError("Invalid DDR module")
     points={}
     for line in text.splitlines():
         if 'DQ_EYE slip=' not in line:continue
@@ -18,10 +19,10 @@ def analyze(text):
         if (slip,delay) in points:raise ValueError('Duplicate eye point')
         points[slip,delay]=dict(samples=samples,errors=errors)
     if set(points)!={(s,d) for s in range(8) for d in range(32)}:raise ValueError('Incomplete eye scan')
-    return dict(qualification=False,points=256,
+    return dict(qualification=False,module=module,points=256,
         samples_per_bit_per_point=sorted({v['samples'] for v in points.values()}),
         slips=[dict(slip=s,common_passing_taps=[d for d in range(32) if not any(points[s,d]['errors'])],
-                    lanes=[dict(dq=32+b,passing_taps=[d for d in range(32) if points[s,d]['errors'][b]==0],
+                    lanes=[dict(dq=8*module+b,passing_taps=[d for d in range(32) if points[s,d]['errors'][b]==0],
                                 minimum_errors=min(points[s,d]['errors'][b] for d in range(32))) for b in range(8)]) for s in range(8)],
         limitation='Fixed write-DQ/DQS settings; finite samples. Zero error taps are diagnostic candidates, not DDR qualification.')
 
@@ -29,7 +30,8 @@ def analyze(text):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--log',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();text=gzip.open(a.log,'rt').read() if a.log.suffix=='.gz' else a.log.read_text();r=analyze(text)
+    p.add_argument('--module',type=int,choices=range(8),default=4)
+    a=p.parse_args();text=gzip.open(a.log,'rt').read() if a.log.suffix=='.gz' else a.log.read_text();r=analyze(text,a.module)
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(r,indent=2)+'\n')
     print('Common passing settings:',sum(len(s['common_passing_taps']) for s in r['slips']))
     for s in r['slips']:

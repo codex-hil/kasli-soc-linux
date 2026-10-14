@@ -1407,3 +1407,23 @@ This is an existing-Linux PL bring-up bundle, not a new SD image or external
 network qualification. Future changed artifacts require fresh matching HW
 evidence. Next continue targeted byte7 clock-route diagnosis offline while
 retaining this operational configuration.
+
+### Direct-clock byte7 has split per-DQ beat alignment (2026-10-14)
+
+Diagnostic builder accepts --module0..7 for build-local DQS/eye tests, default4
+unchanged. Instrumented data offsets, training write-slip hook and sweep
+selection all follow that module. Analyzer accepts same module to label DQ
+indices correctly; fixtures0/4/7 pass, invalid8 rejected. No upstream edits.
+Module7 binary/source hashes in byte7-diagnostic-build.json.
+
+Physical direct-clock seed3 test, initial scan plus2 reset/JEDEC/replay scans:
+DQ56/57/62 pass at read bitslip2–3; DQ58/59/60/61/63 at4–5. Every DQ has
+a finite passing window, but no common full-byte setting in any scan. This
+repeats the earlier byte4 failure mechanism in another placement/clock image.
+Finite samples do not qualify read/write cause or establish precise skew.
+
+Shared-lock candidate/golden comparison and golden3 whole1-GiB BIST completed,
+restoration passed; Linux192.168.2.7. No SD/QSPI writes. Evidence byte7-control-*
+contains full per-point logs and summaries. Operational golden-clock package
+unchanged. Next compare module7 eyes on the qualified integrated image under
+the same software settings, then inspect common clock phase/skew evidence.
