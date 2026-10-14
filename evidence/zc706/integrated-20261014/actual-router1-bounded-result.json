@@ -1,0 +1,10 @@
+{
+  "hardware_access": false,
+  "router": "router1",
+  "timeout_seconds": 900,
+  "qualified": false,
+  "last_progress_remaining_arcs": 189209,
+  "last_progress_elapsed_seconds": 782.84,
+  "timing_report_present": false,
+  "resource_limit_restored_gib": 6
+}

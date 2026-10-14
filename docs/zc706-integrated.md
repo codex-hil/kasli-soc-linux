@@ -1245,3 +1245,21 @@ Output prefix actual-router1 and actual-router1-full-route.log under
 build/zc706-integrated-golden-clock. Need confirm actual algorithm from log
 and final settings before reporting comparison. Then repeat LUT audits and
 setup/hold checks. No hardware accessed.
+
+### Actual router1 control exhausted bounded window; clean RTL control started
+
+Actual router1 confirmed by its iteration table, but no route/timing output
+within900sec. Last recorded progress782.84sec has189209 remaining arcs.
+Process ended, container6GiB restored. Not a timing result; no hardware test.
+Evidence actual-router1-bounded-result.json/log.gz.
+
+Added experimental `--prerouted FILE` to normal full build pipeline: passes
+the native reference route file to nextpnr and records its SHA256 in manifest.
+Started clean integrated RTL→Yosys→router2→assembly control with reset sync,
+seed2 and both golden MMCM routes, avoiding all packed snapshot reconstruction
+changes. Clock/DDR targets unchanged. Output:
+build/zc706-integrated-golden-clock-clean/gateware; log
+build/zc706-integrated-golden-clock-clean-build.log. Container8GiB/no swap/
+2CPUs, command bounded1200sec then6GiB restoration. Status BUILDING.
+Next inspect timing, exact route sets, FASM/physical LUT audit and route-through
+legality before any hardware action. No FPGA/SD/QSPI accesses this turn.

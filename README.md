@@ -744,3 +744,9 @@ DDR reset experiment (2026-10-13): timing-clean synchronized serializer reset
 bitstream physically tested; byte-four split alignment persists. Integrated
 DDR remains FAIL. Golden restored with three clean full 1-GiB BIST passes;
 Linux IP 192.168.2.10. Evidence and next clock-path comparison in integration log.
+
+2026-10-14 diagnostic status: integrated DDR remains unqualified. Snapshot
+replay LUT audits now pass but setup fails; actual router1 control did not
+complete its bounded window. A clean RTL build with golden MMCM reference
+routes is running, with timing and physical tests pending. Golden hardware
+has not been changed. See integration log for evidence and reproduction.
