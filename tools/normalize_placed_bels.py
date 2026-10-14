@@ -73,7 +73,8 @@ for name,cell in module['cells'].items():
         if len(variants)!=1:raise ValueError('Missing/ambiguous native BEL '+local)
         local=variants[0]
     cell['attributes']['NEXTPNR_BEL']=tile+'/'+local;count+=1
-removed_lut_inputs=0
+constant_bits={bit for name,net in module['netnames'].items() if name in ('$PACKER_GND_NET','$PACKER_VCC_NET') for bit in net['bits']}
+removed_lut_inputs=0;preserved_constant_inputs=0
 if a.logical_lut_inputs:
     for cell in module['cells'].values():
         if cell['type']!='SLICE_LUTX':continue
@@ -81,12 +82,14 @@ if a.logical_lut_inputs:
         if not keep:raise ValueError('LUT lacks original port mapping')
         for port in list(cell['connections']):
             if port in ('A1','A2','A3','A4','A5','A6') and port not in keep:
+                if cell['connections'][port] and all(bit in constant_bits for bit in cell['connections'][port]):
+                    preserved_constant_inputs+=1;continue
                 del cell['connections'][port];cell['port_directions'].pop(port,None)
                 removed_lut_inputs+=1
 # Route names are also exported physically; replay placement only, reroute later.
 for net in module['netnames'].values():net['attributes'].pop('ROUTING',None)
 a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(design)+'\n')
-report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'removed_existing_routes':True,
+report={'hardware_access':False,'qualification':False,'converted_cells':count,'removed_lut_inputs':removed_lut_inputs,'preserved_constant_inputs':preserved_constant_inputs,'removed_existing_routes':True,
         'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),
         'chipdb_sha256':hashlib.sha256(data).hexdigest(),
         'package_sha256':hashlib.sha256(a.package.read_bytes()).hexdigest(),

@@ -1159,3 +1159,24 @@ Checker records first100 mismatch examples and total count; it excludes
 SRL/DRAM, disconnected/multiple outputs and routing legality. Next repair
 replay's physical constant/pin reconstruction and repeat the clean-reference
 control before optimizing its timing. No hardware accessed.
+
+### Missing A6 constant constraints explain all INIT audit mismatches
+
+Counterfactual analysis only: on a copy of the failed replay's routed JSON,
+restored missing reference A6→VCC metadata (21731 pins) without changing FASM.
+Physical INIT audit then checks31496 LUTs/1222144 assignments with zero errors,
+matching the reference control. Thus all6966 reported mismatches disappear
+when A6 high constraints are reintroduced. This does not prove those absent
+pins were physically tied high; the failed replay remains unqualified.
+Evidence replay-hypothetical-a6-init.json is explicitly hypothetical.
+
+Normalizer now preserves every explicit GND/VCC input while pruning extra
+non-original LUT inputs:24930 constant inputs retained,29494 removed (instead
+of54424). No hardware or generated FASM was patched. The new input is
+constant-lut-placement.json, digest in replay-preserve-constants-summary.
+Started bounded900-second router2 with fixed golden reference clocks,8GiB
+no swap/2CPUs, outputs constant-timing.json/constant-top_routed.json/
+constant-top.fasm, log constant-full-route.log. Status ROUTING.
+Next inspect completion and rerun physical INIT audit on actual newly
+produced JSON/FASM before timing qualification. Return resource limit6GiB
+after completion. No hardware accessed.
