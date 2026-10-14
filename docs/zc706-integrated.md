@@ -1051,3 +1051,23 @@ particularly register timing classes and LUT legality transformations, versus
 the original successful in-memory route. Original candidate hardware fault
 and packed replay failure remain separate issues. No hardware accessed;
 last qualified golden unchanged.
+
+### LUT snapshot feedback isolated (2026-10-14)
+
+Found 396 SLICE_LUTX/SELMUX self-feedback cases in normalized exported
+connections. Example LUT1 `$abc$254987$auto$blifparse.cc:535:parse_blif$277136`
+has original logical I0 mapped to A3 via X_ORIG_PORT_A3, while added A5
+is connected to its own O6. This explains a false timing cycle in a replay
+that treats every connected input as logical. It does not establish a
+hardware LUT truth-table defect.
+
+On an isolated copy only, removed 54424 A1..A6 port records absent from
+X_ORIG_PORT metadata, retaining original mapped pins and other ports.
+No loop-check bypass used. Same no-reference replay now passes the loop
+check and enters router2 resource setup. This proves the reported loop
+condition depends on extra exported LUT inputs; full LUT equivalence, shared
+physical pin legality and final timing/routing remain unverified.
+Bounded 60-second diagnostic in progress, log control-logical-luts.log, input
+logical-lut-placement.json. Next preserve a reproducible explicit logical-pin
+normalization mode and validate INIT/port truth tables before full reference
+route experiment. No hardware accessed.
