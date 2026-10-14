@@ -1,0 +1,117 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "io_bel_counts": {
+    "golden": 528,
+    "candidate": 528,
+    "common": 528
+  },
+  "golden_only_bels": [],
+  "candidate_only_bels": [],
+  "io_parameter_differences": {},
+  "io_static_counts": {
+    "golden": 4452,
+    "candidate": 4452
+  },
+  "removed_static_features": [],
+  "added_static_features": [],
+  "clock_routes": {
+    "golden": {
+      "ddrclock_clkout0": {
+        "pips": [
+          "X137Y207/BUFGCTRL_X0Y4.I0/CLK_BUFG_BUFGCTRL4_I0",
+          "X137Y207/CLK_BUFG_BUFGCTRL4_I0/CLK_BUFG_IMUX24_1",
+          "X135Y206/IMUX24/SR1END_N3_3",
+          "X135Y206/SR1BEG3/SW6END2",
+          "X141Y202/SW6BEG2/SS6END2",
+          "X141Y196/SS6BEG2/LVB12",
+          "X141Y196/LVB12/LV0",
+          "X141Y177/LV18/LV0",
+          "X141Y159/LV18/SW6END0",
+          "X146Y154/SW6BEG0/LOGIC_OUTS8",
+          "X147Y154/CLBLM_LOGIC_OUTS8/CLBLM_L_A",
+          "X147Y154/CLBLM_L_A/CLBLM_L_A1",
+          "X147Y154/CLBLM_L_A1/CLBLM_IMUX6",
+          "X146Y154/IMUX6/GFAN1",
+          "X146Y154/GFAN1/GCLK_B9",
+          "X145Y154/GCLK_L_B9_EAST/GCLK_L_B9",
+          "X145Y130/HCLK_LEAF_CLK_B_BOTL3/HCLK_CK_BUFHCLK9",
+          "X137Y130/CLK_HROW_CK_BUFHCLK_R9/CLK_HROW_CK_HCLK_OUT_R9",
+          "X137Y130/CLK_HROW_CK_HCLK_OUT_R9/CLK_HROW_CK_MUX_OUT_R9",
+          "X137Y130/CLK_HROW_CK_MUX_OUT_R9/CLK_HROW_CK_IN_R8",
+          "X258Y130/HCLK_CMT_CK_IN8/HCLK_CMT_MUX_CLK_MMCM0",
+          "X258Y147/CMT_L_LOWER_B_CLK_MMCM0/CMT_LR_LOWER_B_MMCM_CLKOUT0",
+          "X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0"
+        ],
+        "cascade": false,
+        "fabric": true
+      },
+      "ddrclock_clkout1": {
+        "pips": [
+          "X137Y207/BUFGCTRL_X0Y15.I0/CLK_BUFG_BUFGCTRL15_I0",
+          "X137Y207/CLK_BUFG_BUFGCTRL15_I0/CLK_BUFG_IMUX27_3",
+          "X135Y204/IMUX27/SR1END1",
+          "X135Y203/SR1BEG1/WW2END0",
+          "X141Y203/WW2BEG0/SS6END0",
+          "X141Y197/SS6BEG0/LV0",
+          "X141Y178/LV18/LV0",
+          "X141Y160/LV18/SW6END0",
+          "X146Y155/SW6BEG0/LOGIC_OUTS8",
+          "X147Y155/CLBLM_LOGIC_OUTS8/CLBLM_L_A",
+          "X147Y155/CLBLM_L_A/CLBLM_L_A4",
+          "X147Y155/CLBLM_L_A4/CLBLM_IMUX10",
+          "X146Y155/IMUX10/GFAN0",
+          "X146Y155/GFAN0/GCLK_B11",
+          "X145Y155/GCLK_L_B11_EAST/GCLK_L_B11",
+          "X145Y130/HCLK_LEAF_CLK_B_BOTL5/HCLK_CK_BUFHCLK8",
+          "X137Y130/CLK_HROW_CK_BUFHCLK_R8/CLK_HROW_CK_HCLK_OUT_R8",
+          "X137Y130/CLK_HROW_CK_HCLK_OUT_R8/CLK_HROW_CK_MUX_OUT_R8",
+          "X137Y130/CLK_HROW_CK_MUX_OUT_R8/CLK_HROW_CK_IN_R5",
+          "X258Y130/HCLK_CMT_CK_IN5/HCLK_CMT_MUX_CLK_MMCM2",
+          "X258Y147/CMT_L_LOWER_B_CLK_MMCM2/CMT_LR_LOWER_B_MMCM_CLKOUT1",
+          "X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1"
+        ],
+        "cascade": false,
+        "fabric": true
+      }
+    },
+    "candidate": {
+      "ddrclock_clkout0": {
+        "pips": [
+          "X137Y207/BUFGCTRL_X0Y4.I0/CLK_BUFG_BUFGCTRL4_I0",
+          "X137Y207/CLK_BUFG_BUFGCTRL4_I0/CLK_BUFG_TOP_R_CK_MUXED8",
+          "X137Y182/CLK_HROW_TOP_R_CK_BUFG_CASCO8/CLK_HROW_TOP_R_CK_BUFG_CASCIN8",
+          "X137Y130/CLK_HROW_TOP_R_CK_BUFG_CASCO8/CLK_HROW_CK_IN_R11",
+          "X258Y130/HCLK_CMT_CK_IN11/HCLK_CMT_MUX_CLK_MMCM0",
+          "X258Y147/CMT_L_LOWER_B_CLK_MMCM0/CMT_LR_LOWER_B_MMCM_CLKOUT0",
+          "X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0"
+        ],
+        "cascade": true,
+        "fabric": false
+      },
+      "ddrclock_clkout1": {
+        "pips": [
+          "X137Y207/BUFGCTRL_X0Y15.I0/CLK_BUFG_BUFGCTRL15_I0",
+          "X137Y207/CLK_BUFG_BUFGCTRL15_I0/CLK_BUFG_TOP_R_CK_MUXED30",
+          "X137Y182/CLK_HROW_TOP_R_CK_BUFG_CASCO30/CLK_HROW_TOP_R_CK_BUFG_CASCIN30",
+          "X137Y130/CLK_HROW_TOP_R_CK_BUFG_CASCO30/CLK_HROW_CK_IN_R10",
+          "X258Y130/HCLK_CMT_CK_IN10/HCLK_CMT_MUX_CLK_MMCM2",
+          "X258Y147/CMT_L_LOWER_B_CLK_MMCM2/CMT_LR_LOWER_B_MMCM_CLKOUT1",
+          "X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1"
+        ],
+        "cascade": true,
+        "fabric": false
+      }
+    }
+  },
+  "input_sha256": {
+    "golden": {
+      "build/zc706-integrated-golden-clock-clean-seed3/gateware/gateware/top_routed.json": "3cde12c9487bf8033d14f555ce7dfe78066072c4421c433ca14319acf2e48669",
+      "build/zc706-integrated-golden-clock-clean-seed3/gateware/gateware/top.fasm": "a00b11505803bb6b57992bedbe0826aeb7917f29d4164f3e41ff9919dd3e9ee7"
+    },
+    "candidate": {
+      "build/zc706-integrated-direct-clock-seed3/gateware/gateware/top_routed.json": "0c30138897d16042c63d9e3319a7eb84e1a1a44cbad8ab5b22604949fae9d87e",
+      "build/zc706-integrated-direct-clock-seed3/gateware/gateware/top.fasm": "11d89a4ba6b3a17e01c5ca42d0f38976c5bb7d63359407b9e9fe207acbef3470"
+    }
+  }
+}

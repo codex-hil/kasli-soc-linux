@@ -1448,3 +1448,25 @@ configuration from relative SYS/DDR4x phase evidence, retaining these measured
 controls. Do not propose speculative polarity/phase changes as a general fix.
 External SFP switch qualification remains NOT_RUN and module EEPROM was NACK
 in the last integration test; internal loopback result does not cover it.
+
+### Working/failing seed3 comparison and SYS-only reference experiment
+
+Compared qualified golden-clock and failing direct-clock seed3 images:
+528 DDR I/O BEL/type/parameters identical;4452 static I/O features identical;
+DDR MMCM parameters identical. Entire downstream SYS clock PIP tree36149
+and downstream DDR4x tree839 are bit-for-bit identical as PIP sets. Clock
+tree differences are confined to the upstream MMCM→BUFG paths23/22 versus7/7.
+This strengthens a relative clock-arrival hypothesis; it does not prove
+causality because19690 common named signal routes and many FASM features
+also differ. Evidence seed3-working-failing-static/clock-tree/total-diff.json;
+large signal/FASM detail lists are explicitly truncated to100 examples.
+
+Prepared native golden-sys-only-prerouted.txt containing only SYS CLKOUT0
+reference route. Started clean seed3/reset-sync RTL build with SYS reference
+path fixed and DDR4x path left to normal router. No MMCM phase/frequency or
+DDR electrical parameters changed. Output
+build/zc706-integrated-golden-sys-only-seed3/gateware, log
+build/zc706-integrated-golden-sys-only-seed3-build.log. Bounded1200sec,8GiB
+no swap/2CPUs with automatic6GiB restoration. Next require timing/hold,
+physical INIT audit and exact intended clock route sets before locked HW
+comparison. No hardware accessed this step; operational artifacts preserved.
