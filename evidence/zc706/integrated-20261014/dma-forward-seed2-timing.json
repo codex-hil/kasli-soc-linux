@@ -1,0 +1,352 @@
+{
+  "result": "TIMING_FAIL",
+  "hardware_access": false,
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 149.72300720214844,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 130.24224853515625,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "eth_rx_clk": {
+      "achieved": 132.78448486328125,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 211.77467346191406,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1021.4505004882812,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 71.44388580322266,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 215.9360809326172,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 503.2712707519531,
+      "constraint": 200
+    },
+    "integratedsoc_ddrclock_clkin_signal": {
+      "achieved": 846.023681640625,
+      "constraint": 100
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "achieved": 83.15316772460938,
+      "constraint": 83.33333587646484
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 956.9378662109375,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 975.6098022460938,
+      "constraint": 62.5
+    }
+  },
+  "critical_path": [
+    {
+      "from": "posedge integratedsoc_ddrclock_clkout_buf0",
+      "path": [
+        {
+          "delay": 0.3499999940395355,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$133446",
+            "loc": [
+              203,
+              79
+            ],
+            "port": "Q"
+          },
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$133446",
+            "loc": [
+              203,
+              79
+            ],
+            "port": "Q"
+          },
+          "type": "clk-to-q"
+        },
+        {
+          "delay": 1.86899995803833,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$133446",
+            "loc": [
+              203,
+              79
+            ],
+            "port": "Q"
+          },
+          "net": "integratedsoc_litedramnativeportcdc0_wdata_cdc_cdc_graycounter1_q[0]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward-seed2/gateware/gateware/top.v:7391.15-7391.80"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272619",
+            "loc": [
+              180,
+              53
+            ],
+            "port": "A1"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.15000000596046448,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272619",
+            "loc": [
+              180,
+              53
+            ],
+            "port": "A1"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272619",
+            "loc": [
+              180,
+              53
+            ],
+            "port": "O5"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5189999938011169,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272619",
+            "loc": [
+              180,
+              53
+            ],
+            "port": "O5"
+          },
+          "net": "$techmap304706$abc$256236$auto$blifparse.cc:535:parse_blif$272617.A[5]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272617",
+            "loc": [
+              180,
+              59
+            ],
+            "port": "A6"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272617",
+            "loc": [
+              180,
+              59
+            ],
+            "port": "A6"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272617",
+            "loc": [
+              180,
+              59
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 1.0670000314712524,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272617",
+            "loc": [
+              180,
+              59
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap304707$abc$256236$auto$blifparse.cc:535:parse_blif$272616.A[0]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272616",
+            "loc": [
+              180,
+              81
+            ],
+            "port": "A1"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272616",
+            "loc": [
+              180,
+              81
+            ],
+            "port": "A1"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272616",
+            "loc": [
+              180,
+              81
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5239999890327454,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272616",
+            "loc": [
+              180,
+              81
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap304708$abc$256236$auto$blifparse.cc:535:parse_blif$272620.A[2]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272622",
+            "loc": [
+              202,
+              82
+            ],
+            "port": "A3"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272622",
+            "loc": [
+              202,
+              82
+            ],
+            "port": "A3"
+          },
+          "to": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272622",
+            "loc": [
+              202,
+              82
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 6.380000114440918,
+          "from": {
+            "cell": "$abc$256236$auto$blifparse.cc:535:parse_blif$272622",
+            "loc": [
+              202,
+              82
+            ],
+            "port": "O6"
+          },
+          "net": "integratedsoc_litedramnativeportcdc0_wdata_cdc_cdc_graycounter1_q_next_binary[3]",
+          "sources": [
+            "/work/build/zc706-integrated-dma-forward-seed2/gateware/gateware/top.v:7396.15-7396.76"
+          ],
+          "to": {
+            "cell": "storage_9.0.34/DPR2_1",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "storage_9.0.34/DPR2_1",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "storage_9.0.34/DPR2_1",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5669999718666077,
+          "from": {
+            "cell": "storage_9.0.34/DPR2_1",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "O6"
+          },
+          "net": "$\\storage_9$rdreg[0]$d[205]",
+          "sources": [],
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$73558",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "D"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.10000000149011612,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$73558",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "D"
+          },
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$73558",
+            "loc": [
+              222,
+              222
+            ],
+            "port": "D"
+          },
+          "type": "setup"
+        }
+      ],
+      "to": "posedge integratedsoc_ddrclock_clkout_buf0"
+    }
+  ]
+}

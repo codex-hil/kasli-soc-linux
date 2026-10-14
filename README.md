@@ -792,3 +792,8 @@ Forward pipeline seed3 completed routing but fails SYS timing (79.99 versus
 PS write-data CDC FIFO read-address route (8.184ns routing segment). LUT INIT
 audit passed; no hardware programming. Same RTL seed2 build is running in
 `build/zc706-integrated-dma-forward-seed2`; physical validation remains pending.
+
+Pipeline seed2 also misses SYS timing (83.15/83.33MHz), again in the wide native
+CDC FIFO read-address path. A controlled BRAM-mapping build is now running in
+`build/zc706-integrated-dma-bram`; four data FIFOs are annotated, keeping upstream
+CDC logic. Synthesis mapping, timing and hardware validation remain pending.

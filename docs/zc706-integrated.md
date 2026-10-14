@@ -1595,3 +1595,25 @@ reset and golden clock paths with seed2, bounded2400seconds/8GiB, output
 build/zc706-integrated-dma-forward-seed2, log with -build.log suffix.
 Next compare its timing before choosing any explicit PS FIFO buffering/BRAM
 change. Hardware qualification remains pending and golden is preserved.
+
+### Seed2 and explicit BRAM mapping — 2026-10-14
+
+Forward pipeline seed2 also fails SYS timing:83.1532MHz versus83.3333MHz.
+Worst path again ends at wide native CDC FIFO LUTRAM read address, with6.38ns
+routing segment. Evidence: dma-forward-seed2-timing.json and compressed log.
+No hardware programming.
+
+Added project-local gp1 native-port construction using unchanged upstream
+LiteDRAMNativePortCDC. Its four wide data Memory objects carry ram_style=block;
+command FIFO memories are unchanged. This explicitly requests BRAM for the
+512-bit data and 576-bit data+byte-enable queues shared by BIST/PS access,
+instead of scattering depth16 storage into LUTRAM. No pointer or CDC protocol
+changes. Initial Memory emitter override was ineffective because LiteX has its
+own Memory emitter; stopped that build. Correct final implementation attaches
+the attribute set consumed directly by LiteX. Elaboration passes and generated
+Verilog contains exactly four BRAM annotations (dma-bram-elaboration.json).
+
+New clean build: build/zc706-integrated-dma-bram, seed3, same synchronous DDR
+reset/golden MMCM routes, bounded2400seconds/8GiB. Next verify inferred BRAM
+resources and setup/hold before any physical test. No claim of timing or
+hardware success yet; golden bitstream/package remain unchanged.

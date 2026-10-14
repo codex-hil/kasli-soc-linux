@@ -4,12 +4,14 @@
 import argparse
 import json
 from pathlib import Path
-from migen import ClockDomain, ClockSignal, ResetSignal, Signal, Instance, ClockDomainsRenamer
+from migen import Memory, ClockDomain, ClockSignal, ResetSignal, Signal, Instance, ClockDomainsRenamer
 from litex.gen import LiteXModule
 from litex.soc.cores.clock import S7MMCM, S7IDELAYCTRL
 from litex.soc.interconnect.csr import CSRStatus
 from litex.soc.interconnect import wishbone, axi, stream
 from litex.soc.integration.soc import SoCRegion
+from litedram.common import LiteDRAMNativePort
+from litedram.frontend.adapter import LiteDRAMNativePortCDC
 from litedram.frontend.wishbone import LiteDRAMWishbone2Native
 from litedram.frontend.bist import LiteDRAMBISTGenerator, LiteDRAMBISTChecker
 from litex.soc.integration.export import get_csr_json, get_csr_header, get_mem_header, get_soc_header
@@ -80,10 +82,29 @@ class DDRSoC(BaseSoC):
         # BIST address generation has a long CSR-derived mask/add path. Use
         # the upstream wrappers' control/status CDC and native-port CDC to
         # run diagnostics at 50 MHz, while the DDR controller stays in its own faster domain.
+        def gp1_port(mode="both"):
+            # Keep upstream CDC logic, but map its wide, shallow data memories
+            # to BRAM. LUTRAM scatters the 512-bit read-address fanout over the
+            # device (6-8 ns routes in integrated DMA pipeline seed2/seed3).
+            native = self.sdram.crossbar.get_port(mode=mode)
+            port = LiteDRAMNativePort(mode=mode,
+                address_width=native.address_width, data_width=native.data_width,
+                clock_domain="gp1", id=native.id)
+            cdc = LiteDRAMNativePortCDC(port, native)
+            def use_block_ram(module):
+                for special in module._fragment.specials:
+                    if isinstance(special, Memory) and special.width >= 512:
+                        special.attr = {("ram_style", "block")}
+                for _, child in module._submodules:
+                    use_block_ram(child)
+            use_block_ram(cdc)
+            self.submodules += cdc
+            return port
+
         self.sdram_generator = LiteDRAMBISTGenerator(
-            self.sdram.crossbar.get_port(mode="write", clock_domain="gp1"))
+            gp1_port(mode="write"))
         self.sdram_checker = LiteDRAMBISTChecker(
-            self.sdram.crossbar.get_port(mode="read", clock_domain="gp1"))
+            gp1_port(mode="read"))
         # Zynq treats all PL addresses as IO; expose this diagnostic memory
         # uncached, using the same upstream bridge without a CPU/L2 cache.
         ram_bus = wishbone.Interface(data_width=32, address_width=32)
@@ -91,7 +112,7 @@ class DDRSoC(BaseSoC):
         # a 32-bit lane in the native 512-bit word. A separate generic native
         # converter creates an unnecessary ordered-command FIFO and long
         # ready/valid feedback path (75.99 MHz in the rejected build).
-        port = self.sdram.crossbar.get_port(clock_domain="gp1")
+        port = gp1_port()
         self.ram_bridge = ClockDomainsRenamer("gp1")(
             LiteDRAMWishbone2Native(ram_bus, port, base_address=0x80000000))
         # PS decodes GP0 and GP1 into disjoint windows already. A shared

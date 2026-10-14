@@ -1,0 +1,29 @@
+{
+  "hardware_access": false,
+  "elaboration": "PASS",
+  "memories": [
+    {
+      "name": "storage_9",
+      "width": 578,
+      "depth": 16
+    },
+    {
+      "name": "storage_14",
+      "width": 514,
+      "depth": 16
+    },
+    {
+      "name": "storage_20",
+      "width": 578,
+      "depth": 16
+    },
+    {
+      "name": "storage_21",
+      "width": 514,
+      "depth": 16
+    }
+  ],
+  "synthesis_mapping": "PENDING",
+  "timing": "PENDING",
+  "implementation": "Unchanged upstream LiteDRAMNativePortCDC; project-local Memory ram_style attributes emitted by LiteX"
+}
