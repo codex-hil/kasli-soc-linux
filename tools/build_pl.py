@@ -252,7 +252,7 @@ def main():
          "-o", "fasm=top.fasm", "--write", "top_routed.json",
          *(["-o", "prerouted="+str(args.prerouted.resolve())] if args.prerouted else []),
          "--router", args.router, "--seed", str(args.seed), "--freq", "100", "--report", "timing.json", *chipdb_args,
-         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp", "integrated") or args.reciprocal else [])],
+         *(["-o", "hold-fix=8", "-o", "hold-buffer-radius=48"] if args.design in ("adc-ddr", "sfp", "integrated", "srl") or args.reciprocal else [])],
         [str(args.openxc7.resolve() / "bin/fasm2frames"),
          "--part", part, "--db-root", str(db), "top.fasm"],
         [str(args.openxc7.resolve() / "bin/xc7frames2bit"),
@@ -278,7 +278,7 @@ def main():
             validate_sfp_route(work)
             if args.design == "integrated":
                 validate_clock_source_owners((work/"stage1.log").read_text())
-        if n == 1 and (args.design in ('adc-ddr', 'sfp', 'integrated') or args.reciprocal):
+        if n == 1 and (args.design in ('adc-ddr', 'sfp', 'integrated', 'srl') or args.reciprocal):
             timing = json.loads((work/'timing.json').read_text())
             if args.design == 'integrated':
                 validate_integrated_clock_constraints(work, timing)

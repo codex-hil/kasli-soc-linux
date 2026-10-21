@@ -1,5 +1,17 @@
 # SRL16E isolation diagnostic
 
+Current revision is ABI2 (signature `0x53524c32`): two banks of sixteen
+explicit SRL16E, both zero INIT. Low16 error bits correspond to variable CE;
+high16 to CE tied high. Both banks have fully observed flip-flop references.
+The first CE-pair build completed but did not enable mandatory hold checking;
+it is NOT_ADMITTED to hardware. A new `build/zc706-srl-ce-pair-hold` build
+is queued on Dell after source synchronization; physical result NOT_RUN.
+The PASS below belongs to ABI1, retained unchanged in evidence.
+Use `build/zc706-srl-ce-pair-hold` for ABI2; do not overwrite ABI1 artifacts.
+`tools/test_srl.py` now requires ABI2 and rejects an ABI1 bitstream.
+`tools/check_srl_netlist.py` verifies the 32 SRLs, all taps in both CE modes,
+zero INIT and 32 ordinary reference flip-flops before physical qualification.
+
 Status: open-source build and physical SRL16E comparison PASS on 2026-10-21.
 Sixteen explicit SRL16E and sixteen reference flip-flops (8 FDRE, 8 FDSE)
 survived synthesis; all SRLs use 6LUT sites. Ten samples spanning about
@@ -26,7 +38,7 @@ From Optiplex:
 ```sh
 dell-build sync kasli-linux
 dell-build run kasli-linux build/python/bin/python tools/build_pl.py \
-  --board zc706 --design srl --output-dir build/zc706-srl/gateware \
+  --board zc706 --design srl --output-dir build/zc706-srl-ce-pair-hold/gateware \
   --yosys /usr/bin/yosys --openxc7 build/tools/openxc7 --seed 3 --router router2
 ```
 
@@ -37,11 +49,11 @@ IP (the U-Boot setup uses a random MAC, so DHCP addresses can change):
 
 ```sh
 python3 tools/test_integrated_hardware.py --host CURRENT_IP \
-  --work-dir build/zc706-srl --output build/zc706-srl/hardware \
+  --work-dir build/zc706-srl-ce-pair-hold --output build/zc706-srl-ce-pair-hold/hardware \
   --srl-diagnostic-only --program
 ```
- `tools/test_srl.py` is the
-board-side test, not a host lock owner; do not call it outside that lease.
+
+`tools/test_srl.py` is the board-side test, not a host lock owner; do not call it outside that lease.
 It checks signature, ready, sticky errors and counter progress over ten samples.
 
 The first attempt stopped before diagnostic programming because the previous
@@ -52,3 +64,9 @@ Next: isolate CE tied permanently high, matching all 32 failing Ethernet SRLs
 (24 tap2, 8 tap6, INIT zero), versus the working variable-CE case. This PASS
 does not dismiss the existing controlled Ethernet SRL/no-SRL failure or identify
 a faulty tool stage. Dynamic addressing and pre-warmup INIT remain untested.
+
+Timing admission correction: ABI1 functional PASS remains valid, but its
+manifest timing_passed flag did not include the dedicated hold gate. Do not
+interpret ABI1 as hold-qualified. ABI2 host admission independently checks
+reported setup, explicit hold result and primitive/reference inventory; a
+manifest flag alone is insufficient. No new hardware access occurred here.

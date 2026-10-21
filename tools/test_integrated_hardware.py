@@ -33,6 +33,15 @@ def main():
     allowed_designs=('srl',) if a.srl_diagnostic_only else ('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
     if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching timing-clean build required for the selected test scope')
+    if a.srl_diagnostic_only:
+        from build_pl import hold_passed
+        from check_srl_netlist import check
+        timing=json.loads((bit.parent/'timing.json').read_text())
+        if not timing['fmax'] or any(v['achieved'] < v['constraint'] for v in timing['fmax'].values()):
+            raise RuntimeError('SRL setup timing must pass')
+        if not hold_passed((bit.parent/'stage1.log').read_text()):
+            raise RuntimeError('SRL hold validation required before hardware access')
+        check(bit.parent/'top.json')
     if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
         raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']

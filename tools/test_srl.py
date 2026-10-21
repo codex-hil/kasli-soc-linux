@@ -14,15 +14,17 @@ def main():
     parser.add_argument("--device", default="/dev/uio0")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    result = {"result": "FAIL", "samples": [], "scope": "SRL16E static taps, CE gaps, FF reference"}
+    result = {"result": "FAIL", "samples": [], "scope": "SRL16E static taps, zero INIT, variable CE low16 versus constant CE high16, FF references"}
     regs = None
     try:
         regs = Registers(args.csr_json, args.device)
-        if regs.read("srl_signature") != 0x53524c31:
+        if regs.read("srl_signature") != 0x53524c32:
             raise RuntimeError("SRL diagnostic signature mismatch")
         for _ in range(10):
             sample = {name: regs.read("srl_" + name)
                       for name in ("cycles", "errors", "ready")}
+            sample["variable_ce_errors"] = sample["errors"] & 0xffff
+            sample["constant_ce_errors"] = sample["errors"] >> 16
             result["samples"].append(sample)
             if not sample["ready"] or sample["errors"]:
                 raise RuntimeError("SRL versus flip-flop mismatch or not ready")

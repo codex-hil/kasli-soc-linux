@@ -13,37 +13,43 @@ from zc706_sfp import SFPClock
 
 class SRLDiagnostic(LiteXModule):
     def __init__(self):
-        self.signature = CSRStatus(32, reset=0x53524c31, name="signature")
+        self.signature = CSRStatus(32, reset=0x53524c32, name="signature")
         self.cycles = CSRStatus(32, name="cycles")
-        self.errors = CSRStatus(16, name="errors")
-        self.outputs = CSRStatus(16, name="outputs")
-        self.expected = CSRStatus(16, name="expected")
-        self.reference = CSRStatus(16, name="reference")
+        self.errors = CSRStatus(32, name="errors")
+        self.outputs = CSRStatus(32, name="outputs")
+        self.expected = CSRStatus(32, name="expected")
+        self.reference = CSRStatus(32, name="reference")
         self.ready = CSRStatus(1, name="ready")
-        # All reference bits are externally observed, preventing SRL inference.
-        reference = Signal(16, reset=0xa69c)
+        # Low half: variable CE. High half: CE tied high, like Ethernet SRLs.
+        # Both banks use zero INIT; all reference bits are externally observed.
+        references = [Signal(16, name="reference_gap"),
+                      Signal(16, name="reference_always")]
         lfsr = Signal(16, reset=0x1234)
         divider = Signal(4)
         enabled = Signal(5)
         ce = Signal()
         data = lfsr[0]
+        reference = Cat(*references)
         self.comb += [ce.eq(divider != 3), self.reference.status.eq(reference),
                      self.expected.status.eq(reference),
                      self.ready.status.eq(enabled == 16)]
         self.sync += [divider.eq(divider + 1),
             lfsr.eq(Cat(lfsr[15] ^ lfsr[13] ^ lfsr[12] ^ lfsr[10], lfsr[:15])),
             self.cycles.status.eq(self.cycles.status + 1),
-            If(ce, reference.eq(Cat(data, reference[:15])),
-               If(enabled != 16, enabled.eq(enabled + 1))),
+            If(ce, If(enabled != 16, enabled.eq(enabled + 1))),
             If(self.ready.status,
                self.errors.status.eq(self.errors.status |
                    (self.outputs.status ^ reference)))]
-        for tap in range(16):
-            self.specials += Instance("SRL16E", p_INIT=0xa69c,
-                i_CLK=ClockSignal("sys"), i_CE=ce, i_D=data,
-                i_A0=Constant(tap & 1), i_A1=Constant((tap >> 1) & 1),
-                i_A2=Constant((tap >> 2) & 1), i_A3=Constant((tap >> 3) & 1),
-                o_Q=self.outputs.status[tap])
+        for bank, enable in enumerate((ce, Constant(1))):
+            self.sync += If(enable,
+                references[bank].eq(Cat(data, references[bank][:15])))
+            for tap in range(16):
+                self.specials += Instance("SRL16E", p_INIT=0,
+                    i_CLK=ClockSignal("sys"), i_CE=enable, i_D=data,
+                    i_A0=Constant(tap & 1), i_A1=Constant((tap >> 1) & 1),
+                    i_A2=Constant((tap >> 2) & 1), i_A3=Constant((tap >> 3) & 1),
+                    o_Q=self.outputs.status[bank * 16 + tap])
+
 
 
 class SRLSoC(BaseSoC):
