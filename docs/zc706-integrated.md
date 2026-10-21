@@ -1895,3 +1895,16 @@ Routing pending; no hardware action this turn. Next timing/INIT audit then
 repeat locked switch test with restoration. A same-RTL SRL-enabled control
 is still needed to strengthen causal attribution beyond previous tap-dependent
 comparisons. Do not yet attribute the defect to Yosys versus nextpnr/FASM.
+
+Controlled no-SRL physical qualification2026-10-21: --no-srl with
+--no-header-probes (same protocols, no raw header observation). Timing/INIT
+clean8091LUT/248416assignments. Locked switch RJ45 test PASS:20/20ICMP,
+350/350exactUDP(157300bytes), zero settledCRC/preamble/clockfault increments.
+ARP18updates/0failures,350RX/FIFO/TXframes. Golden restored/full BIST PASS;
+Linux192.168.2.10. Evidence no-srl/. Confirms working Ethernet without header
+taps; does not yet isolate Yosys versus nextpnr/SRL bitstream mapping.
+
+Started exact same current RTL --no-header-probes with SRL extraction enabled
+(no --no-srl), seed3/fclk/router2, output build/zc706-sfp-srl-control,
+1800sec/8GiB. Compare synthesized SRL use, timing and physical network result
+before asserting causal primitive defect and returning to integrated design.
