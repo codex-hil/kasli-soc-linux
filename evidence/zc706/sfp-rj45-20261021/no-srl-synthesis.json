@@ -1,0 +1,15 @@
+{
+  "hardware_access": false,
+  "raw_header_snapshots": false,
+  "srl_cells": {},
+  "no_srl_in_yosys_script": true,
+  "timing": "PENDING",
+  "header_drivers": {
+    "sfpsoc_arp_rx_depacketizer_sr": {
+      "FDRE": 224
+    },
+    "sfpsoc_rx_depacketizer_sr": {
+      "FDRE": 64
+    }
+  }
+}

@@ -1882,3 +1882,16 @@ counts from synthesized JSON. This is not causal proof: next controlled
 experiment must disable SRL without header observation and repeat hardware
 qualification. Do not declare upstream protocol bug fixed. Temporary capture
 capability remains for controlled follow-up; remove after diagnosis.
+
+Controlled no-SRL experiment2026-10-21: added build_pl --no-srl (Yosys
+synth_xilinx -nosrl) and --no-header-probes (isolated SFP only). The latter
+omits sevenARP/fourUDP raw header snapshots while retaining other counters.
+Default behavior unchanged. Build flags recorded in manifest. New build
+build/zc706-sfp-no-srl uses fclk/seed3/router2,1800sec/8GiB.
+
+Elaboration confirms no raw header CSR names. Synthesis completes with zero
+SRL cells and FF-driven ARP/UDP headers; no-srl-synthesis.json records counts.
+Routing pending; no hardware action this turn. Next timing/INIT audit then
+repeat locked switch test with restoration. A same-RTL SRL-enabled control
+is still needed to strengthen causal attribution beyond previous tap-dependent
+comparisons. Do not yet attribute the defect to Yosys versus nextpnr/FASM.

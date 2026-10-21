@@ -175,7 +175,7 @@ class SFPClock(LiteXModule):
 
 
 class SFPSoC(BaseSoC):
-    def __init__(self, ip="192.168.2.206", refclk="si5324"):
+    def __init__(self, ip="192.168.2.206", refclk="si5324", header_probes=True):
         super().__init__("zc706", crg=SFPClock(), sys_clk_freq=50e6)
         # The AXI master and GP0 frontend run in sys, not the 100 MHz FCLK.
         self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
@@ -183,9 +183,9 @@ class SFPSoC(BaseSoC):
         self.platform.add_extension([r for r in _io if r[0] == "i2c"])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
-        add_sfp(self, ip, refclk)
+        add_sfp(self, ip, refclk, header_probes=header_probes)
 
-def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False, clock_monitors=True):
+def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False, clock_monitors=True, header_probes=True):
     self.platform.add_extension([r for r in _io if r[0] in
         ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324")])
     if refclk == "local":
@@ -245,11 +245,12 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
     self.mac_status.arp_sender_ip = CSRStatus(32, name="arp_sender_ip")
     self.sync += If(arp.rx.source.valid,
         self.mac_status.arp_sender_ip.status.eq(arp.rx.source.ip_address))
-    for index in range(7):
-        csr = CSRStatus(32, name=f"arp_reply_header{index}")
-        setattr(self.mac_status, f"arp_reply_header{index}", csr)
-        self.sync += If(arp.rx.source.valid & arp.rx.source.reply,
-            csr.status.eq(arp.rx.depacketizer.header[index*32:(index+1)*32]))
+    if header_probes:
+        for index in range(7):
+            csr = CSRStatus(32, name=f"arp_reply_header{index}")
+            setattr(self.mac_status, f"arp_reply_header{index}", csr)
+            self.sync += If(arp.rx.source.valid & arp.rx.source.reply,
+                csr.status.eq(arp.rx.depacketizer.header[index*32:(index+1)*32]))
     self.csr.add("mac_status", bank+1)
     self.packet_test = PacketTest(self.ethcore.mac.crossbar.get_port(0x88b5))
     self.csr.add("packet_test", bank+2)
@@ -276,13 +277,14 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
                 frames.status.eq(frames.status + 1)))
     udp_rx = self.ethcore.udp.rx
     udp_active = Signal()
-    for edge in ("first", "last"):
-        for index in range(2):
-            csr = CSRStatus(32, name=f"udp_header_{edge}{index}")
-            setattr(self.mac_status, f"udp_header_{edge}{index}", csr)
-            condition = ~udp_active if edge == "first" else udp_rx.source.last
-            self.sync += If(udp_rx.source.valid & udp_rx.source.ready & condition,
-                csr.status.eq(udp_rx.depacketizer.header[index*32:(index+1)*32]))
+    if header_probes:
+        for edge in ("first", "last"):
+            for index in range(2):
+                csr = CSRStatus(32, name=f"udp_header_{edge}{index}")
+                setattr(self.mac_status, f"udp_header_{edge}{index}", csr)
+                condition = ~udp_active if edge == "first" else udp_rx.source.last
+                self.sync += If(udp_rx.source.valid & udp_rx.source.ready & condition,
+                    csr.status.eq(udp_rx.depacketizer.header[index*32:(index+1)*32]))
     self.mac_status.udp_ip_length = CSRStatus(16, name="udp_ip_length")
     self.sync += If(udp_rx.source.valid & udp_rx.source.ready,
         If(~udp_active, self.mac_status.udp_ip_length.status.eq(udp_rx.sink.length)),
@@ -312,8 +314,9 @@ def main():
     p.add_argument("--board", choices=["zc706"], default="zc706")
     p.add_argument("--output-dir", default="build/zc706-sfp/gateware")
     p.add_argument("--refclk", choices=["si5324", "fclk", "local"], default="si5324")
+    p.add_argument("--no-header-probes", action="store_true")
     a = p.parse_args()
-    soc = SFPSoC(refclk=a.refclk); soc.finalize()
+    soc = SFPSoC(refclk=a.refclk, header_probes=not a.no_header_probes); soc.finalize()
     out = Path(a.output_dir); out.mkdir(parents=True, exist_ok=True)
     (out/"csr.json").write_text(get_csr_json(csr_regions=soc.csr_regions,
         constants=soc.constants, mem_regions=soc.mem_regions))

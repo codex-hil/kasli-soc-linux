@@ -92,6 +92,8 @@ def hold_passed(log):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
+    p.add_argument("--no-srl", action="store_true", help="Disable Yosys SRL extraction for controlled comparison")
+    p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (isolated SFP only)")
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated"], default="probe")
@@ -135,6 +137,10 @@ def main():
         target_command += ["--cards", str(args.cards)]
         if args.reciprocal:
             target_command += ["--reciprocal"]
+    if args.no_header_probes:
+        if args.design != "sfp":
+            p.error("--no-header-probes requires isolated SFP target")
+        target_command += ["--no-header-probes"]
     if not args.resume_assembly:
         subprocess.run(target_command, cwd=ROOT, check=True)
     work = args.output_dir / "gateware"
@@ -152,6 +158,9 @@ def main():
         if args.design in ("pl-ddr", "adc-ddr", "integrated"):
             # Use stable ABC mapping for the standalone DDR controller.
             script.write_text(script.read_text().replace(" -abc9", ""))
+    if args.no_srl and not args.resume_assembly:
+        script = work / "top.ys"
+        script.write_text(script.read_text().replace("synth_xilinx ", "synth_xilinx -nosrl "))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
     # FBG/FFG676: 676 identical pin functions, AMD pinout evidence in repo.
     # -1 timing is conservative for the physical -3 device; no GTX in this design.
@@ -290,6 +299,8 @@ def main():
         "physical_part": physical_part, "database_part": part,
         "design": args.design,
         "nextpnr_seed": args.seed,
+        "yosys_no_srl": args.no_srl,
+        "sfp_header_probes": not args.no_header_probes,
         "prerouted_sha256": hashlib.sha256(args.prerouted.read_bytes()).hexdigest() if args.prerouted else None,
         "ddr_serdes_sync_reset": args.ddr_sync_reset,
         "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,
