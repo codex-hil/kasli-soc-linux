@@ -5,6 +5,11 @@
 > Internal PMA loopback with the active copper module remains unresolved.
 > The bundle is not an SD image; earlier golden artifacts are retained.
 
+SRL investigation: basic primitive, CE and Yosys inference hardware tests pass,
+but the active chipdb omits SRL16E data/output sequential timing. An isolated
+[SDF-derived timing model](docs/zc706-srl-timing-gap.md) is under test; its role
+in the Ethernet failure remains unproven. The qualified build above uses `-nosrl`.
+
 # Kasli-SoC Linux / LiteX / openXC7
 
 Work in progress. **Kasli-SoC milestone 1 has not been validated on hardware.**

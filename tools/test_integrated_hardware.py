@@ -33,6 +33,9 @@ def main():
     allowed_designs=('srl',) if a.srl_diagnostic_only else ('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
     if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching timing-clean build required for the selected test scope')
+    if manifest.get('experimental_srl_timing'):
+        from build_pl import validate_srl_coverage
+        validate_srl_coverage(bit.parent)
     if a.srl_diagnostic_only:
         from build_pl import hold_passed
         from check_srl_netlist import check

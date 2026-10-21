@@ -29,6 +29,24 @@ def validate_ddr_io(work):
 
 
 
+def validate_srl_coverage(work):
+    """Require runtime timing callbacks and final placement for the experiment."""
+    source = json.loads((work/'top.json').read_text())['modules']['top']['cells']
+    expected = sum(c['type'] == 'SRL16E' for c in source.values())
+    packed = json.loads((work/'top_routed.json').read_text())['modules']['top']['cells']
+    srls = [c for c in packed.values() if c.get('attributes', {}).get('X_ORIG_TYPE') == 'SRL16E']
+    reports = re.findall(r'SRL timing coverage: (\d+) SRL16E DI2 inputs and O6 outputs sequential; six-LUT placement verified\.',
+                         (work/'stage1.log').read_text())
+    if not expected or len(srls) != expected or not reports or int(reports[-1]) != expected:
+        raise RuntimeError('Missing or mismatched SRL sequential timing coverage')
+    for cell in srls:
+        if not re.search(r'/[ABCD]6LUT$', cell['attributes'].get('NEXTPNR_BEL', '')):
+            raise RuntimeError('SRL timing experiment requires final six-LUT placement')
+        if not cell['connections'].get('DI2') or not cell['connections'].get('O6'):
+            raise RuntimeError('Disconnected modeled SRL data/output')
+    return {'srl16e_count': expected, 'runtime_sequential_coverage': True, 'six_lut_placement': True}
+
+
 def validate_sfp_clock(work):
     top = json.loads((work/'top.json').read_text())['modules']['top']
     ps = [c for c in top['cells'].values() if c['type'] == 'PS7']
@@ -280,6 +298,8 @@ def main():
             validate_sfp_clock(work)
         if n == 0 and args.design in ('pl-ddr', 'adc-ddr', 'integrated'):
             validate_ddr_io(work)
+        if n == 1 and args.srl_timing:
+            validate_srl_coverage(work)
         if n == 1 and args.design in ("sfp", "integrated"):
             validate_sfp_route(work)
             if args.design == "integrated":

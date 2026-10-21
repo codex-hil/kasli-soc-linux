@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "scope": "offline admission fixtures, not runtime model or physical proof",
+  "controls": [
+    "valid 32-SRL fixture accepted",
+    "missing runtime coverage rejected",
+    "wrong coverage count rejected",
+    "final five-LUT SRL rejected"
+  ],
+  "hardware_access": false
+}

@@ -69,8 +69,20 @@ placement are rejected. SRLC32E is outside this experiment. Coverage and model
 precision remain experimental, not a vendor timing signoff.
 
 Offline envelope controls passed (`evidence/zc706/srl-model-20261021/model.json`).
-The first modeled SRL build is running on Dell; compilation/routing/hardware
-results are pending. No physical board access in this implementation turn.
+The isolated binary compiles. First placement was rejected when a temporary
+SRL candidate occupied a five-LUT position; the failure log is retained under
+`evidence/zc706/srl-model-20261022`. The placement checker now rejects such
+candidates, and preRoute asserts the final six-LUT positions and sequential
+DI2/O6 classes. The replacement build confirms coverage for all32 SRLs and passed final
+setup/hold. Physical ABI3 comparison PASS: inferred and explicit delays4/8,
+zero sticky errors over about45M observed fabric cycles. Golden restoration
+and three whole1GiB DDR BIST passes PASS; final management IP192.168.2.16.
+Evidence: `evidence/zc706/srl-modeled-20261022`.
+Bitstream SHA-256: `03f88f3aa8325564d3c5eaa0ec0ede77bca6dd291181673d45169ab79f8e65b9`.
+
+Both build and hardware admission check runtime coverage counts against source
+and routed netlists. Missing coverage, count mismatch and five-LUT placement
+negative controls passed offline. A manifest timing flag alone is insufficient.
 
 ```sh
 dell-build sync kasli-linux
@@ -83,3 +95,9 @@ dell-build run kasli-linux build/python/bin/python tools/build_pl.py \
 Next: collect compile output, resolve any model integration errors, verify
 reported sequential endpoints, then qualify the diagnostic before an Ethernet
 comparison. Keep existing golden restoration and shared board lease mandatory.
+
+The next controlled SFP build is running on Dell under
+`build/zc706-sfp-srl-modeled`: same functional Ethernet target, FCLK reference,
+no raw header probes, SRL enabled, seed3/router2, experimental timing model.
+External network hardware result remains NOT_RUN. No claim that the model
+fixes Ethernet until this comparison completes.

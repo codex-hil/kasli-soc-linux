@@ -1,0 +1,86 @@
+{
+  "result": "PASS",
+  "samples": [
+    {
+      "cycles": 1191223922,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1196240156,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1201255013,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1206269033,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1211282317,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1216295679,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1221309085,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1226322551,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1231335765,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    },
+    {
+      "cycles": 1236348920,
+      "errors": 0,
+      "ready": 1,
+      "polarity": 0,
+      "inferred_errors": 0,
+      "explicit_errors": 0
+    }
+  ],
+  "scope": "Yosys inferred low16 versus explicit SRL+FF high16, byte delays4/8, FF references"
+}
