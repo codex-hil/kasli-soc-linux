@@ -1700,3 +1700,14 @@ with full BIST PASS; Linux192.168.2.32. Evidence sfp-rj45-20261021/independent-u
 Raw host frame capture is blocked: tcpdump socket EPERM, sudo -n needs password.
 Next collect targeted ARP/IP frames after human enables tcpdump capture access;
 no attempt to bypass host permissions, no switch/flash changes.
+
+Frame capture2026-10-21 after user grants tcpdump cap_net_raw: targeted
+ARP/PL traffic capture started/stopped inside locked network test. PCAP shows
+host ARP requests and valid PL replies, ICMP requests host->PL, then repeated
+PL ARP requests for192.168.2.107 every100ms. Host replies immediately with
+6c:2b:59:f4:76:e8, but PL continues requesting. This localizes failure to
+ARP reply acceptance/cache/resolution in PL; switch/DAC absence no longer
+explains observed exchange. Need inspect upstream LiteEth ARP RX/cache logic,
+including short reply/padding behavior, before changing gateware. Capture
+evidence sfp-rj45-20261021/pcap. Golden restored/full BIST clean. Temporary
+tcpdump capability remains for follow-up captures, to be removed after diagnosis.

@@ -5,6 +5,7 @@ import hashlib
 import ipaddress
 import json
 from pathlib import Path
+import os
 import socket
 import subprocess
 import time
@@ -22,7 +23,20 @@ def main():
     result = {"result": "FAIL", "target": str(a.ip), "port": a.port,
         "sizes": [1, 17, 64, 128, 512, 1024, 1400], "repeats": a.repeat,
         "completed_packets": 0, "completed_bytes": 0}
+    capture = None
+    capture_log = None
+    interface = os.environ.get("ZC706_CAPTURE_INTERFACE")
+    if interface:
+        a.output.parent.mkdir(parents=True, exist_ok=True)
+        capture_log = a.output.with_suffix(".tcpdump.log").open("w")
+        capture = subprocess.Popen(["tcpdump", "-p", "-U", "-i", interface,
+            "-nn", "-s", "0", "-w", str(a.output.with_suffix(".pcap")),
+            f"host {a.ip} or ether host 02:c0:de:70:60:01"],
+            stdout=capture_log, stderr=capture_log)
+        time.sleep(.5)
     try:
+        if capture is not None and capture.poll() is not None:
+            raise RuntimeError("tcpdump failed; inspect capture log")
         ping = subprocess.run(["ping", "-c", "20", "-W", "1", str(a.ip)],
             capture_output=True, text=True, timeout=40)
         result["ping"] = {"returncode": ping.returncode, "stdout": ping.stdout, "stderr": ping.stderr}
@@ -53,6 +67,10 @@ def main():
         result["error"] = str(e)
         raise
     finally:
+        if capture is not None:
+            capture.terminate()
+            capture.wait(timeout=5)
+            capture_log.close()
         a.output.parent.mkdir(parents=True, exist_ok=True)
         a.output.write_text(json.dumps(result, indent=2)+"\n")
         print(json.dumps(result, indent=2))
