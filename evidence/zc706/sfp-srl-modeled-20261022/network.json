@@ -1,0 +1,29 @@
+{
+  "result": "FAIL",
+  "target": "192.168.2.206",
+  "port": 1234,
+  "sizes": [
+    1,
+    17,
+    64,
+    128,
+    512,
+    1024,
+    1400
+  ],
+  "repeats": 50,
+  "completed_packets": 0,
+  "completed_bytes": 0,
+  "warmup": {
+    "returncode": 1,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n\n--- 192.168.2.206 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss, time 412ms\n\n"
+  },
+  "ping": {
+    "returncode": 1,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n\n--- 192.168.2.206 ping statistics ---\n20 packets transmitted, 0 received, 100% packet loss, time 19411ms\n\n",
+    "stderr": ""
+  },
+  "icmp_result": "FAIL",
+  "neighbor": "[{\"dst\":\"192.168.2.206\",\"dev\":\"enp2s0\",\"lladdr\":\"02:c0:de:70:60:01\",\"state\":[\"DELAY\"]}]\n",
+  "error": "timed out"
+}

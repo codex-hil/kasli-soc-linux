@@ -1,0 +1,50 @@
+{
+  "srl16e_count": 32,
+  "runtime_sequential_coverage": true,
+  "six_lut_placement": true,
+  "timing": {
+    "eth_rx_clk": {
+      "achieved": 148.78738403320312,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 168.54879760742188,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1003.009033203125,
+      "constraint": 62.5
+    },
+    "gt_ref_clk": {
+      "achieved": 234.85205078125,
+      "constraint": 100
+    },
+    "ps7_clk": {
+      "achieved": 841.7508544921875,
+      "constraint": 100
+    },
+    "sfpclock_clkout_buf": {
+      "achieved": 81.017578125,
+      "constraint": 50
+    },
+    "sfpsoc_pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 975.6098022460938,
+      "constraint": 62.5
+    },
+    "sfpsoc_pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 971.8172607421875,
+      "constraint": 62.5
+    },
+    "si_ref_clk": {
+      "achieved": 260.21337890625,
+      "constraint": 62.5
+    }
+  },
+  "hold_lines": [
+    "Info: Hold-fix: no hold violations to fix."
+  ],
+  "hardware_access": false,
+  "functional_verilog_equal_to_srl_control": true,
+  "normalized_control_sha256": "aa629c2d66a14e0463f794443538a2cfd56c817d3dfd6e3593b055e4ec565294",
+  "normalized_modeled_sha256": "aa629c2d66a14e0463f794443538a2cfd56c817d3dfd6e3593b055e4ec565294"
+}

@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "519cecc97518c06303bdca96c850204f15aafe0f809743781502ad99c63614dd",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-sfp-srl-modeled/gateware/csr.json": "01eca82f54663a3c29cc5f832cdcb4595e519f837783dbeb7c150fba1df2aaa9"
+  }
+}

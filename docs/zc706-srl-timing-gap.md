@@ -99,5 +99,16 @@ comparison. Keep existing golden restoration and shared board lease mandatory.
 The next controlled SFP build is running on Dell under
 `build/zc706-sfp-srl-modeled`: same functional Ethernet target, FCLK reference,
 no raw header probes, SRL enabled, seed3/router2, experimental timing model.
-External network hardware result remains NOT_RUN. No claim that the model
-fixes Ethernet until this comparison completes.
+External network hardware test FAIL: 0/20 ping, first UDP timeout.
+Runtime coverage32/setup/hold allPASS, but ARP replies162, host matches0,
+cache updates0, failures24. Settled CRC/preamble/clock error deltas0.
+PCAP shows correct host192.168.2.107/MAC replies while PL decoded last sender
+IP192.168.2.0. Functional Verilog matches the failing control after comment
+removal. This timing-model intervention alone did not fix Ethernet.
+Golden restored192.168.2.18; three whole1GiB DDR BIST passes PASS.
+Evidence: `evidence/zc706/sfp-srl-modeled-20261022` (including PCAP).
+Bitstream SHA-256: `519cecc97518c06303bdca96c850204f15aafe0f809743781502ad99c63614dd`.
+Next: hardware self-test of the actual upstream ARP depacketizer driven by a
+known byte stream, with no raw header taps that would inhibit SRL extraction.
+Compare SRL-enabled versus no-SRL builds; keep timing coverage repair as a
+separate confirmed limitation, not a proven root cause of the header failure.
