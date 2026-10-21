@@ -26,8 +26,10 @@ def main():
         ping = subprocess.run(["ping", "-c", "20", "-W", "1", str(a.ip)],
             capture_output=True, text=True, timeout=40)
         result["ping"] = {"returncode": ping.returncode, "stdout": ping.stdout, "stderr": ping.stderr}
-        if ping.returncode:
-            raise RuntimeError("PL ICMP test failed")
+        result["icmp_result"] = "PASS" if ping.returncode == 0 else "FAIL"
+        result["neighbor"] = subprocess.run(
+            ["ip", "-j", "neigh", "show", "to", str(a.ip)],
+            capture_output=True, text=True, timeout=5).stdout
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.settimeout(2)
             sock.connect((str(a.ip), a.port))
@@ -43,6 +45,9 @@ def main():
                     result["completed_packets"] += 1
                     result["completed_bytes"] += size
             result["elapsed_seconds"] = time.monotonic()-start
+        result["udp_result"] = "PASS"
+        if ping.returncode:
+            raise RuntimeError("PL ICMP test failed; UDP tested independently")
         result["result"] = "PASS"
     except Exception as e:
         result["error"] = str(e)

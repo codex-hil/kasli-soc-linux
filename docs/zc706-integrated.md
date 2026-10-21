@@ -1691,3 +1691,12 @@ sfp-rj45-20261021 includes before/after counters and network results.
 Next investigate ARP/addressing and frame contents rather than equating
 PCS/LED with network qualification. Host tcpdump currently lacks raw-socket
 permission; sudo -n is unavailable.
+
+Independent UDP check2026-10-21: network test now records ARP neighbor and
+tests UDP even if ICMP fails; overall PASS still requires both. Physical trial
+shows correct02:c0:de:70:60:01 neighbor REACHABLE, ICMP0/20 and first UDP echo
+timeout. Thus ARP works but IP/ICMP/UDP remains unqualified. Golden restored
+with full BIST PASS; Linux192.168.2.32. Evidence sfp-rj45-20261021/independent-udp.
+Raw host frame capture is blocked: tcpdump socket EPERM, sudo -n needs password.
+Next collect targeted ARP/IP frames after human enables tcpdump capture access;
+no attempt to bypass host permissions, no switch/flash changes.
