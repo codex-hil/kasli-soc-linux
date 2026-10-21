@@ -1660,3 +1660,13 @@ qualification. Do not interpret this as a measured external link failure.
 Golden restored/full DDR BIST clean; final Linux192.168.2.17. No persistent
 writes. Evidence sfp-dac-20261021. Next isolate external-mode GTX/PCS and
 network diagnostics from the failing internal-loopback prerequisite.
+
+External DAC retry2026-10-21: user identifies port52 on first48-port Netgear.
+Added --sfp-diagnostic-only to locked integrated wrapper; omits internal-loopback
+prerequisite and ADC/PLL tests, retains golden restoration/full DDR BIST. First
+attempt SSH banner timeout before probe, restoration PASS. Retry external
+control8/status127, RX/TX clocks about125MHz, MAC RX220frames, CRC1/preamble6.
+ICMP0/20 to192.168.2.206; UDP not attempted. PHY/PCS indication is insufficient
+for working Ethernet. Further work: MAC frame reception and port52 VLAN/link
+configuration; no switch changes made. Golden restored/BIST PASS, Linux
+192.168.2.22. Evidence sfp-dac-20261021/external.

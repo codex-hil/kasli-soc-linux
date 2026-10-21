@@ -18,6 +18,7 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--program',action='store_true')
     p.add_argument('--external-network',action='store_true',help='Also test a physically connected external SFP link')
+    p.add_argument('--sfp-diagnostic-only',action='store_true',help='Probe external SFP without internal-loopback prerequisite; always restore golden')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
     work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
@@ -66,6 +67,19 @@ def main():
             with (a.output/(name+'.log')).open('w') as log:
                 subprocess.run(ssh+['cd '+remote+' && '+command],stdout=log,
                     stderr=subprocess.STDOUT,timeout=timeout,check=True)
+        if a.sfp_diagnostic_only:
+            run('sfp-external','python3 sfp_probe.py --csr-json csr.json --init-clock --external --output sfp.json')
+            probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp.json'],text=True))
+            record['external_probe']=probe
+            if probe['status']['sfp_status_status'] & 63 == 63:
+                subprocess.run(['python3',str(ROOT/'tools/test_sfp_network.py'),
+                    '--output',str(a.output/'network.json')],check=False,timeout=120)
+                record['network_result']=json.loads((a.output/'network.json').read_text())['result']
+            else:
+                record['network_result']='NOT_RUN'
+                record['network_reason']='External GTX/PCS link is down'
+            record['result']='PASS' if record['network_result']=='PASS' else 'PARTIAL'
+            return
         run('ddr','./pl-ddr-test')
         run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 '+('--external ' if a.external_network else '')+'--output sfp.json')
         run('train-adc', '''python3 -c 'from fmc_adc import Registers,ADC; rs=[Registers("csr.json","/dev/uio0",card=i) for i in (1,2)]; [(ADC(r).initialize(),ADC(r).calibrate()) for r in rs]; [r.mem.close() for r in rs]' ''')
