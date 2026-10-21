@@ -248,7 +248,12 @@ def main():
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)
-                time.sleep(2)
+                # Copper SFP PHY negotiation can finish after the PCS reset.
+                # Do not classify a two-second snapshot as a permanent failure.
+                start = time.monotonic()
+                while r.read("sfp_status_status") & 63 != 63 and time.monotonic()-start < 30:
+                    time.sleep(.2)
+                result["external_link_wait_seconds"] = time.monotonic()-start
             result["status"] = status(r)
             result["clock_rates_hz"] = clock_rates(r)
         result.update(result="PASS" if not a.identify_only or "module" in result else "NOT_PRESENT",

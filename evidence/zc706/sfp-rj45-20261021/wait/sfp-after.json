@@ -1,0 +1,57 @@
+{
+  "result": "PASS",
+  "hardware_validated": true,
+  "module": {
+    "eeprom_hex": "0304220000000800000000010c000000000064004653202020202020202020202020202000649d995346502d47452d5420202020202020204120202000000059001000004332363036353532363731202020202032363036323120200000006c",
+    "identifier": 3,
+    "vendor": "FS",
+    "part": "SFP-GE-T",
+    "serial": "C2606552671",
+    "ethernet_compliance": 8,
+    "nominal_mbps": 1200,
+    "connector": 34
+  },
+  "drp": {
+    "0x05b": 30,
+    "0x05c": 56320,
+    "0x05d": 48135,
+    "0x05e": 12419,
+    "0x05f": 488,
+    "0x088": 34,
+    "0x0a8": 32,
+    "0x0a9": 4112,
+    "0x0aa": 9215,
+    "0x0ab": 0,
+    "0x0ac": 3
+  },
+  "status": {
+    "sfp_status_control": 8,
+    "sfp_status_status": 127,
+    "sfp_status_signature": 1397116977,
+    "sfp_status_rx_count": 2799961509,
+    "sfp_status_tx_count": 2800742495,
+    "sfp_status_si_ref_count": 0,
+    "sfp_status_gt_ref_count": 0,
+    "sfp_status_clock_faults": 0,
+    "sfp_status_drp_address": 172,
+    "sfp_status_drp_write_data": 0,
+    "sfp_status_drp_command": 0,
+    "sfp_status_drp_read_data": 3,
+    "sfp_status_drp_busy": 0,
+    "mac_status_crc_errors": 1,
+    "mac_status_preamble_errors": 391,
+    "mac_status_tx_frames": 127,
+    "mac_status_rx_frames": 554,
+    "packet_test_start": 0,
+    "packet_test_busy": 0,
+    "packet_test_tx_frames": 0,
+    "packet_test_rx_frames": 0,
+    "packet_test_errors": 0
+  },
+  "clock_rates_hz": {
+    "sfp_status_si_ref_count": 0.0,
+    "sfp_status_gt_ref_count": 0.0,
+    "sfp_status_rx_count": 125009054.16176957,
+    "sfp_status_tx_count": 124999893.9793662
+  }
+}

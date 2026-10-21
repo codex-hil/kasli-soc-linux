@@ -1680,3 +1680,14 @@ This separates reset-time errors from clean settled traffic; ICMP remainsFAIL,
 so do not claim network qualification. Next capture ARP/ICMP on host and inspect
 addressing/port52 VLAN before touching gateware. Golden restored/BIST PASS,
 Linux192.168.2.26. Evidence sfp-dac-20261021/counters. No switch/flash writes.
+
+RJ45 SFP2026-10-21: user replaced DAC; switch LED lit. EEPROM identifies
+FS SFP-GE-T/C2606552671. Initial external snapshot status95 (PCS link down),
+after-test127 (up); the previous two-second delay was insufficient. Updated
+sfp_probe to poll PCS link up to30seconds. Retry reaches link but ICMP still
+fails; do not claim functional Ethernet. Both locked trials restored golden
+and passed DDR BIST; no switch or persistent-storage changes. Evidence
+sfp-rj45-20261021 includes before/after counters and network results.
+Next investigate ARP/addressing and frame contents rather than equating
+PCS/LED with network qualification. Host tcpdump currently lacks raw-socket
+permission; sudo -n is unavailable.
