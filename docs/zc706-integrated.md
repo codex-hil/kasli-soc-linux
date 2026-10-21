@@ -2001,3 +2001,49 @@ srl-pair-rtl-comparison.json. This strengthens implementation-path attribution
 without identifying the exact faulty tool stage. No new hardware action.
 Integrated span-pipeline remote build has completed synthesis and is still
 in placement refinement; final route/timing pending.
+
+### Full integrated external Ethernet PASS — 2026-10-21
+
+Dell build integrated-no-srl-span passes SYS87.5503MHz/83.333MHz and final
+hold, INIT audit36118LUT/1399312assignments zeroissues. Bit SHA
+5be9d14ca583b9ad0740bac054362f2faa2c08d3d9074c6381850f12b4e6df6f.
+Exact126 ADC/DDR CSR entries, memory map and ABI match qualified DMA-BRAM
+software; reused binary hashes recorded. Remote recompilation was queued
+behind another thread's shared build lock; did not bypass it.
+
+Initial physical attempt passes DDR but internal PMA loopback fails with active
+RJ45 module. External qualification now has explicit independent mode; records
+internalNOT_RUN, never claims that test passed. Another attempt had a wrong
+management IP and stopped at SSHsync before programming, then restored golden.
+Next attempt passed standalone dual captures but failed >=95% overlap under
+PLL CPU load. Missing pkill prevented intended SIGTERM; restoration reset
+Linux before volatile oscillator cleanup. Recovered original Si570 bytes from
+previous qualified evidence, validated unchanged dividers and <50ppm deltas
+before writes, verified both readbacks. Recovery/failed attempts recorded.
+
+Runner now journals original Si570 settings/PID before tuning; stopper checks
+exact PID cmdline and sends SIGTERM using Python, no pkill dependency. Mock
+process test confirms owned termination and unrelated-process rejection.
+Capture uses temporary FIFO priority11 only around two start writes/readbacks,
+restores prior scheduler in finally and retains measured95% overlap criterion.
+PLL priority10 remains. External test window180seconds.
+
+Final physical qualification PASS: Linux, DDR3whole1GiB BIST passes; dual
+independent ADC sequence/pattern/rearm up to4194304samples/card, no drops/data
+errors, approximately800MB/s/card. During both PLLs, long capture overlap
+exceeds95%. Phase concurrent RMS1.5638ns/1.5564ns, peaks7.7778ns/7.6190ns,
+22265records/card. External RJ45/switch20/20ICMP,350/350exactUDP157300bytes,
+settledCRC/preamble/clockfault deltas all0. This does not qualify continuous
+capture, DAC or internal PMA loopback. Original Si570 settings restored=true,
+golden boot restored and3wholeDDR BIST passes repeated. Final Linux192.168.2.23.
+Shared board lease covered full test/restoration; no SD/QSPI/flash/OTP writes.
+
+Evidence integrated-20261021/no-srl-* . Current PL bundle is
+build/zc706-integrated-no-srl-span/zc706-integrated-qualified.tar.xz,41hashed
+members/4168612bytes, SHA dc25d75e663c25b66bfad121dd302cfea649cd3f9b0000439ec06ac860e525ba.
+Package helper accepts explicit evidence prefix/readme, verifies exact tested
+bit/software hashes and records internal/external scope separately. All
+archive hashes checked; mismatched old evidence rejected without overwriting
+valid archive. Reproducer docs/zc706-integrated-no-srl.md. Existing golden
+package untouched. Exact SRL implementation defect and upstream report remain
+follow-up; -nosrl is the physically qualified workaround.

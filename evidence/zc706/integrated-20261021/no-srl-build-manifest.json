@@ -1,0 +1,80 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "integrated",
+  "nextpnr_seed": 3,
+  "yosys_no_srl": true,
+  "sfp_header_probes": false,
+  "prerouted_sha256": "754c50916bd2eebeb4991e140b8f1cc088647a770562e8114ddda0e5ebbf5ccf",
+  "ddr_serdes_sync_reset": true,
+  "sfp_refclk": "fclk",
+  "adc_cards": 2,
+  "reciprocal": true,
+  "wr_pll": true,
+  "wr_pll_cards": 2,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "5be9d14ca583b9ad0740bac054362f2faa2c08d3d9074c6381850f12b4e6df6f",
+  "commands": [
+    [
+      "/usr/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/zc706-integrated/nextpnr/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "-o",
+      "prerouted=/work/evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt",
+      "--router",
+      "router2",
+      "--seed",
+      "3",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/work/build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/zc706-integrated/clock-db/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/zc706-integrated/clock-db/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "9b8cc43de66c04846a1bf6e2ea450eee079dd8c041f0ce974c25dea49db869ad",
+    "top.fasm": "5c3e157fc35a993eee4bdd080d975af12db37ef8ad7d05080362c75ff72344f7",
+    "timing.json": "60a38c55fb2b973d9405034a12db07b8cbba2854cbaa8d784b0176d00efd805b"
+  },
+  "assembly_resumed": false
+}

@@ -1,8 +1,9 @@
-> Validated ZC706 core (2026-10-14): dual ADC→DDR, dual PLL during acquisition
-> and internal SFP loopback PASS. Rebuild/package: `make integrated-qualified-pl`,
-> `make integrated-qualified-software`, `make integrated-qualified-package`.
-> See [qualified configuration and bundle](docs/zc706-integrated-qualified.md).
-> External SFP link remains NOT_RUN; this package is not an SD image.
+> Validated integrated ZC706 (2026-10-21): dual ADC→DDR, both WR PLLs during
+> capture, external SFP RJ45 through the switch: **20/20 ICMP, 350/350 UDP**.
+> Uses Yosys/openXC7 with `-nosrl`; SYS timing 87.55/83.33 MHz. Reproducer and
+> PL bundle: [integrated no-SRL configuration](docs/zc706-integrated-no-srl.md).
+> Internal PMA loopback with the active copper module remains unresolved.
+> The bundle is not an SD image; earlier golden artifacts are retained.
 
 # Kasli-SoC Linux / LiteX / openXC7
 

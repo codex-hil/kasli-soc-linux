@@ -1,0 +1,10 @@
+{
+  "archive": "build/zc706-integrated-no-srl-span/zc706-integrated-qualified.tar.xz",
+  "sha256": "dc25d75e663c25b66bfad121dd302cfea649cd3f9b0000439ec06ac860e525ba",
+  "bytes": 4168612,
+  "checked_members": 41,
+  "external_network": "PASS",
+  "internal_loopback": "NOT_RUN",
+  "hardware_access": false,
+  "mismatched_evidence_rejected_without_overwrite": true
+}

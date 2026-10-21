@@ -1,0 +1,5 @@
+{
+  "hardware_access": false,
+  "owned_pid_sigterm": "PASS",
+  "unrelated_process_rejected_and_survived": "PASS"
+}

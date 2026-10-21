@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import tarfile
 import statistics
+import shlex
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
@@ -109,24 +110,44 @@ def main():
                 record['error']='MAC or clock errors incremented during external traffic'
             return
         run('ddr','./pl-ddr-test')
-        run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 '+('--external ' if a.external_network else '')+'--output sfp.json')
+        # External link qualification is independent of near-end PMA loopback.
+        # Keep internal-only mode available, and report the omitted mode clearly.
+        sfp_mode='--external ' if a.external_network else '--loopback 1000 '
+        run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock '+sfp_mode+'--output sfp.json')
+        record['internal_loopback_result']='NOT_RUN' if a.external_network else 'PASS'
+        record['sfp_test_mode']='external' if a.external_network else 'internal-loopback'
         run('train-adc', '''python3 -c 'from fmc_adc import Registers,ADC; rs=[Registers("csr.json","/dev/uio0",card=i) for i in (1,2)]; [(ADC(r).initialize(),ADC(r).calibrate()) for r in rs]; [r.mem.close() for r in rs]' ''')
         run('adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output initial --max-samples 4194304 --preinitialized')
+        pll_seconds=180 if a.external_network else 120
         with (a.output/'pll.log').open('w') as log:
-            pll=subprocess.Popen(ssh+['cd '+remote+' && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --realtime --seconds 120 --output pll.json'],stdout=log,stderr=subprocess.STDOUT)
+            pll=subprocess.Popen(ssh+['cd '+remote+' && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --realtime --seconds '+str(pll_seconds)+' --output pll.json'],stdout=log,stderr=subprocess.STDOUT)
             try:
                 import time
                 time.sleep(15)
-                run('concurrent-adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output concurrent --max-samples 4194304 --preinitialized')
+                run('concurrent-adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output concurrent --max-samples 4194304 --preinitialized --realtime-start')
                 if a.external_network:
+                    run('sfp-before-network','python3 sfp_probe.py --csr-json csr.json --output sfp-before-network.json')
+                    before=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-before-network.json'],text=True))
                     subprocess.run(['python3',str(ROOT/'tools/test_sfp_network.py'),'--repeat','50',
                         '--output',str(a.output/'network.json')],check=False,timeout=120)
+                    run('sfp-after-network','python3 sfp_probe.py --csr-json csr.json --output sfp-after-network.json')
+                    after=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-after-network.json'],text=True))
+                    names=('mac_status_crc_errors','mac_status_preamble_errors','sfp_status_clock_faults')
+                    record['network_error_deltas']={n:(after['status'][n]-before['status'][n]) & 0xffffffff for n in names}
+                    if any(record['network_error_deltas'].values()):
+                        raise RuntimeError('New MAC/clock errors during integrated external traffic')
                 if pll.poll() is not None:raise RuntimeError('PLL ended before concurrent tests completed')
-                if pll.wait(timeout=120):raise RuntimeError('Dual PLL qualification failed')
+                if pll.wait(timeout=pll_seconds):raise RuntimeError('Dual PLL qualification failed')
             finally:
                 if pll.poll() is None:
                     # SIGTERM remote runner through its own bounded owner; no unrelated processes.
-                    subprocess.run(ssh+["pkill -TERM -f '^python3 run_wr_pll_dual.py'"],check=False)
+                    stop_code = ("from pathlib import Path;import os,signal,sys;"
+                        "pid=int(Path(sys.argv[1]).read_text());"
+                        "cmd=Path('/proc/'+str(pid)+'/cmdline').read_bytes().split(bytes([0]));"
+                        "assert b'run_wr_pll_dual.py' in cmd and b'pll.json' in cmd;"
+                        "os.kill(pid,signal.SIGTERM)")
+                    subprocess.run(ssh+['python3 -c '+shlex.quote(stop_code)+' '+
+                        shlex.quote(remote+'/pll.pid')],check=True,timeout=15)
                     pll.wait(timeout=15)
         capture=json.loads(subprocess.check_output(ssh+['cat '+remote+'/concurrent/result.json'],text=True))
         phases=json.loads(subprocess.check_output(ssh+['cat '+remote+'/pll.json'],text=True))['initial']

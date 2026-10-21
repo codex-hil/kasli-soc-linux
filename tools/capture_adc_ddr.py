@@ -6,6 +6,7 @@ BNC inputs remain disconnected; real ADC checks use LTC2174 digital patterns.
 The two ADC clocks and capture epochs are independent.
 """
 import argparse
+import os
 import json
 from pathlib import Path
 import subprocess
@@ -21,6 +22,7 @@ def main():
     p.add_argument('--max-samples',type=int,default=1<<22)
     p.add_argument('--analog',action='store_true',help='Finally capture CH1 analog inputs at ±5 V, 50Ω OFF')
     p.add_argument('--preinitialized',action='store_true',help='Use trained receivers and leave their clocks running')
+    p.add_argument('--realtime-start',action='store_true',help='Temporarily use SCHED_FIFO priority11 for the two start writes and readbacks')
     a=p.parse_args()
     if a.max_samples<8192 or a.max_samples>1<<24 or a.max_samples%8:
         p.error('Maximum samples must be 8192..16777216 and a multiple of eight')
@@ -62,12 +64,18 @@ def main():
                 r.write('adc_dma_length',count)
                 r.write('adc_dma_synthetic',int(mode=='sequence'))
             time.sleep(.002)
-            issued=time.monotonic()
-            for card,r,adc in opened:r.write('adc_dma_start',1)
-            run['initial_status']={str(card):r.read('adc_dma_status') for card,r,_ in opened}
-            # Include readback: it orders both posted start writes. This
-            # conservatively bounds launch skew; it does not synchronize ADCs.
-            run['start_issue_seconds']=time.monotonic()-issued
+            policy=os.sched_getscheduler(0)
+            priority=os.sched_getparam(0)
+            try:
+                if a.realtime_start:os.sched_setscheduler(0,os.SCHED_FIFO,os.sched_param(11))
+                issued=time.monotonic()
+                for card,r,adc in opened:r.write('adc_dma_start',1)
+                run['initial_status']={str(card):r.read('adc_dma_status') for card,r,_ in opened}
+                # Readback orders posted writes; priority bounds CPU preemption,
+                # not ADC clock phase. Keep the measured overlap requirement.
+                run['start_issue_seconds']=time.monotonic()-issued
+            finally:
+                if a.realtime_start:os.sched_setscheduler(0,policy,priority)
             duration=count/max(c['sample_rate_hz'] for c in result['cards'].values())
             run['estimated_overlap_fraction']=max(0,1-(run['start_issue_seconds']+2e-6)/duration)
             if count >= 1<<18 and not all(s&1 for s in run['initial_status'].values()):

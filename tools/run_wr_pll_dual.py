@@ -179,6 +179,8 @@ def main():
         cyclic_gc='disabled only during bounded phase-control loops',
         proportional_gain_ppm_per_ns=.15,integral_gain_ppm_per_ns_second=.3)
     a.output.parent.mkdir(parents=True,exist_ok=True)
+    pid_file=a.output.with_suffix('.pid')
+    pid_file.write_text(str(os.getpid())+'\n')
     try:
         if a.realtime:
             os.sched_setscheduler(0,os.SCHED_FIFO,os.sched_param(10))
@@ -192,6 +194,8 @@ def main():
             if not a.preinitialized: ADC(r).initialize()
             oscillators.append(Si570(r))
         result['original_si570']={str(i+1):s.original for i,s in enumerate(oscillators)}
+        # Persist the restoration journal before the first tuning operation.
+        a.output.write_text(json.dumps(result,indent=2)+'\n')
         reset_counters(registers[0],BANKS)
         result['frequency_acquisition']=acquire(registers,oscillators,active)
         result['initial']={}
@@ -246,6 +250,7 @@ def main():
         result['finished_utc']=datetime.now(timezone.utc).isoformat()
         a.output.write_text(json.dumps(result,indent=2)+'\n')
         for r in registers:r.mem.close()
+        pid_file.unlink(missing_ok=True)
         if restore_errors:raise RuntimeError('PLL restoration failed: '+json.dumps(restore_errors))
 
 

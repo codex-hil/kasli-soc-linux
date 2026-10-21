@@ -1,0 +1,22 @@
+{
+  "result": "FAIL",
+  "bitstream_sha256": "5be9d14ca583b9ad0740bac054362f2faa2c08d3d9074c6381850f12b4e6df6f",
+  "files": {
+    "pl-ddr-test": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "csr.json": "9e10f92cf0c3b2fe5812c5c4490b6a6cc918b909ffe998445fec2c9beb0f69cb",
+    "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "sfp_probe.py": "c2b3d438212670df4c92bb4f2b14245231e082ea07c7823a2d79a6def5bcd262",
+    "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+    "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "run_wr_pll_dual.py": "d7cf65f38fc1d182a08748e1da0d794f0621937cb253ff7c533fa9084b072a22",
+    "capture_adc_ddr.py": "300429edb234985fc7061c5f89258c97e14da978f8a7ddde7f57d3eeba72b312"
+  },
+  "restoration_passed": true,
+  "internal_loopback_result": "NOT_RUN",
+  "sfp_test_mode": "external",
+  "error": "Command '['ssh', '-i', '/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/id_ed25519', '-o', 'UserKnownHostsFile=/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/known_hosts', '-o', 'HostKeyAlias=192.168.2.15', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=15', '-o', 'ConnectionAttempts=3', 'root@192.168.2.20', 'cd /tmp/zc706-integrated && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --realtime --seconds 180 --output pll.json']' timed out after 15 seconds",
+  "final_host": "192.168.2.21"
+}
