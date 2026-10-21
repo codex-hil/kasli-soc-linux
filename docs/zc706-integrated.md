@@ -1908,3 +1908,14 @@ Started exact same current RTL --no-header-probes with SRL extraction enabled
 (no --no-srl), seed3/fclk/router2, output build/zc706-sfp-srl-control,
 1800sec/8GiB. Compare synthesized SRL use, timing and physical network result
 before asserting causal primitive defect and returning to integrated design.
+
+Matched SRL control continuation2026-10-21: routing still active, no timing
+manifest yet. Synthesized same-RTL control contains SRL16E; archived exact
+primitive connections/parameters and current tool/source hashes as
+srl-control-synthesis.json. Existing nextpnr source already includes SRL INIT
+handling patches, so do not diagnose missing INIT support from the observed
+network failure alone. Future audit must also cover pin/half-LUT mapping,
+CE/clock semantics and linked cached objects; source contents alone are not
+a binary-provenance claim. No hardware actions or configuration changes.
+Next finish bounded control route, gate timing/INIT, then compare with the
+qualified no-SRL physical result.

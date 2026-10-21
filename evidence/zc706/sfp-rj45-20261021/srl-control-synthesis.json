@@ -1,0 +1,1072 @@
+{
+  "hardware_access": false,
+  "srl_counts": {
+    "SRL16E": 32
+  },
+  "srl_cells": {
+    "$auto$ff.cc:266:slice$22955": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1168
+        ],
+        "Q": [
+          1310
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22956": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1167
+        ],
+        "Q": [
+          1295
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22957": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1166
+        ],
+        "Q": [
+          1342
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22958": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1165
+        ],
+        "Q": [
+          1279
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22959": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1173
+        ],
+        "Q": [
+          1270
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22960": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1172
+        ],
+        "Q": [
+          1298
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22961": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1171
+        ],
+        "Q": [
+          1333
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$22962": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "0000000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "1"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          1170
+        ],
+        "Q": [
+          1282
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35608": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4586
+        ],
+        "Q": [
+          7763
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35609": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9551
+        ],
+        "Q": [
+          9577
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35610": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9552
+        ],
+        "Q": [
+          9578
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35611": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9553
+        ],
+        "Q": [
+          9579
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35612": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9561
+        ],
+        "Q": [
+          9588
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35613": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9562
+        ],
+        "Q": [
+          9589
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35614": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9563
+        ],
+        "Q": [
+          9590
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35615": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          9568
+        ],
+        "Q": [
+          4893
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35616": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10889
+        ],
+        "Q": [
+          7768
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35617": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10890
+        ],
+        "Q": [
+          10912
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35618": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10891
+        ],
+        "Q": [
+          10913
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35619": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10892
+        ],
+        "Q": [
+          10919
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35620": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10897
+        ],
+        "Q": [
+          7766
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35621": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10898
+        ],
+        "Q": [
+          10920
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35622": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10899
+        ],
+        "Q": [
+          10921
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$35623": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          10900
+        ],
+        "Q": [
+          10926
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36659": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4353
+        ],
+        "Q": [
+          4209
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36660": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4355
+        ],
+        "Q": [
+          4208
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36661": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4357
+        ],
+        "Q": [
+          4207
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36662": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4363
+        ],
+        "Q": [
+          4210
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36663": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4365
+        ],
+        "Q": [
+          4202
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36664": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4367
+        ],
+        "Q": [
+          4201
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36665": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4359
+        ],
+        "Q": [
+          4200
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$36666": {
+      "type": "SRL16E",
+      "parameters": {
+        "INIT": "000",
+        "IS_CLK_INVERTED": "0"
+      },
+      "connections": {
+        "A0": [
+          "0"
+        ],
+        "A1": [
+          "1"
+        ],
+        "A2": [
+          "0"
+        ],
+        "A3": [
+          "0"
+        ],
+        "CE": [
+          "1"
+        ],
+        "CLK": [
+          11901
+        ],
+        "D": [
+          4361
+        ],
+        "Q": [
+          4199
+        ]
+      }
+    }
+  },
+  "source_hashes": {
+    "build/zc706-integrated/nextpnr/nextpnr-himbaechel-xilinx": "d183d6c719f84bd9bf5a04fa7dbca1a39d402acdcb78220286215766d9b41fcf",
+    "build/zc706-sfp/nextpnr/source/himbaechel/uarch/xilinx/fasm.cc": "7f5865ba064b90a60dda87a67a6629bd88c7b683805740495fb399e5914ce6e0",
+    "build/zc706-sfp/nextpnr/source/himbaechel/uarch/xilinx/pack.cc": "03971af3407ede9eb03062c1b1fc1a64f0bc9cfb23856aeca9fc96b4628e36de",
+    "upstream/nextpnr/himbaechel/uarch/xilinx/fasm.cc": "a04ca3bcba3e0fe117156d6e56b8bacbf2adef3f4740ceddc405a52d9914cf00"
+  },
+  "routing": "PENDING",
+  "limitation": "Source hash records do not alone prove which object files were linked; cached build manifests must also be traced."
+}
