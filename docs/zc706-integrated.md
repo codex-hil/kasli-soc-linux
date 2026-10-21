@@ -1746,3 +1746,19 @@ arp-debug-seed3-* evidence. Started controlled same-RTL seed2 build at
 build/zc706-integrated-arp-debug-seed2, same reset/golden clock routes, bounded
 2400sec/8GiB with automatic restoration. Golden hardware unchanged; pending
 setup/hold/INIT audit before instrumented ARP hardware test.
+
+ARP diagnostic seed2 continuation2026-10-21: SYS77.12MHz/83.333MHz FAIL,
+final hold clean after6buffers. Not programmed. Evidence arp-debug-seed2-* .
+Rather than another integrated placement retry, use existing isolated SFP
+target (development scope previously permits dropping ADC/FIFO/DDR logic).
+Build: --design sfp --sfp-refclk fclk --seed3 --router router2, output
+build/zc706-sfp-arp-debug/gateware, bounded1800sec/8GiB. Yosys synthesis
+completed; router2 running. No timing result or physical qualification yet.
+
+Locked integrated wrapper accepts an sfp manifest only with explicit
+--sfp-diagnostic-only, checks bit hash/timing, rejects local-quad reference,
+and requires only CSR JSON rather than unused ADC/DDR binaries. Golden
+restoration and wholeDDR BIST remain mandatory. Normal integrated tests still
+require integrated manifest. Next audit isolated build then collect ARP stage
+counters through external RJ45; results will be labeled isolated, not full
+ADC/DDR integration. No hardware access this turn; golden unchanged.

@@ -23,9 +23,14 @@ def main():
     work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
     manifest=json.loads((bit.parent/'manifest.json').read_text())
-    if manifest['design']!='integrated' or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
-        raise RuntimeError('Matching integrated build required')
+    allowed_designs=('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
+    if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
+        raise RuntimeError('Matching timing-clean build required for the selected test scope')
+    if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
+        raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
+    if a.sfp_diagnostic_only:
+        required=[work/'gateware/csr.json']
     hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in required}
     if a.preflight_only:
         report=dict(hardware_access=False,qualification=False,bitstream_sha256=digest,artifacts=hashes)
@@ -54,6 +59,8 @@ def main():
         sources=[(work/'pl-ddr-test','pl-ddr-test'),(work/'adc-ddr-read','adc-ddr-read'),
             (work/'gateware/csr.json','csr.json'),
             (work/'i2c.so','i2c.so')]
+        if a.sfp_diagnostic_only:
+            sources=[(work/'gateware/csr.json','csr.json')]
         for name in ('fmc_adc.py','sfp_probe.py','measure_fmc_clocks.py',
                      'wr_pll_control.py','run_wr_pll.py','run_wr_pll_dual.py','capture_adc_ddr.py'):
             sources.append((ROOT/'tools'/name,name))

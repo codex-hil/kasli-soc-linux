@@ -1,0 +1,758 @@
+{
+  "result": "TIMING_FAIL",
+  "hardware_access": false,
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 156.76437377929688,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 124.93753814697266,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "eth_rx_clk": {
+      "achieved": 151.24017333984375,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 199.64065551757812,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1180.6375732421875,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 77.36345672607422,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 255.8199005126953,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 505.30572509765625,
+      "constraint": 200
+    },
+    "integratedsoc_ddrclock_clkin_signal": {
+      "achieved": 835.421875,
+      "constraint": 100
+    },
+    "integratedsoc_ddrclock_clkout_buf0": {
+      "achieved": 77.11884307861328,
+      "constraint": 83.33333587646484
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 1003.009033203125,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 990.0989990234375,
+      "constraint": 62.5
+    }
+  },
+  "critical_path": [
+    {
+      "from": "posedge integratedsoc_ddrclock_clkout_buf0",
+      "path": [
+        {
+          "delay": 0.3499999940395355,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$128100",
+            "loc": [
+              53,
+              80
+            ],
+            "port": "Q"
+          },
+          "to": {
+            "cell": "$auto$ff.cc:266:slice$128100",
+            "loc": [
+              53,
+              80
+            ],
+            "port": "Q"
+          },
+          "type": "clk-to-q"
+        },
+        {
+          "delay": 1.0219999551773071,
+          "from": {
+            "cell": "$auto$ff.cc:266:slice$128100",
+            "loc": [
+              53,
+              80
+            ],
+            "port": "Q"
+          },
+          "net": "integratedsoc_integratedsoc_socbushandler_axi2axi_lite_pipe_valid_source_payload_addr[1]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:6504.15-6504.96"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$275473",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A2"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$275473",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A2"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$275473",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$275473",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O6"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.X[1]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:112.23-112.24"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "S1"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.5130000114440918,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "S1"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[3]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              60
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.11699999868869781,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              60
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              60
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[1].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              60
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[7]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              59
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.11699999868869781,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              59
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              59
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[2].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              59
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[11]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              58
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.11699999868869781,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              58
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              58
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[3].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              58
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[15]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              57
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.11699999868869781,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              57
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              57
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[4].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              57
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[19]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.11699999868869781,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "CO3"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.05999999865889549,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[5].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "CO3"
+          },
+          "net": "$auto$alumacc.cc:495:replace_alu$66179.CO[23]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:10809.87-10809.254",
+            "/usr/bin/../share/yosys/xilinx/arith_map.v:116.23-116.25"
+          ],
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              55
+            ],
+            "port": "CIN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.3230000138282776,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              55
+            ],
+            "port": "CIN"
+          },
+          "to": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              55
+            ],
+            "port": "O1"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5189999938011169,
+          "from": {
+            "cell": "$auto$alumacc.cc:495:replace_alu$66179.genblk1.slice[6].genblk1.carry4$split$muxcy0$PACKED_CARRY4$",
+            "loc": [
+              53,
+              55
+            ],
+            "port": "O1"
+          },
+          "net": "integratedsoc_integratedsoc_socbushandler_axi2axi_lite_ax_beat_payload_addr[25]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:6413.15-6413.90"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258003",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.15000000596046448,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258003",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258003",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O5"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5059999823570251,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258003",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O5"
+          },
+          "net": "$techmap305818$abc$255289$auto$blifparse.cc:535:parse_blif$258002.A[5]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258002",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A6"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258002",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "A6"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258002",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.5149999856948853,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258002",
+            "loc": [
+              53,
+              61
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap305819$abc$255289$auto$blifparse.cc:535:parse_blif$258001.A[4]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258001",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "A5"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258001",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "A5"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258001",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.9929999709129333,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258001",
+            "loc": [
+              53,
+              56
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap305826$abc$255289$auto$blifparse.cc:535:parse_blif$257999.A[1]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$257999",
+            "loc": [
+              54,
+              79
+            ],
+            "port": "A2"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$257999",
+            "loc": [
+              54,
+              79
+            ],
+            "port": "A2"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$257999",
+            "loc": [
+              54,
+              79
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 1.4900000095367432,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$257999",
+            "loc": [
+              54,
+              79
+            ],
+            "port": "O6"
+          },
+          "net": "socbushandler_slave_sel",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:9841.15-9841.38"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258098",
+            "loc": [
+              57,
+              118
+            ],
+            "port": "A3"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258098",
+            "loc": [
+              57,
+              118
+            ],
+            "port": "A3"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258098",
+            "loc": [
+              57,
+              118
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 1.2339999675750732,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258098",
+            "loc": [
+              57,
+              118
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap305831$abc$255289$auto$blifparse.cc:535:parse_blif$263436.A[0]",
+          "sources": [
+            "/usr/bin/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258099",
+            "loc": [
+              57,
+              137
+            ],
+            "port": "A1"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258099",
+            "loc": [
+              57,
+              137
+            ],
+            "port": "A1"
+          },
+          "to": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258099",
+            "loc": [
+              57,
+              137
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 3.556999921798706,
+          "from": {
+            "cell": "$abc$255289$auto$blifparse.cc:535:parse_blif$258099",
+            "loc": [
+              57,
+              137
+            ],
+            "port": "O6"
+          },
+          "net": "csr_address_next[1]",
+          "sources": [
+            "/work/build/zc706-integrated-arp-debug-seed2/gateware/gateware/top.v:2756.15-2756.31"
+          ],
+          "to": {
+            "cell": "csr_address_22_1",
+            "loc": [
+              186,
+              166
+            ],
+            "port": "D"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.10000000149011612,
+          "from": {
+            "cell": "csr_address_22_1",
+            "loc": [
+              186,
+              166
+            ],
+            "port": "D"
+          },
+          "to": {
+            "cell": "csr_address_22_1",
+            "loc": [
+              186,
+              166
+            ],
+            "port": "D"
+          },
+          "type": "setup"
+        }
+      ],
+      "to": "posedge integratedsoc_ddrclock_clkout_buf0"
+    }
+  ],
+  "final_hold_violations": 0
+}
