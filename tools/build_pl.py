@@ -96,7 +96,7 @@ def main():
     p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (SFP or integrated)")
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
-    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated"], default="probe")
+    p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated", "srl"], default="probe")
     p.add_argument("--output-dir", type=Path, default=ROOT / "build/gateware")
     p.add_argument("--cards", type=int, choices=[1, 2], default=1, help="FMC ADC cards (J5, then J4)")
     p.add_argument("--sfp-refclk", choices=["si5324", "fclk", "local"], default=None)
@@ -123,9 +123,9 @@ def main():
         p.error("--reciprocal requires the FMC ADC target")
     if args.cards != 1 and args.design not in ("fmc-adc", "frequency"):
         p.error("--cards only applies to the FMC ADC target")
-    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated") and args.board != "zc706":
+    if args.design in ("fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated", "srl") and args.board != "zc706":
         p.error("FMC ADC target requires ZC706")
-    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py", "integrated": "zc706_integrated.py"}[args.design]
+    target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py", "integrated": "zc706_integrated.py", "srl": "zc706_srl.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
     if args.ddr_sync_reset:
         target_command += ["--ddr-sync-reset"]
@@ -193,7 +193,7 @@ def main():
         from adc_termination_db import prepare as prepare_termination_db
         nextpnr = prepare_nextpnr()
         db = prepare_termination_db(db)
-    if args.design in ("sfp", "integrated"):
+    if args.design in ("sfp", "integrated", "srl"):
         from ddr_chipdb import prepare
         from sfp_nextpnr import prepare as prepare_nextpnr
         from sfp_database import prepare as prepare_sfp_db
