@@ -1648,3 +1648,15 @@ with tools/build_ddr_software.py --output-dir build/zc706-integrated-dma-bram
 and compile adc_read.c/i2c.c as in integrated-software, targeting that directory.
 Run the locked wrapper with --work-dir build/zc706-integrated-dma-bram,
 --host ACTUAL_BOARD_IP, --program and a fresh --output directory.
+
+### Connected DAC check — 2026-10-21
+
+User confirmed direct DAC connection to powered gigabit switch. Locked integrated
+wrapper booted validated DMA-BRAM image; DDR passes. SFP EEPROM now responds:
+FS SFP-10G-PC01, serial S2426062540-2, nominal10300Mb/s, connector33. This
+does not establish1.25Gb/s compatibility. Internal loopback now times out on
+packet0 (TX1/RX256 MAC frames, CRC1/preamble132), before external mode/network
+qualification. Do not interpret this as a measured external link failure.
+Golden restored/full DDR BIST clean; final Linux192.168.2.17. No persistent
+writes. Evidence sfp-dac-20261021. Next isolate external-mode GTX/PCS and
+network diagnostics from the failing internal-loopback prerequisite.
