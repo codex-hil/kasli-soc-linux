@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "b2a628480415bdd720cf99430915368b7e84748311bd814f43af3a3fc3e59a99",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-srl-ce-pair-hold/gateware/csr.json": "4063fb5ec6dac74b9d9a4b4e03032f9fbccfb3f9e8111a70a13b3be0978a4881"
+  }
+}

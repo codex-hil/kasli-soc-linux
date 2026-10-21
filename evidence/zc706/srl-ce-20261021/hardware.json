@@ -1,0 +1,88 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "b2a628480415bdd720cf99430915368b7e84748311bd814f43af3a3fc3e59a99",
+  "files": {
+    "csr.json": "4063fb5ec6dac74b9d9a4b4e03032f9fbccfb3f9e8111a70a13b3be0978a4881",
+    "test_srl.py": "98a2efbc50724782b3a61e290521c1cef3aa80f6b4b81e3c96b5fd62a1322511",
+    "sfp_probe.py": "c2b3d438212670df4c92bb4f2b14245231e082ea07c7823a2d79a6def5bcd262",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1"
+  },
+  "restoration_passed": true,
+  "srl": {
+    "result": "PASS",
+    "samples": [
+      {
+        "cycles": 947637395,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 952651589,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 957664253,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 962676211,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 967687571,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 972699055,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 977710193,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 982721485,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 987733090,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      },
+      {
+        "cycles": 992744313,
+        "errors": 0,
+        "ready": 1,
+        "variable_ce_errors": 0,
+        "constant_ce_errors": 0
+      }
+    ],
+    "scope": "SRL16E static taps, zero INIT, variable CE low16 versus constant CE high16, FF references"
+  },
+  "final_host": "192.168.2.29"
+}

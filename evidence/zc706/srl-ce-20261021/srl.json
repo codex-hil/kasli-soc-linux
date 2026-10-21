@@ -1,0 +1,76 @@
+{
+  "result": "PASS",
+  "samples": [
+    {
+      "cycles": 947637395,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 952651589,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 957664253,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 962676211,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 967687571,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 972699055,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 977710193,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 982721485,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 987733090,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    },
+    {
+      "cycles": 992744313,
+      "errors": 0,
+      "ready": 1,
+      "variable_ce_errors": 0,
+      "constant_ce_errors": 0
+    }
+  ],
+  "scope": "SRL16E static taps, zero INIT, variable CE low16 versus constant CE high16, FF references"
+}

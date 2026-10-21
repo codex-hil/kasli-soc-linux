@@ -1,0 +1,55 @@
+{
+  "placements": {
+    "SRL16E_20": "SLICE_X30Y303/B6LUT",
+    "SRL16E_10": "SLICE_X30Y293/C6LUT",
+    "SRL16E_29": "SLICE_X30Y310/C6LUT",
+    "SRL16E_7": "SLICE_X30Y287/D6LUT",
+    "SRL16E_16": "SLICE_X30Y302/B6LUT",
+    "SRL16E_30": "SLICE_X30Y307/C6LUT",
+    "SRL16E_1": "SLICE_X30Y290/A6LUT",
+    "SRL16E_23": "SLICE_X30Y300/D6LUT",
+    "SRL16E_2": "SLICE_X30Y290/D6LUT",
+    "SRL16E_26": "SLICE_X30Y307/B6LUT",
+    "SRL16E_15": "SLICE_X30Y292/D6LUT",
+    "SRL16E": "SLICE_X26Y289/B6LUT",
+    "SRL16E_8": "SLICE_X30Y297/D6LUT",
+    "SRL16E_5": "SLICE_X30Y296/D6LUT",
+    "SRL16E_28": "SLICE_X30Y307/D6LUT",
+    "SRL16E_14": "SLICE_X30Y290/C6LUT",
+    "SRL16E_19": "SLICE_X30Y299/C6LUT",
+    "SRL16E_22": "SLICE_X30Y310/A6LUT",
+    "SRL16E_25": "SLICE_X30Y303/D6LUT",
+    "SRL16E_13": "SLICE_X30Y287/A6LUT",
+    "SRL16E_3": "SLICE_X30Y297/C6LUT",
+    "SRL16E_31": "SLICE_X30Y309/B6LUT",
+    "SRL16E_18": "SLICE_X30Y306/D6LUT",
+    "SRL16E_12": "SLICE_X30Y290/B6LUT",
+    "SRL16E_21": "SLICE_X30Y302/D6LUT",
+    "SRL16E_6": "SLICE_X30Y293/B6LUT",
+    "SRL16E_27": "SLICE_X32Y313/A6LUT",
+    "SRL16E_24": "SLICE_X30Y302/C6LUT",
+    "SRL16E_11": "SLICE_X30Y291/D6LUT",
+    "SRL16E_17": "SLICE_X30Y317/D6LUT",
+    "SRL16E_9": "SLICE_X30Y296/B6LUT",
+    "SRL16E_4": "SLICE_X30Y297/A6LUT"
+  },
+  "hold_lines": [
+    "Info: Hold-fix: no hold violations to fix."
+  ],
+  "timing": {
+    "main_clkin_signal": {
+      "achieved": 1020.4081420898438,
+      "constraint": 100
+    },
+    "main_clkout_buf": {
+      "achieved": 119.96160888671875,
+      "constraint": 100
+    }
+  },
+  "inputs": {
+    "gateware/zc706_srl.py": "1ab329b5d149814778aed380327979dc1fa03c4c018e1100d4be7fe647088ce4",
+    "tools/build_pl.py": "a9122064ea436296858a890eabb9298270e00baead4cf71bd6bb9ae619905d20",
+    "tools/test_srl.py": "98a2efbc50724782b3a61e290521c1cef3aa80f6b4b81e3c96b5fd62a1322511",
+    "tools/check_srl_netlist.py": "5390fe6b91616138c223fb4cd3c3457be02f3c7e1017394c41968d5545b83e72"
+  }
+}
