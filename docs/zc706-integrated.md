@@ -1792,3 +1792,14 @@ upstream ARP depacketizer224bit header on recognized reply. No FSM change.
 Snapshots excluded from counter-delta arithmetic. Isolated fclk seed3 build
 build/zc706-sfp-arp-header, bounded1800sec/8GiB; timing and INIT pending.
 Next decode observed header alongside host PCAP.
+
+Header snapshot preparation2026-10-21: build still in router2, no manifest
+yet. Added tools/decode_arp_snapshot.py to reconstruct224bit header from seven
+CSR words and decode Ethernet ARP fields; compares senderIP to existing CSR.
+Extended RX/table simulation to validate this decoder against the actual
+depacketizer.header bus at RX event, not just a constructed software fixture.
+Padded packets/gaps pass with expected host107/MAC and target206/opcode2.
+Evidence arp-snapshot-decoder-sim.log. No physical action this continuation.
+Next finish header build, audit timing/INIT and use locked SFP-only wrapper
+then decode its validation.json. Last senderIP alone cannot distinguish field
+corruption from a reply supplied by another peer; keep both hypotheses open.

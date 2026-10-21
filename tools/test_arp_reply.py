@@ -4,6 +4,7 @@ import struct
 from migen import Module
 from migen.sim import run_simulation, passive
 from liteeth.core.arp import LiteEthARPRX, LiteEthARPTable
+from decode_arp_snapshot import decode
 
 PL_IP=0xc0a802ce
 HOST_IP=0xc0a8026b
@@ -24,6 +25,14 @@ def exercise(padding, gap):
                 responses.append(((yield table.response.failed),(yield table.response.mac_address)))
             if (yield rx.source.valid):
                 events.append(((yield rx.source.reply),(yield rx.source.ip_address),(yield rx.source.mac_address)))
+                raw=(yield rx.depacketizer.header)
+                snapshot={f'mac_status_arp_reply_header{i}':(raw>>(32*i))&0xffffffff for i in range(7)}
+                snapshot['mac_status_arp_sender_ip']=(yield rx.source.ip_address)
+                decoded=decode(snapshot)
+                assert decoded['sender_ip']=='192.168.2.107', decoded
+                assert decoded['sender_mac']=='6c:2b:59:f4:76:e8', decoded
+                assert decoded['target_ip']=='192.168.2.206', decoded
+                assert decoded['opcode']==2 and decoded['sender_ip_matches_csr'], decoded
             yield
     def control():
         yield table.source.ready.eq(1)
