@@ -1,0 +1,504 @@
+{
+  "chipdb": "build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin",
+  "chipdb_sha256": "72eaa756d07ebb2a81a9a9c3189f1c3632fc7690d20252c9d70c3d54c4033d69",
+  "speed_grades": {
+    "DEFAULT": {
+      "pins": {
+        "CLK": {
+          "flags": 1,
+          "comb_arcs": 0,
+          "register_arcs": []
+        },
+        "DI1": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                100,
+                100,
+                100
+              ],
+              "hold_ps": [
+                100,
+                100,
+                100,
+                100
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA1": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA2": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA3": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA4": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA5": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA6": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA7": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WA8": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                500,
+                100,
+                500
+              ],
+              "hold_ps": [
+                100,
+                200,
+                100,
+                200
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "WE": {
+          "flags": 0,
+          "comb_arcs": 0,
+          "register_arcs": [
+            {
+              "clock": "CLK",
+              "edge": 0,
+              "setup_ps": [
+                100,
+                600,
+                100,
+                600
+              ],
+              "hold_ps": [
+                100,
+                100,
+                100,
+                100
+              ],
+              "clock_to_q_ps": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "O5": {
+          "flags": 0,
+          "comb_arcs": 5,
+          "register_arcs": []
+        },
+        "O6": {
+          "flags": 0,
+          "comb_arcs": 6,
+          "register_arcs": []
+        }
+      },
+      "srl16e_DI2_register_input": false,
+      "srl16e_O6_register_output": false
+    }
+  },
+  "hardware_access": false,
+  "routed_sha256": "9d1b0ca4f5638f87faba79b1eb77cbdb0b8c6f6694fd2a1f767e3717edfa4a3a",
+  "srl16e_cells": {
+    "$auto$ff.cc:266:slice$22962": {
+      "bel": "SLICE_X42Y280/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22961": {
+      "bel": "SLICE_X42Y281/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22960": {
+      "bel": "SLICE_X42Y281/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22959": {
+      "bel": "SLICE_X42Y282/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22958": {
+      "bel": "SLICE_X42Y280/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22957": {
+      "bel": "SLICE_X42Y282/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22956": {
+      "bel": "SLICE_X42Y282/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$22955": {
+      "bel": "SLICE_X42Y281/D6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36666": {
+      "bel": "SLICE_X30Y270/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36665": {
+      "bel": "SLICE_X30Y267/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36664": {
+      "bel": "SLICE_X30Y275/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36663": {
+      "bel": "SLICE_X30Y266/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36662": {
+      "bel": "SLICE_X30Y270/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36661": {
+      "bel": "SLICE_X30Y275/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36660": {
+      "bel": "SLICE_X30Y275/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$36659": {
+      "bel": "SLICE_X30Y275/D6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35623": {
+      "bel": "SLICE_X38Y318/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35622": {
+      "bel": "SLICE_X38Y312/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35621": {
+      "bel": "SLICE_X36Y315/D6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35620": {
+      "bel": "SLICE_X36Y315/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35619": {
+      "bel": "SLICE_X36Y310/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35618": {
+      "bel": "SLICE_X36Y313/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35617": {
+      "bel": "SLICE_X42Y303/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35616": {
+      "bel": "SLICE_X42Y303/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35615": {
+      "bel": "SLICE_X38Y318/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35614": {
+      "bel": "SLICE_X38Y312/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35613": {
+      "bel": "SLICE_X42Y315/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35612": {
+      "bel": "SLICE_X36Y315/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35611": {
+      "bel": "SLICE_X42Y303/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35610": {
+      "bel": "SLICE_X36Y310/B6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35609": {
+      "bel": "SLICE_X36Y310/C6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    },
+    "$auto$ff.cc:266:slice$35608": {
+      "bel": "SLICE_X38Y312/A6LUT",
+      "data_port": "DI2",
+      "DI2_connected": true,
+      "O6_connected": true
+    }
+  },
+  "srl16e_count": 32
+}

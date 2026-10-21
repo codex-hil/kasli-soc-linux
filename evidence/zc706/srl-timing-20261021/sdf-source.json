@@ -1,0 +1,238 @@
+{
+  "source": "upstream/prjxray-db/zynq7/timings/slicem.sdf",
+  "sha256": "3d2da5714d8c81165fa51403fb719b3ddd9e7ea7ab79280ae4e157d11a29172e",
+  "units": "ns; source min/max, no speed-grade scaling",
+  "cells": {
+    "SLICEM": [
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "WE",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.514,
+          "max": 0.638
+        },
+        "hold": {
+          "min": 0.011,
+          "max": 0.014
+        }
+      }
+    ],
+    "SLICEM/A6LUT": [
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "MC31",
+        "rising": {
+          "min": 0.332,
+          "max": 0.414
+        },
+        "falling": {
+          "min": 0.898,
+          "max": 1.114
+        }
+      },
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "O6",
+        "rising": {
+          "min": 0.444,
+          "max": 0.553
+        },
+        "falling": {
+          "min": 1.186,
+          "max": 1.472
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI1",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.137,
+          "max": 0.17
+        },
+        "hold": {
+          "min": 0.075,
+          "max": 0.093
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI2",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.14,
+          "max": 0.173
+        },
+        "hold": {
+          "min": 0.076,
+          "max": 0.094
+        }
+      }
+    ],
+    "SLICEM/B6LUT": [
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "MC31",
+        "rising": {
+          "min": 0.286,
+          "max": 0.356
+        },
+        "falling": {
+          "min": 0.789,
+          "max": 0.979
+        }
+      },
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "O6",
+        "rising": {
+          "min": 0.438,
+          "max": 0.545
+        },
+        "falling": {
+          "min": 1.176,
+          "max": 1.458
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI1",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.126,
+          "max": 0.156
+        },
+        "hold": {
+          "min": 0.07,
+          "max": 0.087
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI2",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.143,
+          "max": 0.178
+        },
+        "hold": {
+          "min": 0.089,
+          "max": 0.11
+        }
+      }
+    ],
+    "SLICEM/C6LUT": [
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "MC31",
+        "rising": {
+          "min": 0.285,
+          "max": 0.355
+        },
+        "falling": {
+          "min": 0.784,
+          "max": 0.972
+        }
+      },
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "O6",
+        "rising": {
+          "min": 0.436,
+          "max": 0.543
+        },
+        "falling": {
+          "min": 1.169,
+          "max": 1.45
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI1",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.117,
+          "max": 0.145
+        },
+        "hold": {
+          "min": 0.058,
+          "max": 0.072
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI2",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.116,
+          "max": 0.144
+        },
+        "hold": {
+          "min": 0.062,
+          "max": 0.077
+        }
+      }
+    ],
+    "SLICEM/D6LUT": [
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "MC31",
+        "rising": {
+          "min": 0.286,
+          "max": 0.357
+        },
+        "falling": {
+          "min": 0.788,
+          "max": 0.978
+        }
+      },
+      {
+        "kind": "IOPath",
+        "from_pin": "CLK",
+        "to_pin": "O6",
+        "rising": {
+          "min": 0.438,
+          "max": 0.545
+        },
+        "falling": {
+          "min": 1.174,
+          "max": 1.456
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI1",
+        "clock": "CLK",
+        "setup": {
+          "min": -0.04,
+          "max": -0.033
+        },
+        "hold": {
+          "min": 0.217,
+          "max": 0.269
+        }
+      },
+      {
+        "kind": "SetupHoldCheck",
+        "pin": "DI2",
+        "clock": "CLK",
+        "setup": {
+          "min": 0.133,
+          "max": 0.165
+        },
+        "hold": {
+          "min": 0.091,
+          "max": 0.112
+        }
+      }
+    ]
+  }
+}
