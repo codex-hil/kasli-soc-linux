@@ -6,6 +6,7 @@ import ipaddress
 import json
 from pathlib import Path
 import os
+import re
 import socket
 import subprocess
 import time
@@ -37,13 +38,37 @@ def main():
     try:
         if capture is not None and capture.poll() is not None:
             raise RuntimeError("tcpdump failed; inspect capture log")
+        warmup = subprocess.run(["ping", "-c", "3", "-i", ".2", "-W", "1", str(a.ip)],
+            capture_output=True, text=True, timeout=8)
+        result["warmup"] = {"returncode":warmup.returncode,"stdout":warmup.stdout}
         ping = subprocess.run(["ping", "-c", "20", "-W", "1", str(a.ip)],
             capture_output=True, text=True, timeout=40)
         result["ping"] = {"returncode": ping.returncode, "stdout": ping.stdout, "stderr": ping.stderr}
-        result["icmp_result"] = "PASS" if ping.returncode == 0 else "FAIL"
+        counts = re.search(r"(\d+) packets transmitted, (\d+) received", ping.stdout)
+        result["icmp_result"] = "PASS" if ping.returncode == 0 and counts and counts.groups() == ("20", "20") else "FAIL"
         result["neighbor"] = subprocess.run(
             ["ip", "-j", "neigh", "show", "to", str(a.ip)],
             capture_output=True, text=True, timeout=5).stdout
+        if os.environ.get("ZC706_UDP_DIAGNOSTIC") == "1":
+            result["udp_diagnostic"] = []
+            for size in result["sizes"]:
+                for shot in range(2):
+                    record={"size":size,"shot":shot,"result":"FAIL"}
+                    with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as probe:
+                        probe.settimeout(2)
+                        probe.connect((str(a.ip),a.port))
+                        data=hashlib.shake_256(f"udp-diag:{size}:{shot}".encode()).digest(size)
+                        try:
+                            probe.send(data)
+                            response=probe.recv(2048)
+                            record["received_bytes"]=len(response)
+                            if response != data:raise RuntimeError("UDP payload mismatch")
+                            record["result"]="PASS"
+                        except (OSError,RuntimeError) as error:
+                            record["error"]=str(error)
+                    result["udp_diagnostic"].append(record)
+            result["qualification"]=False
+            raise RuntimeError("Diagnostic-only size sweep; not full UDP qualification")
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.settimeout(2)
             sock.connect((str(a.ip), a.port))
@@ -60,7 +85,7 @@ def main():
                     result["completed_bytes"] += size
             result["elapsed_seconds"] = time.monotonic()-start
         result["udp_result"] = "PASS"
-        if ping.returncode:
+        if result["icmp_result"] != "PASS":
             raise RuntimeError("PL ICMP test failed; UDP tested independently")
         result["result"] = "PASS"
     except Exception as e:

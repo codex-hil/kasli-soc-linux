@@ -1818,3 +1818,19 @@ design. Do not claim a root cause fix: instrumentation-dependent physical
 behavior raises synthesis/placement/observation hypotheses requiring controlled
 comparison. Next test UDP lengths independently and repeat this exact bitstream.
 Golden restored/BIST PASS, Linux192.168.2.19. Evidence header/ and header-lut-init.
+
+Repeated exact header bitstream2026-10-21: ARP again works33host replies/
+33cacheupdates/0failures. Added separate3ping warmup and strict measured20/20
+qualification (exit0 alone is insufficient). Measured19/20 FAIL. UDP diagnostic
+tries every size1/17/64/128/512/1024/1400 twice with independent sockets; all
+timeout at host, diagnostic mode never declares full qualification.
+
+PCAP reveals PL does transmit UDP echoes with correct IP/ports and leading
+payload bytes, but lengths are wrong and packets truncated. Examples1byte
+request(IP29/UDP9)->reply(IP49/UDP29), another1byte->IP161/UDP141;512byte
+request(IP540/UDP520)->reply(IP776/UDP756). Thus no-response interpretation is
+incorrect at wire level: kernel rejects malformed replies. Length varies
+within the low byte and some larger frames also terminate early. Need trace
+UDP RX length, FIFO metadata and TX packetizer length before patching.
+Golden restored/BIST PASS, Linux192.168.2.21. Evidence udp-sizes/. One newCRC
+error recorded; do not claim clean network qualification.
