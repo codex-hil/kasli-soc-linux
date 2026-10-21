@@ -1,0 +1,170 @@
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Info: Parsing XDC file...
+Info: Packing constants..
+Info: Inserting IO buffers..
+Info:     IO port 'user_led' driven by OBUF '$iopadmap$top.user_led'
+Info:     Constraining 'user_led' to pad 'X266Y119/IOB_X0Y1.IOB18M.PAD'
+Info: Generating output buffer for '$iopadmap$top.user_led'
+Info:     Created 1 PAD cells from:
+Info:              1x PAD
+Info:     Created 1 PS7_PS7 cells from:
+Info:              1x PS7
+Info: Preparing clocking...
+Info: Packing constants..
+Info: Packing IOLOGIC...
+Info: Packing cfg...
+Info: Packing PLLs...
+Info: Packing global buffers...
+Info: Packing Gigabit Transceivers..
+Info: Generating derived timing constraints...
+Info: Packing MUX[789]s..
+Info: Packing carries..
+Info:    Grouped 184 MUXCYs and 184 XORCYs into 11 chains.
+Info:    Moved 4 shared LUTs driving carry S inputs into the carry site.
+Info:    Blasted 0 non-chain MUXCYs and 0 non-chain XORCYs to soft logic
+Info:     Created 32 SLICE_LUTX cells from:
+Info:             32x SRL16E
+Info: Packing LUTs..
+Info:     Created 898 SLICE_LUTX cells from:
+Info:            395x LUT1
+Info:            172x LUT2
+Info:             34x LUT3
+Info:            102x LUT4
+Info:            125x LUT5
+Info:             70x LUT6
+Info: Packing DRAM..
+Info:    Transformed 0 tied-low DRAM address inputs to be tied-high
+Info: Packing BRAM..
+Info: BRAM cascade scan: 0 BRAM(s), 0 tie(s) seen, 0 dropped
+Info: Packing DSPs..
+Info: Packing flipflops..
+Info:     Created 430 SLICE_FFX cells from:
+Info:              8x FDCE
+Info:              4x FDPE
+Info:            406x FDRE
+Info:             12x FDSE
+Info:     Created 93 SELMUX2_1 cells from:
+Info:             62x MUXF7
+Info:             31x MUXF8
+Info: Constrained 334 LUTFF pairs.
+Info: Checksum: 0xe8976cf8
+
+Info: Device utilisation:
+Info: 	          SLICE_LUTX:     930/ 437200     0%
+Info: 	           SLICE_FFX:     430/ 437200     0%
+Info: 	              CARRY4:      47/  54650     0%
+Info: 	          PSEUDO_GND:       1/      1   100%
+Info: 	          PSEUDO_VCC:       1/      1   100%
+Info: 	               HARD0:       0/   2680     0%
+Info: 	             DSP48E1:       0/    900     0%
+Info: 	                 PAD:       1/    772     0%
+Info: 	       IOB33M_OUTBUF:       0/     97     0%
+Info: 	       IOB33S_OUTBUF:       0/     97     0%
+Info: 	        IOB33_OUTBUF:       0/    202     0%
+Info: 	     IOB33M_INBUF_EN:       0/     97     0%
+Info: 	     IOB33S_INBUF_EN:       0/     97     0%
+Info: 	      IOB33_INBUF_EN:       0/    202     0%
+Info: 	IOB33M_TERM_OVERRIDE:       0/     97     0%
+Info: 	IOB33S_TERM_OVERRIDE:       0/     97     0%
+Info: 	 IOB33_TERM_OVERRIDE:       0/    202     0%
+Info: 	       PULL_OR_KEEP1:       0/    690     0%
+Info: 	            IDELAYE2:       0/    400     0%
+Info: 	        OLOGICE3_TFF:       0/    250     0%
+Info: 	      OLOGICE3_OUTFF:       0/    250     0%
+Info: 	       OLOGICE3_MISR:       0/    250     0%
+Info: 	           OSERDESE2:       0/    400     0%
+Info: 	        ILOGICE3_IFF:       0/    250     0%
+Info: 	ILOGICE3_ZHOLD_DELAY:       0/    250     0%
+Info: 	           ISERDESE2:       0/    400     0%
+Info: 	               BUFIO:       0/     32     0%
+Info: 	            BUFGCTRL:       2/     32     6%
+Info: 	                 PS7:       1/      1   100%
+Info: 	               BSCAN:       0/      4     0%
+Info: 	            DCIRESET:       0/      1     0%
+Info: 	            DNA_PORT:       0/      1     0%
+Info: 	           EFUSE_USR:       0/      1     0%
+Info: 	                BUFG:       0/     32     0%
+Info: 	              BUFHCE:       0/    168     0%
+Info: 	            FIFO18E1:       0/    545     0%
+Info: 	       GTXE2_CHANNEL:       0/     16     0%
+Info: 	        GTXE2_COMMON:       0/      4     0%
+Info: 	         IBUFDS_GTE2:       0/      8     0%
+Info: 	          IDELAYCTRL:       0/      8     0%
+Info: 	            INVERTER:       0/    169     0%
+Info: 	 IOB18M_OUTBUF_DCIEN:       0/     72     0%
+Info: 	   IOB18_INBUF_DCIEN:       0/    150     0%
+Info: 	  IOB18M_INBUF_DCIEN:       0/     72     0%
+Info: 	  IOB18_OUTBUF_DCIEN:       1/    150     0%
+Info: 	          MMCME2_ADV:       1/      8    12%
+Info: 	            ODELAYE2:       0/    150     0%
+Info: 	        OLOGICE2_TFF:       0/    400     0%
+Info: 	      OLOGICE2_OUTFF:       0/    400     0%
+Info: 	           PLLE2_ADV:       0/      8     0%
+Info: 	            RAMB18E1:       0/   1090     0%
+Info: 	            RAMB36E1:       0/    545     0%
+Info: 	           SELMUX2_1:      93/ 165250     0%
+Info: 	        RAMBFIFO36E1:       0/    545     0%
+Info: 	           FRAME_ECC:       0/      1     0%
+Info: 	                ICAP:       0/      2     0%
+Info: 	             STARTUP:       0/      1     0%
+Info: 	          USR_ACCESS:       0/      1     0%
+Info: 	              BUFFER:       0/     82     0%
+Info: 	        ILOGICE2_IFF:       0/    400     0%
+Info: 	       OLOGICE2_MISR:       0/    400     0%
+Info: 	 IOB18_TERM_OVERRIDE:       0/    150     0%
+Info: 	  IOB18S_INBUF_DCIEN:       0/     72     0%
+Info: 	 IOB18S_OUTBUF_DCIEN:       0/     72     0%
+Info: 	IOB18S_TERM_OVERRIDE:       0/     72     0%
+Info: 	IOB18M_TERM_OVERRIDE:       0/     72     0%
+Info: 	  IDELAYE2_FINEDELAY:       0/    150     0%
+
+Info:     source at X133Y181 reached 864 of 2401 offsets
+Info:     source at X120Y188 reached 893 of 2401 offsets
+Info:     source at X142Y172 reached 846 of 2401 offsets
+Info: Delay matrix: 1450 of 2401 offsets measured from 3 sources in 2.32s (window 24).
+Info: Delay matrix: interpolated 951 structural holes.
+Info: Delay matrix: out-of-window rates 15.3 ps/tile (x), 19.5 ps/tile (y).
+Info: Indexed 24 control sets.
+Info: Placed 1 cells based on constraints.
+Info: Creating initial analytic placement for 578 cells, random placement wirelen = 305407.
+Info:     at initial placer iter 0, wirelen = 1132
+Info:     at initial placer iter 1, wirelen = 1030
+Info:     at initial placer iter 2, wirelen = 1049
+Info:     at initial placer iter 3, wirelen = 1065
+Info: Running main analytical placer, max placement attempts per cell = 284258.
+Info:     at iteration #1, type ALL: wirelen solved = 1070, spread = 35806, legal = 27113; time = 0.13s
+Info:     at iteration #2, type ALL: wirelen solved = 1465, spread = 28177, legal = 26059; time = 0.13s
+Info:     at iteration #3, type ALL: wirelen solved = 2261, spread = 26779, legal = 24874; time = 0.13s
+Info:     at iteration #4, type ALL: wirelen solved = 4146, spread = 20776, legal = 22068; time = 0.14s
+Info:     at iteration #5, type ALL: wirelen solved = 6237, spread = 18916, legal = 20166; time = 0.13s
+Info:     at iteration #6, type ALL: wirelen solved = 7587, spread = 17816, legal = 21022; time = 0.16s
+Info:     at iteration #7, type ALL: wirelen solved = 8350, spread = 17428, legal = 21295; time = 0.17s
+Info:     at iteration #8, type ALL: wirelen solved = 8723, spread = 18102, legal = 20284; time = 0.13s
+Info:     at iteration #9, type ALL: wirelen solved = 9226, spread = 16581, legal = 19808; time = 0.16s
+Info:     at iteration #10, type ALL: wirelen solved = 9724, spread = 16297, legal = 19367; time = 0.15s
+Info:     at iteration #11, type ALL: wirelen solved = 10163, spread = 16674, legal = 19709; time = 0.14s
+Info:     at iteration #12, type ALL: wirelen solved = 10748, spread = 16371, legal = 20306; time = 0.21s
+Info:     at iteration #13, type ALL: wirelen solved = 11156, spread = 17008, legal = 19684; time = 0.15s
+Info:     at iteration #14, type ALL: wirelen solved = 11290, spread = 16777, legal = 18917; time = 0.14s
+Info:     at iteration #15, type ALL: wirelen solved = 11904, spread = 17067, legal = 18820; time = 0.13s
+Info:     at iteration #16, type ALL: wirelen solved = 12346, spread = 17248, legal = 19577; time = 0.14s
+Info:     at iteration #17, type ALL: wirelen solved = 13032, spread = 17410, legal = 19244; time = 0.13s
+Info:     at iteration #18, type ALL: wirelen solved = 13296, spread = 17600, legal = 19128; time = 0.12s
+Info:     at iteration #19, type ALL: wirelen solved = 13470, spread = 17822, legal = 19150; time = 0.12s
+Info:     at iteration #20, type ALL: wirelen solved = 14031, spread = 17472, legal = 18733; time = 0.12s
+Info:     at iteration #21, type ALL: wirelen solved = 14398, spread = 18204, legal = 19410; time = 0.11s
+Info:     at iteration #22, type ALL: wirelen solved = 14843, spread = 18490, legal = 20094; time = 0.12s
+Info:     at iteration #23, type ALL: wirelen solved = 15299, spread = 18291, legal = 19401; time = 0.12s
+Info:     at iteration #24, type ALL: wirelen solved = 15695, spread = 18271, legal = 19179; time = 0.11s
+Info: HeAP Placer Time: 4.71s
+Info:   of which solving equations: 0.68s
+Info:   of which spreading cells: 1.30s
+Info:   of which strict legalisation: 0.85s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 129, wirelen = 18733
+ERROR: SRL timing experiment requires six-LUT placement
+Info: Running post-placement legalisation...
+terminate called after throwing an instance of 'nextpnr_himbaechel::assertion_failure'
+  what():  Assertion failure: port.net == nullptr (/work/build/zc706-ddr/nextpnr-source/common/kernel/nextpnr_types.cc:66)

@@ -16,8 +16,6 @@ TimingPortClass XilinxImpl::getPortTimingClass(const CellInfo *cell, IdString po
         return HimbaechelAPI::getPortTimingClass(cell, port, count);
     if (int_or_default(cell->params, id_IS_CLK_INVERTED, 0) != 0)
         log_error("SRL timing experiment supports rising clocks only\n");
-    if (cell->bel != BelId() && bel_name_in_site(cell->bel).str(ctx).find("6LUT") == std::string::npos)
-        log_error("SRL timing experiment requires six-LUT placement\n");
     count = 0;
     if (port == id_CLK) return TMG_CLOCK_INPUT;
     if (port == id_DI2 || port == id_WE) { count = 1; return TMG_REGISTER_INPUT; }

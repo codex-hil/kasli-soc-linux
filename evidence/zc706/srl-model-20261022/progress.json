@@ -1,0 +1,8 @@
+{
+  "result": "BUILD_REJECTED",
+  "hardware_access": false,
+  "compiler": "PASS after const correction",
+  "placement": "Rejected temporary five-LUT candidate; no approved bitstream",
+  "fix": "Reject five-LUT SRL candidates in legality check; verify final six-LUT placement and DI2/O6 sequential classes in preRoute",
+  "replacement_build": "Not submitted: source sync waits shared Dell build lease"
+}

@@ -41,7 +41,35 @@ def prepare():
     cc = source/'xilinx.cc'
     text = cc.read_text()
     assert text.count('NEXTPNR_NAMESPACE_END') == 1
+    pre_route = "void XilinxImpl::preRoute()\n{"
+    assert text.count(pre_route) == 1
+    coverage = r"""
+    int srl_count = 0;
+    for (auto &entry : ctx->cells) {
+        CellInfo *cell = entry.second.get();
+        if (str_or_default(cell->attrs, id_X_ORIG_TYPE) != "SRL16E") continue;
+        if (cell->bel == BelId() || bel_name_in_site(cell->bel).str(ctx).find("6LUT") == std::string::npos)
+            log_error("SRL timing experiment requires six-LUT final placement\n");
+        int count = 0;
+        NPNR_ASSERT(getPortTimingClass(cell, id_DI2, count) == TMG_REGISTER_INPUT && count == 1);
+        NPNR_ASSERT(getPortTimingClass(cell, id_O6, count) == TMG_REGISTER_OUTPUT && count == 1);
+        ++srl_count;
+    }
+    log_info("SRL timing coverage: %d SRL16E DI2 inputs and O6 outputs sequential; six-LUT placement verified.\n", srl_count);
+"""
+    text = text.replace(pre_route, pre_route + coverage)
     cc.write_text(text.replace('NEXTPNR_NAMESPACE_END', patch.read_text()+'\nNEXTPNR_NAMESPACE_END'))
+    place = source/'xilinx_place.cc'
+    text = place.read_text()
+    needle = "bool XilinxImpl::isBelLocationValid(BelId bel, bool explain_invalid) const\n{"
+    assert text.count(needle) == 1
+    text = text.replace(needle, needle + r"""
+    const CellInfo *srl_candidate = ctx->getBoundBelCell(bel);
+    if (srl_candidate && str_or_default(srl_candidate->attrs, id_X_ORIG_TYPE) == "SRL16E" &&
+        bel_name_in_site(bel).str(ctx).find("6LUT") == std::string::npos)
+        return false;
+""")
+    place.write_text(text)
     (source/'srl_timing_values.h').write_text(header(values))
     work = ROOT/'build/zc706-ddr/nextpnr-build/himbaechel/uarch/xilinx'
     objects = work/'CMakeFiles/nextpnr-himbaechel-xilinx.dir'
@@ -50,10 +78,11 @@ def prepare():
         if line.startswith(('CXX_DEFINES =', 'CXX_INCLUDES =', 'CXX_FLAGS =')):
             key,value = line.split('=',1)
             flags[key.strip()] = shlex.split(value.replace('-flto=auto','-flto=2'))
-    subprocess.run(['/usr/bin/c++', *flags['CXX_DEFINES'], *flags['CXX_INCLUDES'], *flags['CXX_FLAGS'],
-        '-c',str(cc),'-o',str(out/'xilinx.cc.o')],check=True)
+    for unit in (cc, place):
+        subprocess.run(['/usr/bin/c++', *flags['CXX_DEFINES'], *flags['CXX_INCLUDES'], *flags['CXX_FLAGS'],
+            '-c',str(unit),'-o',str(out/(unit.name+'.o'))],check=True)
     command = []; output = False
-    replacements = {'xilinx.cc.o':out/'xilinx.cc.o',
+    replacements = {'xilinx.cc.o':out/'xilinx.cc.o', 'xilinx_place.cc.o':out/'xilinx_place.cc.o',
         'hold_fix.cc.o': ROOT/'build/zc706-adc-ddr/nextpnr-hold/hold_fix.cc.o',
         'pack_io.cc.o':base.parent/'pack_io.cc.o', 'fasm.cc.o':base.parent/'fasm.cc.o'}
     for token in shlex.split((objects/'link.txt').read_text()):

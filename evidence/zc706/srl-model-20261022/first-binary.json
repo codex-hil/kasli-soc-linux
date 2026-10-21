@@ -1,0 +1,90 @@
+{
+  "base_binary_sha256": "5dcf1f01b6dea1d2a23ac450d659f5e070a4ca16a945c30e8bcc49169b7b4e99",
+  "patch_sha256": "8b3ebdf43635f525e100e5188cbbdb27fb2b371ba6cf2267a83b41549f7e1899",
+  "builder_sha256": "9838e9ee14d828954c231e4a69b1c8bb50e1e96476740cde58c678e2481715ea",
+  "model": {
+    "sdf_sha256": "3d2da5714d8c81165fa51403fb719b3ddd9e7ea7ab79280ae4e157d11a29172e",
+    "source_ns": {
+      "A": {
+        "setup": [
+          0.14,
+          0.173
+        ],
+        "hold": [
+          0.076,
+          0.094
+        ],
+        "cq": [
+          0.444,
+          1.472
+        ]
+      },
+      "B": {
+        "setup": [
+          0.143,
+          0.178
+        ],
+        "hold": [
+          0.089,
+          0.11
+        ],
+        "cq": [
+          0.438,
+          1.458
+        ]
+      },
+      "C": {
+        "setup": [
+          0.116,
+          0.144
+        ],
+        "hold": [
+          0.062,
+          0.077
+        ],
+        "cq": [
+          0.436,
+          1.45
+        ]
+      },
+      "D": {
+        "setup": [
+          0.133,
+          0.165
+        ],
+        "hold": [
+          0.091,
+          0.112
+        ],
+        "cq": [
+          0.438,
+          1.456
+        ]
+      }
+    },
+    "envelope_ps": {
+      "setup": [
+        116,
+        178
+      ],
+      "hold": [
+        62,
+        112
+      ],
+      "cq": [
+        436,
+        1472
+      ],
+      "we_setup": [
+        514,
+        638
+      ],
+      "we_hold": [
+        11,
+        14
+      ]
+    },
+    "scope": "SRL16E static addresses, rising CLK, 6LUT; DEFAULT SDF envelope, no speed scaling"
+  },
+  "binary_sha256": "43a62d28f421c824b9583c16886b6afc97f7ed136fae8bbadcaf7fd1cfdbaa8b"
+}
