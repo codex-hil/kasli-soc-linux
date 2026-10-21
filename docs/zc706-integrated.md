@@ -1778,3 +1778,17 @@ comparison failure from cache handshake failure. Started isolated stage2 build
 build/zc706-sfp-arp-stage2, same fclk/seed3,1800sec/8GiB. No upstream FSM
 changes. These counters are diagnostic; one comparison uses captured host IP
 192.168.2.107 explicitly. Pending timing/INIT gate before hardware trial.
+
+Physical ARP stage2 check2026-10-21: isolated build passes timing/INIT audit
+7632LUT/233920assignments. Counter deltas RX350/TX141/CRC1/preamble0, ARP
+replies129, exact host107 replies0, UPDATE_TABLE128cycles, cacheupdatevalid0,
+cachewritecycles0, acceptedupdates0, responses20/allfailed. Last RX senderIP
+192.168.2.2. Host capture shows replies from192.168.2.107. Do not yet infer
+wire corruption or synthesis bug: need compare internal header bytes/fields.
+Golden restored/BIST PASS; final Linux192.168.2.8. Evidence stage2/.
+
+Started header snapshot diagnostic: seven32bit read-only CSR words latch
+upstream ARP depacketizer224bit header on recognized reply. No FSM change.
+Snapshots excluded from counter-delta arithmetic. Isolated fclk seed3 build
+build/zc706-sfp-arp-header, bounded1800sec/8GiB; timing and INIT pending.
+Next decode observed header alongside host PCAP.

@@ -245,6 +245,11 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
     self.mac_status.arp_sender_ip = CSRStatus(32, name="arp_sender_ip")
     self.sync += If(arp.rx.source.valid,
         self.mac_status.arp_sender_ip.status.eq(arp.rx.source.ip_address))
+    for index in range(7):
+        csr = CSRStatus(32, name=f"arp_reply_header{index}")
+        setattr(self.mac_status, f"arp_reply_header{index}", csr)
+        self.sync += If(arp.rx.source.valid & arp.rx.source.reply,
+            csr.status.eq(arp.rx.depacketizer.header[index*32:(index+1)*32]))
     self.csr.add("mac_status", bank+1)
     self.packet_test = PacketTest(self.ethcore.mac.crossbar.get_port(0x88b5))
     self.csr.add("packet_test", bank+2)
