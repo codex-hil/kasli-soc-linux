@@ -234,7 +234,11 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         ("arp_replies", arp.rx.source.valid & arp.rx.source.reply),
         ("arp_updates", arp.table.cache.update.valid & arp.table.cache.update.ready),
         ("arp_responses", arp.table.response.valid & arp.table.response.ready),
-        ("arp_failures", arp.table.response.valid & arp.table.response.ready & arp.table.response.failed)):
+        ("arp_failures", arp.table.response.valid & arp.table.response.ready & arp.table.response.failed),
+        ("arp_host_replies", arp.rx.source.valid & arp.rx.source.reply & (arp.rx.source.ip_address == 0xc0a8026b)),
+        ("arp_update_cycles", arp.table.fsm.ongoing("UPDATE_TABLE")),
+        ("arp_update_valid", arp.table.cache.update.valid),
+        ("arp_cache_write_cycles", arp.table.cache.fsm.ongoing("MEM_UPDATE"))):
         csr = CSRStatus(32, name=name)
         setattr(self.mac_status, name, csr)
         self.sync += If(condition, csr.status.eq(csr.status + 1))

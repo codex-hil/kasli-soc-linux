@@ -1762,3 +1762,19 @@ restoration and wholeDDR BIST remain mandatory. Normal integrated tests still
 require integrated manifest. Next audit isolated build then collect ARP stage
 counters through external RJ45; results will be labeled isolated, not full
 ADC/DDR integration. No hardware access this turn; golden unchanged.
+
+Isolated physical ARP stages2026-10-21: SFP-only fclk seed3 passes timing/hold
+and INIT audit7308LUT/231616assignments. Bit SHA d9c254530df865846dc2f3c63a0f6cbfb8f9e95d9183af0ecf359a503bdd01fc.
+Locked probe counter deltas: RX365/TX134, CRC1/preamble0/clockfault0; ARP
+requests1/replies133/cache accepted updates0/responses19/failures19. ICMP/UDP
+FAIL. Confirms RX recognizes ARP replies but resolution never updates cache.
+Last sender IP is192.168.2.2, which may reflect another peer; not proof that
+host reply decoding is wrong. PCAP still shows correct host107 replies.
+Golden restored/BIST PASS, final Linux192.168.2.37. Evidence in isolated/.
+
+Next diagnostic adds exact host107 reply count, UPDATE_TABLE cycles, cache
+update.valid cycles and cache MEM_UPDATE cycles to distinguish IP/pending
+comparison failure from cache handshake failure. Started isolated stage2 build
+build/zc706-sfp-arp-stage2, same fclk/seed3,1800sec/8GiB. No upstream FSM
+changes. These counters are diagnostic; one comparison uses captured host IP
+192.168.2.107 explicitly. Pending timing/INIT gate before hardware trial.
