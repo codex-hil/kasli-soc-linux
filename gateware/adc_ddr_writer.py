@@ -95,7 +95,10 @@ class ADCToDDR(LiteXModule):
             self.written.status.eq(words << 3)]
         # Widen the span/end calculation: no wrapped range can pass the check.
         end = Signal(34)
-        self.comb += end.eq(self.base.storage + (self.length.storage << 3))
+        # Configuration is stable before the start strobe. Register the span
+        # sum continuously; start_pending validates it one cycle after start,
+        # cutting the base+length carry chain from the launch enable path.
+        self.sync += end.eq(self.base.storage + (self.length.storage << 3))
         # CSR address decode must not feed the span check and capture launch
         # muxes in one long path. The registered CSR bridge acknowledges after
         # this additional cycle, so software observes busy after its start write.

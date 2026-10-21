@@ -1974,3 +1974,21 @@ reports61403overused wires; no final timing/manifest yet. This is progress
 through synthesis, not a claimed bitstream/hardware success. Next finish
 bounded routing, fetch/audit and run full locked integration/network test.
 No hardware actions or changes to the shared remote workspace this turn.
+
+Integrated no-SRL routing result2026-10-21: SYS77.92MHz/83.333MHz FAIL,
+final hold clean after1buffer. No hardware programming. Worst path is ADC1
+base_storage[20] -> base+length end sum -> 1GiB range compare -> capture launch
+register enable. Evidence integrated-no-srl-timing.json/compressed stage1log.
+
+Registered the34bit span sum continuously. Existing start_pending validates
+configuration one cycle after CSR start, so stable config is available while
+the carry-chain sum no longer feeds compare/launch in one cycle. CSR layout,
+clock frequencies and capture data handshake unchanged. Extended simulation
+with near-maximum27bit length exceeding the1GiB window; full dual-clock DMA
+suite passes remotely, including rearm/stalls/overflow/invalidconfig. Evidence
+span-pipeline-simulation.log.
+
+Started new remote build build/zc706-integrated-no-srl-span, same seed3/reset/
+golden routes/no-header-probes/no-srl, bounded2400seconds under shared Dell
+lock. Log build/dell-integrated-no-srl-span-build.log. Next timing/INIT check
+then physical integration. Golden remains unchanged; no hardware access.

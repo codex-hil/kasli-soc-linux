@@ -130,6 +130,7 @@ exercise(length=16)
 exercise(stall=True,length=1024)
 exercise(invalid=True,length=0)
 exercise(invalid=True,length=7)
+exercise(invalid=True,length=(1<<27)-8)  # wide end exceeds the 1-GiB window
 exercise(invalid=True,misaligned=True)
 exercise(real=True)
 exercise(frame_bad=True)
