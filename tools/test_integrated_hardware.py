@@ -83,6 +83,7 @@ def main():
             record['external_after']=after
             counters=('mac_status_tx_frames','mac_status_rx_frames',
                 'mac_status_crc_errors','mac_status_preamble_errors','sfp_status_clock_faults')
+            counters += tuple(n for n in probe['status'] if n.startswith('mac_status_arp_') and n != 'mac_status_arp_sender_ip')
             record['network_counter_deltas']={n:(after['status'][n]-probe['status'][n]) & 0xffffffff for n in counters}
             record['result']='PASS' if record['network_result']=='PASS' else 'PARTIAL'
             if record['result']=='PASS' and any(record['network_counter_deltas'][n] for n in

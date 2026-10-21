@@ -1722,3 +1722,18 @@ this evidence alone. Next replay full Ethernet frames through MAC+ARP, then
 compare synthesized/hardware RX/table state if RTL passes. No HW access or
 configuration changes this turn. Temporary tcpdump capability still needed
 for remaining diagnosis and must be removed at completion.
+
+Full MAC ARP isolation2026-10-21: tools/test_arp_mac_reply.py replays host
+reply Ethernet bytes with minimum padding, preamble, calculated FCS and
+independent RX/TX/SYS clocks through upstream MAC(store-forward,2048-byte CDC)
+and ARP. Both clock configurations PASS, reply resolves expected host MAC and
+CRC/preamble counters stay zero. This tests RX reply handling, not GTX or
+synthesis equivalence, nor the complete ICMP-triggered request interaction.
+
+Added passive ARP diagnostic CSRs under mac_status: RX requests/replies,
+accepted cache updates, response handshakes/failures and last sender IP. No
+upstream FSM/CDC changes. SFP-only wrapper includes available ARP counter
+deltas. Started isolated integrated build build/zc706-integrated-arp-debug,
+seed3/golden clock paths/synchronous DDR reset,2400sec/8GiB. Hardware remains
+on restored golden; new diagnostic build needs timing/INIT checks before use.
+Next compare physical RX replies versus cache updates/responses.

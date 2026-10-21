@@ -227,6 +227,20 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         setattr(self.mac_status, name, csr)
         self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
             csr.status.eq(csr.status + 1))
+    # Observe ARP resolution without changing upstream state machines.
+    arp = self.ethcore.arp
+    for name, condition in (
+        ("arp_requests", arp.rx.source.valid & arp.rx.source.request),
+        ("arp_replies", arp.rx.source.valid & arp.rx.source.reply),
+        ("arp_updates", arp.table.cache.update.valid & arp.table.cache.update.ready),
+        ("arp_responses", arp.table.response.valid & arp.table.response.ready),
+        ("arp_failures", arp.table.response.valid & arp.table.response.ready & arp.table.response.failed)):
+        csr = CSRStatus(32, name=name)
+        setattr(self.mac_status, name, csr)
+        self.sync += If(condition, csr.status.eq(csr.status + 1))
+    self.mac_status.arp_sender_ip = CSRStatus(32, name="arp_sender_ip")
+    self.sync += If(arp.rx.source.valid,
+        self.mac_status.arp_sender_ip.status.eq(arp.rx.source.ip_address))
     self.csr.add("mac_status", bank+1)
     self.packet_test = PacketTest(self.ethcore.mac.crossbar.get_port(0x88b5))
     self.csr.add("packet_test", bank+2)
