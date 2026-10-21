@@ -1737,3 +1737,12 @@ deltas. Started isolated integrated build build/zc706-integrated-arp-debug,
 seed3/golden clock paths/synchronous DDR reset,2400sec/8GiB. Hardware remains
 on restored golden; new diagnostic build needs timing/INIT checks before use.
 Next compare physical RX replies versus cache updates/responses.
+
+ARP instrumented seed3 build2026-10-21: completed routing but fails SYS timing
+80.70MHz/83.333MHz. Hold clean after4feedthrough buffers. Worst path is GP0
+AXI address increment/decode through csr_address_update, not ARP data. No
+bitstream accepted/programmed. Recorded timing and compressed router log as
+arp-debug-seed3-* evidence. Started controlled same-RTL seed2 build at
+build/zc706-integrated-arp-debug-seed2, same reset/golden clock routes, bounded
+2400sec/8GiB with automatic restoration. Golden hardware unchanged; pending
+setup/hold/INIT audit before instrumented ARP hardware test.
