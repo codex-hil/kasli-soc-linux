@@ -1,0 +1,28 @@
+{
+  "external_probe": {
+    "raw_hex": "00000000000000000000000000000000000000000000000000000000",
+    "hwtype": 0,
+    "proto": 0,
+    "hwsize": 0,
+    "protosize": 0,
+    "opcode": 0,
+    "sender_mac": "00:00:00:00:00:00",
+    "sender_ip": "0.0.0.0",
+    "target_mac": "00:00:00:00:00:00",
+    "target_ip": "0.0.0.0",
+    "sender_ip_matches_csr": true
+  },
+  "external_after": {
+    "raw_hex": "00010800060400026c2b59f476e8c0a8026b02c0de706001c0a802ce",
+    "hwtype": 1,
+    "proto": 2048,
+    "hwsize": 6,
+    "protosize": 4,
+    "opcode": 2,
+    "sender_mac": "6c:2b:59:f4:76:e8",
+    "sender_ip": "192.168.2.107",
+    "target_mac": "02:c0:de:70:60:01",
+    "target_ip": "192.168.2.206",
+    "sender_ip_matches_csr": true
+  }
+}

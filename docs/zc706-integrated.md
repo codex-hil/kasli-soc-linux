@@ -1803,3 +1803,18 @@ Evidence arp-snapshot-decoder-sim.log. No physical action this continuation.
 Next finish header build, audit timing/INIT and use locked SFP-only wrapper
 then decode its validation.json. Last senderIP alone cannot distinguish field
 corruption from a reply supplied by another peer; keep both hypotheses open.
+
+Header snapshot physical trial2026-10-21: build passes timing/INIT audit
+7803LUT/243808assignments. Header bytes decode correctly as host107/MAC
+6c:2b:59:f4:76:e8 -> PL206/02:c0:de:70:60:01, ARP opcode2. This build now
+resolves ARP:19 host replies/19 cache updates/19 responses/0 failures. Ping
+18/20 replies (first2lost), RTT0.091-0.189ms. UDP first1byte request times out.
+Capture confirms actual ICMP replies. Overall network FAIL; partial ping is
+not20/20 qualification despite ping process exit0. Need tighten qualification
+and separate warmup from measured packets.
+
+No functional ARP change was made; only header probes changed the synthesized
+design. Do not claim a root cause fix: instrumentation-dependent physical
+behavior raises synthesis/placement/observation hypotheses requiring controlled
+comparison. Next test UDP lengths independently and repeat this exact bitstream.
+Golden restored/BIST PASS, Linux192.168.2.19. Evidence header/ and header-lut-init.

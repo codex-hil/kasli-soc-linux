@@ -1,0 +1,76 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "sfp",
+  "nextpnr_seed": 3,
+  "prerouted_sha256": null,
+  "ddr_serdes_sync_reset": false,
+  "sfp_refclk": "fclk",
+  "adc_cards": null,
+  "reciprocal": false,
+  "wr_pll": false,
+  "wr_pll_cards": null,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "6b562b70ea3c9eda7b7cd7e3ac0418e8641bee85f64159594283a0265748e6de",
+  "commands": [
+    [
+      "/usr/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/zc706-sfp/nextpnr/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--router",
+      "router2",
+      "--seed",
+      "3",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/work/build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/zc706-sfp/database/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/zc706-sfp/database/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "507e4f02c26a6493275af5b3e1e8d64d28844cf2568634bdcece725c3354c349",
+    "top.fasm": "d4c935b5b326cc1145e7bd4c5db0c25284e0e510c80814b3b2bf4d59bc220cdc",
+    "timing.json": "ad1a22c43b90f9429139e5e165a3715595f6851e8660c414d7d6c08b3f13b06c"
+  },
+  "assembly_resumed": false
+}

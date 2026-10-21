@@ -1,0 +1,11 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "checked_luts": 7803,
+  "checked_assignments": 243808,
+  "skipped_luts": 152,
+  "issue_count": 0,
+  "issues": [],
+  "issues_truncated": false,
+  "limitation": "Finite combinational LUT INIT/pin audit only; excludes SRL/DRAM, disconnected or multiple outputs and routing legality."
+}
