@@ -1,0 +1,8 @@
+{
+  "result": "FAIL",
+  "bitstream_sha256": "4a969072571d03d22566a9834e631c504508c992332951f984872ce7f1aef12f",
+  "files": {},
+  "restoration_passed": true,
+  "error": "Command '[PosixPath('/srv/codex-hil-data/workspaces/kasli-soc-linux/.venv/bin/python'), PosixPath('/srv/codex-hil-data/workspaces/kasli-soc-linux/tools/boot_adc_jtag.py'), '--host', '192.168.2.23', '--bit', PosixPath('/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-srl/gateware/gateware/top.bit'), '--output', PosixPath('build/zc706-srl/hardware/boot')]' returned non-zero exit status 1.",
+  "final_host": "192.168.2.24"
+}

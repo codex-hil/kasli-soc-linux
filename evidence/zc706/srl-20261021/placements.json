@@ -1,0 +1,114 @@
+{
+  "SRL16E_11": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y295/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_14": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y294/A6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_6": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y295/A6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_9": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y294/C6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_2": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X26Y296/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_10": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y296/B6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_4": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y296/A6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_13": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y295/B6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_7": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y294/B6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_8": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y299/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_1": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y296/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_15": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y300/B6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_12": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y296/C6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_5": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y294/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y313/D6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  },
+  "SRL16E_3": {
+    "type": "SLICE_LUTX",
+    "bel": "SLICE_X30Y295/C6LUT",
+    "parameters": {
+      "INIT": "1010011010011100"
+    }
+  }
+}

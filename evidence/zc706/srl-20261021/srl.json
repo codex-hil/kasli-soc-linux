@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "samples": [
+    {
+      "cycles": 938433270,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 943447003,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 948459444,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 953470801,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 958482270,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 963493524,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 968504509,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 973515401,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 978526541,
+      "errors": 0,
+      "ready": 1
+    },
+    {
+      "cycles": 983537638,
+      "errors": 0,
+      "ready": 1
+    }
+  ],
+  "scope": "SRL16E static taps, CE gaps, FF reference"
+}

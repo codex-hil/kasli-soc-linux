@@ -1,0 +1,68 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "4a969072571d03d22566a9834e631c504508c992332951f984872ce7f1aef12f",
+  "files": {
+    "csr.json": "4063fb5ec6dac74b9d9a4b4e03032f9fbccfb3f9e8111a70a13b3be0978a4881",
+    "test_srl.py": "d608376556e399f8bd84f5b55d18d5f67a3306c5d77bf753b7bfa248567405ef",
+    "sfp_probe.py": "c2b3d438212670df4c92bb4f2b14245231e082ea07c7823a2d79a6def5bcd262",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1"
+  },
+  "restoration_passed": true,
+  "srl": {
+    "result": "PASS",
+    "samples": [
+      {
+        "cycles": 938433270,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 943447003,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 948459444,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 953470801,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 958482270,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 963493524,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 968504509,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 973515401,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 978526541,
+        "errors": 0,
+        "ready": 1
+      },
+      {
+        "cycles": 983537638,
+        "errors": 0,
+        "ready": 1
+      }
+    ],
+    "scope": "SRL16E static taps, CE gaps, FF reference"
+  },
+  "final_host": "192.168.2.26"
+}
