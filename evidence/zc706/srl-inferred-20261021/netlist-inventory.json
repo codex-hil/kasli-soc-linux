@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "abi": 3,
+  "srl_count": 32,
+  "inferred_lane_delays": {
+    "4": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "8": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ]
+  },
+  "reference_types": {
+    "4": {
+      "FDRE": 32
+    },
+    "8": {
+      "FDRE": 64
+    }
+  },
+  "tap_inventory": {
+    "('inferred', 3)": 16,
+    "('explicit', 2)": 8,
+    "('explicit', 6)": 8
+  }
+}

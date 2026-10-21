@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "controls": [
+    "mapped netlist accepted",
+    "incorrect tap rejected",
+    "CE=0 rejected",
+    "non-FF reference rejected"
+  ],
+  "netlist_sha256": "68b337f05ac4360d9575f9c1fb324ee7a9cf84d192fca47fb68d513c6a168dc9"
+}

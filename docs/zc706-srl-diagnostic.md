@@ -1,5 +1,27 @@
 # SRL16E isolation diagnostic
 
+Current source is ABI3 (signature `0x53524c33`), work directory
+`build/zc706-srl-inferred`. Dell setup/hold and physical comparison PASS on 2026-10-21.
+Both inferred and explicit paths showed zero sticky errors over about45M
+observed cycles. Evidence: `evidence/zc706/srl-inferred-20261021`.
+Bitstream SHA-256: `929cb69748c2350342582f1b2b6307087f18f207ffcb7dbf945b1bb43cb7ab91`.
+Golden restored with three whole1GiB DDR BIST passes; final management
+IP192.168.2.10. Lease released and nonblocking reacquisition checked.
+It compares byte delays4/8 from Yosys-inferred resetless chains (low16
+error bits), explicit SRL16E plus final FF (high16), and fully observed FF
+references. Runtime polarity stays zero during qualification and prevents
+merging inferred storage with the reference. Do not change it during a test.
+Synthesis inspection confirms 32 SRLs: 16 inferred tap3, 8 explicit tap2,
+8 explicit tap6. Shared prefixes produce one four-cycle SRL per lane for
+delay4 and two cascaded four-cycle SRLs per lane for delay8. This does not
+exactly reproduce the Ethernet SRL topology; it tests basic inferred delays.
+The checker traces each lane through SRLs and confirms total delay4/8,
+constant CE, zero INIT and 32+64 observed reference FF bits.
+`tools/test_srl.py` now requires ABI3; prior source revisions and physical
+evidence below remain available in Git.
+
+The following sections document ABI2 and ABI1 historical qualification.
+
 Current revision is ABI2 (signature `0x53524c32`): two banks of sixteen
 explicit SRL16E, both zero INIT. Low16 error bits correspond to variable CE;
 high16 to CE tied high. Both banks have fully observed flip-flop references.
@@ -80,3 +102,8 @@ manifest flag alone is insufficient. No new hardware access occurred here.
 ABI2 restoration: golden boot PASS, GP1 smoke/address PASS and three
 whole-1-GiB DDR BIST passes with zero errors. Final management IP
 192.168.2.29; shared lease released and nonblocking reacquisition checked.
+
+Next investigation: audit SRL data-input setup/hold coverage in nextpnr
+and compare actual Ethernet SRL routes. Basic primitive, CE and inference
+tests passed; the existing SRL-enabled Ethernet failure remains unresolved.
+Do not attribute it to Yosys extraction without a reproducing case.

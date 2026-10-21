@@ -1,0 +1,54 @@
+{
+  "hold_lines": [
+    "Info: Hold-fix: no hold violations to fix."
+  ],
+  "timing": {
+    "main_clkin_signal": {
+      "achieved": 981.3541870117188,
+      "constraint": 100
+    },
+    "main_clkout_buf": {
+      "achieved": 141.1432647705078,
+      "constraint": 100
+    }
+  },
+  "srl_placements": {
+    "$auto$ff.cc:266:slice$6747": "SLICE_X30Y300/D6LUT",
+    "$auto$ff.cc:266:slice$6746": "SLICE_X30Y302/C6LUT",
+    "$auto$ff.cc:266:slice$6745": "SLICE_X26Y325/D6LUT",
+    "$auto$ff.cc:266:slice$6744": "SLICE_X30Y314/D6LUT",
+    "$auto$ff.cc:266:slice$6743": "SLICE_X30Y296/B6LUT",
+    "$auto$ff.cc:266:slice$6742": "SLICE_X30Y296/A6LUT",
+    "$auto$ff.cc:266:slice$6741": "SLICE_X26Y326/C6LUT",
+    "$auto$ff.cc:266:slice$6740": "SLICE_X30Y326/D6LUT",
+    "SRL16E_14": "SLICE_X30Y325/D6LUT",
+    "SRL16E_2": "SLICE_X30Y306/A6LUT",
+    "SRL16E": "SLICE_X26Y325/A6LUT",
+    "SRL16E_11": "SLICE_X30Y306/C6LUT",
+    "SRL16E_5": "SLICE_X26Y325/B6LUT",
+    "SRL16E_8": "SLICE_X30Y325/A6LUT",
+    "SRL16E_6": "SLICE_X30Y325/B6LUT",
+    "SRL16E_13": "SLICE_X26Y325/C6LUT",
+    "SRL16E_3": "SLICE_X30Y315/B6LUT",
+    "SRL16E_10": "SLICE_X30Y315/C6LUT",
+    "SRL16E_15": "SLICE_X30Y306/B6LUT",
+    "SRL16E_7": "SLICE_X30Y315/A6LUT",
+    "SRL16E_12": "SLICE_X30Y316/A6LUT",
+    "SRL16E_1": "SLICE_X30Y316/D6LUT",
+    "SRL16E_4": "SLICE_X30Y325/C6LUT",
+    "SRL16E_9": "SLICE_X26Y326/A6LUT",
+    "$auto$ff.cc:266:slice$6779": "SLICE_X30Y296/D6LUT",
+    "$auto$ff.cc:266:slice$6778": "SLICE_X30Y312/D6LUT",
+    "$auto$ff.cc:266:slice$6777": "SLICE_X32Y320/C6LUT",
+    "$auto$ff.cc:266:slice$6776": "SLICE_X30Y316/B6LUT",
+    "$auto$ff.cc:266:slice$6775": "SLICE_X26Y296/C6LUT",
+    "$auto$ff.cc:266:slice$6774": "SLICE_X30Y301/D6LUT",
+    "$auto$ff.cc:266:slice$6773": "SLICE_X26Y326/D6LUT",
+    "$auto$ff.cc:266:slice$6772": "SLICE_X26Y326/B6LUT"
+  },
+  "source_sha256": {
+    "gateware/zc706_srl.py": "3247e410b19860de0ed8b78167c6ef7242e4ce9f668d48eb5af9f7774be0a6a5",
+    "tools/test_srl.py": "f797a31e1fbbcd21b7b08ccb64e717e3edb2041310cd11fcfa2665261cdf206a",
+    "tools/check_srl_netlist.py": "354b28b7a5af3fe4588ae420559aa232bd61eb225a0d5d2ef8a43e388e5387e4"
+  }
+}

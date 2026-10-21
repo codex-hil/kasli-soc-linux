@@ -1,0 +1,98 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "929cb69748c2350342582f1b2b6307087f18f207ffcb7dbf945b1bb43cb7ab91",
+  "files": {
+    "csr.json": "3daa351417463b66edcef3bf2cb738f4991afbd787bb784fe4335b14bd0f1f75",
+    "test_srl.py": "f797a31e1fbbcd21b7b08ccb64e717e3edb2041310cd11fcfa2665261cdf206a",
+    "sfp_probe.py": "c2b3d438212670df4c92bb4f2b14245231e082ea07c7823a2d79a6def5bcd262",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1"
+  },
+  "restoration_passed": true,
+  "srl": {
+    "result": "PASS",
+    "samples": [
+      {
+        "cycles": 944134851,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 949151173,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 954165801,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 959179961,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 964193416,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 969206839,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 974220303,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 979235040,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 984248115,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      },
+      {
+        "cycles": 989261153,
+        "errors": 0,
+        "ready": 1,
+        "polarity": 0,
+        "inferred_errors": 0,
+        "explicit_errors": 0
+      }
+    ],
+    "scope": "Yosys inferred low16 versus explicit SRL+FF high16, byte delays4/8, FF references"
+  },
+  "final_host": "192.168.2.10"
+}

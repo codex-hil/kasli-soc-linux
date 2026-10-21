@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "929cb69748c2350342582f1b2b6307087f18f207ffcb7dbf945b1bb43cb7ab91",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-srl-inferred/gateware/csr.json": "3daa351417463b66edcef3bf2cb738f4991afbd787bb784fe4335b14bd0f1f75"
+  }
+}
