@@ -1,0 +1,15 @@
+{
+  "hardware_access": false,
+  "functional_text_equal_after_comment_removal": true,
+  "normalization": "Remove block and line comments and blank lines; strip surrounding whitespace. Raw diff inspected: only generated metadata/hierarchy comments differ.",
+  "builds": {
+    "zc706-sfp-no-srl": {
+      "verilog_sha256": "af33a6b9aecdf1841cb87a2dd57a503ea32bfa926caec29798801d480b41840d",
+      "comment_stripped_sha256": "aa629c2d66a14e0463f794443538a2cfd56c817d3dfd6e3593b055e4ec565294"
+    },
+    "zc706-sfp-srl-control": {
+      "verilog_sha256": "6838823cf648416260ab2513e5e61cc8628e6f606caad73cfd3a2f079f1bd34a",
+      "comment_stripped_sha256": "aa629c2d66a14e0463f794443538a2cfd56c817d3dfd6e3593b055e4ec565294"
+    }
+  }
+}

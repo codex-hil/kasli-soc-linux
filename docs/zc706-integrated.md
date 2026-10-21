@@ -1992,3 +1992,12 @@ Started new remote build build/zc706-integrated-no-srl-span, same seed3/reset/
 golden routes/no-header-probes/no-srl, bounded2400seconds under shared Dell
 lock. Log build/dell-integrated-no-srl-span-build.log. Next timing/INIT check
 then physical integration. Golden remains unchanged; no hardware access.
+
+SRL input equivalence check2026-10-21 while remote integrated build places:
+raw top.v hashes differ only in generated SHA/date/hierarchy comments. Inspected
+raw diff; after removing comments/blank lines the Verilog text is identical
+for no-SRL PASS and SRL-on FAIL. Recorded both raw and normalized hashes in
+srl-pair-rtl-comparison.json. This strengthens implementation-path attribution
+without identifying the exact faulty tool stage. No new hardware action.
+Integrated span-pipeline remote build has completed synthesis and is still
+in placement refinement; final route/timing pending.
