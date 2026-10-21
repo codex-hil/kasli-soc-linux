@@ -1847,3 +1847,17 @@ output and UDP TX source to mac_status. No functional protocol/FIFO changes.
 Wrapper records UDP frame deltas, not snapshot arithmetic. New isolated
 fclk/seed3 build build/zc706-sfp-udp-length,1800sec/8GiB. Pending timing/INIT
 before physical size sweep. Golden unchanged; no hardware access this turn.
+
+UDP metadata physical isolation2026-10-21: timing/INIT clean isolated build
+(8213LUT/256640assignments) tested all sizes.14RX/FIFO/TX frames. Last1400byte
+packet snapshots: user RX length first1409/last1276; FIFO first1409/last1276;
+UDP TX first1417/last1417. Thus incorrect, changing length is present before
+echo FIFO; FIFO reproduces metadata and TX adds8. ARP works32updates/0failures;
+network remainsFAIL, CRC+1. Golden restored/full BIST PASS, Linux192.168.2.23.
+Evidence udp-length/ and udp-length-lut-init.json.
+
+Next diagnostic snapshots UDP depacketizer raw64bit header at first/last
+accepted RX beat plus enclosing IP payload length. No protocol change. New
+isolated fclk seed3 build build/zc706-sfp-udp-header,1800sec/8GiB. Need compare
+raw header and decoded length with capture before choosing a fix. Existing
+simulation covers isolated RX/FIFO/TX and does not reproduce hardware mutation.

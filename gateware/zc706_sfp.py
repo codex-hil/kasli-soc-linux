@@ -274,6 +274,19 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
             active.eq(~endpoint.last),
             If(endpoint.last, last_length.status.eq(endpoint.length),
                 frames.status.eq(frames.status + 1)))
+    udp_rx = self.ethcore.udp.rx
+    udp_active = Signal()
+    for edge in ("first", "last"):
+        for index in range(2):
+            csr = CSRStatus(32, name=f"udp_header_{edge}{index}")
+            setattr(self.mac_status, f"udp_header_{edge}{index}", csr)
+            condition = ~udp_active if edge == "first" else udp_rx.source.last
+            self.sync += If(udp_rx.source.valid & udp_rx.source.ready & condition,
+                csr.status.eq(udp_rx.depacketizer.header[index*32:(index+1)*32]))
+    self.mac_status.udp_ip_length = CSRStatus(16, name="udp_ip_length")
+    self.sync += If(udp_rx.source.valid & udp_rx.source.ready,
+        If(~udp_active, self.mac_status.udp_ip_length.status.eq(udp_rx.sink.length)),
+        udp_active.eq(~udp_rx.source.last))
     self.add_constant("SFP_ABI", 1)
     self.add_constant("SFP_REFERENCE_MONITORS", int(clock_monitors))
     self.add_constant("SFP_MAC", MAC)
