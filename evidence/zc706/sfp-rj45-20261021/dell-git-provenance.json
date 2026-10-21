@@ -1,0 +1,19 @@
+{
+  "hardware_access": false,
+  "remote_host": "192.168.2.7",
+  "nextpnr_revision": "c68c13582e972292c86a5025140d52e713384cbc",
+  "metadata_revision": "a4af910cac907f2cbd3a545f26f8e26573e860de",
+  "archive_sha256": "04fdb554a5a9db90808806b9396a901644076fceb7fca0a4c35584d637bd357d",
+  "archive_bytes": 33762607,
+  "connectivity_fsck": "PASS for both repositories; dangling commit reported, no missing objects",
+  "source_status": "clean",
+  "excluded": [
+    "local Git config",
+    "hooks",
+    "logs",
+    "credentials"
+  ],
+  "remote_adjustment": "Restored relative submodule worktree path from original verified config; recreated minimal public-only config",
+  "build_log": "build/dell-integrated-no-srl-build-retry.log",
+  "build_result": "RUNNING"
+}

@@ -1950,3 +1950,18 @@ hardware changes. Next prepare real remote nextpnr/meta Git checkouts from
 local tracked revisions/bundles or audited exported provenance, then resume
 remote build. Do not silently bypass revision verification. Failure log:
 build/dell-integrated-no-srl-build.log.
+
+Dell source provenance repair2026-10-21: exported shallow nextpnr/meta Git
+objects/refs/index/HEAD/shallow records into33.8MB archive, excluding local
+configs/hooks/logs. Restored under shared remote build lock; no source files
+changed. Recreated minimal configs and correct relative meta worktree path.
+Verified exact nextpnr c68c13582e972292c86a5025140d52e713384cbc and metadata
+a4af910cac907f2cbd3a545f26f8e26573e860de, connectivity fsck for both and clean
+status. One dangling commit is informational. Other optional submodules remain
+uninitialized as on source checkout; do not represent this as a full recursive
+checkout. Evidence dell-git-provenance.json; archive retained locally in build.
+
+Restarted full integrated no-SRL/no-header-probes build on Dell using same
+command, log build/dell-integrated-no-srl-build-retry.log,1800/2400 build
+limits per earlier command (this integrated invocation is2400sec). Pending
+final timing/bitstream. No local HW access or persistent writes this turn.
