@@ -1,0 +1,1 @@
+PASS: padded host replies resolve; header-only reply produces no RX event; byte gaps checked

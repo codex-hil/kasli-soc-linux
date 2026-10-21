@@ -1711,3 +1711,14 @@ explains observed exchange. Need inspect upstream LiteEth ARP RX/cache logic,
 including short reply/padding behavior, before changing gateware. Capture
 evidence sfp-rj45-20261021/pcap. Golden restored/full BIST clean. Temporary
 tcpdump capability remains for follow-up captures, to be removed after diagnosis.
+
+ARP offline isolation2026-10-21: tools/test_arp_reply.py instantiates unchanged
+upstream ARPRX+ARPTable at PL/host IP/MAC from capture. Padded replies (18/32
+extra bytes), continuous stream and1/3-cycle byte gaps all resolve host MAC.
+Header-only28-byte input emits no RX event; records an edge case, not proof
+of physical frame truncation. MAC padding checker forwards padding and marks
+runt frames; no padding-removal path found there. Thus do not patch ARP on
+this evidence alone. Next replay full Ethernet frames through MAC+ARP, then
+compare synthesized/hardware RX/table state if RTL passes. No HW access or
+configuration changes this turn. Temporary tcpdump capability still needed
+for remaining diagnosis and must be removed at completion.
