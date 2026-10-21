@@ -92,6 +92,7 @@ def hold_passed(log):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
+    p.add_argument("--srl-timing", action="store_true", help="Experimental SDF timing for static rising-edge six-LUT SRL16E (SFP/SRL only)")
     p.add_argument("--no-srl", action="store_true", help="Disable Yosys SRL extraction for controlled comparison")
     p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (SFP or integrated)")
     p.add_argument("--yosys", type=Path, required=True)
@@ -109,6 +110,8 @@ def main():
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
+    if args.srl_timing and (args.design not in ("sfp", "srl") or args.no_srl):
+        p.error("--srl-timing requires SFP/SRL with SRL extraction enabled")
     if args.ddr_sync_reset and args.design != "integrated":
         p.error("--ddr-sync-reset requires --design integrated")
     args.sfp_refclk = args.sfp_refclk or ("fclk" if args.design == "integrated" else "si5324")
@@ -209,6 +212,9 @@ def main():
             extra_rows=({"pin": "AA18", "bank": "9", "site": "IOB_X0Y24",
                 "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]
         nextpnr = prepare_nextpnr()
+    if args.srl_timing:
+        from srl_nextpnr import prepare as prepare_srl_timing
+        nextpnr = prepare_srl_timing()
     if args.design == "integrated":
         from integrated_nextpnr import prepare as prepare_integrated
         nextpnr = prepare_integrated()
@@ -300,6 +306,7 @@ def main():
         "design": args.design,
         "nextpnr_seed": args.seed,
         "yosys_no_srl": args.no_srl,
+        "experimental_srl_timing": args.srl_timing,
         "sfp_header_probes": not args.no_header_probes,
         "prerouted_sha256": hashlib.sha256(args.prerouted.read_bytes()).hexdigest() if args.prerouted else None,
         "ddr_serdes_sync_reset": args.ddr_sync_reset,

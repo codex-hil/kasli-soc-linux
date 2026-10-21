@@ -53,3 +53,33 @@ lease, then compare the same SRL-enabled Ethernet design under the ZC706 lease
 with automatic golden restoration. Preserve the no-SRL qualified image. Dynamic
 address behavior, SRLC32E and speed-grade precision need explicit scope rather
 than an unqualified timing signoff.
+
+## Isolated model implementation (2026-10-21)
+
+`--srl-timing` selects `tools/srl_nextpnr.py` for SFP or SRL diagnostics.
+It builds a separate binary under `build/zc706-srl-timing/nextpnr`, keeping
+qualified binaries intact. `srl_timing_model.py` derives conservative integer-ps
+bounds from the pinned SDF, rounding outward across A6/B6/C6/D6. No speed-grade
+scaling is invented. Source hash and generated bounds enter the binary manifest.
+
+`patches/nextpnr-srl-timing.inc` overrides timing only for packed SRL16E:
+DI2/WE become sequential inputs and O6 a clocked output. Ordinary LUTs retain
+existing timing. Inverted clocks, dynamic address inputs and non-six-LUT SRL
+placement are rejected. SRLC32E is outside this experiment. Coverage and model
+precision remain experimental, not a vendor timing signoff.
+
+Offline envelope controls passed (`evidence/zc706/srl-model-20261021/model.json`).
+The first modeled SRL build is running on Dell; compilation/routing/hardware
+results are pending. No physical board access in this implementation turn.
+
+```sh
+dell-build sync kasli-linux
+dell-build run kasli-linux build/python/bin/python tools/build_pl.py \
+  --board zc706 --design srl --srl-timing \
+  --output-dir build/zc706-srl-modeled/gateware \
+  --yosys /usr/bin/yosys --openxc7 build/tools/openxc7 --seed 3 --router router2
+```
+
+Next: collect compile output, resolve any model integration errors, verify
+reported sequential endpoints, then qualify the diagnostic before an Ethernet
+comparison. Keep existing golden restoration and shared board lease mandatory.

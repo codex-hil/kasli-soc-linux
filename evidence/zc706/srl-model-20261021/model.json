@@ -1,0 +1,89 @@
+{
+  "sdf_sha256": "3d2da5714d8c81165fa51403fb719b3ddd9e7ea7ab79280ae4e157d11a29172e",
+  "source_ns": {
+    "A": {
+      "setup": [
+        0.14,
+        0.173
+      ],
+      "hold": [
+        0.076,
+        0.094
+      ],
+      "cq": [
+        0.444,
+        1.472
+      ]
+    },
+    "B": {
+      "setup": [
+        0.143,
+        0.178
+      ],
+      "hold": [
+        0.089,
+        0.11
+      ],
+      "cq": [
+        0.438,
+        1.458
+      ]
+    },
+    "C": {
+      "setup": [
+        0.116,
+        0.144
+      ],
+      "hold": [
+        0.062,
+        0.077
+      ],
+      "cq": [
+        0.436,
+        1.45
+      ]
+    },
+    "D": {
+      "setup": [
+        0.133,
+        0.165
+      ],
+      "hold": [
+        0.091,
+        0.112
+      ],
+      "cq": [
+        0.438,
+        1.456
+      ]
+    }
+  },
+  "envelope_ps": {
+    "setup": [
+      116,
+      178
+    ],
+    "hold": [
+      62,
+      112
+    ],
+    "cq": [
+      436,
+      1472
+    ],
+    "we_setup": [
+      514,
+      638
+    ],
+    "we_hold": [
+      11,
+      14
+    ]
+  },
+  "scope": "SRL16E static addresses, rising CLK, 6LUT; DEFAULT SDF envelope, no speed scaling",
+  "offline_controls": {
+    "all_four_positions_enclosed": true,
+    "ten_generated_bounds": true,
+    "hardware_access": false
+  }
+}
