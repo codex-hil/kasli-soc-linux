@@ -79,6 +79,15 @@ def main():
             probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp.json'],text=True))
             record['external_probe']=probe
             if probe['status']['sfp_status_status'] & 63 == 63:
+                # Preserve reset/link-up counters, then measure settled traffic
+                # separately. Initial frame fragments can span a PCS reset.
+                record['external_initial']=probe
+                warmup=subprocess.run(['ping','-c','3','-i','.2','-W','1','192.168.2.206'],
+                    capture_output=True,text=True,timeout=8)
+                record['link_warmup']={'returncode':warmup.returncode,'stdout':warmup.stdout}
+                run('sfp-ready','python3 sfp_probe.py --csr-json csr.json --output sfp-ready.json')
+                probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-ready.json'],text=True))
+                record['external_probe']=probe
                 subprocess.run(['python3',str(ROOT/'tools/test_sfp_network.py'),
                     '--output',str(a.output/'network.json')],check=False,timeout=120)
                 record['network_result']=json.loads((a.output/'network.json').read_text())['result']

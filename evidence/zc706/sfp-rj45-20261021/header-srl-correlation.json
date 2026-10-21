@@ -1,0 +1,42 @@
+{
+  "qualification": false,
+  "scope": "Synthesized header storage structure comparison; correlation, not causal proof",
+  "builds": [
+    {
+      "build": "zc706-sfp-arp-debug",
+      "header_drivers": {
+        "sfpsoc_arp_rx_depacketizer_sr": {
+          "FDRE": 168,
+          "SRL16E": 8
+        },
+        "sfpsoc_rx_depacketizer_sr": {
+          "FDRE": 40,
+          "SRL16E": 8
+        }
+      }
+    },
+    {
+      "build": "zc706-sfp-udp-length",
+      "header_drivers": {
+        "sfpsoc_arp_rx_depacketizer_sr": {
+          "FDRE": 224
+        },
+        "sfpsoc_rx_depacketizer_sr": {
+          "FDRE": 40,
+          "SRL16E": 8
+        }
+      }
+    },
+    {
+      "build": "zc706-sfp-udp-header",
+      "header_drivers": {
+        "sfpsoc_arp_rx_depacketizer_sr": {
+          "FDRE": 224
+        },
+        "sfpsoc_rx_depacketizer_sr": {
+          "FDRE": 64
+        }
+      }
+    }
+  ]
+}

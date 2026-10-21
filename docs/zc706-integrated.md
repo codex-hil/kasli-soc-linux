@@ -1861,3 +1861,24 @@ accepted RX beat plus enclosing IP payload length. No protocol change. New
 isolated fclk seed3 build build/zc706-sfp-udp-header,1800sec/8GiB. Need compare
 raw header and decoded length with capture before choosing a fix. Existing
 simulation covers isolated RX/FIFO/TX and does not reproduce hardware mutation.
+
+UDP header observation2026-10-21: isolated build timing/INIT clean8264LUT/
+260752assignments. Raw header stable and correct; last1400byte packet RX/FIFO
+length1400, UDP TX/IPpayload1408. All14diagnostic size cases PASS; ICMP20/20.
+
+Repeated exact bitstream normal qualification after explicit recorded link
+warmup:20/20 ICMP and350/350byte-exact UDP replies,157300payload bytes,
+zero newCRC/preamble/clock faults in settled measurement. Initial reset
+counters retained separately; no masking as a global error-free claim. Golden
+restored/full BIST PASS, Linux192.168.2.27. Evidence udp-header-sweep/ and
+udp-header-qualification/. This qualifies isolated SFP RJ45 through switch,
+not integrated ADC/DDR networking or DAC.
+
+Structural comparison identifies strong SRL correlation. Bad ARP header:
+168FDRE+8SRL16E; observed good ARP header224FDRE. Bad UDP header40FDRE+
+8SRL16E; observed good UDP header64FDRE. Additional passive taps prevent
+shift-register extraction. header-srl-correlation.json records exact driver
+counts from synthesized JSON. This is not causal proof: next controlled
+experiment must disable SRL without header observation and repeat hardware
+qualification. Do not declare upstream protocol bug fixed. Temporary capture
+capability remains for controlled follow-up; remove after diagnosis.

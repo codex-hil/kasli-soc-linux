@@ -1,0 +1,116 @@
+{
+  "result": "FAIL",
+  "target": "192.168.2.206",
+  "port": 1234,
+  "sizes": [
+    1,
+    17,
+    64,
+    128,
+    512,
+    1024,
+    1400
+  ],
+  "repeats": 50,
+  "completed_packets": 0,
+  "completed_bytes": 0,
+  "warmup": {
+    "returncode": 1,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n\n--- 192.168.2.206 ping statistics ---\n3 packets transmitted, 0 received, 100% packet loss, time 408ms\n\n"
+  },
+  "ping": {
+    "returncode": 0,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n64 bytes from 192.168.2.206: icmp_seq=1 ttl=128 time=0.115 ms\n64 bytes from 192.168.2.206: icmp_seq=2 ttl=128 time=0.121 ms\n64 bytes from 192.168.2.206: icmp_seq=3 ttl=128 time=0.073 ms\n64 bytes from 192.168.2.206: icmp_seq=4 ttl=128 time=0.120 ms\n64 bytes from 192.168.2.206: icmp_seq=5 ttl=128 time=0.104 ms\n64 bytes from 192.168.2.206: icmp_seq=6 ttl=128 time=0.100 ms\n64 bytes from 192.168.2.206: icmp_seq=7 ttl=128 time=0.155 ms\n64 bytes from 192.168.2.206: icmp_seq=8 ttl=128 time=0.143 ms\n64 bytes from 192.168.2.206: icmp_seq=9 ttl=128 time=0.199 ms\n64 bytes from 192.168.2.206: icmp_seq=10 ttl=128 time=0.157 ms\n64 bytes from 192.168.2.206: icmp_seq=11 ttl=128 time=0.113 ms\n64 bytes from 192.168.2.206: icmp_seq=12 ttl=128 time=0.110 ms\n64 bytes from 192.168.2.206: icmp_seq=13 ttl=128 time=0.119 ms\n64 bytes from 192.168.2.206: icmp_seq=14 ttl=128 time=0.148 ms\n64 bytes from 192.168.2.206: icmp_seq=15 ttl=128 time=0.119 ms\n64 bytes from 192.168.2.206: icmp_seq=16 ttl=128 time=0.152 ms\n64 bytes from 192.168.2.206: icmp_seq=17 ttl=128 time=0.137 ms\n64 bytes from 192.168.2.206: icmp_seq=18 ttl=128 time=0.122 ms\n64 bytes from 192.168.2.206: icmp_seq=19 ttl=128 time=0.121 ms\n64 bytes from 192.168.2.206: icmp_seq=20 ttl=128 time=0.163 ms\n\n--- 192.168.2.206 ping statistics ---\n20 packets transmitted, 20 received, 0% packet loss, time 19469ms\nrtt min/avg/max/mdev = 0.073/0.129/0.199/0.026 ms\n",
+    "stderr": ""
+  },
+  "icmp_result": "PASS",
+  "neighbor": "[{\"dst\":\"192.168.2.206\",\"dev\":\"enp2s0\",\"lladdr\":\"02:c0:de:70:60:01\",\"state\":[\"REACHABLE\"]}]\n",
+  "udp_diagnostic": [
+    {
+      "size": 1,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 1
+    },
+    {
+      "size": 1,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 1
+    },
+    {
+      "size": 17,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 17
+    },
+    {
+      "size": 17,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 17
+    },
+    {
+      "size": 64,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 64
+    },
+    {
+      "size": 64,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 64
+    },
+    {
+      "size": 128,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 128
+    },
+    {
+      "size": 128,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 128
+    },
+    {
+      "size": 512,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 512
+    },
+    {
+      "size": 512,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 512
+    },
+    {
+      "size": 1024,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 1024
+    },
+    {
+      "size": 1024,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 1024
+    },
+    {
+      "size": 1400,
+      "shot": 0,
+      "result": "PASS",
+      "received_bytes": 1400
+    },
+    {
+      "size": 1400,
+      "shot": 1,
+      "result": "PASS",
+      "received_bytes": 1400
+    }
+  ],
+  "qualification": false,
+  "error": "Diagnostic-only size sweep; not full UDP qualification"
+}
