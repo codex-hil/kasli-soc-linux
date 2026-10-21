@@ -1919,3 +1919,25 @@ CE/clock semantics and linked cached objects; source contents alone are not
 a binary-provenance claim. No hardware actions or configuration changes.
 Next finish bounded control route, gate timing/INIT, then compare with the
 qualified no-SRL physical result.
+
+Matched SRL control physical trial2026-10-21: same RTL/no raw header probes,
+SRL extraction enabled32SRL16E. Timing/INIT clean8004LUT/250640assignments.
+ICMP/UDP FAIL; ARP161replies, exacthost replies0, acceptedcacheupdates0,
+24responses/allfailed. Zero settledCRC/preamble/clockfault increments.
+Versus no-SRL sameRTL qualification20/20ICMP+350/350UDP PASS, this directly
+supports a defect in the implemented SRL path (not yet assigned to a specific
+tool stage). Golden restored/full BIST PASS, Linux192.168.2.18. Evidence
+srl-control/. No switch or persistent writes.
+
+New AGENTS.md handoff requires heavy jobs on Dell. Read both heavy-build and
+Vivado handoffs. Extended --no-header-probes to integrated target, default
+behavior unchanged. Synced sources with dell-build sync kasli-linux under
+shared remote lock; runtime preflight confirms Python/openXC7/patchednextpnr
+and golden prerouted input exist. Started remote integrated no-SRL build:
+dell-build run kasli-linux timeout2400 build/python/bin/python tools/build_pl.py
+--board zc706 --design integrated --ddr-sync-reset --no-header-probes --no-srl
+--seed3 --router router2 --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt
+--output-dir build/zc706-integrated-no-srl/gateware --openxc7 build/tools/openxc7
+--yosys /usr/bin/yosys. Local log build/dell-integrated-no-srl-build.log.
+Next fetch/audit artifacts then locked full integration/network test; remote
+compilation is not physical validation. Local golden remains restored.

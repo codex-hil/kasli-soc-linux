@@ -93,7 +93,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
     p.add_argument("--no-srl", action="store_true", help="Disable Yosys SRL extraction for controlled comparison")
-    p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (isolated SFP only)")
+    p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (SFP or integrated)")
     p.add_argument("--yosys", type=Path, required=True)
     p.add_argument("--board", choices=["kasli-soc", "zc706"], default="kasli-soc")
     p.add_argument("--design", choices=["probe", "fmc-adc", "pl-ddr", "adc-ddr", "sfp", "frequency", "integrated"], default="probe")
@@ -138,8 +138,8 @@ def main():
         if args.reciprocal:
             target_command += ["--reciprocal"]
     if args.no_header_probes:
-        if args.design != "sfp":
-            p.error("--no-header-probes requires isolated SFP target")
+        if args.design not in ("sfp", "integrated"):
+            p.error("--no-header-probes requires SFP or integrated target")
         target_command += ["--no-header-probes"]
     if not args.resume_assembly:
         subprocess.run(target_command, cwd=ROOT, check=True)
