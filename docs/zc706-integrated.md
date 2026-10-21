@@ -1965,3 +1965,12 @@ Restarted full integrated no-SRL/no-header-probes build on Dell using same
 command, log build/dell-integrated-no-srl-build-retry.log,1800/2400 build
 limits per earlier command (this integrated invocation is2400sec). Pending
 final timing/bitstream. No local HW access or persistent writes this turn.
+
+Remote integrated continuation2026-10-21: source provenance fix allowed
+synthesis to finish. Read-only check of completed synthesized JSON on Dell
+confirms52172cells, zeroSRL cells and no raw header CSR probes. Evidence
+integrated-no-srl-synthesis.json. Router2 still active, first iteration
+reports61403overused wires; no final timing/manifest yet. This is progress
+through synthesis, not a claimed bitstream/hardware success. Next finish
+bounded routing, fetch/audit and run full locked integration/network test.
+No hardware actions or changes to the shared remote workspace this turn.

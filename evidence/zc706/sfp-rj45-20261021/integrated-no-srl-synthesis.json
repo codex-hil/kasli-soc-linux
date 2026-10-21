@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "host": "Dell192.168.2.7",
+  "status": "SYNTHESIS_PASS_ROUTING_PENDING",
+  "srl_cells": {},
+  "raw_header_probes": [],
+  "cells": 52172
+}

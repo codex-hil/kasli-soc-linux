@@ -804,3 +804,11 @@ ADC captures up to4194304 samples/card at about800MB/s/card with no errors/drops
 both PLLs active during captures, internal SFP loopback PASS. External SFP switch
 link remains NOT_RUN. Shared-lock test restored golden and repeated full DDR
 BIST cleanly; Linux192.168.2.7. Reproducer/evidence in the integration log.
+
+SFP switch Ethernet update (2026-10-21): isolated FS SFP-GE-T RJ45 target
+with Yosys `-nosrl` and no raw-header probes passes20/20ICMP and350/350
+byte-exact UDP replies with zero new settled MAC/clock errors. Matched SRL-on
+RTL fails ARP resolution, supporting an implementation defect in the SRL path.
+Full ADC/DDR/dualPLL/SFP no-SRL build is routing on Dell; integrated network
+qualification is pending. Source/tool and paired hardware evidence are in
+`evidence/zc706/sfp-rj45-20261021`; see the integration log. Golden restored.
