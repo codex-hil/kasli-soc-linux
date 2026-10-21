@@ -1941,3 +1941,12 @@ dell-build run kasli-linux timeout2400 build/python/bin/python tools/build_pl.py
 --yosys /usr/bin/yosys. Local log build/dell-integrated-no-srl-build.log.
 Next fetch/audit artifacts then locked full integration/network test; remote
 compilation is not physical validation. Local golden remains restored.
+
+Remote integrated first attempt stopped before synthesis: ddr_chipdb.prepare
+unconditionally runs git submodule update and rev-parse; source-only sync
+excludes .git, so remote nextpnr checkout lacks required metadata. Existing
+runtime caches alone do not satisfy source provenance. No FPGA result and no
+hardware changes. Next prepare real remote nextpnr/meta Git checkouts from
+local tracked revisions/bundles or audited exported provenance, then resume
+remote build. Do not silently bypass revision verification. Failure log:
+build/dell-integrated-no-srl-build.log.
