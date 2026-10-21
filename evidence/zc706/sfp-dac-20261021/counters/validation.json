@@ -1,0 +1,145 @@
+{
+  "result": "PARTIAL",
+  "bitstream_sha256": "6da4da64a004caac5ae27ac35ad2cbfe29a12016298043a4c63244e3096a771b",
+  "files": {
+    "pl-ddr-test": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "csr.json": "d214bae161909b2b015df1daebeb566838c735aa896d0053540127b10aa85b44",
+    "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "sfp_probe.py": "85cd72a8309bb6a1a248210980adeedfe8e3a04e77cd8f294126ff75b9296e8d",
+    "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+    "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "run_wr_pll_dual.py": "d7cf65f38fc1d182a08748e1da0d794f0621937cb253ff7c533fa9084b072a22",
+    "capture_adc_ddr.py": "300429edb234985fc7061c5f89258c97e14da978f8a7ddde7f57d3eeba72b312"
+  },
+  "restoration_passed": true,
+  "external_probe": {
+    "result": "PASS",
+    "hardware_validated": true,
+    "module": {
+      "eeprom_hex": "03042101000000000400000067000000000001004653202020202020202020202020202000649d995346502d3130472d504330312020202041202020010000890012000053323432363036323534302d32202020323430353330202000000091",
+      "identifier": 3,
+      "vendor": "FS",
+      "part": "SFP-10G-PC01",
+      "serial": "S2426062540-2",
+      "ethernet_compliance": 0,
+      "nominal_mbps": 10300,
+      "connector": 33
+    },
+    "drp": {
+      "0x05b": 30,
+      "0x05c": 56320,
+      "0x05d": 48135,
+      "0x05e": 12419,
+      "0x05f": 488,
+      "0x088": 34,
+      "0x0a8": 32,
+      "0x0a9": 4112,
+      "0x0aa": 9215,
+      "0x0ab": 0,
+      "0x0ac": 3
+    },
+    "clock": {
+      "source": "fclk",
+      "si5324_programmed": false
+    },
+    "status": {
+      "sfp_status_control": 8,
+      "sfp_status_status": 127,
+      "sfp_status_signature": 1397116977,
+      "sfp_status_rx_count": 160722864,
+      "sfp_status_tx_count": 160703964,
+      "sfp_status_si_ref_count": 0,
+      "sfp_status_gt_ref_count": 0,
+      "sfp_status_clock_faults": 0,
+      "sfp_status_drp_address": 172,
+      "sfp_status_drp_write_data": 0,
+      "sfp_status_drp_command": 0,
+      "sfp_status_drp_read_data": 3,
+      "sfp_status_drp_busy": 0,
+      "mac_status_crc_errors": 1,
+      "mac_status_preamble_errors": 179,
+      "mac_status_tx_frames": 0,
+      "mac_status_rx_frames": 213,
+      "packet_test_start": 0,
+      "packet_test_busy": 0,
+      "packet_test_tx_frames": 0,
+      "packet_test_rx_frames": 0,
+      "packet_test_errors": 0
+    },
+    "clock_rates_hz": {
+      "sfp_status_si_ref_count": 0.0,
+      "sfp_status_gt_ref_count": 0.0,
+      "sfp_status_rx_count": 125008729.8801652,
+      "sfp_status_tx_count": 125001278.85196073
+    }
+  },
+  "network_result": "FAIL",
+  "external_after": {
+    "result": "PASS",
+    "hardware_validated": true,
+    "module": {
+      "eeprom_hex": "03042101000000000400000067000000000001004653202020202020202020202020202000649d995346502d3130472d504330312020202041202020010000890012000053323432363036323534302d32202020323430353330202000000091",
+      "identifier": 3,
+      "vendor": "FS",
+      "part": "SFP-10G-PC01",
+      "serial": "S2426062540-2",
+      "ethernet_compliance": 0,
+      "nominal_mbps": 10300,
+      "connector": 33
+    },
+    "drp": {
+      "0x05b": 30,
+      "0x05c": 56320,
+      "0x05d": 48135,
+      "0x05e": 12419,
+      "0x05f": 488,
+      "0x088": 34,
+      "0x0a8": 32,
+      "0x0a9": 4112,
+      "0x0aa": 9215,
+      "0x0ab": 0,
+      "0x0ac": 3
+    },
+    "status": {
+      "sfp_status_control": 8,
+      "sfp_status_status": 127,
+      "sfp_status_signature": 1397116977,
+      "sfp_status_rx_count": 3888248111,
+      "sfp_status_tx_count": 3879738967,
+      "sfp_status_si_ref_count": 0,
+      "sfp_status_gt_ref_count": 0,
+      "sfp_status_clock_faults": 0,
+      "sfp_status_drp_address": 172,
+      "sfp_status_drp_write_data": 0,
+      "sfp_status_drp_command": 0,
+      "sfp_status_drp_read_data": 3,
+      "sfp_status_drp_busy": 0,
+      "mac_status_crc_errors": 1,
+      "mac_status_preamble_errors": 179,
+      "mac_status_tx_frames": 141,
+      "mac_status_rx_frames": 589,
+      "packet_test_start": 0,
+      "packet_test_busy": 0,
+      "packet_test_tx_frames": 0,
+      "packet_test_rx_frames": 0,
+      "packet_test_errors": 0
+    },
+    "clock_rates_hz": {
+      "sfp_status_si_ref_count": 0.0,
+      "sfp_status_gt_ref_count": 0.0,
+      "sfp_status_rx_count": 125004870.69116896,
+      "sfp_status_tx_count": 125000170.87956156
+    }
+  },
+  "network_counter_deltas": {
+    "mac_status_tx_frames": 141,
+    "mac_status_rx_frames": 376,
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0
+  },
+  "final_host": "192.168.2.26"
+}

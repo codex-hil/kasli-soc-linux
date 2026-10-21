@@ -1,0 +1,23 @@
+{
+  "result": "FAIL",
+  "target": "192.168.2.206",
+  "port": 1234,
+  "sizes": [
+    1,
+    17,
+    64,
+    128,
+    512,
+    1024,
+    1400
+  ],
+  "repeats": 50,
+  "completed_packets": 0,
+  "completed_bytes": 0,
+  "ping": {
+    "returncode": 1,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n\n--- 192.168.2.206 ping statistics ---\n20 packets transmitted, 0 received, 100% packet loss, time 19421ms\n\n",
+    "stderr": ""
+  },
+  "error": "PL ICMP test failed"
+}

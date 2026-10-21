@@ -1670,3 +1670,13 @@ ICMP0/20 to192.168.2.206; UDP not attempted. PHY/PCS indication is insufficient
 for working Ethernet. Further work: MAC frame reception and port52 VLAN/link
 configuration; no switch changes made. Golden restored/BIST PASS, Linux
 192.168.2.22. Evidence sfp-dac-20261021/external.
+
+External counter check2026-10-21: added post-traffic probe and counter deltas
+to SFP-only wrapper; PASS now also requires no new MAC/clock errors. Initial
+attempt SSH banner timeout before probe; golden restoration passed. Increased
+bounded management SSH connection timeout to15seconds/3attempts. Retry
+completed: during failed ping, MAC RX+376/TX+141, CRC+0/preamble+0/clockfault+0.
+This separates reset-time errors from clean settled traffic; ICMP remainsFAIL,
+so do not claim network qualification. Next capture ARP/ICMP on host and inspect
+addressing/port52 VLAN before touching gateware. Golden restored/BIST PASS,
+Linux192.168.2.26. Evidence sfp-dac-20261021/counters. No switch/flash writes.

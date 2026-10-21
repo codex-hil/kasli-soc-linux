@@ -48,7 +48,7 @@ def main():
         ssh=['ssh','-i',str(ROOT/'build/ssh/id_ed25519'),'-o',
             'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),'-o',
             'HostKeyAlias=192.168.2.15','-o','StrictHostKeyChecking=yes',
-            '-o','ConnectTimeout=5','root@'+a.host]
+            '-o','ConnectTimeout=15','-o','ConnectionAttempts=3','root@'+a.host]
         remote='/tmp/zc706-integrated'
         subprocess.run(ssh+['mkdir -p '+remote],check=True)
         sources=[(work/'pl-ddr-test','pl-ddr-test'),(work/'adc-ddr-read','adc-ddr-read'),
@@ -78,7 +78,17 @@ def main():
             else:
                 record['network_result']='NOT_RUN'
                 record['network_reason']='External GTX/PCS link is down'
+            run('sfp-after','python3 sfp_probe.py --csr-json csr.json --output sfp-after.json')
+            after=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-after.json'],text=True))
+            record['external_after']=after
+            counters=('mac_status_tx_frames','mac_status_rx_frames',
+                'mac_status_crc_errors','mac_status_preamble_errors','sfp_status_clock_faults')
+            record['network_counter_deltas']={n:(after['status'][n]-probe['status'][n]) & 0xffffffff for n in counters}
             record['result']='PASS' if record['network_result']=='PASS' else 'PARTIAL'
+            if record['result']=='PASS' and any(record['network_counter_deltas'][n] for n in
+                    ('mac_status_crc_errors','mac_status_preamble_errors','sfp_status_clock_faults')):
+                record['result']='FAIL'
+                record['error']='MAC or clock errors incremented during external traffic'
             return
         run('ddr','./pl-ddr-test')
         run('sfp','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 '+('--external ' if a.external_network else '')+'--output sfp.json')
@@ -133,7 +143,7 @@ def main():
                     restore_ssh=['ssh','-i',str(ROOT/'build/ssh/id_ed25519'),'-o',
                         'UserKnownHostsFile='+str(ROOT/'build/ssh/known_hosts'),'-o',
                         'HostKeyAlias=192.168.2.15','-o','StrictHostKeyChecking=yes',
-                        '-o','ConnectTimeout=5','root@'+a.host]
+                        '-o','ConnectTimeout=15','-o','ConnectionAttempts=3','root@'+a.host]
                     data=(ROOT/'build/zc706-adc-ddr/pl-ddr-test').read_bytes()
                     subprocess.run(restore_ssh+['cat > /tmp/integrated-restore-bist; chmod 700 /tmp/integrated-restore-bist'],input=data,check=True,timeout=20)
                     with (a.output/'restored-golden-bist.log').open('w') as output:
