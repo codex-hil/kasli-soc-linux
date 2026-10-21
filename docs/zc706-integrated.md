@@ -1834,3 +1834,16 @@ within the low byte and some larger frames also terminate early. Need trace
 UDP RX length, FIFO metadata and TX packetizer length before patching.
 Golden restored/BIST PASS, Linux192.168.2.21. Evidence udp-sizes/. One newCRC
 error recorded; do not claim clean network qualification.
+
+UDP length isolation2026-10-21: tools/test_udp_echo_path.py tests upstream
+UDPRX -> identical2048-word buffered echo FIFO -> UDPTX with swapped ports,
+input padding, output stalls, all seven sizes1..1400. Checks RX/FIFO length on
+each valid beat, TX enclosing length and exact packetized bytes. All PASS.
+This excludes IP/MAC/GTX and synthesized memory implementation; no claim of
+physical equivalence. Evidence udp-echo-path-sim.log.
+
+Added passive first/last length and frame counters at user RX, echo FIFO
+output and UDP TX source to mac_status. No functional protocol/FIFO changes.
+Wrapper records UDP frame deltas, not snapshot arithmetic. New isolated
+fclk/seed3 build build/zc706-sfp-udp-length,1800sec/8GiB. Pending timing/INIT
+before physical size sweep. Golden unchanged; no hardware access this turn.

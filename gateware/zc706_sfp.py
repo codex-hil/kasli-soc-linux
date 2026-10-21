@@ -259,6 +259,21 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         self.echo_fifo.source.connect(udp.sink, omit={"src_port", "dst_port"}),
         udp.sink.src_port.eq(self.echo_fifo.source.dst_port),
         udp.sink.dst_port.eq(self.echo_fifo.source.src_port)]
+    # Passive metadata snapshots at each echo stage distinguish protocol
+    # length decoding from FIFO storage and TX packetizer problems.
+    for stage, endpoint in (("rx", udp.source), ("fifo", self.echo_fifo.source),
+                            ("tx", self.ethcore.udp.tx.source)):
+        active = Signal()
+        first_length = CSRStatus(16, name=f"udp_{stage}_first_length")
+        last_length = CSRStatus(16, name=f"udp_{stage}_last_length")
+        frames = CSRStatus(32, name=f"udp_{stage}_frames")
+        for suffix, csr in (("first_length", first_length), ("last_length", last_length), ("frames", frames)):
+            setattr(self.mac_status, f"udp_{stage}_{suffix}", csr)
+        self.sync += If(endpoint.valid & endpoint.ready,
+            If(~active, first_length.status.eq(endpoint.length)),
+            active.eq(~endpoint.last),
+            If(endpoint.last, last_length.status.eq(endpoint.length),
+                frames.status.eq(frames.status + 1)))
     self.add_constant("SFP_ABI", 1)
     self.add_constant("SFP_REFERENCE_MONITORS", int(clock_monitors))
     self.add_constant("SFP_MAC", MAC)
