@@ -1,0 +1,7 @@
+{
+  "functional_verilog_equal_after_comment_removal": true,
+  "normalized_sha256": "79897db57c5122782e2c93938fb4117f7c6d1f6e29139a646a6ac5698928cb7b",
+  "hardware_access": false,
+  "srl_result": "FAIL",
+  "no_srl_result": "PASS"
+}

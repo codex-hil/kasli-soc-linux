@@ -1,0 +1,5 @@
+gap=0 sent=        75 received=        75 errors=         0 ip=c0a8026b mac=6c2b59f476e8
+gap=1 sent=       123 received=       123 errors=         0 ip=c0a8026b mac=6c2b59f476e8
+gap=3 sent=       151 received=       151 errors=         0 ip=c0a8026b mac=6c2b59f476e8
+PASS
+tb.v:21: $finish called at 189050 (1s)

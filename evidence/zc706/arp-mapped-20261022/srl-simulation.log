@@ -1,0 +1,3 @@
+gap=0 sent=        75 received=        75 errors=        75 ip=c0a80202 mac=6c2b59f476e8
+FATAL: tb.v:19: ARP decoded fields/count mismatch
+       Time: 63050  Scope: tb

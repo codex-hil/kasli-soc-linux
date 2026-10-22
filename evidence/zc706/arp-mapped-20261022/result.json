@@ -1,0 +1,20 @@
+{
+  "hardware_access": false,
+  "rtl_baseline": "Migen simulation PASS, same module/input cases",
+  "cases": {
+    "srl": {
+      "srl_count": 8,
+      "result": "FAIL",
+      "returncode": 1,
+      "transcript": "gap=0 sent=        75 received=        75 errors=        75 ip=c0a80202 mac=6c2b59f476e8\nFATAL: tb.v:19: ARP decoded fields/count mismatch\n       Time: 63050  Scope: tb\n",
+      "source_sha256": "91d4bf1a0fa8ee2f6ee7bd925944a1ff5b33a14be2709db4d69600c196f96655"
+    },
+    "no-srl": {
+      "srl_count": 0,
+      "result": "PASS",
+      "returncode": 0,
+      "transcript": "gap=0 sent=        75 received=        75 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=1 sent=       123 received=       123 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=3 sent=       151 received=       151 errors=         0 ip=c0a8026b mac=6c2b59f476e8\nPASS\ntb.v:21: $finish called at 189050 (1s)\n",
+      "source_sha256": "b1aaee66a9582583aac448c291b1bfc4e3beeab74808a9dde44274d71d44ea6a"
+    }
+  }
+}

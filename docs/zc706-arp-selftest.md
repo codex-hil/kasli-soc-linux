@@ -67,3 +67,38 @@ writes. Bitstream SHA-256:
 `1e3c2cf8a066fdda771b7d90aa3b01f9d43bbb66025fdcf88906a92727ae3f4e`.
 Next: no-SRL hardware control and mapped-netlist simulation, preserving this
 failed result. Do not claim which tool is responsible before that comparison.
+
+No-SRL physical control PASS:124,749 cumulative sent/received, zero errors,
+gaps0/1/3, correct IP and MAC throughout. Functional Verilog is identical to
+the failed SRL variant after comments are removed. Golden restored192.168.2.22
+and three whole1GiB DDR BIST passes PASS; lease released/reacquirechecked.
+Evidence: `evidence/zc706/arp-selftest-no-srl-20261022`. Bitstream SHA-256:
+`6ba72e2cb3def2bf829c2e150e4a9485ac5498a0dc91f6f813edb05fefd7843c`.
+
+`tools/test_arp_mapped.py` prepares standalone Yosys/ABC9-mapped versions
+with and without SRL, verifies8/0 SRL cells, and runs them with the existing
+OSS CAD Suite Icarus tools on Dell. Migen simulation is the RTL baseline.
+A first attempt to simulate raw Migen-generated Verilog with Icarus stalled
+without transcript; it is not a functional FAIL. Mapped simulation results
+remain pending, and timeouts must stay distinct from field mismatches.
+
+Confirmed mapped simulation (Dell, no nextpnr or bitstream): Migen RTL PASS;
+Yosys0.52/ABC9 SRL netlist FAIL,75/75 errors and IP192.168.2.2; no-SRL
+netlist PASS,151 cumulative frames across all three gap cases. This matches
+the physical failure and localizes this reproducer to synthesis/technology
+mapping rather than FPGA routing or FASM. Exact source/transcripts are under
+`evidence/zc706/arp-mapped-20261022`; the raw-Verilog stalled attempt is not
+used as RTL proof. No extra hardware tests were required.
+
+Reproduce on Dell:
+
+```sh
+dell-build sync kasli-linux
+dell-build run kasli-linux build/python/bin/python tools/test_arp_mapped.py \
+  --output build/zc706-arp-mapped-confirmed
+```
+
+Next: reduce to a clock-enabled shift chain and identify where enable is
+lost: the no-SRL header FFs have variable CE, while the mapped SRLs have
+CE tied high. This structural difference needs pass-by-pass confirmation
+before proposing an upstream fix.

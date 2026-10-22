@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "cases": [
+    {
+      "busy": 0,
+      "sent": 61829,
+      "received": 61829,
+      "errors": 0,
+      "last_ip": 3232236139,
+      "last_mac_lo": 1509193448,
+      "last_mac_hi": 27691,
+      "gap": 0,
+      "frames": 61829
+    },
+    {
+      "busy": 0,
+      "sent": 101570,
+      "received": 101570,
+      "errors": 0,
+      "last_ip": 3232236139,
+      "last_mac_lo": 1509193448,
+      "last_mac_hi": 27691,
+      "gap": 1,
+      "frames": 39741
+    },
+    {
+      "busy": 0,
+      "sent": 124749,
+      "received": 124749,
+      "errors": 0,
+      "last_ip": 3232236139,
+      "last_mac_lo": 1509193448,
+      "last_mac_hi": 27691,
+      "gap": 3,
+      "frames": 23179
+    }
+  ],
+  "scope": "actual upstream ARPRX, injected padded bytes, no GTX"
+}
