@@ -226,3 +226,10 @@ final timing are UNKNOWN. Do not infer synthesis/routing failure or success
 from the transport exit code, and do not start a duplicate build until the
 remote process state is inspected. No ZC706 access occurred. Reconnect Dell,
 recover logs/artifacts, then perform normal timing and netlist admission.
+
+Dell reconnected with14-minute uptime and no remaining build process. The
+interrupted stage1 log ends during routing; it is retained as
+`csr-boundary-interrupted-stage1.log`. The same candidate was restarted from
+source under the shared build lease into
+`build/zc706-integrated-yosys-fixed-csr-boundary-retry/gateware`.
+No partial route is reused or admitted. Final timing remains pending.

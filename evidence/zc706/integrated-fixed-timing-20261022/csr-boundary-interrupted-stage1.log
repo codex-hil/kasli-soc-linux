@@ -1,0 +1,1833 @@
+Info: Using uarch 'xilinx' for device 'xc7z045ffg900-2'
+
+Info: Parsing XDC file...
+Warning: ignoring unsupported XDC option '-name' (on line 1270)
+Warning: ignoring unsupported XDC option '-name' (on line 1272)
+Warning: ignoring unsupported XDC option '-name' (on line 1306)
+Warning: ignoring unsupported XDC option '-name' (on line 1307)
+Warning: ignoring unsupported XDC option '-name' (on line 1308)
+Warning: ignoring unsupported XDC option '-name' (on line 1309)
+Warning: ignoring unsupported XDC option '-name' (on line 1310)
+Warning: ignoring unsupported XDC option '-name' (on line 1311)
+Warning: ignoring unsupported XDC option '-name' (on line 1312)
+Warning: ignoring unsupported XDC option '-name' (on line 1313)
+Warning: ignoring unsupported XDC option '-name' (on line 1314)
+Warning: ignoring unsupported XDC option '-name' (on line 1315)
+Warning: ignoring unsupported XDC option '-name' (on line 1316)
+Warning: ignoring unsupported XDC option '-name' (on line 1317)
+Warning: ignoring unsupported XDC option '-name' (on line 1318)
+Info: Packing constants..
+Info: Inserting IO buffers..
+Info:     IO port 'adc_dco1_p' driven by IBUFDS 'adc2_rx.dco_ibuf'
+Info:     IO port 'adc_dco1_n' driven by IBUFDS 'adc2_rx.dco_ibuf'
+Info:     IO port 'adc_dco0_p' driven by IBUFDS 'adc_rx.dco_ibuf'
+Info:     IO port 'adc_dco0_n' driven by IBUFDS 'adc_rx.dco_ibuf'
+Info:     IO port 'adc_data1_p[7]' driven by IBUFDS 'adc2_rx.lanes[7].ibuf'
+Info:     IO port 'adc_data1_p[6]' driven by IBUFDS 'adc2_rx.lanes[6].ibuf'
+Info:     IO port 'adc_data1_p[5]' driven by IBUFDS 'adc2_rx.lanes[5].ibuf'
+Info:     IO port 'adc_data1_p[4]' driven by IBUFDS 'adc2_rx.lanes[4].ibuf'
+Info:     IO port 'adc_data1_p[3]' driven by IBUFDS 'adc2_rx.lanes[3].ibuf'
+Info:     IO port 'adc_data1_p[2]' driven by IBUFDS 'adc2_rx.lanes[2].ibuf'
+Info:     IO port 'adc_data1_p[1]' driven by IBUFDS 'adc2_rx.lanes[1].ibuf'
+Info:     IO port 'adc_data1_p[0]' driven by IBUFDS 'adc2_rx.lanes[0].ibuf'
+Info:     IO port 'adc_data1_n[7]' driven by IBUFDS 'adc2_rx.lanes[7].ibuf'
+Info:     IO port 'adc_data1_n[6]' driven by IBUFDS 'adc2_rx.lanes[6].ibuf'
+Info:     IO port 'adc_data1_n[5]' driven by IBUFDS 'adc2_rx.lanes[5].ibuf'
+Info:     IO port 'adc_data1_n[4]' driven by IBUFDS 'adc2_rx.lanes[4].ibuf'
+Info:     IO port 'adc_data1_n[3]' driven by IBUFDS 'adc2_rx.lanes[3].ibuf'
+Info:     IO port 'adc_data1_n[2]' driven by IBUFDS 'adc2_rx.lanes[2].ibuf'
+Info:     IO port 'adc_data1_n[1]' driven by IBUFDS 'adc2_rx.lanes[1].ibuf'
+Info:     IO port 'adc_data1_n[0]' driven by IBUFDS 'adc2_rx.lanes[0].ibuf'
+Info:     IO port 'adc_data0_p[7]' driven by IBUFDS 'adc_rx.lanes[7].ibuf'
+Info:     IO port 'adc_data0_p[6]' driven by IBUFDS 'adc_rx.lanes[6].ibuf'
+Info:     IO port 'adc_data0_p[5]' driven by IBUFDS 'adc_rx.lanes[5].ibuf'
+Info:     IO port 'adc_data0_p[4]' driven by IBUFDS 'adc_rx.lanes[4].ibuf'
+Info:     IO port 'adc_data0_p[3]' driven by IBUFDS 'adc_rx.lanes[3].ibuf'
+Info:     IO port 'adc_data0_p[2]' driven by IBUFDS 'adc_rx.lanes[2].ibuf'
+Info:     IO port 'adc_data0_p[1]' driven by IBUFDS 'adc_rx.lanes[1].ibuf'
+Info:     IO port 'adc_data0_p[0]' driven by IBUFDS 'adc_rx.lanes[0].ibuf'
+Info:     IO port 'adc_data0_n[7]' driven by IBUFDS 'adc_rx.lanes[7].ibuf'
+Info:     IO port 'adc_data0_n[6]' driven by IBUFDS 'adc_rx.lanes[6].ibuf'
+Info:     IO port 'adc_data0_n[5]' driven by IBUFDS 'adc_rx.lanes[5].ibuf'
+Info:     IO port 'adc_data0_n[4]' driven by IBUFDS 'adc_rx.lanes[4].ibuf'
+Info:     IO port 'adc_data0_n[3]' driven by IBUFDS 'adc_rx.lanes[3].ibuf'
+Info:     IO port 'adc_data0_n[2]' driven by IBUFDS 'adc_rx.lanes[2].ibuf'
+Info:     IO port 'adc_data0_n[1]' driven by IBUFDS 'adc_rx.lanes[1].ibuf'
+Info:     IO port 'adc_data0_n[0]' driven by IBUFDS 'adc_rx.lanes[0].ibuf'
+Info:     IO port 'adc_control1_ssr[27]' driven by OBUF '$iopadmap$top.adc_control1_ssr_27'
+Info:     IO port 'adc_control1_ssr[26]' driven by OBUF '$iopadmap$top.adc_control1_ssr_26'
+Info:     IO port 'adc_control1_ssr[25]' driven by OBUF '$iopadmap$top.adc_control1_ssr_25'
+Info:     IO port 'adc_control1_ssr[24]' driven by OBUF '$iopadmap$top.adc_control1_ssr_24'
+Info:     IO port 'adc_control1_ssr[23]' driven by OBUF '$iopadmap$top.adc_control1_ssr_23'
+Info:     IO port 'adc_control1_ssr[22]' driven by OBUF '$iopadmap$top.adc_control1_ssr_22'
+Info:     IO port 'adc_control1_ssr[21]' driven by OBUF '$iopadmap$top.adc_control1_ssr_21'
+Info:     IO port 'adc_control1_ssr[20]' driven by OBUF '$iopadmap$top.adc_control1_ssr_20'
+Info:     IO port 'adc_control1_ssr[19]' driven by OBUF '$iopadmap$top.adc_control1_ssr_19'
+Info:     IO port 'adc_control1_ssr[18]' driven by OBUF '$iopadmap$top.adc_control1_ssr_18'
+Info:     IO port 'adc_control1_ssr[17]' driven by OBUF '$iopadmap$top.adc_control1_ssr_17'
+Info:     IO port 'adc_control1_ssr[16]' driven by OBUF '$iopadmap$top.adc_control1_ssr_16'
+Info:     IO port 'adc_control1_ssr[15]' driven by OBUF '$iopadmap$top.adc_control1_ssr_15'
+Info:     IO port 'adc_control1_ssr[14]' driven by OBUF '$iopadmap$top.adc_control1_ssr_14'
+Info:     IO port 'adc_control1_ssr[13]' driven by OBUF '$iopadmap$top.adc_control1_ssr_13'
+Info:     IO port 'adc_control1_ssr[12]' driven by OBUF '$iopadmap$top.adc_control1_ssr_12'
+Info:     IO port 'adc_control1_ssr[11]' driven by OBUF '$iopadmap$top.adc_control1_ssr_11'
+Info:     IO port 'adc_control1_ssr[10]' driven by OBUF '$iopadmap$top.adc_control1_ssr_10'
+Info:     IO port 'adc_control1_ssr[9]' driven by OBUF '$iopadmap$top.adc_control1_ssr_9'
+Info:     IO port 'adc_control1_ssr[8]' driven by OBUF '$iopadmap$top.adc_control1_ssr_8'
+Info:     IO port 'adc_control1_ssr[7]' driven by OBUF '$iopadmap$top.adc_control1_ssr_7'
+Info:     IO port 'adc_control1_ssr[6]' driven by OBUF '$iopadmap$top.adc_control1_ssr_6'
+Info:     IO port 'adc_control1_ssr[5]' driven by OBUF '$iopadmap$top.adc_control1_ssr_5'
+Info:     IO port 'adc_control1_ssr[4]' driven by OBUF '$iopadmap$top.adc_control1_ssr_4'
+Info:     IO port 'adc_control1_ssr[3]' driven by OBUF '$iopadmap$top.adc_control1_ssr_3'
+Info:     IO port 'adc_control1_ssr[2]' driven by OBUF '$iopadmap$top.adc_control1_ssr_2'
+Info:     IO port 'adc_control1_ssr[1]' driven by OBUF '$iopadmap$top.adc_control1_ssr_1'
+Info:     IO port 'adc_control1_ssr[0]' driven by OBUF '$iopadmap$top.adc_control1_ssr'
+Info:     IO port 'adc_control1_osc_oe' driven by OBUF '$iopadmap$top.adc_control1_osc_oe'
+Info:     IO port 'adc_control1_led[1]' driven by OBUF '$iopadmap$top.adc_control1_led_1'
+Info:     IO port 'adc_control1_led[0]' driven by OBUF '$iopadmap$top.adc_control1_led'
+Info:     IO port 'adc_control1_dac_cs_n[3]' driven by OBUF '$iopadmap$top.adc_control1_dac_cs_n_3'
+Info:     IO port 'adc_control1_dac_cs_n[2]' driven by OBUF '$iopadmap$top.adc_control1_dac_cs_n_2'
+Info:     IO port 'adc_control1_dac_cs_n[1]' driven by OBUF '$iopadmap$top.adc_control1_dac_cs_n_1'
+Info:     IO port 'adc_control1_dac_cs_n[0]' driven by OBUF '$iopadmap$top.adc_control1_dac_cs_n'
+Info:     IO port 'adc_control1_dac_clr_n' driven by OBUF '$iopadmap$top.adc_control1_dac_clr_n'
+Info:     IO port 'adc_control0_ssr[27]' driven by OBUF '$iopadmap$top.adc_control0_ssr_27'
+Info:     IO port 'adc_control0_ssr[26]' driven by OBUF '$iopadmap$top.adc_control0_ssr_26'
+Info:     IO port 'adc_control0_ssr[25]' driven by OBUF '$iopadmap$top.adc_control0_ssr_25'
+Info:     IO port 'adc_control0_ssr[24]' driven by OBUF '$iopadmap$top.adc_control0_ssr_24'
+Info:     IO port 'adc_control0_ssr[23]' driven by OBUF '$iopadmap$top.adc_control0_ssr_23'
+Info:     IO port 'adc_control0_ssr[22]' driven by OBUF '$iopadmap$top.adc_control0_ssr_22'
+Info:     IO port 'adc_control0_ssr[21]' driven by OBUF '$iopadmap$top.adc_control0_ssr_21'
+Info:     IO port 'adc_control0_ssr[20]' driven by OBUF '$iopadmap$top.adc_control0_ssr_20'
+Info:     IO port 'adc_control0_ssr[19]' driven by OBUF '$iopadmap$top.adc_control0_ssr_19'
+Info:     IO port 'adc_control0_ssr[18]' driven by OBUF '$iopadmap$top.adc_control0_ssr_18'
+Info:     IO port 'adc_control0_ssr[17]' driven by OBUF '$iopadmap$top.adc_control0_ssr_17'
+Info:     IO port 'adc_control0_ssr[16]' driven by OBUF '$iopadmap$top.adc_control0_ssr_16'
+Info:     IO port 'adc_control0_ssr[15]' driven by OBUF '$iopadmap$top.adc_control0_ssr_15'
+Info:     IO port 'adc_control0_ssr[14]' driven by OBUF '$iopadmap$top.adc_control0_ssr_14'
+Info:     IO port 'adc_control0_ssr[13]' driven by OBUF '$iopadmap$top.adc_control0_ssr_13'
+Info:     IO port 'adc_control0_ssr[12]' driven by OBUF '$iopadmap$top.adc_control0_ssr_12'
+Info:     IO port 'adc_control0_ssr[11]' driven by OBUF '$iopadmap$top.adc_control0_ssr_11'
+Info:     IO port 'adc_control0_ssr[10]' driven by OBUF '$iopadmap$top.adc_control0_ssr_10'
+Info:     IO port 'adc_control0_ssr[9]' driven by OBUF '$iopadmap$top.adc_control0_ssr_9'
+Info:     IO port 'adc_control0_ssr[8]' driven by OBUF '$iopadmap$top.adc_control0_ssr_8'
+Info:     IO port 'adc_control0_ssr[7]' driven by OBUF '$iopadmap$top.adc_control0_ssr_7'
+Info:     IO port 'adc_control0_ssr[6]' driven by OBUF '$iopadmap$top.adc_control0_ssr_6'
+Info:     IO port 'adc_control0_ssr[5]' driven by OBUF '$iopadmap$top.adc_control0_ssr_5'
+Info:     IO port 'adc_control0_ssr[4]' driven by OBUF '$iopadmap$top.adc_control0_ssr_4'
+Info:     IO port 'adc_control0_ssr[3]' driven by OBUF '$iopadmap$top.adc_control0_ssr_3'
+Info:     IO port 'adc_control0_ssr[2]' driven by OBUF '$iopadmap$top.adc_control0_ssr_2'
+Info:     IO port 'adc_control0_ssr[1]' driven by OBUF '$iopadmap$top.adc_control0_ssr_1'
+Info:     IO port 'adc_control0_ssr[0]' driven by OBUF '$iopadmap$top.adc_control0_ssr'
+Info:     IO port 'adc_control0_osc_oe' driven by OBUF '$iopadmap$top.adc_control0_osc_oe'
+Info:     IO port 'adc_control0_led[1]' driven by OBUF '$iopadmap$top.adc_control0_led_1'
+Info:     IO port 'adc_control0_led[0]' driven by OBUF '$iopadmap$top.adc_control0_led'
+Info:     IO port 'adc_control0_dac_cs_n[3]' driven by OBUF '$iopadmap$top.adc_control0_dac_cs_n_3'
+Info:     IO port 'adc_control0_dac_cs_n[2]' driven by OBUF '$iopadmap$top.adc_control0_dac_cs_n_2'
+Info:     IO port 'adc_control0_dac_cs_n[1]' driven by OBUF '$iopadmap$top.adc_control0_dac_cs_n_1'
+Info:     IO port 'adc_control0_dac_cs_n[0]' driven by OBUF '$iopadmap$top.adc_control0_dac_cs_n'
+Info:     IO port 'adc_control0_dac_clr_n' driven by OBUF '$iopadmap$top.adc_control0_dac_clr_n'
+Info:     IO port 'i2c_sda' driven by IOBUF 'IOBUF_65'
+Info:     IO port 'i2c_scl' driven by IOBUF 'IOBUF_64'
+Info:     IO port 'ddram_dqs_p[7]' driven by IOBUFDS 'IOBUFDS_7'
+Info:     IO port 'ddram_dqs_p[6]' driven by IOBUFDS 'IOBUFDS_6'
+Info:     IO port 'ddram_dqs_p[5]' driven by IOBUFDS 'IOBUFDS_5'
+Info:     IO port 'ddram_dqs_p[4]' driven by IOBUFDS 'IOBUFDS_4'
+Info:     IO port 'ddram_dqs_p[3]' driven by IOBUFDS 'IOBUFDS_3'
+Info:     IO port 'ddram_dqs_p[2]' driven by IOBUFDS 'IOBUFDS_2'
+Info:     IO port 'ddram_dqs_p[1]' driven by IOBUFDS 'IOBUFDS_1'
+Info:     IO port 'ddram_dqs_p[0]' driven by IOBUFDS 'IOBUFDS'
+Info:     IO port 'ddram_dqs_n[7]' driven by IOBUFDS 'IOBUFDS_7'
+Info:     IO port 'ddram_dqs_n[6]' driven by IOBUFDS 'IOBUFDS_6'
+Info:     IO port 'ddram_dqs_n[5]' driven by IOBUFDS 'IOBUFDS_5'
+Info:     IO port 'ddram_dqs_n[4]' driven by IOBUFDS 'IOBUFDS_4'
+Info:     IO port 'ddram_dqs_n[3]' driven by IOBUFDS 'IOBUFDS_3'
+Info:     IO port 'ddram_dqs_n[2]' driven by IOBUFDS 'IOBUFDS_2'
+Info:     IO port 'ddram_dqs_n[1]' driven by IOBUFDS 'IOBUFDS_1'
+Info:     IO port 'ddram_dqs_n[0]' driven by IOBUFDS 'IOBUFDS'
+Info:     IO port 'ddram_dq[63]' driven by IOBUF 'IOBUF_63'
+Info:     IO port 'ddram_dq[62]' driven by IOBUF 'IOBUF_62'
+Info:     IO port 'ddram_dq[61]' driven by IOBUF 'IOBUF_61'
+Info:     IO port 'ddram_dq[60]' driven by IOBUF 'IOBUF_60'
+Info:     IO port 'ddram_dq[59]' driven by IOBUF 'IOBUF_59'
+Info:     IO port 'ddram_dq[58]' driven by IOBUF 'IOBUF_58'
+Info:     IO port 'ddram_dq[57]' driven by IOBUF 'IOBUF_57'
+Info:     IO port 'ddram_dq[56]' driven by IOBUF 'IOBUF_56'
+Info:     IO port 'ddram_dq[55]' driven by IOBUF 'IOBUF_55'
+Info:     IO port 'ddram_dq[54]' driven by IOBUF 'IOBUF_54'
+Info:     IO port 'ddram_dq[53]' driven by IOBUF 'IOBUF_53'
+Info:     IO port 'ddram_dq[52]' driven by IOBUF 'IOBUF_52'
+Info:     IO port 'ddram_dq[51]' driven by IOBUF 'IOBUF_51'
+Info:     IO port 'ddram_dq[50]' driven by IOBUF 'IOBUF_50'
+Info:     IO port 'ddram_dq[49]' driven by IOBUF 'IOBUF_49'
+Info:     IO port 'ddram_dq[48]' driven by IOBUF 'IOBUF_48'
+Info:     IO port 'ddram_dq[47]' driven by IOBUF 'IOBUF_47'
+Info:     IO port 'ddram_dq[46]' driven by IOBUF 'IOBUF_46'
+Info:     IO port 'ddram_dq[45]' driven by IOBUF 'IOBUF_45'
+Info:     IO port 'ddram_dq[44]' driven by IOBUF 'IOBUF_44'
+Info:     IO port 'ddram_dq[43]' driven by IOBUF 'IOBUF_43'
+Info:     IO port 'ddram_dq[42]' driven by IOBUF 'IOBUF_42'
+Info:     IO port 'ddram_dq[41]' driven by IOBUF 'IOBUF_41'
+Info:     IO port 'ddram_dq[40]' driven by IOBUF 'IOBUF_40'
+Info:     IO port 'ddram_dq[39]' driven by IOBUF 'IOBUF_39'
+Info:     IO port 'ddram_dq[38]' driven by IOBUF 'IOBUF_38'
+Info:     IO port 'ddram_dq[37]' driven by IOBUF 'IOBUF_37'
+Info:     IO port 'ddram_dq[36]' driven by IOBUF 'IOBUF_36'
+Info:     IO port 'ddram_dq[35]' driven by IOBUF 'IOBUF_35'
+Info:     IO port 'ddram_dq[34]' driven by IOBUF 'IOBUF_34'
+Info:     IO port 'ddram_dq[33]' driven by IOBUF 'IOBUF_33'
+Info:     IO port 'ddram_dq[32]' driven by IOBUF 'IOBUF_32'
+Info:     IO port 'ddram_dq[31]' driven by IOBUF 'IOBUF_31'
+Info:     IO port 'ddram_dq[30]' driven by IOBUF 'IOBUF_30'
+Info:     IO port 'ddram_dq[29]' driven by IOBUF 'IOBUF_29'
+Info:     IO port 'ddram_dq[28]' driven by IOBUF 'IOBUF_28'
+Info:     IO port 'ddram_dq[27]' driven by IOBUF 'IOBUF_27'
+Info:     IO port 'ddram_dq[26]' driven by IOBUF 'IOBUF_26'
+Info:     IO port 'ddram_dq[25]' driven by IOBUF 'IOBUF_25'
+Info:     IO port 'ddram_dq[24]' driven by IOBUF 'IOBUF_24'
+Info:     IO port 'ddram_dq[23]' driven by IOBUF 'IOBUF_23'
+Info:     IO port 'ddram_dq[22]' driven by IOBUF 'IOBUF_22'
+Info:     IO port 'ddram_dq[21]' driven by IOBUF 'IOBUF_21'
+Info:     IO port 'ddram_dq[20]' driven by IOBUF 'IOBUF_20'
+Info:     IO port 'ddram_dq[19]' driven by IOBUF 'IOBUF_19'
+Info:     IO port 'ddram_dq[18]' driven by IOBUF 'IOBUF_18'
+Info:     IO port 'ddram_dq[17]' driven by IOBUF 'IOBUF_17'
+Info:     IO port 'ddram_dq[16]' driven by IOBUF 'IOBUF_16'
+Info:     IO port 'ddram_dq[15]' driven by IOBUF 'IOBUF_15'
+Info:     IO port 'ddram_dq[14]' driven by IOBUF 'IOBUF_14'
+Info:     IO port 'ddram_dq[13]' driven by IOBUF 'IOBUF_13'
+Info:     IO port 'ddram_dq[12]' driven by IOBUF 'IOBUF_12'
+Info:     IO port 'ddram_dq[11]' driven by IOBUF 'IOBUF_11'
+Info:     IO port 'ddram_dq[10]' driven by IOBUF 'IOBUF_10'
+Info:     IO port 'ddram_dq[9]' driven by IOBUF 'IOBUF_9'
+Info:     IO port 'ddram_dq[8]' driven by IOBUF 'IOBUF_8'
+Info:     IO port 'ddram_dq[7]' driven by IOBUF 'IOBUF_7'
+Info:     IO port 'ddram_dq[6]' driven by IOBUF 'IOBUF_6'
+Info:     IO port 'ddram_dq[5]' driven by IOBUF 'IOBUF_5'
+Info:     IO port 'ddram_dq[4]' driven by IOBUF 'IOBUF_4'
+Info:     IO port 'ddram_dq[3]' driven by IOBUF 'IOBUF_3'
+Info:     IO port 'ddram_dq[2]' driven by IOBUF 'IOBUF_2'
+Info:     IO port 'ddram_dq[1]' driven by IOBUF 'IOBUF_1'
+Info:     IO port 'ddram_dq[0]' driven by IOBUF 'IOBUF'
+Info:     IO port 'adc_spi1_mosi' driven by IOBUF 'IOBUF_69'
+Info:     IO port 'adc_spi0_mosi' driven by IOBUF 'IOBUF_66'
+Info:     IO port 'adc_i2c1_sda' driven by IOBUF 'IOBUF_71'
+Info:     IO port 'adc_i2c1_scl' driven by IOBUF 'IOBUF_70'
+Info:     IO port 'adc_i2c0_sda' driven by IOBUF 'IOBUF_68'
+Info:     IO port 'adc_i2c0_scl' driven by IOBUF 'IOBUF_67'
+Info:     IO port 'user_led' driven by OBUF '$iopadmap$top.user_led'
+Info:     IO port 'si5324_rst_n' driven by OBUF '$iopadmap$top.si5324_rst_n'
+Info:     IO port 'si5324_int_n' driven by IBUF '$iopadmap$top.si5324_int_n'
+Info:     IO port 'sfp_txp' driven by OBUF '$iopadmap$top.sfp_txp'
+Info:     IO port 'sfp_txn' driven by OBUF '$iopadmap$top.sfp_txn'
+Info:     IO port 'sfp_tx_disable_n' driven by OBUF '$iopadmap$top.sfp_tx_disable_n'
+Info:     IO port 'sfp_rxp' driven by IBUF '$iopadmap$top.sfp_rxp'
+Info:     IO port 'sfp_rxn' driven by IBUF '$iopadmap$top.sfp_rxn'
+Info:     IO port 'mgt_refclk_p' driven by IBUFDS_GTE2 'IBUFDS_GTE2'
+Info:     IO port 'mgt_refclk_n' driven by IBUFDS_GTE2 'IBUFDS_GTE2'
+Info:     IO port 'ddram_we_n' driven by OBUF '$iopadmap$top.ddram_we_n'
+Info:     IO port 'ddram_reset_n' driven by OBUF '$iopadmap$top.ddram_reset_n'
+Info:     IO port 'ddram_ras_n' driven by OBUF '$iopadmap$top.ddram_ras_n'
+Info:     IO port 'ddram_odt' driven by OBUF '$iopadmap$top.ddram_odt'
+Info:     IO port 'ddram_dm[7]' driven by OBUF '$iopadmap$top.ddram_dm_7'
+Info:     IO port 'ddram_dm[6]' driven by OBUF '$iopadmap$top.ddram_dm_6'
+Info:     IO port 'ddram_dm[5]' driven by OBUF '$iopadmap$top.ddram_dm_5'
+Info:     IO port 'ddram_dm[4]' driven by OBUF '$iopadmap$top.ddram_dm_4'
+Info:     IO port 'ddram_dm[3]' driven by OBUF '$iopadmap$top.ddram_dm_3'
+Info:     IO port 'ddram_dm[2]' driven by OBUF '$iopadmap$top.ddram_dm_2'
+Info:     IO port 'ddram_dm[1]' driven by OBUF '$iopadmap$top.ddram_dm_1'
+Info:     IO port 'ddram_dm[0]' driven by OBUF '$iopadmap$top.ddram_dm'
+Info:     IO port 'ddram_cs_n' driven by OBUF '$iopadmap$top.ddram_cs_n'
+Info:     IO port 'ddram_clk_p' driven by OBUFDS 'OBUFDS'
+Info:     IO port 'ddram_clk_n' driven by OBUFDS 'OBUFDS'
+Info:     IO port 'ddram_cke' driven by OBUF '$iopadmap$top.ddram_cke'
+Info:     IO port 'ddram_cas_n' driven by OBUF '$iopadmap$top.ddram_cas_n'
+Info:     IO port 'ddram_ba[2]' driven by OBUF '$iopadmap$top.ddram_ba_2'
+Info:     IO port 'ddram_ba[1]' driven by OBUF '$iopadmap$top.ddram_ba_1'
+Info:     IO port 'ddram_ba[0]' driven by OBUF '$iopadmap$top.ddram_ba'
+Info:     IO port 'ddram_a[15]' driven by OBUF '$iopadmap$top.ddram_a_15'
+Info:     IO port 'ddram_a[14]' driven by OBUF '$iopadmap$top.ddram_a_14'
+Info:     IO port 'ddram_a[13]' driven by OBUF '$iopadmap$top.ddram_a_13'
+Info:     IO port 'ddram_a[12]' driven by OBUF '$iopadmap$top.ddram_a_12'
+Info:     IO port 'ddram_a[11]' driven by OBUF '$iopadmap$top.ddram_a_11'
+Info:     IO port 'ddram_a[10]' driven by OBUF '$iopadmap$top.ddram_a_10'
+Info:     IO port 'ddram_a[9]' driven by OBUF '$iopadmap$top.ddram_a_9'
+Info:     IO port 'ddram_a[8]' driven by OBUF '$iopadmap$top.ddram_a_8'
+Info:     IO port 'ddram_a[7]' driven by OBUF '$iopadmap$top.ddram_a_7'
+Info:     IO port 'ddram_a[6]' driven by OBUF '$iopadmap$top.ddram_a_6'
+Info:     IO port 'ddram_a[5]' driven by OBUF '$iopadmap$top.ddram_a_5'
+Info:     IO port 'ddram_a[4]' driven by OBUF '$iopadmap$top.ddram_a_4'
+Info:     IO port 'ddram_a[3]' driven by OBUF '$iopadmap$top.ddram_a_3'
+Info:     IO port 'ddram_a[2]' driven by OBUF '$iopadmap$top.ddram_a_2'
+Info:     IO port 'ddram_a[1]' driven by OBUF '$iopadmap$top.ddram_a_1'
+Info:     IO port 'ddram_a[0]' driven by OBUF '$iopadmap$top.ddram_a'
+Info:     IO port 'adc_trigger1_p' driven by IBUFDS 'IBUFDS_1'
+Info:     IO port 'adc_trigger1_n' driven by IBUFDS 'IBUFDS_1'
+Info:     IO port 'adc_trigger0_p' driven by IBUFDS 'IBUFDS'
+Info:     IO port 'adc_trigger0_n' driven by IBUFDS 'IBUFDS'
+Info:     IO port 'adc_spi1_miso' driven by IBUF '$iopadmap$top.adc_spi1_miso'
+Info:     IO port 'adc_spi1_cs_n' driven by OBUF '$iopadmap$top.adc_spi1_cs_n'
+Info:     IO port 'adc_spi1_clk' driven by OBUF '$iopadmap$top.adc_spi1_clk'
+Info:     IO port 'adc_spi0_miso' driven by IBUF '$iopadmap$top.adc_spi0_miso'
+Info:     IO port 'adc_spi0_cs_n' driven by OBUF '$iopadmap$top.adc_spi0_cs_n'
+Info:     IO port 'adc_spi0_clk' driven by OBUF '$iopadmap$top.adc_spi0_clk'
+Info:     IO port 'adc_frame1_p' driven by IBUFDS 'adc2_rx.lanes[8].ibuf'
+Info:     IO port 'adc_frame1_n' driven by IBUFDS 'adc2_rx.lanes[8].ibuf'
+Info:     IO port 'adc_frame0_p' driven by IBUFDS 'adc_rx.lanes[8].ibuf'
+Info:     IO port 'adc_frame0_n' driven by IBUFDS 'adc_rx.lanes[8].ibuf'
+Info:     Constraining 'adc_dco1_p' to pad 'X0Y238/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_dco1_n' to pad 'X0Y238/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_dco0_p' to pad 'X0Y283/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_dco0_n' to pad 'X0Y283/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_p[7]' to pad 'X0Y217/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[6]' to pad 'X0Y219/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[5]' to pad 'X0Y225/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[4]' to pad 'X0Y229/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[3]' to pad 'X0Y254/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[2]' to pad 'X0Y256/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[1]' to pad 'X0Y223/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_p[0]' to pad 'X0Y252/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data1_n[7]' to pad 'X0Y217/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[6]' to pad 'X0Y219/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[5]' to pad 'X0Y225/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[4]' to pad 'X0Y229/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[3]' to pad 'X0Y254/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[2]' to pad 'X0Y256/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[1]' to pad 'X0Y223/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data1_n[0]' to pad 'X0Y252/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_p[7]' to pad 'X0Y302/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[6]' to pad 'X0Y294/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[5]' to pad 'X0Y300/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[4]' to pad 'X0Y277/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[3]' to pad 'X0Y296/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[2]' to pad 'X0Y273/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[1]' to pad 'X0Y292/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_p[0]' to pad 'X0Y306/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_data0_n[7]' to pad 'X0Y302/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[6]' to pad 'X0Y294/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[5]' to pad 'X0Y300/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[4]' to pad 'X0Y277/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[3]' to pad 'X0Y296/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[2]' to pad 'X0Y273/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[1]' to pad 'X0Y292/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_data0_n[0]' to pad 'X0Y306/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[27]' to pad 'X0Y240/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[26]' to pad 'X0Y221/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[25]' to pad 'X0Y240/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[24]' to pad 'X0Y244/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[23]' to pad 'X0Y244/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[22]' to pad 'X0Y242/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[21]' to pad 'X0Y242/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[20]' to pad 'X0Y127/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[19]' to pad 'X0Y231/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[18]' to pad 'X0Y231/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[17]' to pad 'X0Y227/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[16]' to pad 'X0Y227/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[15]' to pad 'X0Y246/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[14]' to pad 'X0Y246/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[13]' to pad 'X0Y121/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[12]' to pad 'X0Y119/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[11]' to pad 'X0Y121/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[10]' to pad 'X0Y123/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[9]' to pad 'X0Y123/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[8]' to pad 'X0Y140/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[7]' to pad 'X0Y127/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[6]' to pad 'X0Y132/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[5]' to pad 'X0Y109/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[4]' to pad 'X0Y109/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_ssr[3]' to pad 'X0Y115/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[2]' to pad 'X0Y119/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[1]' to pad 'X0Y117/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_ssr[0]' to pad 'X0Y117/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_osc_oe' to pad 'X0Y221/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_led[1]' to pad 'X0Y107/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_led[0]' to pad 'X0Y107/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_dac_cs_n[3]' to pad 'X0Y136/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_dac_cs_n[2]' to pad 'X0Y136/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_dac_cs_n[1]' to pad 'X0Y144/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control1_dac_cs_n[0]' to pad 'X0Y144/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control1_dac_clr_n' to pad 'X0Y142/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[27]' to pad 'X0Y271/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[26]' to pad 'X0Y304/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[25]' to pad 'X0Y271/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[24]' to pad 'X0Y281/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[23]' to pad 'X0Y281/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[22]' to pad 'X0Y275/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[21]' to pad 'X0Y275/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[20]' to pad 'X0Y192/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[19]' to pad 'X0Y269/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[18]' to pad 'X0Y269/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[17]' to pad 'X0Y298/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[16]' to pad 'X0Y298/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[15]' to pad 'X0Y279/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[14]' to pad 'X0Y279/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[13]' to pad 'X0Y196/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[12]' to pad 'X0Y200/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[11]' to pad 'X0Y196/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[10]' to pad 'X0Y202/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[9]' to pad 'X0Y202/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[8]' to pad 'X0Y204/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[7]' to pad 'X0Y192/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[6]' to pad 'X0Y194/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[5]' to pad 'X0Y190/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[4]' to pad 'X0Y190/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_ssr[3]' to pad 'X0Y188/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[2]' to pad 'X0Y200/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[1]' to pad 'X0Y198/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_ssr[0]' to pad 'X0Y198/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_osc_oe' to pad 'X0Y304/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_led[1]' to pad 'X0Y177/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_led[0]' to pad 'X0Y177/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_dac_cs_n[3]' to pad 'X0Y159/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_dac_cs_n[2]' to pad 'X0Y159/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_dac_cs_n[1]' to pad 'X0Y163/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_control0_dac_cs_n[0]' to pad 'X0Y163/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_control0_dac_clr_n' to pad 'X0Y161/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'i2c_sda' to pad 'X0Y265/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'i2c_scl' to pad 'X0Y267/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'ddram_dqs_p[7]' to pad 'X266Y44/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[6]' to pad 'X266Y32/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[5]' to pad 'X266Y19/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[4]' to pad 'X266Y96/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[3]' to pad 'X266Y148/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[2]' to pad 'X266Y136/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[1]' to pad 'X266Y123/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_p[0]' to pad 'X266Y111/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dqs_n[7]' to pad 'X266Y44/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[6]' to pad 'X266Y32/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[5]' to pad 'X266Y19/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[4]' to pad 'X266Y96/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[3]' to pad 'X266Y148/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[2]' to pad 'X266Y136/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[1]' to pad 'X266Y123/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dqs_n[0]' to pad 'X266Y111/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[63]' to pad 'X266Y48/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[62]' to pad 'X266Y40/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[61]' to pad 'X266Y46/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[60]' to pad 'X266Y50/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[59]' to pad 'X266Y48/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[58]' to pad 'X266Y50/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[57]' to pad 'X266Y42/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[56]' to pad 'X266Y42/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[55]' to pad 'X266Y38/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[54]' to pad 'X266Y30/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[53]' to pad 'X266Y36/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[52]' to pad 'X266Y36/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[51]' to pad 'X266Y28/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[50]' to pad 'X266Y34/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[49]' to pad 'X266Y28/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[48]' to pad 'X266Y30/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[47]' to pad 'X266Y23/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[46]' to pad 'X266Y23/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[45]' to pad 'X266Y21/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[44]' to pad 'X266Y17/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[43]' to pad 'X266Y15/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[42]' to pad 'X266Y21/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[41]' to pad 'X266Y25/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[40]' to pad 'X266Y25/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[39]' to pad 'X266Y92/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[38]' to pad 'X266Y94/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[37]' to pad 'X266Y100/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[36]' to pad 'X266Y98/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[35]' to pad 'X266Y94/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[34]' to pad 'X266Y102/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[33]' to pad 'X266Y100/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[32]' to pad 'X266Y98/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[31]' to pad 'X266Y144/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[30]' to pad 'X266Y150/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[29]' to pad 'X266Y152/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[28]' to pad 'X266Y154/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[27]' to pad 'X266Y146/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[26]' to pad 'X266Y146/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[25]' to pad 'X266Y152/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[24]' to pad 'X266Y154/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[23]' to pad 'X266Y138/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[22]' to pad 'X266Y142/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[21]' to pad 'X266Y134/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[20]' to pad 'X266Y134/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[19]' to pad 'X266Y132/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[18]' to pad 'X266Y138/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[17]' to pad 'X266Y140/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[16]' to pad 'X266Y140/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[15]' to pad 'X266Y129/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[14]' to pad 'X266Y129/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[13]' to pad 'X266Y125/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[12]' to pad 'X266Y125/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[11]' to pad 'X266Y127/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[10]' to pad 'X266Y121/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[9]' to pad 'X266Y127/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[8]' to pad 'X266Y121/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[7]' to pad 'X266Y117/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[6]' to pad 'X266Y115/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[5]' to pad 'X266Y113/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[4]' to pad 'X266Y109/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[3]' to pad 'X266Y107/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[2]' to pad 'X266Y115/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dq[1]' to pad 'X266Y113/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dq[0]' to pad 'X266Y109/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'adc_spi1_mosi' to pad 'X0Y113/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_spi0_mosi' to pad 'X0Y175/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_i2c1_sda' to pad 'X0Y125/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_i2c1_scl' to pad 'X0Y125/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_i2c0_sda' to pad 'X0Y186/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_i2c0_scl' to pad 'X0Y186/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'user_led' to pad 'X266Y119/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'si5324_rst_n' to pad 'X0Y209/IOB_X0Y0.IOB33.PAD'
+Info:     Constraining 'si5324_int_n' to pad 'X0Y211/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'sfp_txp' to pad 'X249Y225/OPAD_X0Y1.PAD'
+Info:     Constraining 'sfp_txn' to pad 'X249Y225/OPAD_X0Y0.PAD'
+Info:     Constraining 'sfp_tx_disable_n' to pad 'X0Y340/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'sfp_rxp' to pad 'X249Y225/IPAD_X0Y1.PAD'
+Info:     Constraining 'sfp_rxn' to pad 'X249Y225/IPAD_X0Y0.PAD'
+Info:     Constraining 'mgt_refclk_p' to pad 'X249Y289/IPAD_X0Y2.PAD'
+Info:     Constraining 'mgt_refclk_n' to pad 'X249Y289/IPAD_X0Y3.PAD'
+Info:     Constraining 'ddram_we_n' to pad 'X266Y86/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_reset_n' to pad 'X266Y15/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_ras_n' to pad 'X266Y67/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_odt' to pad 'X266Y90/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dm[7]' to pad 'X266Y46/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dm[6]' to pad 'X266Y34/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dm[5]' to pad 'X266Y17/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dm[4]' to pad 'X266Y102/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dm[3]' to pad 'X266Y150/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dm[2]' to pad 'X266Y142/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_dm[1]' to pad 'X266Y119/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_dm[0]' to pad 'X266Y107/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_cs_n' to pad 'X266Y67/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_clk_p' to pad 'X266Y75/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_clk_n' to pad 'X266Y75/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_cke' to pad 'X266Y73/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_cas_n' to pad 'X266Y88/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_ba[2]' to pad 'X266Y59/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_ba[1]' to pad 'X266Y90/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_ba[0]' to pad 'X266Y86/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[15]' to pad 'X266Y63/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[14]' to pad 'X266Y71/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[13]' to pad 'X266Y55/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[12]' to pad 'X266Y71/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[11]' to pad 'X266Y61/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[10]' to pad 'X266Y88/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[9]' to pad 'X266Y84/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[8]' to pad 'X266Y55/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[7]' to pad 'X266Y82/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[6]' to pad 'X266Y82/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[5]' to pad 'X266Y63/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[4]' to pad 'X266Y69/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[3]' to pad 'X266Y57/IOB_X0Y0.IOB18S.PAD'
+Info:     Constraining 'ddram_a[2]' to pad 'X266Y69/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[1]' to pad 'X266Y57/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'ddram_a[0]' to pad 'X266Y73/IOB_X0Y1.IOB18M.PAD'
+Info:     Constraining 'adc_trigger1_p' to pad 'X0Y154/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_trigger1_n' to pad 'X0Y154/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_trigger0_p' to pad 'X0Y179/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_trigger0_n' to pad 'X0Y179/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_spi1_miso' to pad 'X0Y115/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_spi1_cs_n' to pad 'X0Y142/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_spi1_clk' to pad 'X0Y113/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_spi0_miso' to pad 'X0Y188/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_spi0_cs_n' to pad 'X0Y161/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_spi0_clk' to pad 'X0Y175/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_frame1_p' to pad 'X0Y236/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_frame1_n' to pad 'X0Y236/IOB_X0Y0.IOB33S.PAD'
+Info:     Constraining 'adc_frame0_p' to pad 'X0Y290/IOB_X0Y1.IOB33M.PAD'
+Info:     Constraining 'adc_frame0_n' to pad 'X0Y290/IOB_X0Y0.IOB33S.PAD'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_27'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_26'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_25'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_24'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_23'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_22'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_21'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_20'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_19'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_18'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_17'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_16'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_15'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_14'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_13'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_12'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_11'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_10'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_9'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_8'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_7'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_6'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_5'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_4'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_3'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_2'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_ssr'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_osc_oe'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_led_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_led'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_dac_cs_n_3'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_dac_cs_n_2'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_dac_cs_n_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_dac_cs_n'
+Info: Generating output buffer for '$iopadmap$top.adc_control1_dac_clr_n'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_27'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_26'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_25'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_24'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_23'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_22'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_21'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_20'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_19'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_18'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_17'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_16'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_15'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_14'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_13'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_12'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_11'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_10'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_9'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_8'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_7'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_6'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_5'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_4'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_3'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_2'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_ssr'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_osc_oe'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_led_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_led'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_dac_cs_n_3'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_dac_cs_n_2'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_dac_cs_n_1'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_dac_cs_n'
+Info: Generating output buffer for '$iopadmap$top.adc_control0_dac_clr_n'
+Info: Generating input buffer for 'IOBUF_65'
+Info: Generating output buffer for 'IOBUF_65'
+Info: Generating input buffer for 'IOBUF_64'
+Info: Generating output buffer for 'IOBUF_64'
+Info: Generating input buffer for 'IOBUF_63'
+Info: Generating output buffer for 'IOBUF_63'
+Info: Generating input buffer for 'IOBUF_62'
+Info: Generating output buffer for 'IOBUF_62'
+Info: Generating input buffer for 'IOBUF_61'
+Info: Generating output buffer for 'IOBUF_61'
+Info: Generating input buffer for 'IOBUF_60'
+Info: Generating output buffer for 'IOBUF_60'
+Info: Generating input buffer for 'IOBUF_59'
+Info: Generating output buffer for 'IOBUF_59'
+Info: Generating input buffer for 'IOBUF_58'
+Info: Generating output buffer for 'IOBUF_58'
+Info: Generating input buffer for 'IOBUF_57'
+Info: Generating output buffer for 'IOBUF_57'
+Info: Generating input buffer for 'IOBUF_56'
+Info: Generating output buffer for 'IOBUF_56'
+Info: Generating input buffer for 'IOBUF_55'
+Info: Generating output buffer for 'IOBUF_55'
+Info: Generating input buffer for 'IOBUF_54'
+Info: Generating output buffer for 'IOBUF_54'
+Info: Generating input buffer for 'IOBUF_53'
+Info: Generating output buffer for 'IOBUF_53'
+Info: Generating input buffer for 'IOBUF_52'
+Info: Generating output buffer for 'IOBUF_52'
+Info: Generating input buffer for 'IOBUF_51'
+Info: Generating output buffer for 'IOBUF_51'
+Info: Generating input buffer for 'IOBUF_50'
+Info: Generating output buffer for 'IOBUF_50'
+Info: Generating input buffer for 'IOBUF_49'
+Info: Generating output buffer for 'IOBUF_49'
+Info: Generating input buffer for 'IOBUF_48'
+Info: Generating output buffer for 'IOBUF_48'
+Info: Generating input buffer for 'IOBUF_47'
+Info: Generating output buffer for 'IOBUF_47'
+Info: Generating input buffer for 'IOBUF_46'
+Info: Generating output buffer for 'IOBUF_46'
+Info: Generating input buffer for 'IOBUF_45'
+Info: Generating output buffer for 'IOBUF_45'
+Info: Generating input buffer for 'IOBUF_44'
+Info: Generating output buffer for 'IOBUF_44'
+Info: Generating input buffer for 'IOBUF_43'
+Info: Generating output buffer for 'IOBUF_43'
+Info: Generating input buffer for 'IOBUF_42'
+Info: Generating output buffer for 'IOBUF_42'
+Info: Generating input buffer for 'IOBUF_41'
+Info: Generating output buffer for 'IOBUF_41'
+Info: Generating input buffer for 'IOBUF_40'
+Info: Generating output buffer for 'IOBUF_40'
+Info: Generating input buffer for 'IOBUF_39'
+Info: Generating output buffer for 'IOBUF_39'
+Info: Generating input buffer for 'IOBUF_38'
+Info: Generating output buffer for 'IOBUF_38'
+Info: Generating input buffer for 'IOBUF_37'
+Info: Generating output buffer for 'IOBUF_37'
+Info: Generating input buffer for 'IOBUF_36'
+Info: Generating output buffer for 'IOBUF_36'
+Info: Generating input buffer for 'IOBUF_35'
+Info: Generating output buffer for 'IOBUF_35'
+Info: Generating input buffer for 'IOBUF_34'
+Info: Generating output buffer for 'IOBUF_34'
+Info: Generating input buffer for 'IOBUF_33'
+Info: Generating output buffer for 'IOBUF_33'
+Info: Generating input buffer for 'IOBUF_32'
+Info: Generating output buffer for 'IOBUF_32'
+Info: Generating input buffer for 'IOBUF_31'
+Info: Generating output buffer for 'IOBUF_31'
+Info: Generating input buffer for 'IOBUF_30'
+Info: Generating output buffer for 'IOBUF_30'
+Info: Generating input buffer for 'IOBUF_29'
+Info: Generating output buffer for 'IOBUF_29'
+Info: Generating input buffer for 'IOBUF_28'
+Info: Generating output buffer for 'IOBUF_28'
+Info: Generating input buffer for 'IOBUF_27'
+Info: Generating output buffer for 'IOBUF_27'
+Info: Generating input buffer for 'IOBUF_26'
+Info: Generating output buffer for 'IOBUF_26'
+Info: Generating input buffer for 'IOBUF_25'
+Info: Generating output buffer for 'IOBUF_25'
+Info: Generating input buffer for 'IOBUF_24'
+Info: Generating output buffer for 'IOBUF_24'
+Info: Generating input buffer for 'IOBUF_23'
+Info: Generating output buffer for 'IOBUF_23'
+Info: Generating input buffer for 'IOBUF_22'
+Info: Generating output buffer for 'IOBUF_22'
+Info: Generating input buffer for 'IOBUF_21'
+Info: Generating output buffer for 'IOBUF_21'
+Info: Generating input buffer for 'IOBUF_20'
+Info: Generating output buffer for 'IOBUF_20'
+Info: Generating input buffer for 'IOBUF_19'
+Info: Generating output buffer for 'IOBUF_19'
+Info: Generating input buffer for 'IOBUF_18'
+Info: Generating output buffer for 'IOBUF_18'
+Info: Generating input buffer for 'IOBUF_17'
+Info: Generating output buffer for 'IOBUF_17'
+Info: Generating input buffer for 'IOBUF_16'
+Info: Generating output buffer for 'IOBUF_16'
+Info: Generating input buffer for 'IOBUF_15'
+Info: Generating output buffer for 'IOBUF_15'
+Info: Generating input buffer for 'IOBUF_14'
+Info: Generating output buffer for 'IOBUF_14'
+Info: Generating input buffer for 'IOBUF_13'
+Info: Generating output buffer for 'IOBUF_13'
+Info: Generating input buffer for 'IOBUF_12'
+Info: Generating output buffer for 'IOBUF_12'
+Info: Generating input buffer for 'IOBUF_11'
+Info: Generating output buffer for 'IOBUF_11'
+Info: Generating input buffer for 'IOBUF_10'
+Info: Generating output buffer for 'IOBUF_10'
+Info: Generating input buffer for 'IOBUF_9'
+Info: Generating output buffer for 'IOBUF_9'
+Info: Generating input buffer for 'IOBUF_8'
+Info: Generating output buffer for 'IOBUF_8'
+Info: Generating input buffer for 'IOBUF_7'
+Info: Generating output buffer for 'IOBUF_7'
+Info: Generating input buffer for 'IOBUF_6'
+Info: Generating output buffer for 'IOBUF_6'
+Info: Generating input buffer for 'IOBUF_5'
+Info: Generating output buffer for 'IOBUF_5'
+Info: Generating input buffer for 'IOBUF_4'
+Info: Generating output buffer for 'IOBUF_4'
+Info: Generating input buffer for 'IOBUF_3'
+Info: Generating output buffer for 'IOBUF_3'
+Info: Generating input buffer for 'IOBUF_2'
+Info: Generating output buffer for 'IOBUF_2'
+Info: Generating input buffer for 'IOBUF_1'
+Info: Generating output buffer for 'IOBUF_1'
+Info: Generating input buffer for 'IOBUF'
+Info: Generating output buffer for 'IOBUF'
+Info: Generating input buffer for 'IOBUF_69'
+Info: Generating output buffer for 'IOBUF_69'
+Info: Generating input buffer for 'IOBUF_66'
+Info: Generating output buffer for 'IOBUF_66'
+Info: Generating input buffer for 'IOBUF_71'
+Info: Generating output buffer for 'IOBUF_71'
+Info: Generating input buffer for 'IOBUF_70'
+Info: Generating output buffer for 'IOBUF_70'
+Info: Generating input buffer for 'IOBUF_68'
+Info: Generating output buffer for 'IOBUF_68'
+Info: Generating input buffer for 'IOBUF_67'
+Info: Generating output buffer for 'IOBUF_67'
+Info: Generating output buffer for '$iopadmap$top.user_led'
+Info: Generating output buffer for '$iopadmap$top.si5324_rst_n'
+Info: Generating input buffer for '$iopadmap$top.si5324_int_n'
+Info:     Constraining 'GTXE2_CHANNEL' to site 'GTXE2_CHANNEL_X0Y10'
+Info: Generating output buffer for '$iopadmap$top.sfp_tx_disable_n'
+Info:     Constraining 'IBUFDS_GTE2' to site 'IBUFDS_GTE2_X0Y3'
+Info:     'GTXE2_CHANNEL' takes its reference clock from pad 'mgt_refclk_p' in another tile; keeping its existing placement
+Info: Generating output buffer for '$iopadmap$top.ddram_we_n'
+Info: Generating output buffer for '$iopadmap$top.ddram_reset_n'
+Info: Generating output buffer for '$iopadmap$top.ddram_ras_n'
+Info: Generating output buffer for '$iopadmap$top.ddram_odt'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_7'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_6'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_5'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_4'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_3'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_2'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm_1'
+Info: Generating output buffer for '$iopadmap$top.ddram_dm'
+Info: Generating output buffer for '$iopadmap$top.ddram_cs_n'
+Info: Generating output buffer for '$iopadmap$top.ddram_cke'
+Info: Generating output buffer for '$iopadmap$top.ddram_cas_n'
+Info: Generating output buffer for '$iopadmap$top.ddram_ba_2'
+Info: Generating output buffer for '$iopadmap$top.ddram_ba_1'
+Info: Generating output buffer for '$iopadmap$top.ddram_ba'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_15'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_14'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_13'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_12'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_11'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_10'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_9'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_8'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_7'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_6'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_5'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_4'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_3'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_2'
+Info: Generating output buffer for '$iopadmap$top.ddram_a_1'
+Info: Generating output buffer for '$iopadmap$top.ddram_a'
+Info: Generating input buffer for '$iopadmap$top.adc_spi1_miso'
+Info: Generating output buffer for '$iopadmap$top.adc_spi1_cs_n'
+Info: Generating output buffer for '$iopadmap$top.adc_spi1_clk'
+Info: Generating input buffer for '$iopadmap$top.adc_spi0_miso'
+Info: Generating output buffer for '$iopadmap$top.adc_spi0_cs_n'
+Info: Generating output buffer for '$iopadmap$top.adc_spi0_clk'
+Info:     Created 9 INVERTER cells from:
+Info:              9x INV
+Info:     Created 256 PAD cells from:
+Info:            256x PAD
+Info:     Created 1 PS7_PS7 cells from:
+Info:              1x PS7
+Info: Preparing clocking...
+Info: Packing constants..
+Info: Packing IOLOGIC...
+Info:    binding output delay cell 'ODELAYE2_46' to bel 'X265Y107/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_45' to bel 'X265Y115/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_44' to bel 'X265Y113/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_43' to bel 'X265Y109/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_42' to bel 'X265Y46/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_41' to bel 'X265Y34/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_40' to bel 'X265Y17/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_4' to bel 'X265Y57/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_39' to bel 'X265Y102/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_38' to bel 'X265Y150/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_37' to bel 'X265Y142/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_36' to bel 'X265Y119/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_35' to bel 'X265Y107/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_34' to bel 'X265Y44/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_33' to bel 'X265Y32/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_32' to bel 'X265Y19/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_31' to bel 'X265Y96/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_30' to bel 'X265Y148/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_3' to bel 'X265Y73/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_29' to bel 'X265Y136/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_28' to bel 'X265Y123/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_27' to bel 'X265Y111/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_26' to bel 'X265Y90/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_25' to bel 'X265Y73/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_24' to bel 'X265Y86/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_23' to bel 'X265Y88/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_22' to bel 'X265Y67/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_21' to bel 'X265Y59/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_20' to bel 'X265Y90/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_2' to bel 'X265Y67/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_19' to bel 'X265Y86/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_18' to bel 'X265Y63/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_17' to bel 'X265Y71/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_16' to bel 'X265Y55/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_15' to bel 'X265Y71/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_14' to bel 'X265Y61/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_13' to bel 'X265Y88/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_12' to bel 'X265Y84/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_11' to bel 'X265Y55/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_106' to bel 'X265Y48/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_105' to bel 'X265Y40/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_104' to bel 'X265Y46/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_103' to bel 'X265Y50/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_102' to bel 'X265Y48/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_101' to bel 'X265Y50/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_100' to bel 'X265Y42/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_10' to bel 'X265Y82/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_1' to bel 'X265Y15/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2' to bel 'X265Y75/ODELAY_X0Y1.ODELAYE2'
+Info:    binding input delay cell 'IDELAYE2_9' to bel 'X265Y127/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_8' to bel 'X265Y121/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_7' to bel 'X265Y117/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_63' to bel 'X265Y48/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_62' to bel 'X265Y40/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_61' to bel 'X265Y46/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_60' to bel 'X265Y50/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_6' to bel 'X265Y115/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_59' to bel 'X265Y48/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_58' to bel 'X265Y50/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_57' to bel 'X265Y42/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_56' to bel 'X265Y42/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_55' to bel 'X265Y38/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_54' to bel 'X265Y30/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_53' to bel 'X265Y36/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_52' to bel 'X265Y36/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_51' to bel 'X265Y28/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_50' to bel 'X265Y34/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_5' to bel 'X265Y113/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_49' to bel 'X265Y28/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_48' to bel 'X265Y30/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_47' to bel 'X265Y23/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_46' to bel 'X265Y23/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_45' to bel 'X265Y21/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_44' to bel 'X265Y17/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_43' to bel 'X265Y15/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_42' to bel 'X265Y21/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_41' to bel 'X265Y25/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_40' to bel 'X265Y25/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_4' to bel 'X265Y109/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_39' to bel 'X265Y92/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_38' to bel 'X265Y94/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_37' to bel 'X265Y100/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_36' to bel 'X265Y98/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_35' to bel 'X265Y94/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_34' to bel 'X265Y102/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_33' to bel 'X265Y100/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_32' to bel 'X265Y98/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_31' to bel 'X265Y144/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_30' to bel 'X265Y150/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_3' to bel 'X265Y107/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_29' to bel 'X265Y152/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_28' to bel 'X265Y154/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_27' to bel 'X265Y146/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_26' to bel 'X265Y146/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_25' to bel 'X265Y152/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_24' to bel 'X265Y154/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_23' to bel 'X265Y138/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_22' to bel 'X265Y142/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_21' to bel 'X265Y134/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_20' to bel 'X265Y134/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_2' to bel 'X265Y115/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_19' to bel 'X265Y132/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_18' to bel 'X265Y138/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_17' to bel 'X265Y140/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_16' to bel 'X265Y140/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_15' to bel 'X265Y129/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_14' to bel 'X265Y129/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_13' to bel 'X265Y125/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_12' to bel 'X265Y125/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_11' to bel 'X265Y127/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_10' to bel 'X265Y121/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2_1' to bel 'X265Y113/IDELAY_X0Y0.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'IDELAYE2' to bel 'X265Y109/IDELAY_X0Y1.IDELAYE2~IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[8].delay' to bel 'X1Y290/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[7].delay' to bel 'X1Y302/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[6].delay' to bel 'X1Y294/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[5].delay' to bel 'X1Y300/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[4].delay' to bel 'X1Y277/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[3].delay' to bel 'X1Y296/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[2].delay' to bel 'X1Y273/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[1].delay' to bel 'X1Y292/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc_rx.lanes[0].delay' to bel 'X1Y306/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[8].delay' to bel 'X1Y236/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[7].delay' to bel 'X1Y217/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[6].delay' to bel 'X1Y219/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[5].delay' to bel 'X1Y225/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[4].delay' to bel 'X1Y229/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[3].delay' to bel 'X1Y254/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[2].delay' to bel 'X1Y256/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[1].delay' to bel 'X1Y223/IDELAY_X0Y1.IDELAYE2'
+Info:    binding input delay cell 'adc2_rx.lanes[0].delay' to bel 'X1Y252/IDELAY_X0Y1.IDELAYE2'
+Info:    binding output delay cell 'ODELAYE2_99' to bel 'X265Y42/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_98' to bel 'X265Y38/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_97' to bel 'X265Y30/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_96' to bel 'X265Y36/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_95' to bel 'X265Y36/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_94' to bel 'X265Y28/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_93' to bel 'X265Y34/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_92' to bel 'X265Y28/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_91' to bel 'X265Y30/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_90' to bel 'X265Y23/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_9' to bel 'X265Y82/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_89' to bel 'X265Y23/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_88' to bel 'X265Y21/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_87' to bel 'X265Y17/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_86' to bel 'X265Y15/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_85' to bel 'X265Y21/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_84' to bel 'X265Y25/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_83' to bel 'X265Y25/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_82' to bel 'X265Y92/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_81' to bel 'X265Y94/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_80' to bel 'X265Y100/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_8' to bel 'X265Y63/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_79' to bel 'X265Y98/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_78' to bel 'X265Y94/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_77' to bel 'X265Y102/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_76' to bel 'X265Y100/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_75' to bel 'X265Y98/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_74' to bel 'X265Y144/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_73' to bel 'X265Y150/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_72' to bel 'X265Y152/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_71' to bel 'X265Y154/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_70' to bel 'X265Y146/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_7' to bel 'X265Y69/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_69' to bel 'X265Y146/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_68' to bel 'X265Y152/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_67' to bel 'X265Y154/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_66' to bel 'X265Y138/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_65' to bel 'X265Y142/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_64' to bel 'X265Y134/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_63' to bel 'X265Y134/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_62' to bel 'X265Y132/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_61' to bel 'X265Y138/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_60' to bel 'X265Y140/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_6' to bel 'X265Y57/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_59' to bel 'X265Y140/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_58' to bel 'X265Y129/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_57' to bel 'X265Y129/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_56' to bel 'X265Y125/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_55' to bel 'X265Y125/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_54' to bel 'X265Y127/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_53' to bel 'X265Y121/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_52' to bel 'X265Y127/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_51' to bel 'X265Y121/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_50' to bel 'X265Y117/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_5' to bel 'X265Y69/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_49' to bel 'X265Y115/ODELAY_X0Y0.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_48' to bel 'X265Y113/ODELAY_X0Y1.ODELAYE2'
+Info:    binding output delay cell 'ODELAYE2_47' to bel 'X265Y109/ODELAY_X0Y0.ODELAYE2'
+Info:    binding input SERDES cell 'ISERDESE2_9' to bel 'X265Y127/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_8' to bel 'X265Y121/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_7' to bel 'X265Y117/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_63' to bel 'X265Y48/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_62' to bel 'X265Y40/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_61' to bel 'X265Y46/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_60' to bel 'X265Y50/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_6' to bel 'X265Y115/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_59' to bel 'X265Y48/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_58' to bel 'X265Y50/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_57' to bel 'X265Y42/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_56' to bel 'X265Y42/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_55' to bel 'X265Y38/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_54' to bel 'X265Y30/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_53' to bel 'X265Y36/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_52' to bel 'X265Y36/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_51' to bel 'X265Y28/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_50' to bel 'X265Y34/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_5' to bel 'X265Y113/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_49' to bel 'X265Y28/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_48' to bel 'X265Y30/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_47' to bel 'X265Y23/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_46' to bel 'X265Y23/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_45' to bel 'X265Y21/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_44' to bel 'X265Y17/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_43' to bel 'X265Y15/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_42' to bel 'X265Y21/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_41' to bel 'X265Y25/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_40' to bel 'X265Y25/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_4' to bel 'X265Y109/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_39' to bel 'X265Y92/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_38' to bel 'X265Y94/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_37' to bel 'X265Y100/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_36' to bel 'X265Y98/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_35' to bel 'X265Y94/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_34' to bel 'X265Y102/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_33' to bel 'X265Y100/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_32' to bel 'X265Y98/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_31' to bel 'X265Y144/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_30' to bel 'X265Y150/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_3' to bel 'X265Y107/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_29' to bel 'X265Y152/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_28' to bel 'X265Y154/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_27' to bel 'X265Y146/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_26' to bel 'X265Y146/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_25' to bel 'X265Y152/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_24' to bel 'X265Y154/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_23' to bel 'X265Y138/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_22' to bel 'X265Y142/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_21' to bel 'X265Y134/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_20' to bel 'X265Y134/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_2' to bel 'X265Y115/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_19' to bel 'X265Y132/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_18' to bel 'X265Y138/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_17' to bel 'X265Y140/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_16' to bel 'X265Y140/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_15' to bel 'X265Y129/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_14' to bel 'X265Y129/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_13' to bel 'X265Y125/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_12' to bel 'X265Y125/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_11' to bel 'X265Y127/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_10' to bel 'X265Y121/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2_1' to bel 'X265Y113/ILOGIC_X0Y0.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'ISERDESE2' to bel 'X265Y109/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[8].serdes' to bel 'X1Y290/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[7].serdes' to bel 'X1Y302/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[6].serdes' to bel 'X1Y294/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[5].serdes' to bel 'X1Y300/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[4].serdes' to bel 'X1Y277/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[3].serdes' to bel 'X1Y296/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[2].serdes' to bel 'X1Y273/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[1].serdes' to bel 'X1Y292/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc_rx.lanes[0].serdes' to bel 'X1Y306/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[8].serdes' to bel 'X1Y236/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[7].serdes' to bel 'X1Y217/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[6].serdes' to bel 'X1Y219/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[5].serdes' to bel 'X1Y225/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[4].serdes' to bel 'X1Y229/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[3].serdes' to bel 'X1Y254/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[2].serdes' to bel 'X1Y256/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[1].serdes' to bel 'X1Y223/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding input SERDES cell 'adc2_rx.lanes[0].serdes' to bel 'X1Y252/ILOGIC_X0Y1.ISERDESE2~ISERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_99' to bel 'X265Y42/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_98' to bel 'X265Y38/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_97' to bel 'X265Y30/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_96' to bel 'X265Y36/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_95' to bel 'X265Y36/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_94' to bel 'X265Y28/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_93' to bel 'X265Y34/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_92' to bel 'X265Y28/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_91' to bel 'X265Y30/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_90' to bel 'X265Y23/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_9' to bel 'X265Y82/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_89' to bel 'X265Y23/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_88' to bel 'X265Y21/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_87' to bel 'X265Y17/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_86' to bel 'X265Y15/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_85' to bel 'X265Y21/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_84' to bel 'X265Y25/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_83' to bel 'X265Y25/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_82' to bel 'X265Y92/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_81' to bel 'X265Y94/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_80' to bel 'X265Y100/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_8' to bel 'X265Y63/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_79' to bel 'X265Y98/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_78' to bel 'X265Y94/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_77' to bel 'X265Y102/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_76' to bel 'X265Y100/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_75' to bel 'X265Y98/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_74' to bel 'X265Y144/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_73' to bel 'X265Y150/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_72' to bel 'X265Y152/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_71' to bel 'X265Y154/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_70' to bel 'X265Y146/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_7' to bel 'X265Y69/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_69' to bel 'X265Y146/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_68' to bel 'X265Y152/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_67' to bel 'X265Y154/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_66' to bel 'X265Y138/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_65' to bel 'X265Y142/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_64' to bel 'X265Y134/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_63' to bel 'X265Y134/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_62' to bel 'X265Y132/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_61' to bel 'X265Y138/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_60' to bel 'X265Y140/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_6' to bel 'X265Y57/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_59' to bel 'X265Y140/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_58' to bel 'X265Y129/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_57' to bel 'X265Y129/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_56' to bel 'X265Y125/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_55' to bel 'X265Y125/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_54' to bel 'X265Y127/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_53' to bel 'X265Y121/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_52' to bel 'X265Y127/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_51' to bel 'X265Y121/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_50' to bel 'X265Y117/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_5' to bel 'X265Y69/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_49' to bel 'X265Y115/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_48' to bel 'X265Y113/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_47' to bel 'X265Y109/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_46' to bel 'X265Y107/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_45' to bel 'X265Y115/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_44' to bel 'X265Y113/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_43' to bel 'X265Y109/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_42' to bel 'X265Y46/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_41' to bel 'X265Y34/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_40' to bel 'X265Y17/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_4' to bel 'X265Y57/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_39' to bel 'X265Y102/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_38' to bel 'X265Y150/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_37' to bel 'X265Y142/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_36' to bel 'X265Y119/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_35' to bel 'X265Y107/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_34' to bel 'X265Y44/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_33' to bel 'X265Y32/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_32' to bel 'X265Y19/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_31' to bel 'X265Y96/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_30' to bel 'X265Y148/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_3' to bel 'X265Y73/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_29' to bel 'X265Y136/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_28' to bel 'X265Y123/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_27' to bel 'X265Y111/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_26' to bel 'X265Y90/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_25' to bel 'X265Y73/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_24' to bel 'X265Y86/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_23' to bel 'X265Y88/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_22' to bel 'X265Y67/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_21' to bel 'X265Y59/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_20' to bel 'X265Y90/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_2' to bel 'X265Y67/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_19' to bel 'X265Y86/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_18' to bel 'X265Y63/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_17' to bel 'X265Y71/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_16' to bel 'X265Y55/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_15' to bel 'X265Y71/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_14' to bel 'X265Y61/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_13' to bel 'X265Y88/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_12' to bel 'X265Y84/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_11' to bel 'X265Y55/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_106' to bel 'X265Y48/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_105' to bel 'X265Y40/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_104' to bel 'X265Y46/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_103' to bel 'X265Y50/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_102' to bel 'X265Y48/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_101' to bel 'X265Y50/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_100' to bel 'X265Y42/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_10' to bel 'X265Y82/OLOGIC_X0Y0.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2_1' to bel 'X265Y15/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info:    binding output SERDES cell 'OSERDESE2' to bel 'X265Y75/OLOGIC_X0Y1.OSERDESE2~OSERDESE2'
+Info: Packing cfg...
+Info: Packing PLLs...
+Info: Packing global buffers...
+Info:     Constrained MMCME2_ADV_MMCME2_ADV 'adc_rx.dco_mmcm' to bel 'X8Y303/MMCME2_ADV_X0Y0.MMCME2_ADV' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc_rx.dco_feedback' to bel 'X137Y212/BUFGCTRL_X0Y0.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc_rx.dco_divided' to bel 'X137Y212/BUFGCTRL_X0Y5.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'BUFH' to bel 'X137Y212/BUFGCTRL_X0Y6.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'BUFG_5' to bel 'X137Y212/BUFGCTRL_X0Y7.BUFGCTRL' based on dedicated routing
+Info:     Constrained MMCME2_ADV_MMCME2_ADV 'adc2_rx.dco_mmcm' to bel 'X8Y251/MMCME2_ADV_X0Y0.MMCME2_ADV' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc2_rx.dco_feedback' to bel 'X137Y212/BUFGCTRL_X0Y8.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc2_rx.dco_divided' to bel 'X137Y212/BUFGCTRL_X0Y9.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL '$auto$clkbufmap.cc:261:execute$1085640' to bel 'X137Y207/BUFGCTRL_X0Y0.BUFGCTRL' based on dedicated routing
+Info:     Constrained MMCME2_ADV_MMCME2_ADV 'MMCME2_ADV_3' to bel 'X8Y199/MMCME2_ADV_X0Y0.MMCME2_ADV' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc_rx.dco_serial' to bel 'X137Y212/BUFGCTRL_X0Y1.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'BUFG_7' to bel 'X137Y207/BUFGCTRL_X0Y5.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'BUFG_6' to bel 'X137Y207/BUFGCTRL_X0Y6.BUFGCTRL' based on dedicated routing
+Info:     Constrained BUFGCTRL 'adc2_rx.dco_serial' to bel 'X137Y212/BUFGCTRL_X0Y10.BUFGCTRL' based on dedicated routing
+Info: Packing Gigabit Transceivers..
+Info: Generating derived timing constraints...
+Info:     Derived frequency constraint of 400.0 MHz for net adc_rx.dco
+Info:     Derived frequency constraint of 400.0 MHz for net adc2_rx.dco
+Info:     Derived frequency constraint of 62.5 MHz for net pma_k7_gtx_basex_s7mmcm0_clkin_signal
+Info:     Derived frequency constraint of 62.5 MHz for net pma_k7_gtx_basex_rxoutclk_rebuffer
+Info:     Input frequency of PLL 'adc_rx.dco_mmcm' is constrained to 400.0 MHz
+Info:     Input frequency of PLL 'adc2_rx.dco_mmcm' is constrained to 400.0 MHz
+Info:     Input frequency of PLL 'MMCME2_ADV_2' is constrained to 62.5 MHz
+Info:     Derived VCO frequency 1126.1 MHz for PLL 'MMCME2_ADV_2'
+Info:     Derived frequency constraint of 62.5 MHz for net pma_k7_gtx_basex_s7mmcm0_clkout0
+Info:     Derived frequency constraint of 125.0 MHz for net pma_k7_gtx_basex_s7mmcm0_clkout1
+Info:     Derived frequency constraint of 1126.1 MHz for net subfragments_s7mmcm0_mmcm_fb
+Info:     Input frequency of PLL 'MMCME2_ADV_3' is constrained to 62.5 MHz
+Info:     Derived VCO frequency 1126.1 MHz for PLL 'MMCME2_ADV_3'
+Info:     Derived frequency constraint of 62.5 MHz for net pma_k7_gtx_basex_s7mmcm1_clkout0
+Info:     Derived frequency constraint of 125.0 MHz for net pma_k7_gtx_basex_s7mmcm1_clkout1
+Info:     Derived frequency constraint of 1126.1 MHz for net subfragments_s7mmcm1_mmcm_fb
+Info:     Derived frequency constraint of 62.5 MHz for net eth_tx_half_clk
+Info:     Derived frequency constraint of 62.5 MHz for net eth_rx_half_clk
+Info: Packing MUX[789]s..
+Info: Packing carries..
+Info:    Grouped 5652 MUXCYs and 5652 XORCYs into 561 chains.
+Info:    Moved 331 shared LUTs driving carry S inputs into the carry site.
+Info:    Duplicated 11 shared LUTs driving carry S inputs.
+Info:    Blasted 0 non-chain MUXCYs and 4 non-chain XORCYs to soft logic
+Info:     Created 35 SLICE_LUTX cells from:
+Info:             35x SRL16E
+Info: Packing LUTs..
+Info:     Created 30618 SLICE_LUTX cells from:
+Info:          10306x LUT1
+Info:           4149x LUT2
+Info:           3527x LUT3
+Info:           2081x LUT4
+Info:           7155x LUT5
+Info:           3400x LUT6
+Info: Packing DRAM..
+Info:    Transformed 0 tied-low DRAM address inputs to be tied-high
+Info: Packing BRAM..
+Info: BRAM cascade scan: 172 BRAM(s), 0 tie(s) seen, 0 dropped
+Info: Packing DSPs..
+Info: Packing flipflops..
+Info:     Created 19439 SLICE_FFX cells from:
+Info:            478x FDCE
+Info:             32x FDPE
+Info:          18105x FDRE
+Info:            824x FDSE
+Info:     Created 7 SELMUX2_1 cells from:
+Info:              5x MUXF7
+Info:              2x MUXF8
+Info: Constrained 9645 LUTFF pairs.
+Info: Checksum: 0x07a5ebe7
+
+Info: Device utilisation:
+Info: 	          SLICE_LUTX:   34285/ 437200     7%
+Info: 	           SLICE_FFX:   19439/ 437200     4%
+Info: 	              CARRY4:    1462/  54650     2%
+Info: 	          PSEUDO_GND:       1/      1   100%
+Info: 	          PSEUDO_VCC:       1/      1   100%
+Info: 	               HARD0:       0/   2680     0%
+Info: 	             DSP48E1:       0/    900     0%
+Info: 	                 PAD:     256/    772    33%
+Info: 	       IOB33M_OUTBUF:       0/     97     0%
+Info: 	       IOB33S_OUTBUF:       0/     97     0%
+Info: 	        IOB33_OUTBUF:      86/    202    42%
+Info: 	     IOB33M_INBUF_EN:      22/     97    22%
+Info: 	     IOB33S_INBUF_EN:       0/     97     0%
+Info: 	      IOB33_INBUF_EN:      11/    202     5%
+Info: 	IOB33M_TERM_OVERRIDE:       0/     97     0%
+Info: 	IOB33S_TERM_OVERRIDE:       0/     97     0%
+Info: 	 IOB33_TERM_OVERRIDE:       0/    202     0%
+Info: 	       PULL_OR_KEEP1:       0/    690     0%
+Info: 	            IDELAYE2:      82/    400    20%
+Info: 	        OLOGICE3_TFF:       0/    250     0%
+Info: 	      OLOGICE3_OUTFF:       0/    250     0%
+Info: 	       OLOGICE3_MISR:       0/    250     0%
+Info: 	           OSERDESE2:     107/    400    26%
+Info: 	        ILOGICE3_IFF:       0/    250     0%
+Info: 	ILOGICE3_ZHOLD_DELAY:       0/    250     0%
+Info: 	           ISERDESE2:      82/    400    20%
+Info: 	               BUFIO:       0/     32     0%
+Info: 	            BUFGCTRL:      18/     32    56%
+Info: 	                 PS7:       1/      1   100%
+Info: 	               BSCAN:       0/      4     0%
+Info: 	            DCIRESET:       0/      1     0%
+Info: 	            DNA_PORT:       0/      1     0%
+Info: 	           EFUSE_USR:       0/      1     0%
+Info: 	                BUFG:       0/     32     0%
+Info: 	              BUFHCE:       0/    168     0%
+Info: 	            FIFO18E1:       0/    545     0%
+Info: 	       GTXE2_CHANNEL:       1/     16     6%
+Info: 	        GTXE2_COMMON:       0/      4     0%
+Info: 	         IBUFDS_GTE2:       1/      8    12%
+Info: 	          IDELAYCTRL:       5/      8    62%
+Info: 	            INVERTER:       9/    169     5%
+Info: 	 IOB18M_OUTBUF_DCIEN:       9/     72    12%
+Info: 	   IOB18_INBUF_DCIEN:      64/    150    42%
+Info: 	  IOB18M_INBUF_DCIEN:       0/     72     0%
+Info: 	  IOB18_OUTBUF_DCIEN:      99/    150    66%
+Info: 	          MMCME2_ADV:       6/      8    75%
+Info: 	            ODELAYE2:     107/    150    71%
+Info: 	        OLOGICE2_TFF:       0/    400     0%
+Info: 	      OLOGICE2_OUTFF:       0/    400     0%
+Info: 	           PLLE2_ADV:       0/      8     0%
+Info: 	            RAMB18E1:     163/   1090    14%
+Info: 	            RAMB36E1:       9/    545     1%
+Info: 	           SELMUX2_1:       7/ 165250     0%
+Info: 	        RAMBFIFO36E1:       0/    545     0%
+Info: 	           FRAME_ECC:       0/      1     0%
+Info: 	                ICAP:       0/      2     0%
+Info: 	             STARTUP:       0/      1     0%
+Info: 	          USR_ACCESS:       0/      1     0%
+Info: 	              BUFFER:       0/     82     0%
+Info: 	        ILOGICE2_IFF:       0/    400     0%
+Info: 	       OLOGICE2_MISR:       0/    400     0%
+Info: 	 IOB18_TERM_OVERRIDE:       0/    150     0%
+Info: 	  IOB18S_INBUF_DCIEN:       0/     72     0%
+Info: 	 IOB18S_OUTBUF_DCIEN:       9/     72    12%
+Info: 	IOB18S_TERM_OVERRIDE:       0/     72     0%
+Info: 	IOB18M_TERM_OVERRIDE:       0/     72     0%
+Info: 	  IDELAYE2_FINEDELAY:       0/    150     0%
+
+Info: Pre-routed: 2 more tile(s) closed to new cells, a reference route passes through them.
+Info:     source at X133Y181 reached 864 of 2401 offsets
+Info:     source at X120Y188 reached 893 of 2401 offsets
+Info:     source at X142Y172 reached 846 of 2401 offsets
+Info: Delay matrix: 1450 of 2401 offsets measured from 3 sources in 2.32s (window 24).
+Info: Delay matrix: interpolated 951 structural holes.
+Info: Delay matrix: out-of-window rates 15.3 ps/tile (x), 19.5 ps/tile (y).
+Info: Placed 19 cell(s) from LOC constraints.
+Info: Indexed 709 control sets.
+Info: Placed 256 cells based on constraints.
+Info: Creating initial analytic placement for 30274 cells, random placement wirelen = 15353748.
+Info:     at initial placer iter 0, wirelen = 457524
+Info:     at initial placer iter 1, wirelen = 389227
+Info:     at initial placer iter 2, wirelen = 365487
+Info:     at initial placer iter 3, wirelen = 360052
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type ALL: wirelen solved = 357693, spread = 3018526, legal = 3240266; time = 32.60s
+Info:     at iteration #2, type ALL: wirelen solved = 447314, spread = 2188765, legal = 2303393; time = 4.52s
+Info:     at iteration #3, type ALL: wirelen solved = 487247, spread = 1885770, legal = 1982691; time = 7.45s
+Info:     at iteration #4, type ALL: wirelen solved = 531143, spread = 1832768, legal = 1922118; time = 6.71s
+Info:     at iteration #5, type ALL: wirelen solved = 568281, spread = 2036973, legal = 2106086; time = 2.30s
+Info:     at iteration #6, type ALL: wirelen solved = 605918, spread = 1885881, legal = 1925367; time = 2.16s
+Info:     at iteration #7, type ALL: wirelen solved = 645991, spread = 1667019, legal = 1717658; time = 2.14s
+Info:     at iteration #8, type ALL: wirelen solved = 672732, spread = 1663444, legal = 1697316; time = 1.98s
+Info:     at iteration #9, type ALL: wirelen solved = 695067, spread = 1640501, legal = 1684560; time = 1.88s
+Info:     at iteration #10, type ALL: wirelen solved = 719395, spread = 1605797, legal = 1651694; time = 1.96s
+Info:     at iteration #11, type ALL: wirelen solved = 740770, spread = 1640055, legal = 1674305; time = 3.73s
+Info:     at iteration #12, type ALL: wirelen solved = 765507, spread = 1681416, legal = 1725003; time = 1.94s
+Info:     at iteration #13, type ALL: wirelen solved = 793383, spread = 1649877, legal = 1692011; time = 1.92s
+Info:     at iteration #14, type ALL: wirelen solved = 816661, spread = 1642043, legal = 1676767; time = 1.89s
+Info:     at iteration #15, type ALL: wirelen solved = 832542, spread = 1585309, legal = 1619354; time = 1.80s
+Info:     at iteration #16, type ALL: wirelen solved = 828872, spread = 1673966, legal = 1708358; time = 1.79s
+Info:     at iteration #17, type ALL: wirelen solved = 857721, spread = 1648817, legal = 1678206; time = 1.85s
+Info:     at iteration #18, type ALL: wirelen solved = 888778, spread = 1721246, legal = 1760966; time = 1.78s
+Info:     at iteration #19, type ALL: wirelen solved = 903189, spread = 1627824, legal = 1670507; time = 1.77s
+Info:     at iteration #20, type ALL: wirelen solved = 933382, spread = 1642689, legal = 1684480; time = 1.78s
+Info: HeAP Placer Time: 103.59s
+Info:   of which solving equations: 25.63s
+Info:   of which spreading cells: 6.68s
+Info:   of which strict legalisation: 55.53s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 2475, wirelen = 1619354
+Info:   at iteration #5: temp = 0.000000, timing cost = 2394, wirelen = 1521168
+Info:   at iteration #10: temp = 0.000000, timing cost = 2382, wirelen = 1498556
+Info:   at iteration #15: temp = 0.000000, timing cost = 2581, wirelen = 1489021
+Info:   at iteration #20: temp = 0.000000, timing cost = 2589, wirelen = 1484437
+Info:   at iteration #25: temp = 0.000000, timing cost = 2666, wirelen = 1480493
+Info:   at iteration #30: temp = 0.000000, timing cost = 2604, wirelen = 1477562
+Info:   at iteration #35: temp = 0.000000, timing cost = 2605, wirelen = 1475454
+Info:   at iteration #40: temp = 0.000000, timing cost = 2562, wirelen = 1473511
+Info:   at iteration #45: temp = 0.000000, timing cost = 2547, wirelen = 1471935
+Info:   at iteration #50: temp = 0.000000, timing cost = 2550, wirelen = 1471505
+Info:   at iteration #55: temp = 0.000000, timing cost = 2552, wirelen = 1471368
+Info:   at iteration #59: temp = 0.000000, timing cost = 2550, wirelen = 1471328 
+Info: SA placement time 319.56s
+
+Info: Max frequency for clock    'pma_k7_gtx_basex_rxoutclk_rebuffer': 1222.49 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock 'pma_k7_gtx_basex_s7mmcm0_clkin_signal': 1322.75 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                       'eth_tx_half_clk': 1666.67 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                        'adc2_rx.io_clk': 667.56 MHz (PASS at 400.00 MHz)
+Info: Max frequency for clock                         'adc_rx.io_clk': 667.56 MHz (PASS at 400.00 MHz)
+Info: Max frequency for clock                            'idelay_clk': 403.06 MHz (PASS at 200.00 MHz)
+Info: Max frequency for clock                            'helper_clk': 300.21 MHz (PASS at 98.44 MHz)
+Info: Max frequency for clock                            'eth_rx_clk': 180.12 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                              'adc2_clk': 126.52 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                               'adc_clk': 103.62 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                            'eth_tx_clk': 220.99 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock         'dmtd_with_deglitcher.clk_in_i': 1222.49 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                               'gp1_clk': 65.86 MHz (PASS at 50.00 MHz)
+Info: Max frequency for clock                               'sys_clk': 73.04 MHz (FAIL at 83.33 MHz)
+
+Info: Clock 'eth_rx_half_clk' has no interior paths
+
+Info: Max delay posedge adc2_clk        -> posedge adc2_rx.io_clk                       : 1.51 ns
+Info: Max delay posedge adc2_clk        -> posedge sys_clk                              : 4.77 ns
+Info: Max delay posedge adc2_rx.io_clk  -> posedge sys_clk                              : 0.60 ns
+Info: Max delay posedge adc_clk         -> posedge adc_rx.io_clk                        : 1.15 ns
+Info: Max delay posedge adc_clk         -> posedge sys_clk                              : 7.40 ns
+Info: Max delay posedge adc_rx.io_clk   -> posedge sys_clk                              : 0.60 ns
+Info: Max delay posedge eth_rx_clk      -> posedge eth_rx_half_clk                      : 0.78 ns
+Info: Max delay posedge eth_rx_clk      -> posedge eth_tx_clk                           : 0.77 ns
+Info: Max delay posedge eth_rx_clk      -> posedge sys_clk                              : 0.94 ns
+Info: Max delay posedge eth_rx_half_clk -> posedge eth_rx_clk                           : 0.90 ns
+Info: Max delay posedge eth_tx_clk      -> posedge eth_rx_clk                           : 2.00 ns
+Info: Max delay posedge eth_tx_clk      -> posedge eth_tx_half_clk                      : 0.77 ns
+Info: Max delay posedge eth_tx_clk      -> posedge sys_clk                              : 2.66 ns
+Info: Max delay posedge gp1_clk         -> posedge sys_clk                              : 4.12 ns
+Info: Max delay posedge helper_clk      -> posedge sys_clk                              : 0.90 ns
+Info: Max delay posedge sys_clk         -> posedge adc2_clk                             : 6.61 ns
+Info: Max delay posedge sys_clk         -> posedge adc_clk                              : 5.83 ns
+Info: Max delay posedge sys_clk         -> posedge dmtd_with_deglitcher.clk_in_i        : 3.42 ns
+Info: Max delay posedge sys_clk         -> posedge eth_rx_clk                           : 5.57 ns
+Info: Max delay posedge sys_clk         -> posedge eth_tx_clk                           : 5.13 ns
+Info: Max delay posedge sys_clk         -> posedge eth_tx_half_clk                      : 0.60 ns
+Info: Max delay posedge sys_clk         -> posedge gp1_clk                              : 5.15 ns
+Info: Max delay posedge sys_clk         -> posedge helper_clk                           : 0.78 ns
+Info: Max delay posedge sys_clk         -> posedge pma_k7_gtx_basex_rxoutclk_rebuffer   : 0.78 ns
+Info: Max delay posedge sys_clk         -> posedge pma_k7_gtx_basex_s7mmcm0_clkin_signal: 0.74 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 158 endpoint(s)
+Info:          + represents [1,158) endpoint(s)
+Info: [ -1692,   -636) |+
+Info: [  -636,    420) |+
+Info: [   420,   1476) |**+
+Info: [  1476,   2532) |**********+
+Info: [  2532,   3588) |*************+
+Info: [  3588,   4644) |***************+
+Info: [  4644,   5700) |**************************+
+Info: [  5700,   6756) |**************************+
+Info: [  6756,   7812) |**********************************+
+Info: [  7812,   8868) |************************************************+
+Info: [  8868,   9924) |**********************************************+
+Info: [  9924,  10980) |************************************************************ 
+Info: [ 10980,  12036) |****************************************+
+Info: [ 12036,  13092) |*******+
+Info: [ 13092,  14148) |*******+
+Info: [ 14148,  15204) |**********+
+Info: [ 15204,  16260) |************+
+Info: [ 16260,  17316) |*********+
+Info: [ 17316,  18372) |*****************+
+Info: [ 18372,  19428) |*******************+
+Info: Checksum: 0x84c7e9e4
+Info: Running post-placement legalisation...
+Info: Tieing unused PS7 inputs to constants...
+Info: SRL timing coverage: 35 SRL16E DI2 inputs and O6 outputs sequential; six-LUT placement verified.
+Info: Routing global clocks...
+Info:     routing clock 'adc_rx.serial_clock'
+Info:     routing clock 'adc_rx.dco'
+Info:     routing clock 'adc_rx.feedback_buffered'
+Info:     routing clock 'adc_rx.feedback'
+Info:     routing clock 'adc_rx.divided'
+Info:     routing clock 'adc2_rx.serial_clock'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_rx.dco'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_rx.feedback_buffered'
+Info:     routing clock 'adc2_rx.feedback'
+Info:     routing clock 'adc2_rx.divided'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'eth_rx_half_clk'
+Info:     routing clock 'eth_tx_clk'
+Info:     routing clock 'eth_tx_half_clk'
+Info:     routing clock 'adc_clk'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_clk'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'gp1_clk'
+Info:     routing clock 'eth_rx_clk'
+Info:     routing clock 'helper_clk'
+Info:     routing clock 'idelay_clk'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkout1'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkout0'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm0_clkin_signal'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm1_clkout1'
+Info:     routing clock 'pma_k7_gtx_basex_s7mmcm1_clkout0'
+Info:     routing clock 'pma_k7_gtx_basex_rxoutclk_rebuffer'
+Info:     routing clock 'wr_phase_wrphase_clkout'
+Info:     routing clock 'integratedsoc_ddrclock_clkout3'
+Info:     routing clock 'integratedsoc_ddrclock_clkout2'
+Info:     routing clock 'integratedsoc_ddrclock_clkout1'
+Info:     routing clock 'integratedsoc_ddrclock_clkout0'
+Info:     routing clock 'sys_clk'
+Info:     routing clock 'dmtd_with_deglitcher.clk_in_i'
+Info:             failed to find a route using dedicated resources.
+Info:     routing clock 'adc2_rx.io_clk'
+Info:     routing clock 'adc_rx.io_clk'
+Info:     routing clock 'integratedsoc_ddrclock_clkout_buf1'
+Info: Pre-routed: net 'integratedsoc_ddrclock_clkout0' was routed already (8 wires); the reference route replaces it
+Info: Pre-routed: net 'integratedsoc_ddrclock_clkout1' was routed already (8 wires); the reference route replaces it
+Info: Pre-routed: 2 net(s) given their reference route (0 dangling wire(s) pruned), 0 not in this design, 0 collided and left to the router.
+Info: Clock-root: net=adc_rx.serial_clock pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=adc_rx.serial_clock
+Info: Clock-root: net=adc_rx.feedback_buffered pip=X137Y212/CLK_BUFG_BUFGCTRL3_O/BUFGCTRL_X0Y3.O available=1 dst_owner=adc_rx.feedback_buffered
+Info: Clock-root: net=adc_rx.feedback pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=adc_rx.feedback
+Info: Clock-root: net=adc_rx.divided pip=X8Y303/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=adc_rx.divided
+Info: Clock-root: net=adc2_rx.serial_clock pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_MMCM2/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=1
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=0
+Info: Clock-child: net=adc2_rx.serial_clock pip=X8Y199/MMCMOUT_CLK_FREQ_BB_1/CMT_LR_LOWER_B_MMCM_CLKOUT1 available=1
+Info: Clock-root: net=adc2_rx.feedback_buffered pip=X137Y207/CLK_BUFG_BUFGCTRL9_O/BUFGCTRL_X0Y9.O available=1 dst_owner=adc2_rx.feedback_buffered
+Info: Clock-root: net=adc2_rx.feedback pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=adc2_rx.feedback
+Info: Clock-root: net=adc2_rx.divided pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_MMCM0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=1
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=0
+Info: Clock-child: net=adc2_rx.divided pip=X8Y199/MMCMOUT_CLK_FREQ_BB_0/CMT_LR_LOWER_B_MMCM_CLKOUT0 available=1
+Info: Clock-root: net=eth_rx_half_clk pip=X137Y207/CLK_BUFG_BUFGCTRL5_O/BUFGCTRL_X0Y5.O available=1 dst_owner=eth_rx_half_clk
+Info: Clock-root: net=eth_tx_clk pip=X137Y212/CLK_BUFG_BUFGCTRL7_O/BUFGCTRL_X0Y7.O available=1 dst_owner=eth_tx_clk
+Info: Clock-root: net=eth_tx_half_clk pip=X137Y212/CLK_BUFG_BUFGCTRL8_O/BUFGCTRL_X0Y8.O available=1 dst_owner=eth_tx_half_clk
+Info: Clock-root: net=adc_clk pip=X137Y212/CLK_BUFG_BUFGCTRL5_O/BUFGCTRL_X0Y5.O available=1 dst_owner=adc_clk
+Info: Clock-root: net=adc2_clk pip=X137Y212/CLK_BUFG_BUFGCTRL9_O/BUFGCTRL_X0Y9.O available=1 dst_owner=adc2_clk
+Info: Clock-root: net=gp1_clk pip=X137Y207/CLK_BUFG_BUFGCTRL7_O/BUFGCTRL_X0Y7.O available=1 dst_owner=gp1_clk
+Info: Clock-root: net=eth_rx_clk pip=X137Y207/CLK_BUFG_BUFGCTRL0_O/BUFGCTRL_X0Y0.O available=1 dst_owner=eth_rx_clk
+Info: Clock-root: net=helper_clk pip=X137Y207/CLK_BUFG_BUFGCTRL3_O/BUFGCTRL_X0Y3.O available=1 dst_owner=helper_clk
+Info: Clock-root: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_R_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_L_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT available=1 dst_owner=none
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_LR_LOWER_B_CLKFBOUT2IN/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_MMCM11/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=1
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF0/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF1/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF2/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-child: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_L_LOWER_B_CLK_PERF3/CMT_LR_LOWER_B_MMCM_CLKFBOUT available=0
+Info: Clock-root: net=idelay_clk pip=X137Y207/CLK_BUFG_BUFGCTRL8_O/BUFGCTRL_X0Y8.O available=1 dst_owner=idelay_clk
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkout1 pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkout1
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkout0 pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkout0
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm0_clkin_signal pip=X137Y212/CLK_BUFG_BUFGCTRL0_O/BUFGCTRL_X0Y0.O available=1 dst_owner=pma_k7_gtx_basex_s7mmcm0_clkin_signal
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm1_clkout1 pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm1_clkout1
+Info: Clock-root: net=pma_k7_gtx_basex_s7mmcm1_clkout0 pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=pma_k7_gtx_basex_s7mmcm1_clkout0
+Info: Clock-root: net=pma_k7_gtx_basex_rxoutclk_rebuffer pip=X137Y212/CLK_BUFG_BUFGCTRL6_O/BUFGCTRL_X0Y6.O available=1 dst_owner=pma_k7_gtx_basex_rxoutclk_rebuffer
+Info: Clock-root: net=wr_phase_wrphase_clkout pip=X258Y95/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=wr_phase_wrphase_clkout
+Info: Clock-root: net=integratedsoc_ddrclock_clkout3 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT3/MMCME2_ADV_X0Y0.CLKOUT3 available=1 dst_owner=integratedsoc_ddrclock_clkout3
+Info: Clock-root: net=integratedsoc_ddrclock_clkout2 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT2/MMCME2_ADV_X0Y0.CLKOUT2 available=1 dst_owner=integratedsoc_ddrclock_clkout2
+Info: Clock-root: net=integratedsoc_ddrclock_clkout1 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 available=1 dst_owner=integratedsoc_ddrclock_clkout1
+Info: Clock-root: net=integratedsoc_ddrclock_clkout0 pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 available=1 dst_owner=integratedsoc_ddrclock_clkout0
+Info: Clock-root: net=sys_clk pip=X137Y207/CLK_BUFG_BUFGCTRL4_O/BUFGCTRL_X0Y4.O available=1 dst_owner=sys_clk
+Info: Clock-root: net=dmtd_with_deglitcher.clk_in_i pip=X137Y207/CLK_BUFG_BUFGCTRL12_O/BUFGCTRL_X0Y12.O available=1 dst_owner=dmtd_with_deglitcher.clk_in_i
+Info: Clock-root: net=adc2_rx.locked pip=X8Y199/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=adc2_rx.locked pip=X8Y199/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=adc_rx.locked pip=X8Y303/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=adc_rx.locked pip=X8Y303/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=adc2_rx.io_clk pip=X137Y212/CLK_BUFG_BUFGCTRL10_O/BUFGCTRL_X0Y10.O available=1 dst_owner=adc2_rx.io_clk
+Info: Clock-root: net=adc_rx.io_clk pip=X137Y212/CLK_BUFG_BUFGCTRL1_O/BUFGCTRL_X0Y1.O available=1 dst_owner=adc_rx.io_clk
+Info: Clock-root: net=integratedsoc_ddrclock_clkout_buf1 pip=X137Y207/CLK_BUFG_BUFGCTRL15_O/BUFGCTRL_X0Y15.O available=1 dst_owner=integratedsoc_ddrclock_clkout_buf1
+Info: Clock-root: net=wr_phase_wrphase_locked0 pip=X258Y95/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=wr_phase_wrphase_locked0 pip=X258Y95/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Clock-root: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED available=1 dst_owner=none
+Info: Clock-child: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_TOP_LOGIC_OUTS_L_B18_1/CMT_LR_LOWER_B_MMCM_LOCKED available=1
+Info: Running router2...
+Info: Setting up routing resources...
+
+Info: Running main router loop...
+Info: Root-step: net=subfragments_ddrclock_mmcm_fb pip=X258Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT box=1 avail=1 reserved=9790 own=9790 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.dco, X0Y238/IOB_X0Y1.INBUF_EN_OUT -> X8Y199/MMCME2_ADV_X0Y0.CLKIN1: 100000 iterations (fwd 4698, bwd 0, bb 1)
+Info: Root-step: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9769 own=9769 unavailable=0 known=0 samepip=1
+Info: Root-step: net=subfragments_s7mmcm1_mmcm_fb pip=X8Y147/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT box=1 avail=1 reserved=9773 own=9773 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc_rx.locked pip=X8Y303/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32334 own=32334 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 100000 iterations (fwd 0, bwd 74494, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 200000 iterations (fwd 0, bwd 76243, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 300000 iterations (fwd 0, bwd 48042, bb 1)
+Info: Root-step: net=adc2_rx.divided pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 box=1 avail=1 reserved=7076 own=7076 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 100000 iterations (fwd 0, bwd 111242, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 200000 iterations (fwd 0, bwd 160677, bb 1)
+Info: Root-step: net=subfragments_wrphase_mmcm_fb pip=X258Y95/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT box=1 avail=1 reserved=9786 own=9786 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 300000 iterations (fwd 0, bwd 197246, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 400000 iterations (fwd 0, bwd 203627, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 500000 iterations (fwd 0, bwd 197638, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 600000 iterations (fwd 0, bwd 176723, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 700000 iterations (fwd 0, bwd 153978, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 800000 iterations (fwd 0, bwd 136781, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 900000 iterations (fwd 0, bwd 115732, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 1000000 iterations (fwd 0, bwd 89286, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 1100000 iterations (fwd 0, bwd 52950, bb 1)
+Info: Root-step: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9779 own=9779 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc2_rx.serial_clock pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 box=1 avail=1 reserved=7052 own=7052 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 100000 iterations (fwd 0, bwd 109135, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 200000 iterations (fwd 0, bwd 124742, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 300000 iterations (fwd 0, bwd 124274, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 400000 iterations (fwd 0, bwd 130797, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 500000 iterations (fwd 0, bwd 125333, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 600000 iterations (fwd 0, bwd 120175, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 700000 iterations (fwd 0, bwd 105645, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 800000 iterations (fwd 0, bwd 85428, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 900000 iterations (fwd 0, bwd 52808, bb 1)
+Info: Root-step: net=adc2_rx.locked pip=X8Y199/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32332 own=32332 unavailable=0 known=0 samepip=1
+Info: Root-step: net=subfragments_s7mmcm0_mmcm_fb pip=X8Y251/CMT_LR_LOWER_B_MMCM_CLKFBOUT/MMCME2_ADV_X0Y0.CLKFBOUT box=1 avail=1 reserved=9781 own=9781 unavailable=0 known=0 samepip=1
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip26_r0[8], X211Y30/SLICE_X0Y0.D5FF_Q -> X241Y200/SLICE_X1Y0.C2: 100000 iterations (fwd 136543, bwd 188882, bb 1)
+Info: Root-step: net=wr_phase_wrphase_locked0 pip=X258Y95/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=37080 own=37080 unavailable=0 known=0 samepip=1
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip28_r0[8], X211Y31/SLICE_X0Y0.C5FF_Q -> X243Y207/SLICE_X1Y0.D1: 100000 iterations (fwd 114800, bwd 197755, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip17_r0[8], X211Y54/SLICE_X0Y0.D5FF_Q -> X243Y187/SLICE_X0Y0.A2: 100000 iterations (fwd 109599, bwd 172995, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip12_r0[8], X211Y35/SLICE_X1Y0.D5FF_Q -> X243Y177/SLICE_X1Y0.C2: 100000 iterations (fwd 116031, bwd 168259, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip15_r0[8], X211Y51/SLICE_X1Y0.A5FF_Q -> X238Y197/SLICE_X0Y0.C3: 100000 iterations (fwd 134686, bwd 156729, bb 1)
+Info: Root-step: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=57298 own=57298 unavailable=0 known=0 samepip=1
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 100000 iterations (fwd 0, bwd 112609, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 200000 iterations (fwd 0, bwd 151428, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 300000 iterations (fwd 0, bwd 167210, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 400000 iterations (fwd 0, bwd 174001, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 500000 iterations (fwd 0, bwd 246593, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 600000 iterations (fwd 0, bwd 258178, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 700000 iterations (fwd 0, bwd 279009, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 800000 iterations (fwd 0, bwd 308648, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 900000 iterations (fwd 0, bwd 320442, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1000000 iterations (fwd 0, bwd 356907, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1100000 iterations (fwd 0, bwd 372125, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1200000 iterations (fwd 0, bwd 417080, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1300000 iterations (fwd 0, bwd 524476, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1400000 iterations (fwd 0, bwd 596408, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1500000 iterations (fwd 0, bwd 623077, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1600000 iterations (fwd 0, bwd 640447, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1700000 iterations (fwd 0, bwd 633044, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1800000 iterations (fwd 0, bwd 615633, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 1900000 iterations (fwd 0, bwd 593208, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2000000 iterations (fwd 0, bwd 564642, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2100000 iterations (fwd 0, bwd 599215, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2200000 iterations (fwd 0, bwd 622506, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2300000 iterations (fwd 0, bwd 616491, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2400000 iterations (fwd 0, bwd 604566, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2500000 iterations (fwd 0, bwd 565660, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2600000 iterations (fwd 0, bwd 570037, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2700000 iterations (fwd 0, bwd 581334, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2800000 iterations (fwd 0, bwd 565632, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 2900000 iterations (fwd 0, bwd 596793, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3000000 iterations (fwd 0, bwd 579035, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3100000 iterations (fwd 0, bwd 600722, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3200000 iterations (fwd 0, bwd 568432, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3300000 iterations (fwd 0, bwd 612783, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3400000 iterations (fwd 0, bwd 618313, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3500000 iterations (fwd 0, bwd 577090, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3600000 iterations (fwd 0, bwd 555017, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3700000 iterations (fwd 0, bwd 539457, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3800000 iterations (fwd 0, bwd 521611, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 3900000 iterations (fwd 0, bwd 512502, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4000000 iterations (fwd 0, bwd 511180, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4100000 iterations (fwd 0, bwd 510919, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4200000 iterations (fwd 0, bwd 506979, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4300000 iterations (fwd 0, bwd 487666, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4400000 iterations (fwd 0, bwd 453053, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4500000 iterations (fwd 0, bwd 431867, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4600000 iterations (fwd 0, bwd 409898, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4700000 iterations (fwd 0, bwd 377613, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4800000 iterations (fwd 0, bwd 353439, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 4900000 iterations (fwd 0, bwd 327704, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5000000 iterations (fwd 0, bwd 296731, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5100000 iterations (fwd 0, bwd 271545, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5200000 iterations (fwd 0, bwd 243811, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5300000 iterations (fwd 0, bwd 209770, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5400000 iterations (fwd 0, bwd 179201, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5500000 iterations (fwd 0, bwd 145082, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5600000 iterations (fwd 0, bwd 102412, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5700000 iterations (fwd 0, bwd 56488, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank9_ready_w[0], X258Y147/MMCME2_ADV_X0Y0.LOCKED -> X44Y118/SLICE_X0Y0.A1: 5800000 iterations (fwd 0, bwd 6559, bb 1)
+Info: Root-step: net=integratedsoc_csr_bankarray_csrbank9_ready_w[0] pip=X258Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=57298 own=57298 unavailable=0 known=0 samepip=1
+Info: Root-step: net=dmtd_with_deglitcher.clk_in_i pip=X137Y207/CLK_BUFG_BUFGCTRL12_O/BUFGCTRL_X0Y12.O box=1 avail=1 reserved=15718 own=15718 unavailable=0 known=1 samepip=1
+Warning: route_arc: net adc2_rx.dco, X0Y238/IOB_X0Y1.INBUF_EN_OUT -> X8Y199/MMCME2_ADV_X0Y0.CLKIN1: 100000 iterations (fwd 17725, bwd 0, bb 1)
+Info: Root-step: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9769 own=9769 unavailable=0 known=0 samepip=1
+Info: Root-step: net=integratedsoc_sfp_rx_lock_raw pip=X8Y147/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9769 own=9769 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc_rx.locked pip=X8Y303/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32334 own=32334 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 100000 iterations (fwd 0, bwd 104264, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 200000 iterations (fwd 0, bwd 115780, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 300000 iterations (fwd 0, bwd 96970, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 400000 iterations (fwd 0, bwd 62997, bb 1)
+Warning: route_arc: net adc_rx.locked, X8Y303/MMCME2_ADV_X0Y0.LOCKED -> X10Y199/SLICE_X1Y0.A4: 500000 iterations (fwd 0, bwd 12225, bb 1)
+Info: Root-step: net=adc_rx.locked pip=X8Y303/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32334 own=32334 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc2_rx.divided pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 box=1 avail=1 reserved=7076 own=7076 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 100000 iterations (fwd 0, bwd 114381, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 200000 iterations (fwd 0, bwd 161749, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 300000 iterations (fwd 0, bwd 193290, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 400000 iterations (fwd 0, bwd 192513, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 500000 iterations (fwd 0, bwd 180451, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 600000 iterations (fwd 0, bwd 164531, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 700000 iterations (fwd 0, bwd 148652, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 800000 iterations (fwd 0, bwd 131403, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 900000 iterations (fwd 0, bwd 106293, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 1000000 iterations (fwd 0, bwd 73474, bb 1)
+Warning: route_arc: net adc2_rx.divided, X8Y199/MMCME2_ADV_X0Y0.CLKOUT0 -> X137Y212/BUFGCTRL_X0Y9.I0: 1100000 iterations (fwd 0, bwd 27924, bb 1)
+Info: Root-step: net=adc2_rx.divided pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT0/MMCME2_ADV_X0Y0.CLKOUT0 box=1 avail=1 reserved=7076 own=7076 unavailable=0 known=0 samepip=1
+Info: Root-step: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9779 own=9779 unavailable=0 known=0 samepip=1
+Info: Root-step: net=integratedsoc_sfp_tx_lock_raw pip=X8Y251/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=9779 own=9779 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc2_rx.serial_clock pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 box=1 avail=1 reserved=7052 own=7052 unavailable=0 known=0 samepip=1
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 100000 iterations (fwd 0, bwd 99832, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 200000 iterations (fwd 0, bwd 128666, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 300000 iterations (fwd 0, bwd 147673, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 400000 iterations (fwd 0, bwd 148540, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 500000 iterations (fwd 0, bwd 147219, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 600000 iterations (fwd 0, bwd 135348, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 700000 iterations (fwd 0, bwd 117118, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 800000 iterations (fwd 0, bwd 92775, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 900000 iterations (fwd 0, bwd 56932, bb 1)
+Warning: route_arc: net adc2_rx.serial_clock, X8Y199/MMCME2_ADV_X0Y0.CLKOUT1 -> X137Y212/BUFGCTRL_X0Y10.I0: 1000000 iterations (fwd 0, bwd 3988, bb 1)
+Info: Root-step: net=adc2_rx.serial_clock pip=X8Y199/CMT_LR_LOWER_B_MMCM_CLKOUT1/MMCME2_ADV_X0Y0.CLKOUT1 box=1 avail=1 reserved=7052 own=7052 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc2_rx.locked pip=X8Y199/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32332 own=32332 unavailable=0 known=0 samepip=1
+Info: Root-step: net=adc2_rx.locked pip=X8Y199/CMT_LR_LOWER_B_MMCM_LOCKED/MMCME2_ADV_X0Y0.LOCKED box=1 avail=1 reserved=32332 own=32332 unavailable=0 known=0 samepip=1
+Info:     iter=1 wires=1085159 overused=53120 overuse=57948 archfail=NA
+Warning: route_arc: net integratedsoc_integratedsoc_cpu_w_payload_data[1], X32Y51/PS7_X0Y0.MAXIGP0WDATA1 -> X54Y30/SLICE_X1Y0.A5FFMUX_OUT: 100000 iterations (fwd 0, bwd 147, bb 1)
+Warning: route_arc: net integratedsoc_integratedsoc_cpu_w_payload_data[6], X32Y51/PS7_X0Y0.MAXIGP0WDATA6 -> X54Y28/SLICE_X1Y0.D5FFMUX_OUT: 100000 iterations (fwd 0, bwd 85, bb 1)
+Warning: route_arc: net $techmap1064738$abc$1052556$lut$aiger1052555$96066.A[3], X219Y50/SLICE_X1Y0.C6LUT_O6 -> X223Y162/SLICE_X0Y0.C5: 100000 iterations (fwd 61738, bwd 93532, bb 1)
+Warning: route_arc: net $techmap1064733$abc$1052556$lut$aiger1052555$96058.A[3], X222Y50/SLICE_X0Y0.D6LUT_O6 -> X233Y173/SLICE_X1Y0.D5: 100000 iterations (fwd 82415, bwd 89838, bb 1)
+Warning: route_arc: net $techmap1064767$abc$1052556$lut$aiger1052555$96190.A[3], X222Y49/SLICE_X1Y0.D6LUT_O6 -> X233Y173/SLICE_X1Y0.C5: 100000 iterations (fwd 98797, bwd 107862, bb 1)
+Warning: route_arc: net $techmap1064738$abc$1052556$lut$aiger1052555$96066.A[2], X222Y49/SLICE_X1Y0.C6LUT_O6 -> X231Y186/SLICE_X0Y0.A5: 100000 iterations (fwd 83591, bwd 100174, bb 1)
+Warning: route_arc: net $techmap1064749$abc$1052556$lut$aiger1052555$96082.A[2], X222Y50/SLICE_X0Y0.A6LUT_O6 -> X231Y165/SLICE_X0Y0.A5: 100000 iterations (fwd 110923, bwd 110305, bb 1)
+Warning: route_arc: net $techmap1064769$abc$1052556$lut$aiger1052555$96196.A[2], X219Y51/SLICE_X0Y0.A6LUT_O6 -> X217Y188/SLICE_X0Y0.A5: 100000 iterations (fwd 69103, bwd 73096, bb 1)
+Warning: route_arc: net $techmap1064748$abc$1052556$lut$aiger1052555$96078.A[3], X217Y49/SLICE_X1Y0.C6LUT_O6 -> X233Y164/SLICE_X0Y0.B5: 100000 iterations (fwd 98190, bwd 131889, bb 1)
+Warning: route_arc: net $techmap1064769$abc$1052556$lut$aiger1052555$96196.A[3], X219Y50/SLICE_X1Y0.A5LUT_O5 -> X226Y164/SLICE_X0Y0.A5: 100000 iterations (fwd 63719, bwd 94875, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi3_rddata1_w[22], X238Y16/SLICE_X0Y0.A5FF_Q -> X233Y158/SLICE_X1Y0.B4: 100000 iterations (fwd 65354, bwd 80467, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi2_rddata3_w[23], X233Y28/SLICE_X1Y0.D5FF_Q -> X233Y154/SLICE_X0Y0.B2: 100000 iterations (fwd 33637, bwd 55235, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58227, X208Y186/SLICE_X0Y0.D5LUT_O5 -> X211Y36/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 123988, bwd 90207, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58227, X208Y186/SLICE_X0Y0.D5LUT_O5 -> X211Y36/SLICE_X0Y0.CDI1MUX_OUT: 200000 iterations (fwd 169704, bwd 126868, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58250, X208Y185/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 111637, bwd 105112, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58250, X208Y185/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.ADI1MUX_OUT: 200000 iterations (fwd 162733, bwd 140283, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58226, X208Y186/SLICE_X0Y0.C5LUT_O5 -> X222Y29/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 125830, bwd 107723, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58273, X208Y184/SLICE_X0Y0.B5LUT_O5 -> X208Y18/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 101461, bwd 78634, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58273, X208Y184/SLICE_X0Y0.B5LUT_O5 -> X208Y18/SLICE_X0Y0.BDI1MUX_OUT: 200000 iterations (fwd 142313, bwd 119318, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58273, X208Y184/SLICE_X0Y0.B5LUT_O5 -> X208Y18/SLICE_X0Y0.BDI1MUX_OUT: 300000 iterations (fwd 191951, bwd 140207, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58223, X208Y186/SLICE_X1Y0.D6LUT_O6 -> X211Y36/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 140441, bwd 97401, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58276, X208Y184/SLICE_X0Y0.B6LUT_O6 -> X222Y20/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 141588, bwd 100300, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58276, X208Y184/SLICE_X0Y0.B6LUT_O6 -> X222Y20/SLICE_X0Y0.BDI1MUX_OUT: 200000 iterations (fwd 207334, bwd 143997, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58275, X208Y184/SLICE_X0Y0.A6LUT_O6 -> X208Y18/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 123836, bwd 83241, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58275, X208Y184/SLICE_X0Y0.A6LUT_O6 -> X208Y18/SLICE_X0Y0.CDI1MUX_OUT: 200000 iterations (fwd 162833, bwd 123884, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58274, X208Y184/SLICE_X0Y0.D6LUT_O6 -> X222Y20/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 139193, bwd 106890, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58274, X208Y184/SLICE_X0Y0.D6LUT_O6 -> X222Y20/SLICE_X0Y0.ADI1MUX_OUT: 200000 iterations (fwd 209748, bwd 133197, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58272, X208Y183/SLICE_X1Y0.A6LUT_O6 -> X222Y18/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 148964, bwd 93908, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58272, X208Y183/SLICE_X1Y0.A6LUT_O6 -> X222Y18/SLICE_X0Y0.CDI1MUX_OUT: 200000 iterations (fwd 197354, bwd 124617, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58271, X208Y183/SLICE_X0Y0.A6LUT_O6 -> X208Y18/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 111014, bwd 77550, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58271, X208Y183/SLICE_X0Y0.A6LUT_O6 -> X208Y18/SLICE_X0Y0.ADI1MUX_OUT: 200000 iterations (fwd 174179, bwd 116568, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58271, X208Y183/SLICE_X0Y0.A6LUT_O6 -> X208Y18/SLICE_X0Y0.ADI1MUX_OUT: 300000 iterations (fwd 202673, bwd 139143, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58201, X208Y187/SLICE_X1Y0.B6LUT_O6 -> X208Y33/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 112787, bwd 88199, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi2_rddata1_w[20], X231Y30/SLICE_X1Y0.A5FF_Q -> X231Y135/SLICE_X1Y0.A4: 100000 iterations (fwd 37474, bwd 52220, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58225, X208Y187/SLICE_X0Y0.C6LUT_O6 -> X211Y36/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 138416, bwd 94665, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58225, X208Y187/SLICE_X0Y0.C6LUT_O6 -> X211Y36/SLICE_X0Y0.BDI1MUX_OUT: 200000 iterations (fwd 169156, bwd 137656, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58319, X208Y188/SLICE_X1Y0.B5LUT_O5 -> X222Y22/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 143488, bwd 99895, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58319, X208Y188/SLICE_X1Y0.B5LUT_O5 -> X222Y22/SLICE_X0Y0.ADI1MUX_OUT: 200000 iterations (fwd 191176, bwd 138558, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58319, X208Y188/SLICE_X1Y0.B5LUT_O5 -> X222Y22/SLICE_X0Y0.ADI1MUX_OUT: 300000 iterations (fwd 230864, bwd 163026, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58319, X208Y188/SLICE_X1Y0.B5LUT_O5 -> X222Y22/SLICE_X0Y0.ADI1MUX_OUT: 400000 iterations (fwd 263206, bwd 182605, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58204, X208Y190/SLICE_X1Y0.D5LUT_O5 -> X211Y18/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 106468, bwd 83486, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58322, X208Y188/SLICE_X0Y0.B5LUT_O5 -> X222Y21/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 199721, bwd 109220, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58224, X208Y186/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 121121, bwd 101845, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58224, X208Y186/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.CDI1MUX_OUT: 200000 iterations (fwd 160802, bwd 131948, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58224, X208Y186/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.CDI1MUX_OUT: 300000 iterations (fwd 190738, bwd 147749, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58224, X208Y186/SLICE_X0Y0.A5LUT_O5 -> X222Y24/SLICE_X0Y0.CDI1MUX_OUT: 400000 iterations (fwd 210406, bwd 160355, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58299, X208Y183/SLICE_X0Y0.C6LUT_O6 -> X211Y18/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 117640, bwd 85773, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58299, X208Y183/SLICE_X0Y0.C6LUT_O6 -> X211Y18/SLICE_X0Y0.CDI1MUX_OUT: 200000 iterations (fwd 171898, bwd 121185, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58228, X208Y187/SLICE_X1Y0.D6LUT_O6 -> X222Y29/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 147773, bwd 93592, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58228, X208Y187/SLICE_X1Y0.D6LUT_O6 -> X222Y29/SLICE_X0Y0.BDI1MUX_OUT: 200000 iterations (fwd 206383, bwd 120406, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58228, X208Y187/SLICE_X1Y0.D6LUT_O6 -> X222Y29/SLICE_X0Y0.BDI1MUX_OUT: 300000 iterations (fwd 236090, bwd 141520, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58228, X208Y187/SLICE_X1Y0.D6LUT_O6 -> X222Y29/SLICE_X0Y0.BDI1MUX_OUT: 400000 iterations (fwd 268452, bwd 163566, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58202, X208Y190/SLICE_X1Y0.A5LUT_O5 -> X211Y18/SLICE_X0Y0.ADI1MUX_OUT: 100000 iterations (fwd 127521, bwd 92821, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58202, X208Y190/SLICE_X1Y0.A5LUT_O5 -> X211Y18/SLICE_X0Y0.ADI1MUX_OUT: 200000 iterations (fwd 192363, bwd 128688, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58252, X208Y186/SLICE_X1Y0.A6LUT_O6 -> X222Y24/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 146980, bwd 103007, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58252, X208Y186/SLICE_X1Y0.A6LUT_O6 -> X222Y24/SLICE_X0Y0.BDI1MUX_OUT: 200000 iterations (fwd 211614, bwd 145557, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58199, X208Y189/SLICE_X1Y0.A5LUT_O5 -> X222Y21/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 139401, bwd 95493, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58200, X208Y189/SLICE_X0Y0.C6LUT_O6 -> X222Y22/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 148592, bwd 97877, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip42_r0[14], X217Y201/SLICE_X1Y0.A5FF_Q -> X243Y12/SLICE_X0Y0.DFFMUX_OUT: 100000 iterations (fwd 77887, bwd 119990, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58321, X208Y189/SLICE_X1Y0.B5LUT_O5 -> X222Y22/SLICE_X0Y0.BDI1MUX_OUT: 100000 iterations (fwd 121899, bwd 96065, bb 1)
+Warning: route_arc: net $abc$1052556$aiger$o58203, X208Y190/SLICE_X0Y0.C5LUT_O5 -> X208Y33/SLICE_X0Y0.CDI1MUX_OUT: 100000 iterations (fwd 125341, bwd 89044, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi3_rddata1_w[14], X231Y15/SLICE_X0Y0.A5FF_Q -> X233Y123/SLICE_X1Y0.B4: 100000 iterations (fwd 54247, bwd 52448, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[14], X219Y201/SLICE_X0Y0.A5FF_Q -> X233Y3/SLICE_X0Y0.DFFMUX_OUT: 100000 iterations (fwd 79437, bwd 106097, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[14], X219Y201/SLICE_X0Y0.A5FF_Q -> X233Y3/SLICE_X0Y0.DFFMUX_OUT: 200000 iterations (fwd 134933, bwd 141956, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[14], X219Y201/SLICE_X0Y0.A5FF_Q -> X233Y3/SLICE_X0Y0.DFFMUX_OUT: 300000 iterations (fwd 173864, bwd 169295, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[14], X219Y201/SLICE_X0Y0.A5FF_Q -> X233Y3/SLICE_X0Y0.DFFMUX_OUT: 400000 iterations (fwd 221331, bwd 193305, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip44_r0[14], X217Y199/SLICE_X0Y0.D5FF_Q -> X233Y9/SLICE_X1Y0.BFFMUX_OUT: 100000 iterations (fwd 76877, bwd 110358, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip44_r0[14], X217Y199/SLICE_X0Y0.D5FF_Q -> X233Y9/SLICE_X1Y0.BFFMUX_OUT: 200000 iterations (fwd 119076, bwd 141387, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip44_r0[14], X217Y199/SLICE_X0Y0.D5FF_Q -> X233Y9/SLICE_X1Y0.BFFMUX_OUT: 300000 iterations (fwd 147238, bwd 162966, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[14], X217Y41/SLICE_X0Y0.CQ -> X243Y212/SLICE_X1Y0.BFFMUX_OUT: 100000 iterations (fwd 79668, bwd 114978, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[14], X217Y41/SLICE_X0Y0.CQ -> X243Y212/SLICE_X1Y0.BFFMUX_OUT: 200000 iterations (fwd 116542, bwd 150562, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip41_r0[14], X217Y199/SLICE_X0Y0.B5FF_Q -> X243Y19/SLICE_X1Y0.CFFMUX_OUT: 100000 iterations (fwd 84311, bwd 135623, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip41_r0[14], X217Y199/SLICE_X0Y0.B5FF_Q -> X243Y19/SLICE_X1Y0.CFFMUX_OUT: 200000 iterations (fwd 132258, bwd 188481, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[14], X217Y202/SLICE_X1Y0.B5FF_Q -> X243Y22/SLICE_X0Y0.AFFMUX_OUT: 100000 iterations (fwd 75136, bwd 101112, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[14], X217Y202/SLICE_X1Y0.B5FF_Q -> X243Y22/SLICE_X0Y0.AFFMUX_OUT: 200000 iterations (fwd 129689, bwd 133847, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[14], X217Y202/SLICE_X1Y0.B5FF_Q -> X243Y22/SLICE_X0Y0.AFFMUX_OUT: 300000 iterations (fwd 149109, bwd 168100, bb 1)
+Warning: route_arc: net integratedsoc_sdram_generator_fifo_produce[3], X217Y33/SLICE_X0Y0.DQ -> X231Y183/SLICE_X0Y0.D4: 100000 iterations (fwd 129007, bwd 109145, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip6_r2[9], X217Y13/SLICE_X0Y0.B5FF_Q -> X243Y157/SLICE_X0Y0.BFFMUX_OUT: 100000 iterations (fwd 99499, bwd 121704, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi2_rddata3_w[17], X231Y17/SLICE_X0Y0.B5FF_Q -> X231Y138/SLICE_X1Y0.A2: 100000 iterations (fwd 41901, bwd 54276, bb 1)
+Warning: route_arc: net integratedsoc_csr_bankarray_csrbank17_dfii_pi3_rddata1_w[17], X233Y16/SLICE_X0Y0.A5FF_Q -> X233Y141/SLICE_X1Y0.C4: 100000 iterations (fwd 40868, bwd 42348, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[15], X219Y53/SLICE_X1Y0.CQ -> X243Y212/SLICE_X1Y0.DFFMUX_OUT: 100000 iterations (fwd 80024, bwd 136287, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[12], X217Y46/SLICE_X0Y0.AQ -> X243Y212/SLICE_X1Y0.CFFMUX_OUT: 100000 iterations (fwd 81748, bwd 102668, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip5_r2[9], X217Y19/SLICE_X0Y0.C5FF_Q -> X243Y159/SLICE_X1Y0.AFFMUX_OUT: 100000 iterations (fwd 89466, bwd 129919, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[13], X219Y53/SLICE_X1Y0.DQ -> X243Y212/SLICE_X0Y0.D5FFMUX_OUT: 100000 iterations (fwd 87969, bwd 117384, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip3_r1[13], X219Y53/SLICE_X1Y0.DQ -> X243Y212/SLICE_X0Y0.D5FFMUX_OUT: 200000 iterations (fwd 133652, bwd 144652, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip2_r1[13], X219Y53/SLICE_X0Y0.CQ -> X243Y179/SLICE_X1Y0.DFFMUX_OUT: 100000 iterations (fwd 92040, bwd 92875, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip2_r1[14], X217Y41/SLICE_X0Y0.DQ -> X243Y179/SLICE_X0Y0.AFFMUX_OUT: 100000 iterations (fwd 76915, bwd 106760, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[15], X208Y157/SLICE_X0Y0.B5FF_Q -> X233Y4/SLICE_X1Y0.D5FFMUX_OUT: 100000 iterations (fwd 130196, bwd 114799, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[15], X208Y157/SLICE_X0Y0.B5FF_Q -> X233Y4/SLICE_X1Y0.D5FFMUX_OUT: 200000 iterations (fwd 179245, bwd 161568, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip44_r0[15], X208Y170/SLICE_X1Y0.C5FF_Q -> X241Y9/SLICE_X1Y0.C5FFMUX_OUT: 100000 iterations (fwd 125612, bwd 138786, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip44_r0[15], X208Y170/SLICE_X1Y0.C5FF_Q -> X241Y9/SLICE_X1Y0.C5FFMUX_OUT: 200000 iterations (fwd 223111, bwd 173943, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip43_r0[13], X226Y141/SLICE_X1Y0.A5FF_Q -> X243Y3/SLICE_X1Y0.CFFMUX_OUT: 100000 iterations (fwd 93728, bwd 91942, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip54_r0[15], X203Y166/SLICE_X1Y0.A5FF_Q -> X233Y25/SLICE_X1Y0.B5FFMUX_OUT: 100000 iterations (fwd 124105, bwd 135536, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip54_r0[15], X203Y166/SLICE_X1Y0.A5FF_Q -> X233Y25/SLICE_X1Y0.B5FFMUX_OUT: 200000 iterations (fwd 173508, bwd 177350, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip42_r0[12], X219Y142/SLICE_X0Y0.A5FF_Q -> X243Y11/SLICE_X1Y0.DFFMUX_OUT: 100000 iterations (fwd 104304, bwd 111024, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip56_r0[14], X211Y174/SLICE_X0Y0.A5FF_Q -> X243Y45/SLICE_X0Y0.AFFMUX_OUT: 100000 iterations (fwd 105904, bwd 103730, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip2_r2[9], X219Y15/SLICE_X1Y0.D5FF_Q -> X243Y149/SLICE_X1Y0.D5FFMUX_OUT: 100000 iterations (fwd 77288, bwd 110038, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip49_r0[15], X203Y163/SLICE_X0Y0.A5FF_Q -> X243Y19/SLICE_X0Y0.CFFMUX_OUT: 100000 iterations (fwd 133961, bwd 140946, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip42_r0[15], X203Y165/SLICE_X1Y0.D5FF_Q -> X243Y13/SLICE_X1Y0.AFFMUX_OUT: 100000 iterations (fwd 138085, bwd 145879, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip42_r0[15], X203Y165/SLICE_X1Y0.D5FF_Q -> X243Y13/SLICE_X1Y0.AFFMUX_OUT: 200000 iterations (fwd 198648, bwd 184257, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip2_r1[15], X217Y44/SLICE_X0Y0.BQ -> X243Y178/SLICE_X1Y0.CFFMUX_OUT: 100000 iterations (fwd 74240, bwd 86446, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip2_r1[15], X217Y44/SLICE_X0Y0.BQ -> X243Y178/SLICE_X1Y0.CFFMUX_OUT: 200000 iterations (fwd 109049, bwd 155178, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[12], X219Y149/SLICE_X0Y0.C5FF_Q -> X243Y22/SLICE_X1Y0.CFFMUX_OUT: 100000 iterations (fwd 114709, bwd 107196, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip54_r0[14], X208Y163/SLICE_X0Y0.B5FF_Q -> X241Y25/SLICE_X1Y0.BFFMUX_OUT: 100000 iterations (fwd 149836, bwd 125252, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip54_r0[14], X208Y163/SLICE_X0Y0.B5FF_Q -> X241Y25/SLICE_X1Y0.BFFMUX_OUT: 200000 iterations (fwd 223949, bwd 164642, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[15], X208Y170/SLICE_X0Y0.C5FF_Q -> X243Y22/SLICE_X0Y0.D5FFMUX_OUT: 100000 iterations (fwd 117812, bwd 124956, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip40_r0[15], X208Y170/SLICE_X0Y0.C5FF_Q -> X243Y22/SLICE_X0Y0.D5FFMUX_OUT: 200000 iterations (fwd 203153, bwd 159626, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip51_r0[12], X219Y150/SLICE_X0Y0.D5FF_Q -> X241Y15/SLICE_X0Y0.AFFMUX_OUT: 100000 iterations (fwd 104364, bwd 99017, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip52_r0[15], X208Y167/SLICE_X0Y0.B5FF_Q -> X243Y34/SLICE_X1Y0.D5FFMUX_OUT: 100000 iterations (fwd 122942, bwd 118768, bb 1)
+Warning: route_arc: net integratedsoc_k7ddrphy_bitslip52_r0[15], X208Y167/SLICE_X0Y0.B5FF_Q -> X243Y34/SLICE_X1Y0.D5FFMUX_OUT: 200000 iterations (fwd 204563, bwd 159363, bb 1)

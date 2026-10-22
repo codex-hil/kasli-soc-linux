@@ -1,0 +1,10 @@
+{
+  "result": "RECONNECTED_BUILD_INCOMPLETE",
+  "dell_uptime_observed": "14 minutes",
+  "build_process_found": false,
+  "stage1_log": "truncated during routing; no completion",
+  "hardware_access": false,
+  "previous_output_preserved": true,
+  "action": "restart same candidate in csr-boundary-retry directory under shared build lease",
+  "timing_result": "PENDING"
+}
