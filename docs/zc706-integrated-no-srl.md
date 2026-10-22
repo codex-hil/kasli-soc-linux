@@ -112,3 +112,12 @@ investigation with `tools/probe_ddr_elaboration.py`. The minimal explicit IOBUF
 passes five normalization/round-trip controls (`tools/test_yosys_inout.py`).
 Evidence: `evidence/zc706/integrated-fixed-admission-20261022`.
 No candidate hardware programming has occurred.
+
+Further isolation: all64 DQ connections survive through `map_luts` and
+finalization when checked from the mapped snapshot. Explicit `bufnorm -conn`
+then disconnects64/64 pads, including `-flat` and top-only selection controls.
+The added normalization cleanup has been removed. The DDR pad admission
+continues to reject the bad result. A full uninterrupted synthesis without
+normalization is being compared with the admitted staged snapshot; the
+original155-buffer observation is not yet explained. This is an offline
+Yosys investigation, not evidence of board damage or a qualified replacement.
