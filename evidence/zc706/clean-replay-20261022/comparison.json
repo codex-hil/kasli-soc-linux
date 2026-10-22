@@ -1,0 +1,99 @@
+{
+  "files": {
+    "top.v": {
+      "replay": "d5be95d46116d6c2bea40c1b6d419da13175231dfaa6bf2e5d1f569ebad7344a",
+      "qualified": "5b43b39520e2cf57bfe664458425413b5f9e8dad2b5a5bea0293d94c6a7aa46d",
+      "equal": false
+    },
+    "top.xdc": {
+      "replay": "7095393dc7c27064375b4285a30376ab7315fe5979f24273134d29d79f01c45d",
+      "qualified": "7095393dc7c27064375b4285a30376ab7315fe5979f24273134d29d79f01c45d",
+      "equal": true
+    },
+    "top.json": {
+      "replay": "2711f14a6f095adf0732d28c6802641c253aaff3d9222fef8c61b4f245e2a796",
+      "qualified": "02a6b9340476974ff47c4ce8cfa0fd94de5f71b04b5e641086882e31eb276a9f",
+      "equal": false
+    },
+    "top.fasm": {
+      "replay": "eace010af63ae4bb6a94e9e8719be9badc29e7976df277df11967cd72c12861d",
+      "qualified": "5ab3c0fe0cc6d5e28f9251f6d2a7af97e2b7248c9612e312f2e89d570fd3990a",
+      "equal": false
+    },
+    "top.frames": {
+      "replay": "27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b",
+      "qualified": "27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b",
+      "equal": true
+    },
+    "top.bit": {
+      "replay": "1cdcc6c6845304188e03e6f64be5c5658e2b86a38d3d9b3562a3ee7d6e6dec95",
+      "qualified": "3d050ef1cb859bb494df726d328a75059423bdb792f519036ecae533feccde6e",
+      "equal": false
+    },
+    "timing.json": {
+      "replay": "6518022d69796f169cb67b7ca501900406b88e4cd6613fd7bbb68ce3ebb3ded8",
+      "qualified": "c316c4e84daa24c771c4b87cf75ed9f27e66db65b5cd6a6fbdb0bf8966d5556e",
+      "equal": false
+    }
+  },
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 103.7990493774414,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 120.35142517089844,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "dmtd_with_deglitcher.clk_in_i": {
+      "achieved": 808.407470703125,
+      "constraint": 100
+    },
+    "eth_rx_clk": {
+      "achieved": 156.39662170410156,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 179.2114715576172,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1153.402587890625,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 69.8714370727539,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 217.72262573242188,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 358.0379638671875,
+      "constraint": 200
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 846.023681640625,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 1001.0009765625,
+      "constraint": 62.5
+    },
+    "sys_clk": {
+      "achieved": 85.10638427734375,
+      "constraint": 83.33333587646484
+    }
+  },
+  "result": "BUILD_TIMING_PASS_CONFIGURATION_PAYLOAD_IDENTICAL",
+  "hardware_retested": false
+}

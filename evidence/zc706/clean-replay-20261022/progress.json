@@ -1,14 +1,14 @@
 {
   "observed_utc": "2026-10-22T16:15:09.227936+00:00",
-  "result": "RUNNING_NOT_QUALIFIED",
+  "result": "BUILD_TIMING_PASS_CONFIGURATION_PAYLOAD_IDENTICAL",
   "session": 83074,
   "hardware_access": false,
   "fresh_baseline_nextpnr_compile": "PASS",
   "derived_backend_compile": "PASS",
   "chipdb_generation": "PASS",
   "yosys_synthesis": "PASS",
-  "nextpnr_stage": "placement refinement",
-  "timing": "NOT_COLLECTED",
-  "bitstream": "NOT_COLLECTED",
+  "nextpnr_stage": "completed",
+  "timing": "PASS",
+  "bitstream": "payload identical; header time differs",
   "note": "Read-only observation of the existing Dell job; no duplicate build started."
 }

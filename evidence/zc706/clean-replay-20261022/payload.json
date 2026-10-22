@@ -1,0 +1,23 @@
+{
+  "replay": {
+    "a": "top.frames;Generator=xc7frames2bit",
+    "b": "xc7z045ffg900-2",
+    "c": "2026/10/22",
+    "d": "16:29:55",
+    "e": {
+      "bytes": 13321404,
+      "sha256": "29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35"
+    }
+  },
+  "qualified": {
+    "a": "top.frames;Generator=xc7frames2bit",
+    "b": "xc7z045ffg900-2",
+    "c": "2026/10/22",
+    "d": "14:33:11",
+    "e": {
+      "bytes": 13321404,
+      "sha256": "29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35"
+    }
+  },
+  "configuration_payload_identical": true
+}

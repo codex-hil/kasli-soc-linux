@@ -120,3 +120,17 @@ Replay progress: fresh baseline/derived nextpnr compilation, chipdb generation
 and Yosys synthesis have completed. nextpnr is refining placement. Routing,
 final timing and bitstream comparison remain pending; this is not a replay
 PASS. See `evidence/zc706/clean-replay-20261022/progress.json`.
+
+Final isolated replay: **PASS** (process exit0). Fresh nextpnr objects, chipdb,
+Yosys synthesis, routing and bitstream assembly completed without Vivado.
+Setup/final hold passed; SYS85.106MHz, ADC1 120.351MHz, ADC2 103.799MHz.
+`top.frames` is byte-identical to the physically qualified build. The complete
+13,321,404-byte configuration payload is also identical, SHA256
+`29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35`.
+Only the `.bit` header time differs (16:29:55 versus14:33:11); full file SHA256
+is therefore different. This is an offline reproduction, not a new hardware run.
+The replay still reuses the existing runtime/interpreter and pinned tool assets;
+it does not yet prove fresh OS/package/tool installation from the network.
+Evidence: clean-replay `manifest.json`, `timing.json`, `comparison.json`,
+`payload.json`. Next record runtime/compiler versions and close bootstrap
+installation documentation; preserve the qualified bundle unchanged.
