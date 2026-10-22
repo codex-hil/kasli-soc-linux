@@ -9,11 +9,14 @@ from zc706_ddr import export_soc, SYS_CLK_FREQ
 from zc706_sfp import add_sfp
 from reciprocal import ReciprocalCounter
 from wr_pll import WRPhase
+from axi_beat_pipeline import buffered_axi_beats
 
 class IntegratedSoC(ADCDDRSoC):
     def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True):
         # Use upstream buffered bank command queues to cut lookahead ready.
-        super().__init__(cmd_buffer_buffered=True)
+        with buffered_axi_beats():
+            super().__init__(cmd_buffer_buffered=True)
+        self.add_constant("AXI_BEAT_BUFFERED", 1)
         if ddr_sync_reset:
             # One shared release edge for all DDR input/output serializers.
             # Assertion remains asynchronous; deassertion waits two SYS edges.
