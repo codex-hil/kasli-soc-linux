@@ -1,0 +1,17 @@
+{
+  "result": "PACKET_FAIL_ONE_RX_ONE_CRC_ERROR",
+  "hardware_access": true,
+  "counter_deltas": {
+    "mac_status_tx_frames": 1,
+    "mac_status_rx_frames": 1,
+    "mac_status_crc_errors": 1,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0,
+    "packet_test_tx_frames": 1,
+    "packet_test_rx_frames": 0,
+    "packet_test_errors": 0
+  },
+  "restoration_passed": true,
+  "final_host": "192.168.2.18",
+  "scope": "One packet PCS attempt. RX count is MAC core output, not accepted PacketTest payload. No payload bytes captured."
+}

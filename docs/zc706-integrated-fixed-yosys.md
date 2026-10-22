@@ -331,3 +331,17 @@ FASM/bit equivalence. Evidence: frame-capture fullcore simulation and
 `control-route-endpoints.json`. No hardware accessed during this follow-up.
 Next measure settled TX/RX/CRC/preamble deltas with the same qualified diagnostic,
 then use those results to place any additional raw PHY/PCS observation points.
+
+PCS settled-attempt counter measurement: same timing-clean diagnostic image,
+updated software retained the before/after counters. One TX test frame produced
+MAC TX+1, MAC RX+1, CRC errors+1, preamble errors+0 and clock faults+0; PacketTest
+RX stayed0. Correct frozen TX header/64-byte payload remains confirmed. This
+shows a frame reaches the MAC core receive path during the attempt and fails
+CRC; it does not prove its payload/header bytes match the transmission.
+The observer sits after the MAC core/depacketizer and cannot describe bytes
+discarded or marked invalid upstream. Next compare raw transmitted/received
+frame bytes around CRC/preamble processing, including actual FCS and frame
+length, before changing transceiver parameters. Simulation of the digital
+MAC path already passes. Golden restored, three whole1GiB DDR BIST passes
+PASS and shared lease release verified; final management DHCP192.168.2.18.
+No SD/QSPI/boot-environment writes. Evidence: `frame-deltas-20261022`.
