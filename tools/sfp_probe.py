@@ -193,6 +193,17 @@ def loopback_test(r, count, mode="pma", observation=None):
         time.sleep(.01)
     # Snapshot the first complete MAC frame after explicit arming, if present.
     # No clear-on-read, no dependence on repeated MMIO polling timing.
+    raw_directions = []
+    for direction in ("tx", "rx"):
+        prefix = "mac_status_" + direction + "_raw_"
+        if prefix + "arm" in r.map["csr_registers"]:
+            r.write(prefix + "arm", 1)
+            raw_directions.append(prefix)
+    deadline = time.monotonic() + 1
+    while raw_directions and not all(r.read(p + "armed") or r.read(p + "done") for p in raw_directions):
+        if time.monotonic() > deadline:
+            raise TimeoutError("Raw PHY capture arm did not cross the clock domain")
+        time.sleep(.001)
     for direction in ("tx", "rx"):
         arm = "mac_status_" + direction + "_capture_arm"
         if arm in r.map["csr_registers"]:
@@ -285,6 +296,22 @@ def main():
             observation["counter_deltas"] = {name:
                 (result["status"][name] - observation["before"][name]) & 0xffffffff
                 for name in names if name in result["status"] and name in observation["before"]}
+        raw = {}
+        for direction in ("tx", "rx"):
+            prefix = "mac_status_" + direction + "_raw_"
+            if prefix + "done" not in r.map["csr_registers"]:
+                continue
+            capture = {k: r.read(prefix+k) for k in ("done", "length", "error", "overflow", "capacity")}
+            data = []
+            if capture["done"]:
+                for address in range(min(capture["length"], capture["capacity"])):
+                    r.write(prefix + "address", address)
+                    data.append(r.read(prefix + "data") & 255)
+            capture["data_hex"] = bytes(data).hex()
+            capture["truncated"] = capture["length"] > capture["capacity"]
+            raw[direction] = capture
+        if raw:
+            result["raw_phy_capture"] = raw
         r.mem.close()
         a.output.write_text(json.dumps(result, indent=2)+"\n")
         print(json.dumps(result, indent=2), flush=True)

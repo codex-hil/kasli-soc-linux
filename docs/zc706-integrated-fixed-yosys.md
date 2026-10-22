@@ -345,3 +345,23 @@ length, before changing transceiver parameters. Simulation of the digital
 MAC path already passes. Golden restored, three whole1GiB DDR BIST passes
 PASS and shared lease release verified; final management DHCP192.168.2.18.
 No SD/QSPI/boot-environment writes. Evidence: `frame-deltas-20261022`.
+
+## Raw MAC/PHY byte capture diagnostic
+
+`PHYFrameCapture` passively observes accepted PHY bytes in eth_tx/eth_rx,
+uses existing LiteX depth256 CDC to sys, and freezes the first complete frame
+in a128-byte Migen memory. It does not drive PHY ready/valid. Software arming
+crosses via the upstream PulseSynchronizer; an in-flight frame is skipped.
+CSRs expose done, actual received length, error/overflow flags, capacity and
+byte-addressed frozen data. Frames larger than128 bytes are explicitly truncated;
+overflow or incomplete capture cannot be used for FCS validation.
+The software probe arms both raw captures, waits for domain acknowledgment,
+and reads bounded data even on loopback timeout. This remains diagnostic only.
+
+Async125→50MHz simulation PASS: fragments, rearm,90-byte frame, error flags and
+160-byte truncation to the first128bytes. An initial testbench rearm race read
+old done before its reset edge; corrected test waits that edge, with original
+failure retained. Full-core simulation comparing raw TX/RX bytes,90-byte length,
+preamble and independent Python CRC32/FCS is running on Dell. No new FPGA build
+or hardware test is admitted until that comparison passes. Evidence:
+`evidence/zc706/raw-capture-20261022`.

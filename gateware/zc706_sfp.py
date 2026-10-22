@@ -17,6 +17,7 @@ from liteeth.phy import K7_1000BASEX
 from liteeth.core import LiteEthUDPIPCore
 from liteeth.common import eth_udp_user_description
 from kasli_soc import BaseSoC
+from phy_frame_capture import PHYFrameCapture
 
 MAC = 0x02c0de706001
 
@@ -263,6 +264,8 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
             csr.status.eq(csr.status + 1))
     if header_probes:
+        self.mac_status.tx_raw = PHYFrameCapture(self.ethphy.sink, "eth_tx")
+        self.mac_status.rx_raw = PHYFrameCapture(self.ethphy.source, "eth_rx")
         self.mac_status.tx_capture = MACFrameSnapshot(self.ethcore.mac.packetizer.sink)
         self.mac_status.rx_capture = MACFrameSnapshot(self.ethcore.mac.depacketizer.source)
     # Observe ARP resolution without changing upstream state machines.

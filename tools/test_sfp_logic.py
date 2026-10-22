@@ -11,6 +11,7 @@ from liteeth.core import LiteEthUDPIPCore
 from liteeth.common import eth_phy_description
 from litex.soc.interconnect import stream
 from zc706_sfp import PacketTest, MAC, MACFrameSnapshot
+from phy_frame_capture import PHYFrameCapture
 
 
 def test():
@@ -143,14 +144,16 @@ def test_mac_loopback(full_core=False):
     if full_core:
         top.submodules.tx_capture = tx_capture = MACFrameSnapshot(mac.packetizer.sink)
         top.submodules.rx_capture = rx_capture = MACFrameSnapshot(mac.depacketizer.source)
+        top.submodules.tx_raw = tx_raw = PHYFrameCapture(phy.sink, 'eth_tx')
+        top.submodules.rx_raw = rx_raw = PHYFrameCapture(phy.source, 'eth_rx')
     def run():
         for shot in range(3):
             if full_core:
-                for capture in (tx_capture, rx_capture):
+                for capture in (tx_capture, rx_capture, tx_raw, rx_raw):
                     yield capture.arm.storage.eq(1)
                     yield capture.arm.re.eq(1)
                 yield
-                for capture in (tx_capture, rx_capture):
+                for capture in (tx_capture, rx_capture, tx_raw, rx_raw):
                     yield capture.arm.re.eq(0)
                 yield
             yield dut.start.storage.eq(1)
@@ -173,6 +176,23 @@ def test_mac_loopback(full_core=False):
                     assert (yield capture.ethernet_type.status) == 0x88b5
                     assert (yield capture.payload_bytes.status) == 64
                     assert (yield capture.error.status) == 0
+                raw_frames = []
+                for raw in (tx_raw, rx_raw):
+                    assert (yield raw.done.status) == 1
+                    assert (yield raw.length.status) == 90
+                    assert (yield raw.overflow.status) == 0
+                    assert (yield raw.error.status) == 0
+                    data = []
+                    for address in range(90):
+                        yield raw.address.storage.eq(address)
+                        yield
+                        data.append((yield raw.data.status))
+                    raw_frames.append(bytes(data))
+                assert raw_frames[0] == raw_frames[1]
+                assert raw_frames[0][:8] == b'\x55'*7 + b'\xd5'
+                import binascii
+                expected = binascii.crc32(raw_frames[0][8:-4]).to_bytes(4, 'little')
+                assert raw_frames[0][-4:] == expected
     fragment = top.get_fragment()
     for special in fragment.specials:
         if isinstance(special, Memory):

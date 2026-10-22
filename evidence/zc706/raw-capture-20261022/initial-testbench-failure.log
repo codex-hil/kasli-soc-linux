@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/work/tools/test_phy_capture.py", line 95, in <module>
+    main()
+    ~~~~^^
+  File "/work/tools/test_phy_capture.py", line 90, in main
+    run_simulation(fragment, {'sys': consumer(), 'eth_tx': producer()}, clocks=clocks)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/build/python/lib/python3.13/site-packages/migen/sim/core.py", line 414, in run_simulation
+    s.run()
+    ~~~~~^^
+  File "/work/build/python/lib/python3.13/site-packages/migen/sim/core.py", line 403, in run
+    self._process_generators(cd)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "/work/build/python/lib/python3.13/site-packages/migen/sim/core.py", line 357, in _process_generators
+    request = generator.send(reply)
+  File "/work/tools/test_phy_capture.py", line 71, in consumer
+    assert (yield capture.error.status) == int(shot == 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
