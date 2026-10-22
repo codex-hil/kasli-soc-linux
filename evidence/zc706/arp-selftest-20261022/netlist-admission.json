@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "srl_count": 8,
+  "no_srl_control": false,
+  "negative_controls": [
+    "missing SRL",
+    "incorrect tap",
+    "incorrect CE"
+  ],
+  "netlist_sha256": "aee656d59ea8c09dd8615e2f2ab3a2946c1e8a3a2d5d18d1b6ece9b428cf182c",
+  "hardware_access": false
+}

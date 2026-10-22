@@ -30,7 +30,7 @@ def main():
     work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
     manifest=json.loads((bit.parent/'manifest.json').read_text())
-    allowed_designs=('srl',) if a.srl_diagnostic_only else ('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
+    allowed_designs=('srl','arp') if a.srl_diagnostic_only else ('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
     if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching timing-clean build required for the selected test scope')
     if manifest.get('experimental_srl_timing'):
@@ -44,7 +44,11 @@ def main():
             raise RuntimeError('SRL setup timing must pass')
         if not hold_passed((bit.parent/'stage1.log').read_text()):
             raise RuntimeError('SRL hold validation required before hardware access')
-        check(bit.parent/'top.json')
+        if manifest['design'] == 'arp':
+            from check_arp_netlist import check as check_arp
+            check_arp(bit.parent/'top.json', manifest.get('yosys_no_srl',False))
+        else:
+            check(bit.parent/'top.json')
     if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
         raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
@@ -84,7 +88,7 @@ def main():
                      'wr_pll_control.py','run_wr_pll.py','run_wr_pll_dual.py','capture_adc_ddr.py'):
             sources.append((ROOT/'tools'/name,name))
         if a.srl_diagnostic_only:
-            sources = [(work/'gateware/csr.json','csr.json')] + [(ROOT/'tools'/n,n) for n in ('test_srl.py','sfp_probe.py','fmc_adc.py')]
+            sources = [(work/'gateware/csr.json','csr.json')] + [(ROOT/'tools'/n,n) for n in ('test_srl.py','test_arp_csr.py','sfp_probe.py','fmc_adc.py')]
         for source,name in sources:
             data=source.read_bytes();sha=hashlib.sha256(data).hexdigest()
             subprocess.run(ssh+[f'cat > {remote}/{name}; chmod 700 {remote}/{name}'],input=data,check=True)
@@ -96,7 +100,8 @@ def main():
                 subprocess.run(ssh+['cd '+remote+' && '+command],stdout=log,
                     stderr=subprocess.STDOUT,timeout=timeout,check=True)
         if a.srl_diagnostic_only:
-            run('srl','python3 test_srl.py --csr-json csr.json --output srl.json',timeout=30)
+            test_script = 'test_arp_csr.py' if manifest['design'] == 'arp' else 'test_srl.py'
+            run('srl','python3 '+test_script+' --csr-json csr.json --output srl.json',timeout=30)
             record['srl']=json.loads(subprocess.check_output(ssh+['cat '+remote+'/srl.json'],text=True,timeout=15))
             record['result']=record['srl']['result']
             return

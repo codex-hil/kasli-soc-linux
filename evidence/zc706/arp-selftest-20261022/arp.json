@@ -1,0 +1,18 @@
+{
+  "result": "FAIL",
+  "cases": [
+    {
+      "busy": 0,
+      "sent": 61830,
+      "received": 61830,
+      "errors": 61830,
+      "last_ip": 3232236034,
+      "last_mac_lo": 1509193448,
+      "last_mac_hi": 27691,
+      "gap": 0,
+      "frames": 61830
+    }
+  ],
+  "scope": "actual upstream ARPRX, injected padded bytes, no GTX",
+  "error": "ARP decode/count conservation failed"
+}

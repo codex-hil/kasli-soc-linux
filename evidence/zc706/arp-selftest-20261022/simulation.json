@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "execution_host": "Dell via shared heavy-build lease",
+  "cases": "gaps0/1/3, padded replies, exact sent/received conservation, IP and MAC",
+  "test_sha256": "ead5a4e8750ddc6b11315e17094da227a87ea75bf26e9acb02c1a3cac76c2c97",
+  "gateware_sha256": "21d4c3f91511ccbd021d9f7ae38e13ac0e66c890cdc519c6229771e77b789284",
+  "hardware_access": false
+}

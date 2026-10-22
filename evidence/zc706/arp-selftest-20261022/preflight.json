@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "1e3c2cf8a066fdda771b7d90aa3b01f9d43bbb66025fdcf88906a92727ae3f4e",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-arp-selftest/gateware/csr.json": "696106c7e90148aca75521180082bd183d1e787b3ab81f396d103d036d3086ae"
+  }
+}
