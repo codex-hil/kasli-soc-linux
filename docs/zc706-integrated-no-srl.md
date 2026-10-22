@@ -288,3 +288,10 @@ this additional buffer, preserving queued data across stop/rearm. Existing
 dual-clock/backpressure/overflow tests are running before a new build.
 Evidence: `evidence/zc706/axi-beat-buffer-20261022/pipeline-timing.json`.
 No timing-qualified replacement or physical test is claimed.
+
+CDC ready-buffer simulation PASS: both independent ADC clocks, repeated
+captures/reset, command/data stalls, overflow, frame failure, real data and
+invalid configuration. Evidence: `cdc-ready-simulation.json` in the AXI beat
+buffer evidence directory. Full build is running under
+`build/zc706-integrated-yosys-fixed-cdc-ready/gateware`, seed3/router2 and
+unchanged clocks. Routing/timing and hardware qualification are pending.
