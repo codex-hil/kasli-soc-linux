@@ -291,3 +291,14 @@ Golden restored and three whole1GiB DDR BIST passes PASS; lease reacquisition
 verified. Evidence `pcs-hold-20261022/hardware`. No SD/QSPI/bootenv writes.
 Next audit physical LOOPBACK pin mapping and test-frame receive filtering;
 PCS failure alone does not identify a hardware or toolchain fault.
+
+Loopback path audit: pinned GTX site metadata maps LOOPBACK0/1/2 and RXCDRHOLD
+as identity-named input wires; no index reversal was found in that metadata.
+This is not independent FASM/PIP or silicon routing proof. MAC crossbar dispatch
+selects EtherType0x88b5 for PacketTest, independently of ARP/UDP users.
+`test_sfp_logic.py` now also instantiates the production-size UDP/IP core with
+ARP/ICMP and UDP echo before adding PacketTest. The existing generator/error
+and standalone MAC byte-loopback tests passed on Dell. Full-core simulation
+is still running with a240-second bound. It models MAC/CRC/CDC byte traffic,
+not PCS symbols or analog GTX. No hardware accessed during this audit.
+Evidence: `loopback-path-20261022`.

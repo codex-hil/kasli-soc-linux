@@ -1,0 +1,24 @@
+{
+  "hardware_access": false,
+  "scope": "metadata only; not independent route/bit proof",
+  "source_sha256": "229adf06756043a1bcab5030a3673dc756b94c455fb10bbd35d3857b45e393dc",
+  "pins": {
+    "LOOPBACK0": {
+      "dir": "INPUT",
+      "wire": "LOOPBACK0"
+    },
+    "LOOPBACK1": {
+      "dir": "INPUT",
+      "wire": "LOOPBACK1"
+    },
+    "LOOPBACK2": {
+      "dir": "INPUT",
+      "wire": "LOOPBACK2"
+    },
+    "RXCDRHOLD": {
+      "dir": "INPUT",
+      "wire": "RXCDRHOLD"
+    }
+  },
+  "mapping_identity": true
+}

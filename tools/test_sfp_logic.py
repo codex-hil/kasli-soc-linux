@@ -7,6 +7,7 @@ from migen import Module, Signal, Memory, ClockDomain
 from migen.sim import run_simulation
 from liteeth.mac.common import LiteEthMACUserPort
 from liteeth.mac import LiteEthMAC
+from liteeth.core import LiteEthUDPIPCore
 from liteeth.common import eth_phy_description
 from litex.soc.interconnect import stream
 from zc706_sfp import PacketTest, MAC
@@ -59,7 +60,7 @@ def test():
     print("PASS: 64-byte numbered MAC payload, TX stalls, repeated CSR triggers, corrupt data, short frame and RX error")
 
 
-def test_mac_loopback():
+def test_mac_loopback(full_core=False):
     # PHY byte loopback models MAC/CRC and asynchronous system/PHY FIFOs;
     # it does not model the analog GTX or the PCS symbol layer.
     class PHY(Module):
@@ -73,8 +74,24 @@ def test_mac_loopback():
     for name in ("sys", "eth_tx", "eth_rx"):
         setattr(top.clock_domains, "cd_"+name, ClockDomain(name))
     top.submodules.phy = phy = PHY()
-    top.submodules.mac = mac = LiteEthMAC(phy, dw=8, with_sys_datapath=True,
-        tx_cdc_depth=512, rx_cdc_depth=512, with_store_and_forward=True)
+    if full_core:
+        top.submodules.ethcore = ethcore = LiteEthUDPIPCore(phy, MAC,
+            "192.168.2.206", 50e6, dw=8, with_sys_datapath=True,
+            icmp_fifo_depth=1536, tx_cdc_depth=2048, rx_cdc_depth=2048,
+            with_store_and_forward=True)
+        mac = ethcore.mac
+        # Match the production crossbar's extra UDP consumer/echo connection.
+        from liteeth.common import eth_udp_user_description
+        udp = ethcore.udp.crossbar.get_port(1234)
+        top.submodules.echo_fifo = echo_fifo = stream.SyncFIFO(
+            eth_udp_user_description(8), 2048, buffered=True)
+        top.comb += [udp.source.connect(echo_fifo.sink),
+            echo_fifo.source.connect(udp.sink, omit={"src_port", "dst_port"}),
+            udp.sink.src_port.eq(echo_fifo.source.dst_port),
+            udp.sink.dst_port.eq(echo_fifo.source.src_port)]
+    else:
+        top.submodules.mac = mac = LiteEthMAC(phy, dw=8, with_sys_datapath=True,
+            tx_cdc_depth=512, rx_cdc_depth=512, with_store_and_forward=True)
     top.submodules.test = dut = PacketTest(mac.crossbar.get_port(0x88b5))
     def run():
         for shot in range(3):
@@ -104,9 +121,10 @@ def test_mac_loopback():
             # ClockDomainCrossing emits local clock-domain aliases.
             clocks[domain.name] = 20 if domain.name.startswith("from") else 8
     run_simulation(fragment, run(), clocks=clocks)
-    print("PASS: complete LiteEth MAC/preamble/padding/CRC loopback with 50 MHz system and 125 MHz PHY clocks")
+    print("PASS: " + ("full UDP/IP core with ARP/ICMP/UDP echo and test EtherType" if full_core else "MAC") + " loopback with 50 MHz system and 125 MHz PHY clocks")
 
 
 if __name__ == "__main__":
     test()
     test_mac_loopback()
+    test_mac_loopback(full_core=True)
