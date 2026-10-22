@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "tests": 11,
+  "hardware_access": false,
+  "source_sha256": {
+    "gateware/axi_beat_pipeline.py": "f67a493890cec0512fedc635ff19eddd1cd51dc228561e2684275004c11d157e",
+    "patches/litex-axi-beat-buffer.patch": "2a05af8c1a9b989d60bcf5f4de63ef5f0975e6975da7b5e4873fc8a48090096e",
+    "tools/test_axi_beat_buffer.py": "9c40baa27a51384a866c2bfedf81b4abdce13fa58a0f5fb3982263c1e6bb9c05"
+  },
+  "timing": "PENDING"
+}

@@ -1,0 +1,16 @@
+test_axi2axilite_bridge (test_axi.TestAXI.test_axi2axilite_bridge) ... ok
+test_axi2wishbone_random_all (test_axi.TestAXI.test_axi2wishbone_random_all) ... ok
+test_axi2wishbone_random_ar_valid (test_axi.TestAXI.test_axi2wishbone_random_ar_valid) ... ok
+test_axi2wishbone_random_aw_valid (test_axi.TestAXI.test_axi2wishbone_random_aw_valid) ... ok
+test_axi2wishbone_random_b_ready (test_axi.TestAXI.test_axi2wishbone_random_b_ready) ... ok
+test_axi2wishbone_random_r_ready (test_axi.TestAXI.test_axi2wishbone_random_r_ready) ... ok
+test_axi2wishbone_random_r_valid (test_axi.TestAXI.test_axi2wishbone_random_r_valid) ... ok
+test_axi2wishbone_random_w_ready (test_axi.TestAXI.test_axi2wishbone_random_w_ready) ... ok
+test_axi2wishbone_random_w_valid (test_axi.TestAXI.test_axi2wishbone_random_w_valid) ... ok
+test_axi2wishbone_writes_then_reads_no_random (test_axi.TestAXI.test_axi2wishbone_writes_then_reads_no_random) ... ok
+test_axi2wishbone_writes_then_reads_random_bursts (test_axi.TestAXI.test_axi2wishbone_writes_then_reads_random_bursts) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 42.288s
+
+OK

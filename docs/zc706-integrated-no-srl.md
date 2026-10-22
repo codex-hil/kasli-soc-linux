@@ -269,3 +269,12 @@ including randomized channel stalls. All11 PASS. Patch:
 `patches/litex-axi-beat-buffer.patch`; evidence:
 `evidence/zc706/axi-beat-buffer-20261022`. Project integration, timing and
 physical validation remain pending. No candidate image is admitted yet.
+
+Scoped overlay integration: `gateware/axi_beat_pipeline.py` applies the pinned
+patch to a temporary module and scopes the buffered factory around integrated
+SoC construction, restoring original LiteX bindings afterwards. Upstream
+checkout is unchanged. The exact overlay passed all11 AXI bridge tests
+(`integrated-result.json` and `integrated-tests.log` in the beat evidence).
+Full build is running under `build/zc706-integrated-yosys-fixed-axi-pipeline`,
+seed3/router2 with unchanged clocks; `AXI_BEAT_BUFFERED=1` marks the candidate.
+Its timing and physical validation are pending.
