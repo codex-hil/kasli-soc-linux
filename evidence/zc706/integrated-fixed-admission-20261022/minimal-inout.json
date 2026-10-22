@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "plain",
+    "pad": [
+      5
+    ],
+    "io": [
+      5
+    ],
+    "connected": true
+  },
+  {
+    "mode": "conn",
+    "pad": [
+      5
+    ],
+    "io": [
+      5
+    ],
+    "connected": true
+  },
+  {
+    "mode": "flat",
+    "pad": [
+      5
+    ],
+    "io": [
+      5
+    ],
+    "connected": true
+  },
+  {
+    "mode": "roundtrip",
+    "pad": [
+      5
+    ],
+    "io": [
+      5
+    ],
+    "connected": true
+  },
+  {
+    "mode": "roundtrip_conn",
+    "pad": [
+      5
+    ],
+    "io": [
+      5
+    ],
+    "connected": true
+  }
+]

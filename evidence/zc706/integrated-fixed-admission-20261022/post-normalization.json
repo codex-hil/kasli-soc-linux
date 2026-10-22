@@ -1,0 +1,10 @@
+{
+  "result": "REJECTED",
+  "ddr_dq_matched": 0,
+  "ddr_dq_expected": 64,
+  "remaining_buf_cells": 0,
+  "elaborated_ddr_dq_matched": 64,
+  "flattened_ddr_dq_matched": 64,
+  "hardware_access": false,
+  "next": "locate first synthesis pass losing inout connectivity"
+}
