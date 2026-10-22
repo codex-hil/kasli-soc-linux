@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "2d8548273fa14c695b9f8cdda68c1599651d224291a155f6e8a9d474b09c19c4",
+  "files": {
+    "csr.json": "696106c7e90148aca75521180082bd183d1e787b3ab81f396d103d036d3086ae",
+    "test_srl.py": "f797a31e1fbbcd21b7b08ccb64e717e3edb2041310cd11fcfa2665261cdf206a",
+    "test_arp_csr.py": "2f0cbead4b615695b971cb927094630641d03d85539167708dee2968e235e28e",
+    "sfp_probe.py": "c2b3d438212670df4c92bb4f2b14245231e082ea07c7823a2d79a6def5bcd262",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1"
+  },
+  "restoration_passed": false,
+  "srl": {
+    "result": "PASS",
+    "cases": [
+      {
+        "busy": 0,
+        "sent": 61833,
+        "received": 61833,
+        "errors": 0,
+        "last_ip": 3232236139,
+        "last_mac_lo": 1509193448,
+        "last_mac_hi": 27691,
+        "gap": 0,
+        "frames": 61833
+      },
+      {
+        "busy": 0,
+        "sent": 101576,
+        "received": 101576,
+        "errors": 0,
+        "last_ip": 3232236139,
+        "last_mac_lo": 1509193448,
+        "last_mac_hi": 27691,
+        "gap": 1,
+        "frames": 39743
+      },
+      {
+        "busy": 0,
+        "sent": 124756,
+        "received": 124756,
+        "errors": 0,
+        "last_ip": 3232236139,
+        "last_mac_lo": 1509193448,
+        "last_mac_hi": 27691,
+        "gap": 3,
+        "frames": 23180
+      }
+    ],
+    "scope": "actual upstream ARPRX, injected padded bytes, no GTX"
+  },
+  "final_host": "192.168.2.23"
+}

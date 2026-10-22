@@ -108,3 +108,18 @@ Root cause confirmed with the minimal seven-FF CE reproducer:
 chains even though E is connected to CE. The mapped SRL ignores CE.
 See `diagnostics/yosys-srl-ce/README.md` and upstream issue6058/PR6059.
 Replacement-tool validation is pending; keep the qualified no-SRL image.
+
+Fixed-tool validation (Yosys0.69+190/0e8336b4e, OSS CAD Suite20261005):
+ARP mapped SRL simulation PASS151frames, gaps0/1/3. Physical SRL image
+PASS124,756frames, zero errors, correct IP/MAC. Eight SRL16E tap6 now
+share variable CE; admission rejects the old tied-high variant when enable
+preservation is required. Functional Verilog matches the failed reproducer.
+Evidence: `evidence/zc706/arp-fixed-20261022`. Bitstream SHA-256:
+`2d8548273fa14c695b9f8cdda68c1599651d224291a155f6e8a9d474b09c19c4`.
+
+The first restoration stopped before reset on an SSH banner timeout. It is
+retained as a failed restoration attempt. Under a fresh shared lease, UART
+sync was confirmed, golden loaded through JTAG, and three whole1GiB DDR
+BIST passes completed. Final Linux192.168.2.24, lease released/reacquire
+checked. This recovery is separate evidence, not a rewritten original result.
+SFP and full integrated SRL-enabled qualification remain pending.

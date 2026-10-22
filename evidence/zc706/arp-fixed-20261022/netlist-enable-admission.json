@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "srl_count": 8,
+  "no_srl_control": false,
+  "clock_enable_mode": "variable",
+  "old_enable_loss_rejected": true,
+  "hardware_access": false
+}

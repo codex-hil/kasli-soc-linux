@@ -1,0 +1,20 @@
+{
+  "srl16e_count": 8,
+  "runtime_sequential_coverage": true,
+  "six_lut_placement": true,
+  "timing": {
+    "main_clkin_signal": {
+      "achieved": 831.9467163085938,
+      "constraint": 100
+    },
+    "main_clkout_buf": {
+      "achieved": 111.19760131835938,
+      "constraint": 100
+    }
+  },
+  "hold_lines": [
+    "Info: Hold-fix: no hold violations to fix."
+  ],
+  "functional_verilog_equal_to_failing_reproducer": true,
+  "normalized_verilog_sha256": "79897db57c5122782e2c93938fb4117f7c6d1f6e29139a646a6ac5698928cb7b"
+}

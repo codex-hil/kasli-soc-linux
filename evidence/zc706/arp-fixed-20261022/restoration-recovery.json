@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "restoration_passed": true,
+  "uart_sync_confirmed": true,
+  "final_host": "192.168.2.24"
+}

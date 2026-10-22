@@ -1,0 +1,21 @@
+{
+  "yosys_version": "Yosys 0.69+190 (git sha1 0e8336b4e, Release, Clang /usr/bin/clang++ 21.1.8)",
+  "hardware_access": false,
+  "rtl_baseline": "Migen simulation PASS, same module/input cases",
+  "cases": {
+    "srl": {
+      "srl_count": 8,
+      "result": "PASS",
+      "returncode": 0,
+      "transcript": "gap=0 sent=        75 received=        75 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=1 sent=       123 received=       123 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=3 sent=       151 received=       151 errors=         0 ip=c0a8026b mac=6c2b59f476e8\nPASS\ntb.v:21: $finish called at 189050 (1s)\n",
+      "source_sha256": "65f03a2c3e4680ec3816184d7d51b0e909b9578fd0020a99d397c07d66ac7855"
+    },
+    "no-srl": {
+      "srl_count": 0,
+      "result": "PASS",
+      "returncode": 0,
+      "transcript": "gap=0 sent=        75 received=        75 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=1 sent=       123 received=       123 errors=         0 ip=c0a8026b mac=6c2b59f476e8\ngap=3 sent=       151 received=       151 errors=         0 ip=c0a8026b mac=6c2b59f476e8\nPASS\ntb.v:21: $finish called at 189050 (1s)\n",
+      "source_sha256": "2341f7480a2745b4ad8b4fe0a9faf9ae916ab0504629d526d284017f95f06e9d"
+    }
+  }
+}

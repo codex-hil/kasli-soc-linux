@@ -1,0 +1,9 @@
+{
+  "arp_result": "PASS",
+  "frames": 124756,
+  "errors": 0,
+  "initial_restoration": "FAIL: SSH banner timeout before reset",
+  "separate_restoration_recovery": "PASS: UART sync then JTAG boot and DDR BIST",
+  "final_host": "192.168.2.24",
+  "restoration_passed": true
+}

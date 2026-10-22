@@ -36,6 +36,8 @@ dell-build run kasli-linux build/python/bin/python tools/test_srl_enable.py \
 The old-tool failure and trace are retained in
 `evidence/zc706/srl-enable-20261022`. Replacement-tool test PASS: installed OSS CAD Suite20261005 contains
 Yosys0.69+190, commit0e8336b4e. It preserves variable CE; mapped SRL and
-no-SRL controls both pass. No replacement FPGA image or hardware
-qualification is claimed yet. Next: map the actual ARP reproducer with
-this pinned tool, then build and qualify hardware before promoting defaults.
+no-SRL controls both pass. Actual ARP mapped simulation and physical SRL-enabled self-test also PASS:
+124,756 hardware frames with zero errors. See
+`evidence/zc706/arp-fixed-20261022` for the initial restoration timeout and
+separate successful UART/JTAG golden recovery plus DDR BIST.
+Next: SFP and full integrated qualification before promoting defaults.
