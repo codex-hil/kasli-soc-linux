@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "beat_buffer_net_count": 4,
+  "beat_buffer_nets": [
+    "integratedsoc_axi2axilite_beat_buffer_pipe_valid_source_last",
+    "integratedsoc_axi2axilite_beat_buffer_pipe_valid_source_valid",
+    "integratedsoc_integratedsoc_socbushandler_axi2axi_lite_beat_buffer_pipe_valid_source_last",
+    "integratedsoc_integratedsoc_socbushandler_axi2axi_lite_beat_buffer_pipe_valid_source_valid"
+  ],
+  "ddr_pad_admission": "PASS",
+  "sfp_clock_admission": "PASS",
+  "netlist_sha256": "fd13f6db7b4903673095849e9c376ab13cda807a4caacb049aead8aa758a1fb0",
+  "timing": "PENDING"
+}
