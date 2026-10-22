@@ -101,3 +101,14 @@ verify software CSR compatibility, then run the bounded integrated external
 network/dual-ADC/dual-PLL/DDR wrapper under the shared board lease, including
 golden restoration and DDR BIST. Current management address after the last
 restoration is192.168.2.10; DHCP may change on reset.
+
+Candidate update: synthesis is currently rejected before routing because DDR
+IOBUF pads lose top-level connectivity. Clock admission now follows actual
+PS FCLK0→BUFG→GTX connections rather than a Yosys wire alias. Alias cleanup
+removes155 `$buf` cells but does not restore the DDR pad connections; it is
+not a qualified fix. All64 DQ pads remain connected after elaboration,
+flattening, preparation and memory mapping. Later synthesis stages are under
+investigation with `tools/probe_ddr_elaboration.py`. The minimal explicit IOBUF
+passes five normalization/round-trip controls (`tools/test_yosys_inout.py`).
+Evidence: `evidence/zc706/integrated-fixed-admission-20261022`.
+No candidate hardware programming has occurred.
