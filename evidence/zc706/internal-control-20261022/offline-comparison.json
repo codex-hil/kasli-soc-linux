@@ -1,0 +1,19 @@
+{
+  "hardware_access": false,
+  "gtx_parameters_identical": true,
+  "drp_identical": true,
+  "old_module": null,
+  "current_module": {
+    "eeprom_hex": "0304220000000800000000010c000000000064004653202020202020202020202020202000649d995346502d47452d5420202020202020204120202000000059001000004332363036353532363731202020202032363036323120200000006c",
+    "identifier": 3,
+    "vendor": "FS",
+    "part": "SFP-GE-T",
+    "serial": "C2606552671",
+    "ethernet_compliance": 8,
+    "nominal_mbps": 1200,
+    "connector": 34
+  },
+  "old_loopback_result": "PASS",
+  "current_loopback_result": "FAIL",
+  "warning": "Old test had no readable module EEPROM; this does not prove physical module absence. Structural equality is not routing or functional proof."
+}

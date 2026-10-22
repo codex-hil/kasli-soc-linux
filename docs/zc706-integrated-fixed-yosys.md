@@ -232,3 +232,15 @@ No SD/QSPI/boot-environment writes. External switch qualification remains the
 separate earlier PASS. Evidence: `evidence/zc706/integrated-internal-20261022`.
 Next compare the loopback control and packet path with the earlier successful
 internal diagnostic before changing GTX configuration or drawing a HW conclusion.
+
+Internal PMA control comparison: all GTXE2_CHANNEL parameters and captured DRP
+registers match the2026-10-14 successful build. Loading that exact old build
+again with the current copper SFP also fails packet0 (status127, TX1/testRX0,
+CRC1/preamble353). This does not isolate a new synthesis/routing regression.
+The historical test had no readable module EEPROM; that alone does not prove
+its cage was empty. Golden restoration and three whole1GiB BIST passes PASS;
+shared lease release verified. Evidence: `internal-control-20261022`.
+A new `--internal-loopback-only --program` wrapper mode bounds packet diagnostics
+without retraining ADCs/running PLLs, while retaining golden+BIST restoration.
+Next separate GTX near-end PCS versus PMA modes under the same conditions,
+then inspect framing/polarity/reset only where the comparison supplies evidence.

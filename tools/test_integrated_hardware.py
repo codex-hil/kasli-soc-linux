@@ -21,7 +21,12 @@ def main():
     p.add_argument('--external-network',action='store_true',help='Also test a physically connected external SFP link')
     p.add_argument('--sfp-diagnostic-only',action='store_true',help='Probe external SFP without internal-loopback prerequisite; always restore golden')
     p.add_argument('--srl-diagnostic-only',action='store_true',help='Test explicit SRL16E versus flip-flops; always restore golden')
+    p.add_argument('--internal-loopback-only',action='store_true',help='Bounded internal PMA packet diagnostic with golden restoration')
     a=p.parse_args()
+    if a.internal_loopback_only and (a.external_network or a.sfp_diagnostic_only or a.srl_diagnostic_only):
+        p.error('Internal loopback diagnostic requires its own test scope')
+    if a.internal_loopback_only and not a.program and not a.preflight_only:
+        p.error('Internal loopback diagnostic requires --program for golden restoration')
     if a.srl_diagnostic_only and (a.sfp_diagnostic_only or a.external_network):
         p.error('SRL diagnostic requires its own test scope')
     if a.srl_diagnostic_only and not a.program and not a.preflight_only:
@@ -30,7 +35,7 @@ def main():
     work=a.work_dir.resolve();bit=work/'gateware/gateware/top.bit'
     digest=hashlib.sha256(bit.read_bytes()).hexdigest()
     manifest=json.loads((bit.parent/'manifest.json').read_text())
-    allowed_designs=('srl','arp') if a.srl_diagnostic_only else ('integrated','sfp') if a.sfp_diagnostic_only else ('integrated',)
+    allowed_designs=('srl','arp') if a.srl_diagnostic_only else ('integrated','sfp') if (a.sfp_diagnostic_only or a.internal_loopback_only) else ('integrated',)
     if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching timing-clean build required for the selected test scope')
     if manifest.get('experimental_srl_timing'):
@@ -52,7 +57,7 @@ def main():
     if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
         raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
-    if a.sfp_diagnostic_only or a.srl_diagnostic_only:
+    if a.sfp_diagnostic_only or a.srl_diagnostic_only or a.internal_loopback_only:
         required=[work/'gateware/csr.json']
     hashes={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in required}
     if a.preflight_only:
@@ -82,7 +87,7 @@ def main():
         sources=[(work/'pl-ddr-test','pl-ddr-test'),(work/'adc-ddr-read','adc-ddr-read'),
             (work/'gateware/csr.json','csr.json'),
             (work/'i2c.so','i2c.so')]
-        if a.sfp_diagnostic_only or a.srl_diagnostic_only:
+        if a.sfp_diagnostic_only or a.srl_diagnostic_only or a.internal_loopback_only:
             sources=[(work/'gateware/csr.json','csr.json')]
         for name in ('fmc_adc.py','sfp_probe.py','measure_fmc_clocks.py',
                      'wr_pll_control.py','run_wr_pll.py','run_wr_pll_dual.py','capture_adc_ddr.py'):
@@ -104,6 +109,14 @@ def main():
             run('srl','python3 '+test_script+' --csr-json csr.json --output srl.json',timeout=30)
             record['srl']=json.loads(subprocess.check_output(ssh+['cat '+remote+'/srl.json'],text=True,timeout=15))
             record['result']=record['srl']['result']
+            return
+        if a.internal_loopback_only:
+            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --output sfp-internal.json',timeout=60)
+            probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-internal.json'],text=True,timeout=15))
+            record['internal_probe']=probe
+            record['internal_loopback_result']=probe.get('loopback',{}).get('result','FAIL')
+            record['result']=record['internal_loopback_result']
+            if record['result'] != 'PASS':raise RuntimeError('Internal packet loopback failed')
             return
         if a.sfp_diagnostic_only:
             run('sfp-external','python3 sfp_probe.py --csr-json csr.json --init-clock --external --output sfp.json')

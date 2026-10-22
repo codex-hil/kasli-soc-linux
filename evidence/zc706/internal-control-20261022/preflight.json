@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "6da4da64a004caac5ae27ac35ad2cbfe29a12016298043a4c63244e3096a771b",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-integrated-dma-bram/gateware/csr.json": "d214bae161909b2b015df1daebeb566838c735aa896d0053540127b10aa85b44"
+  }
+}
