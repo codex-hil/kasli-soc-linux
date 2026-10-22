@@ -29,6 +29,10 @@ class CSRAddressReplication(Module):
         address = bridge.csr.adr
         data = Signal.like(address, name='csr_address_next')
         enable = Signal(name='csr_address_update')
+        # Preserve the shared decode boundary before the distributed bank FFs.
+        # Keep transaction latency and address/strobe alignment unchanged.
+        data.attr.add('keep')
+        enable.attr.add('keep')
         bridge.comb += [data.eq(0), enable.eq(0)]
         capture = _CaptureAddressUpdate(address, data, enable)
         for state, statements in bridge.fsm.actions.items():

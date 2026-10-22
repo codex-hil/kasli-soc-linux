@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "transactions": 450,
+  "checks": "cycle-exact ACK/read/storage equivalence",
+  "command": "dell-build run kasli-linux build/python/bin/python tools/test_csr_address_replication.py",
+  "source_sha256": "3e9d90d16e1a72bad60a13920dfa627a166026e5d66aa4adfd38a7fc57929b85",
+  "hardware_access": false,
+  "timing": "PENDING"
+}

@@ -212,3 +212,9 @@ routing and2.82ns logic. Evidence: `bank-buffered-stage1.log` and
 `bank-buffered-timing.json`. Next inspect the existing LiteX bus/CSR pipeline
 and identify a protocol-correct registered cut; do not change replicated
 CSR address latency alone. This candidate remains rejected before hardware.
+
+CSR boundary experiment: preserve shared address-next and update-enable nets
+with keep; no extra cycle or handshake change. Existing450-transaction
+cycle-exact ACK/read/storage comparison PASS. Full seed3/router2 build
+is running under `build/zc706-integrated-yosys-fixed-csr-boundary`.
+Timing improvement is a hypothesis; hardware qualification remains pending.
