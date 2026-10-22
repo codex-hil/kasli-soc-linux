@@ -1,8 +1,8 @@
 {
-  "result": "ASYNC_UNIT_PASS_FULLCORE_SIM_RUNNING",
+  "result": "FULLCORE_RAW_BYTE_AND_FCS_SIM_PASS_BUILD_RUNNING",
   "hardware_access": false,
-  "session": 53362,
-  "timeout_seconds": 300,
+  "session": 25852,
+  "timeout_seconds": 3600,
   "capacity_bytes": 128,
   "cdc_depth_bytes": 256,
   "uses": "LiteX ClockDomainCrossing and Migen Memory/PulseSynchronizer",
@@ -10,5 +10,8 @@
   "unit_scope": "125MHz to 50MHz, fragment rejection, 90-byte frames, error/rearm, 160-byte frame retains first128",
   "initial_failure": "Testbench sampled old done on rearm; added sys clock before waiting for new done. Original transcript retained.",
   "fullcore_scope": "Three TX/RX raw byte comparisons, 90byte lengths, preamble and Python CRC32/FCS match",
-  "build": "NOT_STARTED"
+  "build": "RUNNING: build/zc706-sfp-raw-capture-20261023/gateware",
+  "simulation_session": 53362,
+  "simulation_exit_code": 0,
+  "decoder_tests": "PASS"
 }

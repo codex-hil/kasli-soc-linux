@@ -365,3 +365,18 @@ failure retained. Full-core simulation comparing raw TX/RX bytes,90-byte length,
 preamble and independent Python CRC32/FCS is running on Dell. No new FPGA build
 or hardware test is admitted until that comparison passes. Evidence:
 `evidence/zc706/raw-capture-20261022`.
+
+Full-core raw capture simulation completed **PASS**: three90-byte TX/RX frames
+identical, seven55 preamble bytes plusD5, and actual FCS matched Python CRC32
+in little-endian Ethernet byte order. This validates the diagnostic in the
+byte-level digital model, not the PCS/analog transceiver or mapped hardware.
+A separate SFP raw-capture build is now running on Dell:
+`build/zc706-sfp-raw-capture-20261023/gateware`.
+
+`tools/compare_phy_frames.py PROBE_JSON` decodes bounded captures, independently
+checks preamble/FCS and test-frame bytes, and lists differing offsets. It refuses
+complete-frame conclusions for missing done, overflow, truncation or inconsistent
+length. Offline controls PASS: valid reference, four byte corruptions and four
+incomplete/overflow cases. These are synthetic controls, not hardware data.
+No hardware was accessed in this step; next collect build timing/admission and
+perform a bounded raw-byte PCS capture with golden restoration.

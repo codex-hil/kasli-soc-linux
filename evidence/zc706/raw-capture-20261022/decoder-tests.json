@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "identical_valid_frame": 1,
+  "byte_corruptions_detected": 4,
+  "incomplete_or_overflow_rejections": 4
+}
