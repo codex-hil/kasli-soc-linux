@@ -1,0 +1,13 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 79.64,
+  "adc1_mhz": 126.42,
+  "adc2_mhz": 138.85,
+  "final_hold_violations": 0,
+  "critical_start": "adctoddr1_output_buffer_level0[0]",
+  "critical_end": "storage_26.0.7.ADDRARDADDR5",
+  "critical_ns": 12.56,
+  "routing_ns": 11.09,
+  "hardware_access": false,
+  "next": "registered-ready buffer between CDC output and output queue; include buffered data in drain predicate"
+}

@@ -46,7 +46,11 @@ class ADCToDDR(LiteXModule):
             for _, child in module._submodules:
                 use_block_ram(child)
         use_block_ram(self.output_buffer)
-        self.comb += self.fifo.source.connect(self.output_buffer.sink)
+        # Cut queue-occupancy feedback before the async BRAM lookahead address.
+        self.cdc_buffer = stream.Buffer(self.fifo.source.description,
+            pipe_valid=True, pipe_ready=True)
+        self.comb += [self.fifo.source.connect(self.cdc_buffer.sink),
+                      self.cdc_buffer.source.connect(self.output_buffer.sink)]
 
         request, request_adc, ack, ack_sys = [Signal() for _ in range(4)]
         busy, done, config_bad = Signal(), Signal(), Signal()
@@ -98,7 +102,7 @@ class ADCToDDR(LiteXModule):
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
-        self.comb += empty.eq(~self.fifo.source.valid & ~self.output_buffer.source.valid & ~self.command_buffer.source.valid & ~self.writer.fifo.source.valid)
+        self.comb += empty.eq(~self.fifo.source.valid & ~self.cdc_buffer.source.valid & ~self.output_buffer.source.valid & ~self.command_buffer.source.valid & ~self.writer.fifo.source.valid)
         self.comb += [self.command_buffer.sink.valid.eq(busy & self.output_buffer.source.valid),
             self.command_buffer.sink.data.eq(self.output_buffer.source.data),
             self.command_buffer.sink.address.eq(next_address),
