@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "csr_registers_equal": 236,
+  "csr_bases_equal": true,
+  "memories_equal": true,
+  "constant_differences": {},
+  "files": {
+    "pl-ddr-test": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b"
+  },
+  "candidate_csr_sha256": "9e10f92cf0c3b2fe5812c5c4490b6a6cc918b909ffe998445fec2c9beb0f69cb",
+  "timing_qualification": "PENDING"
+}
