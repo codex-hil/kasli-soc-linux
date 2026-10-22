@@ -12,5 +12,10 @@
     "RXCDRHOLD": "0"
   },
   "negative_admission_control": "PASS: old artifact rejected for PCS before hardware access",
-  "syntax_check": "PASS"
+  "syntax_check": "PASS",
+  "logical_admission": "PASS: all 8 modes",
+  "admission_controls": "1 positive and 8 corruptions rejected",
+  "build_stage": "router2 routing",
+  "physical_routing_admission": "PENDING",
+  "timing": "PENDING"
 }

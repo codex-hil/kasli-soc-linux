@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "qualification": false,
+  "scope": "synthesized logical connectivity; not physical routing or hardware proof",
+  "input_sha256": "1a1f65b7159f39a197271ea8aedb24556a026adbe064e1f389142f73b92e52cb",
+  "decoder": "$abc$1087982$lut$aiger$o45177",
+  "truth_table": [
+    {
+      "loopback": "000",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "001",
+      "cdr_hold": 1
+    },
+    {
+      "loopback": "010",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "011",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "100",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "101",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "110",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "111",
+      "cdr_hold": 0
+    }
+  ]
+}

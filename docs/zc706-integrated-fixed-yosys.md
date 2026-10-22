@@ -262,3 +262,11 @@ CDR-hold input. Old artifact rejection and Python syntax checks passed. Dynamic
 hold truth-table/routed-path verification, timing and physical PCS/PMA tests
 remain pending. A new build is running on Dell; no hardware was accessed.
 Evidence: `evidence/zc706/pcs-hold-20261022`.
+
+PCS logical admission: `tools/check_gtx_loopback.py TOP_JSON` verifies the
+synthesized GTX buffer/clock conditions and exhaustively evaluates the direct
+LUT3 CDR decoder for all eight LOOPBACK values. Actual synthesized netlist PASS:
+hold1 only for001, hold0 otherwise. One positive fixture and all eight individual
+truth-table bit corruptions behaved as expected; incorrect functions are rejected.
+The wrapper now uses this check rather than accepting any dynamic hold signal.
+This is logical admission only; final routing/timing and hardware remain pending.

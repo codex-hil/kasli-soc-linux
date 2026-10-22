@@ -60,14 +60,8 @@ def main():
     if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
         raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
     if a.internal_loopback_mode == 'pcs':
-        top=json.loads((bit.parent/'top.json').read_text())['modules']['top']
-        channels=[c for c in top['cells'].values() if c['type']=='GTXE2_CHANNEL']
-        if len(channels)!=1:raise RuntimeError('Expected one GTX for PCS admission')
-        channel=channels[0]
-        if channel['parameters'].get('RXBUF_EN')!='TRUE' or channel['parameters'].get('RX_XCLK_SEL')!='RXREC':
-            raise RuntimeError('PCS requires RX buffer and RXREC XCLK')
-        if channel['connections'].get('RXOUTCLKSEL')!=['0','1','0'] or all(isinstance(b,str) for b in channel['connections'].get('RXCDRHOLD',[])):
-            raise RuntimeError('PCS requires audited dynamic CDR hold with PMA RXOUTCLK')
+        from check_gtx_loopback import check as check_loopback
+        check_loopback(bit.parent/'top.json')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
     if a.sfp_diagnostic_only or a.srl_diagnostic_only or a.internal_loopback_only:
         required=[work/'gateware/csr.json']

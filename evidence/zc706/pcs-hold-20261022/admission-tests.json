@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "positive_decoder_cases": 1,
+  "single_truth_table_bit_corruptions_rejected": 8
+}
