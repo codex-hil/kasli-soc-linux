@@ -150,3 +150,20 @@ validated source-to-configuration reproduction; a newly downloaded and installed
 runtime/toolchain has **not** yet been tested. The snapshot repository and tool
 release URLs remain external availability dependencies. Installed system Yosys
 0.52 is listed in the inventory but is not used by this target.
+
+Fresh archive installation can be tested independently of source compilation:
+place the two release archives (URLs and SHA256 in `toolchains.lock.json`) in
+an input directory as `openxc7.tgz` and `oss-cad-suite.tgz`, then run inside
+the build runtime:
+
+```sh
+python3 tools/install_tool_assets.py --archives INPUT_DIR --destination NEW_TOOLS_DIR
+```
+
+The installer refuses an existing destination and verifies both archive hashes
+before extraction. It retains any failed extraction for diagnosis. Its manifest
+means extraction only; run the tools and a build before declaring installation
+qualified. This procedure leaves `build/tools` and the qualified bundle intact.
+A fresh download trial on Dell is staged in
+`build/fresh-tool-download-20261022`: openXC7 downloaded/verified; OSS CAD Suite
+was still downloading at this checkpoint. Downloading is not installation PASS.
