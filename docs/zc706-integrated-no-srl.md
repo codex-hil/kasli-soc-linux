@@ -260,3 +260,12 @@ See `abc9-stage1.log` and `abc9-timing.json`. Next evaluate a registered
 AXI burst-to-beat output before CSR capture, using the existing upstream
 stream Buffer primitive with burst/response/backpressure tests. Registering
 only replicated CSR address is not protocol-correct. No physical test ran.
+
+Optional beat-pipeline candidate: upstream AXI2AXILite uses an upstream
+stream.Buffer after AXIBurst2Beat when `buffer_beats=True` (defaultFalse).
+`tools/test_axi_beat_buffer.py` loads the modified module in memory, leaving
+the LiteX checkout unchanged, and runs11 upstream AXI bridge/Wishbone tests
+including randomized channel stalls. All11 PASS. Patch:
+`patches/litex-axi-beat-buffer.patch`; evidence:
+`evidence/zc706/axi-beat-buffer-20261022`. Project integration, timing and
+physical validation remain pending. No candidate image is admitted yet.

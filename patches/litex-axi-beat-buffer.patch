@@ -1,0 +1,26 @@
+--- a/litex/soc/interconnect/axi/axi_full_to_axi_lite.py
++++ b/litex/soc/interconnect/axi/axi_full_to_axi_lite.py
+@@ -23,7 +23,7 @@
+     # Note: Since this AXI bridge will mostly be used to target buses that are not supporting
+     # simultaneous writes/reads, to reduce ressource usage the AXIBurst2Beat module is shared
+     # between writes/reads.
+-    def __init__(self, axi, axi_lite):
++    def __init__(self, axi, axi_lite, buffer_beats=False):
+         assert axi.data_width    == axi_lite.data_width
+         assert axi.address_width == axi_lite.address_width
+ 
+@@ -32,8 +32,13 @@
+         ax_buffer = stream.Buffer(ax_burst.description)
+ 
+         self.comb += ax_burst.connect(ax_buffer.sink)
+-        ax_burst2beat = AXIBurst2Beat(ax_buffer.source, ax_beat)
++        ax_generated = AXIStreamInterface(layout=ax_description(axi.address_width), id_width=axi.id_width) if buffer_beats else ax_beat
++        ax_burst2beat = AXIBurst2Beat(ax_buffer.source, ax_generated)
+         self.submodules += ax_buffer, ax_burst2beat
++        if buffer_beats:
++            self.beat_buffer = stream.Buffer(ax_beat.description)
++            self.comb += ax_generated.connect(self.beat_buffer.sink)
++            self.comb += self.beat_buffer.source.connect(ax_beat)
+ 
+         _data         = Signal(axi.data_width)
+         _cmd_done     = Signal()
