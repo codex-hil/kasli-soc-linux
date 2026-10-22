@@ -12,9 +12,13 @@ from srl_timing_model import model, header
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare():
+def prepare(integrated=False):
     base = prepare_base()
-    out = ROOT/'build/zc706-srl-timing/nextpnr'
+    if integrated:
+        from integrated_nextpnr import prepare as prepare_integrated
+        base = prepare_integrated()
+    out = ROOT/('build/zc706-integrated-srl-timing/nextpnr' if integrated else
+        'build/zc706-srl-timing/nextpnr')
     out.mkdir(parents=True, exist_ok=True)
     binary = out/'nextpnr-himbaechel-xilinx'
     patch = ROOT/'patches/nextpnr-srl-timing.inc'
@@ -29,7 +33,10 @@ def prepare():
         if all(cached.get(k) == v for k,v in identity.items()) and cached.get('binary_sha256') == hashlib.sha256(binary.read_bytes()).hexdigest():
             return binary
     source = out/'source/himbaechel/uarch/xilinx'
-    shutil.copytree(base.parent/'source/himbaechel/uarch/xilinx', source, dirs_exist_ok=True)
+    source_base = prepare_base() if integrated else base
+    shutil.copytree(source_base.parent/'source/himbaechel/uarch/xilinx', source, dirs_exist_ok=True)
+    if integrated:
+        shutil.copy2(base.parent/'xilinx.cc', source/'xilinx.cc')
     h = source/'xilinx.h'
     declarations = '''    bool getCellDelay(const CellInfo *, IdString, IdString, DelayQuad &) const override;
     TimingPortClass getPortTimingClass(const CellInfo *, IdString, int &) const override;
@@ -84,7 +91,10 @@ def prepare():
     command = []; output = False
     replacements = {'xilinx.cc.o':out/'xilinx.cc.o', 'xilinx_place.cc.o':out/'xilinx_place.cc.o',
         'hold_fix.cc.o': ROOT/'build/zc706-adc-ddr/nextpnr-hold/hold_fix.cc.o',
-        'pack_io.cc.o':base.parent/'pack_io.cc.o', 'fasm.cc.o':base.parent/'fasm.cc.o'}
+        'pack_io.cc.o':source_base.parent/'pack_io.cc.o', 'fasm.cc.o':source_base.parent/'fasm.cc.o'}
+    if integrated:
+        for unit in ('router1.cc.o', 'router2.cc.o', 'hold_fix.cc.o'):
+            replacements[unit] = base.parent/unit
     for token in shlex.split((objects/'link.txt').read_text()):
         if output: command.append(str(binary)); output = False
         elif token == '-o': command.append(token); output = True

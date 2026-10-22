@@ -110,7 +110,7 @@ def hold_passed(log):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--openxc7", type=Path, required=True)
-    p.add_argument("--srl-timing", action="store_true", help="Experimental SDF timing for static rising-edge six-LUT SRL16E (SFP/SRL only)")
+    p.add_argument("--srl-timing", action="store_true", help="Experimental SDF timing for static rising-edge six-LUT SRL16E (SFP/SRL/ARP/integrated)")
     p.add_argument("--no-srl", action="store_true", help="Disable Yosys SRL extraction for controlled comparison")
     p.add_argument("--no-header-probes", action="store_true", help="Omit passive ARP/UDP raw header snapshots (SFP or integrated)")
     p.add_argument("--yosys", type=Path, required=True)
@@ -128,8 +128,8 @@ def main():
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     args = p.parse_args()
-    if args.srl_timing and (args.design not in ("sfp", "srl", "arp") or args.no_srl):
-        p.error("--srl-timing requires SFP/SRL with SRL extraction enabled")
+    if args.srl_timing and (args.design not in ("sfp", "srl", "arp", "integrated") or args.no_srl):
+        p.error("--srl-timing requires SFP/SRL/ARP/integrated with SRL extraction enabled")
     if args.ddr_sync_reset and args.design != "integrated":
         p.error("--ddr-sync-reset requires --design integrated")
     args.sfp_refclk = args.sfp_refclk or ("fclk" if args.design == "integrated" else "si5324")
@@ -230,14 +230,14 @@ def main():
             extra_rows=({"pin": "AA18", "bank": "9", "site": "IOB_X0Y24",
                 "tile": "LIOB33_X0Y23", "pin_function": "IO_L13P_T2_MRCC_9"},)))]
         nextpnr = prepare_nextpnr()
-    if args.srl_timing:
-        from srl_nextpnr import prepare as prepare_srl_timing
-        nextpnr = prepare_srl_timing()
     if args.design == "integrated":
         from integrated_nextpnr import prepare as prepare_integrated
         nextpnr = prepare_integrated()
         from adc_termination_db import prepare as prepare_termination_db
         db = prepare_termination_db(db, overlay=ROOT/"build/zc706-integrated/termination-db/zynq7")
+    if args.srl_timing:
+        from srl_nextpnr import prepare as prepare_srl_timing
+        nextpnr = prepare_srl_timing(integrated=args.design == "integrated")
     if args.design in ("adc-ddr", "integrated"):
         from adc_ddr_clock_db import prepare as prepare_clock_db
         db = prepare_clock_db(db, args.openxc7.resolve()/"share/nextpnr/external/prjxray-db",

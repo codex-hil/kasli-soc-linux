@@ -71,3 +71,33 @@ after extraction. Physical evidence is under
 `evidence/zc706/integrated-20261021/no-srl-*`; failed attempts and cleanup recovery
 are recorded separately in the same directory. Existing older qualified
 artifacts are retained.
+
+## Fixed-Yosys SRL replacement candidate (2026-10-22)
+
+The qualified no-SRL image above remains the baseline. Yosys0.69+190
+(OSS CAD Suite20261005, commit0e8336b4e) fixes the enabled-FDRE SRL extraction
+bug confirmed by the minimal, ARP and external SFP hardware tests.
+The full integrated replacement is building; it is not hardware qualified.
+
+`--srl-timing` now composes the experimental static SRL16E SDF model with
+the integrated backend's clock routing and hold fixes. It builds an isolated
+binary under `build/zc706-integrated-srl-timing/nextpnr`; the qualified binary
+and tool defaults are preserved. Source/routed SRL counts, sequential endpoint
+coverage and six-LUT placement remain mandatory before admission. SRLC32E,
+dynamic taps and inverted SRL clocks are outside the model.
+
+```sh
+dell-build sync kasli-linux
+dell-build run kasli-linux timeout 3600 build/python/bin/python tools/build_pl.py \
+  --board zc706 --design integrated --ddr-sync-reset --no-header-probes \
+  --srl-timing --seed 3 --router router2 \
+  --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt \
+  --output-dir build/zc706-integrated-yosys-fixed/gateware \
+  --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+```
+
+Next: fetch the completed build, inspect timing/coverage and DDR I/O,
+verify software CSR compatibility, then run the bounded integrated external
+network/dual-ADC/dual-PLL/DDR wrapper under the shared board lease, including
+golden restoration and DDR BIST. Current management address after the last
+restoration is192.168.2.10; DHCP may change on reset.
