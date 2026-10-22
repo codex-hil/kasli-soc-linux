@@ -1,6 +1,6 @@
 {
-  "result": "INSTALL_RUNNING_NOT_QUALIFIED",
-  "session": 27618,
+  "result": "OS_AND_PYTHON_INSTALL_PASS_FULL_BUILD_RUNNING",
+  "session": 45216,
   "hardware_access": false,
   "reused_runtime_mounts": false,
   "base_image": "debian@sha256:a99cfc517144bc59b1978475ec53b46ecabec7e43635402ee5b77cc54cd1b20a",
@@ -9,5 +9,13 @@
   "image_tag": "localhost/zc706-fresh-runtime:20261022",
   "build_cache": false,
   "shared_build_lock": true,
-  "timeout_seconds": 1800
+  "timeout_seconds": 1800,
+  "os_install": "PASS",
+  "python_install": "PASS",
+  "image_id": "2e0a9a1e2c7a005345c56340a9e83a18c9c8e84c362f86ecadb1d750464a295f",
+  "full_build_network": false,
+  "tool_assets": "fresh-tools-20261022",
+  "generated_objects_copied": false,
+  "source_snapshot": "a903dc6",
+  "full_build_timeout_seconds": 7200
 }

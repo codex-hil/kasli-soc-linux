@@ -182,9 +182,20 @@ On the shared Dell take the documented shared build lease for this provisioning
 operation; no project/runtime/device mounts are needed. Network is required only
 for fetching the snapshot packages. The normal FPGA build runtime stays offline.
 
-The2026-10-22 isolated trial is installing under a1800-second bound, image tag
-`localhost/zc706-fresh-runtime:20261022`. The snapshot InRelease and package index
-were fetched successfully. OS installation, Python dependency installation and
-execution in this new image remain pending. Recipe and status are in
-`evidence/zc706/fresh-runtime-20261022`. No existing runtime image/tag or build
-cache was replaced.
+The2026-10-22 isolated OS installation completed successfully, image ID
+`2e0a9a1e2c7a005345c56340a9e83a18c9c8e84c362f86ecadb1d750464a295f`.
+A new virtualenv installed all eight locked external Python dependencies.
+Ten source repositories and the nextpnr metadata were prepared from pinned Git
+objects; all six source imports resolve inside the new tree. The preparation
+report uses generic wording about reused tools/runtime; in this trial the runtime
+and Python are freshly installed, and the new tree's `build/tools` symlink was
+explicitly switched to the freshly downloaded/extracted tool installation.
+
+A full synthesis/routing/assembly trial is now running offline in that fresh
+image with a7200-second bound and shared build lease. It has no migrated runtime
+mounts, no hardware access and no copied generated objects/chipdb. The previous
+project is mounted read-only as a source/asset cache. New outputs stay under
+`build/fresh-runtime-trial-20261022`. Completion/timing/configuration comparison
+remain pending. Recipe, package inventory, Python install log and preparation
+provenance are in `evidence/zc706/fresh-runtime-20261022`. Existing runtime tags,
+qualified bundles and hardware configuration remain unchanged.
