@@ -1,3 +1,8 @@
+> Reproduction update2026-10-22: full FPGA build in a freshly installed Debian,
+> fresh Python environment and freshly downloaded Yosys/openXC7 tools PASS.
+> Setup/hold PASS; configuration payload byte-identical to the physically
+> qualified ZC706 build. [Recipe and evidence](docs/zc706-integrated-fixed-yosys.md).
+
 > Fixed-Yosys integrated ZC706 qualification (2026-10-22): dual ADC→DDR,
 > both WR PLLs during capture, external SFP through switch **20/20 ICMP,
 > 350/350 byte-exact UDP**, zero new MAC/clock errors. SYS85.11/83.33MHz.

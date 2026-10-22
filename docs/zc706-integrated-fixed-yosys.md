@@ -191,12 +191,13 @@ report uses generic wording about reused tools/runtime; in this trial the runtim
 and Python are freshly installed, and the new tree's `build/tools` symlink was
 explicitly switched to the freshly downloaded/extracted tool installation.
 
-A full synthesis/routing/assembly trial is now running offline in that fresh
-image with a7200-second bound and shared build lease. It has no migrated runtime
+A full synthesis/routing/assembly trial completed offline in that fresh
+image (exit0) with a7200-second bound and shared build lease. It has no migrated runtime
 mounts, no hardware access and no copied generated objects/chipdb. The previous
 project is mounted read-only as a source/asset cache. New outputs stay under
-`build/fresh-runtime-trial-20261022`. Completion/timing/configuration comparison
-remain pending. Recipe, package inventory, Python install log and preparation
+`build/fresh-runtime-trial-20261022`. Setup/final hold passed; frames and the complete BIT configuration payload
+are byte-identical to the physically qualified build. Only the BIT header time
+differs. This is an offline reproduction, not another hardware test. Recipe, package inventory, Python install log and preparation
 provenance are in `evidence/zc706/fresh-runtime-20261022`. Existing runtime tags,
 qualified bundles and hardware configuration remain unchanged.
 
@@ -206,3 +207,14 @@ to the earlier isolated replay; generated Verilog is identical after removing
 comments (quoted strings preserved). Differences are generated timestamps and
 hierarchy comment ordering. This comparison is not final routing/timing proof.
 See `fresh-runtime-20261022/synthesis-comparison.json`.
+
+Final fresh-runtime result: **PASS**. SYS85.106/83.333MHz,
+ADC1 120.351/100MHz and ADC2 103.799/100MHz. Configuration payload SHA256
+`29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35`.
+Evidence: `fresh-runtime-20261022/comparison.json`, `manifest.json`,
+`timing.json`, `status.json` and compressed full build log. This closes the
+fresh OS/Python/tool installation and source-to-bitstream replay trial. Pinned
+source Git objects were reused; network re-download of every upstream source
+was not part of this trial. Existing hardware qualification and archive stay
+unchanged. Continuous ADC streaming, deterministic alignment and Kasli-SoC
+hardware qualification retain their separate pending status.

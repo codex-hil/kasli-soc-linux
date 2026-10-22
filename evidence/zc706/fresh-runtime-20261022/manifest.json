@@ -1,0 +1,82 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "integrated",
+  "nextpnr_seed": 3,
+  "yosys_no_srl": false,
+  "ddr_abc9": false,
+  "experimental_srl_timing": true,
+  "sfp_header_probes": false,
+  "prerouted_sha256": "754c50916bd2eebeb4991e140b8f1cc088647a770562e8114ddda0e5ebbf5ccf",
+  "ddr_serdes_sync_reset": true,
+  "sfp_refclk": "fclk",
+  "adc_cards": 2,
+  "reciprocal": true,
+  "wr_pll": true,
+  "wr_pll_cards": 2,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "d5b6cddca6271d3d6f482bd9545d040e78f9b31511ef49b8113138d9f71a40b4",
+  "commands": [
+    [
+      "/cache/build/fresh-tools-20261022/oss-cad-suite/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/trial/replay/build/zc706-integrated-srl-timing/nextpnr/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "-o",
+      "prerouted=/trial/replay/evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt",
+      "--router",
+      "router2",
+      "--seed",
+      "3",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/trial/replay/build/zc706-integrated/chipdb-cascade-hr/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/cache/build/fresh-tools-20261022/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/trial/replay/build/zc706-integrated/clock-db/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/cache/build/fresh-tools-20261022/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/trial/replay/build/zc706-integrated/clock-db/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "738393f2416bf37d9d14afc1dd7c3de15177f1a57bbd33f541ac327181aac181",
+    "top.fasm": "c5e95f1debb08b8206b91a640e86fce22efcc379910acb9e3ff39ebd6e1bc905",
+    "timing.json": "53161fea8145669b6d8e48cc621dc4a0edc1fa8734815f1850ed7ff09d92b710"
+  },
+  "assembly_resumed": false
+}

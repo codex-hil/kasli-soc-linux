@@ -1,0 +1,89 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "new_hardware_test": false,
+  "build_exit_code": 0,
+  "timing_passed": true,
+  "frames_identical": true,
+  "frames_sha256": "27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b",
+  "configuration_payload_identical": true,
+  "replay_bit": {
+    "a": "top.frames;Generator=xc7frames2bit",
+    "b": "xc7z045ffg900-2",
+    "c": "2026/10/22",
+    "d": "18:54:42",
+    "e": {
+      "bytes": 13321404,
+      "sha256": "29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35"
+    }
+  },
+  "qualified_bit": {
+    "a": "top.frames;Generator=xc7frames2bit",
+    "b": "xc7z045ffg900-2",
+    "c": "2026/10/22",
+    "d": "14:33:11",
+    "e": {
+      "bytes": 13321404,
+      "sha256": "29a86b08b362d2f5c764a159eead390a93aaf4afd61dc7f17f73fda097d39d35"
+    }
+  },
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 103.7990493774414,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 120.35142517089844,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "dmtd_with_deglitcher.clk_in_i": {
+      "achieved": 808.407470703125,
+      "constraint": 100
+    },
+    "eth_rx_clk": {
+      "achieved": 156.39662170410156,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 179.2114715576172,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1153.402587890625,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 69.8714370727539,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 217.72262573242188,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 358.0379638671875,
+      "constraint": 200
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 846.023681640625,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 1001.0009765625,
+      "constraint": 62.5
+    },
+    "sys_clk": {
+      "achieved": 85.10638427734375,
+      "constraint": 83.33333587646484
+    }
+  },
+  "scope": "fresh OS, fresh Python, fresh downloaded tools, source-only Git caches; no generated objects copied"
+}
