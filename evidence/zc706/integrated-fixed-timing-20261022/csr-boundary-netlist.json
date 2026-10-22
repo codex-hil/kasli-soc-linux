@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "keep_boundaries": [
+    "csr_address_next",
+    "csr_address_update"
+  ],
+  "ddr_pad_admission": "PASS",
+  "sfp_clock_admission": "PASS",
+  "netlist_sha256": "7d4f66d1ef99bda34417a3e3ecbd719434ae8f8b5d7f8a605cae2ee2d212c8ed",
+  "hardware_access": false,
+  "route_timing": "PENDING"
+}
