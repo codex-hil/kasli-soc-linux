@@ -164,6 +164,10 @@ The installer refuses an existing destination and verifies both archive hashes
 before extraction. It retains any failed extraction for diagnosis. Its manifest
 means extraction only; run the tools and a build before declaring installation
 qualified. This procedure leaves `build/tools` and the qualified bundle intact.
-A fresh download trial on Dell is staged in
-`build/fresh-tool-download-20261022`: openXC7 downloaded/verified; OSS CAD Suite
-was still downloading at this checkpoint. Downloading is not installation PASS.
+Fresh download/extraction trial on Dell completed for both locked archives in
+`build/fresh-tool-download-20261022` and `build/fresh-tools-20261022`.
+Fresh Yosys plus fresh Icarus passed both clock-enable regressions (SRL enabled
+and disabled). Fresh openXC7 assembly from the qualified FASM/database passed; generated
+frames are byte-identical (SHA256 `27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b`). This is tool installation/execution coverage, not a fresh
+OS installation or a second full synthesis/routing run. Evidence is under
+`evidence/zc706/fresh-tools-20261022`.

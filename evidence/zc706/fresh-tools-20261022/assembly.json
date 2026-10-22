@@ -1,0 +1,7 @@
+{
+  "hardware_access": false,
+  "frames_sha256": "27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b",
+  "reference_frames_sha256": "27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b",
+  "result": "PASS",
+  "scope": "fresh openXC7 assembly; reused qualified FASM and database"
+}

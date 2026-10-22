@@ -12,6 +12,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
     p.add_argument('--skip-trace',action='store_true',help='Skip version-specific late-pass snapshots')
     p.add_argument('--yosys',default='/usr/bin/yosys')
+    p.add_argument('--suite',type=Path,default=ROOT/'build/tools/oss-cad-suite',help='Suite providing iverilog and vvp')
     p.add_argument('--cells-sim',default='/usr/share/yosys/xilinx/cells_sim.v')
     a=p.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
     for name in ('shift.v','tb.v'):shutil.copyfile(ROOT/'diagnostics/yosys-srl-ce'/name,out/name)
@@ -27,7 +28,7 @@ def main():
         run([a.yosys,'-p',script],mode+'-yosys.log')
         cells=json.loads((out/(mode+'.json')).read_text())['modules']['shift']['cells']
         srls={n:{'type':c['type'],'parameters':c['parameters'],'connections':c['connections']} for n,c in cells.items() if 'SHREG' in c['type'] or c['type'].startswith('SRL')}
-        suite=ROOT/'build/tools/oss-cad-suite/bin'
+        suite=a.suite.resolve()/'bin'
         run([str(suite/'iverilog'),'-g2012','-s','tb','-o',mode+'.vvp','tb.v',mode+'.v',a.cells_sim],mode+'-compile.log')
         code=run([str(suite/'vvp'),mode+'.vvp'],mode+'-simulation.log',check=False)
         transcript=(out/(mode+'-simulation.log')).read_text()
