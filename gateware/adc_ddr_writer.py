@@ -29,6 +29,11 @@ class ADCToDDR(LiteXModule):
         self.fifo = stream.ClockDomainCrossing([('data', 512)],
             cd_from=domain, cd_to='sys', depth=fifo_depth, buffered=True,
             with_common_rst=True)
+        # Keep the full/valid boundary separate from wide BRAM control logic.
+        # It is also in the Gray write-pointer feedback path; folding it into
+        # distant payload logic produced an 8.94 ns routing delay at 100 MHz.
+        self.fifo.sink.ready.attr.add("keep")
+        self.fifo.sink.valid.attr.add("keep")
         self.writer = LiteDRAMDMAWriter(port, fifo_depth=16, fifo_buffered=True)
         # Local BRAM occupancy cuts native command-ready feedback without a
         # 512-bit skid register enable driven by distant bank-machine logic.

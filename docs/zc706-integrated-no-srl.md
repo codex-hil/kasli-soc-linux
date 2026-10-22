@@ -184,3 +184,12 @@ Evidence: `command-bram-stage1.log` and `command-bram-timing.json`.
 Next: isolate FIFO full/pointer feedback and evaluate a targeted change with
 the existing independent-clock, overflow and backpressure controls. No
 hardware programming has occurred; no clock requirement was relaxed.
+
+Next controlled mapping candidate preserves the ADC async-FIFO `sink.ready`
+and `sink.valid` nets with `keep`. The hypothesis is that separating the
+full/valid decision from shared wide BRAM control logic will improve locality
+of the Gray write-pointer feedback. This changes synthesis boundaries only;
+FIFO clocking, counters, handshake and overflow behavior are unchanged.
+No improvement is claimed yet. Full build is queued/running under
+`build/zc706-integrated-yosys-fixed-fifo-boundary`, seed3/router2. Inspect
+preserved nets and final ADC/SYS setup/hold before physical admission.
