@@ -1,0 +1,14 @@
+{
+  "result": "REJECTED_SETUP",
+  "sys_achieved_mhz": 77.31,
+  "sys_required_mhz": 83.333333,
+  "adc2_achieved_mhz": 99.0,
+  "adc2_required_mhz": 100,
+  "final_hold_violations": 0,
+  "sys_path_start": "adctoddr1_fifo_cdc_readable",
+  "sys_path_end": "storage_25.0.2.ADDRARDADDR8",
+  "sys_path_ns": 12.94,
+  "routing_ns": 11.62,
+  "hardware_access": false,
+  "next": "test local-occupancy command FIFO to cut DDR ready; stop seed search"
+}

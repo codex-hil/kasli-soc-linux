@@ -85,10 +85,11 @@ class ADCToDDR(LiteXModule):
         # pipeline, independently of command acceptance downstream. Preloading
         # an incrementing pointer removes base+words from the native command path.
         next_address = Signal(port.address_width)
-        # The BRAM output queue cuts upstream ready feedback. Register the
-        # complete address/data beat before presenting it to the DMA writer.
-        self.command_buffer = stream.Buffer(self.writer.sink.description,
-            pipe_valid=True, pipe_ready=False)
+        # Queue complete address/data beats using local occupancy. A forward
+        # register alone propagates DDR command-ready into output BRAM enable.
+        self.command_buffer = stream.SyncFIFO(self.writer.sink.description,
+            depth=16, buffered=True)
+        use_block_ram(self.command_buffer)
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
