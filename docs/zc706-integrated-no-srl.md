@@ -278,3 +278,13 @@ checkout is unchanged. The exact overlay passed all11 AXI bridge tests
 Full build is running under `build/zc706-integrated-yosys-fixed-axi-pipeline`,
 seed3/router2 with unchanged clocks; `AXI_BEAT_BUFFERED=1` marks the candidate.
 Its timing and physical validation are pending.
+
+AXI-pipeline route rejected: SYS79.64MHz, ADC1 126.42MHz,
+ADC2 138.85MHz, final hold0. The12.56ns critical path now runs from ADC2
+output-queue occupancy to the asynchronous FIFO BRAM lookahead address.
+The next candidate adds upstream stream.Buffer with pipe_valid/pipe_ready
+between CDC source and output queue. The completion/drain predicate includes
+this additional buffer, preserving queued data across stop/rearm. Existing
+dual-clock/backpressure/overflow tests are running before a new build.
+Evidence: `evidence/zc706/axi-beat-buffer-20261022/pipeline-timing.json`.
+No timing-qualified replacement or physical test is claimed.
