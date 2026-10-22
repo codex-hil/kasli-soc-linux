@@ -140,8 +140,19 @@ def test_mac_loopback(full_core=False):
         top.submodules.mac = mac = LiteEthMAC(phy, dw=8, with_sys_datapath=True,
             tx_cdc_depth=512, rx_cdc_depth=512, with_store_and_forward=True)
     top.submodules.test = dut = PacketTest(mac.crossbar.get_port(0x88b5))
+    if full_core:
+        top.submodules.tx_capture = tx_capture = MACFrameSnapshot(mac.packetizer.sink)
+        top.submodules.rx_capture = rx_capture = MACFrameSnapshot(mac.depacketizer.source)
     def run():
         for shot in range(3):
+            if full_core:
+                for capture in (tx_capture, rx_capture):
+                    yield capture.arm.storage.eq(1)
+                    yield capture.arm.re.eq(1)
+                yield
+                for capture in (tx_capture, rx_capture):
+                    yield capture.arm.re.eq(0)
+                yield
             yield dut.start.storage.eq(1)
             yield dut.start.re.eq(1)
             yield
@@ -156,6 +167,12 @@ def test_mac_loopback(full_core=False):
             assert (yield dut.errors.status) == 0
             assert (yield mac.core.rx_datapath.crc_errors.status) == 0
             assert (yield mac.core.rx_datapath.preamble_errors.status) == 0
+            if full_core:
+                for capture in (tx_capture, rx_capture):
+                    assert (yield capture.valid.status) == 1
+                    assert (yield capture.ethernet_type.status) == 0x88b5
+                    assert (yield capture.payload_bytes.status) == 64
+                    assert (yield capture.error.status) == 0
     fragment = top.get_fragment()
     for special in fragment.specials:
         if isinstance(special, Memory):

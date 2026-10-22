@@ -1,0 +1,21 @@
+{
+  "hardware_access": false,
+  "captures": {
+    "tx": {
+      "available": true,
+      "valid": true,
+      "target_mac": "02:c0:de:70:60:01",
+      "sender_mac": "02:c0:de:70:60:01",
+      "ethernet_type": "0x88b5",
+      "payload_bytes": 64,
+      "error": 0
+    },
+    "rx": {
+      "available": true,
+      "valid": false
+    }
+  },
+  "both_captured": false,
+  "headers_match": null,
+  "scope": "Frozen header comparison only; payload bytes were not captured"
+}
