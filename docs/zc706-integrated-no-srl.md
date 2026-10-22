@@ -141,3 +141,11 @@ SyncFIFO forced to BRAM, retaining independent ADC CDC and the registered
 address/data command beat. Existing dual-clock capture/backpressure/overflow/
 rearm/configuration simulation is running; replacement routing and hardware
 validation remain pending. The qualified no-SRL image is unchanged.
+
+BRAM queue simulation PASS: independent ADC clocks, repeated capture/reset,
+command/data stalls, overflow, frame failure, real input path and invalid
+configuration. See `bram-simulation.json` in the timing evidence directory.
+Replacement build is running under `build/zc706-integrated-yosys-fixed-bram`
+with the same pinned Yosys, seed3/router2 and SRL timing model. The earlier
+failed route is retained in its original directory. Timing and physical
+qualification of the BRAM candidate remain pending.

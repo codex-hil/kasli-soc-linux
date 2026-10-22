@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "command": "dell-build run kasli-linux build/python/bin/python tools/test_adc_ddr.py",
+  "exit_code": 0,
+  "hardware_access": false,
+  "checks": [
+    "independent ADC clocks",
+    "consecutive captures and ADC reset",
+    "command/data stalls",
+    "overflow",
+    "frame failure",
+    "real-data path",
+    "invalid configuration"
+  ],
+  "source_sha256": {
+    "gateware/adc_ddr_writer.py": "0776d4b4758198c79bbd5eed43816e15de0eb29b49ba55e23b1a4ac95d6affc7",
+    "tools/test_adc_ddr.py": "90daa74f79dab6f8e6fa53c20482f8877136026a45f22848b90ef1922d3fba70"
+  },
+  "routing_timing": "PENDING"
+}
