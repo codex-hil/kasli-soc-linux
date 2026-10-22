@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "cdc_buffer_net_count": 32,
+  "ddr_pad_admission": "PASS",
+  "sfp_clock_admission": "PASS",
+  "csr_entries_equal": 236,
+  "new_constants": {
+    "axi_beat_buffered": 1
+  },
+  "netlist_sha256": "02a6b9340476974ff47c4ce8cfa0fd94de5f71b04b5e641086882e31eb276a9f",
+  "timing": "PENDING"
+}
