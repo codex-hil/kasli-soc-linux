@@ -218,3 +218,17 @@ source Git objects were reused; network re-download of every upstream source
 was not part of this trial. Existing hardware qualification and archive stay
 unchanged. Continuous ADC streaming, deterministic alignment and Kasli-SoC
 hardware qualification retain their separate pending status.
+
+## Internal loopback follow-up (2026-10-22)
+
+A bounded physical run of the same qualified bitstream passed Linux boot and
+three whole1GiB DDR BIST passes. Near-end PMA loopback acquired GTX/PCS status127,
+with measured TX/RX approximately125MHz and zero clock faults. Packet0 was not
+received: TX1, test RX0, MAC RX211, CRC1 and preamble185 at failure. Internal
+loopback is **FAIL**, not a successful packet test. The wrapper restored the
+golden image and repeated three whole1GiB DDR BIST passes; lease release was
+verified. Final management DHCP is recorded in the validation report.
+No SD/QSPI/boot-environment writes. External switch qualification remains the
+separate earlier PASS. Evidence: `evidence/zc706/integrated-internal-20261022`.
+Next compare the loopback control and packet path with the earlier successful
+internal diagnostic before changing GTX configuration or drawing a HW conclusion.
