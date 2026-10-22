@@ -233,3 +233,12 @@ interrupted stage1 log ends during routing; it is retained as
 source under the shared build lease into
 `build/zc706-integrated-yosys-fixed-csr-boundary-retry/gateware`.
 No partial route is reused or admitted. Final timing remains pending.
+
+CSR-boundary retry is rejected: SYS79.70MHz, ADC1 123.73MHz, ADC2 145.41MHz,
+final hold0. The12.55ns path now runs from Ethernet TX CDC Gray pointer to
+MAC grant state (10.30ns routing). The CSR keep experiment was reverted.
+The next mapping candidate preserves MAC core sink.ready, retaining the
+buffered bank queues and ADC boundaries. Full build is running under
+`build/zc706-integrated-yosys-fixed-mac-boundary`, seed3/router2. It changes
+only a synthesis boundary; timing benefit remains unproven. Evidence:
+`csr-boundary-stage1.log` and `csr-boundary-timing.json`. No hardware access.

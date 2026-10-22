@@ -1,0 +1,14 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 79.7,
+  "required_sys_mhz": 83.333333,
+  "adc1_mhz": 123.73,
+  "adc2_mhz": 145.41,
+  "final_hold_violations": 0,
+  "critical_ns": 12.55,
+  "critical_start": "mac_core_txdatapath_cdc_graycounter0_q[9]",
+  "critical_end": "subfragments_liteethmac_grant D",
+  "routing_ns": 10.3,
+  "hardware_access": false,
+  "next": "revert CSR keep experiment; preserve MAC input ready boundary"
+}

@@ -228,6 +228,9 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
             csr.status.eq(csr.status + 1))
     # Observe ARP resolution without changing upstream state machines.
+    # Keep the MAC backpressure decision separate from arbitration logic.
+    # The integrated critical path ran from TX CDC full to MAC grant state.
+    self.ethcore.mac.core.sink.ready.attr.add("keep")
     arp = self.ethcore.arp
     for name, condition in (
         ("arp_requests", arp.rx.source.valid & arp.rx.source.request),
