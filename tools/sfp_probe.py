@@ -191,6 +191,12 @@ def loopback_test(r, count, mode="pma"):
         if time.monotonic() > deadline:
             raise TimeoutError(f"GTX/PCS loopback did not lock: {status(r)}")
         time.sleep(.01)
+    # Snapshot the first complete MAC frame after explicit arming, if present.
+    # No clear-on-read, no dependence on repeated MMIO polling timing.
+    for direction in ("tx", "rx"):
+        arm = "mac_status_" + direction + "_capture_arm"
+        if arm in r.map["csr_registers"]:
+            r.write(arm, 1)
     before = status(r)
     for n in range(count):
         r.write("packet_test_start", 1)

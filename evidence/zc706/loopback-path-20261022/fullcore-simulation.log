@@ -1,0 +1,3 @@
+PASS: 64-byte numbered MAC payload, TX stalls, repeated CSR triggers, corrupt data, short frame and RX error
+PASS: MAC loopback with 50 MHz system and 125 MHz PHY clocks
+PASS: full UDP/IP core with ARP/ICMP/UDP echo and test EtherType loopback with 50 MHz system and 125 MHz PHY clocks

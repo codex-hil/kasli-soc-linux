@@ -302,3 +302,18 @@ and standalone MAC byte-loopback tests passed on Dell. Full-core simulation
 is still running with a240-second bound. It models MAC/CRC/CDC byte traffic,
 not PCS symbols or analog GTX. No hardware accessed during this audit.
 Evidence: `loopback-path-20261022`.
+
+Full UDP/IP core loopback simulation finished **PASS**, including all three
+numbered64-byte packets through the MAC/CRC/CDC path with ARP/ICMP/UDP users.
+This does not model PCS symbols/GTX or prove the synthesized hardware behaves
+identically. The next diagnostic adds passive TX/RX `MACFrameSnapshot` observers
+under `header_probes`: arm explicitly, ignore fragments until next first beat,
+freeze the first complete frame's EtherType, split32 source/destination MAC,
+payload length and error. Counters are observed at packetizer input/depacketizer
+output, before MAC crossbar receive filtering. MMIO can read the frozen result.
+Rearm/fragment rejection/length/error/freeze simulation PASS. The loopback probe
+arms observers before starting packet transmission, when those CSRs are present.
+Separate SFP build `zc706-sfp-frame-capture-20261022` is running, with header
+probes enabled. No timing admission or hardware result yet; golden unchanged.
+Evidence: `loopback-path-20261022/fullcore-simulation.log`, snapshot simulation
+and status. No hardware access in this step.

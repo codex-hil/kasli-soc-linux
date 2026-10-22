@@ -75,6 +75,37 @@ class PacketTest(LiteXModule):
         ]
 
 
+class MACFrameSnapshot(LiteXModule):
+    """Passive first-complete-frame snapshot after explicit software arming."""
+    def __init__(self, endpoint):
+        self.arm = CSRStorage(1, name="arm")
+        self.valid = CSRStatus(1, name="valid")
+        self.ethernet_type = CSRStatus(32, name="ethernet_type")
+        self.target_lo = CSRStatus(32, name="target_lo")
+        self.target_hi = CSRStatus(32, name="target_hi")
+        self.sender_lo = CSRStatus(32, name="sender_lo")
+        self.sender_hi = CSRStatus(32, name="sender_hi")
+        self.payload_bytes = CSRStatus(32, name="payload_bytes")
+        self.error = CSRStatus(1, name="error")
+        active = Signal()
+        started = Signal()
+        count = Signal(16)
+        bad = Signal()
+        self.sync += If(self.arm.re & self.arm.storage,
+            active.eq(1), started.eq(0), self.valid.status.eq(0), count.eq(0), bad.eq(0)
+        ).Elif(active & endpoint.valid & endpoint.ready & (started | endpoint.first),
+            started.eq(1), count.eq(count + 1), bad.eq(bad | endpoint.error),
+            If(endpoint.last,
+                active.eq(0), self.valid.status.eq(1),
+                self.ethernet_type.status.eq(endpoint.ethernet_type),
+                self.target_lo.status.eq(endpoint.target_mac[:32]),
+                self.target_hi.status.eq(endpoint.target_mac[32:]),
+                self.sender_lo.status.eq(endpoint.sender_mac[:32]),
+                self.sender_hi.status.eq(endpoint.sender_mac[32:]),
+                self.payload_bytes.status.eq(count + 1),
+                self.error.status.eq(bad | endpoint.error)))
+
+
 class Diagnostics(LiteXModule):
     def __init__(self, phy, si5324, tx_enable, fabric_refclk=False, local_refclk=False, clock_monitors=True):
         self.control = CSRStorage(5, reset=8, name="control")
@@ -231,6 +262,9 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         setattr(self.mac_status, name, csr)
         self.sync += If(endpoint.valid & endpoint.ready & endpoint.last,
             csr.status.eq(csr.status + 1))
+    if header_probes:
+        self.mac_status.tx_capture = MACFrameSnapshot(self.ethcore.mac.packetizer.sink)
+        self.mac_status.rx_capture = MACFrameSnapshot(self.ethcore.mac.depacketizer.source)
     # Observe ARP resolution without changing upstream state machines.
     arp = self.ethcore.arp
     for name, condition in (

@@ -10,7 +10,7 @@ from liteeth.mac import LiteEthMAC
 from liteeth.core import LiteEthUDPIPCore
 from liteeth.common import eth_phy_description
 from litex.soc.interconnect import stream
-from zc706_sfp import PacketTest, MAC
+from zc706_sfp import PacketTest, MAC, MACFrameSnapshot
 
 
 def test():
@@ -58,6 +58,53 @@ def test():
             assert (yield dut.errors.status) == shot
     run_simulation(top, run())
     print("PASS: 64-byte numbered MAC payload, TX stalls, repeated CSR triggers, corrupt data, short frame and RX error")
+
+
+def test_snapshot():
+    top = Module()
+    port = LiteEthMACUserPort(8)
+    top.submodules.snapshot = dut = MACFrameSnapshot(port.source)
+    def run():
+        yield port.source.ready.eq(1)
+        for shot in range(2):
+            yield dut.arm.storage.eq(1)
+            yield dut.arm.re.eq(1)
+            yield
+            yield dut.arm.re.eq(0)
+            yield port.source.valid.eq(1)
+            yield port.source.first.eq(0)  # Ignore an in-flight fragment.
+            yield port.source.last.eq(1)
+            yield
+            yield port.source.valid.eq(0)
+            yield
+            assert (yield dut.valid.status) == 0
+            for n in range(4):
+                yield port.source.valid.eq(1)
+                yield port.source.first.eq(n == 0)
+                yield port.source.last.eq(n == 3)
+                yield port.source.ethernet_type.eq(0x88b5 + shot)
+                yield port.source.target_mac.eq(MAC)
+                yield port.source.sender_mac.eq(MAC + 1)
+                yield port.source.error.eq(n == 1 and shot == 1)
+                yield
+            yield port.source.valid.eq(0)
+            yield
+            assert (yield dut.valid.status) == 1
+            assert (yield dut.payload_bytes.status) == 4
+            assert (yield dut.ethernet_type.status) == 0x88b5 + shot
+            assert (yield dut.error.status) == shot
+            assert (yield dut.target_lo.status) == MAC & 0xffffffff
+            assert (yield dut.sender_hi.status) == (MAC + 1) >> 32
+            yield port.source.valid.eq(1)
+            yield port.source.first.eq(1)
+            yield port.source.last.eq(1)
+            yield port.source.ethernet_type.eq(0)
+            yield
+            yield port.source.valid.eq(0)
+            yield
+            assert (yield dut.ethernet_type.status) == 0x88b5 + shot
+    run_simulation(top, run())
+    print("PASS: passive frame snapshot rearm, fragment rejection, length, errors and freeze")
 
 
 def test_mac_loopback(full_core=False):
@@ -125,6 +172,7 @@ def test_mac_loopback(full_core=False):
 
 
 if __name__ == "__main__":
+    test_snapshot()
     test()
     test_mac_loopback()
     test_mac_loopback(full_core=True)

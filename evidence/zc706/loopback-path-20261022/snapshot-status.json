@@ -1,0 +1,10 @@
+{
+  "result": "SIMULATION_PASS_BUILD_RUNNING",
+  "session": 45922,
+  "hardware_access": false,
+  "output": "build/zc706-sfp-frame-capture-20261022/gateware",
+  "snapshot": "first complete frame after arm; rejects partial frame; frozen until rearm",
+  "diagnostic": "TX and RX EtherType, source/destination MAC split32, payload byte count and error",
+  "timing": "PENDING",
+  "hardware": "NOT_RUN"
+}

@@ -1,10 +1,11 @@
 {
-  "result": "RUNNING_NOT_QUALIFIED",
+  "result": "PASS",
   "session": 58029,
   "timeout_seconds": 240,
   "packet_generator_regression": "PASS",
   "standalone_mac_loopback": "PASS",
-  "full_udp_ip_core_loopback": "RUNNING",
+  "full_udp_ip_core_loopback": "PASS",
   "hardware_access": false,
-  "scope": "byte PHY loopback, no PCS symbol or GTX analog model"
+  "scope": "byte PHY loopback, no PCS symbol or GTX analog model",
+  "exit_code": 0
 }
