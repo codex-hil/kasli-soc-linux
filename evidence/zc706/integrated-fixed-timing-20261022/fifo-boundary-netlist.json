@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "keep_boundaries": [
+    "adctoddr0_fifo_sink_sink_ready",
+    "adctoddr0_fifo_sink_sink_valid",
+    "adctoddr1_fifo_sink_sink_ready",
+    "adctoddr1_fifo_sink_sink_valid"
+  ],
+  "ddr_pad_admission": "PASS",
+  "sfp_clock_admission": "PASS",
+  "netlist_sha256": "4595298437acf3e492ddae0798525760b4caa6e8b8785e29b734bc235907a08e",
+  "final_route_timing": "PENDING"
+}
