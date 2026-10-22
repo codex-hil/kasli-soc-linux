@@ -2,7 +2,7 @@
 .NOTPARALLEL:
 BOARD ?= kasli-soc
 SFP_REFCLK ?= si5324
-ENV = python3 tools/environment.py
+ENV ?= python3 tools/environment.py
 bootstrap:
 	$(ENV) python3 tools/image.py bootstrap --board $(BOARD)
 pl:
@@ -148,3 +148,9 @@ integrated-qualified-software:
 	$(ENV) build/zc706/buildroot/host/bin/arm-linux-gcc -shared -fPIC -O2 -Wall -Wextra -Werror software/wr_pll/i2c.c -o $(INTEGRATED_QUALIFIED_DIR)/i2c.so
 integrated-qualified-package:
 	python3 tools/package_integrated.py --work-dir $(INTEGRATED_QUALIFIED_DIR)
+
+# Fixed-Yosys/SRL timing configuration physically qualified on 2026-10-22.
+INTEGRATED_FIXED_DIR ?= build/zc706-integrated-yosys-fixed-cdc-ready
+.PHONY: integrated-fixed-pl
+integrated-fixed-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --ddr-sync-reset --no-header-probes --srl-timing --seed 3 --router router2 --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt --output-dir $(INTEGRATED_FIXED_DIR)/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys

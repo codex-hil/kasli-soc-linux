@@ -94,13 +94,11 @@ The backend cache paths have generators: baseline nextpnr is built by
 preparers before relinking. Chipdb and WR HDL also have generators.
 Their presence in the qualified cache is not itself a clean-replay result.
 
-Remaining proof: rebuild in a fresh isolated build directory without copying
-nextpnr objects or generated chipdb; preseed pinned Git submodule objects for
-the offline runtime; ensure Python resolves the isolated checkouts rather
-than old editable-install paths; record OS/compiler package versions. Runtime
-image is pinned but the bootstrap apt package list does not pin individual
-package versions. Do not delete the working caches to perform this test.
-Evidence: `evidence/zc706/integrated-fixed-cdc-20261022/bootstrap-audit.json`.
+The isolated source/object-cache replay described below completed successfully.
+The environment bootstrap pins a dated Debian snapshot (20261005T000000Z)
+as well as the base image digest. Exact installed versions are captured in
+`evidence/zc706/clean-replay-20261022/runtime-versions.txt`. They describe the
+reused Dell runtime, not a freshly installed runtime validation.
 
 Replay preparation2026-10-22: Dell has186GiB free. A Git archive snapshot
 was expanded into `build/clean-replay-a903dc6`; ten required PL source
@@ -110,16 +108,11 @@ All six Python source libraries resolve inside the isolated tree. Only the
 existing runtime/interpreter and pinned tool asset cache are reused.
 The first preparation exposed absent Git metadata in some migrated source
 copies; source bundles resolve this without changing those copies.
-Full isolated replay is running with seed3/router2 and the qualified clock
-settings. Preparation is not build success; evidence:
+Full isolated replay completed with seed3/router2 and the qualified clock
+settings. Preparation provenance:
 `evidence/zc706/clean-replay-20261022/preparation.json` and `source-bundles.json`.
 The standalone preparer is `tools/prepare_clean_replay.py`; it refuses an
 existing destination and verifies source revisions/tool archive markers.
-
-Replay progress: fresh baseline/derived nextpnr compilation, chipdb generation
-and Yosys synthesis have completed. nextpnr is refining placement. Routing,
-final timing and bitstream comparison remain pending; this is not a replay
-PASS. See `evidence/zc706/clean-replay-20261022/progress.json`.
 
 Final isolated replay: **PASS** (process exit0). Fresh nextpnr objects, chipdb,
 Yosys synthesis, routing and bitstream assembly completed without Vivado.
@@ -134,3 +127,26 @@ it does not yet prove fresh OS/package/tool installation from the network.
 Evidence: clean-replay `manifest.json`, `timing.json`, `comparison.json`,
 `payload.json`. Next record runtime/compiler versions and close bootstrap
 installation documentation; preserve the qualified bundle unchanged.
+
+## Installation and one-command PL build
+
+On a separate build machine with Docker, `make bootstrap BOARD=zc706` creates
+its project-local environment, fetches locked sources and verifies tool archive
+SHA256 values. This downloads all source entries, including optional projects.
+Do not run that Docker environment bootstrap inside the shared Dell runtime.
+After bootstrap, `make integrated-fixed-pl` builds this configuration.
+For the prepared shared Dell environment use:
+
+```sh
+dell-build sync kasli-linux
+dell-build run kasli-linux make integrated-fixed-pl ENV=
+```
+
+`ENV=` selects the already prepared runtime instead of nesting Docker. The
+legacy `integrated-pl`/`integrated-qualified-pl` targets retain their historical
+settings; use `integrated-fixed-pl` for the fixed-Yosys configuration. Override
+`INTEGRATED_FIXED_DIR` to retain separate trials. The isolated replay has
+validated source-to-configuration reproduction; a newly downloaded and installed
+runtime/toolchain has **not** yet been tested. The snapshot repository and tool
+release URLs remain external availability dependencies. Installed system Yosys
+0.52 is listed in the inventory but is not used by this target.
