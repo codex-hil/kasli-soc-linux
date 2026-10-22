@@ -1,0 +1,208 @@
+{
+  "scope": "static/bootstrap inventory; not a clean build qualification",
+  "hardware_access": false,
+  "clean_replay_executed": false,
+  "nextpnr_prepare_chain": [
+    "srl_nextpnr",
+    "integrated_nextpnr",
+    "sfp_nextpnr",
+    "adc_ddr_nextpnr",
+    "adc_nextpnr",
+    "ddr_nextpnr"
+  ],
+  "sources": [
+    {
+      "name": "artiq",
+      "expected": "7d7b85f377e0c172ae3496f0c03cfb6cb85ba022",
+      "actual": "7d7b85f377e0c172ae3496f0c03cfb6cb85ba022",
+      "pinned_match": true
+    },
+    {
+      "name": "openXC7",
+      "expected": "092acc1e4599a0892fe02937a15928e137ad592d",
+      "actual": "092acc1e4599a0892fe02937a15928e137ad592d",
+      "pinned_match": true
+    },
+    {
+      "name": "litex-boards",
+      "expected": "10debf146d433ce8ac8aedcac84e97d252ff4d5b",
+      "actual": "10debf146d433ce8ac8aedcac84e97d252ff4d5b",
+      "pinned_match": true
+    },
+    {
+      "name": "GenZ",
+      "expected": "842a8f6471bd0b0765f24bc2eaaa1d8f82347dde",
+      "actual": "842a8f6471bd0b0765f24bc2eaaa1d8f82347dde",
+      "pinned_match": true
+    },
+    {
+      "name": "toolchain-installer",
+      "expected": "0cb31563418a2cfec44d68d7d0836e000d73fba6",
+      "actual": "0cb31563418a2cfec44d68d7d0836e000d73fba6",
+      "pinned_match": true
+    },
+    {
+      "name": "kasli-hardware",
+      "expected": "6a9c5adf05ce6058f390d7213dca6664278fecb2",
+      "actual": "6a9c5adf05ce6058f390d7213dca6664278fecb2",
+      "pinned_match": true
+    },
+    {
+      "name": "u-boot",
+      "expected": "a6ab6a66146ed0bf1420db0ee858b49005783222",
+      "actual": "a6ab6a66146ed0bf1420db0ee858b49005783222",
+      "pinned_match": true
+    },
+    {
+      "name": "nextpnr",
+      "expected": "c68c13582e972292c86a5025140d52e713384cbc",
+      "actual": "c68c13582e972292c86a5025140d52e713384cbc",
+      "pinned_match": true
+    },
+    {
+      "name": "artiq-zynq",
+      "expected": "15c856f315969b5c1d01d2917ed52f1b0f199677",
+      "actual": "15c856f315969b5c1d01d2917ed52f1b0f199677",
+      "pinned_match": true
+    },
+    {
+      "name": "migen",
+      "expected": "e19524c963a8342952840983047557707fbe0b6a",
+      "actual": "e19524c963a8342952840983047557707fbe0b6a",
+      "pinned_match": true
+    },
+    {
+      "name": "yosys",
+      "expected": "0e8336b4e2659efb40c2b8751c7619f69c358137",
+      "actual": "0e8336b4e2659efb40c2b8751c7619f69c358137",
+      "pinned_match": true
+    },
+    {
+      "name": "litex",
+      "expected": "8c01073afb71aa0a0709f02f8e24247589e8f5e4",
+      "actual": "8c01073afb71aa0a0709f02f8e24247589e8f5e4",
+      "pinned_match": true
+    },
+    {
+      "name": "migen-axi",
+      "expected": "3ec01e9cbdcb25ff3dac6eaedb8a0c6e98b0769a",
+      "actual": "3ec01e9cbdcb25ff3dac6eaedb8a0c6e98b0769a",
+      "pinned_match": true
+    },
+    {
+      "name": "mkbootimage",
+      "expected": "521a7b059b88a75bbce3a3481ae83385d8e71bc9",
+      "actual": "521a7b059b88a75bbce3a3481ae83385d8e71bc9",
+      "pinned_match": true
+    },
+    {
+      "name": "prjxray",
+      "expected": "9553f1ad53c18ba5d5246a7dd10a718da9a9b20c",
+      "actual": "9553f1ad53c18ba5d5246a7dd10a718da9a9b20c",
+      "pinned_match": true
+    },
+    {
+      "name": "zynq-rs",
+      "expected": "e825ca79c6b01e068df0e8078b77ee017c54a485",
+      "actual": "e825ca79c6b01e068df0e8078b77ee017c54a485",
+      "pinned_match": true
+    },
+    {
+      "name": "buildroot",
+      "expected": "cdddb871d385ef0549819d1dbcffd24a58277181",
+      "actual": "cdddb871d385ef0549819d1dbcffd24a58277181",
+      "pinned_match": true
+    },
+    {
+      "name": "linux",
+      "expected": "a90ee4305c4a5df72c11b31dacfdc76e00fcf78a",
+      "actual": "a90ee4305c4a5df72c11b31dacfdc76e00fcf78a",
+      "pinned_match": true
+    },
+    {
+      "name": "fmc-adc-100m14b4cha-gw",
+      "expected": "f08eb4cde093d4753d6b01928298317994047557",
+      "actual": "f08eb4cde093d4753d6b01928298317994047557",
+      "pinned_match": true
+    },
+    {
+      "name": "fmc-adc-100m14b4cha-sw",
+      "expected": "949cbe3f687f0828a16dea18d83b331eceb5f8f4",
+      "actual": "949cbe3f687f0828a16dea18d83b331eceb5f8f4",
+      "pinned_match": true
+    },
+    {
+      "name": "litedram",
+      "expected": "74522f715d7b10163ef6f6caa09887a90874be83",
+      "actual": "74522f715d7b10163ef6f6caa09887a90874be83",
+      "pinned_match": true
+    },
+    {
+      "name": "liteeth",
+      "expected": "e3ebe03be76f33e0c2b2a024a1d0f19c99b7e96a",
+      "actual": "e3ebe03be76f33e0c2b2a024a1d0f19c99b7e96a",
+      "pinned_match": true
+    },
+    {
+      "name": "liteiclink",
+      "expected": "6e69216944e94c69f5a7d58d5c6d75dc3d754242",
+      "actual": "6e69216944e94c69f5a7d58d5c6d75dc3d754242",
+      "pinned_match": true
+    },
+    {
+      "name": "prjxray-db",
+      "expected": "75825f2e66e16a40a51cf1cfa61afb21f5958afe",
+      "actual": "75825f2e66e16a40a51cf1cfa61afb21f5958afe",
+      "pinned_match": true
+    },
+    {
+      "name": "wr-cores-afcz-v5",
+      "expected": "0f8fbced87988254f5c9ca55c0e04585b29b485c",
+      "actual": "0f8fbced87988254f5c9ca55c0e04585b29b485c",
+      "pinned_match": true
+    },
+    {
+      "name": "wrpc-sw-wrs-v4",
+      "expected": "c3f553d267f3b8bad4f4ff6c321cf214ab09b97a",
+      "actual": "c3f553d267f3b8bad4f4ff6c321cf214ab09b97a",
+      "pinned_match": true
+    },
+    {
+      "name": "general-cores-wr",
+      "expected": "20f990e96f9293e597f48789e85de0fda3f17d2c",
+      "actual": "20f990e96f9293e597f48789e85de0fda3f17d2c",
+      "pinned_match": true
+    }
+  ],
+  "generated_cache_rebuilders": {
+    "build/zc706-ddr/nextpnr-build": "tools/ddr_nextpnr.py: CMake configure/build from pinned nextpnr",
+    "build/zc706-adc/nextpnr-term": "tools/adc_nextpnr.py: baseline then isolated patch/relink",
+    "build/zc706-adc-ddr/nextpnr-hold": "tools/adc_ddr_nextpnr.py: ADC baseline then isolated patch/relink",
+    "build/zc706-sfp/nextpnr": "tools/sfp_nextpnr.py: hold baseline then GTX patches",
+    "build/zc706-integrated-srl-timing/nextpnr": "tools/srl_nextpnr.py: integrated backend plus SDF model",
+    "build/wr-ddmtd": "tools/build_wr_ddmtd.py: GHDL translation",
+    "build/zc706-ddr/chipdb": "tools/ddr_chipdb.py: metadata submodule and chipdb generation"
+  },
+  "tool_archives": {
+    "openxc7": {
+      "url": "https://github.com/cavearr/toolchain-openxc7-releases/releases/download/2026-10-03/openxc7-toolchain-linux-x86-64-20261003.tgz",
+      "sha256": "5ad99cfbc3f4309f10e650e39d17a5e551cd6838ab0bf473de86c00630d9e775"
+    },
+    "oss-cad-suite": {
+      "url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-05/oss-cad-suite-linux-x64-20261005.tgz",
+      "sha256": "0c432bb689ba2aaea76d4c38fa6e7b3a81b1123e00d437bfae8c96b292bc6824"
+    }
+  },
+  "prerequisites": [
+    "Container/runtime OS development packages from tools/environment.py",
+    "Pinned source checkouts and nextpnr metadata submodule (network or preseeded Git objects)",
+    "Python environment from tools/image.py bootstrap",
+    "Pinned openXC7 and OSS CAD Suite archives; GHDL and C++/CMake toolchain"
+  ],
+  "remaining_proof": [
+    "Fresh isolated build directory with no copied generated nextpnr objects/chipdb",
+    "Verify Python imports resolve isolated checkouts, not existing editable install paths",
+    "Record runtime package/compiler versions; package names alone are not immutable pins",
+    "Rebuild and compare admitted timing/netlist/bitstream; hardware equivalence only after admission"
+  ]
+}

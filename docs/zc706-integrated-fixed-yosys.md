@@ -78,3 +78,26 @@ python3 tools/package_integrated.py \
 
 The packager rejects mismatched bitstreams/software or absent core/restoration
 proof and emits SHA256SUMS. Preserve the earlier qualified no-SRL bundle.
+
+## Clean-checkout audit
+
+Run the read-only inventory without hardware access:
+
+```sh
+python3 tools/audit_integrated_bootstrap.py \
+  --output /tmp/zc706-bootstrap-audit.json
+```
+
+The2026-10-22 audit confirms27/27 source revisions match the lock file.
+The backend cache paths have generators: baseline nextpnr is built by
+`ddr_nextpnr.py`; ADC, hold, GTX, integrated and SRL layers call their base
+preparers before relinking. Chipdb and WR HDL also have generators.
+Their presence in the qualified cache is not itself a clean-replay result.
+
+Remaining proof: rebuild in a fresh isolated build directory without copying
+nextpnr objects or generated chipdb; preseed pinned Git submodule objects for
+the offline runtime; ensure Python resolves the isolated checkouts rather
+than old editable-install paths; record OS/compiler package versions. Runtime
+image is pinned but the bootstrap apt package list does not pin individual
+package versions. Do not delete the working caches to perform this test.
+Evidence: `evidence/zc706/integrated-fixed-cdc-20261022/bootstrap-audit.json`.
