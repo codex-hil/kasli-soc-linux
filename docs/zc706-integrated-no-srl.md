@@ -218,3 +218,11 @@ with keep; no extra cycle or handshake change. Existing450-transaction
 cycle-exact ACK/read/storage comparison PASS. Full seed3/router2 build
 is running under `build/zc706-integrated-yosys-fixed-csr-boundary`.
 Timing improvement is a hypothesis; hardware qualification remains pending.
+
+CSR-boundary build interruption: the remote SSH launcher exited255 after
+`Connection ... closed by remote host`. Two readback attempts returned
+`No route to host` for Dell192.168.2.7. Completion, remote process state and
+final timing are UNKNOWN. Do not infer synthesis/routing failure or success
+from the transport exit code, and do not start a duplicate build until the
+remote process state is inspected. No ZC706 access occurred. Reconnect Dell,
+recover logs/artifacts, then perform normal timing and netlist admission.

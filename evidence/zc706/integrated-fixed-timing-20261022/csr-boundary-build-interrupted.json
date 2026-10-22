@@ -1,0 +1,13 @@
+{
+  "result": "INCONCLUSIVE",
+  "hardware_access": false,
+  "build_session": 58462,
+  "launcher_exit_code": 255,
+  "last_error": "Connection to 192.168.2.7 closed by remote host",
+  "readback_attempts": 2,
+  "readback_error": "ssh: connect to host 192.168.2.7 port 22: No route to host",
+  "timing_result": "UNKNOWN",
+  "remote_process_state": "UNKNOWN",
+  "duplicate_build_started": false,
+  "next": "reconnect Dell; inspect process and stage logs before any resume/rebuild; never admit partial artifacts"
+}
