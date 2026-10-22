@@ -69,10 +69,28 @@ def prepare():
         (state / "ready").write_text(ready_identity)
 
 
+def containerfile():
+    """Render the same OS/package recipe for an isolated Docker/Podman trial."""
+    sources = ("Types: deb\nURIs: http://snapshot.debian.org/archive/debian/20261005T000000Z/\n"
+               "Suites: trixie\nComponents: main\nCheck-Valid-Until: no\n"
+               "Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg\n")
+    import shlex
+    return ("FROM docker.io/library/" + IMAGE + "\n"
+            "RUN printf %b " + shlex.quote(sources.replace("\n", "\\n")) +
+            " > /etc/apt/sources.list.d/debian.sources\n"
+            "RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y "
+            "--no-install-recommends " + " ".join(PACKAGES) + "\n"
+            "RUN dpkg-query -W > /runtime-packages.txt\n")
+
+
 def main():
     p = argparse.ArgumentParser()
+    p.add_argument("--write-containerfile", type=Path, help="Write isolated OS recipe without starting Docker")
     p.add_argument("command", nargs=argparse.REMAINDER, default=[])
     args = p.parse_args()
+    if args.write_containerfile:
+        args.write_containerfile.write_text(containerfile())
+        return
     prepare()
     if args.command:
         # Keep compiler/download temporary files on the project's data disk.

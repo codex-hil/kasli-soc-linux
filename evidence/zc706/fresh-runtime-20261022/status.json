@@ -1,0 +1,13 @@
+{
+  "result": "INSTALL_RUNNING_NOT_QUALIFIED",
+  "session": 27618,
+  "hardware_access": false,
+  "reused_runtime_mounts": false,
+  "base_image": "debian@sha256:a99cfc517144bc59b1978475ec53b46ecabec7e43635402ee5b77cc54cd1b20a",
+  "snapshot": "20261005T000000Z",
+  "containerfile_sha256": "d4b5ad3a811ff22811ee4a44cc291ac5c0e38104727ef8852096969638ca11c9",
+  "image_tag": "localhost/zc706-fresh-runtime:20261022",
+  "build_cache": false,
+  "shared_build_lock": true,
+  "timeout_seconds": 1800
+}

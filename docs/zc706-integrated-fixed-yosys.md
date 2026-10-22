@@ -171,3 +171,20 @@ and disabled). Fresh openXC7 assembly from the qualified FASM/database passed; g
 frames are byte-identical (SHA256 `27205eb789dce8e66be92782db5dd91e2dfac6526358d0b2fb2435e877595a1b`). This is tool installation/execution coverage, not a fresh
 OS installation or a second full synthesis/routing run. Evidence is under
 `evidence/zc706/fresh-tools-20261022`.
+
+## Fresh OS installation trial
+
+`python3 tools/environment.py --write-containerfile Containerfile` renders the
+same pinned base image, dated Debian snapshot and package list without starting
+Docker or changing the existing environment. On a dedicated build host use
+`podman build --no-cache -t zc706-runtime -f Containerfile EMPTY_CONTEXT_DIR`.
+On the shared Dell take the documented shared build lease for this provisioning
+operation; no project/runtime/device mounts are needed. Network is required only
+for fetching the snapshot packages. The normal FPGA build runtime stays offline.
+
+The2026-10-22 isolated trial is installing under a1800-second bound, image tag
+`localhost/zc706-fresh-runtime:20261022`. The snapshot InRelease and package index
+were fetched successfully. OS installation, Python dependency installation and
+execution in this new image remain pending. Recipe and status are in
+`evidence/zc706/fresh-runtime-20261022`. No existing runtime image/tag or build
+cache was replaced.
