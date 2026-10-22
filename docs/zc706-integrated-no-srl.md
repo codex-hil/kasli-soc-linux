@@ -193,3 +193,13 @@ FIFO clocking, counters, handshake and overflow behavior are unchanged.
 No improvement is claimed yet. Full build is queued/running under
 `build/zc706-integrated-yosys-fixed-fifo-boundary`, seed3/router2. Inspect
 preserved nets and final ADC/SYS setup/hold before physical admission.
+
+FIFO-boundary timing result: ADC1 117.84MHz and ADC2 132.86MHz pass100MHz;
+final hold violations0. SYS81.97MHz remains below83.333MHz. The new12.20ns
+path runs from bankmachine2 row state to bankmachine5 queue-level CE.
+The next integrated-only candidate selects the existing upstream
+`ControllerSettings(cmd_buffer_buffered=True)`, keeping standalone DDR
+and ADC-DDR defaults unchanged. Full build is running under
+`build/zc706-integrated-yosys-fixed-bank-buffered/gateware` with pinned
+Yosys0.69+190, experimental SRL timing, seed3/router2 and unchanged clocks.
+Elaboration has started; final timing and hardware validation are pending.
