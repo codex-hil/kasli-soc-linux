@@ -121,3 +121,12 @@ continues to reject the bad result. A full uninterrupted synthesis without
 normalization is being compared with the admitted staged snapshot; the
 original155-buffer observation is not yet explained. This is an offline
 Yosys investigation, not evidence of board damage or a qualified replacement.
+
+Alias-removal update: full uninterrupted synthesis retains64/64 DQ connections
+but155 `$buf` cells. `opt_clean`, `opt_expr` and buffer-mode reset leave them.
+An explicit identity-only techmap (`gateware/yosys/alias_buffers.v`) removes
+all155 without buffer-normalizing the design. DDR DQ/DQS connectivity and
+structural SFP FCLK admission PASS;35 SRL16E remain. The build script now runs
+that map and asserts no `$buf`/`$_BUF_` before JSON export. Full routing/timing
+and hardware qualification are pending. Controls and hashes are recorded in
+`cleanup-probe.json` and `alias-map-admission.json` in the admission evidence.

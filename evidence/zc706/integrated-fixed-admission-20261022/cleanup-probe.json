@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "clean",
+    "matched": 64,
+    "expected": 64,
+    "buffers": 155
+  },
+  {
+    "mode": "expr",
+    "matched": 64,
+    "expected": 64,
+    "buffers": 155
+  },
+  {
+    "mode": "reset_clean",
+    "matched": 64,
+    "expected": 64,
+    "buffers": 155
+  },
+  {
+    "mode": "mapped_alias",
+    "matched": 64,
+    "expected": 64,
+    "buffers": 0
+  }
+]

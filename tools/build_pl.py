@@ -187,6 +187,14 @@ def main():
     if args.no_srl and not args.resume_assembly:
         script = work / "top.ys"
         script.write_text(script.read_text().replace("synth_xilinx ", "synth_xilinx -nosrl "))
+    if not args.resume_assembly:
+        # Explicit identity mapping preserves physical inout connectivity.
+        # bufnorm -conn disconnects DDR pads in the integrated design.
+        script = work / "top.ys"
+        alias_map = ROOT / "gateware/yosys/alias_buffers.v"
+        script.write_text(script.read_text().replace("write_json ",
+            f'techmap -map "{alias_map}"\nopt_clean\n'
+            'select -assert-none t:$buf t:$_BUF_\nwrite_json '))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
     # FBG/FFG676: 676 identical pin functions, AMD pinout evidence in repo.
     # -1 timing is conservative for the physical -3 device; no GTX in this design.

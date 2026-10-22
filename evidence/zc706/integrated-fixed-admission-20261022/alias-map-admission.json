@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "ddr_dq_dqs_pad_admission": "PASS",
+  "structural_sfp_clock": "PASS",
+  "srl16e_count": 35,
+  "remaining_alias_buffers": 0,
+  "mapped_netlist_sha256": "d7516e6ca4d609a570b4d482e435c584ff96752c2c42c582d5904f7d8c0828b5",
+  "mapping_sha256": "dd6736b57d2213d4a6e2fd1daa2cf060911a6acd803a44d82ada53766b7e7f07",
+  "routing_timing": "PENDING",
+  "hardware_access": false
+}
