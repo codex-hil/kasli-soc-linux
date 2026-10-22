@@ -1,3 +1,12 @@
+> Fixed-Yosys integrated ZC706 qualification (2026-10-22): dual ADC→DDR,
+> both WR PLLs during capture, external SFP through switch **20/20 ICMP,
+> 350/350 byte-exact UDP**, zero new MAC/clock errors. SYS85.11/83.33MHz.
+> SRL enabled; Yosys0.69+190 + experimental openXC7 SRL timing model.
+> Golden restored and three whole1GiB DDR BIST passes PASS.
+> Evidence: `evidence/zc706/integrated-fixed-cdc-20261022`.
+> Reproducer: [integrated development](docs/zc706-integrated-no-srl.md).
+> Replacement packaging pending; prior qualified no-SRL bundle is retained.
+
 > Validated integrated ZC706 (2026-10-21): dual ADC→DDR, both WR PLLs during
 > capture, external SFP RJ45 through the switch: **20/20 ICMP, 350/350 UDP**.
 > Uses Yosys/openXC7 with `-nosrl`; SYS timing 87.55/83.33 MHz. Reproducer and

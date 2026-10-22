@@ -305,3 +305,14 @@ golden restoration remain pending; this is not final qualification yet.
 Local data disk is full; routed netlist and test output use `/tmp` on the
 root disk. Persistent complete build remains on Dell. Evidence:
 `evidence/zc706/integrated-fixed-cdc-20261022`.
+
+Physical fixed-Yosys CDC-ready integrated qualification PASS. Both ADCs pass
+sequence/pattern/rearm with4194304 samples/card, zero errors/drops, while
+both PLLs run; concurrent phase21787records/card,std1.712/1.704ns,
+peaks7.143/6.984ns. External SFP/switch20/20ICMP,350/350 byte-exactUDP,
+zero new CRC/preamble/clock errors. Golden restored192.168.2.18 and three
+whole1GiB DDR BIST passes PASS; shared lease released/reacquirechecked.
+Internal PMA loopback remains NOT_RUN. This qualifies finite capture,
+not continuous streaming or deterministic sample alignment. No SD/QSPI/OTP
+writes. Evidence: `evidence/zc706/integrated-fixed-cdc-20261022`.
+Next package the qualified replacement without overwriting the old bundle.
