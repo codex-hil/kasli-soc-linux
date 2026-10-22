@@ -270,3 +270,12 @@ hold1 only for001, hold0 otherwise. One positive fixture and all eight individua
 truth-table bit corruptions behaved as expected; incorrect functions are rejected.
 The wrapper now uses this check rather than accepting any dynamic hold signal.
 This is logical admission only; final routing/timing and hardware remain pending.
+
+PCS integrated trial was rejected: nextpnr exit1, SYS82.45/83.33MHz, final
+hold clean. Worst SYS path is BRAM `storage_29.0.0/DOADO8` to
+`storage_29.0.7/ENARDEN` (12.128ns), including a3.819ns route into BRAM enable.
+No candidate bitstream was admitted or programmed. Preserve this failed route.
+To isolate PCS/PMA behavior without DDR timing pressure, a separate SFP-only
+build is running with the same CDR-hold change, FCLK reference, SRL timing model,
+seed3/router2 and pinned fixed Yosys. Existing integrated golden stays unchanged.
+Its output is `build/zc706-sfp-pcs-hold-20261022/gateware`.

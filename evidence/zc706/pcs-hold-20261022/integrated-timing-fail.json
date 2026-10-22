@@ -1,0 +1,399 @@
+{
+  "result": "TIMING_FAIL_NOT_ADMITTED",
+  "hardware_access": false,
+  "fmax": {
+    "adc2_clk": {
+      "achieved": 105.4963607788086,
+      "constraint": 100
+    },
+    "adc2_rx.io_clk": {
+      "achieved": 589.970458984375,
+      "constraint": 400
+    },
+    "adc_clk": {
+      "achieved": 132.41525268554688,
+      "constraint": 100
+    },
+    "adc_rx.io_clk": {
+      "achieved": 638.9776000976562,
+      "constraint": 400
+    },
+    "dmtd_with_deglitcher.clk_in_i": {
+      "achieved": 834.0283813476562,
+      "constraint": 100
+    },
+    "eth_rx_clk": {
+      "achieved": 171.55601501464844,
+      "constraint": 125
+    },
+    "eth_tx_clk": {
+      "achieved": 196.0399932861328,
+      "constraint": 125
+    },
+    "eth_tx_half_clk": {
+      "achieved": 1153.402587890625,
+      "constraint": 62.5
+    },
+    "gp1_clk": {
+      "achieved": 75.13147735595703,
+      "constraint": 50
+    },
+    "helper_clk": {
+      "achieved": 233.1545867919922,
+      "constraint": 98.44457244873047
+    },
+    "idelay_clk": {
+      "achieved": 378.3579406738281,
+      "constraint": 200
+    },
+    "pma_k7_gtx_basex_rxoutclk_rebuffer": {
+      "achieved": 805.8017578125,
+      "constraint": 62.5
+    },
+    "pma_k7_gtx_basex_s7mmcm0_clkin_signal": {
+      "achieved": 1052.631591796875,
+      "constraint": 62.5
+    },
+    "sys_clk": {
+      "achieved": 82.45382690429688,
+      "constraint": 83.33333587646484
+    }
+  },
+  "sys_critical_paths": [
+    {
+      "from": "posedge sys_clk",
+      "path": [
+        {
+          "delay": 2.4539999961853027,
+          "from": {
+            "cell": "storage_29.0.0",
+            "loc": [
+              143,
+              51
+            ],
+            "port": "DOADO8"
+          },
+          "to": {
+            "cell": "storage_29.0.0",
+            "loc": [
+              143,
+              51
+            ],
+            "port": "DOADO8"
+          },
+          "type": "clk-to-q"
+        },
+        {
+          "delay": 1.843000054359436,
+          "from": {
+            "cell": "storage_29.0.0",
+            "loc": [
+              143,
+              51
+            ],
+            "port": "DOADO8"
+          },
+          "net": "adctoddr1_command_buffer_fifo_out_payload_address[9]",
+          "sources": [
+            "/work/build/zc706-integrated-pcs-hold-20261022/gateware/gateware/top.v:2396.15-2396.64"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80710",
+            "loc": [
+              170,
+              83
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.15000000596046448,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80710",
+            "loc": [
+              170,
+              83
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80710",
+            "loc": [
+              170,
+              83
+            ],
+            "port": "O5"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.46299999952316284,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80710",
+            "loc": [
+              170,
+              83
+            ],
+            "port": "O5"
+          },
+          "net": "$techmap1093347$abc$1087982$lut$aiger1087981$80882.A[5]",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80886",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A5"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.15000000596046448,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80886",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A5"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80886",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O5"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.33000001311302185,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80886",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O5"
+          },
+          "net": "$techmap1093491$abc$1087982$lut$aiger1087981$81663.A[1]",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80888",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A3"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80888",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A3"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80888",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.1979999989271164,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80888",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap1093605$abc$1087982$lut$aiger1087981$80897.A[3]",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80897",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80897",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80897",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 0.7250000238418579,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80897",
+            "loc": [
+              171,
+              81
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap1093606$auto$abc_ops_reintegrate.cc:696:reintegrate$1092046.A[5]",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80902",
+            "loc": [
+              171,
+              79
+            ],
+            "port": "A6"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80902",
+            "loc": [
+              171,
+              79
+            ],
+            "port": "A6"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger1087981$80902",
+            "loc": [
+              171,
+              79
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 1.0529999732971191,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger1087981$80902",
+            "loc": [
+              171,
+              79
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap1094634$abc$1087982$lut$aiger$o47206.A[3]",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22"
+          ],
+          "to": {
+            "cell": "$abc$1087982$lut$aiger$o47206",
+            "loc": [
+              174,
+              53
+            ],
+            "port": "A4"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.125,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger$o47206",
+            "loc": [
+              174,
+              53
+            ],
+            "port": "A4"
+          },
+          "to": {
+            "cell": "$abc$1087982$lut$aiger$o47206",
+            "loc": [
+              174,
+              53
+            ],
+            "port": "O6"
+          },
+          "type": "logic"
+        },
+        {
+          "delay": 3.819000005722046,
+          "from": {
+            "cell": "$abc$1087982$lut$aiger$o47206",
+            "loc": [
+              174,
+              53
+            ],
+            "port": "O6"
+          },
+          "net": "$techmap1092744\\storage_29.0.14.ENARDEN",
+          "sources": [
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/brams_xc6v_map.v:245.4-257.3",
+            "/work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/cells_sim.v:3965.11-3965.18"
+          ],
+          "to": {
+            "cell": "storage_29.0.7",
+            "loc": [
+              213,
+              218
+            ],
+            "port": "ENARDEN"
+          },
+          "type": "routing"
+        },
+        {
+          "delay": 0.4429999887943268,
+          "from": {
+            "cell": "storage_29.0.7",
+            "loc": [
+              213,
+              218
+            ],
+            "port": "ENARDEN"
+          },
+          "to": {
+            "cell": "storage_29.0.7",
+            "loc": [
+              213,
+              218
+            ],
+            "port": "ENARDEN"
+          },
+          "type": "setup"
+        }
+      ],
+      "to": "posedge sys_clk"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "result": "BUILD_RUNNING_NOT_HARDWARE_QUALIFIED",
-  "session": 55818,
+  "result": "INTEGRATED_TIMING_FAIL_ISOLATED_BUILD_RUNNING",
+  "session": 34884,
   "hardware_access": false,
-  "output": "build/zc706-integrated-pcs-hold-20261022/gateware",
+  "output": "build/zc706-sfp-pcs-hold-20261022/gateware",
   "hypothesis": "Near-end PCS loopback requires CDR hold with current RXOUTCLKSEL=010; expose loopback001 with RXCDRHOLD=(loop==1), keep other modes low",
   "reference": "https://docs.amd.com/v/u/en-US/ug476_7Series_Transceivers",
   "existing_design": {
@@ -15,7 +15,10 @@
   "syntax_check": "PASS",
   "logical_admission": "PASS: all 8 modes",
   "admission_controls": "1 positive and 8 corruptions rejected",
-  "build_stage": "router2 routing",
+  "build_stage": "isolated SFP synthesis/routing",
   "physical_routing_admission": "PENDING",
-  "timing": "PENDING"
+  "timing": "INTEGRATED_FAIL_ISOLATED_PENDING",
+  "integrated_exit_code": 1,
+  "integrated_sys_mhz": 82.454,
+  "integrated_required_sys_mhz": 83.333
 }
