@@ -178,13 +178,14 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count):
+def loopback_test(r, count, mode="pma"):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
-    r.write("sfp_status_control", 8 | 2 | 16)
+    selection = {"pma": 2, "pcs": 1}[mode]
+    r.write("sfp_status_control", 8 | selection | 16)
     time.sleep(.01)
-    r.write("sfp_status_control", 8 | 2)
+    r.write("sfp_status_control", 8 | selection)
     deadline = time.monotonic()+10
     while r.read("sfp_status_status") & 63 != 63:
         if time.monotonic() > deadline:
@@ -213,7 +214,7 @@ def loopback_test(r, count):
             raise RuntimeError(f"Loopback error counter incremented: {name}")
     if (after["packet_test_tx_frames"]-before["packet_test_tx_frames"]) & 0xffffffff != count:
         raise RuntimeError("TX count mismatch")
-    return {"result": "PASS", "frames": count, "payload_bytes": 64,
+    return {"result": "PASS", "mode": mode, "frames": count, "payload_bytes": 64,
             "before": before, "after": after, "user_clock_hz": frequencies}
 
 
@@ -224,6 +225,7 @@ def main():
     p.add_argument("--identify-only", action="store_true")
     p.add_argument("--init-clock", action="store_true")
     p.add_argument("--loopback", type=int, default=0)
+    p.add_argument("--loopback-mode", choices=("pma", "pcs"), default="pma")
     p.add_argument("--external", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
@@ -244,7 +246,7 @@ def main():
             if a.init_clock:
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
-                result["loopback"] = loopback_test(r, a.loopback)
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode)
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)

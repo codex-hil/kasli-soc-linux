@@ -138,6 +138,10 @@ class Diagnostics(LiteXModule):
                     item.expr = drp_inputs[item.name]
             if isinstance(item, Instance.Input) and item.name == "LOOPBACK":
                 item.expr = loop
+            elif isinstance(item, Instance.Input) and item.name == "RXCDRHOLD":
+                # UG476 near-end PCS loopback: RXOUTCLKSEL=010 uses PMA
+                # clock, so hold CDR in PCS mode. Other modes keep hold low.
+                item.expr = (loop == 1)
             # Si5324 feeds REFCLK1 of quad 110 below SFP quad 111.
             # UG476: clocks from the quad below enter GTNORTHREFCLK*.
             elif isinstance(item, Instance.Input) and item.name == "GTREFCLK0":

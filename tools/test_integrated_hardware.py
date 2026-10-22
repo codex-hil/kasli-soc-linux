@@ -22,7 +22,10 @@ def main():
     p.add_argument('--sfp-diagnostic-only',action='store_true',help='Probe external SFP without internal-loopback prerequisite; always restore golden')
     p.add_argument('--srl-diagnostic-only',action='store_true',help='Test explicit SRL16E versus flip-flops; always restore golden')
     p.add_argument('--internal-loopback-only',action='store_true',help='Bounded internal PMA packet diagnostic with golden restoration')
+    p.add_argument("--internal-loopback-mode",choices=("pma","pcs"),default="pma")
     a=p.parse_args()
+    if a.internal_loopback_mode == "pcs" and not a.internal_loopback_only:
+        p.error("PCS mode requires --internal-loopback-only")
     if a.internal_loopback_only and (a.external_network or a.sfp_diagnostic_only or a.srl_diagnostic_only):
         p.error('Internal loopback diagnostic requires its own test scope')
     if a.internal_loopback_only and not a.program and not a.preflight_only:
@@ -56,6 +59,15 @@ def main():
             check(bit.parent/'top.json')
     if a.sfp_diagnostic_only and manifest.get('sfp_refclk') == 'local':
         raise RuntimeError('Local-quad diagnostic cannot test the SFP connector')
+    if a.internal_loopback_mode == 'pcs':
+        top=json.loads((bit.parent/'top.json').read_text())['modules']['top']
+        channels=[c for c in top['cells'].values() if c['type']=='GTXE2_CHANNEL']
+        if len(channels)!=1:raise RuntimeError('Expected one GTX for PCS admission')
+        channel=channels[0]
+        if channel['parameters'].get('RXBUF_EN')!='TRUE' or channel['parameters'].get('RX_XCLK_SEL')!='RXREC':
+            raise RuntimeError('PCS requires RX buffer and RXREC XCLK')
+        if channel['connections'].get('RXOUTCLKSEL')!=['0','1','0'] or all(isinstance(b,str) for b in channel['connections'].get('RXCDRHOLD',[])):
+            raise RuntimeError('PCS requires audited dynamic CDR hold with PMA RXOUTCLK')
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
     if a.sfp_diagnostic_only or a.srl_diagnostic_only or a.internal_loopback_only:
         required=[work/'gateware/csr.json']
@@ -111,7 +123,7 @@ def main():
             record['result']=record['srl']['result']
             return
         if a.internal_loopback_only:
-            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --output sfp-internal.json',timeout=60)
+            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode '+a.internal_loopback_mode+' --output sfp-internal.json',timeout=60)
             probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-internal.json'],text=True,timeout=15))
             record['internal_probe']=probe
             record['internal_loopback_result']=probe.get('loopback',{}).get('result','FAIL')

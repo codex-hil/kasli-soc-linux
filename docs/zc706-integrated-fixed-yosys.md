@@ -244,3 +244,21 @@ A new `--internal-loopback-only --program` wrapper mode bounds packet diagnostic
 without retraining ADCs/running PLLs, while retaining golden+BIST restoration.
 Next separate GTX near-end PCS versus PMA modes under the same conditions,
 then inspect framing/polarity/reset only where the comparison supplies evidence.
+
+## PCS versus PMA experiment
+
+[AMD UG476](https://docs.amd.com/v/u/en-US/ug476_7Series_Transceivers), Loopback,
+requires RXBUF enabled and RX_XCLK_SEL=RXREC for near-end PCS. With PMA-selected
+RXOUTCLK, select PCS clock output or assert RXCDRHOLD. Existing netlist uses
+RXBUF=TRUE/RXREC/RXOUTCLKSEL=010 and fixed RXCDRHOLD=0, so switching only the
+LOOPBACK port to001 is not admitted as a valid PCS comparison.
+
+Separate diagnostic build `zc706-integrated-pcs-hold-20261022` sets RXCDRHOLD
+only when synchronized LOOPBACK=001. PMA010 and external000 retain hold0.
+`--internal-loopback-only --internal-loopback-mode pcs --program` selects the
+bounded test with golden restoration; default remains PMA. Before hardware,
+PCS admission checks the synthesized RX buffer/XCLK/OUTCLK and rejects a fixed
+CDR-hold input. Old artifact rejection and Python syntax checks passed. Dynamic
+hold truth-table/routed-path verification, timing and physical PCS/PMA tests
+remain pending. A new build is running on Dell; no hardware was accessed.
+Evidence: `evidence/zc706/pcs-hold-20261022`.

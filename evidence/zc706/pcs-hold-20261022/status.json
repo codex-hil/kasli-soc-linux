@@ -1,0 +1,16 @@
+{
+  "result": "BUILD_RUNNING_NOT_HARDWARE_QUALIFIED",
+  "session": 55818,
+  "hardware_access": false,
+  "output": "build/zc706-integrated-pcs-hold-20261022/gateware",
+  "hypothesis": "Near-end PCS loopback requires CDR hold with current RXOUTCLKSEL=010; expose loopback001 with RXCDRHOLD=(loop==1), keep other modes low",
+  "reference": "https://docs.amd.com/v/u/en-US/ug476_7Series_Transceivers",
+  "existing_design": {
+    "RXBUF_EN": "TRUE",
+    "RX_XCLK_SEL": "RXREC",
+    "RXOUTCLKSEL": "010",
+    "RXCDRHOLD": "0"
+  },
+  "negative_admission_control": "PASS: old artifact rejected for PCS before hardware access",
+  "syntax_check": "PASS"
+}
