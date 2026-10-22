@@ -101,3 +101,17 @@ than old editable-install paths; record OS/compiler package versions. Runtime
 image is pinned but the bootstrap apt package list does not pin individual
 package versions. Do not delete the working caches to perform this test.
 Evidence: `evidence/zc706/integrated-fixed-cdc-20261022/bootstrap-audit.json`.
+
+Replay preparation2026-10-22: Dell has186GiB free. A Git archive snapshot
+was expanded into `build/clean-replay-a903dc6`; ten required PL source
+repositories were cloned from pinned source-only Git bundles. The nextpnr
+metadata gitlink was verified. No generated objects or chipdb were copied.
+All six Python source libraries resolve inside the isolated tree. Only the
+existing runtime/interpreter and pinned tool asset cache are reused.
+The first preparation exposed absent Git metadata in some migrated source
+copies; source bundles resolve this without changing those copies.
+Full isolated replay is running with seed3/router2 and the qualified clock
+settings. Preparation is not build success; evidence:
+`evidence/zc706/clean-replay-20261022/preparation.json` and `source-bundles.json`.
+The standalone preparer is `tools/prepare_clean_replay.py`; it refuses an
+existing destination and verifies source revisions/tool archive markers.

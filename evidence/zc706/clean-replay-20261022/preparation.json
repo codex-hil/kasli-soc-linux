@@ -1,0 +1,71 @@
+{
+  "result": "PREPARED_NOT_BUILT",
+  "hardware_access": false,
+  "source_archive_sha256": "5d5bcde0f469ebddbd257750c2197713c6c229c4d30c101449d0550ef0db484e",
+  "destination": "/work/build/clean-replay-a903dc6",
+  "sources": [
+    {
+      "name": "migen",
+      "revision": "e19524c963a8342952840983047557707fbe0b6a",
+      "bundle_sha256": "18eba9b5b546a42bf4f5ea5650c73695ef527eb44bda13b152632ccefc331197"
+    },
+    {
+      "name": "litex",
+      "revision": "8c01073afb71aa0a0709f02f8e24247589e8f5e4",
+      "bundle_sha256": "0efe0dffc403a66ef6add8af5355f1d092be5529aed4f12fba0a2be8da809028"
+    },
+    {
+      "name": "litex-boards",
+      "revision": "10debf146d433ce8ac8aedcac84e97d252ff4d5b",
+      "bundle_sha256": "fc3fbd3fc1971c48c81df90bb0bae073dbaa9cd53c1040a5a3100c3f3ec1b6c6"
+    },
+    {
+      "name": "litedram",
+      "revision": "74522f715d7b10163ef6f6caa09887a90874be83",
+      "bundle_sha256": "63fcc5b291f8c05e4cdf60bff8e95941ec7b62f036145a0b046e676b159f1c5c"
+    },
+    {
+      "name": "liteeth",
+      "revision": "e3ebe03be76f33e0c2b2a024a1d0f19c99b7e96a",
+      "bundle_sha256": "cdaff007f3b7b8c6f3fd27b9edf9d4a006dc3be0e6b8452f1ad006f9de8b5f9e"
+    },
+    {
+      "name": "liteiclink",
+      "revision": "6e69216944e94c69f5a7d58d5c6d75dc3d754242",
+      "bundle_sha256": "f091eab8e29e97a648357e0dc10f8b04b857fa2ba23bad08ce03e4a55216510a"
+    },
+    {
+      "name": "nextpnr",
+      "revision": "c68c13582e972292c86a5025140d52e713384cbc",
+      "bundle_sha256": "e79ebfa653a454f83e603ca33c0b7571cdf48e0fa778e0b0429db8b2337743a3"
+    },
+    {
+      "name": "prjxray-db",
+      "revision": "75825f2e66e16a40a51cf1cfa61afb21f5958afe",
+      "bundle_sha256": "5c072e407acef0c8c60768ad098c70d09ab51c9a406cd136dbe32e4914afb4ea"
+    },
+    {
+      "name": "general-cores-wr",
+      "revision": "20f990e96f9293e597f48789e85de0fda3f17d2c",
+      "bundle_sha256": "12af11f44a592c194302a4712fb9bd02c41d44544382d1b1b444391aa9200ff0"
+    },
+    {
+      "name": "wr-cores-afcz-v5",
+      "revision": "0f8fbced87988254f5c9ca55c0e04585b29b485c",
+      "bundle_sha256": "c40527ff6010f495af0e56d22568221ec4009215a9d392227da5fcde6ca7941d"
+    }
+  ],
+  "metadata_revision": "a4af910cac907f2cbd3a545f26f8e26573e860de",
+  "python_imports": {
+    "migen": "/work/build/clean-replay-a903dc6/upstream/migen/migen/__init__.py",
+    "litex": "/work/build/clean-replay-a903dc6/upstream/litex/litex/__init__.py",
+    "litex_boards": "/work/build/clean-replay-a903dc6/upstream/litex-boards/litex_boards/__init__.py",
+    "litedram": "/work/build/clean-replay-a903dc6/upstream/litedram/litedram/__init__.py",
+    "liteeth": "/work/build/clean-replay-a903dc6/upstream/liteeth/liteeth/__init__.py",
+    "liteiclink": "/work/build/clean-replay-a903dc6/upstream/liteiclink/liteiclink/__init__.py"
+  },
+  "pythonpath": "/work/build/clean-replay-a903dc6/upstream/migen:/work/build/clean-replay-a903dc6/upstream/litex:/work/build/clean-replay-a903dc6/upstream/litex-boards:/work/build/clean-replay-a903dc6/upstream/litedram:/work/build/clean-replay-a903dc6/upstream/liteeth:/work/build/clean-replay-a903dc6/upstream/liteiclink",
+  "interpreter": "/work/build/python/bin/python",
+  "reused": "pinned source Git objects, tool assets and runtime only",
+  "generated_objects_copied": false
+}
