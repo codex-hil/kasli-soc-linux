@@ -295,3 +295,13 @@ invalid configuration. Evidence: `cdc-ready-simulation.json` in the AXI beat
 buffer evidence directory. Full build is running under
 `build/zc706-integrated-yosys-fixed-cdc-ready/gateware`, seed3/router2 and
 unchanged clocks. Routing/timing and hardware qualification are pending.
+
+CDC-ready candidate full build PASS: SYS85.11/83.333MHz, ADC1 120.35/100MHz,
+ADC2 103.80/100MHz, all required setup/hold and35-SRL coverage admitted.
+Bit SHA256 `3d050ef1cb859bb494df726d328a75059423bdb792f519036ecae533feccde6e`.
+Physical integrated test is running under the shared ZC706 lease: Linux boot
+and three whole1GiB PL DDR BIST passes already PASS. ADC/PLL/network and
+golden restoration remain pending; this is not final qualification yet.
+Local data disk is full; routed netlist and test output use `/tmp` on the
+root disk. Persistent complete build remains on Dell. Evidence:
+`evidence/zc706/integrated-fixed-cdc-20261022`.
