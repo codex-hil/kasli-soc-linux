@@ -1,0 +1,313 @@
+{
+  "hardware_access": false,
+  "cases": {
+    "srl": {
+      "result": "FAIL",
+      "returncode": 1,
+      "srls": {
+        "$auto$ff.cc:266:slice$1685": {
+          "type": "SRL16E",
+          "parameters": {
+            "INIT": "0000000",
+            "IS_CLK_INVERTED": "0"
+          },
+          "connections": {
+            "A0": [
+              "0"
+            ],
+            "A1": [
+              "1"
+            ],
+            "A2": [
+              "1"
+            ],
+            "A3": [
+              "0"
+            ],
+            "CE": [
+              "1"
+            ],
+            "CLK": [
+              7
+            ],
+            "D": [
+              8
+            ],
+            "Q": [
+              9
+            ]
+          }
+        }
+      },
+      "transcript": "FAIL cycle=6 ce=1 q=1 expected=0\nFATAL: tb.v:17: clock enable was not preserved\n       Time: 76  Scope: tb\n"
+    },
+    "nosrl": {
+      "result": "PASS",
+      "returncode": 0,
+      "srls": {},
+      "transcript": "PASS enabled seven-stage shift\ntb.v:20: $finish called at 2006 (1s)\n"
+    },
+    "trace": {
+      "result": "FAIL",
+      "returncode": 1,
+      "srls": {
+        "$auto$ff.cc:266:slice$1685": {
+          "type": "SRL16E",
+          "parameters": {
+            "INIT": "0000000",
+            "IS_CLK_INVERTED": "0"
+          },
+          "connections": {
+            "A0": [
+              "0"
+            ],
+            "A1": [
+              "1"
+            ],
+            "A2": [
+              "1"
+            ],
+            "A3": [
+              "0"
+            ],
+            "CE": [
+              "1"
+            ],
+            "CLK": [
+              6
+            ],
+            "D": [
+              7
+            ],
+            "Q": [
+              8
+            ]
+          }
+        }
+      },
+      "transcript": "FAIL cycle=6 ce=1 q=1 expected=0\nFATAL: tb.v:17: clock enable was not preserved\n       Time: 76  Scope: tb\n"
+    }
+  },
+  "before-fixed": {
+    "$auto$ff.cc:266:slice$1685": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          8
+        ],
+        "Q": [
+          9
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1686": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          9
+        ],
+        "Q": [
+          10
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1687": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          10
+        ],
+        "Q": [
+          11
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1688": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          11
+        ],
+        "Q": [
+          12
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1689": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          12
+        ],
+        "Q": [
+          13
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1690": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          13
+        ],
+        "Q": [
+          14
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    },
+    "$auto$ff.cc:266:slice$1691": {
+      "type": "FDRE",
+      "parameters": {
+        "INIT": "0"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "CE": [
+          7
+        ],
+        "D": [
+          14
+        ],
+        "Q": [
+          15
+        ],
+        "R": [
+          "0"
+        ]
+      }
+    }
+  },
+  "after-fixed": {
+    "$auto$ff.cc:266:slice$1685": {
+      "type": "$__XILINX_SHREG_",
+      "parameters": {
+        "CLKPOL": "00000000000000000000000000000001",
+        "DEPTH": "00000000000000000000000000000111",
+        "ENPOL": "00000000000000000000000000000010",
+        "INIT": "0000000"
+      },
+      "connections": {
+        "C": [
+          6
+        ],
+        "D": [
+          7
+        ],
+        "E": [
+          8
+        ],
+        "L": [
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "Q": [
+          9
+        ]
+      }
+    }
+  }
+}

@@ -102,3 +102,9 @@ Next: reduce to a clock-enabled shift chain and identify where enable is
 lost: the no-SRL header FFs have variable CE, while the mapped SRLs have
 CE tied high. This structural difference needs pass-by-pass confirmation
 before proposing an upstream fix.
+
+Root cause confirmed with the minimal seven-FF CE reproducer:
+`xilinx_srl -fixed` in the installed Yosys0.52 sets ENPOL=2 for FDRE
+chains even though E is connected to CE. The mapped SRL ignores CE.
+See `diagnostics/yosys-srl-ce/README.md` and upstream issue6058/PR6059.
+Replacement-tool validation is pending; keep the qualified no-SRL image.

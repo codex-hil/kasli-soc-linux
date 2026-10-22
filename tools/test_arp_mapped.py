@@ -15,6 +15,8 @@ from zc706_arp import ARPSelfTest
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--yosys',default='/usr/bin/yosys')
+    p.add_argument('--cells-sim',default='/usr/share/yosys/xilinx/cells_sim.v')
     a = p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
     out = a.output.resolve()
     dut = ARPSelfTest()
@@ -51,7 +53,7 @@ endmodule
     (out/'rtl-migen.log').write_text(baseline.stdout+baseline.stderr)
     if 'PASS:' not in baseline.stdout:
         raise RuntimeError('Missing Migen baseline completion marker')
-    result = {'hardware_access':False,'rtl_baseline':'Migen simulation PASS, same module/input cases','cases':{}}
+    result = {'yosys_version':subprocess.check_output([a.yosys,'-V'],text=True).strip(),'hardware_access':False,'rtl_baseline':'Migen simulation PASS, same module/input cases','cases':{}}
     def run_logged(command, name, check=True):
         with (out/name).open('w') as log:
             r = subprocess.run(command,cwd=out,stdout=log,stderr=subprocess.STDOUT,timeout=180,check=check)
@@ -62,13 +64,13 @@ endmodule
         if mode != 'rtl':
             source = mode+'.v'
             script = f'read_verilog rtl.v; synth_xilinx -flatten -abc9 -arch xc7 -top arp_test {"-nosrl" if mode=="no-srl" else ""}; write_json {mode}.json; write_verilog -noattr {source}'
-            run_logged(['/usr/bin/yosys','-p',script],mode+'-yosys.log')
+            run_logged([a.yosys,'-p',script],mode+'-yosys.log')
             cells = json.loads((out/(mode+'.json')).read_text())['modules']['arp_test']['cells']
             entry['srl_count'] = sum(c['type']=='SRL16E' for c in cells.values())
             if entry['srl_count'] != (8 if mode=='srl' else 0):
                 raise RuntimeError('Mapped simulation changed the SRL topology')
         run_logged([str(ROOT/'build/tools/oss-cad-suite/bin/iverilog'),'-g2012','-s','tb','-o',mode+'.vvp','tb.v',source,
-            '/usr/share/yosys/xilinx/cells_sim.v'],mode+'-compile.log')
+            a.cells_sim],mode+'-compile.log')
         try:
             code = run_logged([str(ROOT/'build/tools/oss-cad-suite/bin/vvp'),mode+'.vvp'],mode+'-simulation.log',check=False)
         except subprocess.TimeoutExpired:

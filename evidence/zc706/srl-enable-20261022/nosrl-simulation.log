@@ -1,0 +1,2 @@
+PASS enabled seven-stage shift
+tb.v:20: $finish called at 2006 (1s)
