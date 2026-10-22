@@ -57,8 +57,13 @@ def validate_sfp_clock(work):
         raise RuntimeError('PS GP0 and its AXI frontend must share the system clock')
     gt = gt[0]['connections']
     if gt['CPLLREFCLKSEL'] == ['1', '1', '1']:
-        if gt['GTGREFCLK'] != top['netnames']['ps7_clk']['bits']:
-            raise RuntimeError('Fabric CPLL reference must be the 100 MHz PS FCLK')
+        # Yosys may rename/remove aliases; follow the actual FCLK0 buffer.
+        fclk0 = ps[0]['connections']['FCLKCLK'][:1]
+        buffers = [c for c in top['cells'].values() if c['type'] == 'BUFG'
+            and c['connections'].get('I') == fclk0
+            and c['connections'].get('O') == gt['GTGREFCLK']]
+        if len(buffers) != 1:
+            raise RuntimeError('Fabric CPLL reference must be buffered PS FCLK0')
     elif gt['CPLLREFCLKSEL'] not in (['0', '0', '1'], ['0', '1', '0']):
         raise RuntimeError('ZC706 SFP requires NORTHREFCLK1 or diagnostic FCLK')
 
@@ -182,6 +187,12 @@ def main():
     if args.no_srl and not args.resume_assembly:
         script = work / "top.ys"
         script.write_text(script.read_text().replace("synth_xilinx ", "synth_xilinx -nosrl "))
+    if not args.resume_assembly:
+        # New Yosys retains alias buffers around kept/vendor inout nets.
+        # nextpnr needs direct connections, not unmapped $buf cells.
+        script = work / "top.ys"
+        script.write_text(script.read_text().replace("write_json ",
+            "bufnorm -conn\nselect -assert-none t:$buf t:$_BUF_\nwrite_json "))
     db = args.openxc7.resolve() / "share/nextpnr/external/prjxray-db/zynq7"
     # FBG/FFG676: 676 identical pin functions, AMD pinout evidence in repo.
     # -1 timing is conservative for the physical -3 device; no GTX in this design.

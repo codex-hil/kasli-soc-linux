@@ -1,0 +1,13 @@
+{
+  "result": "BUILD_REJECTED_BEFORE_ROUTE",
+  "hardware_access": false,
+  "initial_failure": "validate_sfp_clock: removed ps7_clk alias",
+  "second_admission_failure": "155 unmapped alias buffer cells in new Yosys netlist",
+  "structural_clock_check": "PASS",
+  "wrong_reference_negative_control": "PASS (rejected)",
+  "correction": "bufnorm -conn and assert no $buf/$_BUF_ before write_json",
+  "correction_execution": "PENDING_DELL_SHARED_BUILD_LEASE",
+  "hardware_qualification": "NOT_RUN",
+  "golden_changed": false,
+  "next": "complete source sync, rebuild full integrated candidate, verify DDR pads and timing before hardware"
+}
