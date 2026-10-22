@@ -5,7 +5,8 @@
 > Golden restored and three whole1GiB DDR BIST passes PASS.
 > Evidence: `evidence/zc706/integrated-fixed-cdc-20261022`.
 > Reproducer: [integrated development](docs/zc706-integrated-no-srl.md).
-> Replacement packaging pending; prior qualified no-SRL bundle is retained.
+> [Qualified PL bundle and reproducer](docs/zc706-integrated-fixed-yosys.md).
+> Prior qualified no-SRL bundle is retained.
 
 > Validated integrated ZC706 (2026-10-21): dual ADC→DDR, both WR PLLs during
 > capture, external SFP RJ45 through the switch: **20/20 ICMP, 350/350 UDP**.

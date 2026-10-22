@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "archive": "/home/codex-hil/artifacts/zc706-fixed-cdc/zc706-integrated-fixed-yosys.tar.xz",
+  "sha256": "5de7ec712587fb11fd1fa8c7ecb7680d44650d4ca56cea3a79b92d4fa04ed924",
+  "bytes": 3453832,
+  "verified_members": 36,
+  "scope": "PL diagnostic bundle, not SD image",
+  "hardware_access": false,
+  "old_bundle_sha256": "dc25d75e663c25b66bfad121dd302cfea649cd3f9b0000439ec06ac860e525ba"
+}
