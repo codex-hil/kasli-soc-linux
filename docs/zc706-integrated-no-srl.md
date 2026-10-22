@@ -251,3 +251,12 @@ already generates `-abc9`, which the DDR compatibility script stripped.
 The new flag preserves it and records the selection in the manifest.
 Build: `build/zc706-integrated-yosys-fixed-abc9/gateware`, seed3/router2,
 all clocks unchanged. Final timing and hardware qualification pending.
+
+ABC9 comparison remains rejected: SYS82.73MHz, ADC1 142.51MHz,
+ADC2 125.63MHz, final hold0. The explicit flag is present in `top.ys`,
+but it gives no timing benefit in this trial. Cell graphs after stripping
+attributes are not identical, so this is not claimed to be a no-op.
+See `abc9-stage1.log` and `abc9-timing.json`. Next evaluate a registered
+AXI burst-to-beat output before CSR capture, using the existing upstream
+stream Buffer primitive with burst/response/backpressure tests. Registering
+only replicated CSR address is not protocol-correct. No physical test ran.

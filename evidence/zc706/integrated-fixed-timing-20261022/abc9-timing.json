@@ -1,0 +1,10 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 82.73,
+  "adc1_mhz": 142.51,
+  "adc2_mhz": 125.63,
+  "final_hold_violations": 0,
+  "hardware_access": false,
+  "cell_types_parameters_connections_equal_to_bank_abc": false,
+  "next": "registered AXI beat output before CSR path, with burst/backpressure tests"
+}
