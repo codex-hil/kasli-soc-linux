@@ -1,0 +1,14 @@
+{
+  "result": "REJECTED_SETUP",
+  "sys_achieved_mhz": 81.56,
+  "required_mhz": 83.333333,
+  "previous_mhz": 77.2,
+  "final_hold_violations": 0,
+  "critical_ns": 12.26,
+  "routing_ns": 10.24,
+  "logic_ns": 2.02,
+  "critical_start": "roundrobin2_grant[0]",
+  "critical_end": "storage_27.0.2.ENARDEN",
+  "hardware_access": false,
+  "next": "controlled seed4 placement comparison; same RTL/clocks/constraints"
+}
