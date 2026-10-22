@@ -149,3 +149,11 @@ Replacement build is running under `build/zc706-integrated-yosys-fixed-bram`
 with the same pinned Yosys, seed3/router2 and SRL timing model. The earlier
 failed route is retained in its original directory. Timing and physical
 qualification of the BRAM candidate remain pending.
+
+Seed3 BRAM result: SYS81.56MHz (up from77.20MHz), final hold violations0,
+but setup still rejected at83.333MHz. The new12.26ns critical path ends at
+`storage_27.0.2.ENARDEN`, identified by its address/data nets as ADC1's output
+queue. A single controlled seed4 build is running with identical RTL/clocks/
+constraints under `build/zc706-integrated-yosys-fixed-bram-seed4`. Both failed
+seed3 reports are retained. If placement does not close timing, use the
+recorded queue-enable path to guide the next pipeline change.

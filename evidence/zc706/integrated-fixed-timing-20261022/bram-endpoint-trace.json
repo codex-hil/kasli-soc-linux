@@ -1,0 +1,11 @@
+{
+  "result": "PATH_IDENTIFIED",
+  "endpoint": "storage_27.0.2.ENARDEN",
+  "read_address_net": "adctoddr1_consume",
+  "data_input_net": "adctoddr1_fifo_cdc_dout",
+  "queue": "ADC1 output_buffer",
+  "same_enable_bram_count": 15,
+  "netlist_sha256": "cf089861de14d39215fecb5010ca43452a70bf2fc627f4a012032e42276ff9c2",
+  "next_experiment": "seed4 with identical RTL, clocks and constraints",
+  "hardware_access": false
+}
