@@ -178,7 +178,7 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count, mode="pma"):
+def loopback_test(r, count, mode="pma", observation=None):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
@@ -198,6 +198,8 @@ def loopback_test(r, count, mode="pma"):
         if arm in r.map["csr_registers"]:
             r.write(arm, 1)
     before = status(r)
+    if observation is not None:
+        observation.update(mode=mode, before=before)
     for n in range(count):
         r.write("packet_test_start", 1)
         deadline = time.monotonic()+1
@@ -252,7 +254,8 @@ def main():
             if a.init_clock:
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
-                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode)
+                result["loopback_observation"] = {}
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"])
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)
@@ -272,6 +275,16 @@ def main():
         result["clock_rates_hz"] = clock_rates(r)
         raise
     finally:
+        observation = result.get("loopback_observation", {})
+        if "before" in observation and "status" in result:
+            observation["after"] = result["status"]
+            names = ("mac_status_tx_frames", "mac_status_rx_frames",
+                "mac_status_crc_errors", "mac_status_preamble_errors",
+                "sfp_status_clock_faults", "packet_test_tx_frames",
+                "packet_test_rx_frames", "packet_test_errors")
+            observation["counter_deltas"] = {name:
+                (result["status"][name] - observation["before"][name]) & 0xffffffff
+                for name in names if name in result["status"] and name in observation["before"]}
         r.mem.close()
         a.output.write_text(json.dumps(result, indent=2)+"\n")
         print(json.dumps(result, indent=2), flush=True)

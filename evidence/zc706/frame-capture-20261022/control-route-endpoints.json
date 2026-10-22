@@ -1,0 +1,65 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "scope": "serialized nextpnr route endpoints only; not independent FASM/bit equivalence",
+  "input_sha256": "6fecfbc158c081f804b434d67e1efad044b7ebd190ae76f2529f444cf27a62d8",
+  "gtx_bel": "GTXE2_CHANNEL_X0Y10/GTXE2_CHANNEL",
+  "routes": [
+    {
+      "port": "LOOPBACK0",
+      "net": "sfpsoc_sfp_status_loop[0]",
+      "expected_sitewire": "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK0",
+      "endpoint_present": true,
+      "gtx_route_entries": [
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT43",
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT43/GTXE2_INT_INTERFACE_IMUX43",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK0",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK0/GTXE2_IMUX43_9",
+        "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK0",
+        "X249Y225/GTXE2_CHANNEL_X0Y0.LOOPBACK0/GTXE2_CHANNEL_LOOPBACK0"
+      ]
+    },
+    {
+      "port": "LOOPBACK1",
+      "net": "sfpsoc_sfp_status_loop[1]",
+      "expected_sitewire": "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK1",
+      "endpoint_present": true,
+      "gtx_route_entries": [
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT46",
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT46/GTXE2_INT_INTERFACE_IMUX46",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK1",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK1/GTXE2_IMUX46_9",
+        "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK1",
+        "X249Y225/GTXE2_CHANNEL_X0Y0.LOOPBACK1/GTXE2_CHANNEL_LOOPBACK1"
+      ]
+    },
+    {
+      "port": "LOOPBACK2",
+      "net": "sfpsoc_sfp_status_loop[2]",
+      "expected_sitewire": "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK2",
+      "endpoint_present": true,
+      "gtx_route_entries": [
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT47",
+        "X246Y221/GTXE2_INT_INTERFACE_IMUX_OUT47/GTXE2_INT_INTERFACE_IMUX47",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK2",
+        "X249Y225/GTXE2_CHANNEL_LOOPBACK2/GTXE2_IMUX47_9",
+        "SITEWIRE/GTXE2_CHANNEL_X0Y10/LOOPBACK2",
+        "X249Y225/GTXE2_CHANNEL_X0Y0.LOOPBACK2/GTXE2_CHANNEL_LOOPBACK2"
+      ]
+    },
+    {
+      "port": "RXCDRHOLD",
+      "net": "$abc$260183$aiger$o7771",
+      "expected_sitewire": "SITEWIRE/GTXE2_CHANNEL_X0Y10/RXCDRHOLD",
+      "endpoint_present": true,
+      "gtx_route_entries": [
+        "X246Y222/GTXE2_INT_INTERFACE_IMUX_OUT30",
+        "X246Y222/GTXE2_INT_INTERFACE_IMUX_OUT30/GTXE2_INT_INTERFACE_IMUX30",
+        "X249Y225/GTXE2_CHANNEL_RXCDRHOLD",
+        "X249Y225/GTXE2_CHANNEL_RXCDRHOLD/GTXE2_IMUX30_8",
+        "SITEWIRE/GTXE2_CHANNEL_X0Y10/RXCDRHOLD",
+        "X249Y225/GTXE2_CHANNEL_X0Y0.RXCDRHOLD/GTXE2_CHANNEL_RXCDRHOLD"
+      ]
+    }
+  ]
+}

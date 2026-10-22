@@ -317,3 +317,17 @@ Separate SFP build `zc706-sfp-frame-capture-20261022` is running, with header
 probes enabled. No timing admission or hardware result yet; golden unchanged.
 Evidence: `loopback-path-20261022/fullcore-simulation.log`, snapshot simulation
 and status. No hardware access in this step.
+
+TX/RX frame observer validation in the full UDP/IP core completed **PASS** for
+three packets with explicit rearm: both captures valid, EtherType88b5,64bytes,
+error0. Physical capture recorded correct TX fields but no complete RX frame
+at the depacketizer output after arming. Do not interpret accumulated MAC RX
+counts as traffic during this capture. The probe now preserves a pre-transmit
+counter snapshot and modulo32 deltas even when packet reception times out;
+this software change has not yet been run on hardware.
+Route-endpoint audit found LOOPBACK0/1/2 and RXCDRHOLD each routed to its
+expected GTX sitewire in serialized nextpnr output. This still is not independent
+FASM/bit equivalence. Evidence: frame-capture fullcore simulation and
+`control-route-endpoints.json`. No hardware accessed during this follow-up.
+Next measure settled TX/RX/CRC/preamble deltas with the same qualified diagnostic,
+then use those results to place any additional raw PHY/PCS observation points.
