@@ -203,3 +203,12 @@ and ADC-DDR defaults unchanged. Full build is running under
 `build/zc706-integrated-yosys-fixed-bank-buffered/gateware` with pinned
 Yosys0.69+190, experimental SRL timing, seed3/router2 and unchanged clocks.
 Elaboration has started; final timing and hardware validation are pending.
+
+Buffered bank command result: ADC1 142.51MHz and ADC2 125.63MHz pass100MHz;
+final hold violations0. SYS82.73MHz is still below83.333MHz. The former
+bank-to-bank queue path is no longer critical. New12.09ns path runs from
+AXI2AXILite burst beat offset to replicated CSR address FDRE D, with9.27ns
+routing and2.82ns logic. Evidence: `bank-buffered-stage1.log` and
+`bank-buffered-timing.json`. Next inspect the existing LiteX bus/CSR pipeline
+and identify a protocol-correct registered cut; do not change replicated
+CSR address latency alone. This candidate remains rejected before hardware.

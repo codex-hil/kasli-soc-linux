@@ -1,0 +1,15 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 82.73,
+  "required_sys_mhz": 83.333333,
+  "adc1_mhz": 142.51,
+  "adc2_mhz": 125.63,
+  "final_hold_violations": 0,
+  "critical_ns": 12.09,
+  "critical_start": "AXI2AXILite beat_offset[0]",
+  "critical_end": "csr_address_20_2.D",
+  "logic_ns": 2.82,
+  "routing_ns": 9.27,
+  "hardware_access": false,
+  "next": "inspect existing LiteX AXI/CSR registered bridge path before adding a protocol-correct pipeline"
+}
