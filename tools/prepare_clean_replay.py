@@ -6,13 +6,23 @@ ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--source-archive',type=Path,required=True)
 p.add_argument('--destination',type=Path,required=True)
+p.add_argument('--git-bundle-cache',type=Path,help='Pinned source-only bundles when runtime checkouts lack Git metadata')
 a=p.parse_args();archive=a.source_archive.resolve();dest=a.destination.resolve()
 if dest.exists():raise SystemExit('Destination exists; refusing to reuse or remove it')
 dest.mkdir(parents=True)
 with tarfile.open(archive) as t:t.extractall(dest,filter='data')
 lock=json.loads((dest/'sources.lock.json').read_text());sources=[]
-for name,entry in lock.items():
+required=['migen','litex','litex-boards','litedram','liteeth','liteiclink','nextpnr','prjxray-db','general-cores-wr','wr-cores-afcz-v5']
+for name in required:
+ entry=lock[name]
  src=ROOT/'upstream'/name
+ bundle=(a.git_bundle_cache/(name+'.bundle')).resolve() if a.git_bundle_cache else None
+ if bundle and bundle.exists():
+  target=dest/'upstream'/name;target.parent.mkdir(exist_ok=True)
+  subprocess.run(['git','clone','--quiet','--no-checkout',bundle,target],check=True)
+  subprocess.run(['git','-C',target,'checkout','--quiet','--detach',entry['rev']],check=True)
+  sources.append(dict(name=name,revision=entry['rev'],bundle_sha256=hashlib.sha256(bundle.read_bytes()).hexdigest()))
+  continue
  actual=subprocess.check_output(['git','-C',src,'rev-parse','HEAD'],text=True).strip()
  if actual!=entry['rev']:raise RuntimeError('Source cache revision mismatch: '+name)
  target=dest/'upstream'/name;target.parent.mkdir(exist_ok=True)
