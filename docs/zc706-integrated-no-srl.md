@@ -157,3 +157,13 @@ queue. A single controlled seed4 build is running with identical RTL/clocks/
 constraints under `build/zc706-integrated-yosys-fixed-bram-seed4`. Both failed
 seed3 reports are retained. If placement does not close timing, use the
 recorded queue-enable path to guide the next pipeline change.
+
+Seed4 comparison is rejected as well: SYS77.31/83.333MHz and
+ADC2 99.00/100MHz, with zero final hold violations. Its SYS path runs from
+ADC1 asynchronous-FIFO readable to BRAM address (12.94ns,11.62ns routing).
+No further seed sweep is planned. A candidate changes the forward-only
+address/data command register into an upstream depth16 buffered BRAM FIFO,
+so output-queue ready depends on local occupancy rather than DDR command
+acceptance. The complete address/data beat remains atomic. The existing
+independent-clock/backpressure/overflow/rearm suite is running before any
+new synthesis; this candidate has no timing or hardware qualification.
