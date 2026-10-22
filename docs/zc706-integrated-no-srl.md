@@ -174,3 +174,13 @@ real input data and invalid configuration. Source hashes and command are in
 `command-bram-simulation.json`. Full seed3/router2 build is running under
 `build/zc706-integrated-yosys-fixed-command-bram/gateware`, retaining all
 previous reports. Timing and physical qualification remain pending.
+
+Command-BRAM routing result: SYS86.27MHz passes83.333MHz and final hold
+violations are zero. Build remains rejected because ADC1 reaches97.62MHz
+versus100MHz. The10.24ns critical path is within the ADC1 async-FIFO Gray
+write-pointer feedback (8.94ns routing,1.30ns logic). Endpoint was verified
+against the mapped FDRE Q net; this is not the former DDR ready path.
+Evidence: `command-bram-stage1.log` and `command-bram-timing.json`.
+Next: isolate FIFO full/pointer feedback and evaluate a targeted change with
+the existing independent-clock, overflow and backpressure controls. No
+hardware programming has occurred; no clock requirement was relaxed.

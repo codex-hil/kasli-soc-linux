@@ -1,0 +1,15 @@
+{
+  "result": "REJECTED_ADC_SETUP",
+  "sys_achieved_mhz": 86.27,
+  "sys_required_mhz": 83.333333,
+  "adc_achieved_mhz": 97.62,
+  "adc_required_mhz": 100,
+  "final_hold_violations": 0,
+  "critical_adc_ns": 10.24,
+  "routing_ns": 8.94,
+  "logic_ns": 1.3,
+  "critical_start": "adctoddr0_fifo_cdc_graycounter0_q[3]",
+  "critical_end": "adctoddr0_fifo_cdc_graycounter0_q D",
+  "hardware_access": false,
+  "next": "isolate async FIFO full/pointer feedback; preserve independent clocks and exact overflow accounting"
+}
