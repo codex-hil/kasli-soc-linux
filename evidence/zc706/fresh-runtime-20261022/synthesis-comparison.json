@@ -1,0 +1,11 @@
+{
+  "hardware_access": false,
+  "result": "PLACEMENT_RUNNING_NOT_QUALIFIED",
+  "verilog_without_comments_identical": true,
+  "normalized_sha256": [
+    "6cb4657f335d7c5aa6360e401ddd966fc35a5844e7e1ae2536150fc9db8a8748",
+    "6cb4657f335d7c5aa6360e401ddd966fc35a5844e7e1ae2536150fc9db8a8748"
+  ],
+  "normalization": "remove line/block comments, preserve quoted strings and whitespace",
+  "xdc_identical": true
+}

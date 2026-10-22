@@ -199,3 +199,10 @@ project is mounted read-only as a source/asset cache. New outputs stay under
 remain pending. Recipe, package inventory, Python install log and preparation
 provenance are in `evidence/zc706/fresh-runtime-20261022`. Existing runtime tags,
 qualified bundles and hardware configuration remain unchanged.
+
+Fresh-runtime build progress: backend compilation, chipdb generation and Yosys
+synthesis completed. nextpnr is refining placement. Generated XDC is identical
+to the earlier isolated replay; generated Verilog is identical after removing
+comments (quoted strings preserved). Differences are generated timestamps and
+hierarchy comment ordering. This comparison is not final routing/timing proof.
+See `fresh-runtime-20261022/synthesis-comparison.json`.

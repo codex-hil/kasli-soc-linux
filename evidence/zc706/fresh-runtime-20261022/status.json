@@ -17,5 +17,11 @@
   "tool_assets": "fresh-tools-20261022",
   "generated_objects_copied": false,
   "source_snapshot": "a903dc6",
-  "full_build_timeout_seconds": 7200
+  "full_build_timeout_seconds": 7200,
+  "full_build_stage": "nextpnr placement refinement",
+  "backend_compile": "PASS",
+  "chipdb_generation": "PASS",
+  "yosys_synthesis": "PASS",
+  "verilog_without_comments_identical": true,
+  "xdc_identical": true
 }
