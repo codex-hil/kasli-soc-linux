@@ -15,6 +15,8 @@ from litex.soc.integration.export import get_csr_json
 from litex_boards.platforms.xilinx_zc706 import _io
 from liteeth.phy import K7_1000BASEX
 from liteeth.core import LiteEthUDPIPCore
+from liteeth.mac.crc import LiteEthMACCRC32Checker
+from liteeth.mac.preamble import LiteEthMACPreambleChecker
 from liteeth.common import eth_udp_user_description
 from kasli_soc import BaseSoC
 from phy_frame_capture import PHYFrameCapture
@@ -105,6 +107,20 @@ class MACFrameSnapshot(LiteXModule):
                 self.sender_hi.status.eq(endpoint.sender_mac[32:]),
                 self.payload_bytes.status.eq(count + 1),
                 self.error.status.eq(bad | endpoint.error)))
+
+
+def add_crc_captures(owner, mac):
+    """Observe upstream RX stages without changing their stream handshakes."""
+    pipeline = mac.core.rx_datapath.pipeline
+    checkers = [stage for stage in pipeline if isinstance(stage, LiteEthMACCRC32Checker)]
+    preambles = [stage for stage in pipeline if isinstance(stage, LiteEthMACPreambleChecker)]
+    if len(checkers) != 1 or len(preambles) != 1:
+        raise RuntimeError("Expected one upstream CRC and preamble checker")
+    checker = checkers[0]
+    # fifo.sink observes the actual CRC input behind BufferizeEndpoints.
+    owner.submodules.rx_cdc_raw = PHYFrameCapture(preambles[0].sink, "sys")
+    owner.submodules.crc_input_raw = PHYFrameCapture(checker.fifo.sink, "sys")
+    owner.submodules.crc_output_raw = PHYFrameCapture(checker.source, "sys")
 
 
 class Diagnostics(LiteXModule):
@@ -266,6 +282,7 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
     if header_probes:
         self.mac_status.tx_raw = PHYFrameCapture(self.ethphy.sink, "eth_tx")
         self.mac_status.rx_raw = PHYFrameCapture(self.ethphy.source, "eth_rx")
+        add_crc_captures(self.mac_status, self.ethcore.mac)
         self.mac_status.tx_capture = MACFrameSnapshot(self.ethcore.mac.packetizer.sink)
         self.mac_status.rx_capture = MACFrameSnapshot(self.ethcore.mac.depacketizer.source)
     # Observe ARP resolution without changing upstream state machines.

@@ -194,7 +194,7 @@ def loopback_test(r, count, mode="pma", observation=None):
     # Snapshot the first complete MAC frame after explicit arming, if present.
     # No clear-on-read, no dependence on repeated MMIO polling timing.
     raw_directions = []
-    for direction in ("tx", "rx"):
+    for direction in ("tx", "rx", "rx_cdc", "crc_input", "crc_output"):
         prefix = "mac_status_" + direction + "_raw_"
         if prefix + "arm" in r.map["csr_registers"]:
             r.write(prefix + "arm", 1)
@@ -297,7 +297,7 @@ def main():
                 (result["status"][name] - observation["before"][name]) & 0xffffffff
                 for name in names if name in result["status"] and name in observation["before"]}
         raw = {}
-        for direction in ("tx", "rx"):
+        for direction in ("tx", "rx", "rx_cdc", "crc_input", "crc_output"):
             prefix = "mac_status_" + direction + "_raw_"
             if prefix + "done" not in r.map["csr_registers"]:
                 continue

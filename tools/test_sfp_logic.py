@@ -10,7 +10,7 @@ from liteeth.mac import LiteEthMAC
 from liteeth.core import LiteEthUDPIPCore
 from liteeth.common import eth_phy_description
 from litex.soc.interconnect import stream
-from zc706_sfp import PacketTest, MAC, MACFrameSnapshot
+from zc706_sfp import PacketTest, MAC, MACFrameSnapshot, add_crc_captures
 from phy_frame_capture import PHYFrameCapture
 
 
@@ -146,14 +146,16 @@ def test_mac_loopback(full_core=False):
         top.submodules.rx_capture = rx_capture = MACFrameSnapshot(mac.depacketizer.source)
         top.submodules.tx_raw = tx_raw = PHYFrameCapture(phy.sink, 'eth_tx')
         top.submodules.rx_raw = rx_raw = PHYFrameCapture(phy.source, 'eth_rx')
+        add_crc_captures(top, mac)
+        crc_captures = (top.rx_cdc_raw, top.crc_input_raw, top.crc_output_raw)
     def run():
         for shot in range(3):
             if full_core:
-                for capture in (tx_capture, rx_capture, tx_raw, rx_raw):
+                for capture in (tx_capture, rx_capture, tx_raw, rx_raw) + crc_captures:
                     yield capture.arm.storage.eq(1)
                     yield capture.arm.re.eq(1)
                 yield
-                for capture in (tx_capture, rx_capture, tx_raw, rx_raw):
+                for capture in (tx_capture, rx_capture, tx_raw, rx_raw) + crc_captures:
                     yield capture.arm.re.eq(0)
                 yield
             yield dut.start.storage.eq(1)
@@ -193,6 +195,18 @@ def test_mac_loopback(full_core=False):
                 import binascii
                 expected = binascii.crc32(raw_frames[0][8:-4]).to_bytes(4, 'little')
                 assert raw_frames[0][-4:] == expected
+                for capture, expected_data in zip(crc_captures,
+                        (raw_frames[0], raw_frames[0][8:], raw_frames[0][8:-4])):
+                    assert (yield capture.done.status) == 1
+                    assert (yield capture.length.status) == len(expected_data)
+                    assert (yield capture.overflow.status) == 0
+                    assert (yield capture.error.status) == 0
+                    captured = []
+                    for address in range(len(expected_data)):
+                        yield capture.address.storage.eq(address)
+                        yield
+                        captured.append((yield capture.data.status))
+                    assert bytes(captured) == expected_data
     fragment = top.get_fragment()
     for special in fragment.specials:
         if isinstance(special, Memory):

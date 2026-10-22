@@ -1,0 +1,14 @@
+{
+  "result": "PREPARED_NOT_SIMULATED",
+  "hardware_access": false,
+  "syntax_check": "PASS",
+  "points": {
+    "rx_cdc_raw": "Preamble checker sink, sys domain, expected90 bytes",
+    "crc_input_raw": "CRC checker fifo.sink behind BufferizeEndpoints, expected82 bytes",
+    "crc_output_raw": "CRC checker source, expected78 bytes"
+  },
+  "simulation_assertions": "Three exact byte-array comparisons, done/length/error/overflow checks",
+  "source_sync_session": 85018,
+  "blocker": "Shared Dell build lease held by another flock owner; source sync waiting",
+  "next": "Complete sync, then run full-core simulation under shared wrapper before any build/HW"
+}
