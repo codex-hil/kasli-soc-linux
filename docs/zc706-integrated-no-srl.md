@@ -242,3 +242,12 @@ buffered bank queues and ADC boundaries. Full build is running under
 `build/zc706-integrated-yosys-fixed-mac-boundary`, seed3/router2. It changes
 only a synthesis boundary; timing benefit remains unproven. Evidence:
 `csr-boundary-stage1.log` and `csr-boundary-timing.json`. No hardware access.
+
+MAC boundary result rejected: SYS77.36MHz, ADC1 144.59MHz, ADC2 124.16MHz,
+final hold0. Critical path moved to DDR ZQCS refresh control (12.93ns).
+The MAC keep experiment was reverted. Next compare the current Yosys ABC9
+mapper with ABC using `--ddr-abc9`; default mapping is unchanged. LiteX
+already generates `-abc9`, which the DDR compatibility script stripped.
+The new flag preserves it and records the selection in the manifest.
+Build: `build/zc706-integrated-yosys-fixed-abc9/gateware`, seed3/router2,
+all clocks unchanged. Final timing and hardware qualification pending.

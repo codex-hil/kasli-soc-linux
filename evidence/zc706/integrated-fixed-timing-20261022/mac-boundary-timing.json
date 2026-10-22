@@ -1,0 +1,11 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 77.36,
+  "adc1_mhz": 144.59,
+  "adc2_mhz": 124.16,
+  "final_hold_violations": 0,
+  "critical_start": "DDR zqcs timer",
+  "critical_ns": 12.93,
+  "hardware_access": false,
+  "next": "revert MAC keep; controlled ABC9 comparison"
+}

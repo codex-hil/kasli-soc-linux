@@ -127,6 +127,7 @@ def main():
     p.add_argument("--wr-pll", action="store_true", help="Add original WR DDMTD phase taggers to the clock-only target")
     p.add_argument("--wr-pll-cards", type=int, choices=[1, 2], default=1)
     p.add_argument("--reciprocal", action="store_true", help="Add reciprocal counters to the FMC ADC target")
+    p.add_argument("--ddr-abc9", action="store_true", help="Compare ABC9 mapping for DDR targets; default keeps qualified ABC flow")
     p.add_argument("--ddr-sync-reset", action="store_true", help="Experimental shared serializer reset release (integrated only)")
     p.add_argument("--prerouted",type=Path,help="Experimental native nextpnr reference clock route file")
     p.add_argument("--seed", type=int, default=1, help="Recorded nextpnr placement/routing seed")
@@ -181,7 +182,7 @@ def main():
         script.write_text(prelude + script.read_text().replace("verilog_defaults -add -defer", "")
             .replace("synth_xilinx", "hierarchy -check -top top\nproc\n"
                 "write_rtlil elaborated.il\ndesign -reset\nread_rtlil elaborated.il\nsynth_xilinx"))
-        if args.design in ("pl-ddr", "adc-ddr", "integrated"):
+        if args.design in ("pl-ddr", "adc-ddr", "integrated") and not args.ddr_abc9:
             # Use stable ABC mapping for the standalone DDR controller.
             script.write_text(script.read_text().replace(" -abc9", ""))
     if args.no_srl and not args.resume_assembly:
@@ -339,6 +340,7 @@ def main():
         "design": args.design,
         "nextpnr_seed": args.seed,
         "yosys_no_srl": args.no_srl,
+        "ddr_abc9": args.ddr_abc9,
         "experimental_srl_timing": args.srl_timing,
         "sfp_header_probes": not args.no_header_probes,
         "prerouted_sha256": hashlib.sha256(args.prerouted.read_bytes()).hexdigest() if args.prerouted else None,
