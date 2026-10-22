@@ -1,0 +1,14 @@
+{
+  "result": "REJECTED_SETUP",
+  "sys_achieved_mhz": 77.2,
+  "sys_required_mhz": 83.333333,
+  "srl_timing_coverage": 35,
+  "final_hold_violations": 0,
+  "critical_start": "sdram_bankmachine3_level[3]",
+  "critical_end": "adctoddr1_output_buffer_pipe_ready_sink_d_payload_data FDRE.CE",
+  "critical_ns": 12.95,
+  "logic_ns": 1.95,
+  "routing_ns": 11.0,
+  "hardware_access": false,
+  "candidate_change": "replace 512-bit skid buffer with depth16 buffered BRAM FIFO; simulation pending"
+}

@@ -130,3 +130,14 @@ structural SFP FCLK admission PASS;35 SRL16E remain. The build script now runs
 that map and asserts no `$buf`/`$_BUF_` before JSON export. Full routing/timing
 and hardware qualification are pending. Controls and hashes are recorded in
 `cleanup-probe.json` and `alias-map-admission.json` in the admission evidence.
+
+Routing update: alias-mapped fixed-Yosys candidate reaches routing with35/35
+SRL16E timing coverage and zero final hold violations. Setup is rejected:
+SYS77.20MHz versus83.333MHz. The12.95ns path runs from DDR bank-machine
+queue occupancy to the512-bit ADC output skid register CE (11.00ns routing,
+1.95ns logic). Evidence: `evidence/zc706/integrated-fixed-timing-20261022`.
+A candidate replaces that skid stage with upstream LiteX depth16 buffered
+SyncFIFO forced to BRAM, retaining independent ADC CDC and the registered
+address/data command beat. Existing dual-clock capture/backpressure/overflow/
+rearm/configuration simulation is running; replacement routing and hardware
+validation remain pending. The qualified no-SRL image is unchanged.

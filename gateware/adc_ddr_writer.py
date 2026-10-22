@@ -6,7 +6,7 @@ Eight 64-bit sample ticks form one native 512-bit DRAM word. No sample
 backpressure is possible: a full FIFO sets a sticky failure, never hides loss.
 CSR configuration is held throughout the request/acknowledgement handshake.
 """
-from migen import Cat, If, Signal
+from migen import Cat, If, Memory, Signal
 from migen.genlib.cdc import MultiReg
 from litex.gen import LiteXModule
 from litex.soc.interconnect import stream
@@ -30,9 +30,17 @@ class ADCToDDR(LiteXModule):
             cd_from=domain, cd_to='sys', depth=fifo_depth, buffered=True,
             with_common_rst=True)
         self.writer = LiteDRAMDMAWriter(port, fifo_depth=16, fifo_buffered=True)
-        # Break native DDR command-ready feedback before the async FIFO BRAM address.
-        self.output_buffer = stream.Buffer(self.fifo.source.description,
-            pipe_valid=True, pipe_ready=True)
+        # Local BRAM occupancy cuts native command-ready feedback without a
+        # 512-bit skid register enable driven by distant bank-machine logic.
+        self.output_buffer = stream.SyncFIFO(self.fifo.source.description,
+            depth=16, buffered=True)
+        def use_block_ram(module):
+            for special in module._fragment.specials:
+                if isinstance(special, Memory):
+                    special.attr = {("ram_style", "block")}
+            for _, child in module._submodules:
+                use_block_ram(child)
+        use_block_ram(self.output_buffer)
         self.comb += self.fifo.source.connect(self.output_buffer.sink)
 
         request, request_adc, ack, ack_sys = [Signal() for _ in range(4)]
@@ -77,9 +85,8 @@ class ADCToDDR(LiteXModule):
         # pipeline, independently of command acceptance downstream. Preloading
         # an incrementing pointer removes base+words from the native command path.
         next_address = Signal(port.address_width)
-        # The existing output_buffer already cuts ready feedback. Only the
-        # forward beat needs another register here; a second skid buffer would
-        # duplicate 512-bit storage and its mux without another required cut.
+        # The BRAM output queue cuts upstream ready feedback. Register the
+        # complete address/data beat before presenting it to the DMA writer.
         self.command_buffer = stream.Buffer(self.writer.sink.description,
             pipe_valid=True, pipe_ready=False)
         settling = Signal(4)
