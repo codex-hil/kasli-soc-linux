@@ -167,3 +167,10 @@ so output-queue ready depends on local occupancy rather than DDR command
 acceptance. The complete address/data beat remains atomic. The existing
 independent-clock/backpressure/overflow/rearm suite is running before any
 new synthesis; this candidate has no timing or hardware qualification.
+
+Command-queue candidate simulation PASS: both independent ADC clocks,
+command/data stalls, repeated captures/reset, overflow, frame failure,
+real input data and invalid configuration. Source hashes and command are in
+`command-bram-simulation.json`. Full seed3/router2 build is running under
+`build/zc706-integrated-yosys-fixed-command-bram/gateware`, retaining all
+previous reports. Timing and physical qualification remain pending.
