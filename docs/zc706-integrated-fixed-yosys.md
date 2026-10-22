@@ -115,3 +115,8 @@ settings. Preparation is not build success; evidence:
 `evidence/zc706/clean-replay-20261022/preparation.json` and `source-bundles.json`.
 The standalone preparer is `tools/prepare_clean_replay.py`; it refuses an
 existing destination and verifies source revisions/tool archive markers.
+
+Replay progress: fresh baseline/derived nextpnr compilation, chipdb generation
+and Yosys synthesis have completed. nextpnr is refining placement. Routing,
+final timing and bitstream comparison remain pending; this is not a replay
+PASS. See `evidence/zc706/clean-replay-20261022/progress.json`.
