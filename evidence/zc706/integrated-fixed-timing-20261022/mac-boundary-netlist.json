@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "kept_mac_ready_nets": [
+    "mac_core_sink_ready"
+  ],
+  "ddr_pad_admission": "PASS",
+  "sfp_clock_admission": "PASS",
+  "netlist_sha256": "46b0f24d6851e7db9f90131d47fdd367b3102f1904e76a1d08aeb34aaacb3ced",
+  "route_timing": "PENDING"
+}
