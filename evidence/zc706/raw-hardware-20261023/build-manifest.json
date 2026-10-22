@@ -1,0 +1,80 @@
+{
+  "physical_part": "xc7z045ffg900-2",
+  "database_part": "xc7z045ffg900-2",
+  "design": "sfp",
+  "nextpnr_seed": 3,
+  "yosys_no_srl": false,
+  "ddr_abc9": false,
+  "experimental_srl_timing": true,
+  "sfp_header_probes": true,
+  "prerouted_sha256": null,
+  "ddr_serdes_sync_reset": false,
+  "sfp_refclk": "fclk",
+  "adc_cards": null,
+  "reciprocal": false,
+  "wr_pll": false,
+  "wr_pll_cards": null,
+  "hardware_validated": false,
+  "timing_passed": true,
+  "bitstream_sha256": "102968edb6e1b1ed03aafe40651aa7ee342f79ead264b47bacd38db1113dea4e",
+  "commands": [
+    [
+      "/work/build/tools/oss-cad-suite/bin/yosys",
+      "-l",
+      "top.rpt",
+      "top.ys"
+    ],
+    [
+      "/work/build/zc706-srl-timing/nextpnr/nextpnr-himbaechel-xilinx",
+      "--device",
+      "xc7z045ffg900-2",
+      "--json",
+      "top.json",
+      "-o",
+      "xdc=top.xdc",
+      "-o",
+      "fasm=top.fasm",
+      "--write",
+      "top_routed.json",
+      "--router",
+      "router2",
+      "--seed",
+      "3",
+      "--freq",
+      "100",
+      "--report",
+      "timing.json",
+      "--chipdb",
+      "/work/build/zc706-sfp/chipdb-hr/chipdb-xc7z045.bin",
+      "-o",
+      "hold-fix=8",
+      "-o",
+      "hold-buffer-radius=48"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/fasm2frames",
+      "--part",
+      "xc7z045ffg900-2",
+      "--db-root",
+      "/work/build/zc706-sfp/database/zynq7",
+      "top.fasm"
+    ],
+    [
+      "/work/build/tools/openxc7/bin/xc7frames2bit",
+      "--part_file",
+      "/work/build/zc706-sfp/database/zynq7/xc7z045ffg900-2/part.yaml",
+      "--part_name",
+      "xc7z045ffg900-2",
+      "--frm_file",
+      "top.frames",
+      "--output_file",
+      "top.bit"
+    ]
+  ],
+  "route_input_sha256": {
+    "top.json": "b35f62a7997adbb65adf1cfe0a17b2c71a0530ba1c14ae023a4e993311f82094",
+    "top.fasm": "a5113c413c6f16d855cd5c75e1fd3ba04445c4af0421410739778dab6d21c234",
+    "timing.json": "6c1a9b84f0fee02f8bae161aefe5171df6da291165480577b48281f730f3657c"
+  },
+  "assembly_resumed": false
+}

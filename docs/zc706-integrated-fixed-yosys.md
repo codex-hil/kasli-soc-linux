@@ -380,3 +380,20 @@ length. Offline controls PASS: valid reference, four byte corruptions and four
 incomplete/overflow cases. These are synthetic controls, not hardware data.
 No hardware was accessed in this step; next collect build timing/admission and
 perform a bounded raw-byte PCS capture with golden restoration.
+
+## Physical raw-frame result (2026-10-23)
+
+The raw SFP diagnostic passed timing/hold and was loaded under the shared lease.
+TX and RX captures both completed:90bytes, no capture error/overflow, identical
+byte for byte to the expected test frame. Both have valid preamble, correct
+MAC/EtherType/payload and FCS `77b3d256`, independently checked with Python CRC32.
+Nevertheless PacketTest packet0 timed out and the MAC CRC counter incremented.
+This is a **raw boundary loopback PASS / downstream MAC packet FAIL**, not a
+complete Ethernet qualification. It points the next investigation into the MAC
+RX pipeline after the observed PHY boundary; no new evidence of serial-link
+byte corruption was found in this captured frame. Next snapshot the CRC checker
+input/output and upstream RX CDC/preamble stages, preserving the same test frame.
+Golden restored and three whole1GiB DDR BIST passes PASS, lock release verified.
+Final management address is in `raw-hardware-20261023/validation.json`.
+No SD/QSPI/bootenv writes. Exact raw bytes and comparison are retained in that
+same evidence directory; no additional packet was sent after restoration.

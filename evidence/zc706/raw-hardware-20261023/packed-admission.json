@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "qualification": false,
+  "scope": "packed connectivity via original pin metadata; not bit-level or hardware proof",
+  "input_sha256": "81e8bc23563a5511e905c674e0d34b88f297ee34164492266c8cbe63c4cd5e58",
+  "decoder": "$abc$279525$lut$aiger$o8495",
+  "truth_table": [
+    {
+      "loopback": "000",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "001",
+      "cdr_hold": 1
+    },
+    {
+      "loopback": "010",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "011",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "100",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "101",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "110",
+      "cdr_hold": 0
+    },
+    {
+      "loopback": "111",
+      "cdr_hold": 0
+    }
+  ]
+}
