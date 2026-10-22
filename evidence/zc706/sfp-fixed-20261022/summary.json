@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "yosys": "0.69+190 / 0e8336b4e",
+  "srl_count": 32,
+  "icmp": "20/20",
+  "udp": "350/350 byte-exact, 157300 bytes",
+  "settled_errors": 0,
+  "golden_restored": true,
+  "ddr": "3 whole-1-GiB passes",
+  "final_host": "192.168.2.10",
+  "lease_reacquire": "PASS",
+  "vivado_used": false
+}

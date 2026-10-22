@@ -40,4 +40,7 @@ no-SRL controls both pass. Actual ARP mapped simulation and physical SRL-enabled
 124,756 hardware frames with zero errors. See
 `evidence/zc706/arp-fixed-20261022` for the initial restoration timeout and
 separate successful UART/JTAG golden recovery plus DDR BIST.
-Next: SFP and full integrated qualification before promoting defaults.
+The SRL-enabled SFP replacement also passes20/20 ICMP and350/350 byte-exact
+UDP packets through the external RJ45 switch, with32 variable-CE SRLs.
+Evidence: `evidence/zc706/sfp-fixed-20261022`.
+Next: full integrated qualification before promoting defaults.

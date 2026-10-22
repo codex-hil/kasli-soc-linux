@@ -10,7 +10,9 @@ shift chains. A [minimal reproducer](diagnostics/yosys-srl-ce/README.md)
 confirms upstream issue6058 (already fixed). The qualified build above uses
 `-nosrl`; pinned Yosys0.69+190 preserves CE in the minimal regression,
 and the SRL-enabled ARP hardware reproducer now passes124,756frames.
-SFP/network replacement validation is in progress. The separate
+The SRL-enabled SFP replacement now passes20/20 ICMP and350/350 byte-exact
+UDP packets through the external switch. Full integrated replacement qualification
+is pending. Evidence: `evidence/zc706/sfp-fixed-20261022`. The separate
 [SRL timing coverage gap](docs/zc706-srl-timing-gap.md) remains experimental.
 
 # Kasli-SoC Linux / LiteX / openXC7

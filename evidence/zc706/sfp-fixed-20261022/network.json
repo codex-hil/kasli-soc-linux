@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "target": "192.168.2.206",
+  "port": 1234,
+  "sizes": [
+    1,
+    17,
+    64,
+    128,
+    512,
+    1024,
+    1400
+  ],
+  "repeats": 50,
+  "completed_packets": 350,
+  "completed_bytes": 157300,
+  "warmup": {
+    "returncode": 0,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n64 bytes from 192.168.2.206: icmp_seq=1 ttl=128 time=0.233 ms\n64 bytes from 192.168.2.206: icmp_seq=2 ttl=128 time=0.076 ms\n64 bytes from 192.168.2.206: icmp_seq=3 ttl=128 time=0.143 ms\n\n--- 192.168.2.206 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 414ms\nrtt min/avg/max/mdev = 0.076/0.150/0.233/0.064 ms\n"
+  },
+  "ping": {
+    "returncode": 0,
+    "stdout": "PING 192.168.2.206 (192.168.2.206) 56(84) bytes of data.\n64 bytes from 192.168.2.206: icmp_seq=1 ttl=128 time=0.140 ms\n64 bytes from 192.168.2.206: icmp_seq=2 ttl=128 time=0.236 ms\n64 bytes from 192.168.2.206: icmp_seq=3 ttl=128 time=0.232 ms\n64 bytes from 192.168.2.206: icmp_seq=4 ttl=128 time=0.231 ms\n64 bytes from 192.168.2.206: icmp_seq=5 ttl=128 time=0.232 ms\n64 bytes from 192.168.2.206: icmp_seq=6 ttl=128 time=0.229 ms\n64 bytes from 192.168.2.206: icmp_seq=7 ttl=128 time=0.222 ms\n64 bytes from 192.168.2.206: icmp_seq=8 ttl=128 time=0.230 ms\n64 bytes from 192.168.2.206: icmp_seq=9 ttl=128 time=0.232 ms\n64 bytes from 192.168.2.206: icmp_seq=10 ttl=128 time=0.231 ms\n64 bytes from 192.168.2.206: icmp_seq=11 ttl=128 time=0.126 ms\n64 bytes from 192.168.2.206: icmp_seq=12 ttl=128 time=0.123 ms\n64 bytes from 192.168.2.206: icmp_seq=13 ttl=128 time=0.229 ms\n64 bytes from 192.168.2.206: icmp_seq=14 ttl=128 time=0.224 ms\n64 bytes from 192.168.2.206: icmp_seq=15 ttl=128 time=0.195 ms\n64 bytes from 192.168.2.206: icmp_seq=16 ttl=128 time=0.197 ms\n64 bytes from 192.168.2.206: icmp_seq=17 ttl=128 time=0.198 ms\n64 bytes from 192.168.2.206: icmp_seq=18 ttl=128 time=0.153 ms\n64 bytes from 192.168.2.206: icmp_seq=19 ttl=128 time=0.201 ms\n64 bytes from 192.168.2.206: icmp_seq=20 ttl=128 time=0.235 ms\n\n--- 192.168.2.206 ping statistics ---\n20 packets transmitted, 20 received, 0% packet loss, time 19418ms\nrtt min/avg/max/mdev = 0.123/0.204/0.236/0.037 ms\n",
+    "stderr": ""
+  },
+  "icmp_result": "PASS",
+  "neighbor": "[{\"dst\":\"192.168.2.206\",\"dev\":\"enp2s0\",\"lladdr\":\"02:c0:de:70:60:01\",\"state\":[\"REACHABLE\"]}]\n",
+  "elapsed_seconds": 0.044344577996525913,
+  "udp_result": "PASS"
+}

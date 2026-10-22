@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "4b5f7ffd40a0b0671c32a1a06de81120b6a5934e800fce2d8a870cd1aa241641",
+  "artifacts": {
+    "/srv/codex-hil-data/workspaces/kasli-soc-linux/build/zc706-sfp-yosys-fixed/gateware/csr.json": "01eca82f54663a3c29cc5f832cdcb4595e519f837783dbeb7c150fba1df2aaa9"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "srl_count": 32,
+  "all_variable": true,
+  "clock_enable": {
+    "$auto$ff.cc:337:slice$22759": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22760": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22761": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22762": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22763": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22764": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22765": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22766": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22767": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22768": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22769": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22770": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22771": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22772": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22773": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$22774": [
+      172
+    ],
+    "$auto$ff.cc:337:slice$23771": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23772": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23773": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23774": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23775": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23776": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23777": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$23778": [
+      667
+    ],
+    "$auto$ff.cc:337:slice$26794": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26795": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26796": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26797": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26798": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26799": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26800": [
+      292
+    ],
+    "$auto$ff.cc:337:slice$26801": [
+      292
+    ]
+  }
+}
