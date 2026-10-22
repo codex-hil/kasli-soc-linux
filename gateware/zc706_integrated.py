@@ -12,7 +12,8 @@ from wr_pll import WRPhase
 
 class IntegratedSoC(ADCDDRSoC):
     def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True):
-        super().__init__()
+        # Use upstream buffered bank command queues to cut lookahead ready.
+        super().__init__(cmd_buffer_buffered=True)
         if ddr_sync_reset:
             # One shared release edge for all DDR input/output serializers.
             # Assertion remains asynchronous; deassertion waits two SYS edges.

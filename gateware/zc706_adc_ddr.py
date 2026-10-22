@@ -16,8 +16,8 @@ class ADCDDRSoC(DDRSoC):
     def add_csr_bridge(self, name='csr', origin=None, with_register=False):
         return super().add_csr_bridge(name, origin, with_register=True)
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, cmd_buffer_buffered=False):
+        super().__init__(cmd_buffer_buffered=cmd_buffer_buffered)
         # Reuse the physically validated standalone DDR clock placement. The
         # unconstrained combined build moved its MMCM to the opposite column;
         # byte lane m4 then had no DQ training window despite passing core STA.

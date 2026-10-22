@@ -11,6 +11,7 @@ from litex.soc.interconnect.csr import CSRStatus
 from litex.soc.interconnect import wishbone, axi, stream
 from litex.soc.integration.soc import SoCRegion
 from litedram.common import LiteDRAMNativePort
+from litedram.core.controller import ControllerSettings
 from litedram.frontend.adapter import LiteDRAMNativePortCDC
 from litedram.frontend.wishbone import LiteDRAMWishbone2Native
 from litedram.frontend.bist import LiteDRAMBISTGenerator, LiteDRAMBISTChecker
@@ -60,7 +61,7 @@ class DDRStatus(LiteXModule):
 
 
 class DDRSoC(BaseSoC):
-    def __init__(self):
+    def __init__(self, cmd_buffer_buffered=False):
         super().__init__("zc706", crg=DDRClock(), sys_clk_freq=SYS_CLK_FREQ)
         self.csr.add("probe", 1)
         self.csr.add("ddrphy", 2)
@@ -78,7 +79,8 @@ class DDRSoC(BaseSoC):
             nphases=4, sys_clk_freq=SYS_CLK_FREQ, iodelay_clk_freq=200e6)
         self.dram_module = MT8JTF12864(SYS_CLK_FREQ, "1:4")
         self.add_sdram("sdram", phy=self.ddrphy, module=self.dram_module,
-            with_soc_interconnect=False, with_bist=False)
+            with_soc_interconnect=False, with_bist=False,
+            controller_settings=ControllerSettings(cmd_buffer_buffered=cmd_buffer_buffered))
         # BIST address generation has a long CSR-derived mask/add path. Use
         # the upstream wrappers' control/status CDC and native-port CDC to
         # run diagnostics at 50 MHz, while the DDR controller stays in its own faster domain.

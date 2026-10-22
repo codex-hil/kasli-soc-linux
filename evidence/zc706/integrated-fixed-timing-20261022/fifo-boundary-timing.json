@@ -1,0 +1,15 @@
+{
+  "result": "REJECTED_SYS_SETUP",
+  "sys_mhz": 81.97,
+  "required_sys_mhz": 83.333333,
+  "adc1_mhz": 117.84,
+  "adc2_mhz": 132.86,
+  "required_adc_mhz": 100,
+  "final_hold_violations": 0,
+  "critical_start": "sdram_bankmachine2_row[13]",
+  "critical_end": "sdram_bankmachine5_level FDRE.CE",
+  "critical_ns": 12.2,
+  "routing_ns": 10.1,
+  "hardware_access": false,
+  "next": "upstream ControllerSettings(cmd_buffer_buffered=True), integrated target only"
+}
