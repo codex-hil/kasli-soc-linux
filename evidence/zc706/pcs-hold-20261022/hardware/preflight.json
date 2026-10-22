@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "bab3fb2885d4a91860020f6b3e1fca334adda59fb7f0fddf84e9ea6f4598af25",
+  "artifacts": {
+    "/tmp/zc706-sfp-pcs-artifact/gateware/csr.json": "01eca82f54663a3c29cc5f832cdcb4595e519f837783dbeb7c150fba1df2aaa9"
+  }
+}

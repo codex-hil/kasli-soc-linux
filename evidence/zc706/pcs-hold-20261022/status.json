@@ -1,7 +1,7 @@
 {
-  "result": "INTEGRATED_TIMING_FAIL_ISOLATED_BUILD_RUNNING",
-  "session": 34884,
-  "hardware_access": false,
+  "result": "ISOLATED_BUILD_PASS_PCS_PACKET_FAIL_GOLDEN_RESTORED",
+  "session": 24537,
+  "hardware_access": true,
   "output": "build/zc706-sfp-pcs-hold-20261022/gateware",
   "hypothesis": "Near-end PCS loopback requires CDR hold with current RXOUTCLKSEL=010; expose loopback001 with RXCDRHOLD=(loop==1), keep other modes low",
   "reference": "https://docs.amd.com/v/u/en-US/ug476_7Series_Transceivers",
@@ -20,5 +20,11 @@
   "timing": "INTEGRATED_FAIL_ISOLATED_PENDING",
   "integrated_exit_code": 1,
   "integrated_sys_mhz": 82.454,
-  "integrated_required_sys_mhz": 83.333
+  "integrated_required_sys_mhz": 83.333,
+  "isolated_build_exit_code": 0,
+  "isolated_timing": "PASS",
+  "packed_admission": "PASS: all 8 modes",
+  "pcs_packet_result": "FAIL: packet0",
+  "restoration_passed": true,
+  "final_host": "192.168.2.20"
 }

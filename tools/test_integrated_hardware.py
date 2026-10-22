@@ -62,6 +62,7 @@ def main():
     if a.internal_loopback_mode == 'pcs':
         from check_gtx_loopback import check as check_loopback
         check_loopback(bit.parent/'top.json')
+        check_loopback(bit.parent/'top_routed.json',routed=True)
     required=[work/'pl-ddr-test',work/'adc-ddr-read',work/'i2c.so',work/'gateware/csr.json']
     if a.sfp_diagnostic_only or a.srl_diagnostic_only or a.internal_loopback_only:
         required=[work/'gateware/csr.json']

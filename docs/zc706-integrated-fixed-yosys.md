@@ -279,3 +279,15 @@ To isolate PCS/PMA behavior without DDR timing pressure, a separate SFP-only
 build is running with the same CDR-hold change, FCLK reference, SRL timing model,
 seed3/router2 and pinned fixed Yosys. Existing integrated golden stays unchanged.
 Its output is `build/zc706-sfp-pcs-hold-20261022/gateware`.
+
+Isolated PCS build completed: setup/hold PASS, bit SHA256
+`bab3fb2885d4a91860020f6b3e1fca334adda59fb7f0fddf84e9ea6f4598af25`.
+Packed original-pin connectivity and all eight CDR decoder cases PASS; this
+checks netlist metadata, not independent bit-level routing equivalence.
+Physical PCS packet test FAIL: status127, control9, clocks nominal125MHz,
+TX1/testRX0, MAC RX161, CRC1/preamble1 at timeout. These are accumulated counters,
+not a settled delta measurement; do not infer all MAC RX frames were looped data.
+Golden restored and three whole1GiB DDR BIST passes PASS; lease reacquisition
+verified. Evidence `pcs-hold-20261022/hardware`. No SD/QSPI/bootenv writes.
+Next audit physical LOOPBACK pin mapping and test-frame receive filtering;
+PCS failure alone does not identify a hardware or toolchain fault.
