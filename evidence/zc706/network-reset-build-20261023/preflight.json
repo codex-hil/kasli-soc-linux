@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "bda5b406b8b475537891e971e3b08e9efc2bc95deb3e293f62efa720c34c63a0",
+  "artifacts": {
+    "/tmp/zc706-network-reset-artifact/gateware/csr.json": "b9eee7e121ca165b115a3965f128720423982f4675dd9f50eaa96761679a29f8"
+  }
+}

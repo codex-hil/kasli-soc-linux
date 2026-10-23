@@ -1,0 +1,39 @@
+{
+  "result": "EXPECTED_STAGE_BYTES",
+  "hardware_access": false,
+  "stages": [
+    {
+      "stage": "rx_cdc",
+      "reference": "rx",
+      "complete": true,
+      "error": 0,
+      "expected_length": 90,
+      "actual_length": 90,
+      "identical": true,
+      "first_differences": []
+    },
+    {
+      "stage": "crc_input",
+      "reference": "rx_cdc",
+      "complete": true,
+      "error": 0,
+      "expected_length": 82,
+      "actual_length": 82,
+      "identical": true,
+      "first_differences": []
+    },
+    {
+      "stage": "crc_output",
+      "reference": "crc_input",
+      "complete": true,
+      "error": 0,
+      "expected_length": 78,
+      "actual_length": 78,
+      "identical": true,
+      "first_differences": []
+    }
+  ],
+  "raw_rx_fcs_valid": true,
+  "crc_checker_input_fcs_valid": true,
+  "scope": "Byte comparisons at observed handshakes, not internal CRC state or bit equivalence"
+}

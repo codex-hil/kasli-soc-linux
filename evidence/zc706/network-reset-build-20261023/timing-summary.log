@@ -1,0 +1,48 @@
+Info: Max frequency for clock    'sfpsoc_ethphy_pma_k7_gtx_basex_rxoutclk_rebuffer': 1251.56 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock 'sfpsoc_ethphy_pma_k7_gtx_basex_s7mmcm0_clkin_signal': 1288.66 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                     'eth_tx_half_clk': 1196.17 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'gt_ref_clk': 300.21 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                          'si_ref_clk': 330.69 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'eth_rx_clk': 192.57 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                          'eth_tx_clk': 188.32 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                             'ps7_clk': 1253.13 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                         'net_sys_clk': 81.22 MHz (PASS at 50.00 MHz)
+                                               sfpsoc_csr_bankarray_csrbank2_errors_w[7]      2 204.9ms
+                                               sfpsoc_csr_bankarray_csrbank2_errors_w[2]      2 180.1ms
+                                               sfpsoc_csr_bankarray_csrbank2_errors_w[6]      2 142.1ms
+                                               sfpsoc_csr_bankarray_csrbank2_errors_w[3]      2 133.8ms
+                                               sfpsoc_csr_bankarray_csrbank2_errors_w[5]      2 77.9ms
+                                           sfpsoc_csr_bankarray_csrbank1_crc_errors_w[8]      2 41.3ms
+                                     sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[24]      2 25.6ms
+                                     sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[22]      2 20.7ms
+                                     sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[28]      2 20.6ms
+                                           sfpsoc_csr_bankarray_csrbank1_crc_errors_w[4]      2 10.4ms
+                                           sfpsoc_csr_bankarray_csrbank1_crc_errors_w[2]      2 10.0ms
+                                           sfpsoc_csr_bankarray_csrbank1_crc_errors_w[5]      2 9.5ms
+                                           sfpsoc_csr_bankarray_csrbank1_crc_errors_w[1]      2 9.1ms
+                                     sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[14]      2 8.3ms
+                                      sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[8]      2 7.9ms
+                                      sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[5]      2 6.7ms
+                                     sfpsoc_csr_bankarray_csrbank1_preamble_errors_w[20]      2 6.2ms
+                                          sfpsoc_csr_bankarray_csrbank1_crc_errors_w[16]      2 5.9ms
+Info: Max frequency for clock    'sfpsoc_ethphy_pma_k7_gtx_basex_rxoutclk_rebuffer': 930.23 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock 'sfpsoc_ethphy_pma_k7_gtx_basex_s7mmcm0_clkin_signal': 1013.17 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                     'eth_tx_half_clk': 882.61 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'gt_ref_clk': 246.79 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                          'si_ref_clk': 253.49 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'eth_rx_clk': 167.31 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                          'eth_tx_clk': 160.13 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                             'ps7_clk': 1002.00 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                         'net_sys_clk': 71.24 MHz (PASS at 50.00 MHz)
+Info: Max frequency for clock    'sfpsoc_ethphy_pma_k7_gtx_basex_rxoutclk_rebuffer': 930.23 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock 'sfpsoc_ethphy_pma_k7_gtx_basex_s7mmcm0_clkin_signal': 1013.17 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                     'eth_tx_half_clk': 882.61 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'gt_ref_clk': 246.79 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                          'si_ref_clk': 253.49 MHz (PASS at 62.50 MHz)
+Info: Max frequency for clock                                          'eth_rx_clk': 167.31 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                          'eth_tx_clk': 160.13 MHz (PASS at 125.00 MHz)
+Info: Max frequency for clock                                             'ps7_clk': 1002.00 MHz (PASS at 100.00 MHz)
+Info: Max frequency for clock                                         'net_sys_clk': 71.24 MHz (PASS at 50.00 MHz)
+Info: Hold-fix: no hold violations to fix.
+10 warnings, 0 errors
+Info: Program finished normally.

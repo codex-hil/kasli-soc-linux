@@ -560,3 +560,12 @@ default off and recorded in manifest/CSR constant. Actual helper RTL model at
 `evidence/zc706/network-reset-candidate-20261023`. Build launched on Dell to
 `build/zc706-sfp-network-reset-20261023/gateware`, elaboration completed, timing
 and physical test pending. No hardware access or golden/integrated changes.
+
+Whole-network reset candidate build PASS: setup/hold, net_sys71.235/50MHz,
+RX167.308/125MHz, TX160.128/125MHz. Bit bda5b406...c63a0. Physical cold PMA
+**1000/1000 PASS with no warmup**, first packet included; MAC/test TX/RX+1000,
+CRC/preamble/clock/data errors+0. Raw TX/RX valid FCS, RX90/82/78stages match.
+Evidence `network-reset-build-20261023` and `network-reset-cold-pma-20261023`.
+Golden restored, three whole1GiB DDR BIST passes PASS, lease release verified.
+Final management192.168.2.10. Isolated candidate only; cold PCS/external and
+integrated regression pending. No SD/QSPI/bootenv writes.

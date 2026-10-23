@@ -1,3 +1,9 @@
+> SFP reset candidate2026-10-23: **cold PMA1000/1000 PASS without warmup**,
+> first packet included; CRC/preamble/clock/data errors0. Opt-in whole-network
+> reset, isolated target only. Setup/hold PASS; golden restored/DDR3×1GiB PASS.
+> Evidence: `evidence/zc706/network-reset-cold-pma-20261023`.
+> Cold PCS/external regression and integrated deployment pending.
+
 > SFP diagnostic update2026-10-23: settled near-end PCS and PMA each **1000/1000 frames PASS**,
 > zero new CRC/preamble/clock/data errors. Explicit3-frame warmup retained one
 > initial lost frame/CRC error; cold mode-transition issue remains open.
