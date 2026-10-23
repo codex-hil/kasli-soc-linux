@@ -1,8 +1,14 @@
+> Qualified PL archive (not SD): `zc706-integrated-network-reset-queue2.tar.xz`,
+> 1,416,436 bytes, SHA256 `a90b84564f25115d19d51cdc64698edb92d64a6434456d9111bf56e2b2743daf`.
+> All33 packaged-file checksums verified; matching full integration and cold
+> PMA/PCS evidence included. See `evidence/zc706/integrated-queue2-package-20261023`.
+
 > Integrated update 2026-10-23: **physical ADC/DDR/dual PLL/external SFP PASS**
 > with NetworkReset and local command queue. SYS91.70/83.33MHz; both ADCs up to
 > 4,194,304 samples/card, zero drops/errors, about800MB/s/card finite capture.
 > Concurrent PLL phase stddev1.58/1.57ns; switch20/20 ICMP,350/350 exact UDP.
-> Golden restored, DDR3×1GiB PASS. Integrated cold PMA/PCS still pending.
+> Integrated cold PMA/PCS each1000/1000 PASS without warmup. Golden restored,
+> DDR3×1GiB PASS. [Qualified PL bundle and build recipe](docs/zc706-integrated-network-reset.md).
 > Evidence: `evidence/zc706/integrated-queue2-hardware-20261023`.
 
 > SFP reset candidate2026-10-23: **cold PMA and PCS each1000/1000 PASS without warmup**,

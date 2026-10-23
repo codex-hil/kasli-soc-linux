@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "archive": "/home/codex-hil/artifacts/zc706-integrated-network-reset-queue2-20261023/zc706-integrated-network-reset-queue2.tar.xz",
+  "sha256": "a90b84564f25115d19d51cdc64698edb92d64a6434456d9111bf56e2b2743daf",
+  "bytes": 1416436,
+  "verified_files": 33,
+  "qualification": {
+    "core_evidence_matches": true,
+    "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+    "external_network_result": "PASS",
+    "internal_loopback_result": "PASS",
+    "cold_internal_modes": [
+      "pcs",
+      "pma"
+    ],
+    "scope": "DDR, dual ADC DMA, dual PLL, external SFP switch link; cold pcs, pma"
+  },
+  "negative_controls": [
+    {
+      "mutation": "wrong-bit",
+      "rejected": true,
+      "reason": "ValueError: Loopback evidence hash/result/restoration mismatch"
+    },
+    {
+      "mutation": "warmup",
+      "rejected": true,
+      "reason": "ValueError: Cold loopback evidence must not use warmup or diagnostic burst"
+    },
+    {
+      "mutation": "bad-counter",
+      "rejected": true,
+      "reason": "ValueError: Loopback evidence counter mismatch: packet_test_rx_frames"
+    }
+  ]
+}

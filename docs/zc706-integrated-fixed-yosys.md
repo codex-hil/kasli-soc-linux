@@ -735,3 +735,12 @@ included, all MAC/test counts+1000 and errors+0. Same bit as full integration
 and cold PMA. Golden restored, three whole1GiB BIST passes PASS, lease release
 verified; management192.168.2.20. Evidence `integrated-queue2-cold-pcs-20261023`.
 Next package matching build/full integration/both cold-mode evidence together.
+
+Qualified integrated queue2 PL bundle packaged and verified:1416436bytes,
+SHA256a90b84564f25115d19d51cdc64698edb92d64a6434456d9111bf56e2b2743daf,
+all33 listed file checksums PASS. Packager accepts same-bit restored cold-mode
+proofs and rejects wrong bit/warmup/counter mismatch. Reproducer/new Make target
+and bundle instructions in `zc706-integrated-network-reset.md`; package evidence
+`integrated-queue2-package-20261023`. No new SD image or Kasli hardware milestone
+claim. Latest ZC706 golden restored/DDR BIST PASS, management192.168.2.20, lease
+released. Remaining separate test: repeated/in-flight network reset recovery.
