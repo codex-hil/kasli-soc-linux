@@ -619,3 +619,12 @@ verify the candidate's own manifest/bitstream, timing and CSR map. Hardware runs
 must use `test_integrated_hardware.py` with its shared ZC706 lease and golden
 restoration. Test cold PMA/PCS first, then ADC/DDR/dual-PLL capture and external
 network through switch. No hardware accessed or images overwritten at this step.
+
+Integrated candidate offline follow-up: synthesis complete, router still active
+(no final manifest/timing). Parameter-only comparison with qualified netlist
+PASS for named PS7,6MMCM,1IDELAYCTRL,82IDELAYE2,107ODELAYE2,22IBUFDS,1GTX.
+Changed-multiplier/missing-MMCM negative controls rejected. This is not netlist
+connectivity or timing proof. Existing ARM test binaries prepared separately
+with recorded hashes; no hardware access. Evidence:
+`evidence/zc706/integrated-network-reset-offline-20261023`. Routing continues
+under its original bounded Dell lease; next inspect result before preflight.

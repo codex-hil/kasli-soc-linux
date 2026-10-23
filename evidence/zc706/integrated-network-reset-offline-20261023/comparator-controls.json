@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "controls": [
+    {
+      "control": "changed MMCM multiplier",
+      "rejected": true
+    },
+    {
+      "control": "missing MMCM",
+      "rejected": true
+    }
+  ]
+}
