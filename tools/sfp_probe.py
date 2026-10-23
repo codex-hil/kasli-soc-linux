@@ -178,7 +178,7 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0):
+def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, warmup=0):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
@@ -191,6 +191,18 @@ def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0):
         if time.monotonic() > deadline:
             raise TimeoutError(f"GTX/PCS loopback did not lock: {status(r)}")
         time.sleep(.01)
+    if warmup:
+        warmup_before = status(r)
+        for n in range(warmup):
+            r.write("packet_test_start", 1)
+            deadline = time.monotonic() + 1
+            while (r.read("packet_test_tx_frames") - warmup_before["packet_test_tx_frames"]) & 0xffffffff != n+1:
+                if time.monotonic() > deadline:
+                    raise TimeoutError("Warmup TX did not complete")
+                time.sleep(.001)
+            time.sleep(.02)
+        if observation is not None:
+            observation["warmup"] = dict(frames=warmup, before=warmup_before, after=status(r))
     # Snapshot the first complete MAC frame after explicit arming, if present.
     # No clear-on-read, no dependence on repeated MMIO polling timing.
     raw_directions = []
@@ -256,10 +268,11 @@ def main():
     p.add_argument("--loopback", type=int, default=0)
     p.add_argument("--loopback-mode", choices=("pma", "pcs"), default="pma")
     p.add_argument("--diagnostic-burst", type=int, choices=range(0,9), default=0, help="Send up to8 frames using TX completion before checking RX")
+    p.add_argument("--loopback-warmup",type=int,choices=range(0,9),default=0,help="Explicit mode-transition warmup, recorded separately from qualification")
     p.add_argument("--external", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
-    if a.diagnostic_burst and not a.loopback:
+    if (a.diagnostic_burst or a.loopback_warmup) and not a.loopback:
         p.error("Diagnostic burst requires loopback")
     r = Registers(a.csr_json, a.device); bus = BoardI2C(r)
     result = {"result": "FAIL", "hardware_validated": False}
@@ -279,7 +292,7 @@ def main():
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
                 result["loopback_observation"] = {}
-                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst)
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst, a.loopback_warmup)
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)

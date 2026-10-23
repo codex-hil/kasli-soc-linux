@@ -1,0 +1,8 @@
+{
+  "hardware_access": false,
+  "qualification": false,
+  "bitstream_sha256": "ee68e22021f3ad4f4072b798b35bd7a174109f86c029210e2971e4bb8dd35454",
+  "artifacts": {
+    "/tmp/zc706-crc-stage-artifact/gateware/csr.json": "df5b8f83a5bdbf2c5dc872fde7ff2d8cd87eb9aa9f7ccf7ce9860948114ef572"
+  }
+}

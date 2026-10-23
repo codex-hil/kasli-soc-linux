@@ -24,7 +24,10 @@ def main():
     p.add_argument('--internal-loopback-only',action='store_true',help='Bounded internal PMA packet diagnostic with golden restoration')
     p.add_argument("--internal-loopback-mode",choices=("pma","pcs"),default="pma")
     p.add_argument("--internal-probe-burst",type=int,choices=range(0,9),default=0)
+    p.add_argument("--internal-probe-warmup",type=int,choices=range(0,9),default=0)
     a=p.parse_args()
+    if a.internal_probe_warmup and not a.internal_loopback_only:
+        p.error("Warmup requires internal-loopback-only")
     if a.internal_probe_burst and not a.internal_loopback_only:
         p.error("Probe burst requires internal-loopback-only")
     if a.internal_loopback_mode == "pcs" and not a.internal_loopback_only:
@@ -121,7 +124,7 @@ def main():
             record['result']=record['srl']['result']
             return
         if a.internal_loopback_only:
-            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode '+a.internal_loopback_mode+' --diagnostic-burst '+str(a.internal_probe_burst)+' --output sfp-internal.json',timeout=60)
+            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode '+a.internal_loopback_mode+' --diagnostic-burst '+str(a.internal_probe_burst)+' --loopback-warmup '+str(a.internal_probe_warmup)+' --output sfp-internal.json',timeout=60)
             probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-internal.json'],text=True,timeout=15))
             record['internal_probe']=probe
             record['internal_loopback_result']=probe.get('loopback',{}).get('result','FAIL')

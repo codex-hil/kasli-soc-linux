@@ -430,3 +430,19 @@ fails if RX count does not match. `--internal-probe-burst 3` is restricted to
 `--internal-loopback-only` and retains golden restoration. Mock control PASS:
 three frames transmitted despite missing RX, final RX timeout still FAIL.
 Hardware burst has not yet run. Evidence: `crc-stage-hardware-20261023`.
+
+Three-frame physical burst: TX3, MAC RX3, PacketTest RX2, test errors0 and one
+new CRC error. All intermediate observers now completed with correct90/82/78
+bytes and valid FCS at the CRC input. Frames were identical; captures can be
+from different ordinals and do not capture/prove the first failing frame's data.
+This supports a mode-transition/startup-state hypothesis rather than continuous
+corruption. The strict3/3 test remains FAIL. Golden restored and three whole1GiB
+DDR BIST passes PASS; shared lease release verified.
+
+An explicit `--internal-probe-warmup 3` diagnostic is prepared to record startup
+frames separately, then strictly test1000 subsequent frames with unchanged
+error/count checks. Default cold test stays unchanged. This is a settled-mode
+experiment, not a fix for first-packet loss; that remains a known issue until
+reset/flush behavior is understood. A mock control retains the initial dropped
+frame in warmup and checks subsequent frame counts separately. Hardware warmup
+has not run. Evidence: `crc-burst-20261023`.

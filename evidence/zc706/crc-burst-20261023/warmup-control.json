@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "mock_warmup_tx": 3,
+  "mock_warmup_rx": 2,
+  "qualification_tx": 5,
+  "qualification_rx": 5,
+  "original_first_drop_retained": true
+}
