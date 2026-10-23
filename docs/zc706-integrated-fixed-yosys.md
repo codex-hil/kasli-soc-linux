@@ -487,3 +487,12 @@ This supports an interrupted-frame hypothesis but does not identify the physical
 cause or prove a reset patch necessary. K7 RX MMCM already resets via CDR lock
 sequencing; next trace domain reset coverage and post-reset RX traffic. No new
 hardware access or production gateware changes in this experiment.
+
+PCS boundary follow-up: actual PCSTX->PCSRX RTL with a200-cycle decoder CE gap
+while TX continues terminates the interrupted packet with last/error (14bytes
+in this model), then accepts both following90-byte packets. Clean control is
+three90-byte packets without errors. Both final regression assertions PASS.
+Evidence: `evidence/zc706/pcs-boundary-model-20261023`. Thus a CE gap alone does
+not explain an unterminated fragment; previous artificial-prefix result remains
+a possible mechanism, not the diagnosed physical cause. Next observe RX startup
+before the mode/reset sequence; no production reset patch or hardware change.

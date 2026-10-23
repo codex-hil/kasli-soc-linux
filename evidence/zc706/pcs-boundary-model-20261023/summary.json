@@ -1,0 +1,38 @@
+[
+  {
+    "gap_cycles": 0,
+    "triggered": false,
+    "frames": [
+      {
+        "bytes": 90,
+        "error": 0
+      },
+      {
+        "bytes": 90,
+        "error": 0
+      },
+      {
+        "bytes": 90,
+        "error": 0
+      }
+    ]
+  },
+  {
+    "gap_cycles": 200,
+    "triggered": true,
+    "frames": [
+      {
+        "bytes": 14,
+        "error": 1
+      },
+      {
+        "bytes": 90,
+        "error": 0
+      },
+      {
+        "bytes": 90,
+        "error": 0
+      }
+    ]
+  }
+]
