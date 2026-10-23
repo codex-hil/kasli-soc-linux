@@ -1,0 +1,23 @@
+{
+  "result": "SETTLED_PMA_1000_PASS_FIRST_PACKET_LOSS_UNRESOLVED",
+  "hardware_access": true,
+  "qualification_counter_deltas": {
+    "mac_status_tx_frames": 1000,
+    "mac_status_rx_frames": 1000,
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0,
+    "packet_test_tx_frames": 1000,
+    "packet_test_rx_frames": 1000,
+    "packet_test_errors": 0
+  },
+  "warmup": {
+    "tx": 3,
+    "rx": 2,
+    "crc_errors": 1,
+    "preamble_errors": 0
+  },
+  "restoration_passed": true,
+  "final_host": "192.168.2.20",
+  "scope": "SFP-only warmed PMA; not cold mode transition or full integrated image"
+}

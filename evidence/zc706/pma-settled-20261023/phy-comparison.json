@@ -1,0 +1,40 @@
+{
+  "hardware_access": false,
+  "captures": {
+    "tx": {
+      "complete": true,
+      "length": 90,
+      "error": 0,
+      "overflow": 0,
+      "preamble_valid": true,
+      "matches_expected_test_frame": true,
+      "fcs": "77b3d256",
+      "expected_fcs": "77b3d256",
+      "fcs_valid": true,
+      "target_mac": "02:c0:de:70:60:01",
+      "sender_mac": "02:c0:de:70:60:01",
+      "ethernet_type": "0x88b5",
+      "payload_bytes": 64
+    },
+    "rx": {
+      "complete": true,
+      "length": 90,
+      "error": 0,
+      "overflow": 0,
+      "preamble_valid": true,
+      "matches_expected_test_frame": true,
+      "fcs": "77b3d256",
+      "expected_fcs": "77b3d256",
+      "fcs_valid": true,
+      "target_mac": "02:c0:de:70:60:01",
+      "sender_mac": "02:c0:de:70:60:01",
+      "ethernet_type": "0x88b5",
+      "payload_bytes": 64
+    }
+  },
+  "both_complete": true,
+  "identical": true,
+  "result": "IDENTICAL_VALID_FCS",
+  "different_byte_count": 0,
+  "first_differences": []
+}

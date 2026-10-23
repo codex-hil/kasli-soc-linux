@@ -460,3 +460,16 @@ Golden restored; three whole1GiB DDR BIST passes PASS, shared lease release
 verified. Evidence: `pcs-settled-20261023`. No SD/QSPI/bootenv writes.
 Next compare settled near-end PMA with the same bitstream and explicit warmup,
 then investigate coherent RX reset/flush during mode transitions.
+
+Settled near-end PMA comparison also **PASS1000/1000**, same isolated bitstream,
+explicit3-frame warmup retained TX3/RX2/CRC+1 separately. Qualification MAC/test
+TX/RX each+1000 and CRC/preamble/clock/test errors each+0. Raw TX/RX and RX
+90/82/78stage bytes match expected data, with valid independent FCS. Thus both
+PCS and PMA work in settled mode. The cold first-frame loss after mode change
+remains unresolved; these tests do not claim it fixed. Golden restored and
+three whole1GiB DDR BIST passes PASS; lock release verified. Evidence:
+`pma-settled-20261023`. No SD/QSPI/bootenv writes.
+Next reproduce an interrupted RX frame/domain reset in the digital model,
+checking RX CDC pointer reset and sys-domain preamble/CRC state, before choosing
+any reset/flush implementation. Upstream CDC offers common-reset support but
+its applicability here remains to be tested; do not assume a patch is proven.
