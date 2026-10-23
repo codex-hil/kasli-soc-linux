@@ -446,3 +446,17 @@ experiment, not a fix for first-packet loss; that remains a known issue until
 reset/flush behavior is understood. A mock control retains the initial dropped
 frame in warmup and checks subsequent frame counts separately. Hardware warmup
 has not run. Evidence: `crc-burst-20261023`.
+
+## Settled near-end PCS qualification (2026-10-23)
+
+Same isolated diagnostic bitstream, explicit3-frame warmup: warmup TX3/RX2,
+CRC+1. Then **1000/1000 PCS packets PASS**, with MAC/test TX and RX each+1000,
+no new CRC/preamble/clock/test-data errors. Raw TX/RX bytes and the90/82/78byte
+RX-stage captures all match expected test data and independent FCS. Warmup
+counters are retained separately; the first-packet loss remains unresolved.
+This qualifies settled PCS operation only, not cold mode transitions, PMA or
+ADC/DDR integration. Default cold diagnostic has not been weakened.
+Golden restored; three whole1GiB DDR BIST passes PASS, shared lease release
+verified. Evidence: `pcs-settled-20261023`. No SD/QSPI/bootenv writes.
+Next compare settled near-end PMA with the same bitstream and explicit warmup,
+then investigate coherent RX reset/flush during mode transitions.

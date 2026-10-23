@@ -1,3 +1,8 @@
+> SFP diagnostic update2026-10-23: settled near-end PCS **1000/1000 frames PASS**,
+> zero new CRC/preamble/clock/data errors. Explicit3-frame warmup retained one
+> initial lost frame/CRC error; cold mode-transition issue remains open.
+> Evidence: `evidence/zc706/pcs-settled-20261023`. Golden restored/DDR BIST PASS.
+
 > Reproduction update2026-10-22: full FPGA build in a freshly installed Debian,
 > fresh Python environment and freshly downloaded Yosys/openXC7 tools PASS.
 > Setup/hold PASS; configuration payload byte-identical to the physically
