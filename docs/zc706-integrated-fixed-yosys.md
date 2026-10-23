@@ -518,3 +518,14 @@ Evidence `evidence/zc706/reset-held-capture-20261023`. Four offline ordering
 checks PASS. Golden restored, three whole1GiB DDR BIST passes PASS, lease release
 verified. Next model queued RX CDC traffic with write-domain-only reset while
 sys read state remains alive; prior prefix model did not cover that case.
+
+Queued CDC reset model: actual upstream unbuffered depth32 RX->sys FIFO,
+125/50MHz, old data partially read and consumer paused. Reset of RX/write side
+alone produces an invalid stream with repeated new data; upstream common reset
+of both FIFO sides flushes old data and delivers exactly three new bytes with
+correct final last. Clean/no-reset control also passes. Functional ideal reset
+lowering only; no synchronizer timing/metastability/GTX proof. Evidence and
+reproducer: `evidence/zc706/cdc-queued-reset-20261023`. This establishes a concrete
+reset-coherency failure mechanism, not yet the physical root cause. Next test
+full MAC downstream state: common FIFO reset alone may leave partial CRC/
+preamble state in sys. No production reset change or hardware access yet.
