@@ -538,3 +538,14 @@ FIFO reset alone is insufficient for a partly processed sys-domain frame.
 Evidence: `evidence/zc706/mac-queued-reset-20261023`; upstream/production logic
 unchanged. Physical cause still unproven. Next test coherent FIFO reset plus
 MAC parser recovery at multiple frame positions before selecting a fix.
+
+Model recovery PASS at12-byte header and40-byte payload positions: common RX
+FIFO reset plus reset of whole MAC sys state and diagnostic packet consumer
+receives all three new packets from the first attempt, CRC/preamble/data errors0.
+Both bounded runs exit0; evidence `evidence/zc706/mac-recovery-model-20261023`.
+This contrasts with common-FIFO-only reset, which lost the first new packet.
+Test-only ResetInserter does not assert global sys reset or automatically reset
+TX FIFO local aliases; no TX was active. Active-TX and full UDP/IP recovery remain
+unqualified. No upstream/production gateware change, build or hardware access.
+Next prepare opt-in SFP recovery with explicit FIFO reset ownership and protocol
+state reset, then validate RTL and timing before any physical program operation.
