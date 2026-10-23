@@ -703,3 +703,11 @@ next-state done from count<=1/reload==0; arithmetic identity checks0..64 PASS
 but no HDL/production change or qualification claimed. See corrected seed3
 README/timeout-transition-analysis.json. Next wait for final STA before choosing
 this bus-only candidate; no hardware access or timeout-policy relaxation.
+
+Queue2 seed4 build **setup/hold PASS**: SYS91.701/83.333MHz, ADC153.965/100MHz,
+ADC2123.442/100MHz, GTX RX176.429/125MHz, TX172.652/125MHz. Bit7bdc77ea...83ac831,
+NetworkReset/ADC command pipeline enabled. Full artifact/ARM tool preflight PASS.
+Evidence `integrated-queue2-seed4-build-20261023`. No timeout/AXI policy change
+needed. Full hardware integration test launched through shared ZC706 lease with
+external-network flag and guaranteed golden restoration; physical outcome
+pending. Existing qualified artifacts/images retained, no SD/QSPI writes.
