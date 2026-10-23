@@ -723,3 +723,9 @@ window; no timeout change needed. Golden restored, three whole1GiB BIST passes
 PASS, lease release verified; management192.168.2.8. Evidence
 `integrated-queue2-hardware-20261023`, full compressed board archive hash retained.
 No SD/QSPI/bootenv writes, no continuous-streaming/active-reset qualification.
+
+Integrated queue2 bit cold PMA **1000/1000 PASS without warmup**, first frame
+included. MAC/test TX/RX+1000, CRC/preamble/clock/test errors+0. Header probes
+omitted in this build, so no raw-byte stage capture claim. Golden restored,
+three whole1GiB BIST passes PASS, lease release verified; management192.168.2.18.
+Evidence `integrated-queue2-cold-pma-20261023`. Next same-bit cold PCS and bundle.
