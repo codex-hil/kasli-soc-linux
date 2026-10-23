@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-23",
+  "scope": "Offline integrity recheck of existing Kasli-SoC image; no rebuild or hardware access",
+  "sd_audit": {
+    "hardware_validated": false,
+    "checks": [
+      {
+        "partition": 1,
+        "type": 12,
+        "start_sector": 1,
+        "sectors": 131072,
+        "payload_identical": true
+      },
+      {
+        "partition": 2,
+        "type": 131,
+        "start_sector": 131073,
+        "sectors": 524288,
+        "payload_identical": true
+      }
+    ],
+    "image_sha256": "7ca07108b30f7eff41299b82654f5f16ffe0d6b25f870e55f1d83ef9ce990541"
+  },
+  "payloads": {
+    "BOOT.BIN": {
+      "sha256": "f6f03e8653ec0fe5a85fff6323409d9b73957ff1cd9b0007c2497bb81c07bff6",
+      "bytes": 7045512,
+      "matches_recorded_manifest": true
+    },
+    "zImage": {
+      "sha256": "97ae4e99b32edc67f2936e6cfaccca82d2ae56836894b10564f4544514eb69c8",
+      "bytes": 3768760,
+      "matches_recorded_manifest": true
+    },
+    "kasli-soc.dtb": {
+      "sha256": "cbf44c77c6dc0c6fd5d6c6155114c4e837d383f61502a4a4463dd08bb3a4948a",
+      "bytes": 12328,
+      "matches_recorded_manifest": true
+    },
+    "rootfs.ext4": {
+      "sha256": "fc25426caec4846e4ae6e521ed2968987e597cc6d7eb6fdb7c2f23841742e775",
+      "bytes": 268435456,
+      "matches_recorded_manifest": true
+    },
+    "sdcard.img": {
+      "sha256": "7ca07108b30f7eff41299b82654f5f16ffe0d6b25f870e55f1d83ef9ce990541",
+      "bytes": 335544832,
+      "matches_recorded_manifest": true
+    }
+  },
+  "milestone_1_complete": false,
+  "next_step": "Identify and connect a physical Kasli-SoC before board-specific boot validation; ordinary Kasli boards are not substitutes."
+}
