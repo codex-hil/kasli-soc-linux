@@ -766,3 +766,12 @@ management192.168.2.23. Evidence `network-reset-overlap-hardware-20261023`.
 No in-flight Ethernet packet or continuous-streaming claim. Updated capture
 software now physically qualified; next produce a separate updated evidence/
 software bundle, preserving the earlier archive unchanged.
+
+Updated reset-tested PL package verified:1418748bytes,
+SHA256b07d7b34faa91a02507dde0503d14b829cde2dc1acd12989e35cf1d6f89947ce,
+33 packaged checksums and all6 reset overlap/data records checked from archive.
+Capture tool matches new physical proof; cold PMA/PCS evidence remains same-bit.
+Previous package hash unchanged. Evidence `integrated-reset-tested-package-20261023`.
+No new hardware access. Current ZC706 integration qualification/package complete;
+physical Kasli milestone and continuous-streaming/alignment scopes remain separate.
+Latest board state golden/DDR BIST PASS, lease released, management192.168.2.23.

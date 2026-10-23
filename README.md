@@ -1,3 +1,8 @@
+> Latest reset-tested PL package (not SD): `zc706-integrated-reset-tested.tar.xz`,
+> 1,418,748 bytes, SHA256 `b07d7b34faa91a02507dde0503d14b829cde2dc1acd12989e35cf1d6f89947ce`.
+> All33 listed checksums and all6 reset-overlap records verified from archive.
+> Previous packages retained. Evidence: `evidence/zc706/integrated-reset-tested-package-20261023`.
+
 > Reset-overlap update 2026-10-23: **six PHY resets during both active ADC DMAs PASS**,
 > including three with dual PLLs. Zero sample drops/data errors; link recovery,
 > switch20/20 ICMP and350/350 exact UDP PASS. PLL stddev1.90/1.89ns within limits.

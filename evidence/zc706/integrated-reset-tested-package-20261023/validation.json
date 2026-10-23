@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "archive": "/home/codex-hil/artifacts/zc706-integrated-network-reset-queue2-reset-tested-20261023/zc706-integrated-reset-tested.tar.xz",
+  "sha256": "b07d7b34faa91a02507dde0503d14b829cde2dc1acd12989e35cf1d6f89947ce",
+  "bytes": 1418748,
+  "verified_files": 33,
+  "reset_counts": {
+    "adc-initial.json": 3,
+    "adc-concurrent.json": 3
+  },
+  "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+  "cold_internal_modes": [
+    "pcs",
+    "pma"
+  ],
+  "previous_archive_preserved": true
+}
