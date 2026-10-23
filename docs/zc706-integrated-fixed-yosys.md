@@ -684,3 +684,12 @@ card: upstream source-valid and2 occupancy bits; no DDR grant/ready terminal.
 Evidence `adc-command-queue2-structure-20261023`. Router still active, no final
 setup/hold/admission result; no hardware access. Next inspect final STA rather
 than infer timing from this structural check.
+
+Queue2 seed3 final setup FAIL:SYS82.02/83.33MHz, hold0. Worst path has moved
+from ADC DMA to socbushandler_count[1] -> AXI burst/control -> ax_buffer burst
+bit0 reset:12.19ns total,9.71ns routing. DMA structural improvement does not
+qualify the whole design. Evidence `adc-command-queue2-seed3-fail-20261023`.
+Separate identical-RTL queue2 seed4 build launched to
+`build/zc706-integrated-network-reset-queue2-seed4-20261023/gateware`, same clock/
+options. Next inspect final timing; if still failing, target AXI burst/ready
+feedback with protocol tests. No hardware access or frequency relaxation.

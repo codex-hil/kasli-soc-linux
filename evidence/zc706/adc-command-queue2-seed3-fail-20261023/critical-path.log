@@ -1,0 +1,67 @@
+Critical path report for clock 'sys_clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.35  0.35 Source $auto$ff.cc:337:slice$97885.Q
+Info:    routing  0.18  0.53 Net socbushandler_count[1] (54,80) -> (54,80)
+Info:                          Sink $abc$1093751$lut$not$aiger1093750$29134.A1
+Info:                          Defined in:
+Info:                               /work/build/zc706-integrated-network-reset-queue2-20261023/gateware/gateware/top.v:10370.15-10370.34
+Info:      logic  0.12  0.65 Source $abc$1093751$lut$not$aiger1093750$29134.O6
+Info:    routing  0.00  0.65 Net $abc$1093751$aiger$o31028 (54,80) -> (54,80)
+Info:                          Sink $auto$alumacc.cc:576:replace_alu$69952.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$.S1
+Info:      logic  0.56  1.21 Source $auto$alumacc.cc:576:replace_alu$69952.genblk1.slice[0].genblk1.carry4$split$muxcy0$PACKED_CARRY4$.O2
+Info:    routing  0.38  1.59 Net $techmap1101181$abc$1093751$lut$aiger1093750$85858.A[4] (54,80) -> (54,80)
+Info:                          Sink $abc$1093751$lut$aiger1093750$85858.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  1.74 Source $abc$1093751$lut$aiger1093750$85858.O5
+Info:    routing  0.33  2.07 Net $techmap1101182$abc$1093751$lut$aiger1093750$85862.A[4] (54,80) -> (54,80)
+Info:                          Sink $abc$1093751$lut$aiger1093750$85862.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  2.19 Source $abc$1093751$lut$aiger1093750$85862.O6
+Info:    routing  0.51  2.70 Net $techmap1101183$auto$abc_ops_reintegrate.cc:696:reintegrate$1094709.A[4] (54,80) -> (54,80)
+Info:                          Sink $auto$abc_ops_reintegrate.cc:696:reintegrate$1094709.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  2.82 Source $auto$abc_ops_reintegrate.cc:696:reintegrate$1094709.O6
+Info:    routing  0.34  3.16 Net $techmap1101185$abc$1093751$lut$aiger1093750$85867.A[1] (54,80) -> (57,79)
+Info:                          Sink $abc$1093751$lut$aiger1093750$85867.A2
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  3.29 Source $abc$1093751$lut$aiger1093750$85867.O6
+Info:    routing  2.02  5.31 Net $techmap1101186$abc$1093751$lut$aiger$o78104.A[1] (57,79) -> (154,79)
+Info:                          Sink $abc$1093751$lut$aiger$o78104.A2
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  5.43 Source $abc$1093751$lut$aiger$o78104.O6
+Info:    routing  2.68  8.11 Net $techmap1101190$auto$abc_ops_reintegrate.cc:696:reintegrate$1097421.A[4] (154,79) -> (54,66)
+Info:                          Sink $abc$1093751$lut$aiger1093750$85894.A2
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  8.26 Source $abc$1093751$lut$aiger1093750$85894.O5
+Info:    routing  0.33  8.59 Net $techmap1107083$abc$1093751$lut$aiger1093750$85900.A[4] (54,66) -> (54,66)
+Info:                          Sink $abc$1093751$lut$aiger1093750$85900.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  8.71 Source $abc$1093751$lut$aiger1093750$85900.O6
+Info:    routing  0.89  9.60 Net $techmap1107084$auto$abc_ops_reintegrate.cc:696:reintegrate$1094708.A[2] (54,66) -> (53,49)
+Info:                          Sink $auto$abc_ops_reintegrate.cc:696:reintegrate$1094708.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  9.75 Source $auto$abc_ops_reintegrate.cc:696:reintegrate$1094708.O5
+Info:    routing  0.65  10.40 Net $techmap1107085$auto$abc_ops_reintegrate.cc:696:reintegrate$1094707.A[2] (53,49) -> (53,59)
+Info:                          Sink $auto$abc_ops_reintegrate.cc:696:reintegrate$1094707.A4
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  10.55 Source $auto$abc_ops_reintegrate.cc:696:reintegrate$1094707.O5
+Info:    routing  0.33  10.88 Net $techmap1114616$abc$1093751$lut$aiger$o118629.A[1] (53,59) -> (53,59)
+Info:                          Sink $abc$1093751$lut$aiger$o118629.A2
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  11.00 Source $abc$1093751$lut$aiger$o118629.O6
+Info:    routing  1.09  12.09 Net $abc$1093751$aiger$o118629 (53,59) -> (53,63)
+Info:                          Sink $auto$ff.cc:337:slice$94616.SR
+Info:      setup  0.10  12.19 Source $auto$ff.cc:337:slice$94616.SR
+Info: 2.48 ns logic, 9.71 ns routing
+
+Info: 

@@ -1,0 +1,16 @@
+{
+  "result": "FAIL",
+  "hardware_access": false,
+  "qualification": false,
+  "seed": 3,
+  "sys_achieved_mhz": 82.02,
+  "sys_required_mhz": 83.33333333333333,
+  "total_delay_ns": 12.19,
+  "routing_delay_ns": 9.71,
+  "logic_delay_ns": 2.48,
+  "final_hold_violations": 0,
+  "start": "socbushandler_count[1]",
+  "endpoint": "AXI2AXILite ax_buffer burst bit0 reset",
+  "source_netlist_sha256": "17606b85dcdf345c67102a864f65547f25877a16d87363d9eca5badfd2c1d080",
+  "next_experiment": "queue2 same RTL, seed4, same required clock"
+}
