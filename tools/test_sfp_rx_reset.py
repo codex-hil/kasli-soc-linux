@@ -12,9 +12,10 @@ from liteeth.mac import LiteEthMAC
 from liteeth.common import eth_phy_description
 from litex.soc.interconnect import stream
 from test_sfp_logic import PacketTest, MAC
+from network_reset import NetworkReset
 
 
-def trial(prefix_length, reset_rx, queued=False, common_cdc=False, reset_mac=False):
+def trial(prefix_length, reset_rx, queued=False, common_cdc=False, reset_mac=False, network_reset=False):
     top = Module()
     for name in ('sys', 'eth_tx', 'eth_rx'):
         setattr(top.clock_domains, 'cd_'+name, ClockDomain(name))
@@ -60,10 +61,15 @@ def trial(prefix_length, reset_rx, queued=False, common_cdc=False, reset_mac=Fal
         ResetInserter(['sys'])(dut)
         top.comb += [mac.reset_sys.eq(ResetSignal('eth_rx')),
             dut.reset_sys.eq(ResetSignal('eth_rx'))]
+    if network_reset:
+        top.submodules.recovery = recovery = NetworkReset(ResetSignal('eth_rx'))
+        recovery.wrap(mac)
+        recovery.wrap(dut)
+        alias_rates.update({'net_sys': 20, 'net_eth_tx': 8, 'net_eth_rx': 8})
     injected = Signal()
     body = MAC.to_bytes(6, 'big')*2 + b'\x88\xb5' + bytes(n ^ 0xa5 for n in range(64))
     frame = b'\x55'*7+b'\xd5'+body+binascii.crc32(body).to_bytes(4, 'little')
-    result = {'prefix_bytes': prefix_length, 'reset_eth_rx': reset_rx, 'queued_frame': queued, 'common_cdc': common_cdc, 'reset_mac_and_consumer': reset_mac, 'frames': []}
+    result = {'prefix_bytes': prefix_length, 'reset_eth_rx': reset_rx, 'queued_frame': queued, 'common_cdc': common_cdc, 'reset_mac_and_consumer': reset_mac, 'network_reset': network_reset, 'frames': []}
     def inject():
         for _ in range(40):
             yield
@@ -127,10 +133,13 @@ if __name__ == '__main__':
     parser.add_argument("--queued-frame", action="store_true", help="Commit full frame, reset after prefix reaches sys")
     parser.add_argument("--common-cdc", action="store_true", help="Use upstream common-reset RX FIFO in model only")
     parser.add_argument("--reset-mac", action="store_true", help="Model-only MAC sys + test consumer reset, coherent TX FIFO")
+    parser.add_argument("--network-reset", action="store_true", help="Exercise actual project NetworkReset helper")
     args = parser.parse_args()
+    if args.network_reset and (not (args.queued_frame and args.reset_rx) or args.reset_mac or args.common_cdc):
+        parser.error("Network reset requires queued RX reset without other reset strategies")
     if args.reset_mac and not (args.reset_rx and args.queued_frame and args.common_cdc):
         parser.error("MAC reset model requires queued frame, RX reset and common RX CDC")
-    result = trial(args.prefix_bytes, args.reset_rx, args.queued_frame, args.common_cdc, args.reset_mac)
+    result = trial(args.prefix_bytes, args.reset_rx, args.queued_frame, args.common_cdc, args.reset_mac, args.network_reset)
     print(json.dumps(result, indent=2), flush=True)
     if not args.queued_frame and (args.prefix_bytes == 0 or (args.prefix_bytes == 12 and args.reset_rx)):
         assert [row['rx'] for row in result['frames']] == [1, 2, 3], result
@@ -138,7 +147,7 @@ if __name__ == '__main__':
     if not args.queued_frame and args.prefix_bytes == 12 and not args.reset_rx:
         assert [row['rx'] for row in result['frames']] == [0, 1, 2], result
         assert [row['crc'] for row in result['frames']] == [1, 1, 1], result
-    if args.reset_mac:
+    if args.reset_mac or args.network_reset:
         assert [row['rx'] for row in result['frames']] == [1, 2, 3], result
         assert all(row['crc'] == 0 and row['errors'] == 0 and row['preamble'] == 0 for row in result['frames']), result
     print('PASS: scenario completed; counters above are observations, not a hardware diagnosis')

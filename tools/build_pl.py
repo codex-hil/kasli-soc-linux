@@ -133,7 +133,10 @@ def main():
     p.add_argument("--seed", type=int, default=1, help="Recorded nextpnr placement/routing seed")
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
+    p.add_argument("--sfp-network-reset", action="store_true", help="Experimental coherent reset, isolated SFP only")
     args = p.parse_args()
+    if args.sfp_network_reset and args.design != "sfp":
+        p.error("--sfp-network-reset requires --design sfp")
     if args.srl_timing and (args.design not in ("sfp", "srl", "arp", "integrated") or args.no_srl):
         p.error("--srl-timing requires SFP/SRL/ARP/integrated with SRL extraction enabled")
     if args.ddr_sync_reset and args.design != "integrated":
@@ -164,6 +167,8 @@ def main():
         target_command += ["--cards", str(args.cards)]
         if args.reciprocal:
             target_command += ["--reciprocal"]
+    if args.sfp_network_reset:
+        target_command += ["--network-reset"]
     if args.no_header_probes:
         if args.design not in ("sfp", "integrated"):
             p.error("--no-header-probes requires SFP or integrated target")
@@ -343,6 +348,7 @@ def main():
         "ddr_abc9": args.ddr_abc9,
         "experimental_srl_timing": args.srl_timing,
         "sfp_header_probes": not args.no_header_probes,
+        "sfp_network_reset": args.sfp_network_reset,
         "prerouted_sha256": hashlib.sha256(args.prerouted.read_bytes()).hexdigest() if args.prerouted else None,
         "ddr_serdes_sync_reset": args.ddr_sync_reset,
         "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,

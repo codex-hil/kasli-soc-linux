@@ -20,6 +20,7 @@ from liteeth.mac.preamble import LiteEthMACPreambleChecker
 from liteeth.common import eth_udp_user_description
 from kasli_soc import BaseSoC
 from phy_frame_capture import PHYFrameCapture
+from network_reset import NetworkReset
 
 MAC = 0x02c0de706001
 
@@ -227,7 +228,7 @@ class SFPClock(LiteXModule):
 
 
 class SFPSoC(BaseSoC):
-    def __init__(self, ip="192.168.2.206", refclk="si5324", header_probes=True):
+    def __init__(self, ip="192.168.2.206", refclk="si5324", header_probes=True, network_reset=False):
         super().__init__("zc706", crg=SFPClock(), sys_clk_freq=50e6)
         # The AXI master and GP0 frontend run in sys, not the 100 MHz FCLK.
         self.cpu.cpu_params["i_M_AXI_GP0_ACLK"] = ClockSignal("sys")
@@ -235,9 +236,9 @@ class SFPSoC(BaseSoC):
         self.platform.add_extension([r for r in _io if r[0] == "i2c"])
         self.board_i2c = I2CMaster(self.platform.request("i2c"))
         self.csr.add("board_i2c", 2)
-        add_sfp(self, ip, refclk, header_probes=header_probes)
+        add_sfp(self, ip, refclk, header_probes=header_probes, network_reset=network_reset)
 
-def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False, clock_monitors=True, header_probes=True):
+def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3, register_usrready=False, clock_monitors=True, header_probes=True, network_reset=False):
     self.platform.add_extension([r for r in _io if r[0] in
         ("sfp", "sfp_tx_disable_n", "mgt_refclk", "si5324")])
     if refclk == "local":
@@ -361,6 +362,12 @@ def add_sfp(self, ip="192.168.2.206", refclk="si5324", sys_clk_freq=50e6, bank=3
         self.platform.add_period_constraint(self.sfp_status.cd_gt_ref.clk, 10 if refclk == "fclk" else 8)
         self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
             self.sfp_status.cd_si_ref.clk, self.sfp_status.cd_gt_ref.clk)
+    if network_reset:
+        self.network_recovery = NetworkReset(self.ethphy.reset |
+            ResetSignal("eth_tx") | ResetSignal("eth_rx"))
+        for module in (self.ethcore, self.packet_test, self.echo_fifo):
+            self.network_recovery.wrap(module)
+        self.add_constant("sfp_network_reset", 1)
     self.platform.add_period_constraint(self.ethphy.txoutclk, 16)
     self.platform.add_period_constraint(self.ethphy.rxoutclk, 16)
     self.platform.add_false_path_constraints(self.crg.cd_sys.clk,
@@ -373,8 +380,9 @@ def main():
     p.add_argument("--output-dir", default="build/zc706-sfp/gateware")
     p.add_argument("--refclk", choices=["si5324", "fclk", "local"], default="si5324")
     p.add_argument("--no-header-probes", action="store_true")
+    p.add_argument("--network-reset", action="store_true", help="Experimental coherent whole-network reset (isolated SFP only)")
     a = p.parse_args()
-    soc = SFPSoC(refclk=a.refclk, header_probes=not a.no_header_probes); soc.finalize()
+    soc = SFPSoC(refclk=a.refclk, header_probes=not a.no_header_probes, network_reset=a.network_reset); soc.finalize()
     out = Path(a.output_dir); out.mkdir(parents=True, exist_ok=True)
     (out/"csr.json").write_text(get_csr_json(csr_regions=soc.csr_regions,
         constants=soc.constants, mem_regions=soc.mem_regions))

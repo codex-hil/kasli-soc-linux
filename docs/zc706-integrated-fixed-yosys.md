@@ -549,3 +549,14 @@ TX FIFO local aliases; no TX was active. Active-TX and full UDP/IP recovery rema
 unqualified. No upstream/production gateware change, build or hardware access.
 Next prepare opt-in SFP recovery with explicit FIFO reset ownership and protocol
 state reset, then validate RTL and timing before any physical program operation.
+
+Optional isolated SFP reset candidate implemented without upstream edits:
+private net_sys/net_eth_tx/net_eth_rx domains use parent clocks, shared reset
+assertion and per-domain synchronized release. Entire UDP/IP core, diagnostic
+consumer and echo FIFO share reset; both FIFO endpoints are covered. PHY and
+unrelated sys/CSR/status remain outside. --sfp-network-reset is isolated-SFP-only,
+default off and recorded in manifest/CSR constant. Actual helper RTL model at
+40bytes PASS: new packets3/3, CRC/preamble/data errors0. Evidence/reproducer:
+`evidence/zc706/network-reset-candidate-20261023`. Build launched on Dell to
+`build/zc706-sfp-network-reset-20261023/gateware`, elaboration completed, timing
+and physical test pending. No hardware access or golden/integrated changes.
