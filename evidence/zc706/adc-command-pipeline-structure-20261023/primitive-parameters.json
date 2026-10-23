@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "qualification": false,
+  "scope": "Named primitive parameters only; not connectivity, timing, bitstream or hardware equivalence",
+  "reference_sha256": "02a6b9340476974ff47c4ce8cfa0fd94de5f71b04b5e641086882e31eb276a9f",
+  "candidate_sha256": "0cf7d4d64fac414a3c23b0a6797ddd26416a2851c85bb0667bb069410ef5d407",
+  "primitives": [
+    {
+      "type": "PS7",
+      "reference_count": 1,
+      "candidate_count": 1,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "MMCME2_ADV",
+      "reference_count": 6,
+      "candidate_count": 6,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "IDELAYCTRL",
+      "reference_count": 1,
+      "candidate_count": 1,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "IDELAYE2",
+      "reference_count": 82,
+      "candidate_count": 82,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "ODELAYE2",
+      "reference_count": 107,
+      "candidate_count": 107,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "IBUFDS",
+      "reference_count": 22,
+      "candidate_count": 22,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    },
+    {
+      "type": "GTXE2_CHANNEL",
+      "reference_count": 1,
+      "candidate_count": 1,
+      "removed": [],
+      "added": [],
+      "parameter_changes": {},
+      "passed": true
+    }
+  ]
+}

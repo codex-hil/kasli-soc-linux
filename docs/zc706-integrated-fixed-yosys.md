@@ -659,3 +659,11 @@ Evidence `adc-command-pipeline-20261023`. Separate seed3 build launched to
 `build/zc706-integrated-network-reset-pipeline-20261023/gateware`, same83.33MHz,
 NetworkReset enabled. Timing/physical tests pending; qualified defaults/artifacts
 unchanged. No Vivado or hardware access in these experiments.
+
+Pipeline candidate routing still active. Post-Yosys structural check PASS:
+all24 address bits in both forward/skid register groups for each ADC have
+single FDRE Q drivers with clock/non-disabled CE (96drivers retained). This
+confirms the intended registered address boundary exists, not final timing.
+Selected primitive parameters match qualified hardware configuration again.
+Evidence `adc-command-pipeline-structure-20261023`. No hardware access or new
+admission manifest; next compare routed critical path and final setup/hold.
