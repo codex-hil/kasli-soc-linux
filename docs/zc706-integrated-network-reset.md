@@ -59,7 +59,9 @@ serializer reset and existing clock preroutes. It does not require Vivado.
 Fetch build artifacts explicitly into a separate WORK_DIR and place the
 qualified/rebuilt ARM `pl-ddr-test`, `adc-ddr-read`, `i2c.so` there. Its structure
 must include `gateware/csr.json` and `gateware/gateware/{top.bit,manifest.json,...}`.
-Use actual management IP from UART/DHCP; last observed after validation192.168.2.20.
+Use the actual management IP from UART/DHCP; the last recorded golden
+restoration on 2026-10-23 used 192.168.2.23. This is a DHCP address, not a
+reservation; rediscover it after each boot.
 PL network IP is192.168.2.206, UDP1234; generator input is not needed for pattern tests.
 
 ```
