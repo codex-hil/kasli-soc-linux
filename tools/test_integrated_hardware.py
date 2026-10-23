@@ -27,7 +27,10 @@ def main():
     p.add_argument("--internal-probe-warmup",type=int,choices=range(0,9),default=0)
     p.add_argument("--internal-capture-startup",action="store_true")
     p.add_argument("--internal-capture-reset-held",action="store_true")
+    p.add_argument("--network-reset-during-capture",action="store_true")
     a=p.parse_args()
+    if a.network_reset_during_capture and (not a.external_network or a.internal_loopback_only or a.sfp_diagnostic_only or a.srl_diagnostic_only):
+        p.error("In-capture reset requires full external-network integration scope")
     if a.internal_capture_startup and a.internal_capture_reset_held:
         p.error("Select one startup capture phase")
     if a.internal_capture_reset_held and (not a.internal_loopback_only or a.internal_probe_warmup):
@@ -55,6 +58,8 @@ def main():
     allowed_designs=('srl','arp') if a.srl_diagnostic_only else ('integrated','sfp') if (a.sfp_diagnostic_only or a.internal_loopback_only) else ('integrated',)
     if manifest['design'] not in allowed_designs or not manifest.get('timing_passed') or manifest['bitstream_sha256']!=digest:
         raise RuntimeError('Matching timing-clean build required for the selected test scope')
+    if a.network_reset_during_capture and not manifest.get('sfp_network_reset'):
+        raise RuntimeError('In-capture reset requires coherent network reset build')
     if manifest.get('experimental_srl_timing'):
         from build_pl import validate_srl_coverage
         validate_srl_coverage(bit.parent)
@@ -181,14 +186,15 @@ def main():
         record['internal_loopback_result']='NOT_RUN' if a.external_network else 'PASS'
         record['sfp_test_mode']='external' if a.external_network else 'internal-loopback'
         run('train-adc', '''python3 -c 'from fmc_adc import Registers,ADC; rs=[Registers("csr.json","/dev/uio0",card=i) for i in (1,2)]; [(ADC(r).initialize(),ADC(r).calibrate()) for r in rs]; [r.mem.close() for r in rs]' ''')
-        run('adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output initial --max-samples 4194304 --preinitialized')
-        pll_seconds=180 if a.external_network else 120
+        capture_reset=' --network-reset-during-capture' if a.network_reset_during_capture else ''
+        run('adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output initial --max-samples 4194304 --preinitialized'+capture_reset)
+        pll_seconds=300 if a.network_reset_during_capture else 180 if a.external_network else 120
         with (a.output/'pll.log').open('w') as log:
             pll=subprocess.Popen(ssh+['cd '+remote+' && python3 run_wr_pll_dual.py --csr-json csr.json --preinitialized --realtime --seconds '+str(pll_seconds)+' --output pll.json'],stdout=log,stderr=subprocess.STDOUT)
             try:
                 import time
                 time.sleep(15)
-                run('concurrent-adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output concurrent --max-samples 4194304 --preinitialized --realtime-start')
+                run('concurrent-adc','python3 capture_adc_ddr.py --csr-json csr.json --reader ./adc-ddr-read --output concurrent --max-samples 4194304 --preinitialized --realtime-start'+capture_reset)
                 if a.external_network:
                     run('sfp-before-network','python3 sfp_probe.py --csr-json csr.json --output sfp-before-network.json')
                     before=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-before-network.json'],text=True))
@@ -215,6 +221,10 @@ def main():
                     pll.wait(timeout=15)
         capture=json.loads(subprocess.check_output(ssh+['cat '+remote+'/concurrent/result.json'],text=True))
         phases=json.loads(subprocess.check_output(ssh+['cat '+remote+'/pll.json'],text=True))['initial']
+        if a.network_reset_during_capture:
+            resets=[run.get('network_reset') for run in capture['runs'] if run['samples_per_card'] >= 1<<20]
+            if not resets or not all(resets):raise RuntimeError('Missing concurrent reset-overlap evidence')
+            record['concurrent_network_resets']=resets
         record['concurrent_phase']={}
         for card,values in phases['cards'].items():
             samples=[row['phase']['phase_ns'] for row in values['records']

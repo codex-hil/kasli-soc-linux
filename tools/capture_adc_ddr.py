@@ -14,6 +14,37 @@ import time
 from fmc_adc import ADC, Registers
 
 
+
+def reset_network_while_capturing(opened):
+    """Owner must hold board lease; no ADC/DDR reset or persistent writes."""
+    r = opened[0][1]
+    if r.map['constants'].get('sfp_network_reset') != 1:
+        raise RuntimeError('Requires coherent NetworkReset gateware')
+    before = {str(card): regs.read('adc_dma_status') for card, regs, _ in opened}
+    if not all(value & 1 for value in before.values()):
+        raise RuntimeError('Network reset missed active dual capture')
+    control = r.read('sfp_status_control')
+    if control & 16:
+        raise RuntimeError('PHY reset already asserted')
+    result = dict(before_dma=before, control_before=control, start_monotonic=time.monotonic())
+    r.write('sfp_status_control', control | 16)
+    try:
+        result['asserted_control'] = r.read('sfp_status_control')
+        if result['asserted_control'] != control | 16:
+            raise RuntimeError('PHY reset write did not read back')
+        result['asserted_dma'] = {str(card): regs.read('adc_dma_status') for card, regs, _ in opened}
+        if not all(value & 1 for value in result['asserted_dma'].values()):
+            raise RuntimeError('Could not prove PHY reset overlapped both active DMAs')
+        time.sleep(.002)
+    finally:
+        r.write('sfp_status_control', control)
+    result['released_control'] = r.read('sfp_status_control')
+    if result['released_control'] != control:
+        raise RuntimeError('PHY reset release did not read back')
+    result['end_monotonic'] = time.monotonic()
+    return result
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--csr-json',required=True)
@@ -23,7 +54,10 @@ def main():
     p.add_argument('--analog',action='store_true',help='Finally capture CH1 analog inputs at ±5 V, 50Ω OFF')
     p.add_argument('--preinitialized',action='store_true',help='Use trained receivers and leave their clocks running')
     p.add_argument('--realtime-start',action='store_true',help='Temporarily use SCHED_FIFO priority11 for the two start writes and readbacks')
+    p.add_argument("--network-reset-during-capture",action="store_true",help="Prove PHY reset overlaps both long ADC captures")
     a=p.parse_args()
+    if a.network_reset_during_capture and a.max_samples < 1<<20:
+        p.error("Reset-overlap test needs at least1048576 samples")
     if a.max_samples<8192 or a.max_samples>1<<24 or a.max_samples%8:
         p.error('Maximum samples must be 8192..16777216 and a multiple of eight')
     a.output.mkdir(parents=True,exist_ok=True)
@@ -84,10 +118,19 @@ def main():
             # overhead. Qualify sustained concurrency on captures >= 10 ms.
             if count >= 1<<20 and run['estimated_overlap_fraction']<.95:
                 raise RuntimeError('Concurrent-rate qualification requires at least 95% estimated overlap')
+            if a.network_reset_during_capture and count >= 1<<20:
+                run["network_reset"] = reset_network_while_capturing(opened)
             deadline=time.monotonic()+5
             while not all(r.read('adc_dma_status')&2 for _,r,_ in opened):
                 if time.monotonic()>deadline:raise TimeoutError('ADC DDR capture did not finish')
                 time.sleep(.001)
+            if 'network_reset' in run:
+                deadline=time.monotonic()+10
+                while opened[0][1].read('sfp_status_status') & 63 != 63:
+                    if time.monotonic()>deadline:
+                        raise TimeoutError('Network did not relock after in-capture reset')
+                    time.sleep(.01)
+                run['network_reset']['relocked_status']=opened[0][1].read('sfp_status_status')
             for card,r,adc in opened:
                 status=r.read('adc_dma_status');written=r.read('adc_dma_written')
                 dropped=r.read('adc_dma_dropped');ticks=r.read('adc_dma_ticks')

@@ -744,3 +744,14 @@ and bundle instructions in `zc706-integrated-network-reset.md`; package evidence
 `integrated-queue2-package-20261023`. No new SD image or Kasli hardware milestone
 claim. Latest ZC706 golden restored/DDR BIST PASS, management192.168.2.20, lease
 released. Remaining separate test: repeated/in-flight network reset recovery.
+
+Opt-in in-capture reset diagnostic implemented on existing bit: require both DMA
+busy before and immediately after PHY reset assertion/readback, hold2ms, release
+in finally; verify relock after capture and all stored data/count/drop checks.
+Missed overlap is FAIL. Five offline helper tests and full artifact preflight
+PASS. Existing owner full external-network scope required,300s phase window
+for bounded relock waits, same qualification thresholds. Physical run launched
+at `/tmp/zc706-network-reset-overlap-20261023`, outcome pending; shared lease
+and golden restoration retained. Preparation evidence
+`network-reset-overlap-preparation-20261023`. No in-flight Ethernet-frame or
+continuous ADC-streaming claim; old qualified bundle kept unchanged.
