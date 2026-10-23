@@ -473,3 +473,17 @@ Next reproduce an interrupted RX frame/domain reset in the digital model,
 checking RX CDC pointer reset and sys-domain preamble/CRC state, before choosing
 any reset/flush implementation. Upstream CDC offers common-reset support but
 its applicability here remains to be tested; do not assume a patch is proven.
+
+## Interrupted RX frame simulation (2026-10-23)
+
+Actual MAC/store-and-forward/2048-entry CDC RTL at 50/125 MHz reproduces the
+startup counter pattern when a 12-byte frame prefix has no final beat: first
+complete packet lost, CRC+1, next two packets accepted. With RX-domain reset
+between prefix and packets, all three pass with zero CRC errors; sys continues.
+Both no-prefix controls also pass3/3. Whole-matrix simulation timed out after
+three completed cases; the reset-after-prefix case completed separately.
+Evidence and bounded reproducer: `evidence/zc706/rx-reset-model-20261023`.
+This supports an interrupted-frame hypothesis but does not identify the physical
+cause or prove a reset patch necessary. K7 RX MMCM already resets via CDR lock
+sequencing; next trace domain reset coverage and post-reset RX traffic. No new
+hardware access or production gateware changes in this experiment.

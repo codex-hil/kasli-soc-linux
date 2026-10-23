@@ -1,0 +1,3 @@
+{"prefix_bytes": 0, "reset_eth_rx": false, "frames": [{"tx": 1, "rx": 1, "errors": 0, "crc": 0, "preamble": 0}, {"tx": 2, "rx": 2, "errors": 0, "crc": 0, "preamble": 0}, {"tx": 3, "rx": 3, "errors": 0, "crc": 0, "preamble": 0}]}
+{"prefix_bytes": 0, "reset_eth_rx": true, "frames": [{"tx": 1, "rx": 1, "errors": 0, "crc": 0, "preamble": 0}, {"tx": 2, "rx": 2, "errors": 0, "crc": 0, "preamble": 0}, {"tx": 3, "rx": 3, "errors": 0, "crc": 0, "preamble": 0}]}
+{"prefix_bytes": 12, "reset_eth_rx": false, "frames": [{"tx": 1, "rx": 0, "errors": 0, "crc": 1, "preamble": 0}, {"tx": 2, "rx": 1, "errors": 0, "crc": 1, "preamble": 0}, {"tx": 3, "rx": 2, "errors": 0, "crc": 1, "preamble": 0}]}
