@@ -1,0 +1,12 @@
+{
+  "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+  "sd_qspi_written": false,
+  "jtag_serial": "210251842914",
+  "boot_passed": true,
+  "sd_written": false,
+  "qspi_written": false,
+  "boot_environment_written": false,
+  "method": "jtag",
+  "jtag_used": true,
+  "host": "192.168.2.4"
+}
