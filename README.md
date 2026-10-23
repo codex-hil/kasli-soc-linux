@@ -1,3 +1,8 @@
+> Standalone SD update 2026-10-23: integrated ZC706 image packaged; physical SD boot
+> **NOT_RUN**. Automatic DDR/SFP/ADC initialization and continuous dual PLL service
+> passed a bounded physical startup/40-second lock/SIGTERM-restoration test.
+> Golden restored and DDR rechecked. [Build, service and recovery](docs/zc706-standalone-sd.md).
+
 > Latest reset-tested PL package (not SD): `zc706-integrated-reset-tested.tar.xz`,
 > 1,418,748 bytes, SHA256 `b07d7b34faa91a02507dde0503d14b829cde2dc1acd12989e35cf1d6f89947ce`.
 > All33 listed checksums and all6 reset-overlap records verified from archive.

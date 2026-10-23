@@ -1,0 +1,66 @@
+{
+  "board": "zc706",
+  "hardware_validated": false,
+  "sd_boot_tested": false,
+  "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+  "base_rootfs_sha256": "3fe5410da478ad7407c431a015bdf08d3c7f0846c5ac0354b2f5c42fe5976544",
+  "runtime": {
+    "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+    "csr_sha256": "4d752723aaab562bab8f14635f5f825b09a64694db1cc04932bbfe770b858b4f",
+    "files": {
+      "integrated_service.py": "dee5f16736385c9dbddc54f0eefbec682da85fa67cb65aa8e5dac7f2f340f313",
+      "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+      "run_wr_pll_dual.py": "1cf8c28967bcad0f9a54c8508847560e933ffa543ba8ce7a52e91940533886ac",
+      "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+      "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+      "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+      "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+      "sfp_probe.py": "b5233e75ddfd198e7e487e862a0cc8ba711093233cf16b8e461bba72ca3258e4",
+      "capture_adc_ddr.py": "b62808c4f82039865c4b3a47883bd9082bd43023d78317a9487bf1ee489cf3de",
+      "pl-ddr-test": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36",
+      "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236"
+    }
+  },
+  "files": {
+    "u-boot.img": {
+      "sha256": "30d7347d737a37ca6454ddef896eb13e49fdf780d4856e235c0fddd79cbc913b",
+      "bytes": 1200168
+    },
+    "BOOT.BIN": {
+      "sha256": "ee8b8866b8a74674094fa69d1daa5b3a29fb6e93d4254c68f896002bc7768493",
+      "bytes": 132444
+    },
+    "boot.vfat": {
+      "sha256": "2d53e91227c88ddb3dc01008ef2be9cfc24a3d1648050c8ebd3825e9345ac807",
+      "bytes": 67108864
+    },
+    "zc706.dtb": {
+      "sha256": "95f711c0b88dbc314af9eae9a02f5ad12bc1a8fc5b1510bb7b9b4733140b0f9b",
+      "bytes": 15693
+    },
+    "boot.scr": {
+      "sha256": "1b3aa9269f19013018f45b024998d735c08c7b08a3a6b539a7623943983651f6",
+      "bytes": 878
+    },
+    "sdcard.img": {
+      "sha256": "921d516751de261b32bdc9d68513b7a96f1260a1b4d67c7a5f2c2cafad3dba1a",
+      "bytes": 335544832
+    },
+    "sdcard.img.gz": {
+      "sha256": "cda14308a4888730c7b7d74c496a677906e06a2a902964ddd139a5fcb8c03b0d",
+      "bytes": 19336242
+    },
+    "rootfs.ext4": {
+      "sha256": "7bffc33d8ab3aaac321539d1ef594a39fcc09b16e2a22db63f08f292e69e3858",
+      "bytes": 268435456
+    },
+    "zImage": {
+      "sha256": "beae38281c012976ca0e9bb0449e83cd659643c61f8ae2ff4c7bbf6c54dafc92",
+      "bytes": 3768760
+    },
+    "top.bit": {
+      "sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+      "bytes": 13321505
+    }
+  }
+}

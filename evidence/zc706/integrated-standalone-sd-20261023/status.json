@@ -1,0 +1,14 @@
+{
+  "result": "OFFLINE_PASS",
+  "hardware_sd_boot": "NOT_RUN",
+  "service_hardware": "PASS",
+  "service_evidence": "../integrated-service-hardware-20261023",
+  "image": "/home/codex-hil/artifacts/zc706-integrated-standalone-sd-20261023/sdcard.img.gz",
+  "compressed_bytes": 19336242,
+  "compressed_sha256": "cda14308a4888730c7b7d74c496a677906e06a2a902964ddd139a5fcb8c03b0d",
+  "uncompressed_sha256": "921d516751de261b32bdc9d68513b7a96f1260a1b4d67c7a5f2c2cafad3dba1a",
+  "blocker": "SD card is in the ZC706 and is not exposed as an Optiplex block device; needs powered-off removal and attachment to reader or a separate card.",
+  "baseline_sd_modified": false,
+  "qspi_modified": false,
+  "final_hardware_host": "192.168.2.10"
+}
