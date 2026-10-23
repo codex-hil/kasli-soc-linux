@@ -638,3 +638,11 @@ with identical RTL, constraints and tools, required frequency unchanged, output
 `build/zc706-integrated-network-reset-seed4-20261023/gateware`. Next inspect final
 timing; if still failing, target this demonstrated DDR path for pipeline/locality
 work. No hardware access or golden changes.
+
+Seed4 routing still active. Critical-path ownership refined from generated
+Verilog: storage_25 is ADC0 address/data command_buffer (538bits); storage_23
+is LiteDRAMDMAWriter data FIFO (514bits), mapped to distributed RAM. Endpoint
+WE is the writer data enqueue enable, not PS AXI or bank-machine FIFO. A later
+pipeline candidate must preserve address/data handshake together and include
+its pending valid in ADCToDDR empty/drain detection. See seed3 evidence
+`path-ownership.md`. No speculative pipeline/default changes during seed4 run.
