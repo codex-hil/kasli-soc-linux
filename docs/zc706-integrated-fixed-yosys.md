@@ -628,3 +628,13 @@ connectivity or timing proof. Existing ARM test binaries prepared separately
 with recorded hashes; no hardware access. Evidence:
 `evidence/zc706/integrated-network-reset-offline-20261023`. Routing continues
 under its original bounded Dell lease; next inspect result before preflight.
+
+Integrated NetworkReset seed3 route completed but setup FAIL:SYS82.04/83.33MHz,
+final hold repaired to0 violations; ADC/GTX/other clocks pass. Critical command
+FIFO address->bank/control decode->distributed RAM WE path12.19ns, of which
+8.48ns routing (final net4.55ns). No admission manifest/programming. Evidence
+`integrated-network-reset-seed3-fail-20261023`. Separate seed4 experiment launched
+with identical RTL, constraints and tools, required frequency unchanged, output
+`build/zc706-integrated-network-reset-seed4-20261023/gateware`. Next inspect final
+timing; if still failing, target this demonstrated DDR path for pipeline/locality
+work. No hardware access or golden changes.

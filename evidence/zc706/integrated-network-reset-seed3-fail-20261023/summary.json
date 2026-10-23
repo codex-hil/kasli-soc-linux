@@ -1,0 +1,14 @@
+{
+  "result": "FAIL",
+  "hardware_access": false,
+  "qualification": false,
+  "seed": 3,
+  "sys_required_mhz": 83.33333333333333,
+  "sys_achieved_mhz": 82.04,
+  "logic_delay_ns": 3.7,
+  "routing_delay_ns": 8.48,
+  "total_delay_ns": 12.19,
+  "final_hold_violations": 0,
+  "source_netlist_sha256": "c44bcac741ac04a5930a54c2a77c3851953569f2f54094dbff1c518e065dc7f2",
+  "next_experiment": "same RTL and frequency, separate seed4 build; no hardware programming"
+}

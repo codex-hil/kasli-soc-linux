@@ -1,0 +1,34 @@
+Critical path report for clock 'sys_clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  2.45  2.45 Source storage_25.0.0.DOADO8
+Info:    routing  1.63  4.09 Net adctoddr0_command_buffer_fifo_out_payload_address[9] (143,67) -> (180,83)
+Info:                          Sink $abc$1088067$lut$aiger1088066$80651.A3
+Info:                          Defined in:
+Info:                               /work/build/zc706-integrated-network-reset-20261023/gateware/gateware/top.v:2139.15-2139.64
+Info:      logic  0.15  4.24 Source $abc$1088067$lut$aiger1088066$80651.O5
+Info:    routing  0.34  4.57 Net $techmap1093554$abc$1088067$lut$aiger1088066$80670.A[4] (180,83) -> (180,83)
+Info:                          Sink $abc$1088067$lut$aiger1088066$80690.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  4.70 Source $abc$1088067$lut$aiger1088066$80690.O6
+Info:    routing  0.20  4.90 Net $techmap1093607$abc$1088067$lut$aiger1088066$81734.A[1] (180,83) -> (180,83)
+Info:                          Sink $abc$1088067$lut$aiger1088066$80692.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  5.02 Source $abc$1088067$lut$aiger1088066$80692.O6
+Info:    routing  0.20  5.22 Net $techmap1093731$abc$1088067$lut$aiger1088066$80696.A[3] (180,83) -> (180,83)
+Info:                          Sink $abc$1088067$lut$aiger1088066$80696.A4
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  5.34 Source $abc$1088067$lut$aiger1088066$80696.O6
+Info:    routing  1.57  6.92 Net $techmap1093732$auto$abc_ops_reintegrate.cc:696:reintegrate$1092110.A[3] (180,83) -> (180,128)
+Info:                          Sink $abc$1088067$lut$aiger$o45538.A4
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  7.04 Source $abc$1088067$lut$aiger$o45538.O6
+Info:    routing  4.55  11.59 Net $abc$1088067$aiger$o45538 (180,128) -> (222,215)
+Info:                          Sink storage_23.0.39/DPR3_1.WE
+Info:      setup  0.60  12.19 Source storage_23.0.39/DPR3_1.WE
+Info: 3.70 ns logic, 8.48 ns routing
+
+Info: 
