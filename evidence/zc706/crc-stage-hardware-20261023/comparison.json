@@ -1,0 +1,27 @@
+{
+  "result": "INCOMPLETE_STAGE_CAPTURE",
+  "hardware_access": false,
+  "stages": [
+    {
+      "stage": "rx_cdc",
+      "reference": "rx",
+      "complete": false,
+      "error": 0
+    },
+    {
+      "stage": "crc_input",
+      "reference": "rx_cdc",
+      "complete": false,
+      "error": 0
+    },
+    {
+      "stage": "crc_output",
+      "reference": "crc_input",
+      "complete": false,
+      "error": 0
+    }
+  ],
+  "raw_rx_fcs_valid": true,
+  "crc_checker_input_fcs_valid": null,
+  "scope": "Byte comparisons at observed handshakes, not internal CRC state or bit equivalence"
+}

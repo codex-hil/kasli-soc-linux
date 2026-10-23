@@ -416,3 +416,17 @@ no errors or overflows. Separate SFP diagnostic build is running on Dell in
 This is a digital-model validation of the observation points, not proof of the
 mapped FPGA CRC pipeline. Evidence: `crc-stages-20261023/fullcore-simulation.log`
 and status. Existing qualified images and golden hardware remain unchanged.
+
+CRC-stage physical attempt: raw TX/RX remained complete and valid, but all
+three intermediate captures stayed armed with done0/length0. Decoder correctly
+reports INCOMPLETE_STAGE_CAPTURE; this cannot localize byte corruption yet.
+A possible cause is conservative in-flight-fragment rejection skipping the
+first post-arm frame; this is a hypothesis, not a finding. Golden restoration
+and three whole1GiB DDR BIST passes PASS; lock release verified.
+
+The next software-only diagnostic can send3 identical frames, waiting for TX
+completion rather than requiring RX before the next transmission. It still
+fails if RX count does not match. `--internal-probe-burst 3` is restricted to
+`--internal-loopback-only` and retains golden restoration. Mock control PASS:
+three frames transmitted despite missing RX, final RX timeout still FAIL.
+Hardware burst has not yet run. Evidence: `crc-stage-hardware-20261023`.

@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "sent_before_rx_timeout": 3,
+  "rx_failure_not_masked": true
+}

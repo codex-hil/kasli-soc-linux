@@ -1,0 +1,8 @@
+{
+  "result": "RAW_PHY_VALID_CRC_STAGE_CAPTURES_INCOMPLETE",
+  "hardware_access": true,
+  "restoration_passed": true,
+  "final_host": "192.168.2.22",
+  "hypothesis": "Intermediate observers may skip the first post-arm frame if a prior partial frame is considered in flight; not proven",
+  "next": "Bounded3frame TX-completed diagnostic burst with same admitted artifact; RX failure remains failure"
+}

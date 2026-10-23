@@ -178,7 +178,7 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count, mode="pma", observation=None):
+def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
@@ -210,13 +210,23 @@ def loopback_test(r, count, mode="pma", observation=None):
             r.write(arm, 1)
     before = status(r)
     if observation is not None:
-        observation.update(mode=mode, before=before)
+        observation.update(mode=mode, before=before, diagnostic_burst=diagnostic_burst)
+    count = diagnostic_burst or count
+    counter = "packet_test_tx_frames" if diagnostic_burst else "packet_test_rx_frames"
     for n in range(count):
         r.write("packet_test_start", 1)
         deadline = time.monotonic()+1
-        while (r.read("packet_test_rx_frames") - before["packet_test_rx_frames"]) & 0xffffffff != n+1:
+        while (r.read(counter) - before[counter]) & 0xffffffff != n+1:
             if time.monotonic() > deadline:
                 raise TimeoutError(f"Loopback packet {n} not received: {status(r)}")
+            time.sleep(.001)
+        if diagnostic_burst:
+            time.sleep(.02)
+    if diagnostic_burst:
+        deadline = time.monotonic() + 1
+        while (r.read("packet_test_rx_frames") - before["packet_test_rx_frames"]) & 0xffffffff != count:
+            if time.monotonic() > deadline:
+                raise TimeoutError(f"Diagnostic burst sent {count} frames but RX did not match: {status(r)}")
             time.sleep(.001)
     after = status(r)
     names = ("sfp_status_rx_count", "sfp_status_tx_count")
@@ -245,9 +255,12 @@ def main():
     p.add_argument("--init-clock", action="store_true")
     p.add_argument("--loopback", type=int, default=0)
     p.add_argument("--loopback-mode", choices=("pma", "pcs"), default="pma")
+    p.add_argument("--diagnostic-burst", type=int, choices=range(0,9), default=0, help="Send up to8 frames using TX completion before checking RX")
     p.add_argument("--external", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
+    if a.diagnostic_burst and not a.loopback:
+        p.error("Diagnostic burst requires loopback")
     r = Registers(a.csr_json, a.device); bus = BoardI2C(r)
     result = {"result": "FAIL", "hardware_validated": False}
     try:
@@ -266,7 +279,7 @@ def main():
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
                 result["loopback_observation"] = {}
-                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"])
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst)
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)
