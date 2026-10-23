@@ -12,7 +12,7 @@ from wr_pll import WRPhase
 from axi_beat_pipeline import buffered_axi_beats
 
 class IntegratedSoC(ADCDDRSoC):
-    def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True):
+    def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True, network_reset=False):
         # Use upstream buffered bank command queues to cut lookahead ready.
         with buffered_axi_beats():
             super().__init__(cmd_buffer_buffered=True)
@@ -59,7 +59,7 @@ class IntegratedSoC(ADCDDRSoC):
                 RECIPROCAL_ABI=1,RECIPROCAL_REFERENCE_HZ=round(SYS_CLK_FREQ),
                 RECIPROCAL_CLOCK_ONLY=0,INTEGRATED_ABI=1).items():
             self.add_constant(name,value)
-        add_sfp(self, refclk=refclk, sys_clk_freq=SYS_CLK_FREQ, bank=21, register_usrready=False, clock_monitors=False, header_probes=header_probes)
+        add_sfp(self, refclk=refclk, sys_clk_freq=SYS_CLK_FREQ, bank=21, register_usrready=False, clock_monitors=False, header_probes=header_probes, network_reset=network_reset)
         # Retain qualified SFP TX clock placement and all SFP BUFG sites.
         # RX and ADC2 share the upper left clock column on integration.
         # Unconstrained TX at X0Y0 could not route CLKOUT1 to its BUFG.
@@ -120,7 +120,8 @@ def main():
     p.add_argument('--refclk',choices=['fclk','si5324'],default='fclk')
     p.add_argument("--ddr-sync-reset", action="store_true")
     p.add_argument("--no-header-probes", action="store_true")
-    a=p.parse_args(); soc=IntegratedSoC(a.refclk, a.ddr_sync_reset, not a.no_header_probes);soc.finalize()
+    p.add_argument("--network-reset", action="store_true", help="Opt-in coherent SFP network reset")
+    a=p.parse_args(); soc=IntegratedSoC(a.refclk, a.ddr_sync_reset, not a.no_header_probes, a.network_reset);soc.finalize()
     a.output_dir.mkdir(parents=True,exist_ok=True)
     export_soc(soc,a.output_dir)
 

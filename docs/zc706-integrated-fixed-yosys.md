@@ -586,3 +586,36 @@ qualification claim. Evidence `network-reset-external-20261023`. Golden restored
 three whole1GiB BIST passes PASS, shared lease release verified; management
 192.168.2.24. Next add opt-in reset flag to integrated target and run a separate
 build/ADC-DDR-dualPLL-network qualification. Existing qualified artifacts retained.
+
+## Integrated NetworkReset candidate (2026-10-23, not yet qualified)
+
+`IntegratedSoC` now accepts optional `network_reset=False`; the CLI exposes
+`--network-reset`. `tools/build_pl.py --sfp-network-reset` accepts SFP and
+integrated designs and still rejects unrelated targets. Default behavior stays
+off. The same helper that passed isolated cold PMA/PCS and external regression
+wraps only UDP/IP, packet test and echo FIFO. ADC capture/CDC, DDR controller,
+WR phase/PLL logic and the global sys domain remain outside that reset scope.
+
+Separate candidate build launched on Dell; elaboration completed. Routing,
+setup/hold and physical qualification remain pending. Do not replace the
+qualified image/bundle or program this build before checks pass.
+
+```sh
+dell-build sync kasli-linux
+dell-build run kasli-linux timeout 3600 build/python/bin/python tools/build_pl.py \
+  --board zc706 --design integrated --ddr-sync-reset --no-header-probes \
+  --sfp-network-reset --srl-timing --seed 3 --router router2 \
+  --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt \
+  --output-dir build/zc706-integrated-network-reset-20261023/gateware \
+  --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+```
+
+The pinned golden preroute input must exist on Dell (source synchronization
+excludes evidence; this host already has the input from qualified replay).
+After a successful build fetch artifacts explicitly into a separate local work
+directory. The existing ARM `pl-ddr-test`, `adc-ddr-read` and `i2c.so` from the
+qualified work directory can be reused, recording their hashes. Preflight must
+verify the candidate's own manifest/bitstream, timing and CSR map. Hardware runs
+must use `test_integrated_hardware.py` with its shared ZC706 lease and golden
+restoration. Test cold PMA/PCS first, then ADC/DDR/dual-PLL capture and external
+network through switch. No hardware accessed or images overwritten at this step.

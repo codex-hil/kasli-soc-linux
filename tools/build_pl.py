@@ -133,10 +133,10 @@ def main():
     p.add_argument("--seed", type=int, default=1, help="Recorded nextpnr placement/routing seed")
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
-    p.add_argument("--sfp-network-reset", action="store_true", help="Experimental coherent reset, isolated SFP only")
+    p.add_argument("--sfp-network-reset", action="store_true", help="Opt-in coherent SFP network reset (SFP or integrated)")
     args = p.parse_args()
-    if args.sfp_network_reset and args.design != "sfp":
-        p.error("--sfp-network-reset requires --design sfp")
+    if args.sfp_network_reset and args.design not in ("sfp", "integrated"):
+        p.error("--sfp-network-reset requires SFP or integrated target")
     if args.srl_timing and (args.design not in ("sfp", "srl", "arp", "integrated") or args.no_srl):
         p.error("--srl-timing requires SFP/SRL/ARP/integrated with SRL extraction enabled")
     if args.ddr_sync_reset and args.design != "integrated":
