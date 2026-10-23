@@ -1,0 +1,11 @@
+Jtag frequency : requested 1.00MHz    -> real 1.00MHz   
+index 0:
+	idcode   0x4ba00477
+	type     ARM cortex A9
+	irlength 4
+index 1:
+	idcode 0x23731093
+	manufacturer xilinx
+	family zynq
+	model  xc7z045
+	irlength 6
