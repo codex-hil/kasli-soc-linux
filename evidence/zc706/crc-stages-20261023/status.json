@@ -1,5 +1,5 @@
 {
-  "result": "FULLCORE_STAGE_SIMULATION_RUNNING",
+  "result": "STAGE_BYTES_SIMULATION_PASS_BUILD_RUNNING",
   "hardware_access": false,
   "syntax_check": "PASS",
   "points": {
@@ -9,9 +9,14 @@
   },
   "simulation_assertions": "Three exact byte-array comparisons, done/length/error/overflow checks",
   "source_sync_session": 85018,
-  "next": "Collect same simulation verdict, then isolated SFP build only after exact byte checks pass",
+  "next": "Collect build timing and GTX admission, then bounded physical stage-byte capture and golden restoration",
   "source_sync": "PASS",
   "simulation_session": 35788,
   "simulation_timeout_seconds": 300,
-  "decoder_tests": "PASS: valid chain, 3 stage corruptions, 4 incomplete cases, error-only case"
+  "decoder_tests": "PASS: valid chain, 3 stage corruptions, 4 incomplete cases, error-only case",
+  "simulation_exit_code": 0,
+  "simulation_result": "PASS: 3 frames exact90/82/78byte stages, no errors/overflow",
+  "build_session": 61740,
+  "build_output": "build/zc706-sfp-crc-stages-20261023/gateware",
+  "build_timeout_seconds": 3600
 }

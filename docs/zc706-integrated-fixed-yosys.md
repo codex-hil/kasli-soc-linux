@@ -408,3 +408,11 @@ or new FPGA build in this step.
 the error flag and recomputes FCS at the actual CRC input. Synthetic decoder
 controls passed: valid chain, three stage corruptions, four incomplete captures
 and an error flag with unchanged valid bytes. Evidence: `crc-stages-20261023`.
+
+CRC-stage full-core simulation completed **PASS**: all three frames produced
+exact90/82/78byte arrays at the respective boundaries, with done asserted and
+no errors or overflows. Separate SFP diagnostic build is running on Dell in
+`build/zc706-sfp-crc-stages-20261023/gateware`; no timing or hardware result yet.
+This is a digital-model validation of the observation points, not proof of the
+mapped FPGA CRC pipeline. Evidence: `crc-stages-20261023/fullcore-simulation.log`
+and status. Existing qualified images and golden hardware remain unchanged.
