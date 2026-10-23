@@ -6,7 +6,7 @@ Eight 64-bit sample ticks form one native 512-bit DRAM word. No sample
 backpressure is possible: a full FIFO sets a sticky failure, never hides loss.
 CSR configuration is held throughout the request/acknowledgement handshake.
 """
-from migen import Cat, If, Memory, Signal
+from migen import Cat, If, Memory, Signal, Constant
 from migen.genlib.cdc import MultiReg
 from litex.gen import LiteXModule
 from litex.soc.interconnect import stream
@@ -15,7 +15,7 @@ from litedram.frontend.dma import LiteDRAMDMAWriter
 
 
 class ADCToDDR(LiteXModule):
-    def __init__(self, port, samples, aligned, frame, domain, card, fifo_depth=256):
+    def __init__(self, port, samples, aligned, frame, domain, card, fifo_depth=256, command_pipeline=False):
         assert port.data_width == 512
         self.base = CSRStorage(30, name='base')  # byte offset in the PL SODIMM
         self.length = CSRStorage(27, name='length')  # 64-bit sample ticks, multiple of 8
@@ -99,15 +99,23 @@ class ADCToDDR(LiteXModule):
         self.command_buffer = stream.SyncFIFO(self.writer.sink.description,
             depth=16, buffered=True)
         use_block_ram(self.command_buffer)
+        command_source = self.command_buffer.source
+        pending_command = Constant(0, 1)
+        if command_pipeline:
+            self.command_pipeline = stream.Buffer(self.writer.sink.description,
+                pipe_valid=True, pipe_ready=True)
+            self.comb += command_source.connect(self.command_pipeline.sink)
+            command_source = self.command_pipeline.source
+            pending_command = command_source.valid
         settling = Signal(4)
         launching = Signal(4)
         empty = Signal()
-        self.comb += empty.eq(~self.fifo.source.valid & ~self.cdc_buffer.source.valid & ~self.output_buffer.source.valid & ~self.command_buffer.source.valid & ~self.writer.fifo.source.valid)
+        self.comb += empty.eq(~self.fifo.source.valid & ~self.cdc_buffer.source.valid & ~self.output_buffer.source.valid & ~self.command_buffer.source.valid & ~pending_command & ~self.writer.fifo.source.valid)
         self.comb += [self.command_buffer.sink.valid.eq(busy & self.output_buffer.source.valid),
             self.command_buffer.sink.data.eq(self.output_buffer.source.data),
             self.command_buffer.sink.address.eq(next_address),
             self.output_buffer.source.ready.eq(busy & self.command_buffer.sink.ready),
-            self.command_buffer.source.connect(self.writer.sink),
+            command_source.connect(self.writer.sink),
             self.status.status.eq(Cat(busy, done, overflow_sys, frame_bad_sys, config_bad)),
             self.written.status.eq(words << 3)]
         # Widen the span/end calculation: no wrapped range can pass the check.

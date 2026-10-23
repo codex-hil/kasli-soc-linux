@@ -646,3 +646,16 @@ WE is the writer data enqueue enable, not PS AXI or bank-machine FIFO. A later
 pipeline candidate must preserve address/data handshake together and include
 its pending valid in ADCToDDR empty/drain detection. See seed3 evidence
 `path-ownership.md`. No speculative pipeline/default changes during seed4 run.
+
+Seed4 also setup FAIL:SYS82.43/83.33MHz, final hold0. Failed route retained in
+`integrated-network-reset-seed4-fail-20261023`, no hardware access. Implemented
+optional full address/data elastic stage between ADC command_buffer and native
+DMA writer; empty/drain includes pending stage and counters retain handshake
+ownership. --adc-command-pipeline is integrated-only/default off, manifest flag
+and ADC_COMMAND_PIPELINE CSR constant recorded. Seven pipeline-enabled RTL
+cases PASS, including delayed data completion, backpressure/overflow, address/
+data conservation, repeated capture/base changes/ADC reset, frame/config errors.
+Evidence `adc-command-pipeline-20261023`. Separate seed3 build launched to
+`build/zc706-integrated-network-reset-pipeline-20261023/gateware`, same83.33MHz,
+NetworkReset enabled. Timing/physical tests pending; qualified defaults/artifacts
+unchanged. No Vivado or hardware access in these experiments.

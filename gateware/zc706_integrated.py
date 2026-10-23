@@ -12,11 +12,13 @@ from wr_pll import WRPhase
 from axi_beat_pipeline import buffered_axi_beats
 
 class IntegratedSoC(ADCDDRSoC):
-    def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True, network_reset=False):
+    def __init__(self, refclk="fclk", ddr_sync_reset=False, header_probes=True, network_reset=False, command_pipeline=False):
         # Use upstream buffered bank command queues to cut lookahead ready.
         with buffered_axi_beats():
-            super().__init__(cmd_buffer_buffered=True)
+            super().__init__(cmd_buffer_buffered=True, command_pipeline=command_pipeline)
         self.add_constant("AXI_BEAT_BUFFERED", 1)
+        if command_pipeline:
+            self.add_constant("ADC_COMMAND_PIPELINE", 1)
         if ddr_sync_reset:
             # One shared release edge for all DDR input/output serializers.
             # Assertion remains asynchronous; deassertion waits two SYS edges.
@@ -121,7 +123,8 @@ def main():
     p.add_argument("--ddr-sync-reset", action="store_true")
     p.add_argument("--no-header-probes", action="store_true")
     p.add_argument("--network-reset", action="store_true", help="Opt-in coherent SFP network reset")
-    a=p.parse_args(); soc=IntegratedSoC(a.refclk, a.ddr_sync_reset, not a.no_header_probes, a.network_reset);soc.finalize()
+    p.add_argument("--command-pipeline", action="store_true", help="Opt-in complete ADC DMA beat pipeline")
+    a=p.parse_args(); soc=IntegratedSoC(a.refclk, a.ddr_sync_reset, not a.no_header_probes, a.network_reset, a.command_pipeline);soc.finalize()
     a.output_dir.mkdir(parents=True,exist_ok=True)
     export_soc(soc,a.output_dir)
 

@@ -9,7 +9,7 @@ from litedram.common import LiteDRAMNativePort
 from adc_ddr_writer import ADCToDDR
 
 
-def exercise(stall=False, length=256, invalid=False, misaligned=False, real=False, frame_bad=False):
+def exercise(stall=False, length=256, invalid=False, misaligned=False, real=False, frame_bad=False, command_pipeline=False, delayed_data=False):
     top=Module()
     top.clock_domains.cd_sys=ClockDomain('sys')
     top.clock_domains.cd_adc=ClockDomain('adc')
@@ -19,7 +19,7 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
     for i in range(2):
         port=LiteDRAMNativePort(mode='write',address_width=24,data_width=512)
         sample,aligned,frame=Signal(64,reset=0x1111222233334444+i),Signal(reset=1),Signal(8,reset=0 if frame_bad else 15)
-        writer=ADCToDDR(port,sample,aligned,frame,'adc' if i==0 else 'adc2',i+1,fifo_depth=4)
+        writer=ADCToDDR(port,sample,aligned,frame,'adc' if i==0 else 'adc2',i+1,fifo_depth=4,command_pipeline=command_pipeline)
         top.submodules += writer
         ports.append(port);writers.append(writer);signals.append((sample,aligned,frame))
     @passive
@@ -34,7 +34,7 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
                     assert (yield port.cmd.addr)==held[i], 'Address changed under backpressure'
                 held[i]=(yield port.cmd.addr) if (yield port.cmd.valid) and not (yield port.cmd.ready) else None
                 (yield port.cmd.ready.eq(not stall and cycle%7!=0))
-                (yield port.wdata.ready.eq(bool(queues[i]) and cycle%5!=0))
+                (yield port.wdata.ready.eq(bool(queues[i]) and cycle%5!=0 and (not delayed_data or cycle%97>=70)))
                 if (yield port.cmd.valid) and (yield port.cmd.ready):
                     queues[i].append((yield port.cmd.addr))
                 if (yield port.wdata.valid) and (yield port.wdata.ready):
@@ -73,7 +73,9 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
                     for port in ports:yield port.cmd.ready.eq(1)
                 status=[]
                 for w in writers:status.append((yield w.status.status))
-                if all(s&2 for s in status):break
+                if all(s&2 for s in status):
+                    assert not any(queues), "done before final memory write drained"
+                    break
                 yield
             else:raise AssertionError('Capture timeout')
             for i,w in enumerate(writers):
@@ -124,14 +126,15 @@ def exercise(stall=False, length=256, invalid=False, misaligned=False, real=Fals
     run_simulation(fragment,[control(),model],clocks=clocks)
 
 
-exercise()
-exercise(length=8)
-exercise(length=16)
-exercise(stall=True,length=1024)
-exercise(invalid=True,length=0)
-exercise(invalid=True,length=7)
-exercise(invalid=True,length=(1<<27)-8)  # wide end exceeds the 1-GiB window
-exercise(invalid=True,misaligned=True)
-exercise(real=True)
-exercise(frame_bad=True)
-print('PASS: independent-clock capture, consecutive runs and ADC reset, command/data stalls, overflow, frame failure, real-data path and invalid configuration')
+if __name__ == "__main__":
+    exercise()
+    exercise(length=8)
+    exercise(length=16)
+    exercise(stall=True,length=1024)
+    exercise(invalid=True,length=0)
+    exercise(invalid=True,length=7)
+    exercise(invalid=True,length=(1<<27)-8)  # wide end exceeds the 1-GiB window
+    exercise(invalid=True,misaligned=True)
+    exercise(real=True)
+    exercise(frame_bad=True)
+    print('PASS: independent-clock capture, consecutive runs and ADC reset, command/data stalls, overflow, frame failure, real-data path and invalid configuration')

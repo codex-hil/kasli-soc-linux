@@ -1,0 +1,9 @@
+{
+  "result": "FAIL",
+  "hardware_access": false,
+  "seed": 4,
+  "sys_achieved_mhz": 82.43,
+  "sys_required_mhz": 83.33333333333333,
+  "final_hold_violations": 0,
+  "next_step": "opt-in full ADC command beat pipeline; tests before build"
+}

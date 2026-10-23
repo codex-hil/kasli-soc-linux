@@ -1,0 +1,7 @@
+PASS: {'length': 8}
+PASS: {'length': 16, 'delayed_data': True}
+PASS: {'length': 256}
+PASS: {'stall': True, 'length': 1024}
+PASS: {'real': True}
+PASS: {'frame_bad': True}
+PASS: {'invalid': True, 'length': 7}

@@ -134,7 +134,10 @@ def main():
     p.add_argument("--router", choices=["router1", "router2"], default="router2")
     p.add_argument("--resume-assembly", action="store_true", help="Reassemble an existing timing-clean ADC DDR route after a DB fix")
     p.add_argument("--sfp-network-reset", action="store_true", help="Opt-in coherent SFP network reset (SFP or integrated)")
+    p.add_argument("--adc-command-pipeline", action="store_true", help="Opt-in ADC DMA beat pipeline, integrated only")
     args = p.parse_args()
+    if args.adc_command_pipeline and args.design != "integrated":
+        p.error("--adc-command-pipeline requires integrated target")
     if args.sfp_network_reset and args.design not in ("sfp", "integrated"):
         p.error("--sfp-network-reset requires SFP or integrated target")
     if args.srl_timing and (args.design not in ("sfp", "srl", "arp", "integrated") or args.no_srl):
@@ -157,6 +160,8 @@ def main():
         p.error("FMC ADC target requires ZC706")
     target = {"probe": "kasli_soc.py", "fmc-adc": "fmc_adc.py", "pl-ddr": "zc706_ddr.py", "adc-ddr": "zc706_adc_ddr.py", "sfp": "zc706_sfp.py", "frequency": "zc706_frequency.py", "integrated": "zc706_integrated.py", "srl": "zc706_srl.py", "arp": "zc706_arp.py"}[args.design]
     target_command = [sys.executable, str(ROOT / "gateware" / target), "--board", args.board, "--output-dir", str(args.output_dir)]
+    if args.adc_command_pipeline:
+        target_command += ["--command-pipeline"]
     if args.ddr_sync_reset:
         target_command += ["--ddr-sync-reset"]
     if args.wr_pll:
@@ -349,6 +354,7 @@ def main():
         "experimental_srl_timing": args.srl_timing,
         "sfp_header_probes": not args.no_header_probes,
         "sfp_network_reset": args.sfp_network_reset,
+        "adc_command_pipeline": args.adc_command_pipeline,
         "prerouted_sha256": hashlib.sha256(args.prerouted.read_bytes()).hexdigest() if args.prerouted else None,
         "ddr_serdes_sync_reset": args.ddr_sync_reset,
         "sfp_refclk": args.sfp_refclk if args.design in ("sfp", "integrated") else None,

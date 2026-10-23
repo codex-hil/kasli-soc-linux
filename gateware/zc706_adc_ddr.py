@@ -16,7 +16,7 @@ class ADCDDRSoC(DDRSoC):
     def add_csr_bridge(self, name='csr', origin=None, with_register=False):
         return super().add_csr_bridge(name, origin, with_register=True)
 
-    def __init__(self, cmd_buffer_buffered=False):
+    def __init__(self, cmd_buffer_buffered=False, command_pipeline=False):
         super().__init__(cmd_buffer_buffered=cmd_buffer_buffered)
         # Reuse the physically validated standalone DDR clock placement. The
         # unconstrained combined build moved its MMCM to the opposite column;
@@ -45,7 +45,7 @@ class ADCDDRSoC(DDRSoC):
             setattr(self, name+'_i2c', I2CMaster(self.platform.request('adc_i2c',index)))
             port = self.sdram.crossbar.get_port(mode='write')
             setattr(self, name+'_dma', ADCToDDR(port, adc.samples, adc.aligned,
-                adc.frame_word, name, index+1))
+                adc.frame_word, name, index+1, command_pipeline=command_pipeline))
         for name, value in [('ADC_CARDS',2),('ADC_ABI',1),('ADC_CAPTURE_SAMPLES',1024),
                             ('ADC_SAMPLE_RATE',100000000),('ADC_FPGA_DIFF_TERM',1),
                             ('ADC_DDR_ABI',1),('ADC_DDR_FIFO_WORDS',256)]:
