@@ -57,7 +57,7 @@ def summarize(records, duration, oscillator):
     return dict(statistics=stats, criteria=CRITERIA, passed=passed)
 
 
-def loop(registers, oscillators, active, duration, label, output):
+def loop(registers, oscillators, active, duration, label, output, status_path=None):
     # Long generation-2 scans of phase records caused physical control gaps.
     # Reference counting continues; cyclic collection runs between bounded loops.
     enabled=gc.isenabled()
@@ -67,8 +67,8 @@ def loop(registers, oscillators, active, duration, label, output):
         # Context shutdown joins all updates before restoration can run.
         if len(active)==2:
             with ThreadPoolExecutor(max_workers=2,thread_name_prefix='si570') as pool:
-                return _loop(registers,oscillators,active,duration,label,output,pool)
-        return _loop(registers,oscillators,active,duration,label,output,None)
+                return _loop(registers,oscillators,active,duration,label,output,pool,status_path)
+        return _loop(registers,oscillators,active,duration,label,output,None,status_path)
     finally:
         if enabled:gc.enable()
 
@@ -86,7 +86,7 @@ def program_pending(oscillators, pending, pool):
     return actuals
 
 
-def _loop(registers, oscillators, active, duration, label, output, pool):
+def _loop(registers, oscillators, active, duration, label, output, pool, status_path=None):
     """Each PI uses its own sample interval; reciprocal gates have one owner."""
     r=registers[0]
     controllers={i:WRPI(round(oscillators[i].ppm*1e6),-50000000,50000000) for i in active}
@@ -103,7 +103,7 @@ def _loop(registers, oscillators, active, duration, label, output, pool):
     for bank in BANKS:
         r.write(bank+'_gate',100000000);r.write(bank+'_start',1)
     iteration=0
-    while time.monotonic()-start<duration:
+    while duration is None or time.monotonic()-start<duration:
         pending={}
         for i in active:
             now=time.monotonic();dt=now-previous[i];previous[i]=now
@@ -145,12 +145,26 @@ def _loop(registers, oscillators, active, duration, label, output, pool):
             sequences=new
         iteration+=1
         if iteration%50==0:
+            if status_path is not None:
+                # Keep a bounded recent window; never accumulate a lifetime trace.
+                for card in output['cards'].values():
+                    del card['records'][:-4096]
+                del output['frequency_windows'][:-120]
+                status = dict(state='running', pid=os.getpid(),
+                    elapsed_seconds=time.monotonic()-start,
+                    cards={key: dict(last=card['records'][-1],
+                        retained_records=len(card['records']))
+                        for key,card in output['cards'].items()})
+                temporary=status_path.with_suffix('.tmp')
+                temporary.write_text(json.dumps(status,indent=2)+'\n')
+                temporary.replace(status_path)
             parts=[]
             for i in active:
                 last=output['cards'][str(i+1)]['records'][-1]
                 parts.append(f"FMC{i+1} phase={last['phase']['phase_ns']:+.3f}ns "
                     f"tune={last['tune_ppm']:+.6f}ppm locked={last['locked']}")
-            print(f'{label} t={time.monotonic()-start:.2f}s '+ ' | '.join(parts),flush=True)
+            if status_path is None:
+                print(f'{label} t={time.monotonic()-start:.2f}s '+ ' | '.join(parts),flush=True)
         time.sleep(.0005)
     for i in active:
         card=output['cards'][str(i+1)]
@@ -165,11 +179,14 @@ def main():
     p.add_argument('--seconds',type=float,default=60)
     p.add_argument('--control',choices=['fmc2','both'],default='both')
     p.add_argument('--loss-test',action='store_true')
+    p.add_argument('--service',action='store_true', help='Continuous control with bounded RAM history; use integrated_service.py for startup/ownership')
     p.add_argument('--realtime',action='store_true',help='Run bounded control with SCHED_FIFO priority 10 (requires privilege)')
     p.add_argument('--preinitialized',action='store_true',
         help='Keep trained ADC receivers and active DMA state; caller owns initialization')
     a=p.parse_args()
     if not 25<=a.seconds<=600:p.error('Require 25..600 seconds per run')
+    if a.service and (a.loss_test or a.control!='both'):
+        p.error('Service requires both cards and excludes destructive loss tests')
     for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,stopped)
     registers=[];oscillators=[]
     active=[1] if a.control=='fmc2' else [0,1]
@@ -199,7 +216,8 @@ def main():
         reset_counters(registers[0],BANKS)
         result['frequency_acquisition']=acquire(registers,oscillators,active)
         result['initial']={}
-        loop(registers,oscillators,active,a.seconds,'initial',result['initial'])
+        loop(registers,oscillators,active,None if a.service else a.seconds,'initial',result['initial'],
+             a.output.with_suffix('.status.json') if a.service else None)
         if not result['initial']['passed']:raise RuntimeError('Initial phase hold qualification failed')
         if a.loss_test:
             result['clock_loss_tests']=[]
@@ -233,6 +251,9 @@ def main():
             if i not in active and s.i2c.read(0x55,7,6)!=s.original:
                 raise RuntimeError('Untuned control card oscillator changed')
         result['hardware_validated']=True
+    except KeyboardInterrupt:
+        if not a.service:raise
+        result['service_stopped']=True
     except BaseException as exc:
         result['error']=str(exc)
         raise
@@ -248,6 +269,11 @@ def main():
         if restore_errors:
             result['restoration_errors']=restore_errors;result['hardware_validated']=False
         result['finished_utc']=datetime.now(timezone.utc).isoformat()
+        if a.service:
+            a.output.with_suffix('.status.json').write_text(json.dumps(dict(
+                state='stopped' if result.get('service_stopped') and not restore_errors else 'failed',
+                original_settings_restored=result['original_settings_restored'],
+                finished_utc=result['finished_utc']))+'\n')
         a.output.write_text(json.dumps(result,indent=2)+'\n')
         for r in registers:r.mem.close()
         pid_file.unlink(missing_ok=True)

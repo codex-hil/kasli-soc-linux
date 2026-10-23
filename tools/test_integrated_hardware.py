@@ -18,6 +18,7 @@ def main():
     p.add_argument('--preflight-only',action='store_true',help='Validate artifacts without hardware access')
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--program',action='store_true')
+    p.add_argument('--service-smoke',action='store_true',help='Bounded autonomous service startup/control/shutdown; always restore golden')
     p.add_argument('--external-network',action='store_true',help='Also test a physically connected external SFP link')
     p.add_argument('--sfp-diagnostic-only',action='store_true',help='Probe external SFP without internal-loopback prerequisite; always restore golden')
     p.add_argument('--srl-diagnostic-only',action='store_true',help='Test explicit SRL16E versus flip-flops; always restore golden')
@@ -29,6 +30,8 @@ def main():
     p.add_argument("--internal-capture-reset-held",action="store_true")
     p.add_argument("--network-reset-during-capture",action="store_true")
     a=p.parse_args()
+    if a.service_smoke and (not a.program or a.external_network or a.internal_loopback_only or a.sfp_diagnostic_only or a.srl_diagnostic_only or a.network_reset_during_capture):
+        p.error('Service smoke requires --program and its own test scope')
     if a.network_reset_during_capture and (not a.external_network or a.internal_loopback_only or a.sfp_diagnostic_only or a.srl_diagnostic_only):
         p.error("In-capture reset requires full external-network integration scope")
     if a.internal_capture_startup and a.internal_capture_reset_held:
@@ -118,6 +121,8 @@ def main():
         for name in ('fmc_adc.py','sfp_probe.py','measure_fmc_clocks.py',
                      'wr_pll_control.py','run_wr_pll.py','run_wr_pll_dual.py','capture_adc_ddr.py'):
             sources.append((ROOT/'tools'/name,name))
+        if a.service_smoke:
+            sources += [(ROOT/'tools'/name,name) for name in ('integrated_service.py','test_integrated_service.py')]
         if a.srl_diagnostic_only:
             sources = [(work/'gateware/csr.json','csr.json')] + [(ROOT/'tools'/n,n) for n in ('test_srl.py','test_arp_csr.py','sfp_probe.py','fmc_adc.py')]
         for source,name in sources:
@@ -130,6 +135,15 @@ def main():
             with (a.output/(name+'.log')).open('w') as log:
                 subprocess.run(ssh+['cd '+remote+' && '+command],stdout=log,
                     stderr=subprocess.STDOUT,timeout=timeout,check=True)
+        if a.service_smoke:
+            runtime_manifest=dict(csr_sha256=record['files']['csr.json'],
+                bitstream_sha256=digest,files={name:sha for name,sha in record['files'].items() if name!='csr.json'})
+            subprocess.run(ssh+['cat > '+remote+'/runtime-manifest.json'],
+                input=json.dumps(runtime_manifest).encode(),check=True,timeout=15)
+            run('service','python3 test_integrated_service.py',timeout=200)
+            record['service']=json.loads(subprocess.check_output(ssh+['cat '+remote+'/service-test.json'],text=True,timeout=15))
+            record['result']=record['service']['result']
+            return
         if a.srl_diagnostic_only:
             test_script = 'test_arp_csr.py' if manifest['design'] == 'arp' else 'test_srl.py'
             run('srl','python3 '+test_script+' --csr-json csr.json --output srl.json',timeout=30)

@@ -1,0 +1,32 @@
+#!/bin/sh
+# All volatile logs/status live in RAM. No automatic restart after HW failure.
+runtime=/run/zc706-integrated
+case "$1" in
+    start)
+        mkdir -p "$runtime"
+        if [ -s "$runtime/service.pid" ] && kill -0 "$(cat "$runtime/service.pid")" 2>/dev/null; then
+            echo 'ZC706 integrated service already running'; exit 1
+        fi
+        python3 -u /opt/zc706-integrated/integrated_service.py >"$runtime/service.log" 2>&1 &
+        echo $! >"$runtime/service.pid"
+        ;;
+    stop)
+        if [ -s "$runtime/service.pid" ]; then
+            pid=$(cat "$runtime/service.pid")
+            if [ -r "/proc/$pid/cmdline" ] && tr '\000' ' ' <"/proc/$pid/cmdline" | grep -q '/opt/zc706-integrated/integrated_service.py'; then
+                kill -TERM "$pid"
+                count=0
+                while kill -0 "$pid" 2>/dev/null; do
+                    count=$((count+1))
+                    [ "$count" -lt 60 ] || { echo 'PLL stop timeout; do not program FPGA'; exit 1; }
+                    sleep 1
+                done
+            fi
+            rm -f "$runtime/service.pid"
+        fi
+        ;;
+    status)
+        cat "$runtime/pll.status.json"
+        ;;
+    *) echo "Usage: $0 {start|stop|status}"; exit 1 ;;
+esac
