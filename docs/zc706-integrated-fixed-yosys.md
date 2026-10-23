@@ -677,3 +677,10 @@ retained. All seven same RTL cases PASS; source hash checked before run. Separat
 queue2 build launched after shared Dell became free, currently placing/routing:
 `build/zc706-integrated-network-reset-queue2-20261023/gateware`. Evidence
 `adc-command-queue2-20261023`. Required83.33MHz unchanged. No hardware access.
+
+Queue2 post-Yosys write-enable isolation PASS: both2x538-bit queues map to90RAM32M
+each. Tracing WE through combinational LUTs reaches exactly3 local FDREs per
+card: upstream source-valid and2 occupancy bits; no DDR grant/ready terminal.
+Evidence `adc-command-queue2-structure-20261023`. Router still active, no final
+setup/hold/admission result; no hardware access. Next inspect final STA rather
+than infer timing from this structural check.

@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "qualification": false,
+  "scope": "Synthesized local queue write-enable cones only; not routed timing or hardware proof",
+  "netlist_sha256": "17606b85dcdf345c67102a864f65547f25877a16d87363d9eca5badfd2c1d080",
+  "queues": [
+    {
+      "card": 0,
+      "storage_prefix": "storage_26.",
+      "memory_cells": 90,
+      "write_enable": [
+        11483
+      ],
+      "sequential_terminals": [
+        {
+          "cell": "$auto$ff.cc:337:slice$85789",
+          "type": "FDRE",
+          "bit": 28360,
+          "aliases": [
+            "adctoddr0_command_pipeline_level"
+          ]
+        },
+        {
+          "cell": "$auto$ff.cc:337:slice$85790",
+          "type": "FDRE",
+          "bit": 28359,
+          "aliases": [
+            "adctoddr0_command_pipeline_level"
+          ]
+        },
+        {
+          "cell": "$auto$ff.cc:337:slice$85776",
+          "type": "FDRE",
+          "bit": 11481,
+          "aliases": [
+            "adctoddr0_command_buffer_readable",
+            "adctoddr0_command_buffer_source_valid"
+          ]
+        }
+      ]
+    },
+    {
+      "card": 1,
+      "storage_prefix": "storage_31.",
+      "memory_cells": 90,
+      "write_enable": [
+        11484
+      ],
+      "sequential_terminals": [
+        {
+          "cell": "$auto$ff.cc:337:slice$87930",
+          "type": "FDRE",
+          "bit": 28300,
+          "aliases": [
+            "adctoddr1_command_pipeline_level"
+          ]
+        },
+        {
+          "cell": "$auto$ff.cc:337:slice$87931",
+          "type": "FDRE",
+          "bit": 28299,
+          "aliases": [
+            "adctoddr1_command_pipeline_level"
+          ]
+        },
+        {
+          "cell": "$auto$ff.cc:337:slice$87374",
+          "type": "FDRE",
+          "bit": 259,
+          "aliases": [
+            "adctoddr1_command_buffer_readable",
+            "adctoddr1_command_buffer_source_valid"
+          ]
+        }
+      ]
+    }
+  ]
+}
