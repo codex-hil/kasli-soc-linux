@@ -1,0 +1,9 @@
+{
+  "hardware_access": false,
+  "source": "gateware/adc_ddr_writer.py",
+  "sha256": "4c6ff9244d643041b983aea61e9621fa00a9893011975c8ed12cc83209bcc328",
+  "test_result": "PASS",
+  "cases": 7,
+  "build_status": "IN_PROGRESS",
+  "output": "build/zc706-integrated-network-reset-queue2-20261023/gateware"
+}

@@ -1,0 +1,13 @@
+{
+  "result": "FAILED_SETUP_DIAGNOSIS",
+  "hardware_access": false,
+  "clock_enable_bit": 11720,
+  "clock_enable_sink_cells": 537,
+  "critical_register": "$auto$ff.cc:337:slice$88904",
+  "payload_alias": "adctoddr1_command_pipeline_pipe_ready_sink_d_payload_data[261]",
+  "sys_achieved_mhz": 75.91,
+  "sys_required_mhz": 83.33333333333333,
+  "critical_total_ns": 13.17,
+  "critical_routing_ns": 11.3,
+  "final_hold_violations": 0
+}

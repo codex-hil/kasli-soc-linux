@@ -1,0 +1,59 @@
+Critical path report for clock 'sys_clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.35  0.35 Source $auto$ff.cc:337:slice$94800.Q
+Info:    routing  0.73  1.08 Net subfragments_roundrobin0_grant[1] (161,107) -> (161,101)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82477.A1
+Info:                          Defined in:
+Info:                               /work/build/zc706-integrated-network-reset-pipeline-20261023/gateware/gateware/top.v:10691.15-10691.45
+Info:      logic  0.15  1.23 Source $abc$1123821$lut$aiger1123820$82477.O5
+Info:    routing  2.16  3.38 Net $techmap1130435$abc$1123821$lut$aiger1123820$82478.A[1] (161,101) -> (163,71)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82533.A3
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  3.53 Source $abc$1123821$lut$aiger1123820$82533.O5
+Info:    routing  0.20  3.73 Net $techmap1130566$abc$1123821$lut$aiger1123820$82535.A[0] (163,71) -> (163,71)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82535.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  3.86 Source $abc$1123821$lut$aiger1123820$82535.O6
+Info:    routing  0.60  4.45 Net $techmap1130568$abc$1123821$lut$aiger1123820$83048.A[3] (163,71) -> (166,67)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82545.A3
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  4.60 Source $abc$1123821$lut$aiger1123820$82545.O5
+Info:    routing  0.20  4.80 Net $techmap1130631$abc$1123821$lut$aiger1123820$82546.A[1] (166,67) -> (166,67)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82547.A5
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  4.95 Source $abc$1123821$lut$aiger1123820$82547.O5
+Info:    routing  0.33  5.28 Net $techmap1130652$abc$1123821$lut$aiger1123820$83028.A[1] (166,67) -> (166,67)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82548.A3
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  5.40 Source $abc$1123821$lut$aiger1123820$82548.O6
+Info:    routing  0.20  5.60 Net $techmap1130674$abc$1123821$lut$aiger1123820$83020.A[3] (166,67) -> (166,67)
+Info:                          Sink $abc$1123821$lut$aiger1123820$82552.A4
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  5.75 Source $abc$1123821$lut$aiger1123820$82552.O5
+Info:    routing  0.20  5.95 Net $techmap1130705$abc$1123821$lut$aiger1123820$82561.A[1] (166,67) -> (166,67)
+Info:                          Sink $abc$1123821$lut$aiger1123820$83044.A3
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  6.10 Source $abc$1123821$lut$aiger1123820$83044.O5
+Info:    routing  0.33  6.43 Net $techmap1130731$abc$1123821$lut$aiger1123820$83052.A[4] (166,67) -> (166,69)
+Info:                          Sink $abc$1123821$lut$aiger1123820$83052.A4
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.15  6.58 Source $abc$1123821$lut$aiger1123820$83052.O5
+Info:    routing  1.87  8.45 Net $techmap1130734$auto$abc_ops_reintegrate.cc:696:reintegrate$1129069.A[4] (166,69) -> (180,115)
+Info:                          Sink $abc$1123821$lut$aiger$o71313.A6
+Info:                          Defined in:
+Info:                               /work/build/tools/oss-cad-suite/lib/../share/yosys/xilinx/lut_map.v:30.21-30.22
+Info:      logic  0.12  8.57 Source $abc$1123821$lut$aiger$o71313.O6
+Info:    routing  4.50  13.07 Net $abc$1123821$aiger$o71313 (180,115) -> (217,203)
+Info:                          Sink $auto$ff.cc:337:slice$88904.CE
+Info:      setup  0.10  13.17 Source $auto$ff.cc:337:slice$88904.CE
+Info: 1.88 ns logic, 11.30 ns routing
+
+Info: 

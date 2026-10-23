@@ -39,13 +39,13 @@ class ADCToDDR(LiteXModule):
         # 512-bit skid register enable driven by distant bank-machine logic.
         self.output_buffer = stream.SyncFIFO(self.fifo.source.description,
             depth=16, buffered=True)
-        def use_block_ram(module):
+        def set_ram_style(module, style="block"):
             for special in module._fragment.specials:
                 if isinstance(special, Memory):
-                    special.attr = {("ram_style", "block")}
+                    special.attr = {("ram_style", style)}
             for _, child in module._submodules:
-                use_block_ram(child)
-        use_block_ram(self.output_buffer)
+                set_ram_style(child, style)
+        set_ram_style(self.output_buffer)
         # Cut queue-occupancy feedback before the async BRAM lookahead address.
         self.cdc_buffer = stream.Buffer(self.fifo.source.description,
             pipe_valid=True, pipe_ready=True)
@@ -98,12 +98,15 @@ class ADCToDDR(LiteXModule):
         # register alone propagates DDR command-ready into output BRAM enable.
         self.command_buffer = stream.SyncFIFO(self.writer.sink.description,
             depth=16, buffered=True)
-        use_block_ram(self.command_buffer)
+        set_ram_style(self.command_buffer)
         command_source = self.command_buffer.source
         pending_command = Constant(0, 1)
         if command_pipeline:
-            self.command_pipeline = stream.Buffer(self.writer.sink.description,
-                pipe_valid=True, pipe_ready=True)
+            # Local occupancy controls writes; downstream command-ready must
+            # not drive a wide skid-register clock enable across the device.
+            self.command_pipeline = stream.SyncFIFO(self.writer.sink.description,
+                depth=2, buffered=False)
+            set_ram_style(self.command_pipeline, "distributed")
             self.comb += command_source.connect(self.command_pipeline.sink)
             command_source = self.command_pipeline.source
             pending_command = command_source.valid

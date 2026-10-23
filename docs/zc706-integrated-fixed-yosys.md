@@ -667,3 +667,13 @@ confirms the intended registered address boundary exists, not final timing.
 Selected primitive parameters match qualified hardware configuration again.
 Evidence `adc-command-pipeline-structure-20261023`. No hardware access or new
 admission manifest; next compare routed critical path and final setup/hold.
+
+First skid pipeline setup FAIL:SYS75.91/83.33MHz, final hold0. Critical path now
+DDR arbitration->ADC1 command PipeReady payload CE,537 sink cells,13.17ns total/
+11.30ns routing. Evidence `adc-skid-pipeline-fail-20261023`. Replaced optional
+stage with upstream depth2/unbuffered distributed SyncFIFO: local write-occupancy
+control, downstream ready affects read pointer; full beat and empty/drain checks
+retained. All seven same RTL cases PASS; source hash checked before run. Separate
+queue2 build launched after shared Dell became free, currently placing/routing:
+`build/zc706-integrated-network-reset-queue2-20261023/gateware`. Evidence
+`adc-command-queue2-20261023`. Required83.33MHz unchanged. No hardware access.

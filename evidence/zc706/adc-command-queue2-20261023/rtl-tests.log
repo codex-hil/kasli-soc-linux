@@ -1,0 +1,8 @@
+PASS queue2: {'length': 8}
+PASS queue2: {'length': 16, 'delayed_data': True}
+PASS queue2: {'length': 256}
+PASS queue2: {'stall': True, 'length': 1024}
+PASS queue2: {'real': True}
+PASS queue2: {'frame_bad': True}
+PASS queue2: {'invalid': True, 'length': 7}
+ALL QUEUE2 RTL TESTS PASS; START BUILD
