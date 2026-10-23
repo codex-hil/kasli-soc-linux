@@ -26,7 +26,12 @@ def main():
     p.add_argument("--internal-probe-burst",type=int,choices=range(0,9),default=0)
     p.add_argument("--internal-probe-warmup",type=int,choices=range(0,9),default=0)
     p.add_argument("--internal-capture-startup",action="store_true")
+    p.add_argument("--internal-capture-reset-held",action="store_true")
     a=p.parse_args()
+    if a.internal_capture_startup and a.internal_capture_reset_held:
+        p.error("Select one startup capture phase")
+    if a.internal_capture_reset_held and (not a.internal_loopback_only or a.internal_probe_warmup):
+        p.error("Reset-held capture requires internal-loopback-only without warmup")
     if a.internal_capture_startup and (not a.internal_loopback_only or a.internal_probe_warmup):
         p.error("Startup capture requires internal-loopback-only without warmup")
     if a.internal_probe_warmup and not a.internal_loopback_only:
@@ -127,7 +132,7 @@ def main():
             record['result']=record['srl']['result']
             return
         if a.internal_loopback_only:
-            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode '+a.internal_loopback_mode+' --diagnostic-burst '+str(a.internal_probe_burst)+' --loopback-warmup '+str(a.internal_probe_warmup)+(' --capture-startup' if a.internal_capture_startup else '')+' --output sfp-internal.json',timeout=60)
+            run('sfp-internal','python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode '+a.internal_loopback_mode+' --diagnostic-burst '+str(a.internal_probe_burst)+' --loopback-warmup '+str(a.internal_probe_warmup)+(' --capture-startup' if a.internal_capture_startup else '')+(' --capture-reset-held' if a.internal_capture_reset_held else '')+' --output sfp-internal.json',timeout=60)
             probe=json.loads(subprocess.check_output(ssh+['cat '+remote+'/sfp-internal.json'],text=True,timeout=15))
             record['internal_probe']=probe
             record['internal_loopback_result']=probe.get('loopback',{}).get('result','FAIL')

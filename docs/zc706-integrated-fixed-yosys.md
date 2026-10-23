@@ -508,3 +508,13 @@ offline tests PASS. Golden restored, three whole1GiB DDR BIST passes PASS;
 shared lease released and verified. Final management DHCP192.168.2.18.
 Next isolate post-reset capture or implement bounded valid/last/reset boundary
 trace with frame ordinals. Default cold test remains unchanged; no reset fix.
+
+Reset-held capture follow-up: sys probes armed after software PHY-reset assertion
+and10ms wait, before release. Still captured preceding external traffic rather
+than the test packet (231/399/395byte snapshots, truncated128; CRC output error1).
+Independent frame ordinals unknown; no cross-stage corruption claim. Strict
+first test packet again MAC RX+1/test RX0/CRC+1, PHY TX/RX correct90bytes.
+Evidence `evidence/zc706/reset-held-capture-20261023`. Four offline ordering
+checks PASS. Golden restored, three whole1GiB DDR BIST passes PASS, lease release
+verified. Next model queued RX CDC traffic with write-domain-only reset while
+sys read state remains alive; prior prefix model did not cover that case.

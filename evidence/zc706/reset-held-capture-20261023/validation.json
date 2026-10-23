@@ -1,0 +1,17 @@
+{
+  "result": "FAIL",
+  "bitstream_sha256": "ee68e22021f3ad4f4072b798b35bd7a174109f86c029210e2971e4bb8dd35454",
+  "files": {
+    "csr.json": "df5b8f83a5bdbf2c5dc872fde7ff2d8cd87eb9aa9f7ccf7ce9860948114ef572",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "sfp_probe.py": "b5233e75ddfd198e7e487e862a0cc8ba711093233cf16b8e461bba72ca3258e4",
+    "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+    "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "run_wr_pll_dual.py": "1e4c06e681ad0e012075ba59361cff8b95c5dc603b269377ce30cbd7117802ff",
+    "capture_adc_ddr.py": "cc0db21d4bc35078a9cd27e39929112a9bfab53d2d08cad9cef56cb3b6686582"
+  },
+  "restoration_passed": true,
+  "error": "Command '['ssh', '-i', '/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/id_ed25519', '-o', 'UserKnownHostsFile=/srv/codex-hil-data/workspaces/kasli-soc-linux/build/ssh/known_hosts', '-o', 'HostKeyAlias=192.168.2.15', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=15', '-o', 'ConnectionAttempts=3', 'root@192.168.2.19', 'cd /tmp/zc706-integrated && python3 sfp_probe.py --csr-json csr.json --init-clock --loopback 1000 --loopback-mode pma --diagnostic-burst 0 --loopback-warmup 0 --capture-reset-held --output sfp-internal.json']' returned non-zero exit status 1.",
+  "final_host": "192.168.2.21"
+}

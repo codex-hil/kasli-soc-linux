@@ -178,11 +178,14 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, warmup=0, capture_startup=False):
+def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, warmup=0, capture_startup=False, capture_reset_held=False):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
     selection = {"pma": 2, "pcs": 1}[mode]
+    if capture_startup and capture_reset_held:
+        raise ValueError("Select one startup capture phase")
+    capture_startup = capture_startup or capture_reset_held
     startup_directions = ("rx_cdc", "crc_input", "crc_output") if capture_startup else ()
     if capture_startup:
         if warmup:
@@ -192,8 +195,10 @@ def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, wa
             raise RuntimeError("Startup capture requires all three sys-domain RX probes")
         if observation is not None:
             observation["startup"] = dict(before=status(r),
+                phase="reset-held" if capture_reset_held else "before-reset",
                 directions=list(startup_directions),
                 scope="First complete frame per sys-domain probe; not a continuous trace")
+    def arm_startup():
         for name in required:
             r.write(name, 1)
         deadline = time.monotonic() + 1
@@ -201,8 +206,12 @@ def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, wa
             if time.monotonic() > deadline:
                 raise TimeoutError("Startup sys-domain probes did not arm")
             time.sleep(.001)
+    if capture_startup and not capture_reset_held:
+        arm_startup()
     r.write("sfp_status_control", 8 | selection | 16)
     time.sleep(.01)
+    if capture_reset_held:
+        arm_startup()
     r.write("sfp_status_control", 8 | selection)
     deadline = time.monotonic()+10
     while r.read("sfp_status_status") & 63 != 63:
@@ -289,13 +298,16 @@ def main():
     p.add_argument("--loopback-mode", choices=("pma", "pcs"), default="pma")
     p.add_argument("--diagnostic-burst", type=int, choices=range(0,9), default=0, help="Send up to8 frames using TX completion before checking RX")
     p.add_argument("--loopback-warmup",type=int,choices=range(0,9),default=0,help="Explicit mode-transition warmup, recorded separately from qualification")
+    p.add_argument("--capture-reset-held", action="store_true", help="Arm sys RX probes while PHY reset is held")
     p.add_argument("--capture-startup", action="store_true", help="Arm sys-domain RX probes before mode/reset; no warmup")
     p.add_argument("--external", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
     if (a.diagnostic_burst or a.loopback_warmup) and not a.loopback:
         p.error("Diagnostic burst requires loopback")
-    if a.capture_startup and (not a.loopback or a.loopback_warmup):
+    if a.capture_startup and a.capture_reset_held:
+        p.error("Select one startup capture phase")
+    if (a.capture_startup or a.capture_reset_held) and (not a.loopback or a.loopback_warmup):
         p.error("Startup capture requires loopback without warmup")
     r = Registers(a.csr_json, a.device); bus = BoardI2C(r)
     result = {"result": "FAIL", "hardware_validated": False}
@@ -315,7 +327,7 @@ def main():
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
                 result["loopback_observation"] = {}
-                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst, a.loopback_warmup, a.capture_startup)
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst, a.loopback_warmup, a.capture_startup, a.capture_reset_held)
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)

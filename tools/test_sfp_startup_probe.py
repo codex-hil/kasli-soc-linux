@@ -31,11 +31,11 @@ class Registers:
 
 
 class StartupSequence(unittest.TestCase):
-    def exercise(self, startup):
+    def exercise(self, startup, held=False):
         r, observation = Registers(), {}
         with patch.object(sfp_probe, 'status', return_value={}), patch.object(sfp_probe.time, 'sleep'):
             with self.assertRaises(StopBeforePacket):
-                sfp_probe.loopback_test(r, 1, observation=observation, capture_startup=startup)
+                sfp_probe.loopback_test(r, 1, observation=observation, capture_startup=startup, capture_reset_held=held)
         return r.writes, observation
 
     def test_probes_survive_mode_sequence_without_rearming(self):
@@ -49,6 +49,17 @@ class StartupSequence(unittest.TestCase):
         for direction in ('tx', 'rx'):
             self.assertGreater(writes.index((f'mac_status_{direction}_raw_arm', 1)), release)
         self.assertIn('after_lock', observation['startup'])
+
+    def test_held_reset_arms_before_release(self):
+        writes, observation = self.exercise(False, held=True)
+        reset = writes.index(('sfp_status_control', 26))
+        release = writes.index(('sfp_status_control', 10))
+        for direction in ('rx_cdc', 'crc_input', 'crc_output'):
+            arm = (f'mac_status_{direction}_raw_arm', 1)
+            self.assertEqual(writes.count(arm), 1)
+            self.assertLess(reset, writes.index(arm))
+            self.assertLess(writes.index(arm), release)
+        self.assertEqual(observation['startup']['phase'], 'reset-held')
 
     def test_default_still_arms_after_reset(self):
         writes, observation = self.exercise(False)
