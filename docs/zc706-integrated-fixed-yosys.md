@@ -693,3 +693,13 @@ Separate identical-RTL queue2 seed4 build launched to
 `build/zc706-integrated-network-reset-queue2-seed4-20261023/gateware`, same clock/
 options. Next inspect final timing; if still failing, target AXI burst/ready
 feedback with protocol tests. No hardware access or frequency relaxation.
+
+Correction to queue2 seed3 timing-path interpretation: socbushandler_count is
+Wishbone timeout WaitTimer (20bits, reload1000000), not an AXI burst counter.
+Its count==0 timeout ACK propagates through bus response to ax_buffer reset.
+Endpoint report remains valid. Seed4 is still routing. If failing again, a
+registered terminal flag can preserve the exact timeout cycle by computing
+next-state done from count<=1/reload==0; arithmetic identity checks0..64 PASS
+but no HDL/production change or qualification claimed. See corrected seed3
+README/timeout-transition-analysis.json. Next wait for final STA before choosing
+this bus-only candidate; no hardware access or timeout-policy relaxation.
