@@ -1,0 +1,6 @@
+{
+  "path": "/home/codex-hil/artifacts/zc706-integrated-queue2-20261023/board-evidence.tar.gz",
+  "sha256": "fb01d3d9fa91b3ba3240f4223a7ce16d33425a4d862e892b6e5fae7ec75db3ef",
+  "bytes": 4899210,
+  "scope": "Full board source/results archive including PLL records; local artifact, not SD image"
+}

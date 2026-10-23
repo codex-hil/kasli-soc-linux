@@ -1,3 +1,10 @@
+> Integrated update 2026-10-23: **physical ADC/DDR/dual PLL/external SFP PASS**
+> with NetworkReset and local command queue. SYS91.70/83.33MHz; both ADCs up to
+> 4,194,304 samples/card, zero drops/errors, about800MB/s/card finite capture.
+> Concurrent PLL phase stddev1.58/1.57ns; switch20/20 ICMP,350/350 exact UDP.
+> Golden restored, DDR3×1GiB PASS. Integrated cold PMA/PCS still pending.
+> Evidence: `evidence/zc706/integrated-queue2-hardware-20261023`.
+
 > SFP reset candidate2026-10-23: **cold PMA and PCS each1000/1000 PASS without warmup**,
 > first packet included; CRC/preamble/clock/data errors0. Opt-in whole-network
 > reset, isolated target only. Setup/hold PASS; golden restored/DDR3×1GiB PASS.

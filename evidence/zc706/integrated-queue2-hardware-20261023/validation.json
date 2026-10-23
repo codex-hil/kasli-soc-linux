@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "bitstream_sha256": "7bdc77eaf6176facf147f43d2c0ee2ed2833e5ea1057a644d2431be3e83ac831",
+  "files": {
+    "pl-ddr-test": "a02d0bead0f8eea6435b93a5bf588e44c8a8dfa9dc5eeae6d193b2550e847d36",
+    "adc-ddr-read": "b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517",
+    "csr.json": "4d752723aaab562bab8f14635f5f825b09a64694db1cc04932bbfe770b858b4f",
+    "i2c.so": "5d0fe4ab59a584411b3973310cee1ecde27e9a4c56c003431a0b3cd56ac1075b",
+    "fmc_adc.py": "046ad510878538433c8d2b3c6ff625a1a976d784f1c83966492ce028f4591ec1",
+    "sfp_probe.py": "b5233e75ddfd198e7e487e862a0cc8ba711093233cf16b8e461bba72ca3258e4",
+    "measure_fmc_clocks.py": "d7e59dc8e54e82aa5f336ce03b84dbab7391ddf304a390e5db299579e8b0e52d",
+    "wr_pll_control.py": "51e24f1ea8f7d3ae9882ca4952b431b2db73cc836cb4a29bae709cd6cba12173",
+    "run_wr_pll.py": "d3b74151a7208db4cec69a762c885aed93da470a9bb725f55c60eae7d9a51236",
+    "run_wr_pll_dual.py": "1e4c06e681ad0e012075ba59361cff8b95c5dc603b269377ce30cbd7117802ff",
+    "capture_adc_ddr.py": "cc0db21d4bc35078a9cd27e39929112a9bfab53d2d08cad9cef56cb3b6686582"
+  },
+  "restoration_passed": true,
+  "internal_loopback_result": "NOT_RUN",
+  "sfp_test_mode": "external",
+  "network_error_deltas": {
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0
+  },
+  "concurrent_phase": {
+    "1": {
+      "samples": 23533,
+      "peak_ns": 7.4603174603174605,
+      "stddev_ns": 1.5762712980623361,
+      "mean_ns": 0.01949305905452593
+    },
+    "2": {
+      "samples": 23533,
+      "peak_ns": 7.4603174603174605,
+      "stddev_ns": 1.569173415415337,
+      "mean_ns": 0.018157548434181246
+    }
+  },
+  "network_result": "PASS",
+  "core_integration_passed": true,
+  "final_host": "192.168.2.8"
+}

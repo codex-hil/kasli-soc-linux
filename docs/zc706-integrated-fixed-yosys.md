@@ -711,3 +711,15 @@ Evidence `integrated-queue2-seed4-build-20261023`. No timeout/AXI policy change
 needed. Full hardware integration test launched through shared ZC706 lease with
 external-network flag and guaranteed golden restoration; physical outcome
 pending. Existing qualified artifacts/images retained, no SD/QSPI writes.
+
+Physical integrated queue2/NetworkReset seed4 qualification **PASS**:
+Linux boot/DDR3x1GiB, both independent ADC streams up to4194304 samples/card,
+zero drops/errors, about800MB/s/card finite capture. Both PLLs during capture
+PASS:23533 phase samples/card, stddev1.5763/1.5692ns, peaks7.4603ns. External
+switch20/20 measured ICMP and350/350 exact UDP, no new MAC/clock errors.
+Internal PMA/PCS on this integrated bit NOT_RUN; next qualify cold loops before
+packaging. Final wrapper PASS supersedes premature live concern about180s PLL
+window; no timeout change needed. Golden restored, three whole1GiB BIST passes
+PASS, lease release verified; management192.168.2.8. Evidence
+`integrated-queue2-hardware-20261023`, full compressed board archive hash retained.
+No SD/QSPI/bootenv writes, no continuous-streaming/active-reset qualification.
