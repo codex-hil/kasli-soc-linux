@@ -1,3 +1,8 @@
+> Reset-overlap update 2026-10-23: **six PHY resets during both active ADC DMAs PASS**,
+> including three with dual PLLs. Zero sample drops/data errors; link recovery,
+> switch20/20 ICMP and350/350 exact UDP PASS. PLL stddev1.90/1.89ns within limits.
+> Golden restored/DDR3×1GiB PASS. Evidence: `evidence/zc706/network-reset-overlap-hardware-20261023`.
+
 > Qualified PL archive (not SD): `zc706-integrated-network-reset-queue2.tar.xz`,
 > 1,416,436 bytes, SHA256 `a90b84564f25115d19d51cdc64698edb92d64a6434456d9111bf56e2b2743daf`.
 > All33 packaged-file checksums verified; matching full integration and cold

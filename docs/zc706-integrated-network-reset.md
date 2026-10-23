@@ -31,8 +31,10 @@ Same bitstream SHA256:
 Evidence directories in `evidence/zc706`: `integrated-queue2-seed4-build-20261023`,
 `integrated-queue2-hardware-20261023`, `integrated-queue2-cold-pma-20261023`,
 `integrated-queue2-cold-pcs-20261023`. Raw PLL archive checksum is retained there.
-Continuous streaming, active-transfer reset recovery and deterministic sample
-alignment are not qualified. Header probes are omitted in this integrated bit.
+Six PHY resets during both active ADC DMAs also PASS, three with dual PLLs;
+all stored data/counts correct and external link recovers. This does not assert
+an Ethernet frame was in flight at reset. Continuous streaming, in-flight
+Ethernet-frame reset recovery and deterministic sample alignment are not qualified. Header probes are omitted in this integrated bit.
 
 ## Rebuild
 

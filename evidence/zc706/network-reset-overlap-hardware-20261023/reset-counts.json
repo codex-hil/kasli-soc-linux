@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "hardware_access": true,
+  "reset_counts": {
+    "adc-initial.json": 3,
+    "adc-concurrent.json": 3
+  },
+  "total_resets": 6,
+  "scope": "PHY reset overlapped both ADC DMA busy intervals; not an in-flight Ethernet packet test"
+}

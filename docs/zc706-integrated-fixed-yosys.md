@@ -755,3 +755,14 @@ at `/tmp/zc706-network-reset-overlap-20261023`, outcome pending; shared lease
 and golden restoration retained. Preparation evidence
 `network-reset-overlap-preparation-20261023`. No in-flight Ethernet-frame or
 continuous ADC-streaming claim; old qualified bundle kept unchanged.
+
+Physical reset-overlap test **PASS**:6 PHY resets with both ADC DMAs busy at
+assertion/readback,3 with dual PLLs. All long captures4194304 samples/card,
+zero drops/data errors, PHY relock after each. External network20/20 ICMP,
+350/350 exact UDP, no new MAC/clock errors. Concurrent PLL phase stddev1.897/
+1.887ns, peaks9.524/9.206ns within unchanged thresholds,24967/24968 records.
+Golden restored, three whole1GiB DDR BIST passes PASS, lease release verified;
+management192.168.2.23. Evidence `network-reset-overlap-hardware-20261023`.
+No in-flight Ethernet packet or continuous-streaming claim. Updated capture
+software now physically qualified; next produce a separate updated evidence/
+software bundle, preserving the earlier archive unchanged.
