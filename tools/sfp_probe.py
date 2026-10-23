@@ -178,11 +178,29 @@ def clock_rates(r):
     return {n: ((b-a) & 0xffffffff)/elapsed for n, a, b in zip(names, initial, final)}
 
 
-def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, warmup=0):
+def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, warmup=0, capture_startup=False):
     if r.read("sfp_status_signature") != 0x53465031:
         raise RuntimeError("Requires SFP ABI 1 gateware")
     # Near-end PMA loopback keeps the full software PCS/8b10b, MAC and CRC path.
     selection = {"pma": 2, "pcs": 1}[mode]
+    startup_directions = ("rx_cdc", "crc_input", "crc_output") if capture_startup else ()
+    if capture_startup:
+        if warmup:
+            raise ValueError("Startup capture must not be combined with warmup")
+        required = ["mac_status_" + d + "_raw_arm" for d in startup_directions]
+        if not all(name in r.map["csr_registers"] for name in required):
+            raise RuntimeError("Startup capture requires all three sys-domain RX probes")
+        if observation is not None:
+            observation["startup"] = dict(before=status(r),
+                directions=list(startup_directions),
+                scope="First complete frame per sys-domain probe; not a continuous trace")
+        for name in required:
+            r.write(name, 1)
+        deadline = time.monotonic() + 1
+        while not all(r.read(name[:-3] + "armed") or r.read(name[:-3] + "done") for name in required):
+            if time.monotonic() > deadline:
+                raise TimeoutError("Startup sys-domain probes did not arm")
+            time.sleep(.001)
     r.write("sfp_status_control", 8 | selection | 16)
     time.sleep(.01)
     r.write("sfp_status_control", 8 | selection)
@@ -191,6 +209,8 @@ def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, wa
         if time.monotonic() > deadline:
             raise TimeoutError(f"GTX/PCS loopback did not lock: {status(r)}")
         time.sleep(.01)
+    if capture_startup and observation is not None:
+        observation["startup"]["after_lock"] = status(r)
     if warmup:
         warmup_before = status(r)
         for n in range(warmup):
@@ -208,7 +228,7 @@ def loopback_test(r, count, mode="pma", observation=None, diagnostic_burst=0, wa
     raw_directions = []
     for direction in ("tx", "rx", "rx_cdc", "crc_input", "crc_output"):
         prefix = "mac_status_" + direction + "_raw_"
-        if prefix + "arm" in r.map["csr_registers"]:
+        if prefix + "arm" in r.map["csr_registers"] and direction not in startup_directions:
             r.write(prefix + "arm", 1)
             raw_directions.append(prefix)
     deadline = time.monotonic() + 1
@@ -269,11 +289,14 @@ def main():
     p.add_argument("--loopback-mode", choices=("pma", "pcs"), default="pma")
     p.add_argument("--diagnostic-burst", type=int, choices=range(0,9), default=0, help="Send up to8 frames using TX completion before checking RX")
     p.add_argument("--loopback-warmup",type=int,choices=range(0,9),default=0,help="Explicit mode-transition warmup, recorded separately from qualification")
+    p.add_argument("--capture-startup", action="store_true", help="Arm sys-domain RX probes before mode/reset; no warmup")
     p.add_argument("--external", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
     if (a.diagnostic_burst or a.loopback_warmup) and not a.loopback:
         p.error("Diagnostic burst requires loopback")
+    if a.capture_startup and (not a.loopback or a.loopback_warmup):
+        p.error("Startup capture requires loopback without warmup")
     r = Registers(a.csr_json, a.device); bus = BoardI2C(r)
     result = {"result": "FAIL", "hardware_validated": False}
     try:
@@ -292,7 +315,7 @@ def main():
                 result["clock"] = initialize_clock(r, bus)
             if a.loopback:
                 result["loopback_observation"] = {}
-                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst, a.loopback_warmup)
+                result["loopback"] = loopback_test(r, a.loopback, a.loopback_mode, result["loopback_observation"], a.diagnostic_burst, a.loopback_warmup, a.capture_startup)
             if a.external:
                 r.write("sfp_status_control", 8 | 16)
                 time.sleep(.01); r.write("sfp_status_control", 8)

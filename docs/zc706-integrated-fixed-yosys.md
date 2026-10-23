@@ -496,3 +496,15 @@ Evidence: `evidence/zc706/pcs-boundary-model-20261023`. Thus a CE gap alone does
 not explain an unterminated fragment; previous artificial-prefix result remains
 a possible mechanism, not the diagnosed physical cause. Next observe RX startup
 before the mode/reset sequence; no production reset patch or hardware change.
+
+Early sys-domain capture physical run (same diagnostic bit, no warmup): first
+packet still FAIL, CRC+1 only when it is sent. Startup itself changes MAC RX159
+->168 and preamble0->2, CRC stays0; test packet then MAC RX+1/test RX0/CRC+1.
+PHY TX/RX remain identical90-byte correct frames. Earlier sys snapshots caught
+preceding external traffic and are truncated/independent, so cannot identify
+the failed packet or prove cross-stage corruption. Evidence:
+`evidence/zc706/startup-capture-20261023`. New opt-in probe ordering has three
+offline tests PASS. Golden restored, three whole1GiB DDR BIST passes PASS;
+shared lease released and verified. Final management DHCP192.168.2.18.
+Next isolate post-reset capture or implement bounded valid/last/reset boundary
+trace with frame ordinals. Default cold test remains unchanged; no reset fix.
