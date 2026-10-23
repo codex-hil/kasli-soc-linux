@@ -1,0 +1,31 @@
+{
+  "prefix_bytes": 12,
+  "reset_eth_rx": true,
+  "queued_frame": true,
+  "common_cdc": true,
+  "frames": [
+    {
+      "tx": 1,
+      "rx": 0,
+      "errors": 0,
+      "crc": 1,
+      "preamble": 0
+    },
+    {
+      "tx": 2,
+      "rx": 1,
+      "errors": 0,
+      "crc": 1,
+      "preamble": 0
+    },
+    {
+      "tx": 3,
+      "rx": 2,
+      "errors": 0,
+      "crc": 1,
+      "preamble": 0
+    }
+  ],
+  "sys_bytes_at_reset_request": 12
+}
+PASS: common FIFO reset leaves partial MAC state; first packet lost

@@ -529,3 +529,12 @@ reproducer: `evidence/zc706/cdc-queued-reset-20261023`. This establishes a concr
 reset-coherency failure mechanism, not yet the physical root cause. Next test
 full MAC downstream state: common FIFO reset alone may leave partial CRC/
 preamble state in sys. No production reset change or hardware access yet.
+
+Full MAC queued-frame model: complete90-byte frame committed, RX reset requested
+when12 bytes reached sys preamble stage, RX FIFO uses common reset but sys MAC
+parser stays active. First subsequent packet lost with CRC1, next two pass.
+Final explicit valid-byte injection and counter assertions PASS. Thus common
+FIFO reset alone is insufficient for a partly processed sys-domain frame.
+Evidence: `evidence/zc706/mac-queued-reset-20261023`; upstream/production logic
+unchanged. Physical cause still unproven. Next test coherent FIFO reset plus
+MAC parser recovery at multiple frame positions before selecting a fix.
