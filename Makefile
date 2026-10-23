@@ -154,3 +154,8 @@ INTEGRATED_FIXED_DIR ?= build/zc706-integrated-yosys-fixed-cdc-ready
 .PHONY: integrated-fixed-pl
 integrated-fixed-pl:
 	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --ddr-sync-reset --no-header-probes --srl-timing --seed 3 --router router2 --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt --output-dir $(INTEGRATED_FIXED_DIR)/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
+
+INTEGRATED_NETWORK_RESET_DIR ?= build/zc706-integrated-network-reset-queue2-seed4-20261023
+.PHONY: integrated-network-reset-pl
+integrated-network-reset-pl:
+	$(ENV) build/python/bin/python tools/build_pl.py --board zc706 --design integrated --ddr-sync-reset --no-header-probes --sfp-network-reset --adc-command-pipeline --srl-timing --seed 4 --router router2 --prerouted evidence/zc706/integrated-20261013/golden-mmcm-native-prerouted.txt --output-dir $(INTEGRATED_NETWORK_RESET_DIR)/gateware --openxc7 build/tools/openxc7 --yosys build/tools/oss-cad-suite/bin/yosys
