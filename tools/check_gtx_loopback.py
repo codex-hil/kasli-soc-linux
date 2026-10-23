@@ -25,8 +25,13 @@ def check(path, routed=False):
         channel['connections']['RXOUTCLKSEL'] = [constants.get(channel['connections']['RXOUTCLKSEL'+str(i)][0]) for i in range(3)]
         hold_bit = channel['connections']['RXCDRHOLD'][0]
         for cell in top['cells'].values():
-            if cell['type'] != 'SLICE_LUTX' or cell['connections'].get('O6') != [hold_bit]:
+            if cell['type'] != 'SLICE_LUTX':
                 continue
+            outputs = [pin for pin in ('O5', 'O6') if cell['connections'].get(pin) == [hold_bit]]
+            if not outputs:
+                continue
+            if len(outputs) != 1 or cell['attributes'].get('X_ORIG_PORT_' + outputs[0]) != 'O':
+                raise RuntimeError('Ambiguous packed CDR decoder output map')
             attrs = cell['attributes']
             if attrs.get('X_ORIG_TYPE') != 'LUT3' or not attrs.get('NEXTPNR_BEL'):
                 raise RuntimeError('Unsupported/unplaced packed CDR decoder')

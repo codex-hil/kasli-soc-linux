@@ -569,3 +569,12 @@ Evidence `network-reset-build-20261023` and `network-reset-cold-pma-20261023`.
 Golden restored, three whole1GiB DDR BIST passes PASS, lease release verified.
 Final management192.168.2.10. Isolated candidate only; cold PCS/external and
 integrated regression pending. No SD/QSPI/bootenv writes.
+
+Same NetworkReset bit cold PCS **1000/1000 PASS without warmup**, first frame
+included; MAC/test TX/RX+1000, CRC/preamble/clock/data errors+0, raw90/82/78stages
+match expected bytes/FCS. Packed decoder uses O5; checker now validates O5 orO6
+using strict original port metadata and all8 truth-table rows. Eight bad INIT
+variants plus invalid output metadata rejected. Initial O5 preflight failure
+accessed no hardware. Evidence `network-reset-cold-pcs-20261023`. Golden restored,
+three whole1GiB BIST passes PASS, lease release verified, management192.168.2.22.
+Next external network regression, then consider integrated candidate.

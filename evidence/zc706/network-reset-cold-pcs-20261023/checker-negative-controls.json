@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "negative_controls": [
+    {
+      "mutation": "INIT bit 0",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 0"
+    },
+    {
+      "mutation": "INIT bit 1",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 4"
+    },
+    {
+      "mutation": "INIT bit 2",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 2"
+    },
+    {
+      "mutation": "INIT bit 3",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 6"
+    },
+    {
+      "mutation": "INIT bit 4",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 1"
+    },
+    {
+      "mutation": "INIT bit 5",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 5"
+    },
+    {
+      "mutation": "INIT bit 6",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 3"
+    },
+    {
+      "mutation": "INIT bit 7",
+      "rejected": true,
+      "reason": "Incorrect CDR hold for loopback mode 7"
+    },
+    {
+      "mutation": "O5 output metadata",
+      "rejected": true,
+      "reason": "Ambiguous packed CDR decoder output map"
+    }
+  ]
+}
