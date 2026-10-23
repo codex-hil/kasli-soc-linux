@@ -1,0 +1,7 @@
+Jtag frequency : requested 1.00MHz    -> real 1.00MHz   
+index 0:
+	idcode 0x4ac2093
+	manufacturer xilinx
+	family artixusp
+	model  xcau15p
+	irlength 6

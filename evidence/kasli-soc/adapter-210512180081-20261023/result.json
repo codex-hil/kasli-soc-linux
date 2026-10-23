@@ -1,0 +1,16 @@
+{
+  "time": "2026-10-23T15:09:45.661037+00:00",
+  "scope": "JTAG IDCODE detection only; no FPGA programming or boot-media writes",
+  "lock": "/home/codex-hil/.cache/alinx-210512180081.lock",
+  "command": [
+    "/srv/codex-hil-data/toolchains/gatemate/oss-cad-suite/bin/openFPGALoader",
+    "-c",
+    "digilent_hs2",
+    "--usb-serial-num",
+    "210512180081",
+    "--freq",
+    "1000000",
+    "--detect"
+  ],
+  "returncode": 0
+}
