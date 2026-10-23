@@ -729,3 +729,9 @@ included. MAC/test TX/RX+1000, CRC/preamble/clock/test errors+0. Header probes
 omitted in this build, so no raw-byte stage capture claim. Golden restored,
 three whole1GiB BIST passes PASS, lease release verified; management192.168.2.18.
 Evidence `integrated-queue2-cold-pma-20261023`. Next same-bit cold PCS and bundle.
+
+Integrated queue2 cold PCS **1000/1000 PASS without warmup**, first frame
+included, all MAC/test counts+1000 and errors+0. Same bit as full integration
+and cold PMA. Golden restored, three whole1GiB BIST passes PASS, lease release
+verified; management192.168.2.20. Evidence `integrated-queue2-cold-pcs-20261023`.
+Next package matching build/full integration/both cold-mode evidence together.
