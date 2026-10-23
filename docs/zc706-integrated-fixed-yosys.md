@@ -578,3 +578,11 @@ variants plus invalid output metadata rejected. Initial O5 preflight failure
 accessed no hardware. Evidence `network-reset-cold-pcs-20261023`. Golden restored,
 three whole1GiB BIST passes PASS, lease release verified, management192.168.2.22.
 Next external network regression, then consider integrated candidate.
+
+NetworkReset isolated external regression PASS:20/20 measured ICMP,350/350
+byte-exact UDP across1..1400bytes,157300bytes. MAC CRC/preamble and clock fault
+increments0. Separately retained wrapper/test3-ping warmups; no external cold
+qualification claim. Evidence `network-reset-external-20261023`. Golden restored,
+three whole1GiB BIST passes PASS, shared lease release verified; management
+192.168.2.24. Next add opt-in reset flag to integrated target and run a separate
+build/ADC-DDR-dualPLL-network qualification. Existing qualified artifacts retained.
