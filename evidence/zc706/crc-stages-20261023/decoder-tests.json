@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "hardware_access": false,
+  "valid_chain": 1,
+  "stage_corruptions": 3,
+  "incomplete_cases": 4,
+  "error_flag_without_byte_change": 1
+}

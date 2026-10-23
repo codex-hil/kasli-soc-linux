@@ -397,3 +397,14 @@ Golden restored and three whole1GiB DDR BIST passes PASS, lock release verified.
 Final management address is in `raw-hardware-20261023/validation.json`.
 No SD/QSPI/bootenv writes. Exact raw bytes and comparison are retained in that
 same evidence directory; no additional packet was sent after restoration.
+
+CRC-stage diagnostic preparation: passive captures observe the RX preamble
+checker sink (after RX CDC), the real CRC input at `checker.fifo.sink` behind
+BufferizeEndpoints, and the CRC checker source. Expected test lengths are90,
+82 and78bytes respectively. Exact stage-byte assertions and capture validity
+checks are running in the full-core digital simulation on Dell; no hardware
+or new FPGA build in this step.
+`compare_mac_crc_stages.py PROBE_JSON` compares these stages independently of
+the error flag and recomputes FCS at the actual CRC input. Synthetic decoder
+controls passed: valid chain, three stage corruptions, four incomplete captures
+and an error flag with unchanged valid bytes. Evidence: `crc-stages-20261023`.

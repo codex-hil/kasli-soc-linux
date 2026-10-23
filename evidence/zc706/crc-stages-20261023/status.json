@@ -1,5 +1,5 @@
 {
-  "result": "PREPARED_NOT_SIMULATED",
+  "result": "FULLCORE_STAGE_SIMULATION_RUNNING",
   "hardware_access": false,
   "syntax_check": "PASS",
   "points": {
@@ -9,6 +9,9 @@
   },
   "simulation_assertions": "Three exact byte-array comparisons, done/length/error/overflow checks",
   "source_sync_session": 85018,
-  "blocker": "Shared Dell build lease held by another flock owner; source sync waiting",
-  "next": "Complete sync, then run full-core simulation under shared wrapper before any build/HW"
+  "next": "Collect same simulation verdict, then isolated SFP build only after exact byte checks pass",
+  "source_sync": "PASS",
+  "simulation_session": 35788,
+  "simulation_timeout_seconds": 300,
+  "decoder_tests": "PASS: valid chain, 3 stage corruptions, 4 incomplete cases, error-only case"
 }
