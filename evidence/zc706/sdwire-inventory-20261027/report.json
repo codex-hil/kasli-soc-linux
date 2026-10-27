@@ -1,0 +1,61 @@
+{
+  "time": "2026-10-27T09:43:02.895005+00:00",
+  "scope": "Cached USB/sysfs identity and storage backend status only; no USB control, block reads, writes, switching, UART, reset or programming",
+  "result": "BLOCKED",
+  "hardware_boot_tested": false,
+  "controller": {
+    "serial": "DP04I33Y",
+    "usb_path": "1-6.3.2",
+    "vid": "0403",
+    "pid": "6015",
+    "backend": "sdwire",
+    "product": "FT200X USB I2C",
+    "factory_identity": true,
+    "state": "unknown",
+    "supports_off": false
+  },
+  "reader": {
+    "vid": "0424",
+    "pid": "4050",
+    "serial": "000000264001",
+    "usb_path": "1-6.3.1",
+    "by_id": "usb-Generic_Ultra_HS-SD_MMC_000000264001-0:0",
+    "min_capacity": 31914983424,
+    "max_capacity": 31914983424
+  },
+  "status": {
+    "storage": "zc706-sdwire",
+    "backend": "sdwire",
+    "serial": "DP04I33Y",
+    "state": "unknown",
+    "locked": true,
+    "simulated": false,
+    "supports_off": false,
+    "device": "/dev/sdb",
+    "card_present": true,
+    "state_error": {
+      "code": "UNCOMMISSIONED_FACTORY",
+      "message": "Factory EEPROM/CBUS role not qualified; ownership unknown. No EEPROM writes performed."
+    },
+    "by_id": "/dev/disk/by-id/usb-Generic_Ultra_HS-SD_MMC_000000264001-0:0",
+    "reader_serial": "000000264001",
+    "usb_path": "1-6.3.1",
+    "vid": "0424",
+    "pid": "4050",
+    "capacity": 31914983424,
+    "removable": true
+  },
+  "partitions": [
+    {
+      "device": "/dev/sdb1",
+      "partition": "1"
+    },
+    {
+      "device": "/dev/sdb2",
+      "partition": "2"
+    }
+  ],
+  "reason": "OFF_UNSUPPORTED and UNCOMMISSIONED_FACTORY; physical revision/isolation and UART assignment need clarification",
+  "support_repo": "https://github.com/codex-hil/lab-instruments",
+  "support_commit": "c0ddc6b4f6b8a0176abd6abae8fb91b1dd4edb88"
+}

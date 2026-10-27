@@ -95,3 +95,27 @@ U-Boot is configured to load `boot.scr` from `mmc 0:1` automatically.
 Evidence: `evidence/zc706/integrated-standalone-sd-20261023`.
 Physical SD write/readback/standalone boot remain NOT_RUN until a card is
 available in the host reader. Existing board SD/QSPI were not modified.
+
+## SD Wire attached (2026-10-27)
+
+Cached USB/sysfs identification under both the ZC706 shared lease and the
+existing `hil-storage` serial lock found controller `DP04I33Y`, factory FT200X
+`0403:6015`, and sibling USB2640 reader `0424:4050`, serial `000000264001`.
+The card is 31,914,983,424 bytes and has two partitions. Its current whole-disk
+by-id is `usb-Generic_Ultra_HS-SD_MMC_000000264001-0:0`.
+This supersedes the earlier absence of a host-visible SD reader.
+
+Current upstream `codex-hil/lab-instruments` support at
+`c0ddc6b4f6b8a0176abd6abae8fb91b1dd4edb88` reports
+`UNCOMMISSIONED_FACTORY`, ownership unknown and `supports_off=False`.
+The legacy backend explicitly rejects switching/writing (`OFF_UNSUPPORTED`);
+this project did not bypass it with raw block writes or direct FTDI commands.
+No block content read, write, USB control request, EEPROM change, switch,
+UART, reset or FPGA programming was performed during this inventory.
+
+Before further hardware work, clarify physical SD Wire revision/target wiring
+and qualify an appropriate backend/ownership path. The 2026-10-25 workspace
+instructions also identify CP2103 USB1-1.3/serial0001 as FIT PM12, conflicting
+with this project's historical ZC706 UART path. Do not open that UART or reset
+the board using the old wrapper until its current assignment is resolved.
+Evidence: `evidence/zc706/sdwire-inventory-20261027/report.json`.
