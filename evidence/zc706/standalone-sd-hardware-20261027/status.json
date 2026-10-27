@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "scope": "PS system reset -> SD BootROM/SPL/U-Boot/PL/Linux -> automatic DDR/ADC/dual PLL service -> external SFP",
+  "image_sha256": "effe3ec9a450952cb57d917b790245bdf81025b7440ad823d9df951aae5305b8",
+  "cold_power_cycle": "NOT_RUN",
+  "jtag_pl_loaded": false,
+  "sdwire": "DP04I33Y retained DUT",
+  "host": "192.168.2.21",
+  "support_commit": "42cf1b7",
+  "support_repo": "https://github.com/codex-hil/lab-instruments",
+  "original_sd_backup": "/srv/codex-hil-nvme/sdwire-backups/DP04I33Y/pre-integrated-20261027.img",
+  "eeprom_backup": "/home/codex-hil/.local/share/sdwire-backups/DP04I33Y/original-20261027.bin",
+  "runtime_retained": "continuous dual PLL service",
+  "qspi_written": false,
+  "boot_environment_written": false
+}

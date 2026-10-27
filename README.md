@@ -1,3 +1,10 @@
+> SD Wire / standalone SD update 2026-10-27: **physical SD boot and automatic runtime PASS**.
+> Corrected image loads the qualified openXC7 PL from SD, starts Linux/SSH,
+> initializes DDR/ADC and both PLLs automatically. DDR3×1GiB,42.19s sampled dual
+> lock, SFP20/20 ICMP and350/350 exact UDP PASS; no new CRC/preamble/clock errors.
+> Linux192.168.2.21, SD Wire retained DUT, service retained running. Cold power-cycle NOT_RUN.
+> [Image, workflow and evidence](docs/zc706-standalone-sd.md).
+
 > Standalone SD update 2026-10-23: integrated ZC706 image packaged; physical SD boot
 > **NOT_RUN**. Automatic DDR/SFP/ADC initialization and continuous dual PLL service
 > passed a bounded physical startup/40-second lock/SIGTERM-restoration test.

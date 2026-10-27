@@ -57,6 +57,7 @@ def main():
         if digest(work/name) != validation['files'][name]:
             raise RuntimeError('Qualified software hash mismatch: '+name)
         shutil.copy2(work/name, runtime/name)
+        (runtime/name).chmod(0o644 if name=='i2c.so' else 0o755)
     names = ('integrated_service.py', 'run_wr_pll_dual.py', 'run_wr_pll.py',
              'fmc_adc.py', 'measure_fmc_clocks.py', 'wr_pll_control.py',
              'sfp_probe.py', 'capture_adc_ddr.py')

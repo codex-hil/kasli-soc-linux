@@ -1,0 +1,7 @@
+{
+  "path": "/srv/codex-hil-nvme/sdwire-evidence/20261027/zc706-sdwire-boot-mode-fix-20261027.tar.gz",
+  "sha256": "648d7bee9cef424084d3d9514bda4800dfc3472397072374950bc0aa564d2607",
+  "raw_directory": "/srv/codex-hil-nvme/sdwire-evidence/20261027/zc706-sdwire-boot-mode-fix-20261027",
+  "jtag_logs": 1005,
+  "verified_stop_readbacks": 1004
+}

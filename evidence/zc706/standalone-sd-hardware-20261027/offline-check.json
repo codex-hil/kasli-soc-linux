@@ -1,0 +1,32 @@
+{
+  "sd_audit": {
+    "hardware_validated": false,
+    "checks": [
+      {
+        "partition": 1,
+        "type": 12,
+        "start_sector": 1,
+        "sectors": 131072,
+        "payload_identical": true
+      },
+      {
+        "partition": 2,
+        "type": 131,
+        "start_sector": 131073,
+        "sectors": 524288,
+        "payload_identical": true
+      }
+    ],
+    "image_sha256": "effe3ec9a450952cb57d917b790245bdf81025b7440ad823d9df951aae5305b8"
+  },
+  "hardware_boot_tested": false,
+  "file_hashes": "PASS",
+  "fat_payloads": "PASS",
+  "runtime_payloads": "PASS",
+  "init_stat": "Inode: 117   Type: regular    Mode:  0755   Flags: 0x80000\nGeneration: 0    Version: 0x00000000:00000000\nUser:     0   Group:     0   Project:     0   Size: 1244\nFile ACL: 0\nLinks: 1   Blockcount: 4\nFragment:  Address: 0    Number: 0    Size: 0\n ctime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\n atime: 0x6adb9ed9:00000000 -- Fri Oct 23 17:52:25 2026\n mtime: 0x6adb9ccd:00000000 -- Fri Oct 23 17:43:41 2026\ncrtime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\nSize of extra inode fields: 32\nInode checksum: 0x15ba80a2\nEXTENTS:\n(0-1):9938-9939\n",
+  "executable_stats": {
+    "pl-ddr-test": "Inode: 172   Type: regular    Mode:  0755   Flags: 0x80000\nGeneration: 0    Version: 0x00000000:00000000\nUser:     0   Group:     0   Project:     0   Size: 632244\nFile ACL: 0\nLinks: 1   Blockcount: 1236\nFragment:  Address: 0    Number: 0    Size: 0\n ctime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\n atime: 0x6adb9d55:00000000 -- Fri Oct 23 17:45:57 2026\n mtime: 0x6adb9d55:00000000 -- Fri Oct 23 17:45:57 2026\ncrtime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\nSize of extra inode fields: 32\nInode checksum: 0xaab42fc1\nEXTENTS:\n(0-617):13081-13698\n",
+    "adc-ddr-read": "Inode: 166   Type: regular    Mode:  0755   Flags: 0x80000\nGeneration: 0    Version: 0x00000000:00000000\nUser:     0   Group:     0   Project:     0   Size: 619744\nFile ACL: 0\nLinks: 1   Blockcount: 1208\nFragment:  Address: 0    Number: 0    Size: 0\n ctime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\n atime: 0x6adb9d55:00000000 -- Fri Oct 23 17:45:57 2026\n mtime: 0x6adb9d55:00000000 -- Fri Oct 23 17:45:57 2026\ncrtime: 0x6ae07d3f:00000000 -- Tue Oct 27 10:30:23 2026\nSize of extra inode fields: 32\nInode checksum: 0xdf2087ca\nEXTENTS:\n(0-455):12425-12880, (458-605):12881-13028\n"
+  },
+  "result": "PASS"
+}

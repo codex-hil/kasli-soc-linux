@@ -1,9 +1,9 @@
 # ZC706 integrated standalone SD image
 
 The SD image packages the physically qualified openXC7 integrated PL with
-Linux/U-Boot and automatic dual WR PLL control. Physical standalone SD boot
-has not yet been tested. The service was tested on ZC706 through the existing
-JTAG boot wrapper; that is not proof of SD boot.
+Linux/U-Boot and automatic dual WR PLL control. Physical SD boot after PS system reset and automatic runtime are now PASS
+(2026-10-27). Cold power removal remains NOT_RUN. Earlier JTAG service tests
+are retained separately; the new proof loads PL from SD through U-Boot.
 
 ## Boot and runtime
 
@@ -72,11 +72,12 @@ init script. This remains an offline check, not physical boot validation.
 
 ## Physical installation and recovery
 
-Current image: `/home/codex-hil/artifacts/zc706-integrated-standalone-sd-20261023/sdcard.img.gz`.
+Current image: `/home/codex-hil/artifacts/zc706-integrated-standalone-sd-20261027-mode-fix/sdcard.img.gz`.
 Its adjacent `manifest.json` includes the compressed and uncompressed SHA256.
 Use a positively identified SD card in the Optiplex reader; preserve a backup
 of the existing card or use a separate card. Do not overwrite a guessed disk.
-The board's currently inserted card is not exposed as an Optiplex block device.
+SD Wire now exposes the card to the host only after the guarded shutdown/
+HOST transition described below; do not switch a running rootfs to HOST.
 
 After writing and readback verification, install SD on the powered-off ZC706,
 boot with UART capture, and verify automatic PL/DDR/PLL startup, SSH and external
@@ -84,7 +85,7 @@ SFP packets. Do not use JTAG PL loading during the standalone boot qualification
 Keep the existing golden SD image/card and volatile JTAG restoration path.
 QSPI and persistent U-Boot environment need no changes.
 
-## Packaged result (2026-10-23)
+## Historical packaged result (2026-10-23; superseded)
 
 Compressed image: 19,336,242 bytes, SHA256
 `cda14308a4888730c7b7d74c496a677906e06a2a902964ddd139a5fcb8c03b0d`.
@@ -96,7 +97,7 @@ Evidence: `evidence/zc706/integrated-standalone-sd-20261023`.
 Physical SD write/readback/standalone boot remain NOT_RUN until a card is
 available in the host reader. Existing board SD/QSPI were not modified.
 
-## SD Wire attached (2026-10-27)
+## Historical SD Wire inventory (2026-10-27; initial blockers resolved below)
 
 Cached USB/sysfs identification under both the ZC706 shared lease and the
 existing `hil-storage` serial lock found controller `DP04I33Y`, factory FT200X
@@ -119,3 +120,55 @@ instructions also identify CP2103 USB1-1.3/serial0001 as FIT PM12, conflicting
 with this project's historical ZC706 UART path. Do not open that UART or reset
 the board using the old wrapper until its current assignment is resolved.
 Evidence: `evidence/zc706/sdwire-inventory-20261027/report.json`.
+
+## Physical standalone SD qualification (2026-10-27)
+
+SD Wire v1.4 controller DP04I33Y was factory-configured with CBUS0 AWAKE21.
+The owner authorized controller/library repair. Original EEPROM was backed
+up privately; only CBUS0 and the two checksum bytes changed, preserving USB
+identity. A controller USB reset activated IOMODE8. Guarded HOST/DUT/HOST,
+full image write and readback physically PASS. Support and bounded board
+wrappers are in [lab-instruments](https://github.com/codex-hil/lab-instruments/blob/main/docs/sdwire-guarded.md),
+commit42cf1b7. The original isolated-storage CLI remains read-only; use the
+new guarded workflow with actual DUT stop readback.
+
+The first SD boot exposed an image-packaging defect: the staged ARM tools
+had mode0600. Manual chmod demonstrated the fix; the packager now installs
+ARM executables as0755 and the offline checker verifies their root ownership
+and mode. The first image and failure evidence remain intact.
+
+The corrected image was rebuilt on Dell, audited, separately written and
+fully read back, and booted without JTAG PL loading or manual service commands.
+UART records SPL, U-Boot, a13,321,505-byte PL load from SD, Linux and login.
+SSH/DHCP192.168.2.21 PASS. Automatic service passed DDR init/leveling and
+three whole-1-GiB BIST passes, initialized/calibrated both ADC receivers and
+ran both WR-derived PLLs. Both `locked` statuses remained true over42.19s of
+sampled observation and after external SFP traffic:20/20 ICMP,350/350 exact
+UDP, zero new CRC/preamble/clock errors. This run did not capture new ADC
+sample data or qualify continuous streaming/jitter/deterministic alignment.
+
+Compressed corrected image:19,335,976 bytes, SHA256
+`5ca30585d6d4c92e1534592fc43bab919ad67b58e7dbc51fd67508650230680d`.
+Expanded image:335,544,832 bytes, SHA256
+`effe3ec9a450952cb57d917b790245bdf81025b7440ad823d9df951aae5305b8`.
+Build-time manifest retains its original unvalidated status; the separate
+`hardware-validation.json` joins the physical proof by exact image hash.
+Evidence: `evidence/zc706/standalone-sd-hardware-20261027`.
+
+All original partition extents and the complete overwritten range were
+backed up (335,544,832 bytes, repeated-read SHA256 verified) to
+`/srv/codex-hil-nvme/sdwire-backups/DP04I33Y/pre-integrated-20261027.img`.
+This is not a full32-GB card backup; the remaining tail was not overwritten.
+A second pre-update backup is retained alongside it. No QSPI or persistent
+U-Boot environment write. Current UART CP2103 USB1-1.3 was positively confirmed
+as ZC706 through hostname and correlated boot. Host access held the actual
+ZC706/PM12 and storage leases; no other owner was preempted.
+
+The board intentionally retains the corrected SD image and continuous dual
+PLL service, with SD Wire on DUT. This authorized installation supersedes
+restoring golden after temporary tests. Stop the service, sync/remount or
+halt Linux and establish/read back the hardware stop guard before HOST
+selection. An initial rootfs-shutdown recovery was not a clean shutdown;
+the later healthy runtime completed rootfs read-only remount and kernel halt.
+Cold power-cycle remains NOT_RUN: the qualified boot used PS system reset
+through JTAG, with boot ROM and all payload loading from SD.

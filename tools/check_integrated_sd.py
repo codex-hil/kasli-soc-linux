@@ -45,7 +45,15 @@ def check(images, host):
             'stat /etc/init.d/S99integrated', str(images/'rootfs.ext4')], text=True)
         if 'User:     0   Group:     0' not in stat or '0755' not in stat:
             raise RuntimeError('Init script ownership/mode mismatch: '+stat)
-        result.update(fat_payloads='PASS', runtime_payloads='PASS', init_stat=stat)
+        executable_stats={}
+        for name in ('pl-ddr-test','adc-ddr-read'):
+            details=subprocess.check_output([str(host/'sbin/debugfs'), '-R',
+                'stat /opt/zc706-integrated/'+name, str(images/'rootfs.ext4')],text=True)
+            if '0755' not in details or 'User:     0   Group:     0' not in details:
+                raise RuntimeError('Runtime executable ownership/mode mismatch: '+name)
+            executable_stats[name]=details
+        result.update(fat_payloads='PASS', runtime_payloads='PASS', init_stat=stat,
+                      executable_stats=executable_stats)
     result['result'] = 'PASS'
     return result
 
