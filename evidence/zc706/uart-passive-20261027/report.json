@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-27T09:44:30.910515+00:00",
+  "scope": "Receive-only existing UART settings; no termios/baud/modem changes, transmitted bytes, reset or programming",
+  "locks": [
+    "/home/codex-hil/.cache/pm12-210249A73E43.lock",
+    "/home/codex-hil/.cache/spartan-edge-cp2103.lock",
+    "/home/codex-hil/.cache/zc706-210251842914.lock"
+  ],
+  "identity_confirmed": false,
+  "result": "BLOCKED",
+  "error": "[Errno 11] Resource temporarily unavailable"
+}
