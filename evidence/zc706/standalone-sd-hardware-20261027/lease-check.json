@@ -1,0 +1,7 @@
+{
+  "lease_reacquire": "PASS",
+  "all_released_on_exit": true,
+  "sdwire_retained": "DUT",
+  "runtime_retained": "corrected SD image with automatic DDR/ADC/SFP initialization and dual PLL service",
+  "host": "192.168.2.21"
+}
