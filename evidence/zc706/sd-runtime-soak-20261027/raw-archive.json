@@ -1,0 +1,7 @@
+{
+  "path": "/home/codex-hil/artifacts/zc706-sd-soak-20261027/soak-evidence.tar.gz",
+  "sha256": "b20c607ddb07636722ac4630767d86e324fe6eb1d9841e3de6fbb16d2f4e7e77",
+  "bytes": 248887,
+  "contains": "All195 PLL snapshots, complete host logs/results and raw first-sequence ADC buffers",
+  "freshness_audit": "All194 consecutive observation intervals independently replayed with validate_phase_progress; six offline negative/progress controls PASS"
+}

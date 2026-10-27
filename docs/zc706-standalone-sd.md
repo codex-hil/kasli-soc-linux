@@ -172,3 +172,13 @@ selection. An initial rootfs-shutdown recovery was not a clean shutdown;
 the later healthy runtime completed rootfs read-only remount and kernel halt.
 Cold power-cycle remains NOT_RUN: the qualified boot used PS system reset
 through JTAG, with boot ROM and all payload loading from SD.
+
+
+## Live-runtime soak follow-up
+
+The unchanged SD runtime subsequently passed600.30s with4 finite dual ADC/DDR
+batches,784.5MiB checked,28,000 exact UDP replies and80/80 ICMP. Both PLLs
+were locked in195 fresh status observations; no service restart or new phase
+rejections/MAC/clock errors. Original ADC fields restored with readback.
+See [the soak scope and evidence](zc706-runtime-soak.md). Continuous streaming,
+analog input qualification and cold power-cycle are not implied.

@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "observed_seconds": 600.3015649029985,
+  "pll_status_samples": 195,
+  "status_progress_intervals_checked": 194,
+  "stale_or_reset_status_detected": false,
+  "adc_dual_capture_runs": 20,
+  "adc_card_buffers": 40,
+  "verified_samples": 102825984,
+  "verified_bytes": 822607872,
+  "verified_mib": 784.5,
+  "adc_dropped_samples": 0,
+  "adc_verification_errors": 0,
+  "udp_packets": 28000,
+  "udp_bytes": 12584000,
+  "qualification_icmp_sent": 80,
+  "qualification_icmp_received": 80,
+  "network_error_deltas": {
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0
+  },
+  "phase_sample_statistics": {
+    "1": {
+      "samples": 195,
+      "peak_ns": 4.126984126984127,
+      "mean_ns": 0.0993080993080993,
+      "stddev_ns": 1.4517484870463038
+    },
+    "2": {
+      "samples": 195,
+      "peak_ns": 3.9682539682539684,
+      "mean_ns": 0.05046805046805048,
+      "stddev_ns": 1.435486685127377
+    }
+  },
+  "restoration_passed": true,
+  "service_pid": 120,
+  "service_pid_retained": true,
+  "kernel_log_prefix_unchanged": true,
+  "new_kernel_log_lines": [],
+  "cold_power_cycle_tested": false,
+  "analog_frontend_changed": false,
+  "pll_scope": "sampled status/phase, not continuous jitter or loss detection",
+  "adc_scope": "finite digital-pattern/sequence captures into reused DDR buffers, not continuous streaming",
+  "udp_frame_deltas": {
+    "mac_status_udp_rx_frames": 28000,
+    "mac_status_udp_fifo_frames": 28000,
+    "mac_status_udp_tx_frames": 28000
+  }
+}

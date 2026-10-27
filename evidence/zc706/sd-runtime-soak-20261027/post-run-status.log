@@ -1,0 +1,46 @@
+b71581d6bd46624e9c3c27a0f25a69a741db611cd73e1a1be78117f176d88517  /opt/zc706-integrated/adc-ddr-read
+{
+  "state": "running",
+  "pid": 120,
+  "elapsed_seconds": 35574.690954183,
+  "cards": {
+    "1": {
+      "last": {
+        "elapsed_seconds": 35574.684317241,
+        "dt": 0.00644454600114841,
+        "phase": {
+          "status": 3,
+          "phase": 6,
+          "raw_phase": 6,
+          "events": 4045916454,
+          "rejected": 1,
+          "ref_age": 25,
+          "adc_age": 20,
+          "phase_ns": 0.9523809523809523
+        },
+        "tune_ppm": -15.329042699741002,
+        "locked": true
+      },
+      "retained_records": 4096
+    },
+    "2": {
+      "last": {
+        "elapsed_seconds": 35574.684998637,
+        "dt": 0.006675317999906838,
+        "phase": {
+          "status": 3,
+          "phase": 6,
+          "raw_phase": 6,
+          "events": 4045917345,
+          "rejected": 0,
+          "ref_age": 28,
+          "adc_age": 23,
+          "phase_ns": 0.9523809523809523
+        },
+        "tune_ppm": -16.942100044659014,
+        "locked": true
+      },
+      "retained_records": 4096
+    }
+  }
+}

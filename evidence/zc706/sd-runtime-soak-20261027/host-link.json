@@ -1,0 +1,20 @@
+{
+  "time": "2026-10-27T20:23:39.746742+00:00",
+  "scope": "Host route and current negotiated link read during the already leased ZC706 soak; no interface changes",
+  "route": [
+    {
+      "dst": "192.168.2.206",
+      "dev": "enp2s0",
+      "prefsrc": "192.168.2.107",
+      "flags": [],
+      "uid": 1001,
+      "cache": []
+    }
+  ],
+  "interface": "enp2s0",
+  "speed": "1000",
+  "duplex": "full",
+  "operstate": "up",
+  "carrier": "1",
+  "address": "6c:2b:59:f4:76:e8"
+}

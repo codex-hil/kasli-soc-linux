@@ -1,0 +1,9 @@
+{
+  "lease_reacquire": "PASS",
+  "runtime_retained": "same continuous dual PLL service PID120, both locked at post-run collection",
+  "host": "192.168.2.21",
+  "sdwire_retained": "DUT",
+  "adc_register_restoration": "readback PASS",
+  "cold_power_cycle": "NOT_RUN",
+  "analog_signal_test": "NOT_RUN; wiring confirmation pending"
+}

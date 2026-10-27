@@ -1,3 +1,9 @@
+> Live SD-runtime soak2026-10-27: **600.30s PASS** with both PLLs running,
+> 20 dual ADC→DDR acquisitions /784.5MiB verified, zero data errors/drops.
+> SFP28,000 exact UDP replies +80/80 ICMP, zero new MAC/clock errors.
+> Same service PID,195 sampled locked statuses; ADC settings restored.
+> [Scope, replay and reproduction](docs/zc706-runtime-soak.md).
+
 > SD Wire / standalone SD update 2026-10-27: **physical SD boot and automatic runtime PASS**.
 > Corrected image loads the qualified openXC7 PL from SD, starts Linux/SSH,
 > initializes DDR/ADC and both PLLs automatically. DDR3×1GiB,42.19s sampled dual

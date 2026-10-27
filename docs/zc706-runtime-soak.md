@@ -1,0 +1,71 @@
+# ZC706 live SD-runtime soak
+
+Physical result2026-10-27: **PASS**,600.30 seconds with the installed standalone
+SD image and existing continuous dual WR PLL service. No reset, clock
+reinitialization, firmware reload, SD Wire switch, boot-image write or analog
+frontend setting change. The same PLL process (PID120) remained active.
+
+## Results
+
+Element | Observation
+---|---
+PLL status |195 sampled observations; both locked, status3, no new rejected phase events
+Status freshness |194 consecutive intervals independently checked for advancing elapsed time and both hardware event counters; no stall/reset
+FMC1 sampled phase |peak4.127ns, mean0.099ns, stddev1.452ns
+FMC2 sampled phase |peak3.968ns, mean0.050ns, stddev1.435ns
+ADC→DDR |4 batches,20 dual-card acquisitions /40 card buffers
+Verified data |102,825,984 samples /822,607,872 bytes (784.5MiB), zero verification errors/drops
+Largest buffer |4,194,304 samples /32MiB per card; independent clocks and capture epochs
+SFP through switch |28,000/28,000 exact UDP replies (1..1400-byte payloads),80/80 qualification ICMP; warmup separate
+MAC/PHY |CRC/preamble/clock error deltas0; PL UDP RX/FIFO/TX counters each advanced exactly28,000
+Host connection |enp2s0,1Gb/s full duplex observed; management connectivity unchanged
+Linux kernel log |Unchanged over the run; no new messages
+Restoration |ADC pattern registers and DMA/control configuration restored with readback; same PLL service retained, both locked
+
+The phase statistics describe **sampled status**, not continuous jitter
+measurement or proof that no sub-sampling-interval excursion occurred. Samples
+were approximately3s apart. Hardware rejection counters were checked too.
+An independent replay of all195 retained snapshots checked freshness, process
+identity and counter progress. Six offline controls cover stale status, stalled
+or reset counters, PID replacement and valid32-bit wrap.
+
+ADC data uses real receiver digital patterns plus synthetic sequence tests.
+This is repeated finite acquisition into reused buffers, not ten minutes of
+continuous eight-channel streaming and not784.5MiB of unique DDR addresses.
+The tests preserve the cards' independent clocks and do not prove deterministic
+sample alignment. No generator, gain, offset or analog50-ohm termination test
+was performed. Analog wiring confirmation and physical cold power-cycle remain
+pending; the existing SD-boot proof used PS reset.
+
+## Reproduce
+
+The board must already run the qualified SD runtime with both PLLs locked,
+the matching CSR map, installed ARM reader and capture tools. Confirm the
+actual management DHCP address and existing SSH identity first.
+
+```
+python3 tools/test_sd_runtime_soak.py --host ACTUAL_IP --seconds 600 --output UNIQUE_OUTPUT
+python3 tests/test_soak_progress.py
+```
+
+The wrapper owns the shared ZC706 and SDWire leases for the entire run,
+validation and restoration. Four batches start near0/150/300/450s. Each uses
+the existing preinitialized capture script and1000 repetitions of the seven
+UDP sizes, concurrently. It snapshots ADC pattern/control/DMA configuration,
+does not restart the PLL service, checks every stored sample through the
+installed ARM reader, then restores the saved fields with readback. An active
+DMA prevents restoration rather than resetting only its receiver. Child
+captures have a separate bounded process-group owner and interruption cleanup.
+
+Initial PHY/DDR training, bus timing/hold and bitstream qualification remain
+the existing integrated evidence; this soak does not rebuild gateware.
+The installed capture script matches the checkout, and post-run collection
+also verified the reader hash against the SD image manifest. Future wrapper
+preflight includes reader hashing and host-link inventory; the physical run's
+host-link observation was collected during the test and retained as such.
+
+Evidence: `evidence/zc706/sd-runtime-soak-20261027`. Full195 status snapshots,
+raw host logs and the first sequence buffers from both cards in each batch
+are retained in the checksummed archive referenced by `raw-archive.json`.
+The independent audit validates the full capture/packet totals and compares
+kernel logs. Service/ADC state restoration and shared-lease reacquisition PASS.
