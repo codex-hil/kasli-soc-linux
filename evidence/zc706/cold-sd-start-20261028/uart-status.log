@@ -1,0 +1,137 @@
+root
+# hostname; uptime; ip -4 addr; cat /run/zc706-integrated/pll.status.json; tail 
+-45 /run/zc706-integrated/service.log; dmesg | tail -35
+zc706-linux
+ 00:01:13 up 1 min,  load average: 0.79, 0.21, 0.07
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    inet 192.168.2.23/24 brd 192.168.2.255 scope global eth0
+       valid_lft forever preferred_lft forever
+{
+  "state": "running",
+  "pid": 118,
+  "elapsed_seconds": 35.987698773000005,
+  "cards": {
+    "1": {
+      "last": {
+        "elapsed_seconds": 35.982122223000005,
+        "dt": 0.005258292000007714,
+        "phase": {
+          "status": 3,
+          "phase": 4,
+          "raw_phase": 4,
+          "events": 56302176,
+          "rejected": 0,
+          "ref_age": 16,
+          "adc_age": 13,
+          "phase_ns": 0.6349206349206349
+        },
+        "tune_ppm": -15.435309303146738,
+        "locked": true
+      },
+      "retained_records": 4096
+    },
+    "2": {
+      "last": {
+        "elapsed_seconds": 35.982530120999996,
+        "dt": 0.0052911239999957616,
+        "phase": {
+          "status": 3,
+          "phase": 4,
+          "raw_phase": 4,
+          "events": 56302719,
+          "rejected": 1,
+          "ref_age": 7,
+          "adc_age": 4,
+          "phase_ns": 0.6349206349206349
+        },
+        "tune_ppm": -17.02912234069487,
+        "locked": true
+      },
+      "retained_records": 4096
+    }
+  }
+}
+    "sfp_status_si_ref_count": 0,
+    "sfp_status_gt_ref_count": 0,
+    "sfp_status_clock_faults": 0,
+    "sfp_status_drp_address": 172,
+    "sfp_status_drp_write_data": 0,
+    "sfp_status_drp_command": 0,
+    "sfp_status_drp_read_data": 3,
+    "sfp_status_drp_busy": 0,
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "mac_status_tx_frames": 0,
+    "mac_status_rx_frames": 99,
+    "mac_status_arp_requests": 0,
+    "mac_status_arp_replies": 0,
+    "mac_status_arp_updates": 0,
+    "mac_status_arp_responses": 0,
+    "mac_status_arp_failures": 0,
+    "mac_status_arp_host_replies": 0,
+    "mac_status_arp_update_cycles": 0,
+    "mac_status_arp_update_valid": 0,
+    "mac_status_arp_cache_write_cycles": 0,
+    "mac_status_arp_sender_ip": 0,
+    "mac_status_udp_rx_first_length": 0,
+    "mac_status_udp_rx_last_length": 0,
+    "mac_status_udp_rx_frames": 0,
+    "mac_status_udp_fifo_first_length": 0,
+    "mac_status_udp_fifo_last_length": 0,
+    "mac_status_udp_fifo_frames": 0,
+    "mac_status_udp_tx_first_length": 0,
+    "mac_status_udp_tx_last_length": 0,
+    "mac_status_udp_tx_frames": 0,
+    "mac_status_udp_ip_length": 347,
+    "packet_test_start": 0,
+    "packet_test_busy": 0,
+    "packet_test_tx_frames": 0,
+    "packet_test_rx_frames": 0,
+    "packet_test_errors": 0
+  },
+  "clock_rates_hz": {
+    "sfp_status_si_ref_count": 0.0,
+    "sfp_status_gt_ref_count": 0.0,
+    "sfp_status_rx_count": 125011825.61858615,
+    "sfp_status_tx_count": 125001240.20519996
+  }
+}
+[    0.932133] cdns-i2c e0004000.i2c: 400 kHz mmio e0004000 irq 28
+[    0.938364] sdhci: Secure Digital Host Controller Interface driver
+[    0.944573] sdhci: Copyright(c) Pierre Ossman
+[    0.948928] sdhci-pltfm: SDHCI platform and OF driver helper
+[    0.955025] clocksource: ttc_clocksource: mask: 0xffff max_cycles: 0xffff, max_idle_ns: 537538477 ns
+[    0.964253] timer #0 at (ptrval), irq=29
+[    0.969585] NET: Registered PF_INET6 protocol family
+[    0.975965] Segment Routing with IPv6
+[    0.979686] mmc0: SDHCI controller on e0100000.mmc [e0100000.mmc] using ADMA
+[    0.979745] In-situ OAM (IOAM) with IPv6
+[    0.990763] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    0.997418] NET: Registered PF_PACKET protocol family
+[    1.002688] Registering SWP/SWPB emulation handler
+[    1.026182] clk: Not disabling unused clocks
+[    1.030754] check access for rdinit=/init failed: -2, ignoring
+[    1.032105] mmc0: new high speed SDHC card at address aaaa
+[    1.036641] Waiting for root device /dev/mmcblk0p2...
+[    1.042974] mmcblk0: mmc0:aaaa SC32G 29.7 GiB
+[    1.057772]  mmcblk0: p1 p2
+[    1.485809] EXT4-fs (mmcblk0p2): recovery complete
+[    1.492233] EXT4-fs (mmcblk0p2): mounted filesystem 2a8b9239-c8b2-4423-8578-79100bbded05 r/w with ordered data mode. Quota mode: disabled.
+[    1.504763] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    1.514373] devtmpfs: mounted
+[    1.518787] Freeing unused kernel image (initmem) memory: 1024K
+[    1.525027] Run /sbin/init as init process
+[    1.529152]   with arguments:
+[    1.529162]     /sbin/init
+[    1.529171]   with environment:
+[    1.529179]     HOME=/
+[    1.529187]     TERM=linux
+[    1.707024] EXT4-fs (mmcblk0p2): re-mounted 2a8b9239-c8b2-4423-8578-79100bbded05.
+[    2.737107] macb e000b000.ethernet eth0: PHY [e000b000.ethernet-ffffffff:07] driver [Marvell 88E1116R] (irq=POLL)
+[    2.747580] macb e000b000.ethernet eth0: configuring for phy/rgmii-id link mode
+[    5.847357] macb e000b000.ethernet eth0: Link is Up - 1Gbps/Full - flow control off
+[    8.436995] random: crng init done
+# 

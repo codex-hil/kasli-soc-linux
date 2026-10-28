@@ -1,3 +1,10 @@
+> Cold SD start2026-10-28: **PASS after owner-reported physical power cycle**.
+> Linux/SSH DHCP192.168.2.23, automatic DDR3×1GiB BIST, both PLLs locked,
+> SFP350/350 UDP +20/20 ICMP; four dual ADC→DDR captures passed with zero drops.
+> No JTAG/reset/reconfiguration used. Early boot UART was not captured; kernel
+> log confirms SD rootfs and journal recovery.
+> [Evidence and scope](evidence/zc706/cold-sd-start-20261028/result.json).
+
 > Live SD-runtime soak2026-10-27: **600.30s PASS** with both PLLs running,
 > 20 dual ADC→DDR acquisitions /784.5MiB verified, zero data errors/drops.
 > SFP28,000 exact UDP replies +80/80 ICMP, zero new MAC/clock errors.
@@ -8,7 +15,7 @@
 > Corrected image loads the qualified openXC7 PL from SD, starts Linux/SSH,
 > initializes DDR/ADC and both PLLs automatically. DDR3×1GiB,42.19s sampled dual
 > lock, SFP20/20 ICMP and350/350 exact UDP PASS; no new CRC/preamble/clock errors.
-> Linux192.168.2.21, SD Wire retained DUT, service retained running. Cold power-cycle NOT_RUN.
+> Linux192.168.2.21, SD Wire retained DUT, service retained running. Cold power-cycle subsequently passed on2026-10-28 (see latest evidence above).
 > [Image, workflow and evidence](docs/zc706-standalone-sd.md).
 
 > Standalone SD update 2026-10-23: integrated ZC706 image packaged; physical SD boot

@@ -182,3 +182,26 @@ were locked in195 fresh status observations; no service restart or new phase
 rejections/MAC/clock errors. Original ADC fields restored with readback.
 See [the soak scope and evidence](zc706-runtime-soak.md). Continuous streaming,
 analog input qualification and cold power-cycle are not implied.
+
+## Physical power-cycle follow-up — 2026-10-28
+
+Owner reported removing/reapplying board power. Post-start validation PASS:
+UART login, short uptime, SD ext4 rootfs, DHCP192.168.2.23 and strict-known-key
+SSH. Initial SSH to former192.168.2.21 timed out; UART identified the new DHCP
+lease without network or boot changes. Early SPL/U-Boot/BootROM UART output
+was not captured and supply-off duration was not instrumented.
+
+The automatic service initialized all DDR lanes and passed three whole1GiB
+BISTs. Both PLLs remained locked in sampled status over41.37s. SFP passed
+350 exact UDP replies and20/20 ICMP with zero new CRC/preamble/clock errors.
+Four subsequent dual captures (8192/262144 sequence,262144 real ADC digital
+pattern,262144 sequence) passed exact readback, zero drops. ADC SSR/control/
+registers3+4/DMA configuration restored and service retained running PID118.
+No analog input acquisition was performed in this follow-up.
+
+Kernel reported ext4 journal recovery after the unclean power removal;
+recovery completed and rootfs mounted read/write. This does not replace
+an offline filesystem consistency scan or qualify repeated power-loss endurance.
+No JTAG programming/reset, SD Wire switching or media rewrite was used.
+All shared leases released.
+[Evidence](../evidence/zc706/cold-sd-start-20261028/result.json).

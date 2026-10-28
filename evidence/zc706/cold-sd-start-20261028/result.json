@@ -1,0 +1,694 @@
+{
+  "result": "PASS",
+  "sd_image_sha256": "effe3ec9a450952cb57d917b790245bdf81025b7440ad823d9df951aae5305b8",
+  "host": "192.168.2.23",
+  "status_snapshots": [
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 51.629785755,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 51.624185702999995,
+            "dt": 0.0053543159999946965,
+            "phase": {
+              "status": 3,
+              "phase": -7,
+              "raw_phase": -7,
+              "events": 80742899,
+              "rejected": 0,
+              "ref_age": 9,
+              "adc_age": 15,
+              "phase_ns": -1.1111111111111112
+            },
+            "tune_ppm": -15.598966684460258,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 51.624596972999996,
+            "dt": 0.005385930000002759,
+            "phase": {
+              "status": 3,
+              "phase": -9,
+              "raw_phase": -9,
+              "events": 80743444,
+              "rejected": 1,
+              "ref_age": 37,
+              "adc_age": 43,
+              "phase_ns": -1.4285714285714286
+            },
+            "tune_ppm": -17.261323711936782,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 54.938142918,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 54.932066045,
+            "dt": 0.00589338000000339,
+            "phase": {
+              "status": 3,
+              "phase": 3,
+              "raw_phase": 3,
+              "events": 85911498,
+              "rejected": 0,
+              "ref_age": 42,
+              "adc_age": 39,
+              "phase_ns": 0.47619047619047616
+            },
+            "tune_ppm": -15.355864799171393,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 54.932501806999994,
+            "dt": 0.00587350200000003,
+            "phase": {
+              "status": 3,
+              "phase": 3,
+              "raw_phase": 3,
+              "events": 85912047,
+              "rejected": 1,
+              "ref_age": 45,
+              "adc_age": 42,
+              "phase_ns": 0.47619047619047616
+            },
+            "tune_ppm": -16.976159651793665,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 57.960385476,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 57.954920736000005,
+            "dt": 0.005553553000012812,
+            "phase": {
+              "status": 3,
+              "phase": -7,
+              "raw_phase": -7,
+              "events": 90634660,
+              "rejected": 0,
+              "ref_age": 48,
+              "adc_age": 2,
+              "phase_ns": -1.1111111111111112
+            },
+            "tune_ppm": -15.44944412379401,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 57.955305695999996,
+            "dt": 0.005529390999996053,
+            "phase": {
+              "status": 3,
+              "phase": -9,
+              "raw_phase": -9,
+              "events": 90635173,
+              "rejected": 1,
+              "ref_age": 12,
+              "adc_age": 19,
+              "phase_ns": -1.4285714285714286
+            },
+            "tune_ppm": -17.12763975414422,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 60.987393666,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 60.981762948,
+            "dt": 0.005294784000000163,
+            "phase": {
+              "status": 3,
+              "phase": 4,
+              "raw_phase": 4,
+              "events": 95364161,
+              "rejected": 0,
+              "ref_age": 24,
+              "adc_age": 21,
+              "phase_ns": 0.6349206349206349
+            },
+            "tune_ppm": -15.290129368183969,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 60.98219829599999,
+            "dt": 0.005350403999997866,
+            "phase": {
+              "status": 3,
+              "phase": 3,
+              "raw_phase": 3,
+              "events": 95364698,
+              "rejected": 1,
+              "ref_age": 23,
+              "adc_age": 21,
+              "phase_ns": 0.47619047619047616
+            },
+            "tune_ppm": -16.94567630339261,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 64.012756824,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 64.007267478,
+            "dt": 0.005558063999998808,
+            "phase": {
+              "status": 3,
+              "phase": -16,
+              "raw_phase": -16,
+              "events": 100091457,
+              "rejected": 0,
+              "ref_age": 32,
+              "adc_age": 45,
+              "phase_ns": -2.5396825396825395
+            },
+            "tune_ppm": -15.78348569863941,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 64.007654076,
+            "dt": 0.005507033999990085,
+            "phase": {
+              "status": 3,
+              "phase": -16,
+              "raw_phase": -16,
+              "events": 100091970,
+              "rejected": 1,
+              "ref_age": 12,
+              "adc_age": 26,
+              "phase_ns": -2.5396825396825395
+            },
+            "tune_ppm": -17.419019692654913,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 67.316543709,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 67.310596094,
+            "dt": 0.0056554500000061125,
+            "phase": {
+              "status": 3,
+              "phase": -16,
+              "raw_phase": -16,
+              "events": 105252928,
+              "rejected": 0,
+              "ref_age": 30,
+              "adc_age": 44,
+              "phase_ns": -2.5396825396825395
+            },
+            "tune_ppm": -15.812521685698577,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 67.311026138,
+            "dt": 0.005644349999997189,
+            "phase": {
+              "status": 3,
+              "phase": -17,
+              "raw_phase": -17,
+              "events": 105253494,
+              "rejected": 1,
+              "ref_age": 0,
+              "adc_age": 13,
+              "phase_ns": -2.6984126984126986
+            },
+            "tune_ppm": -17.460998158358443,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 70.340640501,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 70.335011253,
+            "dt": 0.005385949000000778,
+            "phase": {
+              "status": 3,
+              "phase": -10,
+              "raw_phase": -10,
+              "events": 109978562,
+              "rejected": 0,
+              "ref_age": 45,
+              "adc_age": 1,
+              "phase_ns": -1.5873015873015872
+            },
+            "tune_ppm": -15.802474042092562,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 70.335420501,
+            "dt": 0.005413081000000375,
+            "phase": {
+              "status": 3,
+              "phase": -12,
+              "raw_phase": -12,
+              "events": 109979109,
+              "rejected": 1,
+              "ref_age": 33,
+              "adc_age": 43,
+              "phase_ns": -1.9047619047619047
+            },
+            "tune_ppm": -17.449673338942873,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 73.365318891,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 73.359642999,
+            "dt": 0.0053089330000091195,
+            "phase": {
+              "status": 3,
+              "phase": -18,
+              "raw_phase": -18,
+              "events": 114704546,
+              "rejected": 0,
+              "ref_age": 21,
+              "adc_age": 36,
+              "phase_ns": -2.857142857142857
+            },
+            "tune_ppm": -15.905590113218793,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 73.360047231,
+            "dt": 0.005328222999992249,
+            "phase": {
+              "status": 3,
+              "phase": -16,
+              "raw_phase": -16,
+              "events": 114705086,
+              "rejected": 1,
+              "ref_age": 9,
+              "adc_age": 23,
+              "phase_ns": -2.5396825396825395
+            },
+            "tune_ppm": -17.465851652298525,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 76.391133051,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 76.385614893,
+            "dt": 0.005440247999999315,
+            "phase": {
+              "status": 3,
+              "phase": 2,
+              "raw_phase": 2,
+              "events": 119432623,
+              "rejected": 0,
+              "ref_age": 48,
+              "adc_age": 46,
+              "phase_ns": 0.31746031746031744
+            },
+            "tune_ppm": -15.420919033948266,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 76.385993403,
+            "dt": 0.005441820000001485,
+            "phase": {
+              "status": 3,
+              "phase": 2,
+              "raw_phase": 2,
+              "events": 119433121,
+              "rejected": 1,
+              "ref_age": 47,
+              "adc_age": 45,
+              "phase_ns": 0.31746031746031744
+            },
+            "tune_ppm": -17.037722391477494,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 79.416470097,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 79.410849117,
+            "dt": 0.0055329540000030875,
+            "phase": {
+              "status": 3,
+              "phase": -10,
+              "raw_phase": -10,
+              "events": 124159550,
+              "rejected": 0,
+              "ref_age": 2,
+              "adc_age": 10,
+              "phase_ns": -1.5873015873015872
+            },
+            "tune_ppm": -15.756237851660693,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 79.41123008699999,
+            "dt": 0.005502522000000454,
+            "phase": {
+              "status": 3,
+              "phase": -10,
+              "raw_phase": -10,
+              "events": 124160056,
+              "rejected": 1,
+              "ref_age": 51,
+              "adc_age": 6,
+              "phase_ns": -1.5873015873015872
+            },
+            "tune_ppm": -17.38802545014906,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 82.716446111,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 82.710945287,
+            "dt": 0.005526791999997727,
+            "phase": {
+              "status": 3,
+              "phase": -9,
+              "raw_phase": -9,
+              "events": 129315952,
+              "rejected": 0,
+              "ref_age": 47,
+              "adc_age": 0,
+              "phase_ns": -1.4285714285714286
+            },
+            "tune_ppm": -15.702593652799912,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 82.711328513,
+            "dt": 0.005500103999992234,
+            "phase": {
+              "status": 3,
+              "phase": -9,
+              "raw_phase": -9,
+              "events": 129316458,
+              "rejected": 1,
+              "ref_age": 17,
+              "adc_age": 24,
+              "phase_ns": -1.4285714285714286
+            },
+            "tune_ppm": -17.3394905100821,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 85.74559038,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 85.74010011,
+            "dt": 0.005507586999996761,
+            "phase": {
+              "status": 3,
+              "phase": 12,
+              "raw_phase": 12,
+              "events": 134049007,
+              "rejected": 0,
+              "ref_age": 19,
+              "adc_age": 9,
+              "phase_ns": 1.9047619047619047
+            },
+            "tune_ppm": -15.243637729200898,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 85.740480414,
+            "dt": 0.005486347000001501,
+            "phase": {
+              "status": 3,
+              "phase": 14,
+              "raw_phase": 14,
+              "events": 134049506,
+              "rejected": 1,
+              "ref_age": 43,
+              "adc_age": 31,
+              "phase_ns": 2.2222222222222223
+            },
+            "tune_ppm": -16.834897431428075,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 88.768186242,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 88.76273783399999,
+            "dt": 0.005525591999997914,
+            "phase": {
+              "status": 3,
+              "phase": 1,
+              "raw_phase": 1,
+              "events": 138771877,
+              "rejected": 0,
+              "ref_age": 27,
+              "adc_age": 26,
+              "phase_ns": 0.15873015873015872
+            },
+            "tune_ppm": -15.506834901701794,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 88.763116302,
+            "dt": 0.005496875999995154,
+            "phase": {
+              "status": 3,
+              "phase": 0,
+              "raw_phase": 0,
+              "events": 138772377,
+              "rejected": 1,
+              "ref_age": 2,
+              "adc_age": 1,
+              "phase_ns": 0.0
+            },
+            "tune_ppm": -17.18230542346877,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    },
+    {
+      "state": "running",
+      "pid": 118,
+      "elapsed_seconds": 91.794676896,
+      "cards": {
+        "1": {
+          "last": {
+            "elapsed_seconds": 91.78901634600001,
+            "dt": 0.005301744000007602,
+            "phase": {
+              "status": 3,
+              "phase": 13,
+              "raw_phase": 13,
+              "events": 143500439,
+              "rejected": 0,
+              "ref_age": 43,
+              "adc_age": 32,
+              "phase_ns": 2.0634920634920637
+            },
+            "tune_ppm": -15.126301687873323,
+            "locked": true
+          },
+          "retained_records": 4096
+        },
+        "2": {
+          "last": {
+            "elapsed_seconds": 91.78941434999999,
+            "dt": 0.005321232000000009,
+            "phase": {
+              "status": 3,
+              "phase": 12,
+              "raw_phase": 12,
+              "events": 143500974,
+              "rejected": 1,
+              "ref_age": 18,
+              "adc_age": 8,
+              "phase_ns": 1.9047619047619047
+            },
+            "tune_ppm": -16.803988338032205,
+            "locked": true
+          },
+          "retained_records": 4096
+        }
+      }
+    }
+  ],
+  "cold_power_cycle_tested": true,
+  "power_cycle_evidence": "User reports physical power cycle; early UART boot not captured",
+  "ddr_bist": "PASS",
+  "autonomous_pll_lock_observed_seconds": 41.36971741798334,
+  "network_error_deltas": {
+    "mac_status_crc_errors": 0,
+    "mac_status_preamble_errors": 0,
+    "sfp_status_clock_faults": 0
+  },
+  "final_status": {
+    "state": "running",
+    "pid": 118,
+    "elapsed_seconds": 128.819776609,
+    "cards": {
+      "1": {
+        "last": {
+          "elapsed_seconds": 128.814302551,
+          "dt": 0.005549075999994102,
+          "phase": {
+            "status": 3,
+            "phase": 2,
+            "raw_phase": 2,
+            "events": 201352449,
+            "rejected": 0,
+            "ref_age": 32,
+            "adc_age": 30,
+            "phase_ns": 0.31746031746031744
+          },
+          "tune_ppm": -15.46443043975998,
+          "locked": true
+        },
+        "retained_records": 4096
+      },
+      "2": {
+        "last": {
+          "elapsed_seconds": 128.814687691,
+          "dt": 0.005527595999978985,
+          "phase": {
+            "status": 3,
+            "phase": 2,
+            "raw_phase": 2,
+            "events": 201352956,
+            "rejected": 1,
+            "ref_age": 44,
+            "adc_age": 42,
+            "phase_ns": 0.31746031746031744
+          },
+          "tune_ppm": -17.094516786331226,
+          "locked": true
+        },
+        "retained_records": 4096
+      }
+    }
+  },
+  "sdwire_retained": "DUT",
+  "runtime_retained": "continuous dual PLL service",
+  "jtag_pl_loaded": false
+}
