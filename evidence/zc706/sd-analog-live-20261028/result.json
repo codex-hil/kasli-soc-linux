@@ -1,0 +1,225 @@
+{
+  "start_monotonic": 85540.403177683,
+  "result": "PASS",
+  "synchronized": false,
+  "adc_clocks": "independent",
+  "cards": {
+    "1": {
+      "training": null,
+      "sample_rate_hz": 99993469.74621965,
+      "adc_a2": 0,
+      "base_offset": 33554432
+    },
+    "2": {
+      "training": null,
+      "sample_rate_hz": 99998971.3878751,
+      "adc_a2": 0,
+      "base_offset": 268435456
+    }
+  },
+  "runs": [
+    {
+      "index": 0,
+      "mode": "sequence",
+      "samples_per_card": 8192,
+      "cards": {
+        "1": {
+          "status": 2,
+          "written_samples": 8192,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 146,
+          "system_ticks": 6854,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 796809645.6796031,
+          "reader_returncode": 0,
+          "reader_stdout": "card=1 samples=8192 bytes=65536 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        },
+        "2": {
+          "status": 2,
+          "written_samples": 8192,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 173,
+          "system_ticks": 6854,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 796809645.6796031,
+          "reader_returncode": 0,
+          "reader_stdout": "card=2 samples=8192 bytes=65536 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        }
+      },
+      "initial_status": {
+        "1": 2,
+        "2": 2
+      },
+      "start_issue_seconds": 0.0002560439897933975,
+      "estimated_overlap_fraction": 0,
+      "result": "PASS"
+    },
+    {
+      "index": 1,
+      "mode": "sequence",
+      "samples_per_card": 262144,
+      "cards": {
+        "1": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 146,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=1 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        },
+        "2": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 173,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=2 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        }
+      },
+      "initial_status": {
+        "1": 1,
+        "2": 1
+      },
+      "start_issue_seconds": 0.00023412599693983793,
+      "estimated_overlap_fraction": 0.9099260070346057,
+      "result": "PASS"
+    },
+    {
+      "index": 2,
+      "mode": "adc_pattern",
+      "samples_per_card": 262144,
+      "cards": {
+        "1": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 146,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=1 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        },
+        "2": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 173,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=2 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        }
+      },
+      "initial_status": {
+        "1": 1,
+        "2": 1
+      },
+      "start_issue_seconds": 0.00021282599482219666,
+      "estimated_overlap_fraction": 0.9180512294403204,
+      "result": "PASS"
+    },
+    {
+      "index": 3,
+      "mode": "sequence",
+      "samples_per_card": 262144,
+      "cards": {
+        "1": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 146,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=1 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        },
+        "2": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 0,
+          "adc_a3": 173,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=2 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        }
+      },
+      "initial_status": {
+        "1": 1,
+        "2": 1
+      },
+      "start_issue_seconds": 0.00023010000586509705,
+      "estimated_overlap_fraction": 0.9114617849516697,
+      "result": "PASS"
+    },
+    {
+      "index": 4,
+      "mode": "analog",
+      "samples_per_card": 262144,
+      "cards": {
+        "1": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 69,
+          "adc_a3": 0,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=1 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        },
+        "2": {
+          "status": 2,
+          "written_samples": 262144,
+          "dropped_samples": 0,
+          "adc_ssr": 69,
+          "adc_a3": 0,
+          "system_ticks": 218481,
+          "system_clock_hz": 83333333,
+          "effective_write_bytes_per_second": 799898691.2711678,
+          "reader_returncode": 0,
+          "reader_stdout": "card=2 samples=262144 bytes=2097152 errors=0 result=PASS\n",
+          "reader_stderr": ""
+        }
+      },
+      "range_full_scale_v": 5,
+      "analog_50ohm": false,
+      "initial_status": {
+        "1": 1,
+        "2": 1
+      },
+      "start_issue_seconds": 0.0002189579972764477,
+      "estimated_overlap_fraction": 0.9157120802018368,
+      "result": "PASS"
+    }
+  ],
+  "end_monotonic": 85557.108359843
+}

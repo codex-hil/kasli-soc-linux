@@ -1,0 +1,45 @@
+{
+  "state": "running",
+  "pid": 120,
+  "elapsed_seconds": 85495.298071274,
+  "cards": {
+    "1": {
+      "last": {
+        "elapsed_seconds": 85495.292240072,
+        "dt": 0.0054225959902396426,
+        "phase": {
+          "status": 3,
+          "phase": 8,
+          "raw_phase": 8,
+          "events": 442486840,
+          "rejected": 1,
+          "ref_age": 42,
+          "adc_age": 35,
+          "phase_ns": 1.2698412698412698
+        },
+        "tune_ppm": -15.042684857191624,
+        "locked": true
+      },
+      "retained_records": 4096
+    },
+    "2": {
+      "last": {
+        "elapsed_seconds": 85495.29265112,
+        "dt": 0.005448677999083884,
+        "phase": {
+          "status": 3,
+          "phase": 8,
+          "raw_phase": 8,
+          "events": 442487387,
+          "rejected": 0,
+          "ref_age": 14,
+          "adc_age": 7,
+          "phase_ns": 1.2698412698412698
+        },
+        "tune_ppm": -16.77980601699769,
+        "locked": true
+      },
+      "retained_records": 4096
+    }
+  }
+}

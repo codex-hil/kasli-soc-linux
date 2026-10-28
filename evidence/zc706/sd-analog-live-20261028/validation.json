@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "adc_state_restored": true,
+  "generator_identity": "TEKTRONIX,AFG1062,1544477,SCPI:99.0 FV:V1.0.1",
+  "generator_readback": {
+    "output_ch1": "1",
+    "function": "SIN",
+    "frequency_hz": 1000000,
+    "vpp": 1.001,
+    "offset_v": 0
+  },
+  "generator_modified": false,
+  "physical_connection": "User confirmed CH1 output split to CH1 of both FMCs",
+  "analog_range_pm_v": 5,
+  "analog_termination_ohms": null,
+  "pll_observation": "Before/after status only; same PID and event progression, not continuous lock/jitter proof",
+  "raw_buffers": {
+    "card2-analog.bin": {
+      "bytes": 2097152,
+      "sha256": "10ee16f75705e91069e43c2e8f63821216cdb26bb64769483c23b6637f5981b3"
+    },
+    "card1-analog.bin": {
+      "bytes": 2097152,
+      "sha256": "fde3678fabb1fd394d998ed17d548234fa55681de32f32effb481c8aa150d07b"
+    }
+  }
+}

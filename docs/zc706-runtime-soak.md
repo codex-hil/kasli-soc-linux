@@ -69,3 +69,43 @@ raw host logs and the first sequence buffers from both cards in each batch
 are retained in the checksummed archive referenced by `raw-archive.json`.
 The independent audit validates the full capture/packet totals and compares
 kernel logs. Service/ADC state restoration and shared-lease reacquisition PASS.
+
+## Live analog follow-up — 2026-10-28
+
+Physical CH1 analog acquisition PASS with the installed SD runtime and continuous
+PLL service. User confirmed AFG CH1 split in parallel to CH1 of both FMCs.
+Serial-selected AFG1062 1544477 readback: SIN, output ON, 1 MHz, 1.001 Vpp,
+zero offset. Generator settings were already correct and were not changed.
+Both analog inputs used ±5 V range with analog 50 Ω OFF.
+
+Under the sorted board, SD Wire and generator leases, snapshot receiver control,
+SSR, ADC registers 3/4 and DMA base/length/synthetic before running on the board:
+
+```sh
+cd /opt/zc706-integrated
+python3 capture_adc_ddr.py --csr-json /etc/litex/csr.json \
+  --reader ./adc-ddr-read --max-samples 262144 --preinitialized \
+  --realtime-start --analog --output /tmp/analog-capture
+```
+
+Restore and verify the saved fields afterwards, even on failure; never reset
+an active DMA. This command leaves frontend settings changed by itself.
+The bounded orchestration used the soak STATE_HELPER extended with adc_ssr;
+all saved values were restored and verified. No service stop, receiver clock
+initialization, PL programming, reset or boot-media write occurred.
+
+Each card stored 262144 analog four-channel ticks (2 MiB/card). Beginning,
+middle and end 1024-sample windows passed sine fitting, R² > 0.99993 and
+no clipping. Nominal uncalibrated amplitudes: LPC 0.929 Vpp, HPC 1.021 Vpp.
+This amplitude difference remains open for calibration; it was not corrected
+in the data. Frequency fits assume nominal 100 MS/s and are not a ppm/jitter
+measurement. Separate acquisition epochs do not prove phase alignment.
+The accompanying sequence and real ADC digital-pattern runs also passed;
+all five dual captures reported zero drops and successful GP1 readback.
+
+PLL service PID120 unchanged, both locked before/after, event counters
+advanced. This is sampled evidence, not continuous lock monitoring.
+See [evidence](../evidence/zc706/sd-analog-live-20261028/validation.json) and
+[waveforms](../evidence/zc706/sd-analog-live-20261028/ddr-waveforms.png).
+Raw 2 MiB/card buffers are retained locally in
+`build/analog-live-20261028T102134Z`; hashes are in validation.json.
