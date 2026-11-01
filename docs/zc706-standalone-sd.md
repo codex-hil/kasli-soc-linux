@@ -2,7 +2,7 @@
 
 The SD image packages the physically qualified openXC7 integrated PL with
 Linux/U-Boot and automatic dual WR PLL control. Physical SD boot after PS system reset and automatic runtime are now PASS
-(2026-10-27). Cold power removal remains NOT_RUN. Earlier JTAG service tests
+(2026-10-27). Owner-reported physical power-cycle follow-up passed on2026-10-28; see the final section for scope. Earlier JTAG service tests
 are retained separately; the new proof loads PL from SD through U-Boot.
 
 ## Boot and runtime

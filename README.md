@@ -1,3 +1,6 @@
+> **Handoff:** ZC706 PoC closed by owner; Kasli-SoC port deferred until hardware is available.
+> [Project handoff and recovery notes](docs/HANDOFF.md) — 2026-11-01.
+
 > Cold SD start2026-10-28: **PASS after owner-reported physical power cycle**.
 > Linux/SSH DHCP192.168.2.23, automatic DDR3×1GiB BIST, both PLLs locked,
 > SFP350/350 UDP +20/20 ICMP; four dual ADC→DDR captures passed with zero drops.
